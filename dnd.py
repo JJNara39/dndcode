@@ -1,5 +1,5 @@
 import random
-from dndchargen3 import *
+from dndchargenv3 import *
 from fractions import Fraction
 
 #Dice are in dndchargen
