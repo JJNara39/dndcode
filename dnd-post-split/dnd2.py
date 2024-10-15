@@ -2,6 +2,7 @@ import random
 from dndchargen_race import *
 from dndchargen_bkg import *
 from dndchargen_class import *
+#from dndchargen_character_builder import *
 from fractions import Fraction
 
 def dndCharGen(param, chLvl):
@@ -309,10 +310,6 @@ def dndCharGen(param, chLvl):
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-
-    print(f"PlLang has {PlLang}")
-    print(f"SLANG has {SLANG}")
-    print(f"PlProf has {PlProf}")
     summation(param, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL)
     skillsummation(PlProf, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
