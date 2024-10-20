@@ -1,0 +1,1009 @@
+--- Fields on Page 1 ---
+Field Name: CharacterName 2, Value: 
+Field Name: Age, Value: 
+Field Name: Height, Value: 
+Field Name: Weight, Value: 
+Field Name: Eyes, Value: 
+Field Name: Skin, Value: 
+Field Name: Hair, Value: 
+Field Name: Allies, Value: 
+Field Name: FactionName, Value: 
+Field Name: Backstory, Value: 
+Field Name: Feat+Traits, Value:
+Field Name: Treasure, Value:
+Field Name: CHARACTER IMAGE, Value: None
+Field Name: Faction Symbol Image, Value: None
+Field Name: ClassLevel, Value: None
+Field Name: Background, Value: None
+Field Name: PlayerName, Value: None
+*Field Name: CharacterName, Value: None
+Field Name: Race , Value: None
+Field Name: Alignment, Value: None
+Field Name: XP, Value: None
+Field Name: Inspiration, Value: None
+Field Name: STR, Value: None
+Field Name: ProfBonus, Value: None
+Field Name: AC, Value: None
+Field Name: Initiative, Value: None
+Field Name: Speed, Value: None
+Field Name: PersonalityTraits , Value: None
+Field Name: STRmod, Value: None
+Field Name: HPMax, Value: None
+Field Name: ST Strength, Value: None
+Field Name: DEX, Value: None
+Field Name: HPCurrent, Value: None
+Field Name: Ideals, Value: None
+Field Name: DEXmod , Value: None
+Field Name: HPTemp, Value: None
+Field Name: Bonds, Value: None
+Field Name: CON, Value: None
+Field Name: HDTotal, Value: None
+Field Name: Check Box 12, Value: None [Deathsave Success 1]
+Field Name: Check Box 13, Value: None
+Field Name: Check Box 14, Value: None [Deathsave Success 3]
+Field Name: CONmod, Value: None
+Field Name: Check Box 15, Value: None [Deathsave Fail 1]
+Field Name: Check Box 16, Value: None
+Field Name: Check Box 17, Value: None
+Field Name: HD, Value: None
+Field Name: Flaws, Value: None
+Field Name: INT, Value: None
+Field Name: ST Dexterity, Value: None
+Field Name: ST Constitution, Value: None
+Field Name: ST Intelligence, Value: None
+Field Name: ST Wisdom, Value: None
+Field Name: ST Charisma, Value: None
+Field Name: Acrobatics, Value: None
+Field Name: Animal, Value: None
+Field Name: Athletics, Value: None
+Field Name: Deception , Value: None
+Field Name: History , Value: None
+Field Name: Insight, Value: None
+Field Name: Intimidation, Value: None
+Field Name: Check Box 11, Value: None [Str ST Checkbox]
+Field Name: Check Box 18, Value: None [Dex ST Checkbox]
+Field Name: Check Box 19, Value: None
+Field Name: Check Box 20, Value: None
+Field Name: Check Box 21, Value: None
+Field Name: Check Box 22, Value: None
+Field Name: Wpn Name, Value: None
+Field Name: Wpn1 AtkBonus, Value: None
+Field Name: Wpn1 Damage, Value: None
+Field Name: INTmod, Value: None
+Field Name: Wpn Name 2, Value: None
+Field Name: Wpn2 AtkBonus , Value: None
+Field Name: Wpn2 Damage , Value: None
+Field Name: Investigation , Value: None
+Field Name: WIS, Value: None
+Field Name: Wpn Name 3, Value: None
+Field Name: Wpn3 AtkBonus  , Value: None
+Field Name: Arcana, Value: None
+Field Name: Wpn3 Damage , Value: None
+Field Name: Perception , Value: None
+Field Name: WISmod, Value: None
+Field Name: CHA, Value: None
+Field Name: Nature, Value: None
+Field Name: Performance, Value: None
+Field Name: Medicine, Value: None
+Field Name: Religion, Value: None
+Field Name: Stealth , Value: None
+Field Name: Check Box 23, Value: None
+Field Name: Check Box 24, Value: None
+Field Name: Check Box 25, Value: None
+Field Name: Check Box 26, Value: None
+Field Name: Check Box 27, Value: None
+Field Name: Check Box 28, Value: None
+Field Name: Check Box 29, Value: None
+Field Name: Check Box 30, Value: None
+Field Name: Check Box 31, Value: None
+Field Name: Check Box 32, Value: None
+Field Name: Check Box 33, Value: None
+Field Name: Check Box 34, Value: None
+Field Name: Check Box 35, Value: None
+Field Name: Check Box 36, Value: None
+Field Name: Check Box 37, Value: None
+Field Name: Check Box 38, Value: None
+Field Name: Check Box 39, Value: None
+Field Name: Check Box 40, Value: None
+Field Name: Persuasion, Value: None
+Field Name: SleightofHand, Value: None
+Field Name: CHamod, Value: None
+Field Name: Survival, Value: None
+Field Name: AttacksSpellcasting, Value: None
+Field Name: Passive, Value: None
+Field Name: CP, Value: None
+Field Name: ProficienciesLang, Value: None
+Field Name: SP, Value: None
+Field Name: EP, Value: None
+Field Name: GP, Value: None
+Field Name: PP, Value: None
+Field Name: Equipment, Value: None
+Field Name: Features and Traits, Value: None
+Field Name: Spellcasting Class 2, Value: 
+Field Name: SpellcastingAbility 2, Value:
+Field Name: SpellSaveDC  2, Value:
+Field Name: SpellAtkBonus 2, Value:
+Field Name: SlotsTotal 19, Value:
+Field Name: SlotsRemaining 19, Value:
+Field Name: Spells 1014, Value:
+Field Name: Spells 1015, Value:
+Field Name: Spells 1016, Value:
+Field Name: Spells 1017, Value:
+Field Name: Spells 1018, Value:
+Field Name: Spells 1019, Value:
+Field Name: Spells 1020, Value:
+Field Name: Spells 1021, Value:
+Field Name: Spells 1022, Value:
+Field Name: Check Box 314, Value: /Off
+Field Name: Check Box 3031, Value: /Off
+Field Name: Check Box 3032, Value: /Off
+Field Name: Check Box 3033, Value: /Off
+Field Name: Check Box 3034, Value: /Off
+Field Name: Check Box 3035, Value: /Off
+Field Name: Check Box 3036, Value: /Off
+Field Name: Check Box 3037, Value: /Off
+Field Name: Check Box 3038, Value: /Off
+Field Name: Check Box 3039, Value: /Off
+Field Name: Check Box 3040, Value: None
+Field Name: Check Box 321, Value: None
+Field Name: Check Box 320, Value: None
+Field Name: Check Box 3060, Value: None
+Field Name: Check Box 3061, Value: None
+Field Name: Check Box 3062, Value: None
+Field Name: Check Box 3063, Value: None
+Field Name: Check Box 3064, Value: None
+Field Name: Check Box 3065, Value: None
+Field Name: Check Box 3066, Value: None
+Field Name: Check Box 315, Value: None
+Field Name: Check Box 3041, Value: /Off
+Field Name: Spells 1023, Value:
+Field Name: Check Box 251, Value: None
+Field Name: Check Box 309, Value: None
+Field Name: Check Box 3010, Value: None
+Field Name: Check Box 3011, Value: /Off
+Field Name: Check Box 3012, Value: /Off
+Field Name: Check Box 3013, Value: /Off
+Field Name: Check Box 3014, Value: /Off
+Field Name: Check Box 3015, Value: /Off
+Field Name: Check Box 3016, Value: /Off
+Field Name: Check Box 3017, Value: /Off
+Field Name: Check Box 3018, Value: /Off
+Field Name: Check Box 3019, Value: /Off
+Field Name: Spells 1024, Value:
+Field Name: Spells 1025, Value:
+Field Name: Spells 1026, Value:
+Field Name: Spells 1027, Value: 
+Field Name: Spells 1028, Value:
+Field Name: Spells 1029, Value:
+Field Name: Spells 1030, Value:
+Field Name: Spells 1031, Value:
+Field Name: Spells 1032, Value:
+Field Name: Spells 1033, Value:
+Field Name: SlotsTotal 20, Value:
+Field Name: SlotsRemaining 20, Value:
+Field Name: Spells 1034, Value:
+Field Name: Spells 1035, Value:
+Field Name: Spells 1036, Value:
+Field Name: Spells 1037, Value:
+Field Name: Spells 1038, Value:
+Field Name: Spells 1039, Value:
+Field Name: Spells 1040, Value:
+Field Name: Spells 1041, Value:
+Field Name: Spells 1042, Value:
+Field Name: Spells 1043, Value:
+Field Name: Spells 1044, Value: 
+Field Name: Spells 1045, Value:
+Field Name: Spells 1046, Value:
+Field Name: SlotsTotal 21, Value:
+Field Name: SlotsRemaining 21, Value:
+Field Name: Spells 1047, Value:
+Field Name: Spells 1048, Value:
+Field Name: Spells 1049, Value:
+Field Name: Spells 1050, Value:
+Field Name: Spells 1051, Value:
+Field Name: Spells 1052, Value:
+Field Name: Spells 1053, Value:
+Field Name: Spells 1054, Value:
+Field Name: Spells 1055, Value: 
+Field Name: Spells 1056, Value:
+Field Name: Spells 1057, Value:
+Field Name: Spells 1058, Value:
+Field Name: Spells 1059, Value:
+Field Name: SlotsTotal 22, Value:
+Field Name: SlotsRemaining 22, Value:
+Field Name: Spells 1060, Value:
+Field Name: Spells 1061, Value:
+Field Name: Spells 1062, Value:
+Field Name: Spells 1063, Value:
+Field Name: Spells 1064, Value:
+Field Name: Check Box 323, Value: /Off
+Field Name: Check Box 322, Value: /Off
+Field Name: Check Box 3067, Value: /Off
+Field Name: Check Box 3068, Value: /Off
+Field Name: Check Box 3069, Value: None
+Field Name: Check Box 3070, Value: None
+Field Name: Check Box 3071, Value: /Off
+Field Name: Check Box 3072, Value: None
+Field Name: Check Box 3073, Value: None
+Field Name: Spells 1065, Value:
+Field Name: Spells 1066, Value:
+Field Name: Spells 1067, Value:
+Field Name: Spells 1068, Value:
+Field Name: Spells 1069, Value: 
+Field Name: Spells 1070, Value:
+Field Name: Spells 1071, Value:
+Field Name: Check Box 317, Value: /Off
+Field Name: Spells 1072, Value:
+Field Name: SlotsTotal 23, Value:
+Field Name: SlotsRemaining 23, Value:
+Field Name: Spells 1073, Value:
+Field Name: Spells 1074, Value:
+Field Name: Spells 1075, Value:
+Field Name: Spells 1076, Value:
+Field Name: Spells 1077, Value: 
+Field Name: Spells 1078, Value:
+Field Name: Spells 1079, Value:
+Field Name: Spells 1080, Value:
+Field Name: Spells 1081, Value:
+Field Name: SlotsTotal 24, Value: None
+Field Name: SlotsRemaining 24, Value:
+Field Name: Spells 1082, Value:
+Field Name: Spells 1083, Value: 
+Field Name: Spells 1084, Value:
+Field Name: Spells 1085, Value:
+Field Name: Spells 1086, Value:
+Field Name: Spells 1087, Value: 
+Field Name: Spells 1088, Value:
+Field Name: Spells 1089, Value:
+Field Name: Spells 1090, Value:
+Field Name: SlotsTotal 25, Value:
+Field Name: SlotsRemaining 25, Value: 
+Field Name: Spells 1091, Value:
+Field Name: Spells 1092, Value:
+Field Name: Spells 1093, Value:
+Field Name: Spells 1094, Value:
+Field Name: Spells 1095, Value:
+Field Name: Spells 1096, Value: 
+Field Name: Spells 1097, Value:
+Field Name: Spells 1098, Value:
+Field Name: Spells 1099, Value:
+Field Name: SlotsTotal 26, Value:
+Field Name: SlotsRemaining 26, Value: 
+Field Name: Spells 10100, Value:
+Field Name: Spells 10101, Value:
+Field Name: Spells 10102, Value:
+Field Name: Spells 10103, Value:
+Field Name: Check Box 316, Value: /Off
+Field Name: Check Box 3042, Value: /Off
+Field Name: Check Box 3043, Value: /Off
+Field Name: Check Box 3044, Value: /Off
+Field Name: Check Box 3045, Value: /Off
+Field Name: Check Box 3046, Value: /Off
+Field Name: Check Box 3047, Value: /Off
+Field Name: Check Box 3048, Value: /Off
+Field Name: Check Box 3049, Value: /Off
+Field Name: Check Box 3050, Value: /Off
+Field Name: Check Box 3051, Value: /Off
+Field Name: Check Box 3052, Value: /Off
+Field Name: Spells 10104, Value:
+Field Name: Check Box 325, Value: None
+Field Name: Check Box 324, Value: /Off
+Field Name: Check Box 3074, Value: /Off
+Field Name: Check Box 3075, Value: /Off
+Field Name: Check Box 3076, Value: /Off
+Field Name: Check Box 3077, Value: /Off
+Field Name: Spells 10105, Value:
+Field Name: Spells 10106, Value:
+Field Name: Check Box 3078, Value: /Off
+Field Name: SlotsTotal 27, Value:
+Field Name: SlotsRemaining 27, Value:
+Field Name: Check Box 313, Value: /Off
+Field Name: Check Box 310, Value: /Off
+Field Name: Check Box 3020, Value: /Off
+Field Name: Check Box 3021, Value: /Off
+Field Name: Check Box 3022, Value: /Off
+Field Name: Check Box 3023, Value: /Off
+Field Name: Check Box 3024, Value: /Off
+Field Name: Check Box 3025, Value: /Off
+Field Name: Check Box 3026, Value: /Off
+Field Name: Check Box 3027, Value: /Off
+Field Name: Check Box 3028, Value: /Off
+Field Name: Check Box 3029, Value: /Off
+Field Name: Check Box 3030, Value: /Off
+Field Name: Spells 10107, Value:
+Field Name: Spells 10108, Value:
+Field Name: Spells 10109, Value:
+Field Name: Spells 101010, Value:
+Field Name: Spells 101011, Value:
+Field Name: Spells 101012, Value:
+Field Name: Check Box 319, Value: /Off
+Field Name: Check Box 318, Value: /Off
+Field Name: Check Box 3053, Value: /Off
+Field Name: Check Box 3054, Value: /Off
+Field Name: Check Box 3055, Value: /Off
+Field Name: Check Box 3056, Value: /Off
+Field Name: Check Box 3057, Value: /Off
+Field Name: Check Box 3058, Value: /Off
+Field Name: Check Box 3059, Value: /Off
+Field Name: Check Box 327, Value: None
+Field Name: Check Box 326, Value: None
+Field Name: Check Box 3079, Value: /Off
+Field Name: Check Box 3080, Value: /Off
+Field Name: Check Box 3081, Value: /Off
+Field Name: Check Box 3082, Value: /Off
+Field Name: Spells 101013, Value:
+Field Name: Check Box 3083, Value: /Off
+
+--- Fields on Page 2 ---
+Field Name: CharacterName 2, Value: 
+Field Name: Age, Value:
+Field Name: Height, Value:
+Field Name: Weight, Value:
+Field Name: Eyes, Value:
+Field Name: Skin, Value:
+Field Name: Hair, Value:
+Field Name: Allies, Value:
+Field Name: FactionName, Value:
+Field Name: Backstory, Value:
+Field Name: Feat+Traits, Value: 
+Field Name: Treasure, Value:
+Field Name: CHARACTER IMAGE, Value: None
+Field Name: Faction Symbol Image, Value: None
+Field Name: ClassLevel, Value: None
+Field Name: Background, Value: None
+Field Name: PlayerName, Value: None
+Field Name: CharacterName, Value: None
+Field Name: Race , Value: None
+Field Name: Alignment, Value: None
+Field Name: XP, Value: None
+Field Name: Inspiration, Value: None
+Field Name: STR, Value: None
+Field Name: ProfBonus, Value: None
+Field Name: AC, Value: None
+Field Name: Initiative, Value: None
+Field Name: Speed, Value: None
+Field Name: PersonalityTraits , Value: None
+Field Name: STRmod, Value: None
+Field Name: HPMax, Value: None
+Field Name: ST Strength, Value: None
+Field Name: DEX, Value: None
+Field Name: HPCurrent, Value: None
+Field Name: Ideals, Value: None
+Field Name: DEXmod , Value: None
+Field Name: HPTemp, Value: None
+Field Name: Bonds, Value: None
+Field Name: CON, Value: None
+Field Name: HDTotal, Value: None
+Field Name: Check Box 12, Value: None
+Field Name: Check Box 13, Value: None
+Field Name: Check Box 14, Value: None
+Field Name: CONmod, Value: None
+Field Name: Check Box 15, Value: None
+Field Name: Check Box 16, Value: None
+Field Name: Check Box 17, Value: None
+Field Name: HD, Value: None
+Field Name: Flaws, Value: None
+Field Name: INT, Value: None
+Field Name: ST Dexterity, Value: None
+Field Name: ST Constitution, Value: None
+Field Name: ST Intelligence, Value: None
+Field Name: ST Wisdom, Value: None
+Field Name: ST Charisma, Value: None
+Field Name: Acrobatics, Value: None
+Field Name: Animal, Value: None
+Field Name: Athletics, Value: None
+Field Name: Deception , Value: None
+Field Name: History , Value: None
+Field Name: Insight, Value: None
+Field Name: Intimidation, Value: None
+Field Name: Check Box 11, Value: None
+Field Name: Check Box 18, Value: None
+Field Name: Check Box 19, Value: None
+Field Name: Check Box 20, Value: None
+Field Name: Check Box 21, Value: None
+Field Name: Check Box 22, Value: None
+Field Name: Wpn Name, Value: None
+Field Name: Wpn1 AtkBonus, Value: None
+Field Name: Wpn1 Damage, Value: None
+Field Name: INTmod, Value: None
+Field Name: Wpn Name 2, Value: None
+Field Name: Wpn2 AtkBonus , Value: None
+Field Name: Wpn2 Damage , Value: None
+Field Name: Investigation , Value: None
+Field Name: WIS, Value: None
+Field Name: Wpn Name 3, Value: None
+Field Name: Wpn3 AtkBonus  , Value: None
+Field Name: Arcana, Value: None
+Field Name: Wpn3 Damage , Value: None
+Field Name: Perception , Value: None
+Field Name: WISmod, Value: None
+Field Name: CHA, Value: None
+Field Name: Nature, Value: None
+Field Name: Performance, Value: None
+Field Name: Medicine, Value: None
+Field Name: Religion, Value: None
+Field Name: Stealth , Value: None
+Field Name: Check Box 23, Value: None
+Field Name: Check Box 24, Value: None
+Field Name: Check Box 25, Value: None
+Field Name: Check Box 26, Value: None
+Field Name: Check Box 27, Value: None
+Field Name: Check Box 28, Value: None
+Field Name: Check Box 29, Value: None
+Field Name: Check Box 30, Value: None
+Field Name: Check Box 31, Value: None
+Field Name: Check Box 32, Value: None
+Field Name: Check Box 33, Value: None
+Field Name: Check Box 34, Value: None
+Field Name: Check Box 35, Value: None
+Field Name: Check Box 36, Value: None
+Field Name: Check Box 37, Value: None
+Field Name: Check Box 38, Value: None
+Field Name: Check Box 39, Value: None
+Field Name: Check Box 40, Value: None
+Field Name: Persuasion, Value: None
+Field Name: SleightofHand, Value: None
+Field Name: CHamod, Value: None
+Field Name: Survival, Value: None
+Field Name: AttacksSpellcasting, Value: None
+Field Name: Passive, Value: None
+Field Name: CP, Value: None
+Field Name: ProficienciesLang, Value: None
+Field Name: SP, Value: None
+Field Name: EP, Value: None
+Field Name: GP, Value: None
+Field Name: PP, Value: None
+Field Name: Equipment, Value: None
+Field Name: Features and Traits, Value: None
+Field Name: Spellcasting Class 2, Value: 
+Field Name: SpellcastingAbility 2, Value: 
+Field Name: SpellSaveDC  2, Value:
+Field Name: SpellAtkBonus 2, Value: 
+Field Name: SlotsTotal 19, Value:
+Field Name: SlotsRemaining 19, Value:
+Field Name: Spells 1014, Value:
+Field Name: Spells 1015, Value:
+Field Name: Spells 1016, Value:
+Field Name: Spells 1017, Value:
+Field Name: Spells 1018, Value: 
+Field Name: Spells 1019, Value:
+Field Name: Spells 1020, Value:
+Field Name: Spells 1021, Value:
+Field Name: Spells 1022, Value:
+Field Name: Check Box 314, Value: /Off
+Field Name: Check Box 3031, Value: /Off
+Field Name: Check Box 3032, Value: /Off
+Field Name: Check Box 3033, Value: /Off
+Field Name: Check Box 3034, Value: /Off
+Field Name: Check Box 3035, Value: /Off
+Field Name: Check Box 3036, Value: /Off
+Field Name: Check Box 3037, Value: /Off
+Field Name: Check Box 3038, Value: /Off
+Field Name: Check Box 3039, Value: /Off
+Field Name: Check Box 3040, Value: None
+Field Name: Check Box 321, Value: None
+Field Name: Check Box 320, Value: None
+Field Name: Check Box 3060, Value: None
+Field Name: Check Box 3061, Value: None
+Field Name: Check Box 3062, Value: None
+Field Name: Check Box 3063, Value: None
+Field Name: Check Box 3064, Value: None
+Field Name: Check Box 3065, Value: None
+Field Name: Check Box 3066, Value: None
+Field Name: Check Box 315, Value: None
+Field Name: Check Box 3041, Value: /Off
+Field Name: Spells 1023, Value:
+Field Name: Check Box 251, Value: None
+Field Name: Check Box 309, Value: None
+Field Name: Check Box 3010, Value: None
+Field Name: Check Box 3011, Value: /Off
+Field Name: Check Box 3012, Value: /Off
+Field Name: Check Box 3013, Value: /Off
+Field Name: Check Box 3014, Value: /Off
+Field Name: Check Box 3015, Value: /Off
+Field Name: Check Box 3016, Value: /Off
+Field Name: Check Box 3017, Value: /Off
+Field Name: Check Box 3018, Value: /Off
+Field Name: Check Box 3019, Value: /Off
+Field Name: Spells 1024, Value:
+Field Name: Spells 1025, Value:
+Field Name: Spells 1026, Value:
+Field Name: Spells 1027, Value:
+Field Name: Spells 1028, Value:
+Field Name: Spells 1029, Value:
+Field Name: Spells 1030, Value:
+Field Name: Spells 1031, Value:
+Field Name: Spells 1032, Value:
+Field Name: Spells 1033, Value: 
+Field Name: SlotsTotal 20, Value:
+Field Name: SlotsRemaining 20, Value:
+Field Name: Spells 1034, Value:
+Field Name: Spells 1035, Value:
+Field Name: Spells 1036, Value:
+Field Name: Spells 1037, Value: 
+Field Name: Spells 1038, Value:
+Field Name: Spells 1039, Value:
+Field Name: Spells 1040, Value: 
+Field Name: Spells 1041, Value:
+Field Name: Spells 1042, Value: 
+Field Name: Spells 1043, Value:
+Field Name: Spells 1044, Value:
+Field Name: Spells 1045, Value: 
+Field Name: Spells 1046, Value:
+Field Name: SlotsTotal 21, Value:
+Field Name: SlotsRemaining 21, Value: 
+Field Name: Spells 1047, Value:
+Field Name: Spells 1048, Value:
+Field Name: Spells 1049, Value:
+Field Name: Spells 1050, Value:
+Field Name: Spells 1051, Value:
+Field Name: Spells 1052, Value:
+Field Name: Spells 1053, Value: 
+Field Name: Spells 1054, Value:
+Field Name: Spells 1055, Value:
+Field Name: Spells 1056, Value:
+Field Name: Spells 1057, Value:
+Field Name: Spells 1058, Value:
+Field Name: Spells 1059, Value: 
+Field Name: SlotsTotal 22, Value:
+Field Name: SlotsRemaining 22, Value:
+Field Name: Spells 1060, Value:
+Field Name: Spells 1061, Value:
+Field Name: Spells 1062, Value:
+Field Name: Spells 1063, Value:
+Field Name: Spells 1064, Value: 
+Field Name: Check Box 323, Value: /Off
+Field Name: Check Box 322, Value: /Off
+Field Name: Check Box 3067, Value: /Off
+Field Name: Check Box 3068, Value: /Off
+Field Name: Check Box 3069, Value: None
+Field Name: Check Box 3070, Value: None
+Field Name: Check Box 3071, Value: /Off
+Field Name: Check Box 3072, Value: None
+Field Name: Check Box 3073, Value: None
+Field Name: Spells 1065, Value: 
+Field Name: Spells 1066, Value:
+Field Name: Spells 1067, Value:
+Field Name: Spells 1068, Value:
+Field Name: Spells 1069, Value:
+Field Name: Spells 1070, Value:
+Field Name: Spells 1071, Value:
+Field Name: Check Box 317, Value: /Off
+Field Name: Spells 1072, Value:
+Field Name: SlotsTotal 23, Value:
+Field Name: SlotsRemaining 23, Value:
+Field Name: Spells 1073, Value:
+Field Name: Spells 1074, Value:
+Field Name: Spells 1075, Value: 
+Field Name: Spells 1076, Value:
+Field Name: Spells 1077, Value:
+Field Name: Spells 1078, Value:
+Field Name: Spells 1079, Value:
+Field Name: Spells 1080, Value:
+Field Name: Spells 1081, Value:
+Field Name: SlotsTotal 24, Value: None
+Field Name: SlotsRemaining 24, Value:
+Field Name: Spells 1082, Value: 
+Field Name: Spells 1083, Value:
+Field Name: Spells 1084, Value:
+Field Name: Spells 1085, Value:
+Field Name: Spells 1086, Value:
+Field Name: Spells 1087, Value:
+Field Name: Spells 1088, Value:
+Field Name: Spells 1089, Value:
+Field Name: Spells 1090, Value:
+Field Name: SlotsTotal 25, Value: 
+Field Name: SlotsRemaining 25, Value:
+Field Name: Spells 1091, Value:
+Field Name: Spells 1092, Value:
+Field Name: Spells 1093, Value:
+Field Name: Spells 1094, Value:
+Field Name: Spells 1095, Value:
+Field Name: Spells 1096, Value:
+Field Name: Spells 1097, Value:
+Field Name: Spells 1098, Value:
+Field Name: Spells 1099, Value:
+Field Name: SlotsTotal 26, Value:
+Field Name: SlotsRemaining 26, Value: 
+Field Name: Spells 10100, Value:
+Field Name: Spells 10101, Value:
+Field Name: Spells 10102, Value:
+Field Name: Spells 10103, Value:
+Field Name: Check Box 316, Value: /Off
+Field Name: Check Box 3042, Value: /Off
+Field Name: Check Box 3043, Value: /Off
+Field Name: Check Box 3044, Value: /Off
+Field Name: Check Box 3045, Value: /Off
+Field Name: Check Box 3046, Value: /Off
+Field Name: Check Box 3047, Value: /Off
+Field Name: Check Box 3048, Value: /Off
+Field Name: Check Box 3049, Value: /Off
+Field Name: Check Box 3050, Value: /Off
+Field Name: Check Box 3051, Value: /Off
+Field Name: Check Box 3052, Value: /Off
+Field Name: Spells 10104, Value:
+Field Name: Check Box 325, Value: None
+Field Name: Check Box 324, Value: /Off
+Field Name: Check Box 3074, Value: /Off
+Field Name: Check Box 3075, Value: /Off
+Field Name: Check Box 3076, Value: /Off
+Field Name: Check Box 3077, Value: /Off
+Field Name: Spells 10105, Value: 
+Field Name: Spells 10106, Value:
+Field Name: Check Box 3078, Value: /Off
+Field Name: SlotsTotal 27, Value:
+Field Name: SlotsRemaining 27, Value:
+Field Name: Check Box 313, Value: /Off
+Field Name: Check Box 310, Value: /Off
+Field Name: Check Box 3020, Value: /Off
+Field Name: Check Box 3021, Value: /Off
+Field Name: Check Box 3022, Value: /Off
+Field Name: Check Box 3023, Value: /Off
+Field Name: Check Box 3024, Value: /Off
+Field Name: Check Box 3025, Value: /Off
+Field Name: Check Box 3026, Value: /Off
+Field Name: Check Box 3027, Value: /Off
+Field Name: Check Box 3028, Value: /Off
+Field Name: Check Box 3029, Value: /Off
+Field Name: Check Box 3030, Value: /Off
+Field Name: Spells 10107, Value:
+Field Name: Spells 10108, Value:
+Field Name: Spells 10109, Value:
+Field Name: Spells 101010, Value:
+Field Name: Spells 101011, Value: 
+Field Name: Spells 101012, Value:
+Field Name: Check Box 319, Value: /Off
+Field Name: Check Box 318, Value: /Off
+Field Name: Check Box 3053, Value: /Off
+Field Name: Check Box 3054, Value: /Off
+Field Name: Check Box 3055, Value: /Off
+Field Name: Check Box 3056, Value: /Off
+Field Name: Check Box 3057, Value: /Off
+Field Name: Check Box 3058, Value: /Off
+Field Name: Check Box 3059, Value: /Off
+Field Name: Check Box 327, Value: None
+Field Name: Check Box 326, Value: None
+Field Name: Check Box 3079, Value: /Off
+Field Name: Check Box 3080, Value: /Off
+Field Name: Check Box 3081, Value: /Off
+Field Name: Check Box 3082, Value: /Off
+Field Name: Spells 101013, Value:
+Field Name: Check Box 3083, Value: /Off
+
+--- Fields on Page 3 ---
+Field Name: CharacterName 2, Value:
+Field Name: Age, Value:
+Field Name: Height, Value: 
+Field Name: Weight, Value:
+Field Name: Eyes, Value:
+Field Name: Skin, Value:
+Field Name: Hair, Value:
+Field Name: Allies, Value:
+Field Name: FactionName, Value:
+Field Name: Backstory, Value:
+Field Name: Feat+Traits, Value:
+Field Name: Treasure, Value:
+Field Name: CHARACTER IMAGE, Value: None
+Field Name: Faction Symbol Image, Value: None
+Field Name: ClassLevel, Value: None
+Field Name: Background, Value: None
+Field Name: PlayerName, Value: None
+Field Name: CharacterName, Value: None
+Field Name: Race , Value: None
+Field Name: Alignment, Value: None
+Field Name: XP, Value: None
+Field Name: Inspiration, Value: None
+Field Name: STR, Value: None
+Field Name: ProfBonus, Value: None
+Field Name: AC, Value: None
+Field Name: Initiative, Value: None
+Field Name: Speed, Value: None
+Field Name: PersonalityTraits , Value: None
+Field Name: STRmod, Value: None
+Field Name: HPMax, Value: None
+Field Name: ST Strength, Value: None
+Field Name: DEX, Value: None
+Field Name: HPCurrent, Value: None
+Field Name: Ideals, Value: None
+Field Name: DEXmod , Value: None
+Field Name: HPTemp, Value: None
+Field Name: Bonds, Value: None
+Field Name: CON, Value: None
+Field Name: HDTotal, Value: None
+Field Name: Check Box 12, Value: None
+Field Name: Check Box 13, Value: None
+Field Name: Check Box 14, Value: None
+Field Name: CONmod, Value: None
+Field Name: Check Box 15, Value: None
+Field Name: Check Box 16, Value: None
+Field Name: Check Box 17, Value: None
+Field Name: HD, Value: None
+Field Name: Flaws, Value: None
+Field Name: INT, Value: None
+Field Name: ST Dexterity, Value: None
+Field Name: ST Constitution, Value: None
+Field Name: ST Intelligence, Value: None
+Field Name: ST Wisdom, Value: None
+Field Name: ST Charisma, Value: None
+Field Name: Acrobatics, Value: None
+Field Name: Animal, Value: None
+Field Name: Athletics, Value: None
+Field Name: Deception , Value: None
+Field Name: History , Value: None
+Field Name: Insight, Value: None
+Field Name: Intimidation, Value: None
+Field Name: Check Box 11, Value: None
+Field Name: Check Box 18, Value: None
+Field Name: Check Box 19, Value: None
+Field Name: Check Box 20, Value: None
+Field Name: Check Box 21, Value: None
+Field Name: Check Box 22, Value: None
+Field Name: Wpn Name, Value: None
+Field Name: Wpn1 AtkBonus, Value: None
+Field Name: Wpn1 Damage, Value: None
+Field Name: INTmod, Value: None
+Field Name: Wpn Name 2, Value: None
+Field Name: Wpn2 AtkBonus , Value: None
+Field Name: Wpn2 Damage , Value: None
+Field Name: Investigation , Value: None
+Field Name: WIS, Value: None
+Field Name: Wpn Name 3, Value: None
+Field Name: Wpn3 AtkBonus  , Value: None
+Field Name: Arcana, Value: None
+Field Name: Wpn3 Damage , Value: None
+Field Name: Perception , Value: None
+Field Name: WISmod, Value: None
+Field Name: CHA, Value: None
+Field Name: Nature, Value: None
+Field Name: Performance, Value: None
+Field Name: Medicine, Value: None
+Field Name: Religion, Value: None
+Field Name: Stealth , Value: None
+Field Name: Check Box 23, Value: None
+Field Name: Check Box 24, Value: None
+Field Name: Check Box 25, Value: None
+Field Name: Check Box 26, Value: None
+Field Name: Check Box 27, Value: None
+Field Name: Check Box 28, Value: None
+Field Name: Check Box 29, Value: None
+Field Name: Check Box 30, Value: None
+Field Name: Check Box 31, Value: None
+Field Name: Check Box 32, Value: None
+Field Name: Check Box 33, Value: None
+Field Name: Check Box 34, Value: None
+Field Name: Check Box 35, Value: None
+Field Name: Check Box 36, Value: None
+Field Name: Check Box 37, Value: None
+Field Name: Check Box 38, Value: None
+Field Name: Check Box 39, Value: None
+Field Name: Check Box 40, Value: None
+Field Name: Persuasion, Value: None
+Field Name: SleightofHand, Value: None
+Field Name: CHamod, Value: None
+Field Name: Survival, Value: None
+Field Name: AttacksSpellcasting, Value: None
+Field Name: Passive, Value: None
+Field Name: CP, Value: None
+Field Name: ProficienciesLang, Value: None
+Field Name: SP, Value: None
+Field Name: EP, Value: None
+Field Name: GP, Value: None
+Field Name: PP, Value: None
+Field Name: Equipment, Value: None
+Field Name: Features and Traits, Value: None
+Field Name: Spellcasting Class 2, Value:
+Field Name: SpellcastingAbility 2, Value:
+Field Name: SpellSaveDC  2, Value:
+Field Name: SpellAtkBonus 2, Value:
+Field Name: SlotsTotal 19, Value:
+Field Name: SlotsRemaining 19, Value:
+Field Name: Spells 1014, Value:
+Field Name: Spells 1015, Value:
+Field Name: Spells 1016, Value: 
+Field Name: Spells 1017, Value:
+Field Name: Spells 1018, Value:
+Field Name: Spells 1019, Value:
+Field Name: Spells 1020, Value:
+Field Name: Spells 1021, Value:
+Field Name: Spells 1022, Value:
+Field Name: Check Box 314, Value: /Off
+Field Name: Check Box 3031, Value: /Off
+Field Name: Check Box 3032, Value: /Off
+Field Name: Check Box 3033, Value: /Off
+Field Name: Check Box 3034, Value: /Off
+Field Name: Check Box 3035, Value: /Off
+Field Name: Check Box 3036, Value: /Off
+Field Name: Check Box 3037, Value: /Off
+Field Name: Check Box 3038, Value: /Off
+Field Name: Check Box 3039, Value: /Off
+Field Name: Check Box 3040, Value: None
+Field Name: Check Box 321, Value: None
+Field Name: Check Box 320, Value: None
+Field Name: Check Box 3060, Value: None
+Field Name: Check Box 3061, Value: None
+Field Name: Check Box 3062, Value: None
+Field Name: Check Box 3063, Value: None
+Field Name: Check Box 3064, Value: None
+Field Name: Check Box 3065, Value: None
+Field Name: Check Box 3066, Value: None
+Field Name: Check Box 315, Value: None
+Field Name: Check Box 3041, Value: /Off
+Field Name: Spells 1023, Value:
+Field Name: Check Box 251, Value: None
+Field Name: Check Box 309, Value: None
+Field Name: Check Box 3010, Value: None
+Field Name: Check Box 3011, Value: /Off
+Field Name: Check Box 3012, Value: /Off
+Field Name: Check Box 3013, Value: /Off
+Field Name: Check Box 3014, Value: /Off
+Field Name: Check Box 3015, Value: /Off
+Field Name: Check Box 3016, Value: /Off
+Field Name: Check Box 3017, Value: /Off
+Field Name: Check Box 3018, Value: /Off
+Field Name: Check Box 3019, Value: /Off
+Field Name: Spells 1024, Value:
+Field Name: Spells 1025, Value:
+Field Name: Spells 1026, Value:
+Field Name: Spells 1027, Value:
+Field Name: Spells 1028, Value:
+Field Name: Spells 1029, Value:
+Field Name: Spells 1030, Value:
+Field Name: Spells 1031, Value:
+Field Name: Spells 1032, Value:
+Field Name: Spells 1033, Value:
+Field Name: SlotsTotal 20, Value:
+Field Name: SlotsRemaining 20, Value: 
+Field Name: Spells 1034, Value:
+Field Name: Spells 1035, Value:
+Field Name: Spells 1036, Value:
+Field Name: Spells 1037, Value:
+Field Name: Spells 1038, Value:
+Field Name: Spells 1039, Value:
+Field Name: Spells 1040, Value:
+Field Name: Spells 1041, Value:
+Field Name: Spells 1042, Value:
+Field Name: Spells 1043, Value:
+Field Name: Spells 1044, Value:
+Field Name: Spells 1045, Value:
+Field Name: Spells 1046, Value:
+Field Name: SlotsTotal 21, Value:
+Field Name: SlotsRemaining 21, Value:
+Field Name: Spells 1047, Value: 
+Field Name: Spells 1048, Value:
+Field Name: Spells 1049, Value:
+Field Name: Spells 1050, Value:
+Field Name: Spells 1051, Value:
+Field Name: Spells 1052, Value:
+Field Name: Spells 1053, Value:
+Field Name: Spells 1054, Value:
+Field Name: Spells 1055, Value:
+Field Name: Spells 1056, Value:
+Field Name: Spells 1057, Value:
+Field Name: Spells 1058, Value:
+Field Name: Spells 1059, Value:
+Field Name: SlotsTotal 22, Value:
+Field Name: SlotsRemaining 22, Value:
+Field Name: Spells 1060, Value:
+Field Name: Spells 1061, Value: 
+Field Name: Spells 1062, Value:
+Field Name: Spells 1063, Value:
+Field Name: Spells 1064, Value:
+Field Name: Check Box 323, Value: /Off
+Field Name: Check Box 322, Value: /Off
+Field Name: Check Box 3067, Value: /Off
+Field Name: Check Box 3068, Value: /Off
+Field Name: Check Box 3069, Value: None
+Field Name: Check Box 3070, Value: None
+Field Name: Check Box 3071, Value: /Off
+Field Name: Check Box 3072, Value: None
+Field Name: Check Box 3073, Value: None
+Field Name: Spells 1065, Value: 
+Field Name: Spells 1066, Value:
+Field Name: Spells 1067, Value:
+Field Name: Spells 1068, Value:
+Field Name: Spells 1069, Value:
+Field Name: Spells 1070, Value:
+Field Name: Spells 1071, Value:
+Field Name: Check Box 317, Value: /Off
+Field Name: Spells 1072, Value:
+Field Name: SlotsTotal 23, Value:
+Field Name: SlotsRemaining 23, Value:
+Field Name: Spells 1073, Value: 
+Field Name: Spells 1074, Value: 
+Field Name: Spells 1075, Value: 
+Field Name: Spells 1076, Value: 
+Field Name: Spells 1077, Value:
+Field Name: Spells 1078, Value:
+Field Name: Spells 1079, Value: 
+Field Name: Spells 1080, Value: 
+Field Name: Spells 1081, Value: 
+Field Name: SlotsTotal 24, Value: None
+Field Name: SlotsRemaining 24, Value: 
+Field Name: Spells 1082, Value: 
+Field Name: Spells 1083, Value: 
+Field Name: Spells 1084, Value:
+Field Name: Spells 1085, Value:
+Field Name: Spells 1086, Value:
+Field Name: Spells 1087, Value:
+Field Name: Spells 1088, Value:
+Field Name: Spells 1089, Value:
+Field Name: Spells 1090, Value:
+Field Name: SlotsTotal 25, Value: 
+Field Name: SlotsRemaining 25, Value:
+Field Name: Spells 1091, Value:
+Field Name: Spells 1092, Value:
+Field Name: Spells 1093, Value:
+Field Name: Spells 1094, Value:
+Field Name: Spells 1095, Value:
+Field Name: Spells 1096, Value:
+Field Name: Spells 1097, Value:
+Field Name: Spells 1098, Value:
+Field Name: Spells 1099, Value:
+Field Name: SlotsTotal 26, Value: 
+Field Name: SlotsRemaining 26, Value: 
+Field Name: Spells 10100, Value:
+Field Name: Spells 10101, Value: 
+Field Name: Spells 10102, Value:
+Field Name: Spells 10103, Value:
+Field Name: Check Box 316, Value: /Off
+Field Name: Check Box 3042, Value: /Off
+Field Name: Check Box 3043, Value: /Off
+Field Name: Check Box 3044, Value: /Off
+Field Name: Check Box 3045, Value: /Off
+Field Name: Check Box 3046, Value: /Off
+Field Name: Check Box 3047, Value: /Off
+Field Name: Check Box 3048, Value: /Off
+Field Name: Check Box 3049, Value: /Off
+Field Name: Check Box 3050, Value: /Off
+Field Name: Check Box 3051, Value: /Off
+Field Name: Check Box 3052, Value: /Off
+Field Name: Spells 10104, Value: 
+Field Name: Check Box 325, Value: None
+Field Name: Check Box 324, Value: /Off
+Field Name: Check Box 3074, Value: /Off
+Field Name: Check Box 3075, Value: /Off
+Field Name: Check Box 3076, Value: /Off
+Field Name: Check Box 3077, Value: /Off
+Field Name: Spells 10105, Value:
+Field Name: Spells 10106, Value:
+Field Name: Check Box 3078, Value: /Off
+Field Name: SlotsTotal 27, Value:
+Field Name: SlotsRemaining 27, Value:
+Field Name: Check Box 313, Value: /Off
+Field Name: Check Box 310, Value: /Off
+Field Name: Check Box 3020, Value: /Off
+Field Name: Check Box 3021, Value: /Off
+Field Name: Check Box 3022, Value: /Off
+Field Name: Check Box 3023, Value: /Off
+Field Name: Check Box 3024, Value: /Off
+Field Name: Check Box 3025, Value: /Off
+Field Name: Check Box 3026, Value: /Off
+Field Name: Check Box 3027, Value: /Off
+Field Name: Check Box 3028, Value: /Off
+Field Name: Check Box 3029, Value: /Off
+Field Name: Check Box 3030, Value: /Off
+Field Name: Spells 10107, Value: 
+Field Name: Spells 10108, Value: 
+Field Name: Spells 10109, Value:
+Field Name: Spells 101010, Value:
+Field Name: Spells 101011, Value:
+Field Name: Spells 101012, Value:
+Field Name: Check Box 319, Value: /Off
+Field Name: Check Box 318, Value: /Off
+Field Name: Check Box 3053, Value: /Off
+Field Name: Check Box 3054, Value: /Off
+Field Name: Check Box 3055, Value: /Off
+Field Name: Check Box 3056, Value: /Off
+Field Name: Check Box 3057, Value: /Off
+Field Name: Check Box 3058, Value: /Off
+Field Name: Check Box 3059, Value: /Off
+Field Name: Check Box 327, Value: None
+Field Name: Check Box 326, Value: None
+Field Name: Check Box 3079, Value: /Off
+Field Name: Check Box 3080, Value: /Off
+Field Name: Check Box 3081, Value: /Off
+Field Name: Check Box 3082, Value: /Off
+Field Name: Spells 101013, Value:
+Field Name: Check Box 3083, Value: /Off
+
+"/Yes" is the correct value for this!
