@@ -366,9 +366,10 @@ if DMorPlay == 1:
     if eYN == "Y":
         for p in range(party):
             playername = input("Who is the player behind this character? ")
-            chLvl = int(input("What level is character {}? ".format(p+1)))
+            charactername = input("What is this character's name? ")
+            chLvl = int(input(f"What level is {charactername}? "))
             chLvlList.append(chLvl)
-            para = input("Set parameters on character {}? Y/N ".format(p+1))
+            para = input(f"Set parameters on {charactername}? Y/N ")
             if para == "Y":
                 param = "Y"
             if para == "y":
@@ -389,7 +390,6 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            charactername = input("What is this character's name? ")
             dndCharGen(param, chLvl, charactername, playername)
             
         properPL = sum(chLvlList) / party
@@ -404,9 +404,10 @@ if DMorPlay == 1:
         for p in range(party):
             #Add in a level check for classes, if the level is 3+, the subclass is available.
             playername = input("Who is the player behind this character? ")
-            chLvl = int(input("What level is character {}? ".format(p+1)))
+            charactername = input("What is this character's name? ")
+            chLvl = int(input(f"What level is {charactername}? "))
             chLvlList.append(chLvl)            
-            para = input("Set parameters on character {}? Y/N ".format(p+1))
+            para = input(f"Set parameters on {charactername}? Y/N ")
             if para == "Y":
                 param = "Y"
             if para == "y":
@@ -427,15 +428,15 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            charactername = input("What is this character's name? ")
             dndCharGen(param, chLvl, charactername, playername)
 else:
     for p in range(party):
         playername = input("Who is the player behind this character? ")        
-        chLvl = int(input(f"What level is the character {p+1}? "))
+        charactername = input("What is this character's name? ")
+        chLvl = int(input(f"What level is {charactername}? "))
         chLvlList.append(chLvl)   
     #Add in a level check for classes, if the level is 3+, the subclass is available.
-        para = input(f"Set parameters on character {p+1}? Y/N ")
+        para = input(f"Set parameters on {charactername}? Y/N ")
         if para == "Y":
             param = "Y"
         if para == "y":
@@ -456,7 +457,6 @@ else:
             param = "N"
         if para == "no":
             param = "N"    
-        charactername = input("What is this character's name? ")
         dndCharGen(param, chLvl, charactername, playername)
 
 '''
