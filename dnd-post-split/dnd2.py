@@ -310,7 +310,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, PlProf, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
 
@@ -403,6 +403,7 @@ if DMorPlay == 1:
     if eYN == "N":
         for p in range(party):
             #Add in a level check for classes, if the level is 3+, the subclass is available.
+            playername = input("Who is the player behind this character? ")
             chLvl = int(input("What level is character {}? ".format(p+1)))
             chLvlList.append(chLvl)            
             para = input("Set parameters on character {}? Y/N ".format(p+1))
@@ -426,9 +427,11 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            dndCharGen(param, chLvl)
+            charactername = input("What is this character's name? ")
+            dndCharGen(param, chLvl, charactername, playername)
 else:
     for p in range(party):
+        playername = input("Who is the player behind this character? ")        
         chLvl = int(input(f"What level is the character {p+1}? "))
         chLvlList.append(chLvl)   
     #Add in a level check for classes, if the level is 3+, the subclass is available.
@@ -453,7 +456,8 @@ else:
             param = "N"
         if para == "no":
             param = "N"    
-        dndCharGen(param, chLvl)    
+        charactername = input("What is this character's name? ")
+        dndCharGen(param, chLvl, charactername, playername)
 
 '''
 #This block of code is to make sure dndCharGen works
