@@ -2574,9 +2574,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     WisMod = math.floor((Wisdom-10)/2)
     ProfBonus = math.ceil(chLvl/4)+1
     ProfLang = PlProf + PlLang
-    prof_lang_str = ', '.join(str(item) for item in ProfLang)
+    prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang)
     FeatTrait = OtherBackgroundInfo + RaceNotes
-    feat_trait_str = ', '.join(str(item) for item in FeatTrait)
+    feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)
     data = {
         'ClassLevel':str(Class) + ' ' + str(chLvl),
         'Background':back,
@@ -2588,11 +2588,11 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         'AC':'10',
         'Initiative': str(DexMod),
         'Speed': str(walkingspeed),
-        'PersonalityTraits':Trait,
+        'PersonalityTraits ':Trait,
         'STRmod':str(StrMod),
         'DEX':str(Dexterity),
         'Ideals':Ideal,
-        'DEXmod':str(DexMod),
+        'DEXmod ':str(DexMod),
         'Bonds':Bond,
         'CON':str(Constitution),
         'CONmod':str(ConMod),
@@ -2601,22 +2601,22 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in PlProf else 0)),
         'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in PlProf else 0)),
         'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in PlProf else 0)),
-        'Deception':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in PlProf else 0)),
-        'History':str(HistNum + IntMod + (ProfBonus if 'History' in PlProf else 0)),
+        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in PlProf else 0)),
+        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in PlProf else 0)),
         'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in PlProf else 0)),
         'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in PlProf else 0)),
         'INTmod':str(IntMod),
-        'Investigation':str(InveNum + IntMod + (ProfBonus if 'Investigation' in PlProf else 0)),
+        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in PlProf else 0)),
         'WIS':str(Wisdom),
         'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in PlProf else 0)),
-        'Perception':str(PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
+        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
         'WISmod':str(WisMod),
         'CHA':str(Charisma),
         'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in PlProf else 0)),
         'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in PlProf else 0)),
         'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in PlProf else 0)),
         'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in PlProf else 0)),
-        'Stealth':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in PlProf else 0)),
+        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in PlProf else 0)),
         'Check Box 23':'/Yes' if 'Acrobatics' in PlProf else '/No',
         'Check Box 24':'/Yes' if 'Animal Handling' in PlProf else '/No',
         'Check Box 25':'/Yes' if 'Arcana' in PlProf else '/No',
