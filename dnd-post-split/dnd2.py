@@ -5,7 +5,7 @@ from dndchargen_class import *
 #from dndchargen_character_builder import *
 from fractions import Fraction
 
-def dndCharGen(param, chLvl):
+def dndCharGen(param, chLvl, charactername, playername):
     skills_dict = {
         "AcroNum" : 0,
         "AnHaNum" : 0,
@@ -310,8 +310,7 @@ def dndCharGen(param, chLvl):
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-    summation(param, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL)
-    skillsummation(PlProf, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, PlProf, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
 
@@ -366,6 +365,7 @@ if DMorPlay == 1:
 
     if eYN == "Y":
         for p in range(party):
+            playername = input("Who is the player behind this character? ")
             chLvl = int(input("What level is character {}? ".format(p+1)))
             chLvlList.append(chLvl)
             para = input("Set parameters on character {}? Y/N ".format(p+1))
@@ -389,7 +389,9 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            dndCharGen(param, chLvl)
+            charactername = input("What is this character's name? ")
+            dndCharGen(param, chLvl, charactername, playername)
+            
         properPL = sum(chLvlList) / party
         #encounterCR = int(properPL) * party * (1/4) #Instead of making this fraction that auto reduces, lets instead plug the numerator and denominator in an let it do its thing
         eCRMixednum = int(properPL) * party
