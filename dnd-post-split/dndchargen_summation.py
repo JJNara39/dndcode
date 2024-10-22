@@ -1,11 +1,36 @@
 import random
 from dndchargen_languagesskills import *
+from PyPDF2 import PdfReader, PdfWriter
 
 def d6():
     result = random.randint(1,6)
     return result
 
-def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL):
+def fill_fields_with_names(input_pdf, output_pdf):
+    # Read input file
+    reader = PdfReader(input_pdf)
+    writer = PdfWriter()
+
+    # Loop through all the pages
+    for page_num in range(len(reader.pages)):
+        page = reader.pages[page_num]
+        writer.add_page(page)
+
+        #Get form fields from that page
+        fields = reader.get_fields()
+
+        # If there are fields, fill them with field name
+        if fields:
+            for field_name, field_info in fields.items():
+                #Fill each field with name
+                writer.update_page_form_field_values(
+                    writer.pages[page_num], {field_name: field_name}
+                )
+    # Write the output pdf
+    with open(output_pdf, 'wb') as output_file:
+        writer.write(output_file)
+
+def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -2193,8 +2218,6 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, Class, su
     if ((back == "Inheritor") and ((Inheritance == Inh2 or Inheritance == Inh3))):
         print(f"An an Inheritor with an Inheritance of a Trinket, you inherit: {Trinket2}")
     print(f"Your trinket: {Trinket}")
-
-def skillsummation(PlProf, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     AcroNum = skills_dict["AcroNum"]
     AnHaNum = skills_dict["AnHaNum"]
     ArcaNum = skills_dict["ArcaNum"]
@@ -2263,3 +2286,18 @@ def skillsummation(PlProf, skills_dict, Charisma, Constitution, Dexterity, Intel
         n += 1
         if n >= 6:
             run = False
+        #Figure out how to assign each sum to a value, and figure out what each value is assigned to, then after printing all 6, make sure to THEN ask what abilityscore to assign each value to, and make sure to set the score += the value shown, not just change it to the new value
+        for i in Value:
+            print(f"Value {i+1} is {Value[{i}]}")
+
+
+    data = {
+        'ClassLevel':str(Class) & ' ' & str(chLvl),
+        'Background':back,
+        'PlayerName':playername,
+        'CharacterName':charactername,
+        'Race ':race,
+        'STR':str(Strength),
+        #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
+
+    }
