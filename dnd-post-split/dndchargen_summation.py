@@ -32,7 +32,7 @@ def fill_pdf(input_pdf_path, output_pdf_path, data):
         with open(output_pdf_path, 'wb') as output_pdf:
             writer.write(output_pdf)
 
-def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -800,6 +800,12 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     MusicalInstrumentsRand = random.choice(MusicalInstruments)    
     
     OtherBackgroundInfo = []
+    AdditionalInfo = []
+    if back == "Acolyte":
+        AdditionalInfo.append("Feature: Shelter of the Faithful - As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle. You might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.")
+    if back == "Anthropologist":
+        AdditionalInfo.append("Feature: Cultural Chameleon - Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a race whose culture you've adopted.")
+        AdditionalInfo.append("Feature: Adept Linguist - You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level.")        
     if back == "Archaeologist":
         ArchSI1 = "10-foot pole"
         ArchSI2 = "Medallion"
@@ -809,9 +815,13 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         ArchSI6 = "Sledgehammer"
         ArchSI7 = "Hooded lantern"
         ArchSI8 = "Whip"
-        ArchSI = [ArchSI1,  ArchSI2, ArchSI3, ArchSI4, ArchSI5, ArchSI6, ArchSI7, ArchSI8]
+        ArchSI = [ArchSI1, ArchSI2, ArchSI3, ArchSI4, ArchSI5, ArchSI6, ArchSI7, ArchSI8]
         ArchaeSigItem = random.choice(ArchSI)
-        OtherBackgroundInfo.append(f"As an Archaeologist, your Signature Item is: {ArchaeSigItem}")    
+        EQP.append(ArchaeSigItem)
+        AdditionalInfo.append(f"Feature: Dust Digger - Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you., that item being {ArchaeSigItem}")    
+        AdditionalInfo.append("Feature: Historical Knowledge - When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old.")
+    if back == "Ashari":
+        AdditionalInfo.append("Feature: Elemental Harmony - Growing up surrounded by wild elemental magics has attuned your senses to those chaotic forces, enabling you to subtly bend them to your will. As an action, you channel minor magic involving the element of your chosen Ashari order, giving you one of the following abilities: Pyrah - You instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, you snuff out a flame of the same size; Terrah - You instantaneously create a small rock no larger than a gold coin. The rock appears in your hand, then turns to dust after 1 minute; Vesrah - You instantaneously create enough hot or cold water to fill a small drinking vessel; Zephrah - You create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone's hair.")
     if back == "Astral Drifter":
         AsDrDC1 = "Corellon, god of art and magic (chaotic good)"
         AsDrDC2 = "Tymora, god of good fortune (chaotic good)"
@@ -825,7 +835,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         AsDrDC10 = "Ptah, god of knowledge and secrets (lawful neutral)"
         AsDrDC = [AsDrDC1, AsDrDC2, AsDrDC3, AsDrDC4, AsDrDC5, AsDrDC6, AsDrDC7, AsDrDC8, AsDrDC9, AsDrDC10]
         AstralDrifDivCont = random.choice(AsDrDC)
-        OtherBackgroundInfo.append(f"As an Astral Drifter, your Divine Contact: {AstralDrifDivCont}")
+        AdditionalInfo.append("Longevity - You are 20d6 years older than you look, because you have spent that much time in the Astral Sea without aging.")
+        AdditionalInfo.append(f"Feature: Divine Contact - You gain the Magic Initiate feat from the Player's Handbook and must choose cleric for the feat; In the Astral Sea, you crossed paths with a wandering deity. The encounter was brief and nonviolent, yet it made a lasting impression on you. This deity saw fit to share one secret or obscure bit of cosmic lore with you. Work with your DM to determine the details of this knowledge and its impact on the campaign; that contact being {AstralDrifDivCont}.")
     if back == "Athlete":
         AthFavEv1 = "Marathon"
         AthFavEv2 = "Long-distance running"
@@ -837,8 +848,11 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         AthFavEv8 = "Pentathlon (running, long jump, discus, javelin, wrestling)"
         AthFavEv = [AthFavEv1, AthFavEv2, AthFavEv3, AthFavEv4, AthFavEv5, AthFavEv6, AthFavEv7, AthFavEv8]
         AthleteFavoriteEvent = random.choice(AthFavEv)    
-        OtherBackgroundInfo.append(f"As an Athlete, your Favorite Event is: {AthleteFavoriteEvent}")
+        AdditionalInfo.append(f"Favored Event - While many athletes practice various games and events, most excel at a single form of competition. You excel in {AthleteFavoriteEvent}.")
+        AdditionalInfo.append("Feature: Echoes of Victory - You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories. When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone there who admires you and is willing to provide information or temporary shelter. Between adventures, you might compete in athletic events sufficient enough to maintain a comfortable lifestyle, as per the 'Practicing a Profession' downtime activity in chapter 8 of the Player's Handbook.")
     if back == "Azorius Functionary":
+        AdditionalInfo.append("Feature: Legal Authority - You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace. People mind their manners in your presence and avoid drawing your attention; they assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to (though it might cause more problems than it solves when you're dealing with incorrigible lawbreakers). If you abuse this privilege, though, you can get in serious trouble with your superiors and even be stripped of your position.")
+        OtherBackgroundInfo.append("Azorius Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature; For you, the spells on the Azorius Guild Spells table are added to the spell list of your spellcasting class. (If you are a multiclass character with multiple spell lists, these spells are added to all of them.) Cantrip: Friends, Message; 1st: Command, Ensnaring Strike; 2nd: Arcane Lock, Calm Emotions, Hold Person; 3rd: Clairvoyance, Counterspell; 4th: Compulsion, Divination; 5th: Dominate Person. Your magic often takes the form of blue or golden runes floating and glowing in the air in circular patterns or of shimmering azure barriers of magical energy.")
         AzFuAzC1 = "As a teenager, I was a page for a prominent judge."
         AzFuAzC2 = "One of my childhood friends is now a precognitive mage in service of the guild."
         AzFuAzC3 = "I joined the Azorius hoping to impress an arrester whom I admire."
@@ -881,7 +895,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         BanSp6 = "Captain"
         BanSp = [BanSp1,  BanSp2, BanSp3, BanSp4, BanSp5, BanSp6]
         BanditDefSpec = random.choice(BanSp)   
-        OtherBackgroundInfo.append(f"As a Bandit Defector, your Bandit Specialty is: {BanditDefSpec}")  
+        AdditionalInfo.append(f"Bandit Specialty - The Bandit Coalition is a rather loose organization of rogues and brigands, but there is still a degree of specialization within the ranks. This ensures that everyone knows what their job is and lessens confusion in the heat of a robbery. Your bandit specialty is {BanditDefSpec}. Lookouts typically watch the roads for any signs of Perch Guard patrols, signalling the team to bail if a heist looks too risky. They also keep an eye out for potential marks. Lifters are the specialist thieves of an operation. They are usually as adept at pick-pocketing as they are at sneaking up behind a cart to liberate its valuables. Thugs are the muscle of a bandit group, and use their size and strength to intimidate merchants into giving up without a fight. They also keep other bandits in line, at the captain’s discretion. Runners are the messengers and scouts of the Coalition, serving to smuggle pilfered goods to fences. Additionally, they pass information throughout the different camps of the organization. Their job often finds them working alone which makes them particularly vulnerable. Hustlers are inveterate con-artists. Through careful planning and execution, their diversions can keep cart drivers occupied just long enough for the lifters to do their work, or create a seamless opening for an ambush. Captains are the glue that holds each bandit team together, providing leadership, and stamping out dissention where necessary, often with force. They are figures that inspire with their skill and bravado.")
+        AdditionalInfo.append("Feature: Bandit Routes - As someone who once assisted in countless highway robberies, you are familiar with the roads of the Wood and escape paths used by bandits. When you are not in combat, you (and companions you lead) can travel between locations that cut through forested areas twice as fast as your speed would normally allow.")
     if back == "Boros Legionnaire":             
         BoLgC1 = "A former comrade in arms was promoted into the prestigious Sunhome Guard."
         BoLgC2 = "One of my parents is a ranking Boros officer."
@@ -915,7 +930,11 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         BorosLegonNonCont = random.choice(BoLgNonC)        
         OtherBackgroundInfo.append(f"Your Boros Contact Ally: {BorosLegonCont1}")
         OtherBackgroundInfo.append(f"Your Boros Contact Rival: {BorosLegonCont2}")
-        OtherBackgroundInfo.append(f"Your Non-Boros Contact: {BorosLegonNonCont}")   
+        OtherBackgroundInfo.append(f"Your Non-Boros Contact: {BorosLegonNonCont}")
+        AdditionalInfo.append("Feature: Legion Station - You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use, and you can gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid a salary of 1 gp (a Boros-minted 1-zino coin) per week, which (combined with free lodging in your garrison) enables you to maintain a poor lifestyle between adventures.")  
+        OtherBackgroundInfo.append("Boros Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature; For you, the spells on the Boros Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Fire Bolt, Sacred Flame; 1st: Guiding Bolt, Heroism; 2nd: Aid, Scorching Ray; 3rd: Beacon of Hope, Blinding Smite; 4th: Death Ward, Wall of Fire; 5th: Flame Strike. Your magic often features dramatic bursts of flame or radiance. When you cast beneficial spells on your allies, they appear momentarily surrounded with halos of bright fire.")
+    if back == "Celebrity Adventurer's Scion":
+        AdditionalInfo.append("Feature: Name Dropping - You know and have met any number of powerful people across the land—and some of them might even remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Additionally, the common folk treat you with deference, and your heritage and the stories you tell might be good for a free meal or a place to sleep.")
     if back == "Charlatan":
         S1 = "I cheat at games of chance."
         S2 = "I shave coins or forge documents."
@@ -925,7 +944,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S6 = "I convince people that worthless junk is worth their hard-earned money."
         SCM = [S1, S2, S3, S4, S5, S6]
         Scam = random.choice(SCM)   
-        OtherBackgroundInfo.append(f"Your favored scam: {Scam}")     
+        AdditionalInfo.append(f"Feature: Favorite Schemes - Every charlatan has an angle they use in preference to other schemes, your favorite scam being: {Scam}")
+        AdditionalInfo.append("Feature: False Identity - You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.")  
+    if back == "City Watch":
+        AdditionalInfo.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
     if (back == "Criminal") or (back == "Spy") or (back == "Urban Bounty Hunter"):
         S1 = "Blackmailer"
         S2 = "Burglar"
@@ -1007,6 +1029,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         FacPers = [FacPers1, FacPers2, FacPers3, FacPers4, FacPers5, FacPers6, FacPers7, FacPers8, FacPers9, FacPers10]
         FacelessPersona = random.choice(FacPers)  
         OtherBackgroundInfo.append(f"As a Faceless, your Persona is: {FacelessPersona}") 
+    if back == "Faction Agent":
+        AdditionalInfo.append("Feature: Factions of the Sword Coast - The lack of large, centralized governments in the North and along the Sword Coast is likely directly responsible for the proliferation of secret societies and conspiracies in those lands. If your background is as an agent for one of the main factions of the North and Sword Coast, here are some possibilities. The Harpers: Founded more than a millennium ago, disbanded and reorganized several times, the Harpers remain a powerful, behind-the-scenes agency, which acts to thwart evil and promote fairness through knowledge, rather than brute force. Harper agents are often proficient in Investigation, enabling them to be adept at snooping and spying. They often seek aid from other Harpers, sympathetic bards and innkeepers, rangers, and the clergy of gods that are aligned with the Harpers' ideals. The Order of the Gauntlet: One of the newest power groups in Faerûn, the Order of the Gauntlet has an agenda similar to that of the Harpers. Its methods are vastly different, however: bearers of the gauntlet are holy warriors on a righteous quest to crush evil and promote justice, and they never hide in the shadows. Order agents tend to be proficient in Religion, and frequently seek aid from law enforcement friendly to the order's ideals, and the clergy of the order's patron gods. The Emerald Enclave: Maintaining balance in the natural order and combating the forces that threaten that balance is the twofold goal of the Emerald Enclave. Those who serve the faction are masters of survival and living off the land. They are often proficient in Nature, and can seek assistance from woodsmen, hunters, rangers, barbarian tribes, druid circles, and priests who revere the gods of nature. The Lords' Alliance: On one level, the agents of the Lords' Alliance are representatives of the cities and other governments that constitute the alliance. But, as a faction with interests and concerns that transcend local politics and geography, the Alliance has its own cadre of individuals who work on behalf of the organizations, wider agenda. Alliance agents are required to be knowledgeable in History, and can always rely on the aid of the governments that are part of the Alliance, plus other leaders and groups who uphold the Alliance's ideals. The Zhentarim: In recent years, the Zhentarim have become more visible in the world at large, as the group works to improve its reputation among the common people. The faction draws employees and associates from many walks of life, setting them to tasks that serve the goals of the Black Network but aren't necessarily criminal in nature. Agents of the Black Network must often work in secret, and are frequently proficient in Deception. They seek aid from the wizards, mercenaries, merchants and priesthoods allied with the Zhentarim.")
+        AdditionalInfo.append("Feature: Save Hamen - As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities.")
     if back == "Far Traveler":
         WhyH1 = "Emissary"
         WhyH2 = "Exile"
@@ -2238,26 +2263,6 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     SloHNum = skills_dict["SloHNum"]
     SteaNum = skills_dict["SteaNum"]
     SurvNum = skills_dict["SurvNum"]        
-    for item in PlProf:
-        print(f"You are proficient in: {item}")
-    print(f"Your Acrobatics score: {AcroNum}") 
-    print(f"Your Animal Handling score: {AnHaNum}") 
-    print(f"Your Arcana score: {ArcaNum}") 
-    print(f"Your Athletics score: {AthlNum}") 
-    print(f"Your Deception score: {DeceNum}") 
-    print(f"Your History score: {HistNum}") 
-    print(f"Your Insight score: {InsiNum}") 
-    print(f"Your Intimidation score: {IntiNum}") 
-    print(f"Your Investigation score: {InveNum}") 
-    print(f"Your Medicine score: {MediNum}") 
-    print(f"Your Nature score: {NatuNum}") 
-    print(f"Your Perception score: {PercNum}") 
-    print(f"Your Performance score: {PerfNum}") 
-    print(f"Your Persuasion score: {PersNum}") 
-    print(f"Your Religion score: {ReliNum}") 
-    print(f"Your Sleight of Hand score: {SloHNum}") 
-    print(f"Your Stealth score: {SteaNum}") 
-    print(f"Your Survival score: {SurvNum}") 
     print(f"Your Charisma score: {Charisma}")
     print(f"Your Constitution score: {Constitution}") 
     print(f"Your Dexterity score: {Dexterity}")
