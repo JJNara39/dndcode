@@ -1,4 +1,5 @@
 import random
+import math
 from dndchargen_languagesskills import *
 from PyPDF2 import PdfReader, PdfWriter
 
@@ -6,31 +7,32 @@ def d6():
     result = random.randint(1,6)
     return result
 
-def fill_fields_with_names(input_pdf, output_pdf):
+def fill_pdf(input_pdf_path, output_pdf_path, data):
     # Read input file
-    reader = PdfReader(input_pdf)
-    writer = PdfWriter()
+    with open(input_pdf_path, 'rb') as pdf_file:
+        reader = PdfReader(pdf_file)
+        writer = PdfWriter()
 
-    # Loop through all the pages
-    for page_num in range(len(reader.pages)):
-        page = reader.pages[page_num]
-        writer.add_page(page)
+        # Loop through all the pages
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            writer.add_page(page)
 
-        #Get form fields from that page
-        fields = reader.get_fields()
+            #Get form fields from that page
+            fields = reader.get_fields()
 
-        # If there are fields, fill them with field name
-        if fields:
-            for field_name, field_info in fields.items():
-                #Fill each field with name
-                writer.update_page_form_field_values(
-                    writer.pages[page_num], {field_name: field_name}
-                )
-    # Write the output pdf
-    with open(output_pdf, 'wb') as output_file:
-        writer.write(output_file)
+            # If there are fields, fill them with field name
+            if fields:
+                for key, value in data.items():
+                    #Fill each field with name
+                    writer.update_page_form_field_values(
+                        writer.pages[page_num], {key: value}
+                    )
+        # Write the output pdf
+        with open(output_pdf_path, 'wb') as output_pdf:
+            writer.write(output_pdf)
 
-def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -2265,10 +2267,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     
     print("Six Scores to choose from to apply to your abilities:")
     n=0
-    m=0
+    Sums = []
     run = True
     while run:
-
         Value1 = d6()
         Value2 = d6()
         Value3 = d6()
@@ -2282,22 +2283,370 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         sum = 0
         for k in range(len(Value)):
             sum += Value[k]
-        print(sum)
+        Sums.append(sum)
         n += 1
         if n >= 6:
             run = False
         #Figure out how to assign each sum to a value, and figure out what each value is assigned to, then after printing all 6, make sure to THEN ask what abilityscore to assign each value to, and make sure to set the score += the value shown, not just change it to the new value
-        for i in Value:
-            print(f"Value {i+1} is {Value[{i}]}")
+    AbilityScoresList = ["Charisma", "Constitution", "Dexterity", "Intelligence", "Strength", "Wisdom"]
+    if param == "Y":
+        for i, sum in enumerate(Sums, 1):
+            print(f"Score {i} to apply: {sum}")        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc1 = int(input("Which ability score would you like to apply the first score to? "))
+        if absc1 == 0:
+            AbilityScoresListRand1 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand1 == "Charisma":
+                Charisma += Sums[0]
+            if AbilityScoresListRand1 == "Constitution":
+                Constitution += Sums[0]
+            if AbilityScoresListRand1 == "Dexterity":
+                Dexterity += Sums[0]
+            if AbilityScoresListRand1 == "Intelligence":
+                Intelligence += Sums[0]
+            if AbilityScoresListRand1 == "Strength":
+                Strength += Sums[0]
+            if AbilityScoresListRand1 == "Wisdom":
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(AbilityScoresListRand1)
+        elif 1 <= absc1 <= 6:
+            first_absc_choice = AbilityScoresList[absc1 - 1]
+            if first_absc_choice == "Charisma":
+                Charisma += Sums[0]
+            if first_absc_choice == "Constitution":
+                Constitution += Sums[0]
+            if first_absc_choice == "Dexterity":
+                Dexterity += Sums[0]
+            if first_absc_choice == "Intelligence":
+                Intelligence += Sums[0]
+            if first_absc_choice == "Strength":
+                Strength += Sums[0]
+            if first_absc_choice == "Wisdom":            
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(first_absc_choice)
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc2 = int(input("Which ability score would you like to apply the second score to? "))
+        if absc2 == 0:
+            AbilityScoresListRand2 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand2 == "Charisma":
+                Charisma += Sums[1]
+            if AbilityScoresListRand2 == "Constitution":
+                Constitution += Sums[1]
+            if AbilityScoresListRand2 == "Dexterity":
+                Dexterity += Sums[1]
+            if AbilityScoresListRand2 == "Intelligence":
+                Intelligence += Sums[1]
+            if AbilityScoresListRand2 == "Strength":
+                Strength += Sums[1]
+            if AbilityScoresListRand2 == "Wisdom":
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(AbilityScoresListRand2)
+        elif 1 <= absc2 <= 5:
+            second_absc_choice = AbilityScoresList[absc2 - 1]
+            if second_absc_choice == "Charisma":
+                Charisma += Sums[1]
+            if second_absc_choice == "Constitution":
+                Constitution += Sums[1]
+            if second_absc_choice == "Dexterity":
+                Dexterity += Sums[1]
+            if second_absc_choice == "Intelligence":
+                Intelligence += Sums[1]
+            if second_absc_choice == "Strength":
+                Strength += Sums[1]
+            if second_absc_choice == "Wisdom":            
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(second_absc_choice)        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc3 = int(input("Which ability score would you like to apply the third score to? "))
+        if absc3 == 0:
+            AbilityScoresListRand3 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand3 == "Charisma":
+                Charisma += Sums[2]
+            if AbilityScoresListRand3 == "Constitution":
+                Constitution += Sums[2]
+            if AbilityScoresListRand3 == "Dexterity":
+                Dexterity += Sums[2]
+            if AbilityScoresListRand3 == "Intelligence":
+                Intelligence += Sums[2]
+            if AbilityScoresListRand3 == "Strength":
+                Strength += Sums[2]
+            if AbilityScoresListRand3 == "Wisdom":
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(AbilityScoresListRand3)
+        elif 1 <= absc3 <= 4:
+            third_absc_choice = AbilityScoresList[absc3 - 1]
+            if third_absc_choice == "Charisma":
+                Charisma += Sums[2]
+            if third_absc_choice == "Constitution":
+                Constitution += Sums[2]
+            if third_absc_choice == "Dexterity":
+                Dexterity += Sums[2]
+            if third_absc_choice == "Intelligence":
+                Intelligence += Sums[2]
+            if third_absc_choice == "Strength":
+                Strength += Sums[2]
+            if third_absc_choice == "Wisdom":            
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(third_absc_choice)                    
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc4 = int(input("Which ability score would you like to apply the fourth score to? "))
+        if absc4 == 0:
+            AbilityScoresListRand4 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand4 == "Charisma":
+                Charisma += Sums[3]
+            if AbilityScoresListRand4 == "Constitution":
+                Constitution += Sums[3]
+            if AbilityScoresListRand4 == "Dexterity":
+                Dexterity += Sums[3]
+            if AbilityScoresListRand4 == "Intelligence":
+                Intelligence += Sums[3]
+            if AbilityScoresListRand4 == "Strength":
+                Strength += Sums[3]
+            if AbilityScoresListRand4 == "Wisdom":
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(AbilityScoresListRand4)
+        elif 1 <= absc4 <= 3:
+            fourth_absc_choice = AbilityScoresList[absc4 - 1]
+            if fourth_absc_choice == "Charisma":
+                Charisma += Sums[3]
+            if fourth_absc_choice == "Constitution":
+                Constitution += Sums[3]
+            if fourth_absc_choice == "Dexterity":
+                Dexterity += Sums[3]
+            if fourth_absc_choice == "Intelligence":
+                Intelligence += Sums[3]
+            if fourth_absc_choice == "Strength":
+                Strength += Sums[3]
+            if fourth_absc_choice == "Wisdom":            
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(fourth_absc_choice)        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc5 = int(input("Which ability score would you like to apply the fifth score to? "))
+        if absc5 == 0:
+            AbilityScoresListRand5 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand5 == "Charisma":
+                Charisma += Sums[4]
+            if AbilityScoresListRand5 == "Constitution":
+                Constitution += Sums[4]
+            if AbilityScoresListRand5 == "Dexterity":
+                Dexterity += Sums[4]
+            if AbilityScoresListRand5 == "Intelligence":
+                Intelligence += Sums[4]
+            if AbilityScoresListRand5 == "Strength":
+                Strength += Sums[4]
+            if AbilityScoresListRand5 == "Wisdom":
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(AbilityScoresListRand5)
+        elif 1 <= absc5 <= 2:
+            fifth_absc_choice = AbilityScoresList[absc5 - 1]
+            if fifth_absc_choice == "Charisma":
+                Charisma += Sums[4]
+            if fifth_absc_choice == "Constitution":
+                Constitution += Sums[4]
+            if fifth_absc_choice == "Dexterity":
+                Dexterity += Sums[4]
+            if fifth_absc_choice == "Intelligence":
+                Intelligence += Sums[4]
+            if fifth_absc_choice == "Strength":
+                Strength += Sums[4]
+            if fifth_absc_choice == "Wisdom":            
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(fifth_absc_choice)        
+        last_absc_choice = AbilityScoresList[0]
+        if last_absc_choice == "Charisma":
+            Charisma += Sums[5]
+        if last_absc_choice == "Constitution":
+            Constitution += Sums[5]
+        if last_absc_choice == "Dexterity":
+            Dexterity += Sums[5]
+        if last_absc_choice == "Intelligence":
+            Intelligence += Sums[5]
+        if last_absc_choice == "Strength":
+            Strength += Sums[5]
+        if last_absc_choice == "Wisdom":            
+            Wisdom += Sums[5]
+    if param == "N":
+            AbilityScoresListRand1 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand1 == "Charisma":
+                Charisma += Sums[0]
+            if AbilityScoresListRand1 == "Constitution":
+                Constitution += Sums[0]
+            if AbilityScoresListRand1 == "Dexterity":
+                Dexterity += Sums[0]
+            if AbilityScoresListRand1 == "Intelligence":
+                Intelligence += Sums[0]
+            if AbilityScoresListRand1 == "Strength":
+                Strength += Sums[0]
+            if AbilityScoresListRand1 == "Wisdom":
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(AbilityScoresListRand1)
+            AbilityScoresListRand2 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand2 == "Charisma":
+                Charisma += Sums[1]
+            if AbilityScoresListRand2 == "Constitution":
+                Constitution += Sums[1]
+            if AbilityScoresListRand2 == "Dexterity":
+                Dexterity += Sums[1]
+            if AbilityScoresListRand2 == "Intelligence":
+                Intelligence += Sums[1]
+            if AbilityScoresListRand2 == "Strength":
+                Strength += Sums[1]
+            if AbilityScoresListRand2 == "Wisdom":
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(AbilityScoresListRand2)           
+            AbilityScoresListRand3 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand3 == "Charisma":
+                Charisma += Sums[2]
+            if AbilityScoresListRand3 == "Constitution":
+                Constitution += Sums[2]
+            if AbilityScoresListRand3 == "Dexterity":
+                Dexterity += Sums[2]
+            if AbilityScoresListRand3 == "Intelligence":
+                Intelligence += Sums[2]
+            if AbilityScoresListRand3 == "Strength":
+                Strength += Sums[2]
+            if AbilityScoresListRand3 == "Wisdom":
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(AbilityScoresListRand3)   
+            AbilityScoresListRand4 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand4 == "Charisma":
+                Charisma += Sums[3]
+            if AbilityScoresListRand4 == "Constitution":
+                Constitution += Sums[3]
+            if AbilityScoresListRand4 == "Dexterity":
+                Dexterity += Sums[3]
+            if AbilityScoresListRand4 == "Intelligence":
+                Intelligence += Sums[3]
+            if AbilityScoresListRand4 == "Strength":
+                Strength += Sums[3]
+            if AbilityScoresListRand4 == "Wisdom":
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(AbilityScoresListRand4)   
+            AbilityScoresListRand5 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand5 == "Charisma":
+                Charisma += Sums[4]
+            if AbilityScoresListRand5 == "Constitution":
+                Constitution += Sums[4]
+            if AbilityScoresListRand5 == "Dexterity":
+                Dexterity += Sums[4]
+            if AbilityScoresListRand5 == "Intelligence":
+                Intelligence += Sums[4]
+            if AbilityScoresListRand5 == "Strength":
+                Strength += Sums[4]
+            if AbilityScoresListRand5 == "Wisdom":
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(AbilityScoresListRand5)    
+            AbilityScoresListRand6 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand6 == "Charisma":
+                Charisma += Sums[5]
+            if AbilityScoresListRand6 == "Constitution":
+                Constitution += Sums[5]
+            if AbilityScoresListRand6 == "Dexterity":
+                Dexterity += Sums[5]
+            if AbilityScoresListRand6 == "Intelligence":
+                Intelligence += Sums[5]
+            if AbilityScoresListRand6 == "Strength":
+                Strength += Sums[5]
+            if AbilityScoresListRand6 == "Wisdom":
+                Wisdom += Sums[5]
 
-
+    print(f"Charisma is {Charisma}")
+    ChaMod = math.floor((Charisma-10)/2)
+    print(f"Constitution is {Constitution}")
+    ConMod = math.floor((Constitution-10)/2)
+    print(f"Dexterity is {Dexterity}")
+    DexMod = math.floor((Dexterity-10)/2)
+    print(f"Intelligence is {Intelligence}")
+    IntMod = math.floor((Intelligence-10)/2)
+    print(f"Strength is {Strength}")
+    StrMod = math.floor((Strength-10)/2)
+    print(f"Wisdom is {Wisdom}")
+    WisMod = math.floor((Wisdom-10)/2)
+    ProfBonus = math.ceil(chLvl/4)+1
+    ProfLang = PlProf + PlLang
+    prof_lang_str = ', '.join(str(item) for item in ProfLang)
+    FeatTrait = OtherBackgroundInfo + RaceNotes
+    feat_trait_str = ', '.join(str(item) for item in FeatTrait)
     data = {
-        'ClassLevel':str(Class) & ' ' & str(chLvl),
+        'ClassLevel':str(Class) + ' ' + str(chLvl),
         'Background':back,
         'PlayerName':playername,
         'CharacterName':charactername,
         'Race ':race,
         'STR':str(Strength),
+        'ProfBonus':str(ProfBonus),
+        'AC':'10',
+        'Initiative': str(DexMod),
+        'Speed': str(walkingspeed),
+        'PersonalityTraits':Trait,
+        'STRmod':str(StrMod),
+        'DEX':str(Dexterity),
+        'Ideals':Ideal,
+        'DEXmod':str(DexMod),
+        'Bonds':Bond,
+        'CON':str(Constitution),
+        'CONmod':str(ConMod),
+        'Flaws':Flaw,
+        'INT':str(Intelligence),
+        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in PlProf else 0)),
+        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in PlProf else 0)),
+        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in PlProf else 0)),
+        'Deception':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in PlProf else 0)),
+        'History':str(HistNum + IntMod + (ProfBonus if 'History' in PlProf else 0)),
+        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in PlProf else 0)),
+        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in PlProf else 0)),
+        'INTmod':str(IntMod),
+        'Investigation':str(InveNum + IntMod + (ProfBonus if 'Investigation' in PlProf else 0)),
+        'WIS':str(Wisdom),
+        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in PlProf else 0)),
+        'Perception':str(PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
+        'WISmod':str(WisMod),
+        'CHA':str(Charisma),
+        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in PlProf else 0)),
+        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in PlProf else 0)),
+        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in PlProf else 0)),
+        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in PlProf else 0)),
+        'Stealth':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in PlProf else 0)),
+        'Check Box 23':'/Yes' if 'Acrobatics' in PlProf else '/No',
+        'Check Box 24':'/Yes' if 'Animal Handling' in PlProf else '/No',
+        'Check Box 25':'/Yes' if 'Arcana' in PlProf else '/No',
+        'Check Box 26':'/Yes' if 'Athletics' in PlProf else '/No',
+        'Check Box 27':'/Yes' if 'Deception' in PlProf else '/No',
+        'Check Box 28':'/Yes' if 'History' in PlProf else '/No',
+        'Check Box 29':'/Yes' if 'Insight' in PlProf else '/No',
+        'Check Box 30':'/Yes' if 'Intimidation' in PlProf else '/No',
+        'Check Box 31':'/Yes' if 'Investigation' in PlProf else '/No',
+        'Check Box 32':'/Yes' if 'Medicine' in PlProf else '/No',
+        'Check Box 33':'/Yes' if 'Nature' in PlProf else '/No',
+        'Check Box 34':'/Yes' if 'Perception' in PlProf else '/No',
+        'Check Box 35':'/Yes' if 'Performance' in PlProf else '/No',
+        'Check Box 36':'/Yes' if 'Persuasion' in PlProf else '/No',
+        'Check Box 37':'/Yes' if 'Religion' in PlProf else '/No',
+        'Check Box 38':'/Yes' if 'Sleight of Hand' in PlProf else '/No',
+        'Check Box 39':'/Yes' if 'Stealth' in PlProf else '/No',
+        'Check Box 40':'/Yes' if 'Survival' in PlProf else '/No',
+        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in PlProf else 0)),
+        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in PlProf else 0)),
+        'CHamod':str(ChaMod),
+        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in PlProf else 0)),
+        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
+        'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
+        'GP':str(BGL),
+        #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
+        'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
         #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
-
-    }
+        #All spellcasting info will be provided in our creator function
+        }
+    input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
+    output_pdf_path = f'{charactername}_charsheet.pdf'
+    fill_pdf(input_pdf_path, output_pdf_path, data)
