@@ -2273,7 +2273,7 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         CreatureType = "Goblinoid"
         RaceNotes.append(Darkvision)
         PlProf = martwepprof2(param, PlProf)
-        PlProf.append(LightArmor)
+        PlProf.extend(LightArmor)
         RaceNotes.append("Saving Face: Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest.")
     if race == "Human":
         Hmo1 = d10()
