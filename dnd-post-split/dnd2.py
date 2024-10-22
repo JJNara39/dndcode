@@ -246,7 +246,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if CharacterGenRand1 == "Class":
                 Class, subclass, ClassNotes = dndchargen_class(param)
             if CharacterGenRand1 == "Background":
-                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(CharacterGenRand1)
         elif 1 <= chargen1 <= 3:
             first_choice = CharacterGen[chargen1 - 1]
@@ -255,7 +255,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if first_choice == "Class":
                 Class, subclass, ClassNotes = dndchargen_class(param)
             if first_choice == "Background":
-                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(first_choice)
         print("0 - Random")        
         for i, option in enumerate(CharacterGen, 1):
@@ -268,7 +268,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if CharacterGenRand2 == "Class":
                 Class, subclass, ClassNotes = dndchargen_class(param)
             if CharacterGenRand2 == "Background":
-                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(CharacterGenRand2)
         elif 1 <= chargen2 <= len(CharacterGen):
             second_choice = CharacterGen[chargen2 - 1]
@@ -277,7 +277,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if second_choice == "Class":
                 Class, subclass, ClassNotes = dndchargen_class(param)
             if second_choice == "Background":
-                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+                back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(second_choice)
         last_choice = CharacterGen[0]
         if last_choice == "Race":
@@ -285,7 +285,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if last_choice == "Class":
             Class, subclass, ClassNotes = dndchargen_class(param)
         if last_choice == "Background":
-            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
     if param == "N":
         CharacterGenRand1 = random.choice(CharacterGen)
         if CharacterGenRand1 == "Race":
@@ -293,7 +293,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand1 == "Class":
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand1 == "Background":
-            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
         CharacterGen.remove(CharacterGenRand1)
         CharacterGenRand2 = random.choice(CharacterGen)
         if CharacterGenRand2 == "Race":
@@ -301,7 +301,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand2 == "Class":
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand2 == "Background":
-            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
         CharacterGen.remove(CharacterGenRand2)
         CharacterGenRand3 = random.choice(CharacterGen)
         if CharacterGenRand3 == "Race":
@@ -309,8 +309,8 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand3 == "Class":
             Class, subclass, ClassNotes = dndchargen_class(param)
         if CharacterGenRand3 == "Background":       
-            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+            back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
 
