@@ -948,7 +948,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         AdditionalInfo.append("Feature: False Identity - You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.")  
     if back == "City Watch":
         AdditionalInfo.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
-    if (back == "Criminal") or (back == "Spy") or (back == "Urban Bounty Hunter"):
+    if back == "Clasp Member":
+        AdditionalInfo.append("Feature: A Favor in Turn - You have gained enough clout in the Clasp that you can call in a favor from your contacts whenever you're close enough to a center of syndicate activity. A request for a favor can be no longer than 20 words, and is passed up the chain to an undisclosed Spireling for approval. This favor can take on any form subject to the approval of the GM, who decides how it is fulfilled. If muscle is requested, an NPC member of the Clasp can temporarily aid your party. If money is needed, a small loan can be provided. If you've been imprisoned, Clasp operatives can look into breaking you out or paying off the jailer. At some point, the favor will be called in for repayment, often without warning. Refusing the call will result in your termination—literally. You might be called on to commit a specific burglary, or to pressure an Emonian dignitary to reveal a secret at an upcoming ball. The Clasp might even demand that you assassinate a specific person, with no questions asked or answered. It's the GM's prerogative to ensure that the syndicate's request is proportionate to the favor they bestowed—or that they compensate you in other ways for a service that goes beyond the scope of repaying the initial favor.")
+    if (back == "Criminal") or (back == "Spy"): 
         S1 = "Blackmailer"
         S2 = "Burglar"
         S3 = "Enforcer"
@@ -959,7 +961,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S8 = "Smuggler"
         SPC = [S1, S2, S3, S4, S5, S6]
         Specialty = random.choice(SPC)
-        OtherBackgroundInfo.append(f"Your criminal speciality: {Specialty}")    
+        AdditionalInfo.append(f"Feature: Criminal Specialty - There are many kinds of criminals, and within a thieves' guild or similar criminal organization, individual members have particular specialties. Even criminals who operate outside of such organizations have strong preferences for certain kinds of crimes over others. Your specialty is {Specialty}")  
+        AdditionalInfo.append("Feature: Criminal Contact - You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you.")
+    if back == "Urban Bounty Hunter":
+        AdditionalInfo.append("Feature: Ear to the Ground - You are in frequent contact with people in the segment of society that your chosen quarries move through. These people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of high society. This connection comes in the form of a contact in any city you visit, a person who provides information about the people and places of the local area.")
     if back == "Dimir Operative":
         DORI1 = "My parents belong to this guild, and I let them think I'm following in their footsteps."
         DORI2 = "I've been assigned to track this guild's activities."
@@ -997,10 +1002,12 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
                 randDimirOperGuild2Rival = True
             except IndexError:
                 DimirOperGuild2Rival = random.choice(DimOpC)
-        OtherBackgroundInfo.append(f"Your Reason for Infiltrating: {DimirOperReasonInfil}")  
+        AdditionalInfo.append(f"Feature: False Identity - You have more than one identity. The one you wear most of the time makes you appear to be a member of a guild other than House Dimir. You have documentation, established acquaintances, and disguises that allow you to assume that persona and fit into the secondary guild. Whenever you choose, you can drop this identity and blend into the guildless masses of the city. The reason for your infiltration is {DimirOperReasonInfil}")
         OtherBackgroundInfo.append(f"Your Dimir Guild Contact: {DimirOperGuildCon}")
         OtherBackgroundInfo.append(f"Your 2nd Guild Contact Ally: {DimirOperGuild2Ally}")
         OtherBackgroundInfo.append(f"Your 2nd Guild Contact Rival: {DimirOperGuild2Rival}")    
+        AdditionalInfo.append("Dimir Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature: For you, the spells on the Dimir Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Encode Thoughts, Mage Hand; 1st: Disguise Self, Sleep; 2nd: Detect Thoughts, Pass Without Trace; 3rd: Gaseous Form, Meld into Stone, Nondetection; 4th: Arcane Eye, Freedom of Movement; 5th: Modify Memory. Your magic is meant to be subtle and undetectable, but it might pull shadows or clouds of mist around you as you cast your spells.")
+        EQP.append("The starting equipment for your secondary guild")
     if (back == "Entertainer") or (back == "Gladiator"):
         S1 = "Actor"
         S2 = "Dancer"
@@ -1014,7 +1021,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S10 = "Tumbler"
         ROU = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Routine = random.choice(ROU)     
-        OtherBackgroundInfo.append(f"Your entertainer routine: {Routine}")            
+        AdditionalInfo.append(f"Feature: Entertainer Routines - A good entertainer is versatile, spicing up every performance with a variety of different routines, your routine being {Routine}.")
+        AdditionalInfo.append("Feature: By Popular Demand - You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you.")   
     if back == "Faceless":  
         FacPers1 = "A flamboyant spy or brigand"
         FacPers2 = "The incarnation of a nation or people"
@@ -1028,10 +1036,13 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         FacPers10 = "A disguise with animalistic or monstrous characteristics, meant to inspire fear"
         FacPers = [FacPers1, FacPers2, FacPers3, FacPers4, FacPers5, FacPers6, FacPers7, FacPers8, FacPers9, FacPers10]
         FacelessPersona = random.choice(FacPers)  
-        OtherBackgroundInfo.append(f"As a Faceless, your Persona is: {FacelessPersona}") 
+        AdditionalInfo.append(f"Faceless Persona - A faceless character adventures behind the mask of a public persona. This persona is as natural to them as their hidden, true face, but it disguises their identity, your Faceless Persona being {FacelessPersona}")
+        AdditionalInfo.append("Feature: Dual Personalities - Most of your fellow adventurers and the world know you as your persona. Those who seek to learn more about you- your weaknesses, your origins, your purpose-find themselves stymied by your disguise. Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self. By removing your disguise and revealing your true face, you are no longer identifiable as your persona. This allows you to change appearances between your two personalities as often as you wish, using one to hide the other or serve as convenient camouflage. However, should someone realize the connection between your persona and your true self, your deception might lose its effectiveness.")
     if back == "Faction Agent":
         AdditionalInfo.append("Feature: Factions of the Sword Coast - The lack of large, centralized governments in the North and along the Sword Coast is likely directly responsible for the proliferation of secret societies and conspiracies in those lands. If your background is as an agent for one of the main factions of the North and Sword Coast, here are some possibilities. The Harpers: Founded more than a millennium ago, disbanded and reorganized several times, the Harpers remain a powerful, behind-the-scenes agency, which acts to thwart evil and promote fairness through knowledge, rather than brute force. Harper agents are often proficient in Investigation, enabling them to be adept at snooping and spying. They often seek aid from other Harpers, sympathetic bards and innkeepers, rangers, and the clergy of gods that are aligned with the Harpers' ideals. The Order of the Gauntlet: One of the newest power groups in Faerûn, the Order of the Gauntlet has an agenda similar to that of the Harpers. Its methods are vastly different, however: bearers of the gauntlet are holy warriors on a righteous quest to crush evil and promote justice, and they never hide in the shadows. Order agents tend to be proficient in Religion, and frequently seek aid from law enforcement friendly to the order's ideals, and the clergy of the order's patron gods. The Emerald Enclave: Maintaining balance in the natural order and combating the forces that threaten that balance is the twofold goal of the Emerald Enclave. Those who serve the faction are masters of survival and living off the land. They are often proficient in Nature, and can seek assistance from woodsmen, hunters, rangers, barbarian tribes, druid circles, and priests who revere the gods of nature. The Lords' Alliance: On one level, the agents of the Lords' Alliance are representatives of the cities and other governments that constitute the alliance. But, as a faction with interests and concerns that transcend local politics and geography, the Alliance has its own cadre of individuals who work on behalf of the organizations, wider agenda. Alliance agents are required to be knowledgeable in History, and can always rely on the aid of the governments that are part of the Alliance, plus other leaders and groups who uphold the Alliance's ideals. The Zhentarim: In recent years, the Zhentarim have become more visible in the world at large, as the group works to improve its reputation among the common people. The faction draws employees and associates from many walks of life, setting them to tasks that serve the goals of the Black Network but aren't necessarily criminal in nature. Agents of the Black Network must often work in secret, and are frequently proficient in Deception. They seek aid from the wizards, mercenaries, merchants and priesthoods allied with the Zhentarim.")
         AdditionalInfo.append("Feature: Save Hamen - As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities.")
+    if back == "Failed Merchant":
+        AdditionalInfo.append("Feature: Supply Chain - From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information.")
     if back == "Far Traveler":
         WhyH1 = "Emissary"
         WhyH2 = "Exile"
@@ -1041,7 +1052,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         WhyH6 = "Wanderer"
         WhyH = [WhyH1, WhyH2, WhyH3, WhyH4, WhyH5, WhyH6]
         WhyHere = random.choice(WhyH)  
-        OtherBackgroundInfo.append(f"Your Reason for being here: {WhyHere}")       
+        OtherBackgroundInfo.append(f"Your Reason for being here: {WhyHere}")  
+        AdditionalInfo.append(f"Feature: Why Are You Here? - A far traveler might have set out on a journey for one of a number of reasons, and the departure from his or her homeland could have been voluntary or involuntary, that reason being {WhyHere}.")   
+        AdditionalInfo.append("Feature: Where Are You From? - The most important decision in creating a far traveler background is determining your homeland. The places discussed here are all sufficiently distant from the North and the Sword Coast to justify the use of this background. Evermeet: The fabled elven islands far to the west are home to elves who have never been to Faerun. They often find it a harsher place than they expected when they do make the trip. If you are an elf, Evermeet is a logical (though not mandatory) choice for your homeland. Most of those who emigrate from Evermeet are either exiles, forced out for committing some infraction of elven law, or emissaries who come to Faerun for a purpose that benefits elven culture or society; Halruaa: Located on the southern edges of the Shining South, and hemmed in by mountains all around, the magocracy of Halruaa is a bizarre land to most in Faerun who know about it. Many folk have heard of the strange skyships the Halruaans sail, and a few know of the tales that even the least of their people can work magic. Halruaans usually make their journeys into Faerun for personal reasons, since their government has a strict stance against unauthorized involvement with other nations and organizations. You might have been exiled for breaking one of Halruaa's many byzantine laws, or you could be a pilgrim who seeks the shrines of the gods of magic; Kara-Tur: The continent of Kara-Tur, far to the east of Faerûn, is home to people whose customs are unfamiliar to the folk of the Sword Coast. If you come from Kara-Tur, the people of Faerûn likely refer to you as Shou, even if that isn't your true ethnicity, because that's the blanket term they use for everyone who shares your origin. The folk of Kara-Tur occasionally travel to Faerûn as diplomats or to forge trade relations with prosperous merchant cartels. You might have come here as part of some such delegation, then decided to stay when the mission was over; Mulhorand: From the terrain to the architecture to the god-kings who rule over these lands, nearly everything about Mulhorand is a lien to someone from the Sword Coast. You likely experienced the same sort of culture shock when you left your desert home and traveled to the unfamiliar climes of northern Faerûn. Recent events in your homeland have led to the abolition of slavery, and a corresponding increase in the traffic between Mulhorand and the distant parts of Faerun; Those who leave behind Mulhorand's sweltering deserts and ancient pyramids for a glimpse at a different life do so for many reasons. You might be in the North simply to see the strangeness this wet land has to offer, or because you have made too many enemies among the desert communities of your home; Sossal: Few have heard of your homeland, but many have questions about it upon seeing you. Humans from Sossal seem crafted from snow, with alabaster skin and white hair, and typically dressed in white. Sossal exists far to the northeast, hard up against the endless ice to the north and bounded on its other sides by hundreds of miles of the Great Glacier and the Great Ice Sea. No one from your nation makes the effort to cross such colossal barriers without a convincing reason. You must fear something truly terrible or seek something incredibly important; Zakhara: As the saying goes among those in Faerûn who know of the place, 'To get to Zakhara, go south. Then go south some more.' Of course, you followed an equally long route when you came north from your place of birth. Though it isn't unusual for Zakharans to visit the southern extremes of Faerûn for trading purposes, few of them stray as far from home as you have. You might be traveling to discover what wonders are to be found outside the deserts and sword-like mountains of your homeland, or perhaps you are on a pilgrimage to understand the gods that others worship, so that you might better appreciate your own deities; The Underdark: Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the race that occupies the place but you might also have grown up there after being captured and brought below when you were a child. If you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving 'home' probably has something to do with getting away from a bad situation.")  
+        AdditionalInfo.append("Feature: All Eyes on You - Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign. Curious glances are directed your way wherever you go, which can be a nuisance, but you also gain the friendly interest of scholars and others intrigued by far-off lands, to say nothing of everyday folk who are eager to hear stories of your homeland. You can parley this attention into access to people and places you might not otherwise have, for you and your traveling companions. Noble lords, scholars, and merchant princes, to name a few, might be interested in hearing about your distant homeland and people.")
     if back == "Feylost": 
         FeyWMa1 = "Your eyes swirl with iridescent colors."
         FeyWMa2 = "You have a sweet scent, like that of nectar or honey."
@@ -1063,8 +1077,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         FeyWV8 = "Unicorn"
         FeyWV = [FeyWV1, FeyWV2, FeyWV3, FeyWV4, FeyWV5, FeyWV6, FeyWV7, FeyWV8]
         FeywildVisitor = random.choice(FeyWV)     
-        OtherBackgroundInfo.append(f"As a Feylost, your Feywild Mark: {FeyMark}")
-        OtherBackgroundInfo.append(f"As a Feylost, your Feywild Visitor: {FeywildVisitor}")      
+        AdditionalInfo.append(f"Fey Mark - You were transformed in some small way by your stay in the Feywild and gained a fey mark: {FeyMark}")
+        AdditionalInfo.append(f"Feywild Visitor - Whenever you're sound asleep or in a deep trance during a long rest, a spirit of the Feywild might pay you a visit: {FeywildVisitor}, No harm ever comes to you as a result of such visits, which can last for minutes or hours, and you remember each visit when you wake up. Conversations that occur with a visitor can contain any number of things, from messages and insights to nonsense and red herrings, at the DM's discretion. Such conversations are always conducted in a language you can understand, even if the Feywild visitor can't speak that language normally.")      
+        AdditionalInfo.append("Feature: Feywild Connection - Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Because of this, friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.")
     if back == "Fisher":  
         FshT1 = "Lobster Wrestling. You fought in hand-to-hand combat with an immense lobster."
         FshT2 = "It Dragged the Boat. You nearly caught a fish of monstrous size that pulled your boat for miles."
@@ -1076,7 +1091,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         FshT8 = "Love Story. You fell in love with a creature of pure water, but your brief romance ended tragically."
         FshT = [FshT1, FshT2, FshT3, FshT4, FshT5, FshT6, FshT7, FshT8]
         FisherTale = random.choice(FshT)   
-        OtherBackgroundInfo.append(f"As a Fisher, your Fisher Tale: {FisherTale}")                                      
+        AdditionalInfo.append("Feature: Harvest The Water - You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle while working as a fisher, and you can catch enough food to feed yourself and up to ten other people each day.")
+        AdditionalInfo.append(f"Fishing Tale - You can tell a compelling tale. whether tall or true. to impress and entertain others. Once a day, you can tell your story to willing listeners. At the DM's discretion, a number of those listeners become friendly toward you; this is not a magical effect, and continued amicability on their part depends on your actions. That tale being: {FisherTale}")                                      
     if back == "Folk Hero":
         S1 = "I stood up to a tyrant’s agents."
         S2 = "I saved people during a natural disaster."
@@ -1090,20 +1106,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S10 = "Recruited into a lord’s army, I rose to leadership and was commended for my heroism."
         DEF = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Event = random.choice(DEF)        
-        OtherBackgroundInfo.append(f"Your defining event: {Event}")
-    if back == "Inheritor":
-        S1 = "I stood up to a tyrant’s agents."
-        S2 = "I saved people during a natural disaster."
-        S3 = "I stood alone against a terrible monster."
-        S4 = "I stole from a corrupt merchant to help the poor."
-        S5 = "I led a militia to fight off an invading army."
-        S6 = "I broke into a tyrant’s castle and stole weapons to arm the people."
-        S7 = "I trained the peasantry to use farm implements as weapons against a tyrant’s soldiers."
-        S8 = "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
-        S9 = "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin."
-        S10 = "Recruited into a lord’s army, I rose to leadership and was commended for my heroism."
-        DEF = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
-        Event = random.choice(DEF)  
+        AdditionalInfo.append(f"Feature: Defining Event - You previously pursued a simple profession among the peasantry, perhaps as a farmer, miner, servant, shepherd, woodcutter, or gravedigger. But something happened that set you on a different path and marked you for greater things, that event being: {Event}")        
+    if back == "Inheritor":  
         Inh1 = "A document such as a map, a letter, or a journal."
         Inh2 = "A trinket (see 'Trinkets' in chapter 5 of PHB)."
         Inh3 = "A trinket (see 'Trinkets' in chapter 5 of PHB)."
@@ -1114,8 +1118,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         Inh8 = "A tattoo or other body marking."
         Inh = [Inh1, Inh2, Inh3, Inh4, Inh5, Inh6, Inh7, Inh8]
         Inheritance = random.choice(Inh)
-        OtherBackgroundInfo.append(f"Your defining event: {Event}")
-        OtherBackgroundInfo.append(f"Your inheritance: {Inheritance}")
+        EQP.append(Inheritance)
+        AdditionalInfo.append("Feature: Inheritance - Work with your DM to come up with details for your inheritance: Why is your inheritance so important, and what is its full story? You might prefer for the DM to invent these details as part of the game, allowing you to learn more about your inheritance as your character does. The DM is free to use your inheritance as a story hook, sending you on quests to learn more about its history or true nature, or confronting you with foes who want to claim it for themselves or prevent you from learning what you seek. The DM also determines the properties of your inheritance and how they figure into the item's history and importance. For instance, the object might be a minor magic item, or one that begins with a modest ability and increases in potency with the passage of time. Or, the true nature of your inheritance might not be apparent at first and is revealed only when certain conditions are met. When you begin your adventuring career, you can decide whether to tell your companions about your inheritance right away. Rather than attracting attention to yourself, you might want to keep your inheritance a secret until you learn more about what it means to you and what it can do for you.")
+    if back == "Gambler":
+        AdditionalInfo.append("Feature: Never Tell Me the Odds - Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.")
     if back == "Gate Warden":
         GtWPT1 = "Strange events and otherworldly creatures don't faze me."
         GtWPT2 = "I think in terms of exchange: something for something, nothing for nothing."
@@ -1135,6 +1141,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         GateWardenTrinket = random.choice(GtWTr)
         OtherBackgroundInfo.append(f"Your personality trait: {GateWardenPersTrait}")
         OtherBackgroundInfo.append(f"As a Gate Warden, your Trinket: {GateWardenTrinket}")
+        AdditionalInfo.append("Feature: Planar Infusion - Living in a gate-town or a similar location steeped you in planar energy. You gain the Scion of the Outer Planes feat. In addition, you know where to find free, modest lodging and food in the community you grew up in.")
     if back == "Giant Foundling":
         FoundO1 = "You were found as a baby by a family of nomadic giants who raised you as one of their own."
         FoundO2 = "A family of stone giants rescued you when you fell into a mountain chasm, and you have lived with them underground ever since."
@@ -1152,7 +1159,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         GFPT6 = "The world always feels too big, and I'm afraid I'll never find my place in it."
         GFPT = [GFPT1, GFPT2, GFPT3, GFPT4, GFPT5, GFPT6]
         GiantFoundlingPT = random.choice(GFPT)        
-        OtherBackgroundInfo.append(f"As a Giant Foundling, your Foundling Origin: {FoundlingOrigin}")
+        AdditionalInfo.append(f"As a Giant Foundling, your Foundling Origin: {FoundlingOrigin}")
         OtherBackgroundInfo.append(f"As a Giant Foundling, your Personality Trait: {GiantFoundlingPT}")        
         OtherBackgroundInfo.append("With the Giant Foundling background, if the DM allows, you can have the feats: Skilled (feat) or Tough (feat), as well as Strike of the Giants (feat).")
     if back == "Golgari Agent":
@@ -1189,6 +1196,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         OtherBackgroundInfo.append(f"Your Golgari Contact Ally: {GolgariAgentContactAlly}")
         OtherBackgroundInfo.append(f"Your Golgari Contact Rival: {GolgariAgentContactRival}")
         OtherBackgroundInfo.append(f"Your Golgari Non-Guild Contact: {GolgariAgentNonGolgariCont}")
+        AdditionalInfo.append("Feature: Undercity Paths - You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city. When you aren't in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths of the undercity are haunted by dangers that rarely brave the light of the surface world, so your journey isn't guaranteed to be safe.")
+        AdditionalInfo.append("Golgari Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Golgari Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Dancing Lights, Spare the Dying; 1st: Entangle, Ray of Sickness; 2nd: Protection from Poison, Ray of Enfeeblement, Spider Climb; 3rd: Animate Dead, Plant Growth; 4th: Giant Insect, Grasping Vine; 5th: Cloudkill, Insect Plague. Golgari magic is often accompanied by a sickly green glow and a rotting stench.")
     if (back == "Grey Hunter") or (back == "Whitestone Rifle Corps"):
         CurRel1 = "I retired honorably from the Rifle Corps—and now it's time for me to pursue my own adventures."
         CurRel2 = "I'm on an important mission to protect Whitestone or guard one of our allies."
@@ -1198,7 +1207,11 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         CurRel6 = "My weapon was stolen. I built a new one, but I can't return home until I've tracked down the thief and recovered the original."
         CurRel = [CurRel1, CurRel2, CurRel3, CurRel4, CurRel5, CurRel6]
         CurrentRelationship = random.choice(CurRel)
-        OtherBackgroundInfo.append(f"Your current relationship: {CurrentRelationship}")        
+        AdditionalInfo.append(f"You are—or were—a member of an elite and trusted band of Whitestone's staunchest defenders. Your current relationship: {CurrentRelationship}")
+        if back == "Grey Hunter":
+            AdditionalInfo.append("Feature: Grey Hunter - As elite as they are, the members of the Whitestone Rifle Corps do not represent the apex of firearms skill in Whitestone. A clandestine group of elite soldiers and survivalists is drawn secretly from the Rifle Corps ranks. Called the Grey Hunters, these soldiers are special operatives of the de Rolo family, and loyally serve as spies, bodyguards, and even assassins when the job requires it. Though few officially know of them, rumors of the Grey Hunters' existence swirl constantly throughout the city-state, often in response to their activities after having been loaned out to protect Whitestone's allies. You are one of these Grey Hunters, even if just a trainee (if you're starting your campaign at low levels). You have the ear of the lord and lady of Whitestone, though you must exercise this privilege graciously lest you lose it.")
+        if back == "Whitestone Rifle Corps":    
+            AdditionalInfo.append("Feature: Legacy of Secrecy - You have been entrusted with the use and care of a weapon both powerful and terrifying. The rifle you wield might transform the face of warfare and life in Tal'Dorei. It is a weapon that haunts the mind of its creator, Percival de Rolo, manifesting as a pain that lives always behind his kind eyes. You were granted a musket or a pistol by your commander in the Whitestone Rifle Corps. This weapon is a symbol of your status, and when you display it, other folk around you—particularly adventurers, mercenaries, guards, engineers, and weapons enthusiasts—treat you differently. You might be seen as a noble defender of the people, a selfish hoarder of power, or anything in between, at the GM's discretion.")
     if back == "Grinner":
         FavCS1 = "Zan's Comin' Back. This hopeful Tal 'Dorei folk song declares the inevitable return of a just ruler. Use it to seek out potential allies."
         FavCS2 = "Blow Fire Down the Coast. A rowdy fighting song from the Clovis Concord, this ditty talks of blasting up pirate ships. Use it to encourage battle."
@@ -1208,7 +1221,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         FavCS6 = "Dirge for the Emerald Fire. This elven song supposedly has thousands of obscure verses. Use the first two verses to spread news of death or defeat."
         FavCS = [FavCS1, FavCS2, FavCS3, FavCS4, FavCS5, FavCS6]
         FavoriteCodeSong = random.choice(FavCS)
-        OtherBackgroundInfo.append(f"Your Favorite Code-Song: {FavoriteCodeSong}")
+        AdditionalInfo.append(f"Favorite Code-Song - All members of the Golden Grin have learned a handful of folk songs in their travels, and use those songs to send secret codes and alert fellow Grinners to danger. Your Favorite Code-Song: {FavoriteCodeSong}")
+        AdditionalInfo.append("Feature: Ballad of The Grinning Fool - Like every Grinner, you know how to find a hideout. In any city of 10,000 people or more on the Menagerie Coast or in the lands of the Dwendalian Empire, you can play the 'Ballad of the Grinning Fool' in a major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. This shelter might be discontinued if it becomes too dangerous to hide you, at the DM's discretion. This feature must be used with caution, for not all who know the ballad are your friends. Some are traitors, counterspies, or agents of tyranny.")
     if back == "Grounded": 
         GrComPl1 = "I am considered weak or unskilled and many treat me like a fledgling."
         GrComPl2 = "I am looked upon as a traitor to my people."
@@ -1218,7 +1232,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         GrComPl6 = "I have found a new community on the forest floor."
         GrComPl = [GrComPl1, GrComPl2, GrComPl3, GrComPl4, GrComPl5, GrComPl6]
         GroundedCommunityPlace = random.choice(GrComPl)
-        OtherBackgroundInfo.append(f"As a Grounded, your Community Place: {GroundedCommunityPlace}")
+        AdditionalInfo.append(f"An Odd Bird - Among birdfolk you are somewhere between an oddity and an outcast. Some consider your aversion to heights a rejection of birdfolk culture, leading many to find you off-putting. As a Grounded, your Community Place: {GroundedCommunityPlace}")
+        AdditionalInfo.append("Feature: Find Another Path - Since you have lived your life close to the ground, you are familiar with the undergrowth in the same way other birdfolk are familiar with the canopy. You can always recall the general layout of the terrain around you while traveling along the forest floor. If your path is ever blocked by an obstacle that requires you to climb or otherwise gain height to circumvent it, you can always find a way around, so long as such a path exists. Additionally, you are adept at finding shelter in the Wood while traveling, and can usually locate a suitable safe shelter (a cave, a tree hollow, or bramble thicket) somewhere on the forest floor for you and up to five other creatures.")
     if back == "Gruul Anarch":
         GrAnGC1 = "One of my parents is a renowned warrior in my clan."
         GrAnGC2 = "My sibling has the ear of the clan chief."
@@ -1244,7 +1259,13 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         GruulAnarchNonGuildContact = random.choice(GrAnNGC)
         OtherBackgroundInfo.append(f"Your Gruul Guild Contact: {GruulAnarchGuildContact}")
         OtherBackgroundInfo.append(f"Your Non-Guild Contact: {GruulAnarchNonGuildContact}")
-    if (back == "Clan Crafter") or (back == "Courtier") or (back == "Guild Artisan") or (back == "Guild Merchant"):
+        AdditionalInfo.append("Feature: Rubblebelt Refuge - You are intimately familiar with areas of the city that most people shun: ruined neighborhoods where wurms rampaged, overgrown parks that no hand has tended in decades, and the vast, sprawling rubblebelts of broken terrain that civilized folk have long abandoned. You can find a suitable place for you and your allies to hide or rest in these areas. In addition, you can find food and fresh water in these areas for yourself and up to five other people each day.")
+        AdditionalInfo.append("Gruul Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Gruul Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Fire Bolt, Produce Flame; 1st: Compelled Duel, Speak With Animals, Thunderwave; 2nd: Beast Sense, Shatter; 3rd: Conjure Animals, Conjure Barrage; 4th: Dominate Beast, Stoneskin; 5th: Destructive Wave. Fueled by the fire of rage burning in your heart, your magic is almost always accompanied by fiery effects, such as flames smoldering behind your eyes or dancing over your hands.")
+    if back == "Clan Crafter":
+        AdditionalInfo.append("Feature: Respect of the Stout Folk - As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do. You always have free room and board in any place where shield dwarves or gold dwarves dwell, and the individuals in such a settlement might vie among themselves to determine who can offer you (and possibly your compatriots) the finest accommodations and assistance.")
+    if back == "Courtier":
+        AdditionalInfo.append("Feature: Court Functionary - Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for the favors you seek, and what the current intrigues of interest in the group are.")
+    if (back == "Guild Artisan") or (back == "Guild Merchant"):
         S1 = "Alchemists and apothecaries"
         S2 = "Armorers, locksmiths, and fine smiths"
         S3 = "Brewers, distillers, and vintners"
@@ -1267,7 +1288,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S20 = "Woodcarvers, coopers, and bowyers"
         BUS = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S20]
         Business = random.choice(BUS)                
-        OtherBackgroundInfo.append(f"Your Guild Business: {Business}")
+        AdditionalInfo.append(f"Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Your Guild Business: {Business}")
+        AdditionalInfo.append("Feature: Guild Membership - As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings. Guilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers. You must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.")
     if back == "Haunted One":
         HaOHarE1 = "A monster that slaughtered dozens of innocent people spared your life, and you don’t know why."
         HaOHarE2 = "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night."
@@ -1281,7 +1303,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         HaOHarE10 = "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams."
         HaOHarE = [HaOHarE1, HaOHarE2, HaOHarE3, HaOHarE4, HaOHarE5, HaOHarE6, HaOHarE7, HaOHarE8, HaOHarE9, HaOHarE10]
         HauntedOneHarrowingEvent = random.choice(HaOHarE)        
-        OtherBackgroundInfo.append(f"As a Haunted one, your Harrowing Event: {HauntedOneHarrowingEvent}")
+        AdditionalInfo.append(f"Feature: Harrowing Event - Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape. Your Harrowing Event: {HauntedOneHarrowingEvent}")
+        AdditionalInfo.append("Feature: Heart of Darkness - Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone.")
     if back == "Hermit":
         S1 = "I was searching for spiritual enlightenment."
         S2 = "I was partaking of communal living in accordance with the dictates of a religious order."
@@ -1293,7 +1316,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         S8 = "I was a pilgrim in search of a person, place, or relic of spiritual significance."
         SEC = [S1, S2, S3, S4, S5, S6, S7, S8]
         Seclusion = random.choice(SEC)
-        OtherBackgroundInfo.append(f"Your life of seclusion: {Seclusion}")
+        AdditionalInfo.append(f"Feature: Life of Seclusion - What was the reason for your isolation, and what changed to allow you to end your solitude? Your life of seclusion: {Seclusion}")
+        AdditionalInfo.append("Feature: Discovery - The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society. Work with your DM to determine the details of your discovery and its impact on the campaign.")
     if back == "House Agent":
         HoAg1 = "Cannith, which specializes in Alchemist's supplies and tinker's tools"
         HoAg1Skl = [AlchSupp, TinkTools]
@@ -1394,8 +1418,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         HoAgR8 = "Covert Operations"
         HoAgR = [HoAgR1, HoAgR2, HoAgR3, HoAgR4, HoAgR5, HoAgR6, HoAgR7, HoAgR8]
         HouseAgentRole = random.choice(HoAgR)  
-        OtherBackgroundInfo.append(f"Your House, and thus proficiencies, is: {HouseAgentProf}")
-        OtherBackgroundInfo.append(f"Your House Role: {HouseAgentRole}")    
+        AdditionalInfo.append(f"Your House, and thus proficiencies, is: {HouseAgentProf}")
+        AdditionalInfo.append(f"Role - You always gather information for your house, but when a baron give you a specific mission, what sort of work do you do? Your House Role: {HouseAgentRole}")    
+        AdditionalInfo.append("Feature: House Connections - As an agent of your house, you can always get food and lodging for yourself and your friends at a house enclave. When the house assigns you a mission, it will usually provide you with the necessary supplies and transportation. Beyond this, you have many old friends, mentors, and rivals in your house, and you may encounter one of them when you interact with a house business. The degree to which such acquaintances are willing to help you depends on your current standing in your house.")
     if back == "Investigator":
         InvFirstCa1 = "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend’s innocence and starting your career as a detective."
         InvFirstCa2 = "You’re told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you."
@@ -1408,6 +1433,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         InvFirstCa = [InvFirstCa1, InvFirstCa2, InvFirstCa3, InvFirstCa4, InvFirstCa5, InvFirstCa6, InvFirstCa7, InvFirstCa8]
         InvestigatorFirstCase = random.choice(InvFirstCa) 
         OtherBackgroundInfo.append(f"As an Investigator, your first case: {InvestigatorFirstCase}") 
+        AdditionalInfo.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
     if back == "Izzet Engineer":
         IzEnC1 = "An older relative is a member of the guild's board of directors."
         IzEnC2 = "I know a sprite who carries important messages among the guild's laboratories."
@@ -1509,6 +1535,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         MarH = [MarH1, MarH2, MarH3, MarH4, MarH5, MarH6]
         MarineHardship = random.choice(MarH) 
         OtherBackgroundInfo.append(f"As a Marine, your Hardship: {MarineHardship}")       
+    if back == "Myriad Operative":
+        AdditionalInfo.append("Feature: Myriad Operative - Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed.")
     if back == "Orzhov Representative":
         OrzRepC1 = "The spirit of an ancestor has taken an interest in me."
         OrzRepC2 = "An older cousin has the ear of a powerful oligarch."
@@ -1862,7 +1890,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         OtherBackgroundInfo.append(f"As a Rune Carver, your Rune Style: {RuneStyle}")
         OtherBackgroundInfo.append(f"As a Rune Carver, your Personality Trait: {RuneCarverPT}")
         OtherBackgroundInfo.append("With the Rune Carver background, if the DM allows you, can have the feats Skilled (feat) or Tough (feat), as well as Rune Shaper (feat).")
-    if (back == "Cloistered Solder") or (back == "Sage"):
+    if back == "Cloistered Scholar":
+        AdditionalInfo.append("Feature: Library Access - Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access. You have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease. Additionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy shown to a fellow scholar.")
+    if back == "Sage":
         S1 = "Alchemist"
         S2 = "Astronomer"
         S3 = "Discredited academic"
