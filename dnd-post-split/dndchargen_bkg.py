@@ -1059,7 +1059,6 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         ClaMF6 = "Any slight against me, no matter how small, is cause for revenge."
         ClaMF = [ClaMF1,  ClaMF2, ClaMF3, ClaMF4, ClaMF5, ClaMF6]
         Flaw = random.choice(ClaMF)
-        BGL = 10
         skills_dict["DeceNum"] += 1
         ClMeSki = ["SloHNum", "SteaNum"]
         ClaspMemberSkill = random.choice(ClMeSki)
@@ -1096,6 +1095,42 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
         else:
             PlLang.append(TCant)  
+        BGL = 10
+        EQP = ["A set of inconspicuous common clothes"]
+        if AlchSupp in PlProf:
+            EQP.append("Alchemist's Supplies")
+        elif BrewSupp in PlProf:
+            EQP.append("Brewer's Supplies")
+        elif CallSupp in PlProf:
+            EQP.append("Calligrapher's Supplies")
+        elif CarpTools in PlProf:
+            EQP.append("Carpenter's Tools")
+        elif CartTools in PlProf:
+            EQP.append("Cartographer's Tools")
+        elif CobbTools in PlProf:
+            EQP.append("Cobbler's Tools")
+        elif CooksUten in PlProf:
+            EQP.append("Cook's Utensils")
+        elif GlasTools in PlProf:
+            EQP.append("Glassblower's Tools")
+        elif JeweTools in PlProf:
+            EQP.append("Jeweler's Tools")
+        elif LthrwrkTools in PlProf:
+            EQP.append("Leatherworker's Tools")
+        elif MasnTools in PlProf:
+            EQP.append("Mason's Tools")
+        elif PaintSupp in PlProf:
+            EQP.append("Painter's Supplies")
+        elif PottTools in PlProf:
+            EQP.append("Potter's Tools")
+        elif SmthTools in PlProf:
+            EQP.append("Smith's Tools")
+        elif TinkTools in PlProf:
+            EQP.append("Tinker's Tools")
+        elif WeavTools in PlProf:
+            EQP.append("Weaver's Tools")
+        elif WdcrvTools in PlProf:
+            EQP.append("Woodcarver's Tools")            
     if (back == "Criminal") or (back == "Spy") or (back == "Urban Bounty Hunter"):     
         P1 = "I always have a plan for what to do when things go wrong."
         P2 = "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me."
@@ -1133,11 +1168,13 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         Flaw = random.choice(FLA)
         if ((back == "Criminal") or (back == "Spy")):
             BGL = 15
+            EQP = ["A Crowbar", "A set of dark common clothes including a hood"]
             skills_dict["DeceNum"] += 1
             skills_dict["SteaNum"] += 1
             PlProf = gamingsets(param, PlProf)
         if back == "Urban Bounty Hunter":
             BGL = 20
+            EQP = ["A set of clothes appropriate to your duties"]
             skills_dict["DeceNum"], skills_dict["InsiNum"], skills_dict["PersNum"], skills_dict["SteaNum"] = choicefourskill2(param, skills_dict, "DeceNum", "InsiNum", "PersNum", "SteaNum", Deception, Insight, Persuasion, Stealth)
             PlProf = gamingsetmusicalinstrthieves(param, PlProf)
     if back == "Dimir Operative":
@@ -1176,6 +1213,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         DimOpF = [DimOpF1, DimOpF2, DimOpF3, DimOpF4, DimOpF5, DimOpF6]
         Flaw = random.choice(DimOpF)
         BGL = 10
+        EQP = ["A Dimir insignia", "Three small knives", "A set of dark-colored common clothes"]
         PlLang, SLANG = languagegen(param, PlLang, SLANG)   
         skills_dict["DeceNum"] += 1
         skills_dict["SteaNum"] += 1
@@ -1215,11 +1253,12 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         F6 = "Despite my best efforts, I am unreliable to my friends."
         FLA = [F1, F2, F3, F4, F5, F6]
         Flaw = random.choice(FLA)
-        BGL = 15
         PlProf.append(DisgKit)
         PlProf = musicalinstr(param, PlProf)
         skills_dict["AcroNum"] += 1
-        skills_dict["PerfNum"] += 1    
+        skills_dict["PerfNum"] += 1 
+        BGL = 15
+        EQP = ["A Musical Instrument (one of your choice)", "The favor of an admirer (love letter, lock of hair, or trinket)", "A Costume"]
     if back == "Faceless":   
         FacPT1 = "I'm earnest and uncommonly direct."
         FacPT2 = "I strive to have no personality-it's easier to forget what's hardly there."
@@ -1256,6 +1295,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FacF = [FacF1,  FacF2, FacF3, FacF4, FacF5, FacF6]
         Flaw = random.choice(FacF)
         BGL = 10
+        EQP = ["A Disguise kit", "A Costume"]
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         skills_dict["DeceNum"] += 1
         skills_dict["IntiNum"] += 1
@@ -1296,6 +1336,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FaMeF = [FaMeF1, FaMeF2, FaMeF3, FaMeF4, FaMeF5, FaMeF6]
         Flaw = random.choice(FaMeF)
         BGL = 10
+        EQP = ["One set of Artisan's Tools", "Merchant's Scale", "A set of Fine Clothes"]
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         PlProf = artisantools(param, PlProf)
         skills_dict["InveNum"] += 1
@@ -1333,11 +1374,60 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FTFlaw6 = "I have a weakness for the exotic beauty of the people of these lands."
         FTFlaw = [FTFlaw1, FTFlaw2, FTFlaw3, FTFlaw4, FTFlaw5, FTFlaw6]
         Flaw = random.choice(FTFlaw)
-        BGL = 5
         PlProf = gamingsetsmusicalinstr(param, PlProf)
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         skills_dict["InsiNum"] += 1
-        skills_dict["PercNum"] += 1          
+        skills_dict["PercNum"] += 1     
+        BGL = 15
+        EQP = ["One set of Traveler's Clothes", "Poorly wrought maps from your homeland that depict where you are in Faerun"]     
+        if DiceSet in PlProf:
+            EQP.append(DiceSet)
+        elif DrgnChSet in PlProf:
+            EQP.append(DrgnChSet)
+        elif PlyCrdSet in PlProf:
+            EQP.append(PlyCrdSet)
+        elif ThrDgnASet in PlProf:
+            EQP.append(ThrDgnASet)
+        elif Bagpipes in PlProf:
+            EQP.append(Bagpipes)
+        elif Birdpipes in PlProf:
+            EQP.append(Birdpipes)
+        elif Drum in PlProf:
+            EQP.append(Drum)
+        elif Dulcimer in PlProf:
+            EQP.append(Dulcimer)
+        elif Flute in PlProf:
+            EQP.append(Flute)
+        elif Glaur in PlProf:
+            EQP.append(Glaur)
+        elif HndDrum in PlProf:
+            EQP.append(HndDrum)
+        elif Horn in PlProf:
+            EQP.append(Horn)
+        elif Longhorn in PlProf:
+            EQP.append(Longhorn)
+        elif Lute in PlProf:
+            EQP.append(Lute)
+        elif Lyre in PlProf:
+            EQP.append(Lyre)
+        elif PFlute in PlProf:
+            EQP.append(PFlute)
+        elif Shawm in PlProf:
+            EQP.append(Shawm)
+        elif Songhorn in PlProf:
+            EQP.append(Songhorn)
+        elif Tantan in PlProf:
+            EQP.append(Tantan)
+        elif Thelarr in PlProf:
+            EQP.append(Thelarr)
+        elif Viol in PlProf:
+            EQP.append(Viol)
+        elif Wargong in PlProf:
+            EQP.append(Wargong)
+        elif Yarting in PlProf:
+            EQP.append(Yarting)
+        elif Zulkoon in PlProf:
+            EQP.append(Zulkoon)        
     if back == "Feylost": 
         FeyWPT1 = "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me."
         FeyWPT2 = "Like a nomad, I can't settle down in one place for very long."
@@ -1380,6 +1470,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FeyWF = [FeyWF1,  FeyWF2, FeyWF3, FeyWF4, FeyWF5, FeyWF6, FeyWF7, FeyWF8]
         Flaw = random.choice(FeyWF)
         BGL = 8
+        EQP = ["A musical instrument (one of your choice)", "A set of traveler's clothes", "Three trinkets (each determined by rolling on the Feywild Trinkets table)"]
         PlProf = musicalinstr(param, PlProf)
         PlLang, SLANG = choicefourlang(param, PlLang, SLANG, Elvi, Gnom, Gobl, Sylv)
         skills_dict["DeceNum"] += 1
@@ -1420,6 +1511,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FshF = [FshF1, FshF2, FshF3, FshF4, FshF5, FshF6]
         Flaw = random.choice(FshF)
         BGL = 10
+        EQP = ["Fishing Tackle", "A net", "A favorite fishing lure or oiled leather wading boots", "A set of Traveler's Clothes"]
         PlLang, SLANG = languagegen(param, PlLang, SLANG)      
         skills_dict["HistNum"] += 1
         skills_dict["SurvNum"] += 1    
@@ -1464,12 +1556,62 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             PlProf.append(VehLand)
             PlProf = artisantools(param, PlProf)
             BGL = 10
+            EQP = ["A set of Artisan's Tools (one of your choice)", "A Shovel", "An Iron Pot", "A set of Common Clothes"]
         if back == "Inheritor":
             skills_dict["SurvNum"] += 1
             skills_dict["ArcaNum"], skills_dict["HistNum"], skills_dict["ReliNum"] = choicethreeskill(param, skills_dict, "ArcaNum", "HistNum", "ReliNum", Arcana, History, Religion)
             PlProf = gamingsetsmusicalinstr(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             BGL = 15                  
+            EQP = ["A set of Traveler's Clothes"]
+            if DiceSet in PlProf:
+                EQP.append(DiceSet)
+            elif DrgnChSet in PlProf:
+                EQP.append(DrgnChSet)
+            elif PlyCrdSet in PlProf:
+                EQP.append(PlyCrdSet)
+            elif ThrDgnASet in PlProf:
+                EQP.append(ThrDgnASet)
+            elif Bagpipes in PlProf:
+                EQP.append(Bagpipes)
+            elif Birdpipes in PlProf:
+                EQP.append(Birdpipes)
+            elif Drum in PlProf:
+                EQP.append(Drum)
+            elif Dulcimer in PlProf:
+                EQP.append(Dulcimer)
+            elif Flute in PlProf:
+                EQP.append(Flute)
+            elif Glaur in PlProf:
+                EQP.append(Glaur)
+            elif HndDrum in PlProf:
+                EQP.append(HndDrum)
+            elif Horn in PlProf:
+                EQP.append(Horn)
+            elif Longhorn in PlProf:
+                EQP.append(Longhorn)
+            elif Lute in PlProf:
+                EQP.append(Lute)
+            elif Lyre in PlProf:
+                EQP.append(Lyre)
+            elif PFlute in PlProf:
+                EQP.append(PFlute)
+            elif Shawm in PlProf:
+                EQP.append(Shawm)
+            elif Songhorn in PlProf:
+                EQP.append(Songhorn)
+            elif Tantan in PlProf:
+                EQP.append(Tantan)
+            elif Thelarr in PlProf:
+                EQP.append(Thelarr)
+            elif Viol in PlProf:
+                EQP.append(Viol)
+            elif Wargong in PlProf:
+                EQP.append(Wargong)
+            elif Yarting in PlProf:
+                EQP.append(Yarting)
+            elif Zulkoon in PlProf:
+                EQP.append(Zulkoon)
     if back == "Gambler":
         GamblerPT1 = "I plan for every contingency. Leave nothing to chance!"
         GamblerPT2 = "Every copper wants to be a silver. Each bet is an opportunity."
@@ -1506,12 +1648,14 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         GamblerF = [GamblerF1, GamblerF2, GamblerF3, GamblerF4, GamblerF5, GamblerF6]
         Flaw = random.choice(GamblerF)
         BGL = 15
+        EQP = ["One Gaming Set", "A lucky charm", "A set of Fine Clothes"]
         PlProf = gamingsets(param, PlProf)
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         skills_dict["DeceNum"] += 1
         skills_dict["InsiNum"] += 1          
     if back == "Gate Warden":
         BGL = 10
+        EQP = ["A ring of keys to unknown locks", "A blank book", "An ink pen or quill", "A bottle of black ink", "A set of traveler's clothes"]
         skills_dict["PersNum"] += 1
         skills_dict["SurvNum"] += 1
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -1522,6 +1666,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         Flaw = ""                      
     if back == "Giant Foundling":
         BGL = 10
+        EQP = ["A backpack", "A set of traveler's clothes", "A small stone or sprig that reminds you of home"]
         skills_dict["IntiNum"] += 1
         skills_dict["SurvNum"] += 1
         if Gian in SLANG:
@@ -1568,6 +1713,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         GoAgF = [GoAgF1, GoAgF2, GoAgF3, GoAgF4, GoAgF5, GoAgF6]
         Flaw = random.choice(GoAgF)
         BGL = 10
+        EQP = ["A Golgari insignia", "A Poisoner's Kit", "A pet beetle or spider", "A set of Common Clothes"]
         skills_dict["NatuNum"] += 1
         skills_dict["SurvNum"] += 1
         PlProf.append(PoisKit)
@@ -1608,6 +1754,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         RifFlaw = [Flaw1, Flaw2, Flaw3, Flaw4, Flaw5, Flaw6]
         Flaw = random.choice(RifFlaw)
         BGL = 10
+        EQP = ["Your choice of a musket or a pistol, A set of common clothes"]
         skills_dict["AthlNum"], skills_dict["PercNum"], skills_dict["SurvNum"] = choicethreeskill2(param, skills_dict, "AthlNum", "PercNum", "SurvNum", Athletics, Perception, Survival)
         PlProf.append(Firearms)
         PlLang, SLANG = languagegen(param, PlLang, SLANG)            
@@ -1647,6 +1794,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         GrinF = [GrinF1, GrinF2, GrinF3, GrinF4, GrinF5, GrinF6]
         Flaw = random.choice(GrinF)
         BGL = 15
+        EQP = ["A set of Fine Clothes", "A Disguise Kit", "A Musical Instrument of your choice", "A gold-plated ring depicting a smiling face"]
         skills_dict["DeceNum"] += 1
         skills_dict["PerfNum"] += 1
         PlProf = musicalinstrthiev(param, PlProf)                                                         
@@ -1686,6 +1834,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         GrF = [GrF1, GrF2, GrF3, GrF4, GrF5, GrF6]
         Flaw = random.choice(GrF)
         BGL = 5
+        EQP = ["A set of Artisan’s Tools (one of your choice)", "A walking stick", "A trinket from another culture", "Traveling clothes"]
         skills_dict["AthlNum"] += 1
         skills_dict["InsiNum"] += 1
         PlProf = artisantools(param, PlProf)
@@ -1726,6 +1875,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         GrAnF = [GrAnF1, GrAnF2, GrAnF3, GrAnF4, GrAnF5, GrAnF6]
         Flaw = random.choice(GrAnF)
         BGL = 10
+        EQP = ["A Gruul insignia", "A Hunting Trap", "An Herbalism Kit", "The skull of a boar", "A beast-hide cloak", "A set of Traveler's Clothes"]
         skills_dict["AnHaNum"] += 1
         skills_dict["AthlNum"] += 1
         PlProf.append(HerbKit)
@@ -1774,25 +1924,63 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             else:
                 PlLang, SLANG = languagegen(param, PlLang, SLANG)
             PlProf = artisantools(param, PlProf)
-            BGL = 10
+            BGL = 15
+            EQP = ["A maker's mark chisel used to mark your handiwork with the symbol of the clan of crafters you learned your skill from", "A set of Traveler's Clothes"]
+            if AlchSupp in PlProf:
+                EQP.append("Alchemist's Supplies")
+            elif BrewSupp in PlProf:
+                EQP.append("Brewer's Supplies")
+            elif CallSupp in PlProf:
+                EQP.append("Calligrapher's Supplies")
+            elif CarpTools in PlProf:
+                EQP.append("Carpenter's Tools")
+            elif CartTools in PlProf:
+                EQP.append("Cartographer's Tools")
+            elif CobbTools in PlProf:
+                EQP.append("Cobbler's Tools")
+            elif CooksUten in PlProf:
+                EQP.append("Cook's Utensils")
+            elif GlasTools in PlProf:
+                EQP.append("Glassblower's Tools")
+            elif JeweTools in PlProf:
+                EQP.append("Jeweler's Tools")
+            elif LthrwrkTools in PlProf:
+                EQP.append("Leatherworker's Tools")
+            elif MasnTools in PlProf:
+                EQP.append("Mason's Tools")
+            elif PaintSupp in PlProf:
+                EQP.append("Painter's Supplies")
+            elif PottTools in PlProf:
+                EQP.append("Potter's Tools")
+            elif SmthTools in PlProf:
+                EQP.append("Smith's Tools")
+            elif TinkTools in PlProf:
+                EQP.append("Tinker's Tools")
+            elif WeavTools in PlProf:
+                EQP.append("Weaver's Tools")
+            elif WdcrvTools in PlProf:
+                EQP.append("Woodcarver's Tools")
         if back == "Courtier":
             skills_dict["InsiNum"] += 1
             skills_dict["PersNum"] += 1
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             BGL = 5
+            EQP = ["A set of Fine Clothes"]
         if back == "Guild Artisan":
             skills_dict["InsiNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf = artisantools(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             BGL = 15
+            EQP = ["A set of Artisan's Tools (one of your choice)", "A letter of introduction from your guild", "A set of Traveler's Clothes"]
         if back == "Guild Merchant":
             skills_dict["InsiNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf, PlLang, SLANG = ArtTlNavTlLang(param, PlProf, PlLang, SLANG)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             BGL = 15   
+            EQP = ["A set of Artisan's Tools (one of your choice) or a Mule and a cart", "A letter of introduction from your guild, a set of Traveler's Clothes"]
     if back == "Haunted One":
         HauOPT1 = "I don't run from evil. Evil runs from me."
         HauOPT2 = "I like to read and memorize poetry. It keeps me calm and brings me fleeting moments of happiness."
@@ -1829,10 +2017,9 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         HauOnF = [HauOnF1, HauOnF2, HauOnF3, HauOnF4, HauOnF5, HauOnF6]
         Flaw = random.choice(HauOnF)
         BGL = 0
+        EQP = ["Monster Hunter’s Pack", "One Trinket of special significance"]
         skills_dict["ArcaNum"], skills_dict["InveNum"], skills_dict["ReliNum"], skills_dict["SurvNum"] = choicefourskill2(param, skills_dict, "ArcaNum", "InveNum", "ReliNum", "SurvNum", Arcana, Investigation, Religion, Survival)
-        print("A skill was increased")
         PlLang, SLANG = ExoticLang(param, PlLang, SLANG)
-        print("A language was chosen")
     if back == "Hermit":
         P1 = "I have been isolated for so long that I speak rarely, preferring gestures and also the occasional grunt."
         P2 = "I am utterly serene, even in the face of disaster."
@@ -1869,6 +2056,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         FLA = [F1, F2, F3, F4, F5, F6]
         Flaw = random.choice(FLA)
         BGL = 5
+        EQP = ["A scroll case stuffed full of notes from your studies or prayers", "A winter blanket", "A set of Common Clothes", "An Herbalism Kit"]
         skills_dict["MediNum"] += 1
         skills_dict["ReliNum"] += 1
         PlProf.append(HerbKit)
@@ -1906,7 +2094,8 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         HoAgF6 = "I'm working for a hidden faction in my house that gives me secret assignments."
         HoAgF = [HoAgF1, HoAgF2, HoAgF3, HoAgF4, HoAgF5, HoAgF6]
         Flaw = random.choice(HoAgF)
-        BGL = 20   
+        BGL = 20  
+        EQP = ["A set of Fine Clothes", "House Signet Ring", "Identification papers"] 
         skills_dict["InveNum"] += 1
         skills_dict["PersNum"] += 1   
     if back == "Investigator":
@@ -1967,6 +2156,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         InvFl = [InvFl1, InvFl2, InvFl3, InvFl4, InvFl5, InvFl6, InvFl7, InvFl8, InvFl9, InvFl10, InvFl11, InvFl12]
         Flaw = random.choice(InvFl)        
         BGL = 10   
+        EQP = ["A uniform in the style of your unit and indicative of your rank", "A horn with which to summon help", "A set of Manacles"]
         skills_dict["InveNum"] += 1
         skills_dict["InsiNum"] += 1
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -2565,6 +2755,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             skills_dict["ArcaNum"], skills_dict["NatuNum"], skills_dict["ReliNum"] = choicethreeskill(param, skills_dict, "ArcaNum", "NatuNum", "ReliNum", Arcana, Nature, Religion)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
+            EQP = ["The scholar's robes of your cloister", "A writing kit (small pouch with a Quill, Ink, folded Parchment, and a small penknife)", "A borrowed book on the subject of your current study"]
         if back == "Sage":
             skills_dict["ArcaNum"] += 1
             skills_dict["HistNum"] += 1
