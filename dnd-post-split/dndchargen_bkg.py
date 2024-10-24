@@ -2204,6 +2204,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         PlLang, SLANG = choicethreelang(param, PlLang, SLANG, Drac, Gobl, Veda)     
     if back == "Knight of Solamnia":
         BGL = 10
+        EQP = ["An insignia of rank", "A deck of cards", "A set of common clothes"]
         skills_dict["AthlNum"] += 1
         skills_dict["SurvNum"] += 1
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -2214,6 +2215,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         Flaw = "" 
     if back == "Lorehold Student":   
         BGL = 15
+        EQP = ["A bottle of Black Ink", "An Ink Pen", "A Hammer", "A Hooded Lantern", "A Tinderbox", "A tome of history", "A school uniform"]
         skills_dict["HistNum"] += 1
         skills_dict["ReliNum"] += 1
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -2258,11 +2260,13 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         LySchF = [LySchF1, LySchF2, LySchF3, LySchF4, LySchF5, LySchF6]
         Flaw = random.choice(LySchF)
         BGL = 10
+        EQP = ["A set of fine clothes", "A student uniform", "A writing kit (small pouch with a quill, ink, folded parchment and a penknife)"]
         skills_dict["ArcaNum"], skills_dict["HistNum"], skills_dict["PersNum"] = choicethreeskill2(param, skills_dict, "ArcaNum", "HistNum", "PersNum", Arcana, History, Persuasion)
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         PlLang, SLANG = languagegen(param, PlLang, SLANG)        
     if back == "Mage of High Sorcery":
         BGL = 10
+        EQP = ["A bottle of colored ink"," An ink pen", "A set of common clothes"]
         skills_dict["ArcaNum"] += 1
         skills_dict["HistNum"] += 1
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -2307,6 +2311,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         MarF = [MarF1, MarF2, MarF3, MarF4, MarF5, MarF6]
         Flaw = random.choice(MarF)
         BGL = 10
+        EQP = ["A Dagger that belonged to a fallen comrade", "A folded Rag emblazoned with the symbol of your ship or company" , "A set of Traveler's Clothes"]
         skills_dict["AthlNum"] += 1
         skills_dict["SurvNum"] += 1
         PlProf.append(VehLand)
