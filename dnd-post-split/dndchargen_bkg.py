@@ -2197,6 +2197,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         IzEnF = [IzEnF1, IzEnF2, IzEnF3, IzEnF4, IzEnF5, IzEnF6]
         Flaw = random.choice(IzEnF)
         BGL = 5   
+        EQP = ["An Izzet insignia", "One set of Artisan's Tools", "The charred and twisted remains of a failed experiment", "A Hammer", "A Block and Tackle", "A set of Common Clothes"]
         skills_dict["ArcaNum"] += 1
         skills_dict["InveNum"] += 1
         PlProf = artisantools(param, PlProf)
@@ -2345,22 +2346,27 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         F6 = "By my words and actions, I often bring shame to my family."
         FLA = [F1, F2, F3, F4, F5, F6]
         Flaw = random.choice(FLA)
-        BGL = 25
         if back == "Knight":
             skills_dict["HistNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf = gamingsets(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
+            BGL = 25
+            EQP = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
         if back == "Noble":
             skills_dict["HistNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf = gamingsets(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
+            BGL = 25
+            EQP = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
         if back == "Waterdhavian Noble":
             skills_dict["HistNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf = gamingsetsmusicalinstr(param, PlProf)
-            PlLang, SLANG = languagegen(param, PlLang, SLANG)                     
+            PlLang, SLANG = languagegen(param, PlLang, SLANG)   
+            BGL = 20
+            EQP = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree", "A skin of fine zzar or wine"]                  
     if back == "Orzhov Representative":
         ORPT1 = "I am always willing to act in accordance with the financial incentive offered."
         ORPT2 = "Debts are never meant to be forgiven."
@@ -3019,16 +3025,19 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             skills_dict["ArcaNum"], skills_dict["HistNum"], skills_dict["NatuNum"], skills_dict["ReliNum"] = choicefourskill(param, skills_dict, "ArcaNum", "HistNum", "NatuNum", "ReliNum", Arcana, History, Nature, Religion)
             PlProf = gamingsetsmusicalinstr(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
+            EQP = ["One set of Traveler's Clothes", "A Signet", "Banner or seal representing your place or rank in the order"]
         if back == "Mercenary Veteran":
             skills_dict["AthlNum"] += 1
             skills_dict["PersNum"] += 1
             PlProf.append(VehLand)
             PlProf = gamingsets(param, PlProf)
+            EQP = ["A uniform of your company (Traveler's Clothes in quality)", "An insignia of your rank", "A Gaming Set of your choice"]
         if back == "Soldier":
             skills_dict["AthlNum"] += 1
             skills_dict["IntiNum"] += 1
             PlProf.append(VehLand)
-            PlProf = gamingsets(param, PlProf)                        
+            PlProf = gamingsets(param, PlProf)       
+            EQP = ["An insignia of rank", "A trophy taken from a fallen enemy (a Dagger, broken blade, or piece of a banner)", "A set of Bone Dice or Deck of Cards", "A set of Common Clothes"]                 
     if back == "Urchin":
         P1 = "I hide scraps of food and trinkets away in my pockets."
         P2 = "I ask a lot of questions."
