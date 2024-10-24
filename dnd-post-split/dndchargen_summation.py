@@ -398,8 +398,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         ETrk7 = "A small songbird made of enamel, gold wire, and pre-cious stone; uttering the songbird's name in Elvish causes the trinket to emit that bird's birdsong."
         ETrk8 = "A smallenamel flower that, when put in one's hair, animates, tying back the wearer's hair with a living vine with flowers; plucking a single flower from this vine returns it to its inanimate form."
         ETrk = [ETrk1, ETrk2, ETrk3, ETrk4, ETrk5, ETrk6, ETrk7, ETrk8]
-        ElvenTrinket = random.choice(ETrk)    
-        OtherRaceInfo.append(f"As an elf, you also get a trinket: {ElvenTrinket}")
+        ElvenTrinket = random.choice(ETrk)  
+        EQP.append(ElvenTrinket)  
         OtherRaceInfo.append("As an Elf, if the DM allows, you also have Elven Accuracy (feat).")
 
     if race == "Fairy":
@@ -1140,7 +1140,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         GtWTr = [GtWTr1, GtWTr2, GtWTr3, GtWTr4, GtWTr5, GtWTr6]
         GateWardenTrinket = random.choice(GtWTr)
         OtherBackgroundInfo.append(f"Your personality trait: {GateWardenPersTrait}")
-        OtherBackgroundInfo.append(f"As a Gate Warden, your Trinket: {GateWardenTrinket}")
+        EQP.append(GateWardenTrinket)
         AdditionalInfo.append("Feature: Planar Infusion - Living in a gate-town or a similar location steeped you in planar energy. You gain the Scion of the Outer Planes feat. In addition, you know where to find free, modest lodging and food in the community you grew up in.")
     if back == "Giant Foundling":
         FoundO1 = "You were found as a baby by a family of nomadic giants who raised you as one of their own."
@@ -1489,8 +1489,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         KnSolPT6 = "A dishonorable act drove me to become a knight. I have acted with honor ever since."
         KnSolPT = [KnSolPT1, KnSolPT2, KnSolPT3, KnSolPT4, KnSolPT5, KnSolPT6]
         KnightSolamniaPersTrait = random.choice(KnSolPT)    
-        OtherBackgroundInfo.append(f"As a Knight of Solamnia, your Trinket: {KnightSolamniaTrinket}")
+        EQP.append(KnightSolamniaTrinket)
         OtherBackgroundInfo.append(f"Your personality trait: {KnightSolamniaPersTrait}")
+        AdditionalInfo.append("Feature: Squire of Solamnia - You gain the Squire of Solamnia feat. In addition, the Knights of Solamnia provide you free, modest lodging and food at any of their fortresses or encampments.")
     if back == "Lorehold Student":   
         LoStPT1 = "I thrive on esoteric lore. The more obscure the historical references I can include in everyday conversation, the better."
         LoStPT2 = "By searching for these lost artifacts, I hope to find who I really am along the way."
@@ -1509,7 +1510,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         LoStTr = [LoStTr1, LoStTr2, LoStTr3, LoStTr4, LoStTr5, LoStTr6]
         LoreholdStuTrinket = random.choice (LoStTr)  
         OtherBackgroundInfo.append(f"Your personality trait: {LoreholdStuPersTrait}")
-        OtherBackgroundInfo.append(f"As a Lorehold Student, your Trinket: {LoreholdStuTrinket}")              
+        EQP.append(LoreholdStuTrinket)
+        AdditionalInfo.append("Feature: Lorehold Initiate - You gain the Strixhaven Initiate feat and must choose Lorehold within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Lorehold Spells table are added to the spell list of your spellcasting class. 1st: Comprehend Languages, Identify; 2nd: Borrowed Knowledge, Locate Object; 3rd: Speak with Dead, Spirit Guardians; 4th: Arcane Eye, Stone Shape; 5th: Flame Strike, Legend Lore. Consider customizing how your spells look when you cast them. Your Lorehold spells might create displays of golden light. You might use a tome or a scroll as a spellcasting focus, and your spell effects might reflect the appearance of the reference books you study.")
+    if back == "Lyceum Scholar":
+        AdditionalInfo.append("Feature: Academic Requisition - You've cleared enough lessons—and have gained an ally or two among the staff—to enable access to certain private areas within the Lyceum and other allied universities. Whenever you're on Lyceum grounds or at another major academic institution, you can requisition any set of tools found in the fifth edition rules. Each set of tools is magically marked to sound an alarm if they are removed from the university's grounds. When you seek services such as spellcasting from an NPC at the Alabaster Lyceum or a related institution, you can use those services at a 25 percent discount, at the GM's discretion.")
     if back == "Mage of High Sorcery":
         MaHSTr1 = "An unopened letter from your first teacher"
         MaHSTr2 = "A broken wand made of black, red, or white wood"
@@ -1527,8 +1531,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         MaHSPT6 = "Whether in the past, present, or future, I will be the greatest mage ever known."
         MaHSPT = [MaHSPT1, MaHSPT2, MaHSPT3, MaHSPT4, MaHSPT5, MaHSPT6]
         MageHighSorcPersTrait = random.choice(MaHSPT)    
-        OtherBackgroundInfo.append(f"As a Mage of High Sorcery, your Trinket: {MageHighSorcTrinket}")
+        EQP.append(MageHighSorcTrinket)
         OtherBackgroundInfo.append(f"Your personality trait: {MageHighSorcPersTrait}")
+        AdditionalInfo.append("Feature: Initiate of High Sorcery - You gain the Initiate of High Sorcery feat. In addition, the Mages of High Sorcery provide you with free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.")
     if back == "Marine":   
         MarH1 = "Nearly Drowned. You hid underwater to avoid detection by enemies and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence."
         MarH2 = "Captured. You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke."
@@ -1538,7 +1543,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         MarH6 = "Leave None Behind. You carried an injured marine for miles to avoid capture and death."
         MarH = [MarH1, MarH2, MarH3, MarH4, MarH5, MarH6]
         MarineHardship = random.choice(MarH) 
-        OtherBackgroundInfo.append(f"As a Marine, your Hardship: {MarineHardship}")       
+        AdditionalInfo.append(f"Hardship Endured - Hardship in your past has forged you into an unstoppable living weapon. This hardship is essential to you and is at the heart of a personal philosophy or ethos that often guides your actions, your Hardship: {MarineHardship}")       
+        AdditionalInfo.append("Feature: Steady - You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see 'Travel Pace' in chapter 8 of the Player's Handbook). Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists.")
     if back == "Myriad Operative":
         AdditionalInfo.append("Feature: Myriad Operative - Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed.")
     if back == "Noble":
