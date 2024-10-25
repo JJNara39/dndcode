@@ -2714,8 +2714,8 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
         #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
         #All spellcasting info will be provided in our creator function
-        'Height':str(Height),
-        'Weight':str(Weight),
+        'Height':str(Height) + 'inches',
+        'Weight':str(Weight) + 'pounds',
         'Allies':allies_str,
         'Feat+Traits':add_info_str,
         }
