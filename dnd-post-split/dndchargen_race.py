@@ -1903,9 +1903,9 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         Intelligence += 2
         walkingspeed = 25
         RaceNotes.append(Darkvision)
-        PlProf.append("Intelligence(Saving Throw)")
-        PlProf.append("Wisdom(Saving Throw)")
-        PlProf.append("Charisma(Saving Throw)")
+        RaceNotes.append("Proficent in Intelligence(Saving Throw) against magic")
+        RaceNotes.append("Proficent in Wisdom(Saving Throw) against magic")
+        RaceNotes.append("Proficent in Charisma(Saving Throw) against magic")
         if subrace == "Forest Gnome":
             Dexterity += 1
             RaceNotes.append("Natural Illusionist: You know the Minor Illusion cantrip. Intelligence is your spellcasting modifier for it.")
