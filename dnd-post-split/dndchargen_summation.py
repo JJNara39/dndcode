@@ -2639,11 +2639,10 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     ProfBonus = math.ceil(chLvl/4)+1
     ProfLang = PlProf + PlLang
     prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang)
-    if subclass != "":
-        FeatTrait = f'Subclass: {subclass}' + OtherBackgroundInfo + RaceNotes
-    else:
-        FeatTrait = OtherBackgroundInfo + RaceNotes
+    FeatTrait = OtherBackgroundInfo + RaceNotes    
     feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)
+    if subclass != "":
+        feat_trait_str = f'- Subclass: {subclass}' + '\n' + feat_trait_str
     add_info_str = '\n'.join(f'- {item}' for item in AdditionalInfo)
     allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
     data = {
