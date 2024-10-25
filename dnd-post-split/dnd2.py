@@ -185,6 +185,7 @@ def dndCharGen(param, chLvl, charactername, playername):
     PlProf = []
     PlLang = []    
     ClassNotes = []
+    EQP = []
     Gender = ""
     HollowOne = ""
     race = ""
@@ -232,7 +233,6 @@ def dndCharGen(param, chLvl, charactername, playername):
     Vulp = "Vulpin"
     TCant = "Thieves Cant"
     SLANG = [Aara, Abys, Aqua, Aura, Bird, Cele, Cerva, Comm, DpSp, Drac, Dwarvi, Elvi, Gian, GithL, Gnom, Gobl, Grun, Hafl, Hedg, Infe, Jerb, Krau, Leon, Loxo, Mapa, Mino, Orc, Quo, Prim, Sylv, Unde, Veda, Vulp]
-    EQP = []
     CharacterGen = ["Race", "Class", "Background"]
     if param == "Y":
         print("0 - Random")
