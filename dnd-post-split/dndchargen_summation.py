@@ -2637,6 +2637,80 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     StrMod = math.floor((Strength-10)/2)
     WisMod = math.floor((Wisdom-10)/2)
     ProfBonus = math.ceil(chLvl/4)+1
+    Acrobatics = "Acrobatics"
+    AnimalHandling = "Animal Handling"
+    Arcana = "Arcana"
+    Athletics = "Athletics"
+    Deception = "Deception"
+    History = "History"
+    Insight = "Insight"
+    Intimidation = "Intimidation"
+    Investigation = "Investigation"
+    Medicine = "Medicine"
+    Nature = "Nature"
+    Perception = "Perception"
+    Performance = "Performance"
+    Persuasion = "Persuasion"
+    Religion = "Religion"
+    SleightofHand = "Sleight of Hand"
+    Stealth = "Stealth"
+    Survival = "Survival"
+    SkillProf = []
+    if "Acrobatics" in PlProf:
+        SkillProf.append(Acrobatics)
+        PlProf.remove(Acrobatics)
+    if "Animal Handling" in PlProf:
+        SkillProf.append(AnimalHandling)
+        PlProf.remove(AnimalHandling)
+    if "Arcana" in PlProf:
+        SkillProf.append(Arcana)
+        PlProf.remove(Arcana)
+    if "Athletics" in PlProf:
+        SkillProf.append(Athletics)
+        PlProf.remove(Athletics)
+    if "Deception" in PlProf:
+        SkillProf.append(Deception)
+        PlProf.remove(Deception)
+    if "History" in PlProf:
+        SkillProf.append(History)
+        PlProf.remove(History)
+    if "Insight" in PlProf:
+        SkillProf.append(Insight)
+        PlProf.remove(Insight)
+    if "Intimidation" in PlProf:
+        SkillProf.append(Intimidation)
+        PlProf.remove(Intimidation)
+    if "Investigation" in PlProf:
+        SkillProf.append(Investigation)
+        PlProf.remove(Investigation)
+    if "Medicine" in PlProf:
+        SkillProf.append(Medicine)
+        PlProf.remove(Medicine)
+    if "Nature" in PlProf:
+        SkillProf.append(Nature)
+        PlProf.remove(Nature)
+    if "Perception" in PlProf:
+        SkillProf.append(Perception)
+        PlProf.remove(Perception)
+    if "Performance" in PlProf:
+        SkillProf.append(Performance)
+        PlProf.remove(Performance)
+    if "Persuasion" in PlProf:
+        SkillProf.append(Persuasion)
+        PlProf.remove(Persuasion)
+    if "Religion" in PlProf:
+        SkillProf.append(Religion)
+        PlProf.remove(Religion)
+    if "Sleight of Hand" in PlProf:
+        SkillProf.append(SleightofHand)
+        PlProf.remove(SleightofHand)
+    if "Stealth" in PlProf:
+        SkillProf.append(Stealth)
+        PlProf.remove(Stealth)
+    if "Survival" in PlProf:
+        SkillProf.append(Survival)
+        PlProf.remove(Survival)
+
     ProfLang = PlProf + PlLang
     prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang)
     FeatTrait = OtherBackgroundInfo + RaceNotes    
@@ -2666,48 +2740,48 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         'CONmod':str(ConMod),
         'Flaws':Flaw,
         'INT':str(Intelligence),
-        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in PlProf else 0)),
-        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in PlProf else 0)),
-        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in PlProf else 0)),
-        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in PlProf else 0)),
-        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in PlProf else 0)),
-        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in PlProf else 0)),
-        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in PlProf else 0)),
+        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillProf else 0)),
+        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillProf else 0)),
+        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillProf else 0)),
+        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillProf else 0)),
+        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in SkillProf else 0)),
+        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillProf else 0)),
+        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillProf else 0)),
         'INTmod':str(IntMod),
-        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in PlProf else 0)),
+        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillProf else 0)),
         'WIS':str(Wisdom),
-        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in PlProf else 0)),
-        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
+        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillProf else 0)),
+        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
         'WISmod':str(WisMod),
         'CHA':str(Charisma),
-        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in PlProf else 0)),
-        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in PlProf else 0)),
-        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in PlProf else 0)),
-        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in PlProf else 0)),
-        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in PlProf else 0)),
-        'Check Box 23':'/Yes' if 'Acrobatics' in PlProf else '/No',
-        'Check Box 24':'/Yes' if 'Animal Handling' in PlProf else '/No',
-        'Check Box 25':'/Yes' if 'Arcana' in PlProf else '/No',
-        'Check Box 26':'/Yes' if 'Athletics' in PlProf else '/No',
-        'Check Box 27':'/Yes' if 'Deception' in PlProf else '/No',
-        'Check Box 28':'/Yes' if 'History' in PlProf else '/No',
-        'Check Box 29':'/Yes' if 'Insight' in PlProf else '/No',
-        'Check Box 30':'/Yes' if 'Intimidation' in PlProf else '/No',
-        'Check Box 31':'/Yes' if 'Investigation' in PlProf else '/No',
-        'Check Box 32':'/Yes' if 'Medicine' in PlProf else '/No',
-        'Check Box 33':'/Yes' if 'Nature' in PlProf else '/No',
-        'Check Box 34':'/Yes' if 'Perception' in PlProf else '/No',
-        'Check Box 35':'/Yes' if 'Performance' in PlProf else '/No',
-        'Check Box 36':'/Yes' if 'Persuasion' in PlProf else '/No',
-        'Check Box 37':'/Yes' if 'Religion' in PlProf else '/No',
-        'Check Box 38':'/Yes' if 'Sleight of Hand' in PlProf else '/No',
-        'Check Box 39':'/Yes' if 'Stealth' in PlProf else '/No',
-        'Check Box 40':'/Yes' if 'Survival' in PlProf else '/No',
-        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in PlProf else 0)),
-        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in PlProf else 0)),
+        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillProf else 0)),
+        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillProf else 0)),
+        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillProf else 0)),
+        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillProf else 0)),
+        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillProf else 0)),
+        'Check Box 23':'/Yes' if 'Acrobatics' in SkillProf else '/No',
+        'Check Box 24':'/Yes' if 'Animal Handling' in SkillProf else '/No',
+        'Check Box 25':'/Yes' if 'Arcana' in SkillProf else '/No',
+        'Check Box 26':'/Yes' if 'Athletics' in SkillProf else '/No',
+        'Check Box 27':'/Yes' if 'Deception' in SkillProf else '/No',
+        'Check Box 28':'/Yes' if 'History' in SkillProf else '/No',
+        'Check Box 29':'/Yes' if 'Insight' in SkillProf else '/No',
+        'Check Box 30':'/Yes' if 'Intimidation' in SkillProf else '/No',
+        'Check Box 31':'/Yes' if 'Investigation' in SkillProf else '/No',
+        'Check Box 32':'/Yes' if 'Medicine' in SkillProf else '/No',
+        'Check Box 33':'/Yes' if 'Nature' in SkillProf else '/No',
+        'Check Box 34':'/Yes' if 'Perception' in SkillProf else '/No',
+        'Check Box 35':'/Yes' if 'Performance' in SkillProf else '/No',
+        'Check Box 36':'/Yes' if 'Persuasion' in SkillProf else '/No',
+        'Check Box 37':'/Yes' if 'Religion' in SkillProf else '/No',
+        'Check Box 38':'/Yes' if 'Sleight of Hand' in SkillProf else '/No',
+        'Check Box 39':'/Yes' if 'Stealth' in SkillProf else '/No',
+        'Check Box 40':'/Yes' if 'Survival' in SkillProf else '/No',
+        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillProf else 0)),
+        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillProf else 0)),
         'CHamod':str(ChaMod),
-        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in PlProf else 0)),
-        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in PlProf else 0)),
+        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillProf else 0)),
+        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
         'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
         'GP':str(BGL),
         #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
