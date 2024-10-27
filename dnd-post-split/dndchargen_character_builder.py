@@ -114,18 +114,29 @@ WdcrvTools = "Woodcarver's Tools"
 ARTISANTOOLS = [AlchSupp, BrewSupp, CallSupp, CarpTools, CartTools, CobbTools, CooksUten, GlasTools, JeweTools, LthrwrkTools, MasnTools, PaintSupp, PottTools, SmthTools, TinkTools, WeavTools, WdcrvTools]
 ThievKit = "Thieves' Tools"
 
-def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, EQP, SkillsProf, PlProf, data):
+def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsProf, PlProf, data):
+    ClassNotes = []
+    ProfBonus = int(data['ProfBonus'])
+    ChaMod = int(data['CHaMod'])
     ConMod = int(data['CONmod'])
+    DexMod = int(data['DEXmod'])
+    IntMod = int(data['INTmod'])
+    StrMod = int(data['STRmod'])
+    WisMod = int(data['WISmod'])
+    if (plLvl >= 4) & (plLvl <= 8):
+        ClassNotes.append("You can increase one score by 2, two by one, or a feat. As normal, you can't increase an ability score above 20 using this feature.")
+    if (plLvl >= 8 & (plLvl <= 12)):
+        ClassNotes.append("You can increase one score by 2, two by one, or a feat. As normal, you can't increase an ability score above 20 using this feature.")    
     if Class == "Artificer":
         if param == "Y":
-            artlvl = int(input("What is your Artificer level? "))   
+            artlvl = int(input(f"Given your player level of {plLvl}, What is your Artificer level? "))   
         if param == "N":
-            artlvl = chLvl
-            hitdice = f"{artlvl}d8"
-            if artlvl == 1:
-                hitpoints = 8 + ConMod
-            else:
-                hitpoints = 8 + ConMod + hpcalc(artlvl, d8)
+            artlvl = plLvl
+        hitdice = f"{artlvl}d8"
+        if artlvl == 1:
+            hitpoints = 8 + ConMod
+        else:
+            hitpoints = 8 + ConMod + hpcalc(artlvl, d8)
         PlProf.extend(LightArmor)
         PlProf.extend(MediumArmor)
         PlProf.append(Shield)
@@ -187,15 +198,26 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
                 EQP.clear()
                 BGL = BGL + d4() + d4() + d4() + d4() + d4()
         PlProf.extend(Firearms)
-        ClassNotes.append("Magical Tinkering - At 1st level, you learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice: The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet; Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away; You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long; The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away; A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like; The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
         
+        ClassNotes.append("Magical Tinkering - At 1st level, you learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
+        SpellcastingClass = "Artificer"
+        SpellcastingAbility = "Int"
+        SpellsaveDC = 8 + ProfBonus + IntMod
+        SpellAttackMod = ProfBonus + IntMod
+        if artlvl >= 2:
+            ClassNotes.append("Infuse Item - You have the ability to imbue mundane items with certain magical infusions. The magic items you create with this feature are effectively prototypes of permanent items. You learn additional infusions of your choice when you reach certain levels in this class. Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.")
+            InfusionNumber = 4
+            ClassNotes.append(f"You have {InfusionNumber} infusions")
+            ClassNotes.append("Infusing an Item - Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see 'Attunement' in chapter 7 of the Dungeon Master's Guide). Your infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days have passed equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you give up your knowledge of the infusion for another one. You can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion immediately ends, and then the new infusion applies.")
+        if artlvl >= 3:
+            ClassNotes.append("The Right Tool For The Job - At 3rd level, you learn how to produce exactly the tool you need: with tinker's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.")
         if subclass == "Alchemist Speciliast Artificer":
         if subclass == "Armorer Speciliast Artificer":
         if subclass == "Artilierist Speciliast Artificer":
         if subclass == "Battle Smith Speciliast Artificer":        
     if Class == "Barbarian":
         if param == "Y":
-            barblvl = int(input("What is your Barbarian level? "))        
+            barblvl = int(input(f"Given your player level of {plLvl}, what is your Barbarian level? "))        
         if subclass == "Path of the Ancestral Guardian Barbarian":
         if subclass == "Path of the Battlerager Barbarian":
         if subclass == "Path of the Beast Barbarian":
@@ -215,7 +237,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Path of the Wild Magic Barbarian":        
     if Class == "Bard":
         if param == "Y":
-            bardlvl = int(input("What is your Bard level? "))        
+            bardlvl = int(input(f"Given your player level of {plLvl}, what is your Bard level? "))        
         if subclass == "College of Creation Bard":
         if subclass == "College of Eloquence Bard":
         if subclass == "College of Glamour Bard":
@@ -229,7 +251,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "College of Whispers Bards":        
     if Class == "Cleric":
         if param == "Y":
-            clerlvl = int(input("What is your Cleric level? "))        
+            clerlvl = int(input(f"Given your player level of {plLvl}, what is your Cleric level? "))        
         if subclass == "Arcana Domain Cleric":
         if subclass == "Blood Domain Cleric":
         if subclass == "Commmunity Domain Cleric":
@@ -251,7 +273,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Zeal Domain Cleric":        
     if Class == "Druid":
         if param == "Y":
-            drulvl = int(input("What is your Druid level? "))        
+            drulvl = int(input(f"Given your player level of {plLvl}, what is your Druid level? "))        
         if subclass == "Circle of the Blighted Druid":
         if subclass == "Circle of Dreams Druid":
         if subclass == "Circle of the Land Druid":
@@ -262,7 +284,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Circle of Wildfire Druid":        
     if Class == "Fighter":
         if param == "Y":
-            figlvl = int(input("What is your Fighter level? "))        
+            figlvl = int(input(f"Given your player level of {plLvl}, what is your Fighter level? "))        
         if subclass == "Arcane Archer Archetype Fighter":
         if subclass == "Battle Master Archetype Fighter":
         if subclass == "Cavalier Archetype Fighter":
@@ -276,7 +298,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Scofflaw Archetype Fighter":        
     if Class == "Monk":
         if param == "Y":
-            monklvl = int(input("What is your Monk level? "))        
+            monklvl = int(input(f"Given your player level of {plLvl}, what is your Monk level? "))        
         if subclass == "Way of the Ascendant Dragon Monk":
             ADO1 = "You honed your abilities by aligning your spirit with a dragon's world-altering power."
             ADO2 = "A dragon personally took an active role in shaping your inner energy."
@@ -299,7 +321,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Way of the Sun Soul Monk":        
     if Class == "Paladin":
         if param == "Y":
-            pallvl = int(input("What is your Paladin level? "))        
+            pallvl = int(input(f"Given your player level of {plLvl}, what is your Paladin level? "))        
         if subclass == "Oath of the Ancients Paladin":
         if subclass == "Oath of Conquest Paladin":
         if subclass == "Oath of the Crown Paladin":
@@ -312,7 +334,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Oathbreaker Paladin":        
     if Class == "Ranger":
         if param == "Y":
-            ranlvl = int(input("What is your Ranger level? "))        
+            ranlvl = int(input(f"Given your player level of {plLvl}, what is your Ranger level? "))        
         if subclass == "Beast Master Archetype Ranger":
         if subclass == "Drakewarden Ranger":
             DWO1 = "You studied a dragon's scale or claw, or a trinket from a dragon's hoard, creating your bond through that token's lingering draconic magic."
@@ -333,7 +355,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Swarmkeeper Archetype Ranger":        
     if Class == "Rogue":
         if param == "Y":
-            roglvl = int(input("What is your Rogue level? "))        
+            roglvl = int(input(f"Given your player level of {plLvl}, what is your Rogue level? "))        
         if subclass == "Arcane Trickster Archetype Rogue":
         if subclass == "Assassin Archetype Rogue":
         if subclass == "Inquisitive Archetype Rogue":
@@ -346,7 +368,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Thief Archetype Rogue":        
     if Class == "Sorcerer":
         if param == "Y":
-            sorclvl = int(input("What is your Sorcerer level? "))        
+            sorclvl = int(input(f"Given your player level of {plLvl}, what is your Sorcerer level? "))        
         if subclass == "Aberrant Mind Origin Sorcerer":
             AbSO1 = "You were exposed to the Far Realm's warping influence. You are confinced that a tentacle is now growing on you, but no one else can see it."
             AbSO2 = "A psychic wind from the Astral Plane carried psionic energy to you. When you use your powers, faint motes of light sparkle around you."
@@ -370,7 +392,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Wild Magic Origin Sorcerer":                  
     if Class == "Warlock":   
         if param == "Y":
-            warlvl = int(input("What is your Warlock level? "))          
+            warlvl = int(input(f"Given your player level of {plLvl}, what is your Warlock level? "))          
         if subclass == "Ancient Dragon Patron Warlock":
         if subclass == "Archfey Patron Warlock":
         if subclass == "Celestial Patron Warlock":
@@ -392,7 +414,7 @@ def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, 
         if subclass == "Serpent Patron Warlock":         
     if Class == "Wizard":
         if param == "Y":
-            wizlvl = int(input("What is your Wizard level? "))        
+            wizlvl = int(input(f"Given your player level of {plLvl}, what is your Wizard level? "))        
         if subclass == "Undead Patron Warlock":
         if subclass == "Undying Patron Warlock":
         if subclass == "Abjuration Arcane Tradition Wizard":
