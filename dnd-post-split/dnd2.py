@@ -184,7 +184,6 @@ def dndCharGen(param, chLvl, charactername, playername):
     RaceNotes = []
     PlProf = []
     PlLang = []    
-    ClassNotes = []
     EQP = []
     Gender = ""
     HollowOne = ""
@@ -245,7 +244,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if CharacterGenRand1 == "Race":
                 Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if CharacterGenRand1 == "Class":
-                Class, subclass, ClassNotes = dndchargen_class(param)
+                Class, subclass = dndchargen_class(param)
             if CharacterGenRand1 == "Background":
                 back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(CharacterGenRand1)
@@ -254,7 +253,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if first_choice == "Race":
                 Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if first_choice == "Class":
-                Class, subclass, ClassNotes = dndchargen_class(param)
+                Class, subclass = dndchargen_class(param)
             if first_choice == "Background":
                 back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(first_choice)
@@ -267,7 +266,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if CharacterGenRand2 == "Race":
                 Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if CharacterGenRand2 == "Class":
-                Class, subclass, ClassNotes = dndchargen_class(param)
+                Class, subclass = dndchargen_class(param)
             if CharacterGenRand2 == "Background":
                 back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(CharacterGenRand2)
@@ -276,7 +275,7 @@ def dndCharGen(param, chLvl, charactername, playername):
             if second_choice == "Race":
                 Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if second_choice == "Class":
-                Class, subclass, ClassNotes = dndchargen_class(param)
+                Class, subclass = dndchargen_class(param)
             if second_choice == "Background":
                 back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
             CharacterGen.remove(second_choice)
@@ -284,7 +283,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if last_choice == "Race":
             Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if last_choice == "Class":
-            Class, subclass, ClassNotes = dndchargen_class(param)
+            Class, subclass = dndchargen_class(param)
         if last_choice == "Background":
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
     if param == "N":
@@ -292,7 +291,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand1 == "Race":
             Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand1 == "Class":
-            Class, subclass, ClassNotes = dndchargen_class(param)
+            Class, subclass = dndchargen_class(param)
         if CharacterGenRand1 == "Background":
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
         CharacterGen.remove(CharacterGenRand1)
@@ -300,7 +299,7 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand2 == "Race":
             Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand2 == "Class":
-            Class, subclass, ClassNotes = dndchargen_class(param)
+            Class, subclass = dndchargen_class(param)
         if CharacterGenRand2 == "Background":
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
         CharacterGen.remove(CharacterGenRand2)
@@ -308,10 +307,10 @@ def dndCharGen(param, chLvl, charactername, playername):
         if CharacterGenRand3 == "Race":
             Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand3 == "Class":
-            Class, subclass, ClassNotes = dndchargen_class(param)
+            Class, subclasS = dndchargen_class(param)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-    summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+    summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
 
@@ -320,7 +319,7 @@ def dndCharGen(param, chLvl, charactername, playername):
 
 DMorPlay = int(input("Are you a 1 - DM or 2 - Player? "))
 party = int(input("How many characters will your party have? ")) #This can be used later when I implement CR encounters, it will function on party size
-chLvlList = []
+plLvlList = []
 numMon = 1 #Lets just say for now there is one monster per encounter
 
 ##########################################################################################
@@ -368,8 +367,8 @@ if DMorPlay == 1:
         for p in range(party):
             playername = input("Who is the player behind this character? ")
             charactername = input("What is this character's name? ")
-            chLvl = int(input(f"What level is {charactername}? "))
-            chLvlList.append(chLvl)
+            plLvl = int(input(f"What level is {charactername}? "))
+            plLvlList.append(plLvl)
             para = input(f"Set parameters on {charactername}? Y/N ")
             if para == "Y":
                 param = "Y"
@@ -391,23 +390,23 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            dndCharGen(param, chLvl, charactername, playername)
+            dndCharGen(param, plLvl, charactername, playername)
             
-        properPL = sum(chLvlList) / party
+        properPL = sum(plLvlList) / party
         #encounterCR = int(properPL) * party * (1/4) #Instead of making this fraction that auto reduces, lets instead plug the numerator and denominator in an let it do its thing
         eCRMixednum = int(properPL) * party
         eCRMixedden = 4 #The initial scenario was a lvl 1 character could handle a CR of 1/4
         eCRMixed = mixedFraction(eCRMixednum,eCRMixedden)
         #eCRMixed = mixedFraction(encounterCR) #Going to plug numerator and denominator into our mixedFraction function instead
-        print("With a party size of {} and a total party level of {}, The Total Encounter CR to work with is {}".format(party, sum(chLvlList), eCRMixed))
+        print("With a party size of {} and a total party level of {}, The Total Encounter CR to work with is {}".format(party, sum(plLvlList), eCRMixed))
 
     if eYN == "N":
         for p in range(party):
             #Add in a level check for classes, if the level is 3+, the subclass is available.
             playername = input("Who is the player behind this character? ")
             charactername = input("What is this character's name? ")
-            chLvl = int(input(f"What level is {charactername}? "))
-            chLvlList.append(chLvl)            
+            plLvl = int(input(f"What level is {charactername}? "))
+            plLvlList.append(plLvl)            
             para = input(f"Set parameters on {charactername}? Y/N ")
             if para == "Y":
                 param = "Y"
@@ -429,13 +428,13 @@ if DMorPlay == 1:
                 param = "N"
             if para == "no":
                 param = "N"            
-            dndCharGen(param, chLvl, charactername, playername)
+            dndCharGen(param, plLvl, charactername, playername)
 else:
     for p in range(party):
         playername = input("Who is the player behind this character? ")        
         charactername = input("What is this character's name? ")
-        chLvl = int(input(f"What level is {charactername}? "))
-        chLvlList.append(chLvl)   
+        plLvl = int(input(f"What level is {charactername}? "))
+        plLvlList.append(plLvl)   
     #Add in a level check for classes, if the level is 3+, the subclass is available.
         para = input(f"Set parameters on {charactername}? Y/N ")
         if para == "Y":
@@ -458,7 +457,7 @@ else:
             param = "N"
         if para == "no":
             param = "N"    
-        dndCharGen(param, chLvl, charactername, playername)
+        dndCharGen(param, plLvl, charactername, playername)
 
 '''
 #This block of code is to make sure dndCharGen works
