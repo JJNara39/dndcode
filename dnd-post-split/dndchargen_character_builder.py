@@ -1,5 +1,7 @@
 import random
 import math
+from dndchargen_languagesskills import *
+
 def d2():
     result = random.randint(1,2)
     return result
@@ -24,20 +26,169 @@ def d20():
 
 #Define a function called hpcalc that determines your hp, given your level, and what dice you give it
 def hpcalc(chlvl, dicefunc):
+    result = 0
     for i in range(chlvl):
-        result += dicefunc
-    return result 
+        result += dicefunc()
+    return result
 
-def dndchargen_characterbuilder(param, plLvl, Class, subclass, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
-    ConMod = math.floor((Charisma - 10)/2)
+ChaST = "Charisma(ST)"
+ConST = "Constitution(ST)"
+DexST = "Dexterity(ST)"
+IntST = "Intelligence(ST)"
+StrST = "Strength(ST)"
+WisST = "Wisdom(ST)"
+Acrobatics = "Acrobatics"
+AnimalHandling = "Animal Handling"
+Arcana = "Arcana"
+Athletics = "Athletics"
+Deception = "Deception"
+History = "History"
+Insight = "Insight"
+Intimidation = "Intimidation"
+Investigation = "Investigation"
+Medicine = "Medicine"
+Nature = "Nature"
+Perception = "Perception"
+Performance = "Performance"
+Persuasion = "Persuasion"
+Religion = "Religion"
+SleightofHand = "Sleight of Hand"
+Stealth = "Stealth"
+Survival = "Survival"
+Leather = "Leather"
+StuddedLeather = "Studded Leather"
+Padded = "Padded"
+LightArmor = [Leather, StuddedLeather, Padded]
+Breastplate = "Breastplate"
+ChainShirt = "Chain Shirt"
+HalfPlate = "Half Plate"
+Hide = "Hide"
+ScaleMail = "Scale Mail"
+SpikedArmor ="Spiked Armor"
+MediumArmor = [Breastplate, ChainShirt, HalfPlate, Hide, ScaleMail, SpikedArmor]
+Shield = "Shield" 
+Club = "Club"
+Dagger = "Dagger"
+Dart = "Dart"
+Greatclub = "Greatclub"
+Handaxe = "Handaxe"
+Javelin = "Javelin"
+LightCrossbow = "Light Crossbow"
+LightHammer = "Light Hammer"
+Mace = "Mace"
+Quarterstaff = "Quarterstaff"
+Shortbow = "Shortbow"
+Sickle = "Sickle"
+Sling = "Sling"
+Spear = "Spear"
+Yklwa = "Yklwa"
+SimpleWeapons = [Club, Dagger, Dart, Greatclub, Handaxe, Javelin, LightCrossbow, LightHammer, Mace, Quarterstaff, Shortbow, Sickle, Sling, Spear, Yklwa]
+AntimatterRifle = "Antimatter Rifle"
+AutomaticPistol = "Automatic Pistol"
+AutomaticRifle = "Automatic Rifle"
+HuntingRifle = "Hunting Rifle"
+LaserPistol = "Laser Pistol"
+LaserRifle = "Laser Rifle"
+Musket = "Musket"
+Pistol = "Pistol"
+Revolver = "Revolver"
+Shotgun = "Shotgun"
+Firearms = [AntimatterRifle, AutomaticPistol, AutomaticRifle, HuntingRifle, LaserPistol, LaserRifle, Musket, Pistol, Revolver, Shotgun]
+AlchSupp = "Alchemist's Supplies"
+BrewSupp = "Brewer's Supplies"
+CallSupp = "Calligrapher's Supplies"
+CarpTools = "Carpenter's Tools"
+CartTools = "Cartographer's Tools"
+CobbTools = "Cobbler's Tools"
+CooksUten = "Cook's Utensils"
+GlasTools = "Glassblower's Tools"
+JeweTools = "Jeweler's Tools"
+LthrwrkTools = "Leatherworker's Tools"
+MasnTools = "Mason's Tools"
+PaintSupp = "Painter's Supplies"
+PottTools = "Potter's Tools"
+SmthTools = "Smith's Tools"
+TinkTools = "Tinker's Tools"
+WeavTools = "Weaver's Tools"
+WdcrvTools = "Woodcarver's Tools"
+ARTISANTOOLS = [AlchSupp, BrewSupp, CallSupp, CarpTools, CartTools, CobbTools, CooksUten, GlasTools, JeweTools, LthrwrkTools, MasnTools, PaintSupp, PottTools, SmthTools, TinkTools, WeavTools, WdcrvTools]
+ThievKit = "Thieves' Tools"
+
+def dndchargen_characterbuilder(param, chLvl, Class, subclass, ClassNotes, BGL, EQP, SkillsProf, PlProf, data):
+    ConMod = int(data['CONmod'])
     if Class == "Artificer":
         if param == "Y":
             artlvl = int(input("What is your Artificer level? "))   
-            hitdice = artlvl * d8()
+        if param == "N":
+            artlvl = chLvl
+            hitdice = f"{artlvl}d8"
             if artlvl == 1:
                 hitpoints = 8 + ConMod
             else:
-                hitpoints = 8 + ConMod + hpcalc(artlvl, d8())
+                hitpoints = 8 + ConMod + hpcalc(artlvl, d8)
+        PlProf.extend(LightArmor)
+        PlProf.extend(MediumArmor)
+        PlProf.append(Shield)
+        PlProf.extend(SimpleWeapons)
+        PlProf.append(ThievKit)
+        PlProf.append(TinkTools)
+        PlProf = artisantools(param, PlProf)
+        SkillsProf.append(ConST)
+        SkillsProf.append(IntST)
+        SkillsProf = twoskillsfromlist(param, SkillsProf, Arcana, History, Investigation, Medicine, Nature, Perception, SleightofHand)
+        ArtChoices = ["Starting Equipment", "Gold"]
+        ArtChoices2 = ["Studded Leather Armor", "Scale Mail"]
+        if param == "Y":
+            print("0 - Random")
+            print("1 - Starting Equipment")
+            print("2 - Gold")
+            sego = int(input("Would you like the starting equipment or gold(5d4 x 10gp, must forgo starting equipment from background)? "))
+            if sego == 1:
+                EQP = twosimpleweapons(param, EQP)
+                EQP.append("A Light Crossbow and 20 bolts")
+                print("0 - Random")
+                print("1 - Studded Leather Armor")
+                print("2 - Scale Mail")
+                artchoice3 = int(input("Would you like 1 - Studded Leather Armor, or 2 - Scale Mail? "))
+                if artchoice3 == 1:
+                    EQP.append("Studded Leather Armor")
+                if artchoice3 == 2:
+                    EQP.append("Scale Mail")
+                if artchoice3 == 0:
+                    RandArtChoice2 = random.choice(ArtChoices2)
+                    EQP.append(RandArtChoice2)
+                EQP.append(ThievKit)
+                EQP.append("A Dungeoneer's Pack")
+            if sego == 2:
+                EQP.clear()
+                BGL = BGL + d4() + d4() + d4() + d4() + d4()
+            if sego == 0:
+                RandArtChoice = random.choice(ArtChoices)
+                if RandArtChoice == "Starting Equipment":    
+                    EQP = twosimpleweapons(param, EQP)
+                    EQP.append("A Light Crossbow and 20 bolts")
+                    RandArtChoice2 = random.choice(ArtChoices2)
+                    EQP.append(RandArtChoice2)
+                    EQP.append(ThievKit)
+                    EQP.append("A Dungeoneer's Pack")
+                if RandArtChoice == "Gold":
+                    EQP.clear()
+                    BGL = BGL + d4() + d4() + d4() + d4() + d4()
+        if param == "N":
+            RandArtChoice = random.choice(ArtChoices)
+            if RandArtChoice == "Starting Equipment":    
+                EQP = twosimpleweapons(param, EQP)
+                EQP.append("A Light Crossbow and 20 bolts")
+                RandArtChoice2 = random.choice(ArtChoices2)
+                EQP.append(RandArtChoice2)
+                EQP.append(ThievKit)
+                EQP.append("A Dungeoneer's Pack")
+            if RandArtChoice == "Gold":
+                EQP.clear()
+                BGL = BGL + d4() + d4() + d4() + d4() + d4()
+        PlProf.extend(Firearms)
+        ClassNotes.append("Magical Tinkering - At 1st level, you learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice: The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet; Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away; You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long; The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away; A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like; The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
+        
         if subclass == "Alchemist Speciliast Artificer":
         if subclass == "Armorer Speciliast Artificer":
         if subclass == "Artilierist Speciliast Artificer":
