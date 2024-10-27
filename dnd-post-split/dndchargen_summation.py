@@ -32,7 +32,7 @@ def fill_pdf(input_pdf_path, output_pdf_path, data):
         with open(output_pdf_path, 'wb') as output_pdf:
             writer.write(output_pdf)
 
-def summation(param, playername, charactername, chLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, ClassNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -2328,6 +2328,14 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     SloHNum = skills_dict["SloHNum"]
     SteaNum = skills_dict["SteaNum"]
     SurvNum = skills_dict["SurvNum"]        
+    print(f"Your Charisma score: {Charisma}")
+    print(f"Your Constitution score: {Constitution}") 
+    print(f"Your Dexterity score: {Dexterity}")
+    print(f"Your Intelligence score: {Intelligence}")
+    print(f"Your Strength score: {Strength}")
+    print(f"Your Wisdom score: {Wisdom}")
+    
+    print("Six Scores to choose from to apply to your abilities:")
     n=0
     Sums = []
     run = True
@@ -2349,16 +2357,9 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
         n += 1
         if n >= 6:
             run = False
-        #Figure out how to assign each sum to a value, and figure out what each value is assigned to, then after printing all 6, make sure to THEN ask what abilityscore to assign each value to, and make sure to set the score += the value shown, not just change it to the new value        
+        #Figure out how to assign each sum to a value, and figure out what each value is assigned to, then after printing all 6, make sure to THEN ask what abilityscore to assign each value to, and make sure to set the score += the value shown, not just change it to the new value
     AbilityScoresList = ["Charisma", "Constitution", "Dexterity", "Intelligence", "Strength", "Wisdom"]
     if param == "Y":
-        print(f"Your Charisma score: {Charisma}")
-        print(f"Your Constitution score: {Constitution}") 
-        print(f"Your Dexterity score: {Dexterity}")
-        print(f"Your Intelligence score: {Intelligence}")
-        print(f"Your Strength score: {Strength}")
-        print(f"Your Wisdom score: {Wisdom}")
-        print("Six Scores to choose from to apply to your abilities:")
         for i, sum in enumerate(Sums, 1):
             print(f"Score {i} to apply: {sum}")        
         print("0 - Random")        
@@ -2635,7 +2636,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     IntMod = math.floor((Intelligence-10)/2)
     StrMod = math.floor((Strength-10)/2)
     WisMod = math.floor((Wisdom-10)/2)
-    ProfBonus = math.ceil(chLvl/4)+1
+    ProfBonus = math.ceil(plLvl/4)+1
     Acrobatics = "Acrobatics"
     AnimalHandling = "Animal Handling"
     Arcana = "Arcana"
@@ -2719,7 +2720,7 @@ def summation(param, playername, charactername, chLvl, Gender, race, subrace, He
     add_info_str = '\n'.join(f'- {item}' for item in AdditionalInfo)
     allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
     data = {
-        'ClassLevel':str(Class) + ' ' + str(chLvl),
+        'ClassLevel':str(Class) + ' ' + str(plLvl),
         'Background':back,
         'PlayerName':playername,
         'CharacterName':charactername + f'({Gender})',
