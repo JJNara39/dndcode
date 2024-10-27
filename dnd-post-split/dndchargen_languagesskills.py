@@ -2701,3 +2701,117 @@ def skillprof(param, PlProf):
     if param == "N":
         PlProf.append(RandSklProf1)
     return PlProf
+
+def twoskillsfromlist(param, SkillsProf, skill1, skill2, skill3, skill4, skill5, skill6, skill7):
+    SleightofHand = "Sleight of Hand"
+    SkillsList = [skill1, skill2, skill3, skill4, skill5, skill6, skill7]
+    if param == "Y":
+        print("0 - Random")
+        for i, skill in enumerate(SkillsList, 1):
+            print(f"{i} - {skill}")
+        skillone = int(input("Which is the first skill to be proficient in? "))
+        skilltwo = int(input("Which is the second skill to be proficient in? "))
+        if skillone == 1:
+            SkillsProf.append(skill1)
+        if skillone == 2:
+            SkillsProf.append(skill2)
+        if skillone == 3:
+            SkillsProf.append(skill3)
+        if skillone == 4:
+            SkillsProf.append(skill4)
+        if skillone == 5:
+            SkillsProf.append(skill5)
+        if skillone == 6:
+            SkillsProf.append(skill6)
+        if skillone == 7:
+            SkillsProf.append(skill7)
+        if skillone == 0:
+            SkillsListRand1 = random.choice(SkillsList)
+            SkillsProf.append(SkillsListRand1)
+        if skilltwo == 1:
+            SkillsProf.append(skill1)
+        if skilltwo == 2:
+            SkillsProf.append(skill2)
+        if skilltwo == 3:
+            SkillsProf.append(skill3)
+        if skilltwo == 4:
+            SkillsProf.append(skill4)
+        if skilltwo == 5:
+            SkillsProf.append(skill5)
+        if skilltwo == 6:
+            SkillsProf.append(skill6)
+        if skilltwo == 7:
+            SkillsProf.append(skill7)
+        if skilltwo == 0:
+            SkillsListRand2 = random.choice(SkillsList)
+            SkillsProf.append(SkillsListRand2)
+    if param == "N":
+        SkillsListRand1 = random.choice(SkillsList)
+        SkillsProf.append(SkillsListRand1)
+        SkillsListRand2 = random.choice(SkillsList)
+        SkillsProf.append(SkillsListRand2)
+    return SkillsProf
+
+def twosimpleweapons(param, EQP):
+    Club = "Club"
+    Dagger = "Dagger"
+    Dart = "Dart"
+    Greatclub = "Greatclub"
+    Handaxe = "Handaxe"
+    Javelin = "Javelin"
+    LightCrossbow = "Light Crossbow"
+    LightHammer = "Light Hammer"
+    Mace = "Mace"
+    Quarterstaff = "Quarterstaff"
+    Shortbow = "Shortbow"
+    Sickle = "Sickle"
+    Sling = "Sling"
+    Spear = "Spear"
+    Yklwa = "Yklwa"
+    SimpleWeapons = ["Club", "Dagger", "Dart", "Greatclub", "Handaxe", "Javelin", "LightCrossbow", "LightHammer", "Mace", "Quarterstaff", "Shortbow", "Sickle", "Sling", "Spear", "Yklwa"]
+    if param == "Y":
+        print("0 - Random")
+        for i, sw in enumerate(SimpleWeapons,1):
+            print(f"{i} - {sw}")
+        simpleweapon1 = int(input("Which simple weapon do you want to be proficient in first? "))
+        simpleweapon2 = int(input("Which simple weapon do you want to be proficient in second? "))
+        if ((simpleweapon1 == 1) or (simpleweapon2 == 1)):
+            EQP.append(Club)
+        if ((simpleweapon1 == 2) or (simpleweapon2 == 2)):
+            EQP.append(Dagger)
+        if ((simpleweapon1 == 3) or (simpleweapon2 == 3)):
+            EQP.append(Dart)
+        if ((simpleweapon1 == 4) or (simpleweapon2 == 4)):
+            EQP.append(Greatclub)
+        if ((simpleweapon1 == 5) or (simpleweapon2 == 5)):
+            EQP.append(Handaxe)
+        if ((simpleweapon1 == 6) or (simpleweapon2 == 6)):
+            EQP.append(Javelin)
+        if ((simpleweapon1 == 7) or (simpleweapon2 == 7)):
+            EQP.append(LightCrossbow)
+        if ((simpleweapon1 == 8) or (simpleweapon2 == 8)):
+            EQP.append(LightHammer)
+        if ((simpleweapon1 == 9) or (simpleweapon2 == 9)):
+            EQP.append(Mace)
+        if ((simpleweapon1 == 10) or (simpleweapon2 == 10)):
+            EQP.append(Quarterstaff)
+        if ((simpleweapon1 == 11) or (simpleweapon2 == 11)):
+            EQP.append(Shortbow)
+        if ((simpleweapon1 == 12) or (simpleweapon2 == 12)):
+            EQP.append(Sickle)
+        if ((simpleweapon1 == 13) or (simpleweapon2 == 13)):
+            EQP.append(Sling)
+        if ((simpleweapon1 == 14) or (simpleweapon2 == 14)):
+            EQP.append(Spear)
+        if ((simpleweapon1 == 15) or (simpleweapon2 == 15)):
+            EQP.append(Yklwa)
+        if ((simpleweapon1 == 0) or (simpleweapon2 == 0)):
+            RandomSW = random.choice(SimpleWeapons)
+            EQP.append(RandomSW)
+    if param == "N":
+        RandomSW1 = random.choice(SimpleWeapons)
+        EQP.append(RandomSW1)
+        SimpleWeapons.remove(RandomSW1)
+        RandomSW2 = random.choice(SimpleWeapons)
+        EQP.append(RandomSW2)
+    return EQP
