@@ -335,3 +335,82 @@ Field Name: Spells 101013, Value: [Spell lvl 9, Slot 7]
 Field Name: Check Box 3083, Value: /Off [Spell lvl 9, checkbox 7]
 "/Yes" is the correct value for this!
 pdfplay.py accurately fills certain fields with the correct information
+
+I am done this evening, still working on the lvl 1 Artificer Sheet.
+Before I continue on, see if I can create a function or something that makes a new page in PDF and will be a note page
+
+Actual Dictionary:
+    data = {
+        'ClassLevel':str(Class) + ' ' + str(chLvl),
+        'Background':back,
+        'PlayerName':playername,
+        'CharacterName':charactername + f'({Gender})',
+        'Race ':race,
+        'STR':str(Strength),
+        'ProfBonus':str(ProfBonus),
+        'AC':'10',
+        'Initiative': str(DexMod),
+        'Speed': str(walkingspeed),
+        'PersonalityTraits ':Trait,
+        'STRmod':str(StrMod),
+        'DEX':str(Dexterity),
+        'Ideals':Ideal,
+        'DEXmod ':str(DexMod),
+        'Bonds':Bond,
+        'CON':str(Constitution),
+        'CONmod':str(ConMod),
+        'Flaws':Flaw,
+        'INT':str(Intelligence),
+        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillProf else 0)),
+        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillProf else 0)),
+        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillProf else 0)),
+        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillProf else 0)),
+        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in SkillProf else 0)),
+        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillProf else 0)),
+        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillProf else 0)),
+        'INTmod':str(IntMod),
+        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillProf else 0)),
+        'WIS':str(Wisdom),
+        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillProf else 0)),
+        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'WISmod':str(WisMod),
+        'CHA':str(Charisma),
+        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillProf else 0)),
+        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillProf else 0)),
+        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillProf else 0)),
+        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillProf else 0)),
+        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillProf else 0)),
+        'Check Box 23':'/Yes' if 'Acrobatics' in SkillProf else '/No',
+        'Check Box 24':'/Yes' if 'Animal Handling' in SkillProf else '/No',
+        'Check Box 25':'/Yes' if 'Arcana' in SkillProf else '/No',
+        'Check Box 26':'/Yes' if 'Athletics' in SkillProf else '/No',
+        'Check Box 27':'/Yes' if 'Deception' in SkillProf else '/No',
+        'Check Box 28':'/Yes' if 'History' in SkillProf else '/No',
+        'Check Box 29':'/Yes' if 'Insight' in SkillProf else '/No',
+        'Check Box 30':'/Yes' if 'Intimidation' in SkillProf else '/No',
+        'Check Box 31':'/Yes' if 'Investigation' in SkillProf else '/No',
+        'Check Box 32':'/Yes' if 'Medicine' in SkillProf else '/No',
+        'Check Box 33':'/Yes' if 'Nature' in SkillProf else '/No',
+        'Check Box 34':'/Yes' if 'Perception' in SkillProf else '/No',
+        'Check Box 35':'/Yes' if 'Performance' in SkillProf else '/No',
+        'Check Box 36':'/Yes' if 'Persuasion' in SkillProf else '/No',
+        'Check Box 37':'/Yes' if 'Religion' in SkillProf else '/No',
+        'Check Box 38':'/Yes' if 'Sleight of Hand' in SkillProf else '/No',
+        'Check Box 39':'/Yes' if 'Stealth' in SkillProf else '/No',
+        'Check Box 40':'/Yes' if 'Survival' in SkillProf else '/No',
+        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillProf else 0)),
+        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillProf else 0)),
+        'CHamod':str(ChaMod),
+        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillProf else 0)),
+        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
+        'GP':str(BGL),
+        #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
+        'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
+        #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
+        #All spellcasting info will be provided in our creator function
+        'Height':str(Height) + 'inches',
+        'Weight':str(Weight) + 'pounds',
+        'Allies':allies_str,
+        'Feat+Traits':add_info_str,
+        }
