@@ -3,7 +3,7 @@ import random
 def dndchargen_class(param, plLvl):
     Class = []
     subclass = []
-    Arti = ["Alchemist Speciliast Artificer", "Armorer Speciliast Artificer", "Artilierist Speciliast Artificer", "Battle Smith Speciliast Artificer", ""]
+    Arti = ["Alchemist Specialist Artificer", "Armorer Specialist Artificer", "Artilierist Specialist Artificer", "Battle Smith Specialist Artificer", ""]
     Barb = ["Path of the Ancestral Guardian Barbarian", "Path of the Battlerager Barbarian", "Path of the Beast Barbarian", "Path of the Berserker Barbarian", "Path of the Giant Barbarian", "Path of the Juggernaut Barbarian", "Path of the Storm Herald Barbarian", "Path of the Totem Warrior Barbarian", "Path of the Zealot Barbarian", "Path of the Wild Magic Barbarian", ""]
     Bar = ["College of Creation Bard", "College of Eloquence Bard", "College of Glamour Bard", "College of Lore Bard", "College of the Road Bard", "College of Satire Bard", "College of Spirits Bard", "College of Swords Bard", "College of Tragedy Bard", "College of Valor Bard", "College of Whispers Bards", ""]
     Cle = ["Arcana Domain Cleric", "Blood Domain Cleric", "Commmunity Domain Cleric", "Death Domain Cleric", 'Forge Domain Cleric', "Grave Domain Cleric", "Knowledge Domain Cleric", "Life Domain Cleric", "Light Domain Cleric", "Moon Domain Cleric", "Nature Domain Cleric", "Night Domain Cleric", "Order Domain Cleric", "Peace Domain Cleric", "Tempest Domain Cleric", "Trickery Domain Cleric", "Twilight Domain Cleric", "War Domain Cleric", "Zeal Domain Cleric", ""]
@@ -74,21 +74,21 @@ def dndchargen_class(param, plLvl):
             if cla == "1":
                 Class.append("Artificer")
                 print("0 - Random")
-                print("1 - Alchemist Speciliast Artificer")
-                print("2 - Armorer Speciliast Artificer")
-                print("3 - Artilierist Speciliast Artificer")
-                print("4 - Battle Smith Speciliast Artificer")
+                print("1 - Alchemist Specialist Artificer")
+                print("2 - Armorer Specialist Artificer")
+                print("3 - Artilierist Specialist Artificer")
+                print("4 - Battle Smith Specialist Artificer")
                 print("5 - Unsure/Leave Blank")
                 #Every subclass choice needs an option for Unsure/Leave Blank, and if that choice is picked, that subclass.append is ''
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
-                    subclass.append("Alchemist Speciliast Artificer")
+                    subclass.append("Alchemist Specialist Artificer")
                 if subc == 2:
-                    subclass.append("Armorer Speciliast Artificer")
+                    subclass.append("Armorer Specialist Artificer")
                 if subc == 3:
-                    subclass.append("Artilierist Speciliast Artificer")
+                    subclass.append("Artilierist Specialist Artificer")
                 if subc == 4:
-                    subclass.append("Battle Smith Speciliast Artificer")
+                    subclass.append("Battle Smith Specialist Artificer")
                 if subc == 5:
                     subclass.append("")
                 if subc == 0:
@@ -682,4 +682,4 @@ def dndchargen_class(param, plLvl):
             subclass.append(random.choice(War))
         if "Wizard" in Class:
             subclass.append(random.choice(Wiz))      
-    return Class, subclass
+    return Class, subclass, submulticlass
