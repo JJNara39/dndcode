@@ -114,9 +114,17 @@ WdcrvTools = "Woodcarver's Tools"
 ARTISANTOOLS = [AlchSupp, BrewSupp, CallSupp, CarpTools, CartTools, CobbTools, CooksUten, GlasTools, JeweTools, LthrwrkTools, MasnTools, PaintSupp, PottTools, SmthTools, TinkTools, WeavTools, WdcrvTools]
 ThievKit = "Thieves' Tools"
 
-def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsProf, PlProf, data):
+def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, data):
+    poollevel = plLvl
     ClassNotes = []
     ClassLvl = []
+    SpellcastingClass = []
+    SpellcastingAbility = []
+    SpellsaveDC = []
+    SpellAttackMod = []
+    hitdice = []
+    hitpoints = 0
+
     ProfBonus = int(data['ProfBonus'])
     ChaMod = int(data['CHamod'])
     ConMod = int(data['CONmod'])
@@ -136,127 +144,190 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
         ClassNotes.append("You can increase one score by 2, two by one, or a feat. As normal, you can't increase an ability score above 20 using this feature.")    
     for i in range(len(Class)):
         if Class[i] == "Artificer":
-            if param == "Y":
-                artlvl = int(input(f"Given your player level of {plLvl}, What is your Artificer level? "))   
-                ClassLvl.append(artlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 artlvl = plLvl
-                ClassLvl.append(artlvl)
-            hitdice = f"{artlvl}d8"
-            if artlvl == 1:
-                hitpoints = 8 + ConMod
-            else:
-                hitpoints = 8 + ConMod + hpcalc(artlvl, d8)
-            PlProf.extend(LightArmor)
-            PlProf.extend(MediumArmor)
-            PlProf.append(Shield)
-            PlProf.extend(SimpleWeapons)
-            PlProf.append(ThievKit)
-            PlProf.append(TinkTools)
-            PlProf = artisantools(param, PlProf)
-            SkillsProf.append(ConST)
-            SkillsProf.append(IntST)
-            SkillsProf = twoskillsfromlist(param, SkillsProf, Arcana, History, Investigation, Medicine, Nature, Perception, SleightofHand)
-            ArtChoices = ["Starting Equipment", "Gold"]
-            ArtChoices2 = ["Studded Leather Armor", "Scale Mail"]
+                ClassLvl.append(artlvl)            
             if param == "Y":
-                print("0 - Random")
-                print("1 - Starting Equipment")
-                print("2 - Gold")
-                sego = int(input("Would you like the starting equipment or gold(5d4 x 10gp, must forgo starting equipment from background)? "))
-                if sego == 1:
-                    EQP = twosimpleweapons(param, EQP)
-                    EQP.append("A Light Crossbow and 20 bolts")
-                    print("0 - Random")
-                    print("1 - Studded Leather Armor")
-                    print("2 - Scale Mail")
-                    artchoice3 = int(input("Would you like 1 - Studded Leather Armor, or 2 - Scale Mail? "))
-                    if artchoice3 == 1:
-                        EQP.append("Studded Leather Armor")
-                    if artchoice3 == 2:
-                        EQP.append("Scale Mail")
-                    if artchoice3 == 0:
-                        RandArtChoice2 = random.choice(ArtChoices2)
-                        EQP.append(RandArtChoice2)
-                    EQP.append(ThievKit)
-                    EQP.append("A Dungeoneer's Pack")
-                if sego == 2:
-                    EQP.clear()
-                    BGL = BGL + d4() + d4() + d4() + d4() + d4()
-                if sego == 0:
-                    RandArtChoice = random.choice(ArtChoices)
-                    if RandArtChoice == "Starting Equipment":    
-                        EQP = twosimpleweapons(param, EQP)
-                        EQP.append("A Light Crossbow and 20 bolts")
-                        RandArtChoice2 = random.choice(ArtChoices2)
-                        EQP.append(RandArtChoice2)
-                        EQP.append(ThievKit)
-                        EQP.append("A Dungeoneer's Pack")
-                    if RandArtChoice == "Gold":
-                        EQP.clear()
-                        BGL = BGL + d4() + d4() + d4() + d4() + d4()
-            if param == "N":
-                RandArtChoice = random.choice(ArtChoices)
-                if RandArtChoice == "Starting Equipment":    
-                    EQP = twosimpleweapons(param, EQP)
-                    EQP.append("A Light Crossbow and 20 bolts")
-                    RandArtChoice2 = random.choice(ArtChoices2)
-                    EQP.append(RandArtChoice2)
-                    EQP.append(ThievKit)
-                    EQP.append("A Dungeoneer's Pack")
-                if RandArtChoice == "Gold":
-                    EQP.clear()
-                    BGL = BGL + d4() + d4() + d4() + d4() + d4()
-            PlProf.extend(Firearms)        
-            ClassNotes.append("Magical Tinkering - At 1st level, you learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
-            SpellcastingClass = "Artificer"
-            SpellcastingAbility = "Int"
-            SpellsaveDC = 8 + ProfBonus + IntMod
-            SpellAttackMod = ProfBonus + IntMod
+                charlvlwhile = False
+                while not charlvlwhile:
+                    artlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Artificer level? "))
+                    if artlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")
+                poollevel = poollevel - artlvl
+                ClassLvl.append(artlvl)
+            if artlvl >= 1:
+                hitdice.append(f"{artlvl}d8 for {Class[i]}")
+                if artlvl == 1:
+                    hitpoints += (8 + ConMod)
+                else:
+                    hitpoints += (8 + ConMod + hpcalc(artlvl, d8))
+                PlProf.extend(LightArmor)
+                PlProf.extend(MediumArmor)
+                PlProf.append(Shield)
+                PlProf.extend(SimpleWeapons)
+                PlProf.append(ThievKit)
+                PlProf.append(TinkTools)
+                PlProf = artisantools(param, PlProf)
+                SkillsProf.append(ConST)
+                SkillsProf.append(IntST)
+                SkillsProf = twoskillsfromlist(param, SkillsProf, Arcana, History, Investigation, Medicine, Nature, Perception, SleightofHand)
+                ArtChoices = ["Starting Equipment", "Gold"]
+                ArtChoices2 = ["Studded Leather Armor", "Scale Mail"]
+                if i == 0:
+                    if param == "Y":
+                        print("0 - Random")
+                        print("1 - Starting Equipment")
+                        print("2 - Gold")
+                        sego = int(input("Would you like the starting equipment or gold(5d4 x 10gp, must forgo starting equipment from background)? "))
+                        if sego == 1:
+                            EQP = twosimpleweapons(param, EQP)
+                            EQP.append("A Light Crossbow and 20 bolts")
+                            print("0 - Random")
+                            print("1 - Studded Leather Armor")
+                            print("2 - Scale Mail")
+                            artchoice3 = int(input("Would you like 1 - Studded Leather Armor, or 2 - Scale Mail? "))
+                            if artchoice3 == 1:
+                                EQP.append("Studded Leather Armor")
+                            if artchoice3 == 2:
+                                EQP.append("Scale Mail")
+                            if artchoice3 == 0:
+                                RandArtChoice2 = random.choice(ArtChoices2)
+                                EQP.append(RandArtChoice2)
+                            EQP.append(ThievKit)
+                            EQP.append("A Dungeoneer's Pack")
+                        if sego == 2:
+                            EQP.clear()
+                            BGL = BGL + d4() + d4() + d4() + d4() + d4()
+                        if sego == 0:
+                            RandArtChoice = random.choice(ArtChoices)
+                            if RandArtChoice == "Starting Equipment":    
+                                EQP = twosimpleweapons(param, EQP)
+                                EQP.append("A Light Crossbow and 20 bolts")
+                                RandArtChoice2 = random.choice(ArtChoices2)
+                                EQP.append(RandArtChoice2)
+                                EQP.append(ThievKit)
+                                EQP.append("A Dungeoneer's Pack")
+                            if RandArtChoice == "Gold":
+                                EQP.clear()
+                                BGL = BGL + d4() + d4() + d4() + d4() + d4()
+                    if param == "N":
+                        RandArtChoice = random.choice(ArtChoices)
+                        if RandArtChoice == "Starting Equipment":    
+                            EQP = twosimpleweapons(param, EQP)
+                            EQP.append("A Light Crossbow and 20 bolts")
+                            RandArtChoice2 = random.choice(ArtChoices2)
+                            EQP.append(RandArtChoice2)
+                            EQP.append(ThievKit)
+                            EQP.append("A Dungeoneer's Pack")
+                        if RandArtChoice == "Gold":
+                            EQP.clear()
+                            BGL = BGL + d4() + d4() + d4() + d4() + d4()
+                PlProf.extend(Firearms)        
+                ClassNotes.append("Magical Tinkering - You learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
+                SpellcastingClass.append("Artificer")
+                SpellcastingAbility.append("Int")
+                SpellsaveDC.append(8 + ProfBonus + IntMod)
+                SpellAttackMod.append(ProfBonus + IntMod)
+                ArtCantripsKnown = 2
+                ArtSpellSlot1 = 0
+                ArtSpellSlot2 = 0
+                ArtSpellSlot3 = 0
+                ArtSpellSlot4 = 0
+                ArtSpellSlot5 = 0
             if artlvl >= 2:
                 ClassNotes.append("Infuse Item - You have the ability to imbue mundane items with certain magical infusions. The magic items you create with this feature are effectively prototypes of permanent items. You learn additional infusions of your choice when you reach certain levels in this class. Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.")
                 InfusionNumber = 4
-                ClassNotes.append(f"You have {InfusionNumber} infusions")
+                InfusedItem = 2
                 ClassNotes.append("Infusing an Item - Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see 'Attunement' in chapter 7 of the Dungeon Master's Guide). Your infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days have passed equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you give up your knowledge of the infusion for another one. You can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion immediately ends, and then the new infusion applies.")
+                ArtSpellSlot1 = 2
             if artlvl >= 3:
-                ClassNotes.append("The Right Tool For The Job - At 3rd level, you learn how to produce exactly the tool you need: with tinker's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.")
-                Arti = ["Alchemist Speciliast Artificer", "Armorer Speciliast Artificer", "Artilierist Speciliast Artificer", "Battle Smith Speciliast Artificer"]
+                ClassNotes.append("The Right Tool For The Job - You learn how to produce exactly the tool you need: with tinker's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.")
+                Arti = ["Alchemist Specialist Artificer", "Armorer Specialist Artificer", "Artilierist Specialist Artificer", "Battle Smith Specialist Artificer"]
                 if subclass[i] == "":
                     if param == "Y":
                         print("0 - Random")
-                        print("1 - Alchemist Speciliast Artificer")
-                        print("2 - Armorer Speciliast Artificer")
-                        print("3 - Artilierist Speciliast Artificer")
-                        print("4 - Battle Smith Speciliast Artificer")
-                        #Every subclass choice needs an option for Unsure/Leave Blank, and if that choice is picked, that subclass.append is ''
+                        print("1 - Alchemist Specialist Artificer")
+                        print("2 - Armorer Specialist Artificer")
+                        print("3 - Artilierist Specialist Artificer")
+                        print("4 - Battle Smith Specialist Artificer")
                         subc = int(input("Which subclass would you like? ")) 
                         if subc == 1:
-                            subclass[i] = "Alchemist Speciliast Artificer"
+                            subclass[i] = "Alchemist Specialist Artificer"
                         if subc == 2:
-                            subclass[i] = "Armorer Speciliast Artificer"
+                            subclass[i] = "Armorer Specialist Artificer"
                         if subc == 3:
-                            subclass[i] = "Artilierist Speciliast Artificer"
+                            subclass[i] = "Artilierist Specialist Artificer"
                         if subc == 4:
-                            subclass[i] = "Battle Smith Speciliast Artificer"
+                            subclass[i] = "Battle Smith Specialist Artificer"
                         if subc == 0:
                             subclass[i] = random.choice(Arti)
                     if param == "N":
                         subclass[i] = random.choice(Arti)
-                if subclass[i] == "Alchemist Speciliast Artificer":
+                if subclass[i] == "Alchemist Specialist Artificer":
+                    ClassNotes.append("Alchemist Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Alchemist Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare. 3rd Artificer Level: Healing Word, Ray of Sickness\n5th Artificer Level: Flaming Sphere, Melf's Acid Arrow\n9th Artificer Level: Gaseous Form, Mass Healing Word\n13th Artificer Level: Blight, Death Ward\n17th Artificer Level: Cloudkill, Raise Dead")
+                if subclass[i] == "Armorer Specialist Artificer":
                     print(f"Your subclass is {subclass[i]}")
-                if subclass[i] == "Armorer Speciliast Artificer":
+                if subclass[i] == "Artilierist Specialist Artificer":
                     print(f"Your subclass is {subclass[i]}")
-                if subclass[i] == "Artilierist Speciliast Artificer":
+                if subclass[i] == "Battle Smith Specialist Artificer":        
                     print(f"Your subclass is {subclass[i]}")
-                if subclass[i] == "Battle Smith Speciliast Artificer":        
-                    print(f"Your subclass is {subclass[i]}")
+                ArtSpellSlot1 = 3
+            if artlvl >= 5:
+                ArtSpellSlot1 = 4
+                ArtSpellSlot2 = 2
+            if artlvl >= 6:
+                ClassNotes.append("Tool Expertise - Your proficiency bonus is doubled for any ability check you make that uses your proficiency with a tool.")
+                InfusionNumber = 6
+                InfusedItem = 3
+            if artlvl >= 7:
+                ClassNotes.append("Flash Of Genius - You gain the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll. You can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.")
+                ArtSpellSlot2 = 3
+            if artlvl >= 9:
+                ArtSpellSlot3 = 2
+            if artlvl >= 10:
+                ClassNotes.append("Magic Item Adept - You achieve a profound understanding of how to use and make magic items:\nYou can attune to up to four magic items at once.\nIf you craft a magic item with a rarity of common or uncommon, it takes you a quarter of the normal time, and it costs you half as much of the usual gold.")
+                InfusionNumber = 8
+                InfusedItem = 4
+                ArtCantripsKnown = 3
+            if artlvl >= 11:
+                ClassNotes.append("Spell-Storing Item - You learn how to store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you needn't have it prepared).\nWhile holding the object, a creature can take an action to produce the spell's effect from it, using your spellcasting ability modifier. If the spell requires concentration, the creature must concentrate. The spell stays in the object until it's been used a number of times equal to twice your Intelligence modifier (minimum of twice) or until you use this feature again to store a spell in an object.")
+                ArtSpellSlot3 = 3
+            if artlvl >= 14:
+                ClassNotes.append("Magic Item Savant - Your skill with magic items deepens more: You can attune to up to five magic items at once. You ignore all class, race, spell, and level requirements on attuning to or using a magic item.")
+                InfusionNumber = 10
+                InfusedItem = 5
+                ArtCantripsKnown = 4
+            if artlvl >= 15:
+                ArtSpellSlot4 = 2
+            if artlvl >= 17:
+                ArtSpellSlot4 = 3
+                ArtSpellSlot5 = 1
+            if artlvl >= 18:
+                ClassNotes.append("Magic Item Master - You can attune to up to six magic items at once.")
+                InfusionNumber = 12
+                InfusedItem = 6
+            if artlvl >= 19:
+                ArtSpellSlot5 = 2
+            if artlvl == 20:
+                ClassNotes.append("Soul Of Artifice - You develop a mystical connection to your magic items, which you can draw on for protection:\nYou gain a +1 bonus to all saving throws per magic item you are currently attuned to.\nIf you're reduced to 0 hit points but not killed outright, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.")
+            ClassNotes.append(f"You know {InfusionNumber} infusions and can infuse {InfusedItem} items.")
+            ClassNotes.append(f"Spells known: \nArtificer Cantrips: {ArtCantripsKnown}\nArtificer 1st Level Spell Slots: {ArtSpellSlot1}\nArtificer 2nd Level Spell Slots: {ArtSpellSlot2}\nArtificer 3rd Level Spell Slots: {ArtSpellSlot3}\nArtificer 4th Level Spell Slots: {ArtSpellSlot4}\nArtificer 5th Level Spell Slots: {ArtSpellSlot5}")
         if Class[i] == "Barbarian":
-            if param == "Y":
-                barblvl = int(input(f"Given your player level of {plLvl}, what is your Barbarian level? "))   
-                ClassLvl.append(barblvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 barblvl = plLvl
-                ClassLvl.append(barblvl)  
+                ClassLvl.append(barblvl)              
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    barblvl = int(input(f"Given your pool of levels of {poollevel}, what is your Barbarian level? "))   
+                    if barblvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                    
+                poollevel = poollevel - barblvl
+                ClassLvl.append(barblvl)
             if barblvl >= 3:
                 Barb = ["Path of the Ancestral Guardian Barbarian", "Path of the Battlerager Barbarian", "Path of the Beast Barbarian", "Path of the Berserker Barbarian", "Path of the Giant Barbarian", "Path of the Juggernaut Barbarian", "Path of the Storm Herald Barbarian", "Path of the Totem Warrior Barbarian", "Path of the Zealot Barbarian", "Path of the Wild Magic Barbarian"]            
                 if subclass[i] == "":
@@ -325,12 +396,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Path of the Wild Magic Barbarian":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Bard":
-            if param == "Y":
-                bardlvl = int(input(f"Given your player level of {plLvl}, what is your Bard level? "))      
-                ClassLvl.append(bardlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 bardlvl = plLvl
-                ClassLvl.append(bardlvl)               
+                ClassLvl.append(bardlvl)             
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    bardlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Bard level? "))      
+                    if bardlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - bardlvl
+                ClassLvl.append(bardlvl)              
             if bardlvl >= 3:
                 Bar = ["College of Creation Bard", "College of Eloquence Bard", "College of Glamour Bard", "College of Lore Bard", "College of the Road Bard", "College of Satire Bard", "College of Spirits Bard", "College of Swords Bard", "College of Tragedy Bard", "College of Valor Bard", "College of Whispers Bards"]
                 if subclass[i] == "":
@@ -397,12 +475,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "College of Whispers Bards":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Cleric":
-            if param == "Y":
-                clerlvl = int(input(f"Given your player level of {plLvl}, what is your Cleric level? "))    
-                ClassLvl.append(clerlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 clerlvl = plLvl
-                ClassLvl.append(clerlvl)                     
+                ClassLvl.append(clerlvl) 
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    clerlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Cleric level? "))    
+                    if clerlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - clerlvl
+                ClassLvl.append(clerlvl)
             if clerlvl >= 3:
                 Cle = ["Arcana Domain Cleric", "Blood Domain Cleric", "Commmunity Domain Cleric", "Death Domain Cleric", 'Forge Domain Cleric', "Grave Domain Cleric", "Knowledge Domain Cleric", "Life Domain Cleric", "Light Domain Cleric", "Moon Domain Cleric", "Nature Domain Cleric", "Night Domain Cleric", "Order Domain Cleric", "Peace Domain Cleric", "Tempest Domain Cleric", "Trickery Domain Cleric", "Twilight Domain Cleric", "War Domain Cleric", "Zeal Domain Cleric"]
                 if subclass[i] == "":
@@ -509,12 +594,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Zeal Domain Cleric":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Druid":
-            if param == "Y":
-                drulvl = int(input(f"Given your player level of {plLvl}, what is your Druid level? "))      
-                ClassLvl.append(drulvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 drulvl = plLvl
-                ClassLvl.append(drulvl)                
+                ClassLvl.append(drulvl) 
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    drulvl = int(input(f"Given your pool of levels of {poollevel}, what is your Druid level? "))      
+                    if drulvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - drulvl
+                ClassLvl.append(drulvl)
             if drulvl >= 3:
                 Dru = ["Circle of the Blighted Druid", "Circle of Dreams Druid", "Circle of the Land Druid", "Circle of the Moon Druid", "Circle of the Sheppard Druid", "Circle of Spores Druid", "Circle of the Stars Druid", "Circle of Wildfire Druid"]  
                 if subclass[i] == "":
@@ -566,12 +658,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Circle of Wildfire Druid":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Fighter":
-            if param == "Y":
-                figlvl = int(input(f"Given your player level of {plLvl}, what is your Fighter level? "))       
-                ClassLvl.append(figlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 figlvl = plLvl
-                ClassLvl.append(figlvl)                       
+                ClassLvl.append(figlvl)   
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    figlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Fighter level? "))       
+                    if figlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                    
+                poollevel = poollevel - figlvl
+                ClassLvl.append(figlvl)
             if figlvl >= 3:
                 Fig = ["Arcane Archer Archetype Fighter", "Battle Master Archetype Fighter", "Cavalier Archetype Fighter", "Champion Archetype Fighter", "Echo Knight Archetype Fighter", "Eldrich Knight Archetype Fighter", "Psi Warrior Archetype Fighter", "Purple Dragon Knight Archetype Fighter", "Rune Knight Archetype Fighter", "Samurai Archetype Fighter", "Scofflaw Archetype Fighter"]
                 if subclass[i] == "":
@@ -638,12 +737,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Scofflaw Archetype Fighter":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Monk":
-            if param == "Y":
-                monklvl = int(input(f"Given your player level of {plLvl}, what is your Monk level? "))    
-                ClassLvl.append(monklvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 monklvl = plLvl
-                ClassLvl.append(monklvl)                      
+                ClassLvl.append(monklvl) 
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    monklvl = int(input(f"Given your pool of levels of {poollevel}, what is your Monk level? "))    
+                    if monklvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - monklvl
+                ClassLvl.append(monklvl)
             if monklvl >= 3:
                 Mon = ["Way of the Ascendant Dragon Monk", "Way of the Astral Self Monk", "Way of the Cobalt Soul Monk", "Way of the Drunken Master Monk", "Way of the Four Elements Monk", "Way of the Kensei Monk", "Way of the Long Death Monk", "Way of Mercy Monk", "Way of the Open Hand Monk", "Way of the Shadow Monk", "Way of the Sun Soul Monk"]
                 if subclass[i] == "":
@@ -719,12 +825,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Way of the Sun Soul Monk":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Paladin":
-            if param == "Y":
-                pallvl = int(input(f"Given your player level of {plLvl}, what is your Paladin level? "))      
-                ClassLvl.append(pallvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 pallvl = plLvl
-                ClassLvl.append(pallvl)                   
+                ClassLvl.append(pallvl) 
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    pallvl = int(input(f"Given your pool of levels of {poollevel}, what is your Paladin level? "))      
+                    if pallvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - pallvl
+                ClassLvl.append(pallvl)
             if pallvl >= 3:
                 Pal= ["Oath of the Ancients Paladin", "Oath of Conquest Paladin", "Oath of the Crown Paladin", "Oath of Devotion Paladin", "Oath of Glory Paladin", "Oath of the Open Sea Paladin", "Oath of Redemption Paladin", "Oath of the Watchers Paladin", "Oath of Vengeance Paladin", "Oathbreaker Paladin"]
                 if subclass[i] == "":
@@ -786,12 +899,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Oathbreaker Paladin":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Ranger":
-            if param == "Y":
-                ranlvl = int(input(f"Given your player level of {plLvl}, what is your Ranger level? "))  
-                ClassLvl.append(ranlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 ranlvl = plLvl
-                ClassLvl.append(ranlvl)                      
+                ClassLvl.append(ranlvl)
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    ranlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Ranger level? "))  
+                    if ranlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - ranlvl
+                ClassLvl.append(ranlvl)
             if ranlvl >= 3:
                 Ran = ["Beast Master Archetype Ranger", "Drakewarden Ranger", "Fey Wanderer Archetype Ranger", "Gloom Stalker Archetype Ranger", "Horizon Walker Archetype Ranger", "Hunter Archetype Ranger", "Monster Slayer Archetype Ranger", "Shooting Star Archetype Ranger", "Swarmkeeper Archetype Ranger"]
                 if subclass[i] == "":
@@ -857,12 +977,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Swarmkeeper Archetype Ranger": 
                     print(f"Your subclass is {subclass[i]}")                       
         if Class[i] == "Rogue":
-            if param == "Y":
-                roglvl = int(input(f"Given your player level of {plLvl}, what is your Rogue level? "))   
-                ClassLvl.append(roglvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 roglvl = plLvl
-                ClassLvl.append(roglvl)                       
+                ClassLvl.append(roglvl)
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    roglvl = int(input(f"Given your pool of levels of {poollevel}, what is your Rogue level? "))   
+                    if roglvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - roglvl
+                ClassLvl.append(roglvl)
             if roglvl >= 3:
                 Rog = ["Arcane Trickster Archetype Rogue", "Assassin Archetype Rogue", "Inquisitive Archetype Rogue", "Mastermind Archetype Rogue", "Mountebank Archetype Rogue", "Phantom Archetype Rogue", "Scout Archetype Rogue", "Soulknife Archetype Rogue", "Swashbuckler Archetype Rogue", "Thief Archetype Rogue"]
                 if subclass[i] == "":
@@ -924,12 +1051,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Thief Archetype Rogue":        
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Sorcerer":
-            if param == "Y":
-                sorclvl = int(input(f"Given your player level of {plLvl}, what is your Sorcerer level? "))  
-                ClassLvl.append(sorclvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 sorclvl = plLvl
-                ClassLvl.append(sorclvl)                         
+                ClassLvl.append(sorclvl)              
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    sorclvl = int(input(f"Given your pool of levels of {poollevel}, what is your Sorcerer level? "))  
+                    if sorclvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - sorclvl
+                ClassLvl.append(sorclvl)
             if sorclvl >= 3:
                 Sor = ["Aberrant Mind Origin Sorcerer", "Clockwork Soul Origin Sorcerer", "Divine Soul Origin Sorcerer", "Draconic Bloodline Origin Sorcerer", "Lunar Magic Origin Sorcerer", "Phoenix Origin Sorcerer", "Runechild Origin Sorcerer", "Sea Origin Sorcerer", "Shadow Origin Sorcerer", "Stone Origin Sorcerer", "Storm Origin Sorcerer", "Wild Magic Origin Sorcerer"]
                 if subclass[i] == "":
@@ -1010,12 +1144,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Wild Magic Origin Sorcerer":                  
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Warlock":   
-            if param == "Y":
-                warlvl = int(input(f"Given your player level of {plLvl}, what is your Warlock level? "))    
-                ClassLvl.append(warlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 warlvl = plLvl
-                ClassLvl.append(warlvl)                       
+                ClassLvl.append(warlvl) 
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    warlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Warlock level? "))    
+                    if warlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - warlvl
+                ClassLvl.append(warlvl)
             if warlvl >= 3:
                 War = ["Ancient Dragon Patron Warlock", "Archfey Patron Warlock", "Celestial Patron Warlock", "The Fathomless Patron Warlock", "Fiend Patron Warlock", "The Genie Patron Warlock", "Great Old One Patron Warlock", "Hexblade Patron Warlock", "Mysterious Feline Patron Warlock", "Queen of Spiders Patron Warlock", "Raven Queen Patron Warlock", "Serpent Patron Warlock", "Undead Patron Warlock", "Undying Patron Warlock"]    
                 if subclass[i] == "":
@@ -1104,12 +1245,19 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, BGL, EQP, SkillsP
                 if subclass[i] == "Undying Patron Warlock":                 
                     print(f"Your subclass is {subclass[i]}")
         if Class[i] == "Wizard":
-            if param == "Y":
-                wizlvl = int(input(f"Given your player level of {plLvl}, what is your Wizard level? "))  
-                ClassLvl.append(wizlvl)
-            if param == "N":
+            if ((param == "N") or (submulticlass == "N")):
                 wizlvl = plLvl
-                ClassLvl.append(wizlvl)                          
+                ClassLvl.append(wizlvl)  
+            if param == "Y":
+                charlvlwhile = False
+                while not charlvlwhile:                
+                    wizlvl = int(input(f"Given your pool of levels of {poollevel}, what is your Wizard level? "))  
+                    if wizlvl <= poollevel:
+                        charlvlwhile = True
+                    else:
+                        print("You are only able to invest within your pool.")                
+                poollevel = poollevel - wizlvl
+                ClassLvl.append(wizlvl)                       
             if wizlvl >= 3:
                 Wiz = ["Abjuration Arcane Tradition Wizard", "Bladesinging Arcane Tradition Wizard", "Blood Magic Arcane Tradition Wizard", "Chronurgy Magic Wizard", "Conjuration Arcane Tradition Wizard", "Divination Arcane Tradition Wizard", "Enchantment Arcane Tradition Wizard", "Evocation Arcane Tradition Wizard", "Graviturgy Magic Wizard", "Illusion Arcane Tradition Wizard", "Necromancy Arcane Tradition Wizard", "Order of Scribes Arcane Tradition Wizard", "Transmutation Arcane Tradition Wizard", "War Arcane Tradition Wizard"]
                 if subclass[i] == "":
