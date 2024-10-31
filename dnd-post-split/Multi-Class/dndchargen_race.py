@@ -172,7 +172,7 @@ Splint = "Splint"
 HeavyArmor = [ChainMail, RingMail, Plate, Splint]
 Shield = "Shield"   
 
-def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def dndCharGenRace(param, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     walkingspeed = 0
     CreatureType = ""
     DamageResistance = ""
@@ -1010,8 +1010,10 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         Wisdom += 1
         walkspeed = 25
         CreatureType = "Avian Humanoid"
-        RaceNotes.append("Flight: You have a flying speed of 50 feet. To use this speed, you can't be wearing medium or heavy armor.")
-        RaceNotes.append("Talons: You are proficient with your unarmed strikes, which deal 1d4 slashing damage on a hit.")
+        RaceNotes.append("Flight (see notes)")
+        RaceNotes.append("Talons (see notes)")
+        Notes.append("Flight: You have a flying speed of 50 feet. To use this speed, you can't be wearing medium or heavy armor.")
+        Notes.append("Talons: You are proficient with your unarmed strikes, which deal 1d4 slashing damage on a hit.")
     if race == "Aasimar":
         Hmo1 = d12()
         Hmo2 = d12()
@@ -1033,19 +1035,26 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         Charisma += 2
         walkspeed = 30
         CreatureType = "Humanoid"
-        RaceNotes.append(Darkvision)
-        RaceNotes.append("Celestial Resistance: You have resistance to necrotic damage and radiant damage.")
-        RaceNotes.append("Healing Hands: As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.")
-        RaceNotes.append("Light Bearer: You know the Light cantrip. Charisma is your spellcasting ability for it.")
+        RaceNotes.append("Darkvision")
+        Notes.append(Darkvision)
+        RaceNotes.append("Celestial Resistance")
+        Notes.append("Celestial Resistance: You have resistance to necrotic damage and radiant damage.")
+        RaceNotes.append("Healing Hands")
+        Notes.append("Healing Hands: As an action, you can touch a creature and cause it to regain a number of hit points equal to your level. Once you use this trait, you can't use it again until you finish a long rest.")
+        RaceNotes.append("Light Bearer")
+        Notes.append("Light Bearer: You know the Light cantrip. Charisma is your spellcasting ability for it.")
         if subrace == "Protector Aasimar":
             Wisdom += 1
-            RaceNotes.append("Radiant Soul: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
+            RaceNotes.append("Radiant Soul")
+            Notes.append("Radiant Soul: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
         if subrace == "Scourge Aasimar":
             Constitution += 1
-            RaceNotes.append("Radiant Consumption: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
+            RaceNotes.append("Radiant Consumption")
+            Notes.append("Radiant Consumption: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
         if subrace == "Fallen Aasimar":
             Strength += 1
-            RaceNotes.append("Necrotic Shroud: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back. The instant you transform, other creatures within 10 feet of you that can see you must succeed on a Charisma saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or become frightened of you until the end of your next turn. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
+            RaceNotes.append("Necrotic Shroud")
+            Notes.append("Necrotic Shroud: Starting at 3rd level, you can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back. The instant you transform, other creatures within 10 feet of you that can see you must succeed on a Charisma saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or become frightened of you until the end of your next turn. Your transformation lasts for 1 minute or until you end it as a bonus action. During it, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level. Once you use this trait, you can't use it again until you finish a long rest.")
     if race == "Autognome":
         Hmo1 = d4()
         Hmo2 = d4()
@@ -1066,11 +1075,16 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         PlLang, SLANG = languagegen(param, PlLang, SLANG)
         Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom = abilityscores(param, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         walkspeed = 30
-        RaceNotes.append("Armored Casing: You are encased in thin metal or some other durable material. While you aren't wearing armor, your base Armor Class is 13 + your Dexterity modifier.")
-        RaceNotes.append("Built for Success: You can add a d4 to one attack roll, ability check, or saving throw you make, and you can do so after seeing the d20 roll but before the effects of the roll are resolved. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.")
-        RaceNotes.append("Healing Machine: If the Mending spell is cast on you, you can spend a Hit Die, roll it, and regain a number of hit points equal to the roll plus your Constitution modifier (minimum of 1 hit point). In addition, your creator designed you to benefit from several spells that preserve life but that normally don't affect Constructs: Cure Wounds, Healing Word, Mass Cure Wounds, Mass Healing Word, and Spare the Dying.")
-        RaceNotes.append("Mechanical Nature: You have resistance to poison damage and immunity to disease, and you have advantage on saving throws against being paralyzed or poisoned. You don't need to eat, drink, or breathe.")
-        RaceNotes.append("Sentry's Rest: When you take a long rest, you spend at least 6 hours in an inactive, motionless state, instead of sleeping. In this state, you appear inert, but you remain conscious.")
+        RaceNotes.append("Armored Casing")
+        Notes.append("Armored Casing: You are encased in thin metal or some other durable material. While you aren't wearing armor, your base Armor Class is 13 + your Dexterity modifier.")
+        RaceNotes.append("Built for Success")
+        Notes.append("Built for Success: You can add a d4 to one attack roll, ability check, or saving throw you make, and you can do so after seeing the d20 roll but before the effects of the roll are resolved. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.")
+        RaceNotes.append("Healing Machine")
+        Notes.append("Healing Machine: If the Mending spell is cast on you, you can spend a Hit Die, roll it, and regain a number of hit points equal to the roll plus your Constitution modifier (minimum of 1 hit point). In addition, your creator designed you to benefit from several spells that preserve life but that normally don't affect Constructs: Cure Wounds, Healing Word, Mass Cure Wounds, Mass Healing Word, and Spare the Dying.")
+        RaceNotes.append("Mechanical Nature")
+        Notes.append("Mechanical Nature: You have resistance to poison damage and immunity to disease, and you have advantage on saving throws against being paralyzed or poisoned. You don't need to eat, drink, or breathe.")
+        RaceNotes.append("Sentry's Rest")
+        Notes.append("Sentry's Rest: When you take a long rest, you spend at least 6 hours in an inactive, motionless state, instead of sleeping. In this state, you appear inert, but you remain conscious.")
         PlProf = arttool2(param, PlProf)
         CreatureType = "Construct"
     if race == "Bugbear":
@@ -1088,11 +1102,15 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         Strength += 2
         Dexterity += 1
         CreatureType = "Goblinoid"
-        RaceNotes.append(Darkvision)
-        RaceNotes.append("Long-Limbed: When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.")
-        RaceNotes.append("Powerful Build: You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
+        RaceNotes.append("Darkvision")
+        Notes.append(Darkvision)
+        RaceNotes.append("Long-Limbed")
+        Notes.append("Long-Limbed: When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.")
+        RaceNotes.append("Powerful Build")
+        Notes.append("Powerful Build: You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
         PlProf.append(Stealth)
-        RaceNotes.append("Surprise Attack: If you surprise a creature and hit it with an attack on your first turn in combat, the attack deals an extra 2d6 damage to it. You can use this trait only once per combat." )
+        RaceNotes.append("Surprise Attack")
+        Notes.append("Surprise Attack: If you surprise a creature and hit it with an attack on your first turn in combat, the attack deals an extra 2d6 damage to it. You can use this trait only once per combat." )
     if race == "Centaur":
         Hmo1 = d10()
         Hmo2 = 0
@@ -3374,4 +3392,4 @@ def dndCharGenRace(param, PlLang, SLANG, PlProf, Charisma, Constitution, Dexteri
         DamageResistance = "Immunity to Poison Damage"
         RaceNotes.append("You are immune to the poisoned condition.")
 
-    return Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
+    return Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, CreatureType, DamageResistance, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
