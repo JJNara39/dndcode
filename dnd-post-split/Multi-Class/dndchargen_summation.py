@@ -2,12 +2,13 @@ import random
 import math
 from dndchargen_languagesskills import *
 from dndchargen_character_builder import *
-from PyPDF2 import PdfReader, PdfWriter
+# from PyPDF2 import PdfReader, PdfWriter
 
 def d6():
     result = random.randint(1,6)
     return result
 
+'''
 def fill_pdf(input_pdf_path, output_pdf_path, data):
     # Read input file
     with open(input_pdf_path, 'rb') as pdf_file:
@@ -32,8 +33,8 @@ def fill_pdf(input_pdf_path, output_pdf_path, data):
         # Write the output pdf
         with open(output_pdf_path, 'wb') as output_pdf:
             writer.write(output_pdf)
-
-def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+'''
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -2800,4 +2801,4 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
     input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
     output_pdf_path = f'{charactername}_charsheet.pdf'
     # fill_pdf(input_pdf_path, output_pdf_path, data)
-    dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, data)
+    dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, Notes, data)
