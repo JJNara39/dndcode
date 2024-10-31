@@ -114,7 +114,7 @@ WdcrvTools = "Woodcarver's Tools"
 ARTISANTOOLS = [AlchSupp, BrewSupp, CallSupp, CarpTools, CartTools, CobbTools, CooksUten, GlasTools, JeweTools, LthrwrkTools, MasnTools, PaintSupp, PottTools, SmthTools, TinkTools, WeavTools, WdcrvTools]
 ThievKit = "Thieves' Tools"
 
-def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, data):
+def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, Notes, data):
     poollevel = plLvl
     ClassNotes = []
     ClassLvl = []
