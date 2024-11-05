@@ -1338,3 +1338,5 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                     print(f"Your subclass is {subclass[i]}")
                 if subclass[i] == "War Arcane Tradition Wizard":
                     print(f"Your subclass is {subclass[i]}")
+
+#When finally reporting everything, make sure to include the Color/Gem/Metal for Certain Dragonborn, or Season for the Eladrin Subrace of Elves
