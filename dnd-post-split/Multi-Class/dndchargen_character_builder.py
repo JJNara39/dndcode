@@ -66,6 +66,11 @@ Hide = "Hide"
 ScaleMail = "Scale Mail"
 SpikedArmor ="Spiked Armor"
 MediumArmor = [Breastplate, ChainShirt, HalfPlate, Hide, ScaleMail, SpikedArmor]
+ChainMail = "Chain Mail"
+RingMail = "Ring Mail"
+Plate = "Plate"
+Splint = "Splint"
+HeavyArmor = [ChainMail, RingMail, Plate, Splint]
 Shield = "Shield" 
 Club = "Club"
 Dagger = "Dagger"
@@ -83,6 +88,34 @@ Sling = "Sling"
 Spear = "Spear"
 Yklwa = "Yklwa"
 SimpleWeapons = [Club, Dagger, Dart, Greatclub, Handaxe, Javelin, LightCrossbow, LightHammer, Mace, Quarterstaff, Shortbow, Sickle, Sling, Spear, Yklwa]
+Battleaxe = "Battleaxe"
+DoubleBladedScimitar = "Double-Bladed Scimitar"
+Flail = "Flail"
+Glaive = "Glaive"
+Greataxe = "Greataxe"
+Greatsword = "Greatsword"
+Halberd = "Halberd"
+Lance = "Lance"
+Longsword = "Longsword"
+Maul = "Maul"
+Morningstar = "Morningstar"
+Pike = "Pike"
+Rapier = "Rapier"
+Scimitar = "Scimitar"
+Shortsword = "Shortsword"
+Trident = "Trident"
+WarPick = "War Pick"
+Warhammer = "Warhammer"
+Whip = "Whip"
+Blowgun = "Blowgun"
+Crossbow = "Crossbow"
+HandCrossbow = "Hand Crossbow"
+Longbow = "Longbow"
+Net = "Net"
+MartialWeapons = [
+        Battleaxe, DoubleBladedScimitar, Flail, Glaive, Greataxe, Greatsword, Halberd, Lance, Longsword, Maul, Morningstar, Pike, Rapier, Scimitar,
+        Shortsword, Trident, WarPick, Warhammer, Whip, Blowgun, Crossbow, HandCrossbow, Longbow, Net
+    ]
 AntimatterRifle = "Antimatter Rifle"
 AutomaticPistol = "Automatic Pistol"
 AutomaticRifle = "Automatic Rifle"
@@ -172,7 +205,8 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                 PlProf = artisantools(param, PlProf)
                 SkillsProf.append(ConST)
                 SkillsProf.append(IntST)
-                SkillsProf = twoskillsfromlist(param, SkillsProf, Arcana, History, Investigation, Medicine, Nature, Perception, SleightofHand)
+                ArtSkillsList = [Arcana, History, Investigation, Medicine, Nature, Perception, SleightofHand]
+                SkillsProf = twoskillsfromlist(param, SkillsProf, ArtSkillsList)
                 ArtChoices = ["Starting Equipment", "Gold"]
                 ArtChoices2 = ["Studded Leather Armor", "Scale Mail"]
                 if i == 0:
@@ -225,7 +259,8 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                             EQP.clear()
                             BGL = BGL + d4() + d4() + d4() + d4() + d4()
                 PlProf.extend(Firearms)        
-                ClassNotes.append("Magical Tinkering - You learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
+                ClassNotes.append("Magical Tinkering (see notes)")
+                Notes.append("Magical Tinkering - You learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
                 SpellcastingClass.append("Artificer")
                 SpellcastingAbility.append("Int")
                 SpellsaveDC.append(8 + ProfBonus + IntMod)
@@ -237,13 +272,16 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                 ArtSpellSlot4 = 0
                 ArtSpellSlot5 = 0
             if artlvl >= 2:
-                ClassNotes.append("Infuse Item - You have the ability to imbue mundane items with certain magical infusions. The magic items you create with this feature are effectively prototypes of permanent items. You learn additional infusions of your choice when you reach certain levels in this class. Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.")
+                ClassNotes.append("Infuse Item (see notes)")
+                Notes.append("Infuse Item - You have the ability to imbue mundane items with certain magical infusions. The magic items you create with this feature are effectively prototypes of permanent items. You learn additional infusions of your choice when you reach certain levels in this class.\nWhenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.")
                 InfusionNumber = 4
                 InfusedItem = 2
-                ClassNotes.append("Infusing an Item - Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see 'Attunement' in chapter 7 of the Dungeon Master's Guide). Your infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days have passed equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you give up your knowledge of the infusion for another one. You can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion immediately ends, and then the new infusion applies.")
+                ClassNotes.append("Infusing an Item (see notes)")
+                Notes.append("Infusing an Item - Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see 'Attunement' in chapter 7 of the Dungeon Master's Guide).\nYour infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days have passed equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you give up your knowledge of the infusion for another one.\nYou can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion immediately ends, and then the new infusion applies.")
                 ArtSpellSlot1 = 2
             if artlvl >= 3:
-                ClassNotes.append("The Right Tool For The Job - You learn how to produce exactly the tool you need: with tinker's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.")
+                ClassNotes.append("The Right Tool For The Job (see notes)")
+                Notes.append("The Right Tool For The Job - You learn how to produce exactly the tool you need: with tinker's tools in hand, you can magically create one set of artisan's tools in an unoccupied space within 5 feet of you. This creation requires 1 hour of uninterrupted work, which can coincide with a short or long rest. Though the product of magic, the tools are nonmagical, and they vanish when you use this feature again.")
                 Arti = ["Alchemist Specialist Artificer", "Armorer Specialist Artificer", "Artilierist Specialist Artificer", "Battle Smith Specialist Artificer"]
                 if subclass[i] == "":
                     if param == "Y":
@@ -266,13 +304,90 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                     if param == "N":
                         subclass[i] = random.choice(Arti)
                 if subclass[i] == "Alchemist Specialist Artificer":
-                    ClassNotes.append("Alchemist Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Alchemist Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare. 3rd Artificer Level: Healing Word, Ray of Sickness\n5th Artificer Level: Flaming Sphere, Melf's Acid Arrow\n9th Artificer Level: Gaseous Form, Mass Healing Word\n13th Artificer Level: Blight, Death Ward\n17th Artificer Level: Cloudkill, Raise Dead")
+                    if AlchSupp in PlProf:
+                        print(f"You already know {AlchSupp}, please select a different tool to be proficient in.")
+                        PlProf = artisantools(param, PlProf)
+                    else:
+                        PlProf.append(AlchSupp)
+                    ClassNotes.append("Alchemist Spells (see notes)")
+                    Notes.append("Alchemist Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Alchemist Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Healing Word, Ray of Sickness\n5th Artificer Level: Flaming Sphere, Melf's Acid Arrow\n9th Artificer Level: Gaseous Form, Mass Healing Word\n13th Artificer Level: Blight, Death Ward\n17th Artificer Level: Cloudkill, Raise Dead")
+                    ClassNotes.append("Experimental Elixer (see notes)")
+                    Notes.append("Experimental Elixer - Whenever you finish a long rest, you can magically produce an experimental elixir in an empty flask you touch. Roll on the Experimental Elixir table for the elixir's effect, which is triggered when someone drinks the elixir. As an action, a creature can drink the elixir or administer it to an incapacitated creature.\nCreating an experimental elixir requires you to have alchemist supplies on your person, and any elixir you create with this feature lasts until it is drunk or until the end of your next long rest.\nWhen you reach certain levels in this class, you can make more elixirs at the end of a long rest, roll for each elixir's effect separately. Each elixir requires its own flask.\nYou can create additional experimental elixirs by expending a spell slot of 1st level or higher for each one. When you do so, you use your action to create the elixir in an empty flask you touch, and you choose the elixir's effect from the Experimental Elixir table.")
+                    ArtElixers = 1
+                    if artlvl >= 5:
+                        ClassNotes.append("Alchemical Savant (see notes)")
+                        Notes.append("Alchemical Savant - You develop masterful command of magical chemicals, enhancing the healing and damage you create through them. Whenever you cast a spell using your alchemist's supplies as the spellcasting focus, you gain a bonus to one roll of the spell. That roll must restore hit points or be a damage roll that deals acid, fire, necrotic, or poison damage, and the bonus equals your Intelligence modifier (minimum of +1).")
+                    if artlvl >= 6:
+                        ArtElixers = 2
+                    if artlvl >= 9:
+                        ClassNotes.append("Restorative Reagents (see notes)")
+                        Notes.append("Restorative Reagents - You can incorporate restorative reagents into some of your works:\nWhenever a creature drinks an experimental elixir you created, the creature gains temporary hit points equal to 2d6 + your Intelligence modifier (minimum of 1 temporary hit point).\nYou can cast Lesser Restoration without expending a spell slot and without preparing the spell, provided you use alchemist's supplies as the spellcasting focus.\nYou can do so a number of times equal to your Intelligence modifier (minimum of once), and you regain all expended uses when you finish a long rest.")
+                    if artlvl >= 15:
+                        ArtElixers = 3
+                        ClassNotes.append("Chemical Mastery (see notes)")
+                        Notes.append("Chemical Mastery - You have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments:\nYou gain resistance to acid damage and poison damage, and you are immune to the poisoned condition.\nYou can cast Greater Restoration and Heal without expending a spell slot, without preparing the spell, and without material components, provided you use alchemist's supplies as the spellcasting focus.\nOnce you cast either spell with this feature, you can't cast that spell with it again until you finish a long rest.")
+                    ClassNotes.append(f"You can produce {ArtElixers} elixer(s), rolling on the Experimental Elixer table.")
                 if subclass[i] == "Armorer Specialist Artificer":
-                    print(f"Your subclass is {subclass[i]}")
+                    PlProf.extend(HeavyArmor)
+                    if SmthTools in PlProf:
+                        print(f"You already know {SmthTools}, please select a different tool to be proficient in.")
+                        PlProf = artisantools(param, PlProf)
+                    else:
+                        PlProf.append(SmthTools)
+                    ClassNotes.append("Armorer Spells (see notes")
+                    Notes.append("Armorer Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Armorer Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Magic Missile, Thunderwave\n5th Artificer Level: Mirror Image, Shatter\n9th Artificer Level: Hypnotic Pattern, Lightning Bolt\n13th Artificer Level: Fire Shield, Greater Invisibility\n17th Artificer Level: Passwall, Wall of Force")
+                    ClassNotes.append("Arcane Armor (see notes)")
+                    Notes.append("Your metallurgical pursuits have led to you making armor a conduit for your magic. As an action, you can turn a suit of armor you are wearing into Arcane Armor, provided you have smith's tools in hand.\nYou gain the following benefits while wearing this armor:\nIf the armor normally has a Strength requirement, the arcane armor lacks this requirement for you.\nYou can use the arcane armor as a spellcasting focus for your artificer spells.\nThe armor attaches to you and can't be removed against your will. It also expands to cover your entire body, although you can retract or deploy the helmet as a bonus action. The armor replaces any missing limbs, functioning identically to a limb it replaces.\nYou can doff or don the armor as an action.\nThe armor continues to be Arcane Armor until you don another suit of armor or you die.")
+                    ClassNotes.append("Armor Model (see notes)")
+                    Notes.append("Armor Model - You can customize your Arcane Armor. When you do so, choose one of the following armor models: Guardian or Infiltrator. The model you choose gives you special benefits while you wear it.\nEach model includes a special weapon. When you attack with that weapon, you can add your Intelligence modifier, instead of Strength or Dexterity, to the attack and damage rolls.\nYou can change the armor's model whenever you finish a short or long rest, provided you have smith's tools in hand.\nGuardian:\nYou design your armor to be in the front line of conflict. It has the following features:\nThunder Gauntlets. Each of the armor's gauntlets counts as a simple melee weapon while you aren't holding anything in it, and it deals 1d8 thunder damage on a hit. A creature hit by the gauntlet has disadvantage on attack rolls against targets other than you until the start of your next turn, as the armor magically emits a distracting pulse when the creature attacks someone else.\nDefensive Field. As a bonus action, you can gain temporary hit points equal to your level in this class, replacing any temporary hit points you already have. You lose these temporary hit points if you doff the armor. You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\nInfiltrator:\nYou customize your armor for subtle undertakings. It has the following features:\nLightning Launcher. A gemlike node appears on one of your armored fists or on the chest (your choice). It counts as a simple ranged weapon, with a normal range of 90 feet and a long range of 300 feet. and it deals 1d6 lightning damage on a hit. Once on each of your turns when you hit a creature with it, you can deal an extra 1d6 lightning damage to that target.\nPowered Steps. Your walking speed increases by 5 feet.\nDampening Field. You have advantage on Dexterity (Stealth) checks. If the armor normally imposes disadvantage on such checks, the advantage and disadvantage cancel each other, as normal.")
+                    if artlvl >= 5:
+                        ClassNotes.append("Extra Attack - You can attack twice, rather than once, whenever you take the Attack action on your turn.")
+                    if artlvl >= 9:
+                        ClassNotes.append("Armor Modifications (see notes)")
+                        Notes.append("Armor Modifications - You learn how to use your artificer infusions to specially modify your Arcane Armor. That armor now counts as separate items for the purposes of your Infuse Items feature: armor (the chest piece), boots, helmet, and the armor's special weapon. Each of those items can bear one of your infusions, and the infusions transfer over if you change your armor's model with the Armor Model feature. In addition, the maximum number of items you can infuse at once increases by 2, but those extra items must be part of your Arcane Armor.")
+                    if artlvl >= 15:
+                        ClassNotes.append("Perfected Armor - Your Arcane Armor gains additional benefits based on its model. (see notes)")
+                        Notes.append("Perfected Armor - Your Arcane Armor gains additional benefits based on its model, as shown below.\nGuardian. When a Huge or smaller creature you can see ends its turn within 30 feet of you, you can use your reaction to magically force the creature to make a Strength saving throw against your spell save DC, pulling the creature up to 30 feet toward you to an unoccupied space. If you pull the target to a space within 5 feet of you, you can make a melee weapon attack against it as part of this reaction. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses of it when you finish a long rest.\nInfiltrator. Any creature that takes lightning damage from your Lightning Launcher glimmers with magical light until the start of your next turn. The glimmering creature sheds dim light in a 5-foot radius, and it has disadvantage on attack rolls against you, as the light jolts it if it attacks you. In addition, the next attack roll against it has advantage, and if that attack hits, the target takes an extra 1d6 lightning damage.")
                 if subclass[i] == "Artilierist Specialist Artificer":
-                    print(f"Your subclass is {subclass[i]}")
+                    if WdcrvTools in PlProf:
+                        print(f"You already know {WdcrvTools}, please select a different tool to be proficient in.")
+                        PlProf = artisantools(param, PlProf)
+                    else:
+                        PlProf.append(WdcrvTools)
+                    ClassNotes.append("Artilierist Spells (see notes")
+                    Notes.append("Artilierist Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Artillerist Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Shield, Thunderwave\n5th Artificer Level: Scorching Ray, Shatter\n9th Artificer Level: Fireball, Wind Wall\n13th Artificer Level: Ice Storm, Wall of Fire\n17th Artificer Level: Cone of Cold, Wall of Force")
+                    ClassNotes.append("Eldritch Cannon (see notes)")
+                    Notes.append("Eldritch Cannon - You learn how to create a magical cannon. Using woodcarver's tools or smith's tools, you can take an action to magically create a Small or Tiny eldritch cannon in an unoccupied space on a horizontal surface within 5 feet of you. A Small eldritch cannon occupies its space, and a Tiny one can be held in one hand.\nOnce you create a cannon, you can't do so again until you finish a long rest or until you expend a spell slot of 1st level or higher. You can have only one cannon at a time and can't create one while your cannon is present.\nThe cannon is a magical object. Regardless of size, the cannon has an AC of 18 and a number of hit points equal to five times your artificer level. It is immune to poison damage, psychic damage, and all conditions. If it is forced to make an ability check or a saving throw, treat all its ability scores as 10 (+0). If the Mending spell is cast on it, it regains 2d6 hit points. It disappears if it is reduced to 0 hit points or after 1 hour. You can dismiss it early as an action.\nWhen you create the cannon, you determine its appearance and whether it has legs. You also decide which type it is, choosing from the options on the Eldritch Cannons table. On each of your turns, you can take a bonus action to cause the cannon to activate if you are within 60 feet of it. As part of the same bonus action, you can direct the cannon to walk or climb up to 15 feet to an unoccupied space, provided it has legs.\nFlamethrower: The cannon exhales fire in an adjacent 15-foot cone that you designate. Each creature in that area must make a Dexterity saving throw against your spell save DC, taking 2d8 fire damage on a failed save or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.\nForce Ballista: Make a ranged spell attack, originating from the cannon, at one creature or object within 120 feet of it. On a hit, the target takes 2d8 force damage, and if the target is a creature, it is pushed up to 5 feet away from the cannon.\nProtector: The cannon emits a burst of positive energy that grants itself and each creature of your choice with in 10 feet of it a number of temporary hit points equal to 1d8 + your Intelligence modifier (minimum of +1).")
+                    if plLvl >= 5:
+                        ClassNotes.append("Arcane Firearm (see notes)")
+                        Notes.append("Arcane Firearm - You know how to turn a wand, staff, or rod into an arcane firearm, a conduit for your destructive spells. When you finish a long rest, you can use woodcarver's tools to carve special sigils into a wand, staff, or rod and thereby turn it into your arcane firearm. The sigils disappear from the object if you later carve them on a different item. The sigils otherwise last indefinitely.\nYou can use your arcane firearm as a spellcasting focus for your artificer spells. When you cast an artificer spell through the firearm, roll a d8, and you gain a bonus to one of the spell's damage rolls equal to the number rolled.")
+                    if plLvl >= 9:
+                        ClassNotes.append("Explosive Cannon (see notes)")
+                        Notes.append("Explosive Cannon - Every eldritch cannon you create is more destructive:\nThe cannon's damage rolls all increase by 1d8.\nAs an action, you can command the cannon to detonate if you are within 60 feet of it. Doing so destroys the cannon and forces each creature within 20 feet of it to make a Dexterity saving throw against your spell save DC, taking 3d8 force damage on a failed save or half as much damage on a successful one.")
+                    if plLvl >= 15:
+                        ClassNotes.append("Fortified Position (see notes)")
+                        Notes.append("Fortified Position - You're a master at forming well-defended emplacements using Eldritch Cannon:\nYou and your allies have half cover while within 10 feet of a cannon you create with Eldritch Cannon, as a result of a shimmering field of magical protection that the cannon emits.\nYou can now have two cannons at the same time. You can create two with the same action (but not the same spell slot), and you can activate both of them with the same bonus action. You determine whether the cannons are identical to each other or different. You can't create a third cannon while you have two.")
                 if subclass[i] == "Battle Smith Specialist Artificer":        
-                    print(f"Your subclass is {subclass[i]}")
+                    if SmthTools in PlProf:
+                        print(f"You already know {SmthTools}, please select a different tool to be proficient in.")
+                        PlProf = artisantools(param, PlProf)
+                    else:
+                        PlProf.append(SmthTools)
+                    ClassNotes.append("Battle Smith Spells (see notes")
+                    Notes.append("Battle Smith Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Heroism, Shield\n5th Artificer Level: Branding Smite, Warding Bond\n9th Artificer Level: Aura of Vitality, Conjure Barrage\n13th Artificer Level: Aura of Purity, Fire Shield\n17th Artificer Level: Banishing Smite, Mass Cure Wounds")
+                    PlProf.extend(MartialWeapons)
+                    ClassNotes.append("Battle Ready (see notes)")
+                    Notes.append("Battle Ready - Your combat training and your experiments with magic have paid off in two ways:\nYou gain proficiency with martial weapons (already in Proficiences).\nWhen you attack with a magic weapon, you can use your Intelligence modifier, instead of Strength or Dexterity modifier, for the attack and damage rolls.")
+                    ClassNotes.append("Steel Defender (see notes)")
+                    Notes.append("Steel Defender - Your tinkering has borne you a faithful companion, a Steel Defender. It is friendly to you and your companions, and it obeys your commands. See this creature's game statistics in the steel defender stat block. You determine the creature's appearance and whether it has two legs or four; your choice has no effect on its game statistics.\nIn combat, the steel defender shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take one of the actions in its stat block or the Dash, Disengage, Help, Hide, or Search action.\nIf the mending spell is cast on it, it regains 2d6 hit points. If it has died within the last hour, you can use your smith's tools as an action to revive it, provided you are within 5 feet of it and you expend a spell slot of 1st level or higher. The steel defender returns to life after 1 minute with all its hit points restored.\nAt the end of a long rest, you can create a new steel defender if you have your smith's tools with you. If you already have a steel defender from this feature, the first one immediately perishes.")
+                    if artlvl >= 5:
+                        ClassNotes.append("Extra Attack - You can attack twice, rather than once, whenever you take the Attack action on your turn.")
+                    if artlvl >= 9:
+                        ClassNotes.append("Arcane Jolt (see notes)")
+                        Notes.append("Arcane Jolt - You learn new ways to channel arcane energy to harm or heal. When either you hit a target with a magic weapon attack or your steel defender hits a target, you can channel magical energy through the strike to create one of the following effects:\nThe target takes an extra 2d6 force damage.\nChoose one creature or object you can see within 30 feet of the target. Healing energy flows into the chosen recipient, restoring 2d6 hit points to it. You can use this energy a number of times equal to your Intelligence modifier (minimum of once), but you can do so no more than once on a turn. You regain all expended uses when you finish a long rest.")
+                    if artlvl >= 15:
+                        ClassNotes.append("Improved Defender (see notes)")
+                        Notes.append("Improved Defender - Your Arcane jolt and Steel Defender become more powerful:\nThe extra damage and the healing of your Arcane jolt both increase to 4d6.\nYour steel defender gains a +2 bonus to Armor Class.\nWhenever your steel defender uses its Deflect Attack, the attacker takes force damage equal to 1d4 + your Intelligence modifier.")
                 ArtSpellSlot1 = 3
             if artlvl >= 5:
                 ArtSpellSlot1 = 4
@@ -282,7 +397,8 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                 InfusionNumber = 6
                 InfusedItem = 3
             if artlvl >= 7:
-                ClassNotes.append("Flash Of Genius - You gain the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll. You can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.")
+                ClassNotes.append("Flash Of Genius (see notes)")
+                Notes.append("Flash Of Genius - You gain the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll.\nYou can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.")
                 ArtSpellSlot2 = 3
             if artlvl >= 9:
                 ArtSpellSlot3 = 2
@@ -292,7 +408,8 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                 InfusedItem = 4
                 ArtCantripsKnown = 3
             if artlvl >= 11:
-                ClassNotes.append("Spell-Storing Item - You learn how to store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you needn't have it prepared).\nWhile holding the object, a creature can take an action to produce the spell's effect from it, using your spellcasting ability modifier. If the spell requires concentration, the creature must concentrate. The spell stays in the object until it's been used a number of times equal to twice your Intelligence modifier (minimum of twice) or until you use this feature again to store a spell in an object.")
+                ClassNotes.append("Spell-Storing Item (see notes)")
+                Notes.append("Spell-Storing Item - You learn how to store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you needn't have it prepared).\nWhile holding the object, a creature can take an action to produce the spell's effect from it, using your spellcasting ability modifier. If the spell requires concentration, the creature must concentrate. The spell stays in the object until it's been used a number of times equal to twice your Intelligence modifier (minimum of twice) or until you use this feature again to store a spell in an object.")
                 ArtSpellSlot3 = 3
             if artlvl >= 14:
                 ClassNotes.append("Magic Item Savant - Your skill with magic items deepens more: You can attune to up to five magic items at once. You ignore all class, race, spell, and level requirements on attuning to or using a magic item.")
@@ -311,9 +428,11 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
             if artlvl >= 19:
                 ArtSpellSlot5 = 2
             if artlvl == 20:
-                ClassNotes.append("Soul Of Artifice - You develop a mystical connection to your magic items, which you can draw on for protection:\nYou gain a +1 bonus to all saving throws per magic item you are currently attuned to.\nIf you're reduced to 0 hit points but not killed outright, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.")
+                ClassNotes.append("Soul Of Artifice (see notes)")
+                Notes.append("Soul Of Artifice - You develop a mystical connection to your magic items, which you can draw on for protection:\nYou gain a +1 bonus to all saving throws per magic item you are currently attuned to.\nIf you're reduced to 0 hit points but not killed outright, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.")
             ClassNotes.append(f"You know {InfusionNumber} infusions and can infuse {InfusedItem} items.")
             ClassNotes.append(f"Spells known: \nArtificer Cantrips: {ArtCantripsKnown}\nArtificer 1st Level Spell Slots: {ArtSpellSlot1}\nArtificer 2nd Level Spell Slots: {ArtSpellSlot2}\nArtificer 3rd Level Spell Slots: {ArtSpellSlot3}\nArtificer 4th Level Spell Slots: {ArtSpellSlot4}\nArtificer 5th Level Spell Slots: {ArtSpellSlot5}")
+            #See if I can f-string anything
         if Class[i] == "Barbarian":
             if ((param == "N") or (submulticlass == "N")):
                 barblvl = plLvl
@@ -328,6 +447,53 @@ def dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BG
                         print("You are only able to invest within your pool.")                    
                 poollevel = poollevel - barblvl
                 ClassLvl.append(barblvl)
+            if barblvl >= 1:
+                hitdice.append(f"{barblvl}d12 for {Class[i]}")
+                if barblvl == 1:
+                    hitpoints += (12 + ConMod)
+                else:
+                    hitpoints += (12 + ConMod + hpcalc(barblvl, d12))
+                PlProf.extend(LightArmor)
+                PlProf.extend(MediumArmor)
+                PlProf.append(Shield)
+                PlProf.extend(SimpleWeapons)
+                PlProf.extend(MartialWeapons)
+                SkillsProf.append(StrST)
+                SkillsProf.append(ConST)
+                BarbSkillsList = [AnimalHandling, Athletics, Intimidation, Nature, Perception, Survival]
+                SkillsProf = twoskillsfromlist(param, SkillsProf, BarbSkillsList)
+                StartEquip1 = ["Greataxe", "Martial Melee Weapon"]
+                if param == "Y":
+                    print("0 - Random")
+                    print("1 - Greataxe")
+                    print("2 - Martial Melee Weapon")
+                    se1 = int(input("What would you like your first choice for starting equipment to be? "))
+                    if se1 == 0:
+                        SE1rand = random.choice(StartEquip1)
+                        if SE1rand == "Greataxe":
+                            EQP.append(Greataxe)
+                        if SE1rand == "Martial Melee Weapon":
+                            EQP.append(random.choice(MartialWeapons))
+                    if se1 == 1:
+                        EQP.append(Greataxe)
+                    if se1 == 2:
+                        print("0 - Random")
+                        for i, mw in enumerate(MartialWeapons, 1):
+                            print(f"{i} - {mw}")
+                        se1mw = int(input("Which martial weapon would you like to add to your inventory? "))
+                        if se1mw == 0:
+                            EQP.append(random.choice(MartialWeapons))
+                        elif 1 <= se1mw <= len(MartialWeapons):
+                            EQP.append(MartialWeapons[se1mw-1])
+                    
+                if param == "N":
+                    SE1rand = random.choice(StartEquip1)
+                    if SE1rand == "Greataxe":
+                        EQP.append(Greataxe)
+                    if SE1rand == "Martial Melee Weapon":
+                        EQP.append(random.choice(MartialWeapons))
+
+
             if barblvl >= 3:
                 Barb = ["Path of the Ancestral Guardian Barbarian", "Path of the Battlerager Barbarian", "Path of the Beast Barbarian", "Path of the Berserker Barbarian", "Path of the Giant Barbarian", "Path of the Juggernaut Barbarian", "Path of the Storm Herald Barbarian", "Path of the Totem Warrior Barbarian", "Path of the Zealot Barbarian", "Path of the Wild Magic Barbarian"]            
                 if subclass[i] == "":
