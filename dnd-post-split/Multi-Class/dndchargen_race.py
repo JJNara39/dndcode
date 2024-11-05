@@ -1831,8 +1831,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Dwarvi)
             SLANG.remove(Dwarvi)
             Strength += 2
-            PlProf.append(LightArmor)
-            PlProf.append(MediumArmor) 
+            PlProf.extend(LightArmor)
+            PlProf.extend(MediumArmor) 
     if race == "Elf":
         walkingspeed = 30
         CreatureType = "Humanoid"
