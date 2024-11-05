@@ -2702,54 +2702,24 @@ def skillprof(param, PlProf):
         PlProf.append(RandSklProf1)
     return PlProf
 
-def twoskillsfromlist(param, SkillsProf, skill1, skill2, skill3, skill4, skill5, skill6, skill7):
+def twoskillsfromlist(param, SkillsProf, SkillsList):
     SleightofHand = "Sleight of Hand"
-    SkillsList = [skill1, skill2, skill3, skill4, skill5, skill6, skill7]
     if param == "Y":
         print("0 - Random")
         for i, skill in enumerate(SkillsList, 1):
             print(f"{i} - {skill}")
         skillone = int(input("Which is the first skill to be proficient in? "))
         skilltwo = int(input("Which is the second skill to be proficient in? "))
-        if skillone == 1:
-            SkillsProf.append(skill1)
-        if skillone == 2:
-            SkillsProf.append(skill2)
-        if skillone == 3:
-            SkillsProf.append(skill3)
-        if skillone == 4:
-            SkillsProf.append(skill4)
-        if skillone == 5:
-            SkillsProf.append(skill5)
-        if skillone == 6:
-            SkillsProf.append(skill6)
-        if skillone == 7:
-            SkillsProf.append(skill7)
         if skillone == 0:
-            SkillsListRand1 = random.choice(SkillsList)
-            SkillsProf.append(SkillsListRand1)
-        if skilltwo == 1:
-            SkillsProf.append(skill1)
-        if skilltwo == 2:
-            SkillsProf.append(skill2)
-        if skilltwo == 3:
-            SkillsProf.append(skill3)
-        if skilltwo == 4:
-            SkillsProf.append(skill4)
-        if skilltwo == 5:
-            SkillsProf.append(skill5)
-        if skilltwo == 6:
-            SkillsProf.append(skill6)
-        if skilltwo == 7:
-            SkillsProf.append(skill7)
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillone <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillone-1])
         if skilltwo == 0:
-            SkillsListRand2 = random.choice(SkillsList)
-            SkillsProf.append(SkillsListRand2)
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skilltwo <= len(SkillsList):
+            SkillsProf.append(SkillsList[skilltwo-1])            
     if param == "N":
-        SkillsListRand1 = random.choice(SkillsList)
-        SkillsProf.append(SkillsListRand1)
-        SkillsListRand2 = random.choice(SkillsList)
-        SkillsProf.append(SkillsListRand2)
+        SkillsProf.extend(random.sample(SkillsList, 2))
     return SkillsProf
 
 def twosimpleweapons(param, EQP):
