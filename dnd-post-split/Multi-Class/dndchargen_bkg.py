@@ -186,7 +186,7 @@ Vulp = "Vulpin"
 TCant = "Thieves Cant"
 SLANG = [Aara, Abys, Aqua, Aura, Bird, Cele, Cerva, Comm, DpSp, Drac, Dwarvi, Elvi, Gian, GithL, Gnom, Gobl, Grun, Hafl, Hedg, Infe, Jerb, Krau, Leon, Loxo, Mapa, Mino, Orc, Quo, Prim, Sylv, Unde, Veda, Vulp]
 
-def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict, Notes):    
+def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):    
     AcroNum = skills_dict["AcroNum"]
     AnHaNum = skills_dict["AnHaNum"]
     ArcaNum = skills_dict["ArcaNum"]
@@ -763,7 +763,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict, Notes):
         Trait = ""
         Ideal = ""
         Bond = ""
-        Flaw = ""               
+        Flaw = ""        
     if back == "Athlete":
         AthPT1 = "I feel most at peace during physical exertion, be it exercise or battle."
         AthPT2 = "I don't like to sit idle."
@@ -3320,4 +3320,4 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict, Notes):
         Bond = ""
         Flaw = ""  
 
-    return back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, Notes, skills_dict, EQP
+    return back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP
