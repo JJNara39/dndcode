@@ -1449,11 +1449,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1468,11 +1468,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize  = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1487,11 +1487,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1506,11 +1506,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1538,11 +1538,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 5)):
+            if ((plLvl >= 1) and (plLvl < 5)):
                 BreathWeaponDMG = "1d10"
-            if ((plLvl >= 5) & (plLvl < 11)):
+            if ((plLvl >= 5) and (plLvl < 11)):
                 BreathWeaponDMG = "2d10"
-            if ((plLvl >= 11) & (plLvl < 17)):
+            if ((plLvl >= 11) and (plLvl < 17)):
                 BreathWeaponDMG = "3d10"
             if plLvl >= 17:
                 BreathWeaponDMG = "4d10"                                
@@ -1559,11 +1559,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1599,11 +1599,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 5)):
+            if ((plLvl >= 1) and (plLvl < 5)):
                 BreathWeaponDMG = "1d10"
-            if ((plLvl >= 5) & (plLvl < 11)):
+            if ((plLvl >= 5) and (plLvl < 11)):
                 BreathWeaponDMG = "2d10"
-            if ((plLvl >= 11) & (plLvl < 17)):
+            if ((plLvl >= 11) and (plLvl < 17)):
                 BreathWeaponDMG = "3d10"
             if plLvl >= 17:
                 BreathWeaponDMG = "4d10"                                
@@ -1623,11 +1623,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "5 by 30 ft. line (Dex. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1642,11 +1642,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "15 ft. cone (Con. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1674,11 +1674,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "15 ft. cone (Con. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 5)):
+            if ((plLvl >= 1) and (plLvl < 5)):
                 BreathWeaponDMG = "1d10"
-            if ((plLvl >= 5) & (plLvl < 11)):
+            if ((plLvl >= 5) and (plLvl < 11)):
                 BreathWeaponDMG = "2d10"
-            if ((plLvl >= 11) & (plLvl < 17)):
+            if ((plLvl >= 11) and (plLvl < 17)):
                 BreathWeaponDMG = "3d10"
             if plLvl >= 17:
                 BreathWeaponDMG = "4d10"                                
@@ -1696,11 +1696,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "15 ft. cone (Con. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1722,11 +1722,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "15 ft. cone (Con. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -1741,11 +1741,11 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Breath Weapon (see notes)")
             BreathWeaponSize = "15 ft. cone (Con. save)"
             RaceNotes.append(f"Breath Weapon Size and Damage Type: {BreathWeaponSize}, {BWDT}")
-            if ((plLvl >= 1) & (plLvl < 6)):
+            if ((plLvl >= 1) and (plLvl < 6)):
                 BreathWeaponDMG = "2d6"
-            if ((plLvl >= 6) & (plLvl < 11)):
+            if ((plLvl >= 6) and (plLvl < 11)):
                 BreathWeaponDMG = "3d6"
-            if ((plLvl >= 11) & (plLvl < 16)):
+            if ((plLvl >= 11) and (plLvl < 16)):
                 BreathWeaponDMG = "4d6"
             if plLvl >= 16:
                 BreathWeaponDMG = "5d6"  
@@ -3281,9 +3281,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Graceful Swimmer: Your swimming speed increases to 90 feet.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3295,9 +3295,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Huge Liver: You have advantage on saving throws against being poisoned.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3307,9 +3307,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append("Oceanic Rage: You may enter a rage as a bonus action. While raging, you gain a +2 to damage rolls at 1st level, +3 at 9th, and +4 at 16th. You have advantage on Strength Checks and Strength saving throws. You have resistance to bludgeoning, piercing, and slashing damage. If you are able to cast spells, you can't cast them or concentrate on them while raging. Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can end your rage as a bonus action, and once you have raged you cannot do so again until you finish a long rest.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3319,9 +3319,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlProf.append(Stealth)
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3334,9 +3334,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3347,9 +3347,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Lateral Vision: You gain a +2 bonus to your passive Perception.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3359,9 +3359,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Oxygen Efficient: Your short and long rest times are cut in half.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3372,9 +3372,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Speedy Swimmer: Your swimming speed increases to 120 feet.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3386,9 +3386,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Modified Darkvision: You have darkvision up to 90ft. You see dim light as if it were bright light, and you see darkness as if it were dim light.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3400,9 +3400,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append(f"Whiplash: As a bonus action, your tail can be used to strike a creature, potentially stunning it. The creature must make Constitution saving throw against a DC equal to 8 + your Constitution modifier + your proficiency bonus. On a failed save it becomes stunned until the end of its next turn. On a successful save, it does not get stunned. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3413,9 +3413,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Shell Crusher: You gain a +2 to attack and damage rolls against armored creatures.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3426,9 +3426,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Whale Toughness: Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3438,9 +3438,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append(f"Blood Frenzy: With the ability to smell blood from a range of 3 miles, the smell of it can excite your hunger for battle. When you make an attack against a creature that doesn't have all its hit points, you can choose to make the attack with advantage. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3451,9 +3451,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Speedy Swimmer: Your swimming speed increases to 90 feet.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3465,9 +3465,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append(f"Blood Frenzy: With the ability to smell blood from a range of 3 miles, the smell of it can excite your hunger for battle. When you make an attack against a creature that doesn't have all its hit points, you can choose to make the attack with advantage. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3478,9 +3478,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Razored Teeth: You gain a +2 bonus to attack and damage rolls against unarmored creatures.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3491,9 +3491,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Hacksaw Jaw: You gain an extra 1d4 slashing damage bonus, against creatures that don't have all their hit points.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3501,9 +3501,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Hybodus":
             RaceNotes.append("Dorsal Stinger (see notes)")
             DorsalStingerDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 DorsalStingerDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 DorsalStingerDmg = "3d6"
             if plLvl >= 20:
                 DorsalStingerDmg = "4d6"
@@ -3511,9 +3511,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Stream Burst: Whilst swimming in a body of water, you can use a bonus action to perform the dash action.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3525,9 +3525,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append(f"Blood Frenzy: With the ability to smell blood from a range of 3 miles, the smell of it can excite your hunger for battle. When you make an attack against a creature that doesn't have all its hit points, you can choose to make the attack with advantage. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3537,9 +3537,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Stream Burst: Whilst swimming in a body of water, you can use a bonus action to perform the dash action.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3552,9 +3552,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3562,9 +3562,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Stethacanthus":
             RaceNotes.append("Dorsal Stinger (see notes)")   
             DorsalStingerDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 DorsalStingerDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 DorsalStingerDmg = "3d6"
             if plLvl >= 20:
                 DorsalStingerDmg = "4d6"
@@ -3574,9 +3574,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3585,9 +3585,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Graceful Swimmer: Your swimming speed increases to 90 feet.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
-            if ((plLvl >= 5) & (plLvl < 10)):
+            if ((plLvl >= 5) and (plLvl < 10)):
                 ViciousBiteDmg = "2d6"
-            if ((plLvl >= 10) & (plLvl < 20)):
+            if ((plLvl >= 10) and (plLvl < 20)):
                 ViciousBiteDmg = "3d6"
             if plLvl >= 20:
                 ViciousBiteDmg = "4d6"
@@ -3728,7 +3728,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if plLvl >= 5:
             RaceNotes.append("Animal Enhancement(2) (see notes)")
             AnimalEnhDMG = "2d10"
-            if ((plLvl >= 11) & (plLvl < 17)):
+            if ((plLvl >= 11) and (plLvl < 17)):
                 AnimalEnhDMG = "3d10"
             if plLvl > 17:
                 AnimalEnhDMG = "4d10"
