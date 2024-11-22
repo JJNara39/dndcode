@@ -247,7 +247,7 @@ MonsterHuntersPack = "Monster Hunter's Pack"
 PriestsPack = "Priest's Pack"
 ScholarsPack = "Scholar's Pack"
 
-def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data, FeatTrait):
+def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, SLANG, Notes, data, FeatTrait):
     if ((race == "Corvum") or (race == "Gallus") or (race == "Luma") or (race == "Raptor (Bird)") or (race == "Strig") or (race == "Cervan") or (race == "Hedge") or (race == "Jerbeen") or (race == "Mapach") or (race == "Vulpin")):
         SLANG.remove(Bird)
     else:
