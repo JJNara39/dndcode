@@ -314,6 +314,7 @@ def dndCharGen(param, plLvl, charactername, playername):
             Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
+    print(f"Prior to summation, class is: {Class}") #Troubleshooting
     summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, SLANG, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
@@ -321,12 +322,13 @@ def dndCharGen(param, plLvl, charactername, playername):
 #Dice are in dndchargen
 
 
-DMorPlay = int(input("Are you a 1 - DM or 2 - Player? "))
+# DMorPlay = int(input("Are you a 1 - DM or 2 - Player? ")) This is not needed
 party = int(input("How many characters will your party have? ")) #This can be used later when I implement CR encounters, it will function on party size
 plLvlList = []
-numMon = 1 #Lets just say for now there is one monster per encounter
+#numMon = 1 #Lets just say for now there is one monster per encounter; Nor is this needed
 
 ##########################################################################################
+'''
 def mixedFraction(numerator, denominator): #Plugging in 1 lvl 10 character has CR at 2&3/2; This is a problem pre-Python 3.10, otherwise I couldve done _normalize
     #ecrFract = Fraction(ecr)
     num = int(numerator)
@@ -342,8 +344,10 @@ def mixedFraction(numerator, denominator): #Plugging in 1 lvl 10 character has C
             return str(Fraction(num/den))
     else:
         return str(Fraction(num/den))
+'''
     
 ###########################################################################################
+'''
 if DMorPlay == 1:
     encounterYN = input("Are you building an encounter? Y/N ")
     if encounterYN == "Y":
@@ -446,40 +450,41 @@ if DMorPlay == 1:
                 param = "N"            
             dndCharGen(param, plLvl, charactername, playername)
 else:
-    for p in range(party):
-        playername = input("Who is the player behind this character? ")        
-        charactername = input("What is this character's name? ")
-        plLvlWhile = False
-        while not plLvlWhile:
-            plLvl = int(input(f"What level is {charactername}? "))
-            if (plLvl > 0 and  plLvl <= 20):
-                plLvlWhile = True
-            else:
-                print("Player level is out of range, the range is 1-20, please try again.")
-        plLvlList.append(plLvl)   
-    #Add in a level check for classes, if the level is 3+, the subclass is available.
-        para = input(f"Set parameters on {charactername}? Y/N ")
-        if para == "Y":
-            param = "Y"
-        if para == "y":
-            param = "Y"
-        if para == "Yes":
-            param = "Y"
-        if para == "yes":
-            param = "Y"
-        if para == "Ye":
-            param = "Y"
-        if para == "ye":
-            param = "Y"
-        if para == "N":
-            param = "N"
-        if para == "n":
-            param = "N"
-        if para == "No":
-            param = "N"
-        if para == "no":
-            param = "N"    
-        dndCharGen(param, plLvl, charactername, playername)
+Removing dm/player for now, there for the first part of this if statement is null and the following for loop was shift-tabbed'''
+for p in range(party):
+    playername = input("Who is the player behind this character? ")        
+    charactername = input("What is this character's name? ")
+    plLvlWhile = False
+    while not plLvlWhile:
+        plLvl = int(input(f"What level is {charactername}? "))
+        if (plLvl > 0 and  plLvl <= 20):
+            plLvlWhile = True
+        else:
+            print("Player level is out of range, the range is 1-20, please try again.")
+    plLvlList.append(plLvl)   
+#Add in a level check for classes, if the level is 3+, the subclass is available.
+    para = input(f"Set parameters on {charactername}? Y/N ")
+    if para == "Y":
+        param = "Y"
+    if para == "y":
+        param = "Y"
+    if para == "Yes":
+        param = "Y"
+    if para == "yes":
+        param = "Y"
+    if para == "Ye":
+        param = "Y"
+    if para == "ye":
+        param = "Y"
+    if para == "N":
+        param = "N"
+    if para == "n":
+        param = "N"
+    if para == "No":
+        param = "N"
+    if para == "no":
+        param = "N"    
+    dndCharGen(param, plLvl, charactername, playername)
 
 '''
 #This block of code is to make sure dndCharGen works
