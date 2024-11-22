@@ -6943,5 +6943,5 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             file.write(note+"\n")
 
     input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
-    output_pdf_path = f'{charactername}_charsheet.pdf'
+    output_pdf_path = f'{charactername}_{playername}_charsheet.pdf'
     fill_pdf(input_pdf_path, output_pdf_path, data)
