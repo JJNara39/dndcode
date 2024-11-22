@@ -3,19 +3,20 @@ import random
 def dndchargen_class(param, plLvl):
     Class = []
     subclass = []
+    BeachballFlag = False
     Arti = ["Alchemist Specialist Artificer", "Armorer Specialist Artificer", "Artilierist Specialist Artificer", "Battle Smith Specialist Artificer", ""]
     Barb = ["Path of the Ancestral Guardian Barbarian", "Path of the Battlerager Barbarian", "Path of the Beast Barbarian", "Path of the Berserker Barbarian", "Path of the Giant Barbarian", "Path of the Juggernaut Barbarian", "Path of the Storm Herald Barbarian", "Path of the Totem Warrior Barbarian", "Path of the Zealot Barbarian", "Path of the Wild Magic Barbarian", ""]
-    Bar = ["College of Creation Bard", "College of Eloquence Bard", "College of Glamour Bard", "College of Lore Bard", "College of the Road Bard", "College of Satire Bard", "College of Spirits Bard", "College of Swords Bard", "College of Tragedy Bard", "College of Valor Bard", "College of Whispers Bards", ""]
-    Cle = ["Arcana Domain Cleric", "Blood Domain Cleric", "Commmunity Domain Cleric", "Death Domain Cleric", 'Forge Domain Cleric', "Grave Domain Cleric", "Knowledge Domain Cleric", "Life Domain Cleric", "Light Domain Cleric", "Moon Domain Cleric", "Nature Domain Cleric", "Night Domain Cleric", "Order Domain Cleric", "Peace Domain Cleric", "Tempest Domain Cleric", "Trickery Domain Cleric", "Twilight Domain Cleric", "War Domain Cleric", "Zeal Domain Cleric", ""]
+    Bar = ["College of Creation Bard", "College of Eloquence Bard", "College of Glamour Bard", "College of Lore Bard", "College of the Road Bard", "College of Spirits Bard", "College of Swords Bard", "College of Tragedy Bard", "College of Valor Bard", "College of Whispers Bards", ""]
+    Cle = ["Arcana Domain Cleric", "Blood Domain Cleric", "Commmunity Domain Cleric", "Death Domain Cleric", 'Forge Domain Cleric', "Grave Domain Cleric", "Knowledge Domain Cleric", "Life Domain Cleric", "Light Domain Cleric", "Moon Domain Cleric", "Nature Domain Cleric", "Night Domain Cleric", "Order Domain Cleric", "Peace Domain Cleric", "Tempest Domain Cleric", "Trickery Domain Cleric", "Twilight Domain Cleric", "War Domain Cleric", ""]
     Dru = ["Circle of the Blighted Druid", "Circle of Dreams Druid", "Circle of the Land Druid", "Circle of the Moon Druid", "Circle of the Sheppard Druid", "Circle of Spores Druid", "Circle of the Stars Druid", "Circle of Wildfire Druid", ""]
     Fig = ["Arcane Archer Archetype Fighter", "Battle Master Archetype Fighter", "Cavalier Archetype Fighter", "Champion Archetype Fighter", "Echo Knight Archetype Fighter", "Eldrich Knight Archetype Fighter", "Psi Warrior Archetype Fighter", "Purple Dragon Knight Archetype Fighter", "Rune Knight Archetype Fighter", "Samurai Archetype Fighter", "Scofflaw Archetype Fighter", ""]
     Mon = ["Way of the Ascendant Dragon Monk", "Way of the Astral Self Monk", "Way of the Cobalt Soul Monk", "Way of the Drunken Master Monk", "Way of the Four Elements Monk", "Way of the Kensei Monk", "Way of the Long Death Monk", "Way of Mercy Monk", "Way of the Open Hand Monk", "Way of the Shadow Monk", "Way of the Sun Soul Monk", ""]
-    Pal= ["Oath of the Ancients Paladin", "Oath of Conquest Paladin", "Oath of the Crown Paladin", "Oath of Devotion Paladin", "Oath of Glory Paladin", "Oath of the Open Sea Paladin", "Oath of Redemption Paladin", "Oath of the Watchers Paladin", "Oath of Vengeance Paladin", "Oathbreaker Paladin", ""]
-    Ran = ["Beast Master Archetype Ranger", "Drakewarden Ranger", "Fey Wanderer Archetype Ranger", "Gloom Stalker Archetype Ranger", "Horizon Walker Archetype Ranger", "Hunter Archetype Ranger", "Monster Slayer Archetype Ranger", "Shooting Star Archetype Ranger", "Swarmkeeper Archetype Ranger", ""]
-    Rog = ["Arcane Trickster Archetype Rogue", "Assassin Archetype Rogue", "Inquisitive Archetype Rogue", "Mastermind Archetype Rogue", "Mountebank Archetype Rogue", "Phantom Archetype Rogue", "Scout Archetype Rogue", "Soulknife Archetype Rogue", "Swashbuckler Archetype Rogue", "Thief Archetype Rogue", ""]
-    Sor = ["Aberrant Mind Origin Sorcerer", "Clockwork Soul Origin Sorcerer", "Divine Soul Origin Sorcerer", "Draconic Bloodline Origin Sorcerer", "Lunar Magic Origin Sorcerer", "Phoenix Origin Sorcerer", "Runechild Origin Sorcerer", "Sea Origin Sorcerer", "Shadow Origin Sorcerer", "Stone Origin Sorcerer", "Storm Origin Sorcerer", "Wild Magic Origin Sorcerer", ""]
-    War = ["Ancient Dragon Patron Warlock", "Archfey Patron Warlock", "Celestial Patron Warlock", "The Fathomless Patron Warlock", "Fiend Patron Warlock", "The Genie Patron Warlock", "Great Old One Patron Warlock", "Hexblade Patron Warlock", "Mysterious Feline Patron Warlock", "Queen of Spiders Patron Warlock", "Raven Queen Patron Warlock", "Serpent Patron Warlock", "Undead Patron Warlock", "Undying Patron Warlock", ""]    
-    Wiz = ["Abjuration Arcane Tradition Wizard", "Bladesinging Arcane Tradition Wizard", "Blood Magic Arcane Tradition Wizard", "Chronurgy Magic Wizard", "Conjuration Arcane Tradition Wizard", "Divination Arcane Tradition Wizard", "Enchantment Arcane Tradition Wizard", "Evocation Arcane Tradition Wizard", "Graviturgy Magic Wizard", "Illusion Arcane Tradition Wizard", "Necromancy Arcane Tradition Wizard", "Order of Scribes Arcane Tradition Wizard", "Transmutation Arcane Tradition Wizard", "War Arcane Tradition Wizard", ""]
+    Pal = ["Oath of the Ancients Paladin", "Oath of Conquest Paladin", "Oath of the Crown Paladin", "Oath of Devotion Paladin", "Oath of Glory Paladin", "Oath of the Open Sea Paladin", "Oath of Redemption Paladin", "Oath of the Watchers Paladin", "Oath of Vengeance Paladin", "Oathbreaker Paladin", ""]
+    Ran = ["Beast Master Archetype Ranger", "Drakewarden Ranger", "Fey Wanderer Archetype Ranger", "Gloom Stalker Archetype Ranger", "Horizon Walker Archetype Ranger", "Hunter Archetype Ranger", "Monster Slayer Archetype Ranger", "Swarmkeeper Archetype Ranger", ""]
+    Rog = ["Arcane Trickster Archetype Rogue", "Assassin Archetype Rogue", "Inquisitive Archetype Rogue", "Mastermind Archetype Rogue", "Phantom Archetype Rogue", "Scout Archetype Rogue", "Soulknife Archetype Rogue", "Swashbuckler Archetype Rogue", "Thief Archetype Rogue", ""]
+    Sor = ["Aberrant Mind Origin Sorcerer", "Clockwork Soul Origin Sorcerer", "Divine Soul Origin Sorcerer", "Draconic Bloodline Origin Sorcerer", "Lunar Magic Origin Sorcerer", "Runechild Origin Sorcerer", "Shadow Origin Sorcerer", "Storm Origin Sorcerer", "Wild Magic Origin Sorcerer", ""]
+    War = ["Archfey Patron Warlock", "Beachball Patron Warlock", "Celestial Patron Warlock", "The Fathomless Patron Warlock", "Fiend Patron Warlock", "The Genie Patron Warlock", "Great Old One Patron Warlock", "Hexblade Patron Warlock", "Undead Patron Warlock", "Undying Patron Warlock", ""]    
+    Wiz = ["Abjuration Arcane Tradition Wizard", "Bladesinging Arcane Tradition Wizard", "Blood Magic Arcane Tradition Wizard", "Chronurgy Magic Wizard", "Conjuration Arcane Tradition Wizard", "Divination Arcane Tradition Wizard", "Enchantment Arcane Tradition Wizard", "Evocation Arcane Tradition Wizard", "Graviturgy Magic Wizard", "Illusion Arcane Tradition Wizard", "Necromancy Arcane Tradition Wizard", "Order of Scribes Arcane Tradition Wizard", "Transmutation Arcane Tradition Wizard", "War Magic Arcane Tradition Wizard", ""]
     Clas = ["Artificer", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
     if param == "Y":
         if plLvl > 1:
@@ -79,7 +80,6 @@ def dndchargen_class(param, plLvl):
                 print("3 - Artilierist Specialist Artificer")
                 print("4 - Battle Smith Specialist Artificer")
                 print("5 - Unsure/Leave Blank")
-                #Every subclass choice needs an option for Unsure/Leave Blank, and if that choice is picked, that subclass.append is ''
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("Alchemist Specialist Artificer")
@@ -119,11 +119,11 @@ def dndchargen_class(param, plLvl):
                 if subc == 5:
                     subclass.append("Path of the Giant Barbarian") 
                 if subc == 6:
-                    subclass.append("Path of the Juggernaut Barbarian")   
+                    subclass.append("Path of the Juggernaut Barbarian") 
                 if subc == 7:
-                    subclass.append("Path of the Storm Herald Barbarian")   
+                    subclass.append("Path of the Storm Herald Barbarian") 
                 if subc == 8:
-                    subclass.append("Path of the Totem Warrior Barbarian")  
+                    subclass.append("Path of the Totem Warrior Barbarian")
                 if subc == 9:
                     subclass.append("Path of the Wild Magic Barbarian")
                 if subc == 10:
@@ -131,7 +131,7 @@ def dndchargen_class(param, plLvl):
                 if subc == 11:
                     subclass.append("")
                 if subc == 0:
-                    subclass.append(random.choice(Barb))                                                                                           
+                    subclass.append(random.choice(Barb))
             if cla == "3":
                 Class.append("Bard")
                 print("0 - Random")
@@ -140,13 +140,12 @@ def dndchargen_class(param, plLvl):
                 print("3 - College of Glamour Bard")
                 print("4 - College of Lore Bard")
                 print("5 - College of the Road Bard")
-                print("6 - College of Satire Bard")
-                print("7 - College of Spirits Bard")
-                print("8 - College of Swords Bard")
-                print("9 - College of Tragedy Bard")
-                print("10 - College of Valor Bard")
-                print("11 - College of Whispers Bard")
-                print("12 - Unsure/Leave Blank")
+                print("6 - College of Spirits Bard")
+                print("7 - College of Swords Bard")
+                print("8 - College of Tragedy Bard")
+                print("9 - College of Valor Bard")
+                print("10 - College of Whispers Bard")
+                print("11 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("College of Creation Bard")
@@ -159,18 +158,16 @@ def dndchargen_class(param, plLvl):
                 if subc == 5:
                     subclass.append("College of the Road Bard")
                 if subc == 6:
-                    subclass.append("College of Satire Bard")
-                if subc == 7:
                     subclass.append("College of Spirits Bard")               
-                if subc == 8:
+                if subc == 7:
                     subclass.append("College of Swords Bard")
-                if subc == 9:
+                if subc == 8:
                     subclass.append("College of Tragedy Bard")
-                if subc == 10:
+                if subc == 9:
                     subclass.append("College of Valor Bard")
-                if subc == 11:
+                if subc == 10:
                     subclass.append("College of Whispers Bard")                                                                                                                             
-                if subc == 12:
+                if subc == 11:
                     subclass.append("")
                 if subc == 0:
                     subclass.append(random.choice(Bar))
@@ -195,8 +192,7 @@ def dndchargen_class(param, plLvl):
                 print("16 - Trickery Domain Cleric")
                 print("17 - Twilight Domain Cleric")
                 print("18 - War Domain Cleric")
-                print("19 - Zeal Domain Cleric")
-                print("20 - Unsure/Leave Blank")
+                print("19 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("Arcana Domain Cleric")
@@ -233,10 +229,8 @@ def dndchargen_class(param, plLvl):
                 if subc == 17:
                     subclass.append("Twilight Domain Cleric")
                 if subc == 18:
-                    subclass.append("War Domain Cleric")
+                    subclass.append("War Domain Cleric")                 
                 if subc == 19:
-                    subclass.append("Zeal Domain Cleric")                 
-                if subc == 20:
                     subclass.append("")
                 if subc == 0:
                     subclass.append(random.choice(Cle))                          
@@ -423,12 +417,10 @@ def dndchargen_class(param, plLvl):
                 if subc == 6:
                     subclass.append("Hunter Archetype Ranger")
                 if subc == 7:
-                    subclass.append("Monster Slayer Archetype Ranger")   
+                    subclass.append("Monster Slayer Archetype Ranger")     
                 if subc == 8:
-                    subclass.append("Shooting Star Archetype Ranger")    
-                if subc == 9:
                     subclass.append("Swarmkeeper Archetype Ranger")  
-                if subc == 10:
+                if subc == 9:
                     subclass.append("")        
                 if subc == 0:
                     subclass.append(random.choice(Ran))                          
@@ -439,13 +431,12 @@ def dndchargen_class(param, plLvl):
                 print("2 - Assassin Archetype Rogue")
                 print("3 - Inquisitive Archetype Rogue")
                 print("4 - Mastermind Archetype Rogue")
-                print("5 - Mountebank Archetype Rogue")
-                print("6 - Phantom Archetype Rogue")
-                print("7 - Scout Archetype Rogue")
-                print("8 - Soulknife Archetype Rogue")
-                print("9 - Swashbuckler Archetype Rogue")
-                print("10 - Thief Archetype Rogue")
-                print("11 - Unsure/Leave Blank")
+                print("5 - Phantom Archetype Rogue")
+                print("6 - Scout Archetype Rogue")
+                print("7 - Soulknife Archetype Rogue")
+                print("8 - Swashbuckler Archetype Rogue")
+                print("9 - Thief Archetype Rogue")
+                print("10 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("Arcane Trickster Archetype Rogue")
@@ -456,18 +447,16 @@ def dndchargen_class(param, plLvl):
                 if subc == 4:
                     subclass.append("Mastermind Archetype Rogue")     
                 if subc == 5:
-                    subclass.append("Mountebank Archetype Rogue")
-                if subc == 6:
                     subclass.append("Phantom Archetype Rogue")
-                if subc == 7:
+                if subc == 6:
                     subclass.append("Scout Archetype Rogue")   
-                if subc == 8:
+                if subc == 7:
                     subclass.append("Soulknife Archetype Rogue")    
-                if subc == 9:
+                if subc == 8:
                     subclass.append("Swashbuckler Archetype Rogue")    
-                if subc == 10:
+                if subc == 9:
                     subclass.append("Thief Archetype Rogue")             
-                if subc == 11:
+                if subc == 10:
                     subclass.append("")
                 if subc == 0:
                     subclass.append(random.choice(Rog))                    
@@ -479,14 +468,11 @@ def dndchargen_class(param, plLvl):
                 print("3 - Divine Soul Origin Sorcerer")
                 print("4 - Draconic Bloodline Origin Sorcerer")
                 print("5 - Lunar Magic Origin Sorcerer")
-                print("6 - Phoenix Origin Sorcerer")
-                print("7 - Runechild Origin Sorcerer")
-                print("8 - Sea Origin Sorcerer")
-                print("9 - Shadow Origin Sorcerer")
-                print("10 - Stone Origin Sorcerer")
-                print("11 - Storm Origin Sorcerer")
-                print("12 - Wild Magic Origin Sorcerer")
-                print("13 - Unsure/Leave Blank")
+                print("6 - Runechild Origin Sorcerer")
+                print("7 - Shadow Origin Sorcerer")
+                print("8 - Storm Origin Sorcerer")
+                print("9 - Wild Magic Origin Sorcerer")
+                print("10 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("Aberrant Mind Origin Sorcerer")
@@ -499,74 +485,63 @@ def dndchargen_class(param, plLvl):
                 if subc == 5:
                     subclass.append("Lunar Magic Origin Sorcerer")
                 if subc == 6:
-                    subclass.append("Phoenix Origin Sorcerer")
+                    subclass.append("Runechild Origin Sorcerer")       
                 if subc == 7:
-                    subclass.append("Runechild Origin Sorcerer")   
+                    subclass.append("Shadow Origin Sorcerer")       
                 if subc == 8:
-                    subclass.append("Sea Origin Sorcerer")    
-                if subc == 9:
-                    subclass.append("Shadow Origin Sorcerer")    
-                if subc == 10:
-                    subclass.append("Stone Origin Sorcerer")    
-                if subc == 11:
                     subclass.append("Storm Origin Sorcerer")    
-                if subc == 12:
+                if subc == 9:
                     subclass.append("Wild Magic Origin Sorcerer")            
-                if subc == 13:
+                if subc == 10:
                     subclass.append("")
                 if subc == 0:
                     subclass.append(random.choice(Sor))                       
             if cla == "12":
                 Class.append("Warlock")
                 print("0 - Random")
-                print("1 - Ancient Dragon Patron Warlock")
-                print("2 - Archfey Patron Warlock")
-                print("3 - Celestial Patron Warlock")
-                print("4 - The Fathomless Patron Warlock")
-                print("5 - Fiend Patron Warlock")
-                print("6 - The Genie Patron Warlock")
-                print("7 - Great Old One Patron Warlock")
-                print("8 - Hexblade Patron Warlock")
-                print("9 - Mysterious Feline Patron Warlock")
-                print("10 - Queen of Spiders Patron Warlock")
-                print("11 - Raven Queen Patron Warlock")
-                print("12 - Serpent Patron Warlock")
-                print("13 - Undead Patron Warlock")
-                print("14 - Undying Patron Warlock")
-                print("15 - Unsure/Leave Blank")
+                print("1 - Archfey Patron Warlock")
+                print("2 - Celestial Patron Warlock")
+                print("3 - The Fathomless Patron Warlock")
+                print("4 - Fiend Patron Warlock")
+                print("5 - The Genie Patron Warlock")
+                print("6 - Great Old One Patron Warlock")
+                print("7 - Hexblade Patron Warlock")
+                print("8 - Undead Patron Warlock")
+                print("9 - Undying Patron Warlock")
+                print("10 - Beachball Patron Warlock")
+                print("10 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
-                    subclass.append("Ancient Dragon Patron Warlock")
-                if subc == 2:
                     subclass.append("Archfey Patron Warlock")
-                if subc == 3:
+                if subc == 2:
                     subclass.append("Celestial Patron Warlock")
-                if subc == 4:
+                if subc == 3:
                     subclass.append("The Fathomless Patron Warlock")     
-                if subc == 5:
+                if subc == 4:
                     subclass.append("Fiend Patron Warlock")
-                if subc == 6:
+                if subc == 5:
                     subclass.append("The Genie Patron Warlock")
-                if subc == 7:
+                if subc == 6:
                     subclass.append("Great Old One Patron Warlock")  
-                if subc == 8:
+                if subc == 7:
                     subclass.append("Hexblade Patron Warlock")
-                if subc == 9:
-                    subclass.append("Mysterious Feline Patron Warlock")    
-                if subc == 10:
-                    subclass.append("Queen of Spiders Patron Warlock")  
-                if subc == 11:
-                    subclass.append("Raven Queen Patron Warlock")
-                if subc == 12:
-                    subclass.append("Serpent Patron Warlock")
-                if subc == 13:
+                if subc == 8:
                     subclass.append("Undead Patron Warlock")   
-                if subc == 14:
+                if subc == 9:
                     subclass.append("Undying Patron Warlock")                                                                                                    
-                if subc == 15:
+                if subc == 10:
+                    War.remove("Beachball Patron Warlock")
+                    subclass.append(random.choice(War))
+                    BeachballFlag = True
+                if subc == 11:
                     subclass.append("")
                 if subc == 0:
-                    subclass.append(random.choice(War))                     
+                    WarRand = random.choice(War)
+                    if WarRand == "Beachball Patron Warlock":
+                        War.remove("Beachball Patron Warlock")
+                        WarRand = random.choice(War)
+                        subclass.append(WarRand)
+                        BeachballFlag = True
             if cla == "13":
                 Class.append("Wizard")
                 print("0 - Random")
@@ -583,7 +558,7 @@ def dndchargen_class(param, plLvl):
                 print("11 - Necromancy Arcane Tradition Wizard")
                 print("12 - Order of Scribes Arcane Tradition Wizard")
                 print("13 - Transmutation Arcane Tradition Wizard")
-                print("14 - War Arcane Tradition Wizard")
+                print("14 - War Magic Arcane Tradition Wizard")
                 print("15 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
@@ -613,7 +588,7 @@ def dndchargen_class(param, plLvl):
                 if subc == 13:
                     subclass.append("Transmutation Arcane Tradition Wizard")
                 if subc == 14:
-                    subclass.append("War Arcane Tradition Wizard")                                                     
+                    subclass.append("War Magic Arcane Tradition Wizard")                                                     
                 if subc == 15:
                     subclass.append("")
                 if subc == 0:
@@ -651,35 +626,45 @@ def dndchargen_class(param, plLvl):
                 if ClassRandom == "Sorcerer":
                     subclass.append(random.choice(Sor))
                 if ClassRandom == "Warlock":
-                    subclass.append(random.choice(War))
+                    WarRand = random.choice(War)
+                    if WarRand == "Beachball Patron Warlock":
+                        War.remove("Beachball Patron Warlock")
+                        WarRand = random.choice(War)
+                        subclass.append(WarRand)
+                        BeachballFlag = True
                 if ClassRandom == "Wizard":
                     subclass.append(random.choice(Wiz))
     if param == "N":
-        Class.append(random.choice(Clas))
-        if "Artificer" in Class:
+        ClassRand = random.choice(Clas)
+        if ClassRand == "Artificer":
             subclass.append(random.choice(Arti)) 
-        if "Barbarian" in Class:
+        if ClassRand == "Barbarian":
             subclass.append(random.choice(Barb))
-        if "Bard" in Class:
+        if ClassRand == "Bard":
             subclass.append(random.choice(Bar))
-        if "Cleric" in Class:
+        if ClassRand == "Cleric":
             subclass.append(random.choice(Cle))
-        if "Druid" in Class:
+        if ClassRand == "Druid":
             subclass.append(random.choice(Dru))
-        if "Fighter" in Class:
+        if ClassRand == "Fighter":
             subclass.append(random.choice(Fig))
-        if "Monk" in Class:
+        if ClassRand == "Monk":
             subclass.append(random.choice(Mon))
-        if "Paladin" in Class:
+        if ClassRand == "Paladin":
             subclass.append(random.choice(Pal)) 
-        if "Ranger" in Class:
+        if ClassRand == "Ranger":
             subclass.append(random.choice(Ran))
-        if "Rogue" in Class:
+        if ClassRand == "Rogue":
             subclass.append(random.choice(Rog))
-        if "Sorcerer" in Class:
+        if ClassRand == "Sorcerer":
             subclass.append(random.choice(Sor))
-        if "Warlock" in Class:
-            subclass.append(random.choice(War))
-        if "Wizard" in Class:
+        if ClassRand == "Warlock":
+            WarRand = random.choice(War)
+            if WarRand == "Beachball Patron Warlock":
+                War.remove("Beachball Patron Warlock")
+                WarRand = random.choice(War)
+                subclass.append(WarRand)
+                BeachballFlag = True
+        if ClassRand == "Wizard":
             subclass.append(random.choice(Wiz))      
-    return Class, subclass, submulticlass
+    return Class, subclass, submulticlass, BeachballFlag
