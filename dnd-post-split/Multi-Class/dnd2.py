@@ -197,6 +197,9 @@ def dndCharGen(param, plLvl, charactername, playername):
     Height = 0
     Weight = 0
     walkingspeed = 0
+    color = ""
+    metal = ""
+    gem = ""
     BeachballFlag = False
     Aara = "Aarakocra"
     Abys = "Abyssal"
@@ -243,7 +246,7 @@ def dndCharGen(param, plLvl, charactername, playername):
         if chargen1 == 0:
             CharacterGenRand1 = random.choice(CharacterGen)
             if CharacterGenRand1 == "Race":
-                Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+                Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if CharacterGenRand1 == "Class":
                 Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
             if CharacterGenRand1 == "Background":
@@ -252,7 +255,7 @@ def dndCharGen(param, plLvl, charactername, playername):
         elif 1 <= chargen1 <= 3:
             first_choice = CharacterGen[chargen1 - 1]
             if first_choice == "Race":
-                Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+                Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if first_choice == "Class":
                 Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
             if first_choice == "Background":
@@ -265,7 +268,7 @@ def dndCharGen(param, plLvl, charactername, playername):
         if chargen2 == 0:
             CharacterGenRand2 = random.choice(CharacterGen)
             if CharacterGenRand2 == "Race":
-                Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+                Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if CharacterGenRand2 == "Class":
                 Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
             if CharacterGenRand2 == "Background":
@@ -274,7 +277,7 @@ def dndCharGen(param, plLvl, charactername, playername):
         elif 1 <= chargen2 <= len(CharacterGen):
             second_choice = CharacterGen[chargen2 - 1]
             if second_choice == "Race":
-                Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+                Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             if second_choice == "Class":
                 Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
             if second_choice == "Background":
@@ -282,7 +285,7 @@ def dndCharGen(param, plLvl, charactername, playername):
             CharacterGen.remove(second_choice)
         last_choice = CharacterGen[0]
         if last_choice == "Race":
-            Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+            Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if last_choice == "Class":
             Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
         if last_choice == "Background":
@@ -290,7 +293,7 @@ def dndCharGen(param, plLvl, charactername, playername):
     if param == "N":
         CharacterGenRand1 = random.choice(CharacterGen)
         if CharacterGenRand1 == "Race":
-            Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+            Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand1 == "Class":
             Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
         if CharacterGenRand1 == "Background":
@@ -298,7 +301,7 @@ def dndCharGen(param, plLvl, charactername, playername):
         CharacterGen.remove(CharacterGenRand1)
         CharacterGenRand2 = random.choice(CharacterGen)
         if CharacterGenRand2 == "Race":
-            Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+            Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand2 == "Class":
             Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
         if CharacterGenRand2 == "Background":
@@ -306,12 +309,12 @@ def dndCharGen(param, plLvl, charactername, playername):
         CharacterGen.remove(CharacterGenRand2)
         CharacterGenRand3 = random.choice(CharacterGen)
         if CharacterGenRand3 == "Race":
-            Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+            Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes = dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         if CharacterGenRand3 == "Class":
             Class, subclass, submulticlass, BeachballFlag = dndchargen_class(param, plLvl)
         if CharacterGenRand3 == "Background":       
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
-    summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
+    summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
 
 
