@@ -1831,8 +1831,12 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Dwarvi)
             SLANG.remove(Dwarvi)
             Strength += 2
-            PlProf.extend(LightArmor)
-            PlProf.extend(MediumArmor) 
+            for item in LightArmor:
+                if item not in PlProf:
+                    PlProf.append(item)
+            for item in MediumArmor:
+                if item not in PlProf:
+                    PlProf.append(item)
     if race == "Elf":
         walkingspeed = 30
         CreatureType = "Humanoid"
@@ -2116,7 +2120,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Wing Flap: As a bonus action, you can use your powerful feathered arms to propel yourself upward a distance equal to half your movement speed. You can use it in conjunction with a regular jump, but not while gliding.")
         RaceNotes.append("Communal (see notes)")
         Notes.append(f"Communal: Whenever you make an Intelligence (History) check related to the history of your race, culture, or community, you are considered proficient in the History skill and add double your proficiency bonus to the check, or {2*ProfBonus}, instead of your normal proficiency bonus.")
-        PlProf.extend(SimpleWeapons)
+        for item in SimpleWeapons:
+            if item not in PlProf:
+                PlProf.append(item)
         PlProf = threetoolprof(param, PlProf, BrewSupp, CarpTools, SmthTools)
         if subrace == "Bright Gallus":
             Charisma += 1
@@ -2202,7 +2208,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Swim: Your swimming speed is the same as your walking speed")
         RaceNotes.append("Astral Spark (see notes)")
         Notes.append(f"Astral Spark: Your psychic connection to the Astral Plane enables you to mystically access a spark of divine power, which you can channel through your weapons. When you hit a target with a simple or martial weapon, you can cause the target to take an extra {ProfBonus} force damage.\nYou can use this trait {ProfBonus} times, but you can use it no more than once per turn. You regain all expended uses when you finish a long rest.")
-        PlProf.extend(Firearms)
+        for item in Firearms:
+            if item not in PlProf:
+                PlProf.append(item)
         RaceNotes.append("Firearms Mastery - You have a mystical connection to firearms that traces back to the gods of the giff, who delighted in such weapons. You have proficiency with all firearms (already in proficiencies) and ignore the loading property of any firearm. In addition, attacking at long range with a firearm doesn't impose disadvantage on your attack roll.")
         RaceNotes.append("Hippo Build (see notes)")
         Notes.append("Hippo Build: You have advantage on Strength-based ability checks and Strength saving throws. In addition, you count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
@@ -2238,8 +2246,12 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             if plLvl >= 5:
                 RaceNotes.append("Githyanki Psionics(3) (see notes)")
                 Notes.append("Githyanki Psionics(3): You can cast the Misty Step spell once with this trait, and you regain the ability to do so when you finish a long rest.\nIntelligence is your spellcasting ability for this spell. When you cast it with this trait, it doesn't require components.")
-            PlProf.extend(LightArmor)
-            PlProf.extend(MediumArmor)
+        for item in LightArmor:
+            if item not in PlProf:
+                PlProf.append(item)
+        for item in MediumArmor:
+            if item not in PlProf:
+                PlProf.append(item)                
             PlProf.append(Shortsword)
             PlProf.append(Longsword)
             PlProf.append(Greatsword)
@@ -2701,7 +2713,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
         PlProf = martwepprof2(param, PlProf)
-        PlProf.extend(LightArmor)
+        for item in LightArmor:
+            if item not in PlProf:
+                PlProf.append(item)
         RaceNotes.append("Saving Face (see notes)")
         Notes.append("Saving Face: Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest.")
     if race == "Human":
@@ -4180,4 +4194,4 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("You are immune to the poisoned condition.")
     RaceNotes.append(f"Creature Type: {CreatureType}")
 
-    return Gender, HollowOne, race, subrace, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
+    return Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
