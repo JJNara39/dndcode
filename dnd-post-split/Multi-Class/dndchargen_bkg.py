@@ -187,6 +187,7 @@ TCant = "Thieves Cant"
 SLANG = [Aara, Abys, Aqua, Aura, Bird, Cele, Cerva, Comm, DpSp, Drac, Dwarvi, Elvi, Gian, GithL, Gnom, Gobl, Grun, Hafl, Hedg, Infe, Jerb, Krau, Leon, Loxo, Mapa, Mino, Orc, Quo, Prim, Sylv, Unde, Veda, Vulp]
 
 def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):    
+    EQP = []
     AcroNum = skills_dict["AcroNum"]
     AnHaNum = skills_dict["AnHaNum"]
     ArcaNum = skills_dict["ArcaNum"]
