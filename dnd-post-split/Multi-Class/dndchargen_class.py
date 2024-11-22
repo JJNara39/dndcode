@@ -637,6 +637,7 @@ def dndchargen_class(param, plLvl):
                     subclass.append(random.choice(Wiz))
     if param == "N":
         ClassRand = random.choice(Clas)
+        Class.append(ClassRand)
         if ClassRand == "Artificer":
             subclass.append(random.choice(Arti)) 
         if ClassRand == "Barbarian":
