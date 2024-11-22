@@ -178,6 +178,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
     DamageResistance = ""
     Height = 0
     Weight = 0    
+    color = ""
+    gem = ""
+    metal = ""
     Gen = ["Male", "Female"]
     if param == "Y":
         print("0 - Random")
