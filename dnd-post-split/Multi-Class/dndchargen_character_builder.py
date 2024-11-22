@@ -1,6 +1,7 @@
 import random
 import math
 from dndchargen_languagesskills import *
+from PyPDF2 import PdfReader, PdfWriter
 
 def d2():
     result = random.randint(1,2)
@@ -23,6 +24,31 @@ def d12():
 def d20():
     result = random.randint(1,20)
     return result
+
+def fill_pdf(input_pdf_path, output_pdf_path, data):
+    # Read input file
+    with open(input_pdf_path, 'rb') as pdf_file:
+        reader = PdfReader(pdf_file)
+        writer = PdfWriter()
+
+        # Loop through all the pages
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            writer.add_page(page)
+
+            #Get form fields from that page
+            fields = reader.get_fields()
+
+            # If there are fields, fill them with field name
+            if fields:
+                for key, value in data.items():
+                    #Fill each field with name
+                    writer.update_page_form_field_values(
+                        writer.pages[page_num], {key: value}
+                    )
+        # Write the output pdf
+        with open(output_pdf_path, 'wb') as output_pdf:
+            writer.write(output_pdf)
 
 #Define a function called hpcalc that determines your hp, given your level, and what dice you give it
 def hpcalc(chlvl, dicefunc):
@@ -221,7 +247,7 @@ MonsterHuntersPack = "Monster Hunter's Pack"
 PriestsPack = "Priest's Pack"
 ScholarsPack = "Scholar's Pack"
 
-def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data):
+def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data, FeatTrait):
     if ((race == "Corvum") or (race == "Gallus") or (race == "Luma") or (race == "Raptor (Bird)") or (race == "Strig") or (race == "Cervan") or (race == "Hedge") or (race == "Jerbeen") or (race == "Mapach") or (race == "Vulpin")):
         SLANG.remove(Bird)
     else:
@@ -275,10 +301,16 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(artlvl, d8))
                 if i == 0:
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shield)
-                    PlProf.extend(SimpleWeapons)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(ThievKit)
                     PlProf.append(TinkTools)
                     PlProf = artisantools(param, PlProf)
@@ -340,17 +372,21 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                             EQP.clear()
                             BGL = BGL + d4() + d4() + d4() + d4() + d4()
                 else:
-                    if LightArmor not in PlProf:
-                        PlProf.extend(LightArmor)
-                    if MediumArmor not in PlProf:
-                        PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)                            
                     if Shield not in PlProf:
                         PlProf.append(Shield)
                     if ThievKit not in PlProf:
                         PlProf.append(ThievKit) 
                     if TinkTools not in PlProf:
                         PlProf.append(TinkTools)                         
-                PlProf.extend(Firearms)        
+                for item in Firearms:
+                    if item not in PlProf:
+                        PlProf.append(item)
                 ClassNotes.append("Magical Tinkering (see notes)")
                 Notes.append("Magical Tinkering - You learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
                 SpellcastingClass.append("Artificer")
@@ -420,7 +456,9 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                         Notes.append("Chemical Mastery - You have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments:\nYou gain resistance to acid damage and poison damage, and you are immune to the poisoned condition.\nYou can cast Greater Restoration and Heal without expending a spell slot, without preparing the spell, and without material components, provided you use alchemist's supplies as the spellcasting focus.\nOnce you cast either spell with this feature, you can't cast that spell with it again until you finish a long rest.")
                     ClassNotes.append(f"You can produce {ArtElixers} elixer(s), rolling on the Experimental Elixer table.")
                 if subclass[i] == "Armorer Specialist Artificer":
-                    PlProf.extend(HeavyArmor)
+                    for item in HeavyArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     if SmthTools in PlProf:
                         print(f"You already know {SmthTools}, please select a different tool to be proficient in.")
                         PlProf = artisantools(param, PlProf)
@@ -467,7 +505,9 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                         PlProf.append(SmthTools)
                     ClassNotes.append("Battle Smith Spells (see notes")
                     Notes.append("Battle Smith Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Heroism, Shield\n5th Artificer Level: Branding Smite, Warding Bond\n9th Artificer Level: Aura of Vitality, Conjure Barrage\n13th Artificer Level: Aura of Purity, Fire Shield\n17th Artificer Level: Banishing Smite, Mass Cure Wounds")
-                    PlProf.extend(MartialWeapons)
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     ClassNotes.append("Battle Ready (see notes)")
                     Notes.append("Battle Ready - Your combat training and your experiments with magic have paid off in two ways:\nYou gain proficiency with martial weapons (already in Proficiences).\nWhen you attack with a magic weapon, you can use your Intelligence modifier, instead of Strength or Dexterity modifier, for the attack and damage rolls.")
                     ClassNotes.append("Steel Defender (see notes)")
@@ -556,11 +596,19 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (12 + ConMod + hpcalc(barblvl, d12))
                 if i == 0:
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shield)
-                    PlProf.extend(SimpleWeapons)
-                    PlProf.extend(MartialWeapons)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     SkillsProf.append(StrST)
                     SkillsProf.append(ConST)
                     BarbSkillsList = [AnimalHandling, Athletics, Intimidation, Nature, Perception, Survival]
@@ -631,10 +679,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     if Shield not in PlProf:
                         PlProf.append(Shield)   
-                    if SimpleWeapons not in PlProf:
-                        PlProf.extend(SimpleWeapons)
-                    if MartialWeapons not in PlProf:
-                        PlProf.extend(MartialWeapons)                                                                    
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                                                                  
                 Rages = "2"
                 RageDmg = 2
                 if barblvl >= 3:
@@ -858,8 +908,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(bardlvl, d8))            
                 if i == 0:
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(SimpleWeapons)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(HandCrossbow)
                     PlProf.append(Longsword)
                     PlProf.append(Rapier)
@@ -960,8 +1014,9 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                         EQP.append(LeatherArmor)
                         EQP.append(Dagger)    
                 else:
-                    if LightArmor not in PlProf:
-                        PlProf.extend(LightArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     SkillsProf = skillprof(param, SkillsProf)   
                     PlProf = musicalinstrskill(param, PlProf)                                                                                                      
                 SpellcastingClass.append("Bard")
@@ -1295,8 +1350,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(clerlvl, d8))   
                 if i == 0:             
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shield)
                     PlProf.append(WisST)
                     PlProf.append(ChaST)
@@ -2272,8 +2331,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(drulvl, d8))  
                 if i == 0:
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shield)
                     PlProf.append("Druids will not wear armor or use shields made of metal")
                     PlProf.append(Club)
@@ -2782,12 +2845,21 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (10 + ConMod + hpcalc(figlvl, d10))
                 if i == 0:       
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
-                    PlProf.extend(HeavyArmor)
-                    PlProf.append(Shield)
-                    PlProf.extend(SimpleWeapons)
-                    PlProf.extend(MartialWeapons)      
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in HeavyArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)                                                        
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                                  
                     PlProf.append(StrST)
                     PlProf.append(ConST)
                     SkillsList = [Acrobatics, AnimalHandling, Athletics, History, Insight, Intimidation, Perception, Survival]
@@ -3328,7 +3400,9 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(monklvl, d8)) 
                 if i == 0:
-                    PlProf.extend(SimpleWeapons)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shortsword)      
                     PlProf = artisantoolsmusicalinstr(param, PlProf)
                     PlProf.append(StrST)
@@ -3722,12 +3796,22 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (10 + ConMod + hpcalc(pallvl, d10))      
                 if i == 0:
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
-                    PlProf.extend(HeavyArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in HeavyArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)                                                        
                     PlProf.append(Shield)
-                    PlProf.extend(SimpleWeapons)
-                    PlProf.extend(MartialWeapons)      
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                               
                     PlProf.append(WisST)
                     PlProf.append(ChaST)
                     SkillsList = [Athletics, Insight, Intimidation, Medicine, Persuasion, Religion, Religion]
@@ -4282,11 +4366,19 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (10 + ConMod + hpcalc(ranlvl, d10))   
                 if i == 0:                                     
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(MediumArmor)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in MediumArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
                     PlProf.append(Shield)
-                    PlProf.extend(SimpleWeapons)
-                    PlProf.extend(MartialWeapons)      
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)     
+                    for item in MartialWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                            
                     PlProf.append(StrST)
                     PlProf.append(DexST)
                     SkillsList = [AnimalHandling, Athletics, Insight, Investigation, Nature, Perception, Stealth, Survival]
@@ -4772,8 +4864,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(roglvl, d8))     
                 if i == 0:       
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(SimpleWeapons)
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                            
                     PlProf.append(HandCrossbow)
                     PlProf.append(Longsword)
                     PlProf.append(Rapier)
@@ -5713,8 +5809,12 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 else:
                     hitpoints += (8 + ConMod + hpcalc(warlvl, d8))                    
                 if i == 0: 
-                    PlProf.extend(LightArmor)
-                    PlProf.extend(SimpleWeapons)      
+                    for item in LightArmor:
+                        if item not in PlProf:
+                            PlProf.append(item)
+                    for item in SimpleWeapons:
+                        if item not in PlProf:
+                            PlProf.append(item)                                 
                     PlProf.append(ChaST)
                     PlProf.append(WisST)
                     SkillsList = [Arcana, Deception, History, Intimidation, Investigation, Nature, Religion]
@@ -6811,4 +6911,37 @@ def dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticla
                 Notes.append(f"The number of eighth level spell slots you have as a Wizard is: {WizardSpellSlot8}.")
             if WizardSpellSlot9 != 0:
                 Notes.append(f"The number of ninth level spell slots you have as a Wizard is: {WizardSpellSlot9}.")
-#When finally reporting everything, make sure to include the Color/Gem/Metal for Certain Dragonborn, or Season for the Eladrin Subrace of Elves
+    EQP_string = "\n".join(f" - {item}" for item in EQP)        
+    ProfLang = PlProf + PlLang
+    prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang) 
+    SpellcastingClass_str = '/'.join(f"{item}" for item in SpellcastingClass)
+    SpellcastingAbility_str = '/'.join(f"{item}" for item in SpellcastingAbility)
+    SpellsaveDC_str = '/'.join(f"{item}" for item in SpellsaveDC)
+    SpellAttackMod_str = '/'.join(f"{item}" for item in SpellAttackMod)
+    FeatTrait = FeatTrait + ClassNotes
+    feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)                                 
+    subclass_str = "\n".join(f"- {item}" for item in subclass)
+    feat_trait_str = 'Subclass:' + '\n' + f'{subclass_str}' + '\n' + feat_trait_str    
+    data['HPMax'] = str(hitpoints)
+    data['HPCurrent'] = str(hitpoints) #This is updated in the combat function
+    data['Equipment'] = EQP_string
+    data['ProficiencesLang'] = prof_lang_str
+    data['Features and Traits'] = feat_trait_str
+    data['Spellcasting Class 2'] = SpellcastingClass_str
+    data['SpellcastingAbility 2'] = SpellcastingAbility_str
+    data['SpellSaveDC  2'] = SpellsaveDC_str
+    data['SpellAtkBonus 2'] = SpellAttackMod_str
+
+    Notes.sort()
+    Notes_str = '\n'.join(f"{item}" for item in Notes)
+    filename = f"{charactername}_{playername}_notes.txt"
+
+    with open(filename, "w") as file:
+        file.write(f"{charactername}'s Notes\n")
+        file.write("=" * (len(charactername)+8) + "\n\n") #Decorative Header
+        for note in Notes:
+            file.write(note+"\n")
+
+    input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
+    output_pdf_path = f'{charactername}_charsheet.pdf'
+    fill_pdf(input_pdf_path, output_pdf_path, data)
