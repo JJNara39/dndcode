@@ -2,39 +2,12 @@ import random
 import math
 from dndchargen_languagesskills import *
 from dndchargen_character_builder import *
-# from PyPDF2 import PdfReader, PdfWriter
 
 def d6():
     result = random.randint(1,6)
     return result
 
-'''
-def fill_pdf(input_pdf_path, output_pdf_path, data):
-    # Read input file
-    with open(input_pdf_path, 'rb') as pdf_file:
-        reader = PdfReader(pdf_file)
-        writer = PdfWriter()
-
-        # Loop through all the pages
-        for page_num in range(len(reader.pages)):
-            page = reader.pages[page_num]
-            writer.add_page(page)
-
-            #Get form fields from that page
-            fields = reader.get_fields()
-
-            # If there are fields, fill them with field name
-            if fields:
-                for key, value in data.items():
-                    #Fill each field with name
-                    writer.update_page_form_field_values(
-                        writer.pages[page_num], {key: value}
-                    )
-        # Write the output pdf
-        with open(output_pdf_path, 'wb') as output_pdf:
-            writer.write(output_pdf)
-'''
-def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
         CF2 = "Metallic, luminous, or dark eyes"
@@ -2618,22 +2591,26 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
         SkillsProf.append(Survival)
         PlProf.remove(Survival)
 
-    ProfLang = PlProf + PlLang
-    prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang)
+
     FeatTrait = OtherBackgroundInfo + RaceNotes    
-    feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)
-    if any(element != "" for element in subclass):
-        subclass_str = "\n".join(f"- {item}" for item in subclass)
-        feat_trait_str = 'Subclass:' + '\n' + f'{subclass_str}' + '\n' + feat_trait_str
     add_info_str = '\n'.join(f'- {item}' for item in AdditionalInfo)
     allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
     classlevel_str = "/".join(f"{item}" for item in Class)
+    if subrace == "Chromatic Dragonborn":
+        subrace = f"{color} + {item}"
+    if subrace == "Gem Dragonborn":
+        subrace = f"{gem} + {item}"
+    if subrace == "Metallic Dragonborn":
+        subrace = f"{metal} + {item}"
+    if subrace == "Eladrin":
+        subrace = f"{season} + {item}"   
     data = {
         'ClassLevel':classlevel_str + ' ' + str(plLvl),
         'Background':back,
         'PlayerName':playername,
         'CharacterName':charactername + f'({Gender})',
-        'Race ':race,
+        'CharacterName 2':charactername + f'({Gender})',
+        'Race ':subrace,
         'STR':str(Strength),
         'ProfBonus':str(ProfBonus),
         'AC':'10',
@@ -2691,18 +2668,10 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
         'CHamod':str(ChaMod),
         'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillsProf else 0)),
         'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0)),
-        'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
         'GP':str(BGL),
-        #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
-        'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
-        #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
-        #All spellcasting info will be provided in our creator function
         'Height':str(Height) + 'inches',
         'Weight':str(Weight) + 'pounds',
         'Allies':allies_str,
         'Feat+Traits':add_info_str,
         }
-    input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
-    output_pdf_path = f'{charactername}_charsheet.pdf'
-    # fill_pdf(input_pdf_path, output_pdf_path, data)
-    dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data)
+    dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data, FeatTrait)
