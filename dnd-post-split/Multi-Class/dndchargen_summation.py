@@ -34,7 +34,7 @@ def fill_pdf(input_pdf_path, output_pdf_path, data):
         with open(output_pdf_path, 'wb') as output_pdf:
             writer.write(output_pdf)
 '''
-def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
         CF2 = "Metallic, luminous, or dark eyes"
@@ -80,7 +80,7 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
             DASH1 = "You are a heretic,drawn to worship of Morad in."
             DASH2 = "Caught stealing, you escaped imprisonment but not before torture left you with a scar or lasting injury."
             DASH3 = "You were enslaved by drow or mind flayers but escaped to the surface."
-            DASH4 = "You seek only to test yourselfinbattle with monsters."
+            DASH4 = "You seek only to test yourself in battle with monsters."
             DASH5 = "Profit is all that matters to you."
             DASH6 = " The best way to defeat the folk of the surface is to study them firsthand."
             DASH = [DASH1, DASH2, DASH3, DASH4, DASH5, DASH6]
@@ -1418,7 +1418,6 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
     if back == "Myriad Operative":
         AdditionalInfo.append("Feature: Myriad Operative (see notes)")
         Notes.append("Feature: Myriad Operative - Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed.")
-    #Left off here for splitting certain lines into Notes. All lines that extend beyond the screen should be notes. At certain arbitrary benchmarks, go back and make sure the non-(see notes) lines are Notes.append
     if back == "Noble":
         AdditionalInfo.append("Feature: Retainers (see notes)")
         Notes.append("Feature: Retainers - If your character has a noble background, you may select this background feature instead of Position of Privilege. You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.")
@@ -2706,4 +2705,4 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, He
     input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
     output_pdf_path = f'{charactername}_charsheet.pdf'
     # fill_pdf(input_pdf_path, output_pdf_path, data)
-    dndchargen_characterbuilder(param, plLvl, Class, subclass, submulticlass, BGL, EQP, SkillsProf, PlProf, Notes, data)
+    dndchargen_characterbuilder(param, plLvl, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, Notes, data)
