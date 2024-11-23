@@ -5206,10 +5206,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 SneakAttack = "10d6"
             if roglvl == 20:   
                 ClassNotes.append("Stroke of Luck - You have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.")
-        print(f"Roglvl is: {roglvl}")
-        print(f"Sneak attack is: {SneakAttack}")
-        ClassNotes.append("Sneak Attack (see notes)")
-        Notes.append(f"Sneak Attack - You know how to strike subtly and exploit a foe’s distraction. Once per turn, you can deal an extra {SneakAttack} damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\nYou don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.\nThe amount of the extra damage increases as you gain levels in this class.")     
+            ClassNotes.append("Sneak Attack (see notes)")
+            Notes.append(f"Sneak Attack - You know how to strike subtly and exploit a foe’s distraction. Once per turn, you can deal an extra {SneakAttack} damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\nYou don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.\nThe amount of the extra damage increases as you gain levels in this class.")     
         if Class[i] == "Sorcerer":
             if ((param == "N") or (submulticlass == "N")):
                 sorclvl = plLvl
