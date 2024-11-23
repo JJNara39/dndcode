@@ -510,7 +510,7 @@ def dndchargen_class(param, plLvl):
                 print("8 - Undead Patron Warlock")
                 print("9 - Undying Patron Warlock")
                 print("10 - Beachball Patron Warlock")
-                print("10 - Unsure/Leave Blank")
+                print("11 - Unsure/Leave Blank")
                 subc = int(input("Which subclass would you like? ")) 
                 if subc == 1:
                     subclass.append("Archfey Patron Warlock")
