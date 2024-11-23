@@ -246,7 +246,7 @@ MonsterHuntersPack = "Monster Hunter's Pack"
 PriestsPack = "Priest's Pack"
 ScholarsPack = "Scholar's Pack"
 
-def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, SLANG, Notes, data, FeatTrait):
+def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, SLANG, Notes, data, skills_dict, FeatTrait):
     poollevel = plLvl
     ClassNotes = []
     ClassLvl = []
@@ -264,6 +264,24 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     IntMod = int(data['INTmod'])
     StrMod = int(data['STRmod'])
     WisMod = int(data['WISmod'])
+    AcroNum = skills_dict["AcroNum"]
+    AnHaNum = skills_dict["AnHaNum"]
+    ArcaNum = skills_dict["ArcaNum"]
+    AthlNum = skills_dict["AthlNum"]
+    DeceNum = skills_dict["DeceNum"]
+    HistNum = skills_dict["HistNum"]
+    InsiNum = skills_dict["InsiNum"]
+    IntiNum = skills_dict["IntiNum"]
+    InveNum = skills_dict["InveNum"]
+    MediNum = skills_dict["MediNum"]
+    NatuNum = skills_dict["NatuNum"]
+    PercNum = skills_dict["PercNum"]
+    PerfNum = skills_dict["PerfNum"]
+    PersNum = skills_dict["PersNum"]
+    ReliNum = skills_dict["ReliNum"]
+    SloHNum = skills_dict["SloHNum"]
+    SteaNum = skills_dict["SteaNum"]
+    SurvNum = skills_dict["SurvNum"]    
     if plLvl >= 4:
         ClassNotes.append("You can increase one score by 2, two by one, or a feat. As normal, you can't increase an ability score above 20 using this feature.")
     if plLvl >= 8:
@@ -296,18 +314,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(artlvl, d8))
                 if i == 0:
-                    if "LightArmor" not in PlProf:
-                        PlProf.append("LightArmor")
-                    if "MediumArmor" not in PlProf:
-                        PlProf.append("MediumArmor")
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)
-                    PlProf.append(Shield)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "SimpleWeapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
                     PlProf.append(ThievKit)
-                    PlProf.append(TinkTools)
+                    PlProf.append(TinkTools)                                                
                     PlProf = artisantools(param, PlProf)
                     SkillsProf.append(ConST)
                     SkillsProf.append(IntST)
@@ -367,21 +383,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             EQP.clear()
                             BGL = BGL + d4() + d4() + d4() + d4() + d4()
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)                            
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")                                                                       
                     if Shield not in PlProf:
                         PlProf.append(Shield)
-                    if ThievKit not in PlProf:
-                        PlProf.append(ThievKit) 
-                    if TinkTools not in PlProf:
-                        PlProf.append(TinkTools)                         
-                for item in Firearms:
-                    if item not in PlProf:
-                        PlProf.append(item)
+                    PlProf.append(ThievKit) 
+                    PlProf.append(TinkTools)                         
+                    if "Firearms" not in PlProf:
+                        PlProf.append("Firearms")
                 ClassNotes.append("Magical Tinkering (see notes)")
                 Notes.append("Magical Tinkering - You learn how to invest a spark of magic into mundane objects. To use this ability, you must have tinker's tools or other artisan's tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice:\n - The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet \n - Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away \n - You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long \n - The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away \n - A static visual effect appears on one of the object's surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. \n The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. \n You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.")
                 SpellcastingClass.append("Artificer")
@@ -451,9 +462,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         Notes.append("Chemical Mastery - You have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments:\nYou gain resistance to acid damage and poison damage, and you are immune to the poisoned condition.\nYou can cast Greater Restoration and Heal without expending a spell slot, without preparing the spell, and without material components, provided you use alchemist's supplies as the spellcasting focus.\nOnce you cast either spell with this feature, you can't cast that spell with it again until you finish a long rest.")
                     ClassNotes.append(f"You can produce {ArtElixers} elixer(s), rolling on the Experimental Elixer table.")
                 if subclass[i] == "Armorer Specialist Artificer":
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")
                     if SmthTools in PlProf:
                         print(f"You already know {SmthTools}, please select a different tool to be proficient in.")
                         PlProf = artisantools(param, PlProf)
@@ -500,9 +510,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlProf.append(SmthTools)
                     ClassNotes.append("Battle Smith Spells (see notes")
                     Notes.append("Battle Smith Spells - You always have certain spells prepared after you reach particular levels in this class, as shown in the Battle Smith Spells table. These spells count as artificer spells for you, but they don't count against the number of artificer spells you prepare.\n3rd Artificer Level: Heroism, Shield\n5th Artificer Level: Branding Smite, Warding Bond\n9th Artificer Level: Aura of Vitality, Conjure Barrage\n13th Artificer Level: Aura of Purity, Fire Shield\n17th Artificer Level: Banishing Smite, Mass Cure Wounds")
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")   
                     ClassNotes.append("Battle Ready (see notes)")
                     Notes.append("Battle Ready - Your combat training and your experiments with magic have paid off in two ways:\nYou gain proficiency with martial weapons (already in Proficiences).\nWhen you attack with a magic weapon, you can use your Intelligence modifier, instead of Strength or Dexterity modifier, for the attack and damage rolls.")
                     ClassNotes.append("Steel Defender (see notes)")
@@ -591,19 +600,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (12 + ConMod + hpcalc(barblvl, d12))
                 if i == 0:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shield)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")
                     SkillsProf.append(StrST)
                     SkillsProf.append(ConST)
                     BarbSkillsList = [AnimalHandling, Athletics, Intimidation, Nature, Perception, Survival]
@@ -674,12 +680,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     if Shield not in PlProf:
                         PlProf.append(Shield)   
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                                  
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")   
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                                                                     
                 Rages = "2"
                 RageDmg = 2
                 if barblvl >= 3:
@@ -903,22 +907,24 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(bardlvl, d8))            
                 if i == 0:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(HandCrossbow)
-                    PlProf.append(Longsword)
-                    PlProf.append(Rapier)
-                    PlProf.append(Shortsword)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons") 
+                    if HandCrossbow not in PlProf:
+                        PlProf.append(HandCrossbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Rapier not in PlProf:
+                        PlProf.append(Rapier)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)
                     PlProf = musicalinstr(param, PlProf)
                     PlProf = musicalinstr(param, PlProf)
                     PlProf = musicalinstr(param, PlProf)
                     SkillsProf.append(DexST)
                     SkillsProf.append(ChaST)
-                    PlProf = skillprof3(param, PlProf)  
+                    SkillsProf = skillprof3(param, SkillsProf)  
                     MusicalInstrumentsWOLute = MusicalInstruments
                     MusicalInstrumentsWOLute.remove(Lute)
                     StartEquip1 = ["Rapier", "Longsword", "Any Simple Weapon"]
@@ -1009,11 +1015,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(LeatherArmor)
                         EQP.append(Dagger)    
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
                     SkillsProf = skillprof(param, SkillsProf)   
-                    PlProf = musicalinstrskill(param, PlProf)                                                                                                      
+                    PlProf = musicalinstr(param, PlProf)                                                                                                      
                 SpellcastingClass.append("Bard")
                 SpellcastingAbility.append("Cha")
                 SpellsaveDC.append(8 + ProfBonus + ChaMod)
@@ -1176,9 +1181,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClassNotes.append("Spirit Tales (see notes)")
                         Notes.append("Spirit Tales - Storytellers, like bards of the College of Spirits, often give voice to tales inspired by some greater theme or body of work. When determining what stories you tell, consider what unites them. Do they all feature characters from a specific group, like archetypes from the tarokka deck, figures from constellations, childhood imaginary friends, or characters in a particular storybook? Or are your inspirations more general, incorporating historic champions, mythological heroes, or urban legends? Use the tales you tell to define your niche as a storytelling adventurer.")
                 if subclass[i] == "College of Swords Bard":
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Scimitar not in PlProf:
                         PlProf.append(Scimitar)
                     ClassNotes.append("Bonus Proficiencies - You gain proficiency with medium armor and the scimitar (added to proficiencies).\nIf you’re proficient with a simple or martial melee weapon, you can use it as a spellcasting focus for your bard spells.")
@@ -1205,14 +1209,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClassNotes.append("Nimbus of Pathos (see notes)")
                         Notes.append("Nimbus of Pathos - You can touch a willing creature as an action and empower it with tragic heroism. For 1 minute, the creature is surrounded by mournful music and ghostly singing, granting it the following benefits and drawbacks:\n-The creature has a +4 bonus to AC.\n-It has advantage on attack rolls and saving throws.\n-When the creature hits a target with a weapon attack or spell attack, that target takes an extra 1d10 radiant damage.\n- Any weapon attack against the creature scores a critical hit on a roll of 18–20.\nWhen this effect ends, the creature immediately drops to 0 hit points and is dying. Once you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "College of Valor Bard":
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield) 
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item) 
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons") 
                     ClassNotes.append("Combat Inspiration (see notes)")
                     Notes.append("Combat Inspiration - You learn to inspire others in battle. A creature that has a Bardic Inspiration die from you can roll that die and add the number rolled to a weapon damage roll it just made. Alternatively, when an attack roll is made against the creature, it can use its reaction to roll the Bardic Inspiration die and add the number rolled to its AC against that attack, after seeing the roll but before knowing whether it hits or misses.")                                                  
                     if bardlvl >= 6:
@@ -1345,17 +1347,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(clerlvl, d8))   
                 if i == 0:             
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shield)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
                     SkillsProf.append(WisST)
                     SkillsProf.append(ChaST)
                     SkillsList = [History, Insight, Medicine, Persuasion, Religion]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)   
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)   
                     StartEquip1 = ["Mace", "Warhammer (if proficient)"]
                     StartEquip2 = ["Scale Mail", "Leather Armor", "Chain Mail (if proficient)"]     
                     StartEquip3 = ["Light Crossbow w/ 20 Bolts", "Any Simple Weapon"]
@@ -1502,12 +1503,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(Shield)
                         EQP.append("A Holy Symbol")       
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)  
                 SpellcastingClass.append("Cleric")
@@ -1644,9 +1643,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericBloodDomainSpells.append("Dominate Person")
                         ClericBloodDomainSpells.append("Hold Monster") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericBloodDomainSpells)                        
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")   
                     ClassNotes.append("Bloodletting Focus (see notes)")
                     Notes.append("Bloodletting Focus - Your divine magic draws the blood from magically inflicted wounds, worsening the agony of your foes. When you cast a damage-dealing spell of 1st level or higher whose duration is instantaneous, any creature with blood that takes damage from the spell takes extra necrotic damage equal to 2 + the spell's level.")
                     if clerlvl >= 2:
@@ -1684,8 +1682,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericCommunityDomainSpells.append("Mass Cure Wounds")
                         ClericCommunityDomainSpells.append("Telepathic Bond") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericCommunityDomainSpells)                        
-                    if CooksUten not in PlProf:
-                        PlProf.append(CooksUten)
+                    PlProf.append(CooksUten)
                     ClassNotes.append("Blessing of the Hearth (see notes)")
                     Notes.append("Blessing of the Hearth - You gain the ability to conjure a small flagstone hearth with a simple iron cooking pot whenever you rest. This hearth helps warm you and your companions, and can be used to prepare hearty and nutritious meals on the road. If you or any friendly creatures you make camp with would regain hit points at the end of a short rest by spending one or more hit dice, each of those creatures may choose to re-roll one of their resting dice, taking the higher roll between the two.")
                     if clerlvl >= 2:
@@ -1721,9 +1718,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericDeathDomainSpells.append("Antilife Shell")
                         ClericDeathDomainSpells.append("Cloudkill") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericDeathDomainSpells)                        
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")   
                     ClassNotes.append("Reaper - You learn one necromancy cantrip of your choice from any spell list. When you cast a necromancy cantrip that normally targets only one creature, the spell can instead target two creatures within range and within 5 feet of each other.")
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Touch of Death - You can use Channel Divinity to destroy another creature's life force by touch. When you hit a creature with a melee attack, you can use Channel Divinity to deal extra necrotic damage to the target. The damage equals {5 + (2*clerlvl)}.")
@@ -1754,9 +1750,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericForgeDomainSpells.append("Animate Objects")
                         ClericForgeDomainSpells.append("Creation") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericForgeDomainSpells)                        
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor") 
                     PlProf.append(SmthTools)
                     ClassNotes.append("Blessing of the Forge (see notes)")
                     Notes.append("Blessing of the Forge - You gain the ability to imbue magic into a weapon or armor. At the end of a long rest, you can touch one nonmagical object that is a suit of armor or a simple or martial weapon. Until the end of your next long rest or until you die, the object becomes a magic item, granting a +1 bonus to AC if it’s armor or a +1 bonus to attack and damage rolls if it’s a weapon.\nOnce you use this feature, you can’t use it again until you finish a long rest.")
@@ -1854,9 +1849,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericLifeDomainSpells.append("Mass Cure Wounds")
                         ClericLifeDomainSpells.append("Raise Dead") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericLifeDomainSpells)                        
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor") 
                     ClassNotes.append("Disciple of Life - Your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level.")
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Preserve Life (see notes)")
@@ -1952,9 +1946,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericNatureDomainSpells)                        
                     SkillsList = [AnimalHandling, Nature, Survival]
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)                  
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")                   
                     ClassNotes.append("Acolyte of Nature - You learn one cantrip of your choice from the druid spell list.")
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Charm Animals and Plants (see notes)")
@@ -2024,11 +2017,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericOrderDomainSpells.append("Commune")
                         ClericOrderDomainSpells.append("Dominate Person") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericOrderDomainSpells)                        
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)  
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")   
                     SkillsList = [Intimidation, Persuasion]
-                    PlProf = oneskillfromlist(param, SkillsProf, SkillsList)                    
+                    SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)                    
                     ClassNotes.append("Voice of Authority (see notes)")
                     Notes.append("Voice of Authority - You can invoke the power of law to drive an ally to attack. If you cast a spell with a spell slot of 1st level or higher and target an ally with the spell, that ally can use their reaction immediately after the spell to make one weapon attack against a creature of your choice that you can see.\nIf the spell targets more than one ally, you choose the ally who can make the attack.")
                     if clerlvl >= 2:
@@ -2096,12 +2088,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericTempestDomainSpells.append("Destructive Wave")
                         ClericTempestDomainSpells.append("Insect Plague") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericTempestDomainSpells)                        
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)  
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                  
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")  
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                                                     
                     ClassNotes.append("Wrath of the Storm (see notes)")
                     Notes.append(f"Wrath of the Storm - You can thunderously rebuke attackers. When a creature within 5 feet of you that you can see hits you with an attack, you can use your reaction to cause the creature to make a Dexterity saving throw. The creature takes 2d8 lightning or thunder damage (your choice) on a failed saving throw, and half as much damage on a successful one.\nYou can use this feature {WisMod} times (a minimum of once). You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
@@ -2164,12 +2154,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericTwilightDomainSpells.append("Circle of Power")
                         ClericTwilightDomainSpells.append("Mislead") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericTwilightDomainSpells)                        
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)  
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                        
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")    
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                          
                     ClassNotes.append("Eyes of Night (see notes)")
                     Notes.append("Eyes of Night - You can see through the deepest gloom. You have darkvision out to a range of 300 feet. In that radius, you can see in dim light as if it were bright light and in darkness as if it were dim light.\nAs an action, you can magically share the darkvision of this feature with willing creatures you can see within 10 feet of you, up to a number of creatures equal to your Wisdom modifier (minimum of one creature). The shared darkvision lasts for 1 hour. Once you share it, you can't do so again until you finish a long rest, unless you expend a spell slot of any level to share it again.")
                     ClassNotes.append("Vigilant Blessing - The night has taught you to be vigilant. As an action, you give one creature you touch (including possibly yourself) advantage on the next initiative roll the creature makes. This benefit ends immediately after the roll or if you use this feature again.")
@@ -2204,12 +2192,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericWarDomainSpells.append("Flame Strike")
                         ClericWarDomainSpells.append("Hold Monster") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericWarDomainSpells)
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)  
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                        
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")     
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                          
                     ClassNotes.append(f"War Preist - Your god delivers bolts of inspiration to you while you are engaged in battle. When you use the Attack action, you can make one weapon attack as a bonus action.\nYou can use this feature {WisMod} times (a minimum of once). You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Guided Strike (see notes)")
@@ -2327,13 +2313,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(drulvl, d8))  
                 if i == 0:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shield)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
                     PlProf.append("Druids will not wear armor or use shields made of metal")
                     PlProf.append(Club)
                     PlProf.append(Dagger)
@@ -2349,7 +2334,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     SkillsProf.append(WisST)
                     SkillsProf.append(IntST)
                     SkillsList = [Arcana, AnimalHandling, Insight, Medicine, Nature, Perception, Religion, Survival]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Wooden Shield", "Any Simple Weapon"]
                     StartEquip2 = ["Scimitar", "Any Simple Melee Weapon"]
                     if param == "Y":
@@ -2413,12 +2398,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(ExplorersPack)
                         EQP.append("Druidic Focus")
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)    
                 SpellcastingClass.append("Druid")
@@ -2841,25 +2824,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (10 + ConMod + hpcalc(figlvl, d10))
                 if i == 0:       
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                        
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                  
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")                                                        
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                                 
                     SkillsProf.append(StrST)
                     SkillsProf.append(ConST)
                     SkillsList = [Acrobatics, AnimalHandling, Athletics, History, Insight, Intimidation, Perception, Survival]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Chain Mail", "Leather Armor, Longbow and 20 Arrows"]
                     StartEquip2 = ["Martial Weapon and Shield", "Two Martial Weapons"]
                     StartEquip3 = ["Light Crossbow and 20 Bolts", "Two Handaxes"]
@@ -2988,20 +2966,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         if SE4rand == "Explorer's Pack":
                             EQP.append(ExplorersPack) 
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)   
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                                              
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                                                                              
             ClassNotes.append("Fighting Style (see notes)")
             Notes.append("Fighting Style - You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.\n- Archery - You gain a +2 bonus to attack rolls you make with ranged weapons.\n- Blind Fighting - You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\n- Defense - While you are wearing armor, you gain a +1 bonus to AC.\n- Dueling - When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.\n- Great Weapon Fighting - When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.\n- Interception - When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.\n- Protection - When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.\n- Superior Technique - You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice). You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.\n- Thrown Weapon Fighting - You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.\n- Two-Weapon Fighting - When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.\n- Unarmed Fighting - Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier on a hit. If you aren't wielding any weapons or a shield when you make the attack roll, the d6 becomes a d8. At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you.")
             ClassNotes.append("Second Wind (see notes)")
@@ -3096,14 +3070,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             CavFigChoice = CavFig[cavfiginput-1]
                         if CavFigChoice == "Skills":
                             SkillsList = [AnimalHandling, History, Insight, Performance, Persuasion]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)
                     if param == "N":
                         CavFigChoice = random.choice(CavFig)
                         if CavFigChoice == "Skills":
                             SkillsList = [AnimalHandling, History, Insight, Performance, Persuasion]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)                        
                     ClassNotes.append("Born to the Saddle (see notes)")
@@ -3278,14 +3252,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             CavFigChoice = CavFig[cavfiginput-1]
                         if CavFigChoice == "Skills":
                             SkillsList = [History, Insight, Performance, Persuasion]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)
                     if param == "N":
                         CavFigChoice = random.choice(CavFig)
                         if CavFigChoice == "Skills":
                             SkillsList = [History, Insight, Performance, Persuasion]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)                                            
                     FigSpiritTempHP = 5
@@ -3317,7 +3291,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             CavFigChoice = CavFig[cavfiginput-1]
                         if CavFigChoice == "Skills":
                             SkillsList = [Deception, Insight, Intimidation, SleightofHand, Stealth]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             if TCant not in PlLang:
                                 PlLang.append(TCant)
@@ -3325,7 +3299,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         CavFigChoice = random.choice(CavFig)
                         if CavFigChoice == "Skills":
                             SkillsList = [Deception, Insight, Intimidation, SleightofHand, Stealth]
-                            PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             if TCant not in PlLang:
                                 PlLang.append(TCant)
@@ -3396,15 +3370,15 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(monklvl, d8)) 
                 if i == 0:
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shortsword)      
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons") 
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)      
                     PlProf = artisantoolsmusicalinstr(param, PlProf)
                     SkillsProf.append(StrST)
                     SkillsProf.append(DexST)
                     SkillsList = [Acrobatics, Athletics, History, Insight, Religion, Stealth]    
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Shortsword", "Any Simple Weapon"]
                     StartEquip2 = ["Dungeoneer's Pack", "Explorer's Pack"]
                     if param == "Y":
@@ -3457,9 +3431,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             EQP.append(ExplorersPack)
                         EQP.append("10 Darts")       
                 else:  
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item) 
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons") 
                     if Shortsword not in PlProf:
                         PlProf.append(Shortsword)  
             ClassNotes.append("Unarmored Defense - While you are wearing no armor and not wielding a shield, your AC equals {10 + your DexMod + WisMod}.")
@@ -3792,26 +3765,22 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (10 + ConMod + hpcalc(pallvl, d10))      
                 if i == 0:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in HeavyArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                        
-                    PlProf.append(Shield)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                               
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if "Heavy Armor" not in PlProf:
+                        PlProf.append("Heavy Armor")                                                       
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                              
                     SkillsProf.append(WisST)
                     SkillsProf.append(ChaST)
                     SkillsList = [Athletics, Insight, Intimidation, Medicine, Persuasion, Religion, Religion]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)      
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)      
                     StartEquip1 = ["A Martial Weapon and a Shield", "Two Martial Weapons"]
                     StartEquip2 = ["Five Javelins", "Any Simple Melee Weapon"]
                     StartEquip3 = ["Priest’s Pack", "Explorer’s Pack"]
@@ -3913,20 +3882,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(ChainMail)
                         EQP.append("A Holy Symbol")    
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)   
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)   
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")   
             ClassNotes.append("Divine Sense (see notes)")
             Notes.append(f"Divine Sense - The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.\nYou can use this feature a number of times equal to {1 + ChaMod}. When you finish a long rest, you regain all expended uses.")
             ClassNotes.append("Lay on Hands (see notes)")
@@ -4362,23 +4327,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (10 + ConMod + hpcalc(ranlvl, d10))   
                 if i == 0:                                     
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shield)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)     
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                            
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")        
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                               
                     SkillsProf.append(StrST)
                     SkillsProf.append(DexST)
                     SkillsList = [AnimalHandling, Athletics, Insight, Investigation, Nature, Perception, Stealth, Survival]
-                    PlProf = threeskillsfromlist(param, SkillsProf, SkillsList)         
+                    SkillsProf = threeskillsfromlist(param, SkillsProf, SkillsList)         
                     StartEquip1 = ["Scale Mail", "Leather Armor"]
                     StartEquip2 = ["Two Shortswords", "Two Simple Melee Weapons"]
                     StartEquip3 = ["Dungeoneer's Pack", "Explorer's Pack"]
@@ -4466,20 +4428,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(Longbow)
                         EQP.append("A Quiver of 20 Arrows")   
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
                     if Shield not in PlProf:
                         PlProf.append(Shield)   
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)     
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")   
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")       
                     SkillsList = [AnimalHandling, Athletics, Insight, Investigation, Nature, Perception, Stealth, Survival]
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)       
             ClassNotes.append("Favored Enemy(1) (see notes)")
@@ -4646,7 +4604,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         if WisST not in PlProf:
                             SkillsProf.append(WisST)
                         else:
-                            SkillsProf = twoskillprof(param, SkillsProf, IntST, ChaST)
+                            SkillsList = [IntST, ChaST]
+                            SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         ClassNotes.append("Iron Mind - You have honed your ability to resist the mind-altering powers of your prey. You gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice), these all have been addressed.")                          
                     if ranlvl >= 11:
                         ClassNotes.append("Stalker's Flurry - You learn to attack with such unexpected speed that you can turn a miss into another strike. Once on each of your turns when you miss with a weapon attack, you can make another weapon attack as part of the same action.")                            
@@ -4860,20 +4819,22 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(roglvl, d8))     
                 if i == 0:       
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                            
-                    PlProf.append(HandCrossbow)
-                    PlProf.append(Longsword)
-                    PlProf.append(Rapier)
-                    PlProf.append(Shortsword)      
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")                            
+                    if HandCrossbow not in PlProf:
+                        PlProf.append(HandCrossbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Rapier not in PlProf:
+                        PlProf.append(Rapier)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)      
                     SkillsProf.append(IntST)
                     SkillsProf.append(DexST)
                     SkillsList = [Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, SleightofHand, Stealth]
-                    PlProf = fourskillsfromlist(param, SkillsProf, SkillsList)   
+                    SkillsProf = fourskillsfromlist(param, SkillsProf, SkillsList)   
                     StartEquip1 = ["Rapier", "Shortsword"]
                     StartEquip2 = ["Shortbow and Quiver of 20 Arrows", "Shortsword"]
                     StartEquip3 = ["Burglar's Pack", "Dungeoneer's Pack", "Explorer's Pack"]
@@ -4955,13 +4916,11 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(Dagger)
                         EQP.append(ThievKit)                                                   
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
                     SkillsList = [Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, SleightofHand, Stealth]                            
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
-                    if ThievKit not in PlProf:
-                        PlProf.append(ThievKit) 
+                    PlProf.append(ThievKit) 
             SneakAttack = "1d6"
             ClassNotes.append("Thieves’ Cant (see notes)")
             Notes.append("Thieves’ Cant - During your rogue training you learned thieves’ cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves’ cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\nIn addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves’ guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.")
@@ -5061,10 +5020,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if roglvl >= 17:
                         ClassNotes.append("Spell Thief - You gain the ability to magically steal the knowledge of how to cast a spell from another spellcaster.\nImmediately after a creature casts a spell that targets you or includes you in its area of effect, you can use your reaction to force the creature to make a saving throw with its spellcasting ability modifier. The DC equals your spell save DC. On a failed save, you negate the spell's effect against you, and you steal the knowledge of the spell if it is at least 1st level and of a level you can cast (it doesn't need to be a wizard spell). For the next 8 hours, you know the spell and can cast it using your spell slots. The creature can't cast that spell until the 8 hours have passed.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "Assassin Archetype Rogue":
-                    if DisgKit not in PlProf:
-                        PlProf.append(DisgKit)
-                    if PoisKit not in PlProf:
-                        PlProf.append(PoisKit)
+                    PlProf.append(DisgKit)
+                    PlProf.append(PoisKit)
                     ClassNotes.append("Assassinate - You are at your deadliest when you get the drop on your enemies. You have advantage on attack rolls against any creature that hasn't taken a turn in the combat yet. In addition, any hit you score against a creature that is surprised is a critical hit.")
                     if roglvl >= 9:
                         ClassNotes.append("Infiltration Expertise (see notes)")
@@ -5088,10 +5045,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if roglvl >= 17:
                         ClassNotes.append("Eye for Weakness - You learn to exploit a creature’s weaknesses by carefully studying its tactics and movement. While your Insightful Fighting feature applies to a creature, your Sneak Attack damage against that creature increases by 3d6.")                   
                 if subclass[i] == "Mastermind Archetype Rogue":
-                    if DisgKit not in PlProf:
-                        PlProf.append(DisgKit)
-                    if ForgKit not in PlProf:
-                        PlProf.append(ForgKit) 
+                    PlProf.append(DisgKit)
+                    PlProf.append(ForgKit) 
                     PlProf = gamingsets(param, PlProf)  
                     PlLang, SLANG = languagegen(param, PlLang, SLANG)
                     PlLang, SLANG = languagegen(param, PlLang, SLANG)                 
@@ -5229,15 +5184,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (6 + ConMod + hpcalc(sorclvl, d6))         
                 if i == 0: 
-                    PlProf.append(Dagger)
-                    PlProf.append(Dart)
-                    PlProf.append(Sling)
-                    PlProf.append(Quarterstaff)
-                    PlProf.append(LightCrossbow)      
+                    if Dagger not in PlProf:
+                        PlProf.append(Dagger)
+                    if Dart not in PlProf:
+                        PlProf.append(Dart)
+                    if Sling not in PlProf:
+                        PlProf.append(Sling)
+                    if Quarterstaff not in PlProf:
+                        PlProf.append(Quarterstaff)
+                    if LightCrossbow not in PlProf:
+                        PlProf.append(LightCrossbow)      
                     SkillsProf.append(ConST)
                     SkillsProf.append(ChaST)
                     SkillsList = [Arcana, Deception, Insight, Intimidation, Persuasion, Religion]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Dungeoneer's Pack", "Explorer's Pack"]
@@ -5805,16 +5765,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(warlvl, d8))                    
                 if i == 0: 
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                 
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")                               
                     SkillsProf.append(ChaST)
                     SkillsProf.append(WisST)
                     SkillsList = [Arcana, Deception, History, Intimidation, Investigation, Nature, Religion]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Scholar's Pack", "Dungeoneer's Pack"]
@@ -5903,12 +5861,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         EQP.append(Dagger)
                         EQP.append(Dagger)  
                 else:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in SimpleWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                                                                          
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
+                    if "Simple Weapons" not in PlProf:
+                        PlProf.append("Simple Weapons")                                                                           
                 SpellcastingClass.append("Warlock")
                 SpellcastingAbility.append("Cha")
                 SpellsaveDC.append(8 + ProfBonus + ChaMod)
@@ -6292,13 +6248,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
                     ClassNotes.append("Hexblade's Curse (see notes)")
                     Notes.append(f"Hexblade's Curse - You gain the ability to place a baleful curse on someone. As a bonus action, choose one creature you can see within 30 feet of you. The target is cursed for 1 minute. The curse ends early if the target dies, you die, or you are incapacitated. Until the curse ends, you gain the following benefits:\n- You gain a bonus to damage rolls against the cursed target of {ProfBonus}.\n- Any attack roll you make against the cursed target is a critical hit on a roll of 19 or 20 on the d20.\n- If the cursed target dies, you regain hit points equal to your {warlvl + ChaMod}.\nYou can’t use this feature again until you finish a short or long rest.")
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    PlProf.append(Shield)
-                    for item in MartialWeapons:
-                        if item not in PlProf:
-                            PlProf.append(item)                    
+                    if "Medium Armor" not in PlProf:
+                        PlProf.append("Medium Armor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
+                    if "Martial Weapons" not in PlProf:
+                        PlProf.append("Martial Weapons")                   
                     ClassNotes.append("Hex Warrior (see notes)")
                     Notes.append("Hex Warrior - The influence of your patron also allows you to mystically channel your will through a particular weapon. Whenever you finish a long rest, you can touch one weapon that you are proficient with and that lacks the two-handed property. When you attack with that weapon, you can use your Charisma modifier, instead of Strength or Dexterity, for the attack and damage rolls. This benefit lasts until you finish a long rest. If you later gain the Pact of the Blade feature, this benefit extends to every pact weapon you conjure with that feature, no matter the weapon's type.")
                     if warlvl >= 6:
@@ -6474,15 +6429,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (6 + ConMod + hpcalc(wizlvl, d6))    
                 if i == 0:
-                    PlProf.append(Dagger)
-                    PlProf.append(Dart)
-                    PlProf.append(Sling)
-                    PlProf.append(Quarterstaff)
-                    PlProf.append(LightCrossbow)      
+                    if Dagger not in PlProf:
+                        PlProf.append(Dagger)
+                    if Dart not in PlProf:
+                        PlProf.append(Dart)
+                    if Sling not in PlProf:
+                        PlProf.append(Sling)
+                    if Quarterstaff not in PlProf:
+                        PlProf.append(Quarterstaff)
+                    if LightCrossbow not in PlProf:
+                        PlProf.append(LightCrossbow)      
                     SkillsProf.append(IntST)
                     SkillsProf.append(WisST)
                     SkillsList = [Arcana, History, Insight, Investigation, Medicine, Religion]
-                    PlProf = twoskillsfromlist(param, SkillsProf, SkillsList) 
+                    SkillsProf = twoskillsfromlist(param, SkillsProf, SkillsList) 
                     StartEquip1 = ["Quarterstaff", "Dagger"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Scholar's Pack", "Explorer's Pack"]
@@ -6630,9 +6590,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if wizlvl >= 14:
                         ClassNotes.append("Spell Resistance - You have advantage on saving throws against spells.\nFurthermore, you have resistance against the damage of spells.")
                 if subclass[i] == "Bladesinging Arcane Tradition Wizard":
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "Light Armor" not in PlProf:
+                        PlProf.append("Light Armor")
                     if Performance not in SkillsProf:
                         SkillsProf.append(Performance)
                     OneHandedWeapons = [Club, Dagger, Handaxe, Javelin, LightHammer, Mace, Quarterstaff, Sickle, Spear, Battleaxe, Flail, Lance, Longsword, Morningstar, Rapier, Scimitar, Shortsword, Trident, WarPick, Warhammer, Whip]
@@ -6940,6 +6899,43 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     data['ST Wisdom'] = str(WisMod + (ProfBonus if WisST in SkillsProf else 0))
     data['HDTotal'] = Hitdice_Str
     data['HD'] = Currenthitdice_str
+    data['Nature'] = str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillsProf else 0))
+    data['Performance'] = str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillsProf else 0))
+    data['Medicine'] = str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillsProf else 0))
+    data['Religion'] = str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillsProf else 0))
+    data['Stealth '] = str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillsProf else 0))
+    data['Check Box 23'] = '/Yes' if 'Acrobatics' in SkillsProf else '/No'
+    data['Check Box 24'] = '/Yes' if 'Animal Handling' in SkillsProf else '/No'
+    data['Check Box 25'] = '/Yes' if 'Arcana' in SkillsProf else '/No'
+    data['Check Box 26'] = '/Yes' if 'Athletics' in SkillsProf else '/No'
+    data['Check Box 27'] = '/Yes' if 'Deception' in SkillsProf else '/No'
+    data['Check Box 28'] = '/Yes' if 'History' in SkillsProf else '/No'
+    data['Check Box 29'] = '/Yes' if 'Insight' in SkillsProf else '/No'
+    data['Check Box 30'] = '/Yes' if 'Intimidation' in SkillsProf else '/No'
+    data['Check Box 31'] = '/Yes' if 'Investigation' in SkillsProf else '/No'
+    data['Check Box 32'] = '/Yes' if 'Medicine' in SkillsProf else '/No'
+    data['Check Box 33'] = '/Yes' if 'Nature' in SkillsProf else '/No'
+    data['Check Box 34'] = '/Yes' if 'Perception' in SkillsProf else '/No'
+    data['Check Box 35'] = '/Yes' if 'Performance' in SkillsProf else '/No'
+    data['Check Box 36'] = '/Yes' if 'Persuasion' in SkillsProf else '/No'
+    data['Check Box 37'] = '/Yes' if 'Religion' in SkillsProf else '/No'
+    data['Check Box 38'] = '/Yes' if 'Sleight of Hand' in SkillsProf else '/No'
+    data['Check Box 39'] = '/Yes' if 'Stealth' in SkillsProf else '/No'
+    data['Check Box 40'] = '/Yes' if 'Survival' in SkillsProf else '/No'
+    data['Acrobatics'] = str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillsProf else 0))
+    data['Animal'] = str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillsProf else 0))
+    data['Athletics'] = str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillsProf else 0))
+    data['Deception '] = str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillsProf else 0))
+    data['History '] = str(HistNum + IntMod + (ProfBonus if 'History' in SkillsProf else 0))
+    data['Insight'] = str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillsProf else 0))
+    data['Intimidation'] = str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillsProf else 0))
+    data['Investigation '] = str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillsProf else 0))
+    data['Arcana'] = str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillsProf else 0))
+    data['Perception '] = str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0))
+    data['Persuasion'] = str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillsProf else 0))
+    data['SleightofHand'] = str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillsProf else 0))
+    data['Survival'] = str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillsProf else 0))
+    data['Passive'] = str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0))        
 
     Notes.sort()
     filename = f"{charactername}_{playername}_notes.txt"
