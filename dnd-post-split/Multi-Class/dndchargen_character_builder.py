@@ -1618,7 +1618,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             ArcaneBanishment = "3 or lower" 
                         if clerlvl >= 17:
                             ArcaneBanishment = "4 or lower"                                                                                
-                        ClassNotes.append()                
+                        ClassNotes.append("Channel Divinity: Arcane Abjuration (see notes)")                
                         Notes.append(f"Channel Divinity: Arcane Abjuration - You can use your Channel Divinity to abjure otherworldly creatures.\nAs an action, you present your holy symbol, and one celestial, elemental, fey, or fiend of your choice that is within 30 feet of you must make a Wisdom saving throw, provided that the creature can see or hear you. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly end its move in a space within 30 feet of you. It also can't take reactions. For its action, it can only use the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.\nAfter you reach 5th level, when a creature fails its saving throw against your Arcane Abjuration feature, the creature is banished for 1 minute (as in the Banishment spell, no concentration required) if it isn't on its plane of origin and its challenge rating is {ArcaneBanishment}.")
                         if clerlvl >= 6:
                             ClassNotes.append("Spell Breaker - When you restore hit points to an ally with a spell of 1st level or higher, you can also end one spell of your choice on that creature. The level of the spell you end must be equal to or lower than the level of the spell slot you use to cast the healing spell.")
@@ -1647,15 +1647,15 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)
-                    ClassNotes.append()
+                    ClassNotes.append("Bloodletting Focus (see notes)")
                     Notes.append("Bloodletting Focus - Your divine magic draws the blood from magically inflicted wounds, worsening the agony of your foes. When you cast a damage-dealing spell of 1st level or higher whose duration is instantaneous, any creature with blood that takes damage from the spell takes extra necrotic damage equal to 2 + the spell's level.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Crimson Bond (see notes)")
                         Notes.append("Channel Divinity: Crimson Bond - You can use your Channel Divinity to form a supernatural bond with a creature you can see, or with a creature for which you possess a blood sample. This bond lasts for 1 hour or until your concentration is broken (as if concentrating on a spell).\nWhile the bond is in effect, you can use an action to learn the target's approximate distance and direction from you, as well as its current hit points and any conditions affecting it, as long as the target is within 10 miles of you. Alternatively, you can use your action to attempt to connect with the target's senses. You take 2d6 necrotic damage and the target makes a Constitution saving throw against your spell save DC. On a successful save, the bond ends. On a failure, you can choose to either see or hear through the target's senses for a number of minutes equal to your Wisdom modifier (minimum 1 minute). During this time, you are blinded or deafened (respectively) with regard to your own senses. When the connection ends, the bond is lost.\nRegardless of the outcome, the target feels a wave of unease pass over it when it makes this save.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Blood Puppet(1) (see notes)")
                         Notes.append("Channel Divinity: Blood Puppet(1) - You can use your Channel Divinity to briefly control a creature's actions—whether that creature is living or dead. As an action, you target a Large or smaller creature or corpse within 60 feet of you that has blood. A creature you target must succeed on a Wisdom saving throw against your spell save DC or become charmed by you. An unconscious creature automatically fails its saving throw, and isn't incapacitated while you control its actions. A corpse targeted by this effect gains a semblance of life that you control.\nOn the affected creature or animated corpse's turn, you can command it (no action required) to move up to half its speed and use its action to do one of the following:\n- Interact with an object\n- Make a single attack\n- Do nothing\nAn animated corpse or an unconscious creature takes its turn immediately after yours, but can't move or take actions unless you command it to do so. Its statistics are the same as when it was alive or conscious.\nAn affected living creature makes a new saving throw at the end of each of its turns, ending the effect on itself on a success. For any target, your control lasts for 1 minute or until your concentration is broken (as if concentrating on a spell).")
-                        ClassNotes.append()
+                        ClassNotes.append("Sanguine Recall (see notes)")
                         Notes.append("Sanguine Recall - You can sacrifice a portion of your own vitality to recover expended spell slots as an action. The spell slots can have a combined level equal to or less than half your cleric level (rounded up), and none of the slots can be 6th level or higher. You take 1d8 necrotic damage for each spell slot level recovered, which can't be reduced in any way. You can't use this feature again until you finish a long rest.\nFor example, if you're an 8th-level cleric, you can recover up to four levels of spell slots—a single 4th-level slot, two 2nd-level slots, a 3rd-level slot and a 1st-level slot, or four 1st-level slots. You then take 4d8 necrotic damage.")
                     if clerlvl >= 8:
                         ClericDivineStrike = "1d8"
@@ -1664,7 +1664,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             ClassNotes.append(f"Divine Strike - You gain the ability to cause the physical wounds you deal out to bleed profusely. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra {ClericDivineStrike} necrotic damage to the target.")
                     if clerlvl >= 17:
                         ClassNotes.append("Channel Divinity: Blood Puppet(2) - You can use this feature to target a Huge or smaller creature or corpse.")
-                        ClassNotes.append()
+                        ClassNotes.append("Vascular Corruption Aura (see notes)")
                         Notes.append("Vascular Corruption Aura - You can use your action to emit a deathly aura of necrotic energy that causes the veins of nearby foes to burst and bleed. For 1 minute, any hostile creature with blood that moves within 30 feet of you for the first time on a turn or starts its turn there takes 3d6 necrotic damage. If a hostile creature with blood regains hit points while in the aura, it regains only half as many hit points as expected.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "Commmunity Domain Cleric":
                     ClericCommunityDomainSpells = []
@@ -1684,23 +1684,24 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericCommunityDomainSpells.append("Mass Cure Wounds")
                         ClericCommunityDomainSpells.append("Telepathic Bond") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericCommunityDomainSpells)                        
-                    PlProf.append(CooksUten)
-                    ClassNotes.append()
+                    if CooksUten not in PlProf:
+                        PlProf.append(CooksUten)
+                    ClassNotes.append("Blessing of the Hearth (see notes)")
                     Notes.append("Blessing of the Hearth - You gain the ability to conjure a small flagstone hearth with a simple iron cooking pot whenever you rest. This hearth helps warm you and your companions, and can be used to prepare hearty and nutritious meals on the road. If you or any friendly creatures you make camp with would regain hit points at the end of a short rest by spending one or more hit dice, each of those creatures may choose to re-roll one of their resting dice, taking the higher roll between the two.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Magnificent Feast (see notes)")
                         Notes.append("Channel Divinity: Magnificent Feast - You may use your Channel Divinity to conjure a magical feast for the rough road ahead. By spending 10 minutes, you may create a number of delicious, well-prepared, yet simple food items equal to your Wisdom modifier (minimum of 1). These food items will last up to 8 hours or until the end of a rest, and will never spoil. Eating food created in this way takes an action, providing whomever eats it with healing equal to 2d4 + your cleric level, and can remove either the frightened or poisoned condition from that creature (chosen by the creature when consumed).")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Community Watch (see notes)")
                         Notes.append("Channel Divinity: Community Watch - You can use your Channel Divinity to instill a feeling of vigilant protection in you and your allies. You grant yourself and a number of allies, up to your Wisdom modifier (minimum of 1), a boon from your deity. Allies must be able to see you and be within 30 feet to receive the boon. Once per round, a creature benefitting from this boon can roll a d6, adding the result to a skill check, saving throw, or attack roll. This effect lasts for a number of rounds equal to your Wisdom modifier (minimum of 1 round). A creature can only benefit from this effect if it can see at least one of its allies.")
                     if clerlvl >= 8:
                         ClericDivineStrike = "1d8"
                         if clerlvl >= 14:
                             ClericDivineStrike = "2d8"
-                        ClassNotes.append()
+                        ClassNotes.append("Divine Strike (see notes)")
                         Notes.append(f"Divine Strike - You gain the ability to infuse your weapon with the power to punish wrongdoing. Once on each of your turns, when you hit a creature with a weapon attack, you can cause the attack to deal an extra {ClericDivineStrike} psychic damage to the target. Visions of the evil they have wrought upon others flash before their eyes. You choose whether any foe reduced to 0 hit points by this attack remains stable or dies.")
                     if clerlvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Paragon of the People (see notes)")
                         Notes.append("Paragon of the People - Your Community Watch grants an additional d6 to each affected ally. It also grants immunity to fear for the duration of the effect. Additionally, your Magnificent Feast produces twice as many foodstuffs, each of which can, when consumed, remove a single curse or disease affecting the target (including attunement to a cursed item).")
                 if subclass[i] == "Death Domain Cleric":
                     ClericDeathDomainSpells = []
@@ -1757,10 +1758,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         if item not in PlProf:
                             PlProf.append(item)
                     PlProf.append(SmthTools)
-                    ClassNotes.append()
+                    ClassNotes.append("Blessing of the Forge (see notes)")
                     Notes.append("Blessing of the Forge - You gain the ability to imbue magic into a weapon or armor. At the end of a long rest, you can touch one nonmagical object that is a suit of armor or a simple or martial weapon. Until the end of your next long rest or until you die, the object becomes a magic item, granting a +1 bonus to AC if it’s armor or a +1 bonus to attack and damage rolls if it’s a weapon.\nOnce you use this feature, you can’t use it again until you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Artisan's Blessing (see notes)")
                         Notes.append("Channel Divinity: Artisan's Blessing - You can use your Channel Divinity to create simple items.\nYou conduct an hour-long ritual that crafts a nonmagical item that must include some metal: a simple or martial weapon, a suit of armor, ten pieces of ammunition, a set of tools, or another metal object. The creation is completed at the end of the hour, coalescing in an unoccupied space of your choice on a surface within 5 feet of you.\nThe thing you create can be something that is worth no more than 100 gp. As part of this ritual, you must lay out metal, which can include coins, with a value equal to the creation. The metal irretrievably coalesces and transforms into the creation at the ritual’s end, magically forming even nonmetal parts of the creation.\nThe ritual can create a duplicate of a nonmagical item that contains metal, such as a key, if you possess the original during the ritual.")
                     if clerlvl >= 6:
                         ClassNotes.append("Soul of the Forge - Your mastery of the forge grants you special abilities:\n- You gain resistance to fire damage.\n- While wearing heavy armor, you gain a +1 bonus to AC.")
@@ -1789,20 +1790,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericGraveDomainSpells.append("Antilife Shell")
                         ClericGraveDomainSpells.append("Raise Dead")                 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericGraveDomainSpells)                        
-                    ClassNotes.append()
+                    ClassNotes.append("Circle of Mortality (see notes)")
                     Notes.append("Circle of Mortality - You gain the ability to manipulate the line between life and death. When you would normally roll one or more dice to restore hit points with a spell to a creature at 0 hit points, you instead use the highest number possible for each die.\nIn addition, you learn the Spare the Dying cantrip, which doesn't count against the number of cleric cantrips you know. For you, it has a range of 30 feet, and you can cast it as a bonus action.")
-                    ClassNotes.append()
+                    ClassNotes.append("Eyes of the Grave (see notes)")
                     Notes.append(f"Eyes of the Grave - You gain the ability to occasionally sense the presence of the undead, whose existence is an insult to the natural cycle of life. As an action, you can open your awareness to magically detect undead. Until the end of your next turn, you know the location of any undead within 60 feet of you that isn't behind total cover and that isn't protected from divination magic. This sense doesn't tell you anything about a creature's capabilities or identity.\nYou can use this feature {WisMod} times, minimum of once. You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Path to the Grave (see notes)")
                         Notes.append("Channel Divinity: Path to the Grave - You can use your Channel Divinity to mark another creature’s life force for termination.\nAs an action, you choose one creature you can see within 30 feet of you, cursing it until the end of your next turn. The next time you or an ally of yours hits the cursed creature with an attack, the creature has vulnerability to all of that attack's damage, and then the curse ends.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Sentinel at Death's Door (see notes)")
                         Notes.append(f"Sentinel at Death's Door - You gain the ability to impede death’s progress. As a reaction when you or an ally that you can see within 30 feet of you suffers a critical hit, you can turn that attack into a normal hit. Any effects triggered by a critical hit are canceled.\nYou can use this feature {WisMod} times, minimum of once. You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 8:
                         ClassNotes.append(f"Potent Spellcasting - You add your Wisdom modifier, {WisMod}, to the damage you deal with any cleric cantrip.")
                     if clerlvl >= 17:
-                        ClassNotes.append()        
+                        ClassNotes.append("Keeper of Souls (see notes)")        
                         Notes.append("Keeper of Souls - You can seize a trace of vitality from a parting soul and use it to heal the living. When an enemy you can see dies within 30 feet of you, you or one ally of your choice that is within 30 feet of you regains hit points equal to the enemy’s number of Hit Dice. You can use this feature only if you aren't incapacitated. Once you use it, you can't do so again until the start of your next turn.")             
                 if subclass[i] == "Knowledge Domain Cleric":
                     ClericKnowledgeDomainSpells = []
@@ -1828,12 +1829,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Knowledge of the Ages - You can use your Channel Divinity to tap into a divine well of knowledge. As an action, you choose one skill or tool. For 10 minutes, you have proficiency with the chosen skill or tool.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Read Thoughts (see notes)")
                         Notes.append("Channel Divinity: Read Thoughts - You can use your Channel Divinity to read a creature's thoughts. You can then use your access to the creature's mind to command it.\nAs an action, choose one creature that you can see within 60 feet of you. That creature must make a Wisdom saving throw. If the creature succeeds on the saving throw, you can't use this feature on it again until you finish a long rest.\nIf the creature fails its save, you can read its surface thoughts (those foremost in its mind, reflecting its current emotions and what it ie actively thinking about) when it is within 60 feet of you. This effect lasts for 1 minute.\nDuring that time, you can use your action to end this effect and cast the Suggestion spell on the creature without expending a spell slot. The target automatically fails its saving throw against the spell.")
                     if clerlvl >= 8:
                         ClassNotes.append(f"Potent Spellcasting - You add your Wisdom modifier, {WisMod}, to the damage you deal with any cleric cantrip.")
                     if clerlvl >= 17:
-                        ClassNotes.append()        
+                        ClassNotes.append("Visions of the Past (see notes)")        
                         Notes.append("Visions of the Past - You can call up visions of the past that relate to an object you hold or your immediate surroundings. You spend at least 1 minute in meditation and prayer, then receive dreamlike, shadowy glimpses of recent events. You can meditate in this way for a number of minutes equal to your Wisdom score and must maintain concentration during that time, as if you were casting a spell.\nOnce you use this feature, you can't use it again until you finish a short or long rest.\nObject Reading - Holding an object as you meditate, you can see visions of the object's previous owner. After meditating for 1 minute, you learn how the owner acquired and lost the object, as well as the most recent significant event involving the object and that owner. If the object was owned by another creature in the recent past (within a number of days equal to your Wisdom score), you can spend 1 additional minute for each owner to learn the same information about that creature.\nArea Reading - As you meditate, you see visions of recent events in your immediate vicinity (a room, street, tunnel, clearing, or the like, up to a 50-foot cube), going back a number of days equal to your Wisdom score. For each minute you meditate, you learn about one significant event, beginning with the most recent. Significant events typically involve powerful emotions, such as battles and betrayals, marriages and murders, births and funerals. However, they might also include more mundane events that are nevertheless important in your current situation.")                   
                 if subclass[i] == "Life Domain Cleric":
                     ClericLifeDomainSpells = []
@@ -1858,7 +1859,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)
                     ClassNotes.append("Disciple of Life - Your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Preserve Life (see notes)")
                         Notes.append("Channel Divinity: Preserve Life - You can use your Channel Divinity to heal the badly injured.\nAs an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level. Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can't use this feature on an undead or a construct.")
                     if clerlvl >= 6:
                         ClassNotes.append("Blessed Healer - The healing spells you cast on others heal you as well. When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell's level.")
@@ -1888,17 +1889,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericLightDomainSpells.append("Scrying") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericLightDomainSpells)                        
                     ClassNotes.append("Bonus Cantrip - You gain the Light cantrip if you don't already know it.")
-                    ClassNotes.append()
+                    ClassNotes.append("Warding Flare (see notes)")
                     Notes.append(f"Warding Flare - You can interpose divine light between yourself and an attacking enemy. When you are attacked by a creature within 30 feet of you that you can see, you can use your reaction to impose disadvantage on the attack roll, causing light to flare before the attacker before it hits or misses. An attacker that can't be blinded is immune to this feature.\nYou can use this feature {WisMod} times, a minimum of once. You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Radiance of the Dawn (see notes)")
                         Notes.append("Channel Divinity: Radiance of the Dawn - You can use your Channel Divinity to harness sunlight, banishing darkness and dealing radiant damage to your foes.\nAs an action, you present your holy symbol, and any magical darkness within 30 feet of you is dispelled. Additionally, each hostile creature within 30 feet of you must make a Constitution saving throw. A creature takes radiant damage equal to 2d10 + your cleric level on a failed saving throw, and half as much damage on a successful one. A creature that has total cover from you is not affected.")
                     if clerlvl >= 6:
                         ClassNotes.append("Improved Flare - You can also use your Warding Flare feature when a creature that you can see within 30 feet of you attacks a creature other than you.")
                     if clerlvl >= 8:
                         ClassNotes.append(f"Potent Spellcasting - You can add your Wisdom Modifier, {WisMod}, when you deal with any cleric cantrip.")
                     if clerlvl >= 17:
-                        ClassNotes.append()      
+                        ClassNotes.append("Corona of Light (see notes)")      
                         Notes.append("Corona of Light - You can use your action to activate an aura of sunlight that lasts for 1 minute or until you dismiss it using another action. You emit bright light in a 60-foot radius and dim light 30 feet beyond that. Your enemies in the bright light have disadvantage on saving throws against any spell that deals fire or radiant damage.")                 
                 if subclass[i] == "Moon Domain Cleric":
                     ClericMoonDomainSpells = []
@@ -1918,18 +1919,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericMoonDomainSpells.append("Dream")
                         ClericMoonDomainSpells.append("Passwall") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericMoonDomainSpells)                        
-                    ClassNotes.append()
+                    ClassNotes.append("Clarity of Catha (see notes)")
                     Notes.append(f"Clarity of Catha - When you choose this domain at 1st level, you learn to shine light upon the mind's most dire moments, shielding those you protect. When a creature within 30 feet of you that you can see makes a Wisdom saving throw, you can use your reaction to grant that creature advantage on the save.\nYou can use this feature {ProfBonus} times, regaining all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Blessing of the Full Moon (see notes)")
                         Notes.append("Channel Divinity: Blessing of the Full Moon - You can use your Channel Divinity to infuse your allies with bestial power. As an action, you instill a willing creature of your choice within 30 feet of you that you can see with one of the following blessings of your choice:\nBlessing of the Watchful Moon - For 1 hour, the blessed creature's speed increases by 10 feet, and it has advantage on Wisdom (Perception or Survival) checks involving smell or made to track a creature.\nBlessing of the Blood-Drenched Moon - For 10 minutes, the blessed creature has advantage on attack rolls against a target if at least one of the blessed creature's allies is within 5 feet of the target and the ally isn't incapacitated.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Mind of Two Moons (see notes)")
                         Notes.append("Channel Divinity: Mind of Two Moons - You can use your Channel Divinity to invoke the twofold arcana of Exandria's moons. By expending one use of Channel Divinity, you can cast a second concentration spell while already concentrating on a first spell, as long as both spells are on your list of Moon Domain spells. If you need to make a Constitution saving throw to maintain your concentration on both spells, you make the save with disadvantage. On a failure, you lose concentration on both spells.")
                     if clerlvl >= 8:
                         ClassNotes.append(f"Empowered Cantrips - Your cleric cantrips deal extra damage equal to your Wisdom Modifier, {WisMod}, minimum of 1.")
                     if clerlvl >= 17:
-                        ClassNotes.append()      
+                        ClassNotes.append("Eclipse of Ill Omen (see notes)")      
                         Notes.append("Eclipse of Ill Omen - You can call upon the vermillion moon Ruidus to flare in the sky above you, eclipsing all other light. Its power surrounds you even where the sky can't be seen, and even on other planes. As a bonus action, you can manifest an area of reddish, dim light in a 60-foot radius around you. In addition to the normal effects of dim light, creatures in the area make saving throws with disadvantage. When you create this eclipse, you can choose any number of creatures that are unaffected by it.\nThis eclipse lasts while you concentrate (as if concentrating on a spell) for up to 1 minute. Concentrating on this feature counts as concentrating on a Moon Domain spell for the purpose of your Mind of Two Moons feature.\nAdditionally, once per turn when you deal radiant damage to any creatures in this area of dim light, you can curse one of those creatures until the eclipse ends (no action required). A creature cursed in this way has its speed halved and can't regain hit points.\nOnce you use this feature, you can't use it again until you finish a long rest.")                         
                 if subclass[i] == "Nature Domain Cleric":
                     ClericNatureDomainSpells = []
@@ -1956,7 +1957,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)                  
                     ClassNotes.append("Acolyte of Nature - You learn one cantrip of your choice from the druid spell list.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Charm Animals and Plants (see notes)")
                         Notes.append("Channel Divinity: Charm Animals and Plants - You can use your Channel Divinity to charm animals and plants.\nAs an action, you present your holy symbol and invoke the name of your deity. Each beast or plant creature that can see you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is charmed by you for 1 minute or until it takes damage. While it is charmed by you, it is friendly to you and other creatures you designate.")
                     if clerlvl >= 6:
                         ClassNotes.append("Dampen Elements - When you or a creature within 30 feet of you takes acid, cold, fire, lightning, or thunder damage, you can use your reaction to grant resistance to the creature against that instance of the damage.")
@@ -1985,25 +1986,25 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClericNightDomainSpells.append("Dream")
                         ClericNightDomainSpells.append("Seeming") 
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericNightDomainSpells)                        
-                    ClassNotes.append()
+                    ClassNotes.append("Eye of Twilight(1) (see notes)")
                     Notes.append("Eye of Twilight(1) - A divine blessing grants you the ability to see more clearly in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in magical or nonmagical darkness as if it were only dim light. You can’t discern color in the darkness, only shades of gray.")
-                    ClassNotes.append()
+                    ClassNotes.append("Ward of Shadows (see notes)")
                     Notes.append(f"Ward of Shadows - You can create a ward of divine shadows to conceal yourself from an attacking enemy. When attacked by a creature you can see within 30 feet of you, you can use your reaction to impose disadvantage on the attack roll, as shadows envelop your form. An attacker that can’t be blinded is immune to this feature.\nYou can use this feature a {WisMod} times, a minimum of once; and regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Invocation of Night (see notes)")
                         Notes.append("Channel Divinity: Invocation of Night - You can use your Channel Divinity to harness the powers of night, clouding the vision of your foes in a shroud of darkness.\nAs an action, you present your holy symbol causing any source of mundane or magical light within 30 feet of you to be extinguished. Additionally, each hostile creature within 30 feet of you must make a Constitution saving throw. A creature who fails the saving throw is blinded for a number of rounds equal to your cleric level. A creature blinded in this way gets a new saving throw at the end of each of its turns to remove the effect. A creature that has total cover from you is not affected.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Eye of Twilight(2) (see notes)")
                         Notes.append("Eye of Twilight(2) - You can see in dim light within 120 feet of you as if it were bright light, and in magical or nonmagical darkness as if it were dim light. You can’t discern color in the darkness, only shades of gray.")                            
                         ClassNotes.append("Improved Ward - You can use your Ward of Shadows feature whenever a creature you can see within 30 feet of you attacks a creature besides yourself.")
                     if clerlvl >= 8:
-                        ClassNotes.append()
+                        ClassNotes.append("Veil of Dreams (see notes)")
                         Notes.append("Veil of Dreams - You gain mastery over magical sleep. When you cast the sleep spell, add your cleric level to the dice you roll to determine how many hit points of creatures the spell can affect.\nYou may choose the order in which creatures within the spell’s area are affected. If the first target chosen has too many hit points to be affected, the spell will instead target the next creature you have chosen that the spell could affect before affecting other targets.\nAdditionally, any creature you put to sleep cannot be woken until the start of your next turn. Otherwise, the sleep spell acts as normal.")
                         ClassNotes.append("Eyes of Twilight(2): Improved Darkvision - You can see normally in darkness, both magical and nonmagical within 120 feet.") 
                     if clerlvl >= 17:
-                        ClassNotes.append()      
+                        ClassNotes.append("Creature of the Night (see notes)")      
                         Notes.append("Creature of the Night - You can use your action to activate a supernatural aura of deep night. It lasts for 1 minute, or until you dismiss it using another action. You emit heavily obscuring darkness in a 30-foot radius and lightly obscuring shadows 50 feet beyond that. The darkness and shadows overlap and smother existing sources of light. Only light produced by a 9th level spell or similarly powerful effect can negate the darkness and shadows.\nEnemies within the shadows constantly feel the presence of hungry predators watching them, and become frightened as long as they remain inside the affected area. Enemies in the darkness are both blinded and frightened for as long as they remain within its area.")   
-                        ClassNotes.append()
+                        ClassNotes.append("Eye of Twilight(3) (see notes)")
                         Notes.append(f"Eye of Twilight(3) - Your eyes are able to see the truth hiding within darkness. You gain the ability to call upon the powers of your deity to grant yourself truesight within 120 feet of you for a number of minutes equal to {WisMod}, a minimum of 1 minute. Your truesight only functions while in conditions of magical or nonmagical darkness. Once you have used this feature, you cannot use it again until you have completed a long rest.")                      
                 if subclass[i] == "Order Domain Cleric":
                     ClericOrderDomainSpells = []
@@ -2028,13 +2029,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)  
                     SkillsList = [Intimidation, Persuasion]
                     PlProf = oneskillfromlist(param, SkillsProf, SkillsList)                    
-                    ClassNotes.append()
+                    ClassNotes.append("Voice of Authority (see notes)")
                     Notes.append("Voice of Authority - You can invoke the power of law to drive an ally to attack. If you cast a spell with a spell slot of 1st level or higher and target an ally with the spell, that ally can use their reaction immediately after the spell to make one weapon attack against a creature of your choice that you can see.\nIf the spell targets more than one ally, you choose the ally who can make the attack.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Order's Demand (see notes)")
                         Notes.append("Channel Divinity: Order's Demand - You can use your Channel Divinity to exert an intimidating presence over others.\nAs an action, you present your holy symbol, and each creature of your choice that can see or hear you within 30 feet of you must succeed on a Wisdom saving throw or be charmed by you until the end of your next turn or until the charmed creature takes any damage. You can also cause any of the charmed creatures to drop what they are holding when they fail the saving throw.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Embodiment of the Law (see notes)")
                         Notes.append(f"Embodiment of the Law - You become remarkably adept at channeling magical energy to compel others.\nIf you cast a spell of the enchantment school using a spell slot of 1st level or higher, you can change the spell's casting time to 1 bonus action for this casting, provided the spell's casting time is normally 1 action.\nYou can use this feature {WisMod} times, minimum of once; and you regain all expended uses of it when you finish a long rest.")
                     if clerlvl >= 8:
                         ClericDivineStrike = "1d8"
@@ -2042,7 +2043,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             ClericDivineStrike = "2d8"
                         ClassNotes.append(f"Divine Strike - You gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra {ClericDivineStrike} psychic damage to the target.")
                     if clerlvl >= 17:
-                        ClassNotes.append()                       
+                        ClassNotes.append("Order's Wrath (see notes)")                       
                         Notes.append("Order's Wrath - Enemies you designate for destruction wilt under the combined efforts of you and your allies. If you deal your Divine Strike damage to a creature on your turn, you can curse that creature until the start of your next turn. The next time one of your allies hits the cursed creature with an attack, the target also takes 2d8 psychic damage, and the curse ends. You can curse a creature in this way only once per turn.")
                 if subclass[i] == "Peace Domain Cleric":
                     ClericPeaceDomainSpells = []
@@ -2064,18 +2065,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericPeaceDomainSpells)                        
                     SkillsList = [Insight, Performance, Persuasion]
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)                    
-                    ClassNotes.append()
+                    ClassNotes.append("Emboldening Bond (see notes)")
                     Notes.append(f"Emboldening Bond - You can forge an empowering bond among people who are at peace with one another. As an action, you choose a number of willing creatures within 30 feet of you (this can include yourself) equal to your proficiency bonus, {ProfBonus}. You create a magical bond among them for 10 minutes or until you use this feature again. While any bonded creature is within 30 feet of another, the creature can roll a d4 and add the number rolled to an attack roll, an ability check, or a saving throw it makes. Each creature can add the d4 no more than once per turn.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Balm of Peace (see notes)")
                         Notes.append(f"Channel Divinity: Balm of Peace - You can use your Channel Divinity to make your very presence a soothing balm. As an action, you can move up to your speed, without provoking opportunity attacks, and when you move within 5 feet of any other creature during this action, you can restore a number of hit points to that creature equal to 2d6 + {WisMod} (minimum of 1 hit point). A creature can receive this healing only once whenever you take this action.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Protective Bond (see notes)")
                         Notes.append("Protective Bond - The bond you forge between people helps them protect each other. When a creature affected by your Emboldening Bond feature is about to take damage, a second bonded creature within 30 feet of the first can use its reaction to teleport to an unoccupied space within 5 feet of the first creature. The second creature then takes all the damage instead.")
                     if clerlvl >= 8:
                         ClassNotes.append("Potent Spellcasting - You add your Wisdom modifier to the damage you deal with any Cleric Cantrip.")
                     if clerlvl >= 17:
-                        ClassNotes.append()      
+                        ClassNotes.append("Expansive Bond (see notes)")      
                         Notes.append("Expansive Bond - The benefits of your Emboldening Bond and Protective Bond features now work when the creatures are within 60 feet of each other. Moreover, when a creature uses Protective Bond to take someone else's damage, the creature has resistance to that damage.")                                             
                 if subclass[i] == "Tempest Domain Cleric":
                     ClericTempestDomainSpells = []
@@ -2101,7 +2102,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                                                  
-                    ClassNotes.append()
+                    ClassNotes.append("Wrath of the Storm (see notes)")
                     Notes.append(f"Wrath of the Storm - You can thunderously rebuke attackers. When a creature within 5 feet of you that you can see hits you with an attack, you can use your reaction to cause the creature to make a Dexterity saving throw. The creature takes 2d8 lightning or thunder damage (your choice) on a failed saving throw, and half as much damage on a successful one.\nYou can use this feature {WisMod} times (a minimum of once). You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
                         ClassNotes.append("Channel Divinity: Destructive Wrath - You can use your Channel Divinity to wield the power of the storm with unchecked ferocity.\nWhen you roll lightning or thunder damage, you can use your Channel Divinity to deal maximum damage, instead of rolling.")
@@ -2134,7 +2135,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     clericdomain_str = ", ".join(f"{spell}" for spell in ClericTrickeryDomainSpells)                        
                     ClassNotes.append("Blessing of the Trickster - You can use your action to touch a willing creature other than yourself to give it advantage on Dexterity (Stealth) checks. This blessing lasts for 1 hour or until you use this feature again.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Invoke Duplicity (see notes)")
                         Notes.append("Channel Divinity: Invoke Duplicity - You can use your Channel Divinity to create an illusory duplicate of yourself.\nAs an action, you create a perfect illusion of yourself that lasts for 1 minute, or until you lose your concentration (as if you were concentrating on a spell). The illusion appears in an unoccupied space that you can see within 30 feet of you. As a bonus action on your turn, you can move the illusion up to 30 feet to a space you can see, but it must remain within 120 feet of you.\nFor the duration, you can cast spells as though you were in the illusion's space, but you must use your own senses. Additionally, when both you and your illusion are within 5 feet of a creature that can see the illusion, you have advantage on attack rolls against that creature, given how distracting the illusion is to the target.")
                     if clerlvl >= 6:
                         ClassNotes.append("Channel Divinity: Cloak of Shadows - You can use your Channel Divinity to vanish.\nAs an action, you become invisible until the end of your next turn. You become visible if you attack or cast a spell.")
@@ -2169,14 +2170,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                        
-                    ClassNotes.append()
+                    ClassNotes.append("Eyes of Night (see notes)")
                     Notes.append("Eyes of Night - You can see through the deepest gloom. You have darkvision out to a range of 300 feet. In that radius, you can see in dim light as if it were bright light and in darkness as if it were dim light.\nAs an action, you can magically share the darkvision of this feature with willing creatures you can see within 10 feet of you, up to a number of creatures equal to your Wisdom modifier (minimum of one creature). The shared darkvision lasts for 1 hour. Once you share it, you can't do so again until you finish a long rest, unless you expend a spell slot of any level to share it again.")
                     ClassNotes.append("Vigilant Blessing - The night has taught you to be vigilant. As an action, you give one creature you touch (including possibly yourself) advantage on the next initiative roll the creature makes. This benefit ends immediately after the roll or if you use this feature again.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Twilight Sanctuary (see notes)")
                         Notes.append(f"Channel Divinity: Twilight Sanctuary - You can use your Channel Divinity to refresh your allies with soothing twilight.\nAs an action, you present your holy symbol, and a sphere of twilight emanates from you. The sphere is centered on you, has a 30-foot radius, and is filled with dim light. The sphere moves with you, and it lasts for 1 minute or until you are incapacitated or die. Whenever a creature (including you) ends its turn in the sphere, you can grant that creature one of these benefits:\n- You grant it temporary hit points equal to 1d6 plus {clerlvl}.\n- You end one effect on it causing it to be charmed or frightened.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Steps of Night (see notes)")
                         Notes.append(f"Steps of Night - You can draw on the mystical power of night to rise into the air. As a bonus action when you are in dim light or darkness, you can magically give yourself a flying speed equal to your walking speed for 1 minute. You can use this bonus action {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if clerlvl >= 8:
                         ClericDivineStrike = "1d8"
@@ -2211,10 +2212,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)                        
                     ClassNotes.append(f"War Preist - Your god delivers bolts of inspiration to you while you are engaged in battle. When you use the Attack action, you can make one weapon attack as a bonus action.\nYou can use this feature {WisMod} times (a minimum of once). You regain all expended uses when you finish a long rest.")
                     if clerlvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: Guided Strike (see notes)")
                         Notes.append("Channel Divinity: Guided Strike - You can use your Channel Divinity to strike with supernatural accuracy. When you make an attack roll, you can use your Channel Divinity to gain a +10 bonus to the roll. You make this choice after you see the roll, but before the DM says whether the attack hits or misses.")
                     if clerlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Channel Divinity: War God's Blessing (see notes)")
                         Notes.append("Channel Divinity: War God's Blessing - When a creature within 30 feet of you makes an attack roll, you can use your reaction to grant that creature a +10 bonus to the roll, using your Channel Divinity. You make this choice after you see the roll, but before the DM says whether the attack hits or misses.")
                     if clerlvl >= 8:
                         ClericDivineStrike = "1d8"
@@ -2223,14 +2224,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClassNotes.append(f"Divine Strike - You gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra {ClericDivineStrike} damage of the same type dealt by the weapon to the target.")
                     if clerlvl >= 17:
                         ClassNotes.append("Avatar of Battle - You gain resistance to bludgeoning, piercing, and slashing damage from nonmagical weapons.")                     
-                ClassNotes.append()
+                ClassNotes.append("Domain Spells (see notes)")
                 Notes.append(f"Domain Spells - Each domain has a list of spells — its domain spells — that you gain certain cleric levels. Currently your Domain Spells are: {clericdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn’t count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn’t appear on the cleric spell list, the spell is nonetheless a cleric spell for you.")
                 ClericSpellSlot1 = 4
                 ClericSpellSlot2 = 2
             if clerlvl >= 4:
                 ClericCantripsKnown = 4
                 ClericSpellSlot2 = 3
-                ClassNotes.append()
+                ClassNotes.append("Cantrip Versatility (see notes)")
                 Notes.append("Cantrip Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the cleric spell list.")                
             if clerlvl >= 5:
                 ClericSpellSlot3 = 2
@@ -2251,7 +2252,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClericSpellSlot4 = 1
             if clerlvl >= 8:
                 ClericSpellSlot4 = 2
-                ClassNotes.append()
+                ClassNotes.append("Blessed Strikes (see notes)")
                 Notes.append("Blessed Strikes - You are blessed with divine might in battle. When a creature takes damage from one of your cantrips or weapon attacks, you can also deal 1d8 radiant damage to that creature. Once you deal this damage, you can't use this feature again until the start of your next turn. If you have the Divine Strike or Potent Spellcasting Features, this replaces it.")
             if clerlvl >= 9:
                 ClericSpellSlot4 = 3
@@ -2275,7 +2276,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClericSpellSlot6 = 2
             if clerlvl == 20:
                 ClericSpellSlot7 = 2
-                ClassNotes.append("Divine Intervention(2) - Your call for intervention succeeds automatically, no roll required.")
+                ClassNotes.append("Divine Intervention(2) (see notes)")
+                Notes.append("Divine Intervention(2) - Your call for intervention succeeds automatically, no roll required.")
             Notes.append(f"You have {ClericCantripsKnown} cantrips available to you.")
             Notes.append(f"The number of first level spell slots you have as a Cleric is: {ClericSpellSlot1}.")
             if ClericSpellSlot2 != 0:
@@ -2296,15 +2298,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 Notes.append(f"The number of ninth level spell slots you have as a Cleric is: {ClericSpellSlot9}.")  
             if clerlvl >= 2:      
                 ChannelDivinity = 1
-                ClassNotes.append()
+                ClassNotes.append("Channel Divinity (see notes)")
                 if ((clerlvl >= 6) and (clerlvl < 18)):
                     ChannelDivinity = 2
                 if clerlvl >= 18:
                     ChannelDivinity = 3
                 Notes.append(f"Channel Divinity - You gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.\nSome Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC.\nYou can use Channel Divinity {ChannelDivinity} times between rests, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.")                                                   
                 Notes.append("Channel Divinity: Turn Undead - As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.\nA turned creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action.")
-                Notes.append(f"Channel Divinity: Harness Divine Power - You can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be {math.ceil(ProfBonus/2)}.")
-                              
+                Notes.append(f"Channel Divinity: Harness Divine Power - You can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which can be {math.ceil(ProfBonus/2)}.")                              
         if Class[i] == "Druid":
             if ((param == "N") or (submulticlass == "N")):
                 drulvl = plLvl
@@ -2434,12 +2435,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 DruidSpellSlot7 = 0
                 DruidSpellSlot8 = 0
                 DruidSpellSlot9 = 0   
-            ClassNotes.append()
+            ClassNotes.append("Druidic (see notes)")
             Notes.append("Druidic - You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message’s presence with a successful DC 15 Wisdom (Perception) check but can’t decipher it without magic.")
             if drulvl >= 2: 
                 DruidSpellSlot1 = 3 
-                ClassNotes.append()
-                ClassNotes.append()
+                ClassNotes.append("Wild Shape (see notes)")
+                ClassNotes.append("Wild Companion (see notes)")
                 WildShapeCR = "1/4"
                 WildShapeLimitations = "No flying or swimming speed"
                 if ((drulvl >= 4) and (drulvl < 8)):
@@ -2485,36 +2486,36 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "N":
                         subclass[i] = random.choice(Dru)                               
                 if subclass[i] == "Circle of the Blighted Druid":
-                    ClassNotes.append()
+                    ClassNotes.append("Defile Ground(1) (see notes)")
                     Notes.append("Defile Ground(1) - You can use a bonus action to corrupt a patch of land or an area of water in a 10-foot radius centered on a point within 60 feet of you. This corruption lasts for 1 minute. The corrupted area is difficult terrain for creatures that are hostile to you. Additionally, when a creature in the area takes damage from an attack or spell for the first time on a turn, it takes an extra 1d4 necrotic damage. You can move this patch of corruption up to 30 feet as a bonus action. Flying creatures are unaffected by the corruption.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.")
-                    ClassNotes.append()
+                    ClassNotes.append("Blighted Shape (see notes)")
                     Notes.append("Blighted Shape - Your physical form begins to show effects of the corruption you wield, tracing blackened veins across your skin, producing gnarled, bony protrusions, or other eerie phenomena. You gain proficiency in the Charisma (Intimidation) skill.\nAdditionally, while you are transformed by your Wild Shape feature, you gain a +2 bonus to AC as gnarled spines protrude from your body. Your beast form also gains darkvision with a radius of 60 feet, or an additional 60 feet of darkvision if it already has that sense.")                    
                     if drulvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Call of the Shadowseeds (see notes)")
                         Notes.append(f"Call of the Shadowseeds - You learn to summon the feral children of the forest from the life force of your enemies. When a creature that is not undead or a construct takes damage within the area of your Defile Ground feature, you can use your reaction to summon a blighted sapling in an unoccupied space within 5 feet of the creature. You can direct the sapling to make an attack against any creature within 5 feet of it as a part of this reaction. The sapling then acts on your initiative, obeying your verbal commands.\nThe blighted sapling remains in your service until it's reduced to 0 hit points, until the end of your next long rest, or until you summon another sapling, at which point it crumbles into foul-smelling mulch. You can use this feature {ProfBonus} times, regaining all expended uses when you finish a long rest.\nThe stats for this sapling are available in the 'Tal'Dorei Campaign Setting Reborn' sourcebook.")
                     if drulvl >= 10:
                         DefileGroundDmg = "1d6"
                         if ((drulvl >= 10) and (drulvl < 14)):
                             DefileGroundDmg = "1d8"
-                        ClassNotes.append()
+                        ClassNotes.append("Defile Ground(2) (see notes)")
                         Notes.append(f"Defile Ground(2) - The area of your defiled ground increases to a 20-foot radius. Additionally, the extra damage dealt by your defiled ground increases to {DefileGroundDmg}.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.")
-                        ClassNotes.append()
+                        ClassNotes.append("Foul Conjuration (see notes)")
                         Notes.append("Foul Conjuration - The creatures you conjure are malformed and bloated with toxins. Any beast, fey, or plant (including your blighted sapling) summoned or created by your spells or class features gains the following traits:\nBlighted Resilience. The creature has immunity to necrotic and poison damage and to the poisoned condition.\nToxic Demise - When the creature is reduced to 0 hit points, it explodes in a burst of toxic mulch or fetid viscera. Each creature within 5 feet of the exploding creature must succeed on a Constitution saving throw against your spell save DC or take necrotic damage based on the creature's challenge rating (see the attatched note for Toxic Demise Damage). As an action, you can also cause a summoned creature to explode, immediately killing it.")
                         Notes.append(f"Toxic Demise Damage - if the CR of the Creature is 1/4 or lower, the damage is 1d4 necrotic damage.\nIf the CR is 1/2, the damage is 1d6 necrotic damage.\nIf the CR is 1 or higher, the damage is a number of d8s of necrotic damage equal to the creature's challenge rating.\nIf there is no challenge rating, the damage is a number of d6s of necrotic damage equal to your Proficiency Bonus, or {ProfBonus}d6.")
                     if drulvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Incarnation of Corruption (see notes)")
                         Notes.append("Incarnation of Corruption - Your physical form begins to take on the tainted traits of the land you are bonded to. Your skin grows ashen, and your eyes darken or turn completely white. Spines and jagged spurs emerge from your body, granting you resistance to necrotic damage and a +2 bonus to AC.\nAdditionally, whenever you start your turn within the radius of the corruption created by your Defile Ground feature, you can use a bonus action to gain temporary hit points equal to {ProfBonus}.")
                 if subclass[i] == "Circle of Dreams Druid":
-                    ClassNotes.append()
+                    ClassNotes.append("Balm of the Summer Court (see notes)")
                     Notes.append(f"Balm of the Summer Court - You become imbued with the blessings of the Summer Court. You are a font of energy that offers respite from injuries. You have a pool of fey energy represented by a number of d6s equal to your druid level, or {drulvl}d6.\nAs a bonus action, you can choose an ally you can see within 120 feet of you and spend a number of those dice equal to half your druid level or less. Roll the spent dice and add them together. The target regains a number of hit points equal to the total. The target also gains 1 temporary hit point per die spent.\nYou regain the expended dice when you finish a long rest.")
                     if drulvl >= 6:
-                        ClassNotes.append()
-                        Notes.append("At 6th level, home can be wherever you are. During a short or long rest, you can invoke the shadowy power of the Gloaming Court to help guard your respite. At the start of the rest, you touch a point in space, and an invisible, 30-foot-radius sphere of magic appears, centered on that point. Total cover blocks the sphere.\nWhile within the sphere, you and your allies gain a +5 bonus to Dexterity (Stealth) and Wisdom (Perception) checks, and any light from open flames in the sphere (a campfire, torches, or the like) isn't visible outside it.\nThe sphere vanishes at the end of the rest or when you leave the sphere.")
+                        ClassNotes.append("Hearth of Moonlight and Shadow (see notes)")
+                        Notes.append("Hearth of Moonlight and Shadow - Home can be wherever you are. During a short or long rest, you can invoke the shadowy power of the Gloaming Court to help guard your respite. At the start of the rest, you touch a point in space, and an invisible, 30-foot-radius sphere of magic appears, centered on that point. Total cover blocks the sphere.\nWhile within the sphere, you and your allies gain a +5 bonus to Dexterity (Stealth) and Wisdom (Perception) checks, and any light from open flames in the sphere (a campfire, torches, or the like) isn't visible outside it.\nThe sphere vanishes at the end of the rest or when you leave the sphere.")
                     if drulvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Hidden Paths (see notes)")
                         Notes.append(f"Hidden Paths - You can use the hidden, magical pathways that some fey use to traverse space in a blink of an eye. As a bonus action on your turn, you can teleport up to 60 feet to an unoccupied space you can see. Alternatively, you can use your action to teleport one willing creature you touch up to 30 feet to an unoccupied space you can see.\nYou can use this feature a number of times equal to your Wisdom modifier, {Wismod}, a minimum of once; and you regain all expended uses of it when you finish a long rest.")
                     if drulvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Walker in Dreams (see notes)")
                         Notes.append("Walker in Dreams - The magic of the Feywild grants you the ability to travel mentally or physically through dreamlands.\nWhen you finish a short rest, you can cast one of the following spells, without expending a spell slot or requiring material components: Dream (with you as the messenger), Scrying, or Teleportation Circle.\nThis use of Teleportation Circle is special. Rather than opening a portal to a permanent teleportation circle, it opens a portal to the last location where you finished a long rest on your current plane of existence. If you haven't taken a long rest on your current plane, the spell fails but isn't wasted.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "Circle of the Land Druid":
                     DruidCircleLandsSpells = []
@@ -2635,18 +2636,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             DruidCircleLandsSpells.append("Cloudkill")
                             DruidCircleLandsSpells.append("Insect Plague")                                                  
                     ClassNotes.append("Bonus Cantrip - You learn one additional druid cantrip of your choice.")
-                    ClassNotes.append()
+                    ClassNotes.append("Natural Recovery (see notes)")
                     Notes.append("Natural Recovery - You can regain some of your magical energy by sitting in meditation and communing with nature. During a short rest, you choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your druid level (rounded up), and none of the slots can be 6th level or higher. You can't use this feature again until you finish a long rest.\nFor example, when you are a 4th-level druid, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level slot or two 1st-level slots.")
                     druid_circle_spells = ", ".join(f"{spell}" for spell in DruidCircleLandsSpells)
-                    ClassNotes.append()
+                    ClassNotes.append("Circle Spells (see notes)")
                     Notes.append(f"Circle Spells - Your mystical connection to the land infuses you with the ability to cast certain spells. You gain access to different spells based on your Druid Level and your spells acquired change based on the land you chose. Your current list of spells are: {druid_circle_spells}\nOnce you gain access to a circle spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the druid spell list, the spell is nonetheless a druid spell for you.")
                     if drulvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Land's Stride (see notes)")
                         Notes.append("Land's Stride - Moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\nIn addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such as those created by the Entangle spell.")
                     if drulvl >= 10:
                         ClassNotes.append("Nature's Ward - You can't be charmed or frightened by elementals or fey, and you are immune to poison and disease.")
                     if drulvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Nature's Sanctuary (see notes)")
                         Notes.append("Nature's Sanctuary - Creatures of the natural world sense your connection to nature and become hesitant to attack you. When a beast or plant creature attacks you, that creature must make a Wisdom saving throw against your druid spell save DC. On a failed save, the creature must choose a different target, or the attack automatically misses. On a successful save, the creature is immune to this effect for 24 hours.\nThe creature is aware of this effect before it makes its attack against you.")
                 if subclass[i] == "Circle of the Moon Druid":
                     ClassNotes.append("Combat Wild Shape - You gain the ability to use Wild Shape on your turn as a bonus action, rather than as an action.\nAdditionally, while you are transformed by Wild Shape, you can use a bonus action to expend one spell slot to regain 1d8 hit points per level of the spell slot expended.")
@@ -2661,16 +2662,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 if subclass[i] == "Circle of the Sheppard Druid":
                     if Sylv not in PlLang:
                         PlLang.append(Sylv)
-                    ClassNotes.append()
+                    ClassNotes.append("Speech of the Woods (see notes)")
                     Notes.append("Speech of the Woods - You gain the ability to converse with beasts and many fey.\nBeasts can understand your speech, and you gain the ability to decipher their noises and motions. Most beasts lack the intelligence to convey or understand sophisticated concepts, but a friendly beast could relay what it has seen or heard in the recent past. This ability doesn’t grant you any special friendship with beasts, though you can combine this ability with gifts to curry favor with them as you would with any nonplayer character.")
-                    ClassNotes.append()
+                    ClassNotes.append("Spirit Totem (see notes)")
                     Notes.append("Spirit Totem - You gain the ability to call forth nature spirits and use them to influence the world around you.\nAs a bonus action, you can magically summon an incorporeal spirit to a point you can see within 60 feet of you. The spirit creates an aura in a 30-foot radius around that point. It counts as neither a creature nor an object, though it has the spectral appearance of the creature it represents. As a bonus action, you can move the spirit up to 60 feet to a point you can see.\nThe spirit persists for 1 minute. Once you use this feature, you can’t use it again until you finish a short or long rest.\nThe effect of the spirit’s aura depends on the type of spirit you summon from the options below.\nBear Spirit - The bear spirit grants you and your allies its might and endurance. Each creature of your choice in the aura when the spirit appears gains temporary hit points equal to 5 + your druid level. In addition, you and your allies gain advantage on Strength checks and Strength saving throws while in the aura.\nHawk Spirit - The hawk spirit is a consummate hunter, aiding you and your allies with its keen sight. When a creature makes an attack roll against a target in the spirit’s aura, you can use your reaction to grant advantage to that attack roll. In addition, you and your allies have advantage on Wisdom (Perception) checks while in the aura.\nUnicorn Spirit - The unicorn spirit lends its protection to those nearby. You and your allies gain advantage on all ability checks made to detect creatures in the spirit’s aura. In addition, if you cast a spell using a spell slot that restores hit points to any creature inside or outside the aura, each creature of your choice in the aura also regains hit points equal to {drulvl}.")
                     if drulvl >= 6:
                         ClassNotes.append("Mighty Summoner - Beasts and fey that you conjure are more resilient than normal. Any beast or fey summoned or created by a spell that you cast gains two benefits:\n- The creature appears with more hit points than normal: 2 extra hit points per Hit Die it has.\n- The damage from its natural weapons is considered magical for the purpose of overcoming immunity and resistance to nonmagical attacks and damage.")
                     if drulvl >= 10:
                         ClassNotes.append(f"Guardian Spirit - Your Spirit Totem safeguards the beasts and fey that you call forth with your magic. When a beast or fey that you summoned or created with a spell ends its turn in your Spirit Totem aura, that creature regains a number of hit points equal to {math.floor(drulvl/2)}.")
                     if drulvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Faithful Summons (see notes)")
                         Notes.append("Faithful Summons - The nature spirits you commune with protect you when you are the most defenseless. If you are reduced to 0 hit points or are incapacitated against your will, you can immediately gain the benefits of Conjure Animals as if it were cast with a 9th-level spell slot. It summons four beasts of your choice that are challenge rating 2 or lower. The conjured beasts appear within 20 feet of you. If they receive no commands from you, they protect you from harm and attack your foes. The spell lasts for 1 hour, requiring no concentration, or until you dismiss it (no action required).\nOnce you use this feature, you can’t use it again until you finish a long rest.")
                 if subclass[i] == "Circle of Spores Druid":
                     DruidCircleSporesSpells = []
@@ -2694,20 +2695,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         HaloSporesDmg = "1d8"
                     if drulvl >= 14:
                         HaloSporesDmg = "1d10"
-                    ClassNotes.append()
+                    ClassNotes.append("Halo of Spores (see notes)")
                     Notes.append(f"Halo of Spores - You are surrounded by invisible, necrotic spores that are harmless until you unleash them on a creature nearby. When a creature you can see moves into a space within 10 feet of you or starts its turn there, you can use your reaction to deal {HaloSporesDmg} necrotic damage to that creature unless it succeeds on a Constitution saving throw against your spell save DC. The necrotic damage increases to 1d6 at 6th level, 1d8 at 10th level, and 1d10 at 14th level.")
-                    ClassNotes.append()
+                    ClassNotes.append("Symbiotic Entity (see notes)")
                     Notes.append(f"Symbiotic Entity - You gain the ability to channel magic into your spores. As an action, you can expend a use of your Wild Shape feature to awaken those spores, rather than transforming into a beast form, and you gain {5*clerlvl} temporary hit points. While this feature is active, you gain the following benefits:\n- When you deal your Halo of Spores damage, roll the damage die a second time and add it to the total.\n- Your melee weapon attacks deal an extra 1d6 poison damage to any target they hit.\nThese benefits last for 10 minutes, until you lose all these temporary hit points, or until you use your Wild Shape again.")
                     if drulvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Fungal Infestation (see notes)")
                         Notes.append("Fungal Infestation - Your spores gain the ability to infest a humanoid corpse and animate it.\nIf a beast or humanoid that is Small or Medium dies within 10 feet of you, you can use your reaction to animate it, causing it to stand up immediately with 1 hit point. The creature uses the zombie statistics. It remains animate for 1 hour, after which time it collapses and dies.\nIn combat, the zombie's turn is immediately after yours. It obeys your mental commands, and the only action it can take is the Attack action, making one melee attack.")
                     if drulvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Spreading Spores (see notes)")
                         Notes.append("Spreading Spores - You gain the ability to seed an area with deadly spores. As a bonus action while your Symbiotic Entity feature is active, you can hurl spores up to 30 feet away, where they swirl in a 10-foot cube for 1 minute. The spores disappear early if you use this feature again, if you dismiss them as a bonus action, or if your Symbiotic Entity feature is no longer active.\nWhenever a creature moves into the cube or starts its turn there, that creature takes your Halo of Spores damage, unless the creature succeeds on a Constitution saving throw against your spell save DC. A creature can take this damage no more than once per turn.\nWhile the cube of spores persists, you can't use your Halo of Spores reaction.")
                     if drulvl >= 14:
                         ClassNotes.append("Fungal Body - The fungal spores in your body alter you: you can’t be blinded, deafened, frightened, or poisoned, and any critical hit against you counts as a normal hit, unless you are incapacitated.")    
                     if drulvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Circle Spells (see notes)")
                         Notes.append("Circle Spells - Your symbiotic link to fungus and your ability to tap into the cycle of life and death grants you access to certain spells. You learn the Chill Touch cantrip. Currently the spells you know from this are: {druidcircle_str}.\nOnce you gain access to one of these spells, you always have it prepared, and it doesn’t count against the number of spells you can prepare each day. If you gain access to a spell that doesn’t appear on the druid spell list, the spell is nonetheless a druid spell for you.")
                 if subclass[i] == "Circle of the Stars Druid":
                     SM1 = "A scroll covered with depictions of constellations"
@@ -2718,15 +2719,15 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     SM6 = "Glass disks that depict constellations"
                     SM = [SM1, SM2, SM3, SM4, SM5, SM6]
                     StarMap = random.choice(SM)
-                    ClassNotes.append()
+                    ClassNotes.append("Star Map (see notes)")
                     Notes.appent(f"Star Map - You've created a star chart as part of your heavenly studies. It is a Tiny object and can serve as a spellcasting focus for your druid spells. The form of this Star Map is: {StarMap}.\nWhile holding this map, you have these benefits:\n- You know the Guidance cantrip.\n- You have the Guiding Bolt spell prepared. It counts as a druid spell for you, and it doesn't count against the number of spells you can have prepared.\n- You can cast Guiding Bolt without expending a spell slot. You can do so a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.\nIf you lose the map, you can perform a 1-hour ceremony to magically create a replacement. This ceremony can be performed during a short or long rest, and it destroys the previous map.")
-                    ClassNotes.append()
+                    ClassNotes.append("Starry Form (see notes)")
                     Notes.append(f"Starry Form - As a bonus action, you can expend a use of your Wild Shape feature to take on a starry form, rather than transforming into a beast.\nWhile in your starry form, you retain your game statistics, but your body becomes luminous; your joints glimmer like stars, and glowing lines connect them as on a star chart. This form sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The form lasts for 10 minutes. It ends early if you dismiss it (no action required), are incapacitated, die, or use this feature again.\nWhenever you assume your starry form, choose which of the following constellations glimmers on your body; your choice gives you certain benefits while in the form:\nArcher - A constellation of an archer appears on you. When you activate this form, and as a bonus action on your subsequent turns while it lasts, you can make a ranged spell attack, hurling a luminous arrow that targets one creature within 60 feet of you. On a hit, the attack deals radiant damage equal to 1d8 + your Wisdom modifier, {WisMod}.\nChalice - A constellation of a life-giving goblet appears on you. Whenever you cast a spell using a spell slot that restores hit points to a creature, you or another creature within 30 feet of you can regain hit points equal to 1d8 + your Wisdom modifier, {WisMod}.\nDragon - A constellation of a wise dragon appears on you. When you make an Intelligence or a Wisdom check or a Constitution saving throw to maintain concentration on a spell, you can treat a roll of 9 or lower on the d20 as a 10.")
                     if drulvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Cosmic Omen (see notes)")
                         Notes.append(f"Cosmic Omen - Whenever you finish a long rest, you can consult your Star Map for omens. When you do so, roll a die. Until you finish your next long rest, you gain access to a special reaction based on whether you rolled an even or an odd number on the die:\nWeal (even) - Whenever a creature you can see within 30 feet of you is about to make an attack roll, a saving throw, or an ability check, you can use your reaction to roll a d6 and add the number rolled to the total.\nWoe (odd) - Whenever a creature you can see within 30 feet of you is about to make an attack roll, a saving throw, or an ability check, you can use your reaction to roll a d6 and subtract the number rolled from the total.\nYou can use this reaction {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if drulvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Twinkling Constellations (see notes)")
                         Notes.append("Twinkling Constellations - The constellations of your Starry Form improve. The 1d8 of the Archer and the Chalice becomes 2d8, and while the Dragon is active, you have a flying speed of 20 feet and can hover.\nMoreover, at the start of each of your turns while in your Starry Form, you can change which constellation glimmers on your body.")
                     if drulvl >= 14:
                         ClassNotes.append("Full of Stars - While in your Starry Form, you become partially incorporeal, giving you resistance to bludgeoning, piercing, and slashing damage.")
@@ -2748,25 +2749,25 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         DruidCircleWildfireSpells.append("Flame Strike")
                         DruidCircleWildfireSpells.append("Mass Cure Wounds") 
                     druidcircle_str = ", ".join(f"{spell}" for spell in DruidCircleWildfireSpells)                      
-                    ClassNotes.append()
+                    ClassNotes.append("Summon Wildfire Spirit (see notes)")
                     Notes.append("Summon Wildfire Spirit - You can summon the primal spirit bound to your soul. As an action, you can expend one use of your Wild Shape feature to summon your Wildfire Spirit, rather than assuming a beast form.\nThe spirit appears in an unoccupied space of your choice that you can see within 30 feet of you. Each creature within 10 feet of the spirit (other than you) when it appears must succeed on a Dexterity saving throw against your spell save DC or take 2d6 fire damage.\nThe spirit is friendly to you and your companions and obeys your commands. See this creature's game statistics in the Wildfire Spirit stat block, which uses your proficiency bonus (PB) in several places. You determine the spirit's appearance. Some spirits take the form of a humanoid figure made of gnarled branches covered in flame, while others look like beasts wreathed in fire.\nIn combat, the spirit shares your initiative count, but it takes its turn immediately after yours. The only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the spirit can take any action of its choice, not just Dodge.\nThe spirit manifests for 1 hour, until it is reduced to 0 hit points, until you use this feature to summon the spirit again, or until you die.")
                     if drulvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Enhanced Bond (see notes)")
                         Notes.append("Enhanced Bond - The bond with your wildfire spirit enhances your destructive and restorative spells. Whenever you cast a spell that deals fire damage or restores hit points while your wildfire spirit is summoned, roll a d8, and you gain a bonus equal to the number rolled to one damage or healing roll of the spell.\nIn addition, when you cast a spell with a range other than self, the spell can originate from you or your Wildfire Spirit.")
                     if drulvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Cauterizing Flames (see notes)")
                         Notes.append(f"Cauterizing Flames - You gain the ability to turn death into magical flames that can heal or incinerate. When a Small or larger creature dies within 30 feet of you or your wildfire spirit, a harmless spectral flame springs forth in the dead creature's space and flickers there for 1 minute. When a creature you can see enters that space, you can use your reaction to extinguish the spectral flame there and either heal the creature or deal fire damage to it. The healing or damage equals 2d10 + {WisMod}.\nYou can use this reaction a number of times equal to {ProfBonus}, and you regain all expended uses when you finish a long rest.")
                     if drulvl >= 14:
                         ClassNotes.append("Blazing Revival - The bond with your Wildfire Spirit can save you from death. If the spirit is within 120 feet of you when you are reduced to 0 hit points and thereby fall unconscious, you can cause the spirit to drop to 0 hit points. You then regain half your hit points and immediately rise to your feet.\nOnce you use this feature, you can't use it again until you finish a long rest.")    
                     if drulvl >= 2:
-                        ClassNotes.append()
+                        ClassNotes.append("Circle Spells (see notes)")
                         Notes.append("Circle Spells - You have formed a bond with a wildfire spirit, a primal being of creation and destruction. Your link with this spirit grants you access to some spells when you reach certain levels in this class, which are currently {druidcircle_str}.\nOnce you gain access to one of these spells, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the druid spell list, the spell is nonetheless a druid spell for you.")
                 DruidSpellSlot1 = 4
                 DruidSpellSlot2 = 2
             if drulvl >= 4:
                 DruidCantripsKnown = 3
                 DruidSpellSlot2 = 3
-                ClassNotes.append()
+                ClassNotes.append("Cantrip Versatility (see notes)")
                 Notes.append("Cantrip Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the druid spell list.")
             if drulvl >= 5:
                 DruidSpellSlot3 = 2
@@ -2793,13 +2794,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if drulvl >= 18:
                 DruidSpellSlot5 = 3
                 ClassNotes.append("Timeless Body - The primal magic that you wield causes you to age more slowly. For every 10 years that pass, your body ages only 1 year.")
-                ClassNotes.append()
+                ClassNotes.append("Beast Spells (see notes)")
                 Notes.append("Beast Spells - You can cast many of your druid spells in any shape you assume using Wild Shape. You can perform the somatic and verbal components of a druid spell while in a beast shape, but you aren’t able to provide material components.")
             if drulvl >= 19:
                 DruidSpellSlot6 = 2
             if drulvl == 20:
                 DruidSpellSlot7 = 2
-                ClassNotes.append()
+                ClassNotes.append("Archdruid (see notes)")
                 Notes.append("Archdruid - You can use your Wild Shape an unlimited number of times.\nAdditionally, you can ignore the verbal and somatic components of your druid spells, as well as any material components that lack a cost and aren’t consumed by a spell. You gain this benefit in both your normal shape and your beast shape from Wild Shape.")                
             Notes.append(f"You have {DruidCantripsKnown} cantrips available to you.")
             Notes.append(f"The number of first level spell slots you have as a Druid is: {DruidSpellSlot1}.")
@@ -3001,9 +3002,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                                                                              
-            ClassNotes.append()
+            ClassNotes.append("Fighting Style (see notes)")
             Notes.append("Fighting Style - You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.\n- Archery - You gain a +2 bonus to attack rolls you make with ranged weapons.\n- Blind Fighting - You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\n- Defense - While you are wearing armor, you gain a +1 bonus to AC.\n- Dueling - When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.\n- Great Weapon Fighting - When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.\n- Interception - When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.\n- Protection - When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.\n- Superior Technique - You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice). You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.\n- Thrown Weapon Fighting - You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.\n- Two-Weapon Fighting - When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.\n- Unarmed Fighting - Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier on a hit. If you aren't wielding any weapons or a shield when you make the attack roll, the d6 becomes a d8. At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you.")
-            ClassNotes.append()
+            ClassNotes.append("Second Wind (see notes)")
             Notes.append(f"Second Wind - You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + {figlvl}. Once you use this feature, you must finish a short or long rest before you can use it again.")
             if figlvl >= 2:
                 ClassNotes.append("Action Surge(1) - You can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action.\nOnce you use this feature, you must finish a short or long rest before you can use it again.")
@@ -3054,10 +3055,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         subclass[i] = random.choice(Fig)                    
                 if subclass[i] == "Arcane Archer Archetype Fighter":
                     ClassNotes.append("Arcane Archer Lore - You learn magical theory or some of the secrets of nature – typical for practitioners of of this elven martial tradition. You choose to gain proficiency in either the Arcana or the Nature skill, and you choose to learn either the Prestidigitation or Druidcraft cantrip.")
-                    ClassNotes.append()
+                    ClassNotes.append("Arcane Shot (see notes)")
                     Notes.append("Arcane Shot - You learn to unleash special magical effects with some of your shots. When you gain this feature, you learn two Arcane Shot options of your choice (see the Fighter Arcane Archer Arcane Shot table).\nOnce per turn when you fire an arrow from a shortbow or longbow as part of the Attack action, you can apply one of your Arcane Shot options to that arrow. You decide to use the option when the arrow hits, unless the option doesn’t involve an attack roll. You have two uses of this ability, and you regain all expended uses of it when you finish a short or long rest.\nYou gain an additional Arcane Shot option of your choice when you reach certain levels in this class: 7th, 10th, 15th, and 18th level. Each option also improves when you become an 18th-level fighter.")
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Magic Arrow (see notes)")
                         Notes.append("Magic Arrow - You gain the ability to infuse arrows with magic. Whenever you fire a nonmagical arrow from a shortbow or longbow, you can make it magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage. The magic fades from the arrow immediately after it hits or misses its target.")
                         ClassNotes.append("Curving Shot - You learn how to direct an errant arrow toward a new target. When you make an attack roll with a magic arrow and miss, you can use a bonus action to reroll the attack roll against a different target within 60 feet of the original target.")
                     if figlvl >= 15:
@@ -3068,11 +3069,11 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         SuperiorityDie = "five"
                     if figlvl >= 15:
                         SuperiorityDie = "six"
-                        ClassNotes.append()
+                    ClassNotes.append("Combat Superiority (see notes)")
                     Notes.append(f"Combat Superiority - You learn maneuvers that are fueled by special dice called superiority dice.\nManeuvers - You learn three maneuvers (from Maneuvers table) of your choice. Many maneuvers enhance an attack in some way. You can use only one maneuver per attack. You learn two additional maneuvers of your choice at 7th, 10th, and 15th level. Each time you learn new maneuvers, you can also replace one maneuver you know with a different one.\nSuperiority Dice - You have {SuperiorityDie} superiority dice, which are d8s. A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.\nSaving Throws - Some of your maneuvers require your target to make a saving throw to resist the maneuver's effects. The saving throw DC is calculated as follows:\nManeuver save DC = 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice)")
                     PlProf = artisantools(param, PlProf)                    
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Know Your Enemy (see notes)")
                         Notes.append("Know Your Enemy - If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice:\n- Strength score\n- Dexterity score\n- Constitution score\n- Armor Class\n- Current hit points\n- Total class levels, if any\n- Fighter class levels, if any")
                         ClassNotes.append("")
                     if figlvl >= 10:
@@ -3105,20 +3106,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf = oneskillfromlist(param, SkillsProf, SkillsList)
                         if CavFigChoice == "Language":
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)                        
-                    ClassNotes.append()
+                    ClassNotes.append("Born to the Saddle (see notes)")
                     Notes.append("Born to the Saddle - Your mastery as a rider becomes apparent. You have advantage on saving throws made to avoid falling off your mount. If you fall off your mount and descend no more than 10 feet, you can land on your feet if you’re not incapacitated.\nFinally, mounting or dismounting a creature costs you only 5 feet of movement, rather than half your speed.")
-                    ClassNotes.append()
+                    ClassNotes.append("Unwavering Mark (see notes)")
                     Notes.append(f"Unwavering Mark - You can menace your foes, foiling their attacks and punishing them for harming others. When you hit a creature with a melee weapon attack, you can mark the creature until the end of your next turn. This effect ends early if you are incapacitated or you die, or if someone else marks the creature.\nWhile it is within 5 feet of you, a creature marked by you has disadvantage on any attack roll that doesn't target you.\nIn addition, if a creature marked by you deals damage to anyone other than you, you can make a special melee weapon attack against the marked creature as a bonus action on your next turn. You have advantage on the attack roll, and if it hits, the attack's weapon deals extra damage to the target equal to {math.ceil(figlvl/2)}.\nRegardless of the number of creatures you mark, you can make this special attack a number of times equal to your Strength modifier (a minimum of once), or {StrMod}, and you regain all expended uses of it when you finish a long rest.")               
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Warding Maneuver (see notes)")
                         Notes.append(f"Warding Maneuver - You learn to fend off strikes directed at you, your mount, or other creatures nearby. If you or a creature you can see within 5 feet of you is hit by an attack, you can roll 1d8 as a reaction if you're wielding a melee weapon or a shield. Roll the die, and add the number rolled to the target's AC against that attack. If the attack still hits, the target has resistance against the attack's damage.\nYou can use this feature a number of times equal to your Constitution modifier (a minimum of once), {ConMod}, and you regain all expended uses of it when you finish a long rest.")
                     if figlvl >= 10:
                         ClassNotes.append("Hold the Line - You become a master of locking down your enemies. Creatures provoke an opportunity attack from you when they move 5 feet or more while within your reach, and if you hit a creature with an opportunity attack, the target's speed is reduced to 0 until the end of the current turn.")
                     if figlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Ferocious Charger (see notes)")
                         Notes.append("Ferocious Charger - You can run down your foes, whether you're mounted or not. If you move at least 10 feet in a straight line right before attacking a creature and you hit it with the attack, that target must succeed on a Strength saving throw (DC 8 + your proficiency bonus + your Strength modifier) or be knocked prone. You can use this feature only once on each of your turns.")
                     if figlvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Vigilant Defender (see notes)")
                         Notes.append("Vigilant Defender - You respond to danger with extraordinary vigilance. In combat, you get a special reaction that you can take once on every creature's turn, except your turn. You can use this special reaction only to make an opportunity attack, and you can't use it on the same turn that you take your normal reaction.")
                 if subclass[i] == "Champion Archetype Fighter":
                     ClassNotes.append("Improved Critical - Your weapon attacks score a critical hit on a roll of 19 or 20.")
@@ -3131,21 +3132,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if figlvl >= 18:
                         ClassNotes.append("Survivor - You attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don't gain this benefit if you have 0 hit points.")
                 if subclass[i] == "Echo Knight Archetype Fighter":
-                    ClassNotes.append()
+                    ClassNotes.append("Manifest Echo (see notes)")
                     Notes.append(f"Manifest Echo - You can use a bonus action to magically manifest an echo of yourself in an unoccupied space you can see within 15 feet of you. This echo is a magical, translucent, gray image of you that lasts until it is destroyed, until you dismiss it as a bonus action, until you manifest another echo, or until you're incapacitated.\nYour echo has AC {14 + ProfBonus}, 1 hit point, and immunity to all conditions. If it has to make a saving throw, it uses your saving throw bonus for the roll. It is the same size as you, and it occupies its space. On your turn, you can mentally command the echo to move up to 30 feet in any direction (no action required). If your echo is ever more than 30 feet from you at the end of your turn, it is destroyed. You can use the echo in the following ways:\n- As a bonus action, you can teleport, magically swapping places with your echo at a cost of 15 feet of your movement, regardless of the distance between the two of you.\n- When you take the Attack action on your turn, any attack you make with that action can originate from your space or the echo's space. You make this choice for each attack.\n- When a creature that you can see within 5 feet of your echo moves at least 5 feet away from it, you can use your reaction to make an opportunity attack against that creature as if you were in the echo's space.")
-                    ClassNotes.append()
+                    ClassNotes.append("Unleash Incarnation (see notes)")
                     Notes.append(f"Unleash Incarnation - You can heighten your echo's fury. Whenever you take the Attack action, you can make one additional melee attack from the echo's position.\nYou can use this feature a number of times equal to your Constitution modifier (a minimum of once), or {ConMod}. You regain all expended uses when you finish a long rest.")
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Echo Avatar (see notes)")
                         Notes.append(f"Echo Avatar - You can temporarily transfer your consciousness to your echo. As an action, you can see through your echo's eyes and hear through its ears. During this time, you are deafened and blinded. You can sustain this effect for up to 10 minutes, and you can end it at any time (requires no action). While your echo is being used in this way, it can be up to 1 ,000 feet away from you without being destroyed.")    
                     if figlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Shadow Martyr (see notes)")
                         Notes.append("Shadow Martyr - You can make your echo throw itself in front of an attack directed at another creature that you can see. Before the attack roll is made, you can use your reaction to teleport the echo to an unoccupied space within 5 feet of the targeted creature. The attack roll that triggered the reaction is instead made against your echo.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if figlvl >= 15:                                                                  
-                        ClassNotes.append()
+                        ClassNotes.append("Reclaim Potential (see notes)")
                         Notes.append(f"Reclaim Potential - You've learned to absorb the fleeting magic of your echo. When an echo of yours is destroyed by taking damage, you can gain a number of temporary hit points equal to 2d6 + your Constitution modifier, provided you don't already have temporary hit points.\nYou can use this feature a number of times equal to your Constitution modifier (a minimum of once), or {ConMod}. You regain all expended uses when you finish a long rest.")  
                     if figlvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Legion Of One (see notes)")
                         Notes.append("Legion Of One - You can use a bonus action to create two echoes with your Manifest Echo feature, and these echoes can coexist. If you try to create a third echo, the previous two echoes are destroyed. Anything you can do from one echo's position can be done from the other's instead.\nIn addition, when you roll initiative and have no uses of your Unleash Incarnation feature left, you regain one use of that feature.")                                                  
                 if subclass[i] == "Eldrich Knight Archetype Fighter":
                     EKCantrips = 2
@@ -3154,7 +3155,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     EKSpellSlot2 = 0
                     EKSpellSlot3 = 0
                     EKSpellSlot4 = 0
-                    ClassNotes.append()
+                    ClassNotes.append("Weapon Bond (see notes)")
                     Notes.append("Weapon Bond - You learn a ritual that creates a magical bond between yourself and one weapon. You perform the ritual over the course of 1 hour, which can be done during a short rest. The weapon must be within your reach throughout the ritual, at the conclusion of which you touch the weapon and forge the bond.\nOnce you have bonded a weapon to yourself, you can't be disarmed of that weapon unless you are incapacitated. If it is on the same plane of existence, you can summon that weapon as a bonus action on your turn, causing it to teleport instantly to your hand.\nYou can have up to two bonded weapons, but can summon only one at a time with your bonus action. If you attempt to bond with a third weapon, you must break the bond with one of the other two.")                     
                     if figlvl >= 4:
                         EKSpellsKnown = 4
@@ -3210,21 +3211,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PsionicEnergyDice = "d10"
                     if figlvl >= 17:
                         PsionicEnergyDice = "d12"
-                    ClassNotes.append()
+                    ClassNotes.append("Psionic Power (see notes)")
                     Notes.append("Psionic Power - You harbor a wellspring of psionic energy within yourself. This energy is represented by your Psionic Energy dice, which are each a {PsionicEnergyDice}. You have a number of these dice equal to twice your proficiency bonus, and they fuel various psionic powers you have, which are detailed below.\nSome of your powers expend the Psionic Energy die they use, as specified in a power's description, and you can't use a power if it requires you to use a die when your dice are all expended. You regain all your expended Psionic Energy dice when you finish a long rest. In addition, as a bonus action, you can regain one expended Psionic Energy die, but you can't do so again until you finish a short or long rest.\nThe powers below use your Psionic Energy dice.\nProtective Field - When you or another creature you can see within 30 feet of you takes damage, you can use your reaction to expend one Psionic Energy die, roll the die, and reduce the damage taken by the number rolled plus your Intelligence modifier (minimum reduction of 1), which is {IntMod}, as you create a momentary shield of telekinetic force.\nPsionic Strike - You can propel your weapons with psionic force. Once on each of your turns, immediately after you hit a target within 30 feet of you with an attack and deal damage to it with a weapon, you can expend one Psionic Energy die, rolling it and dealing force damage to the target equal to the number rolled plus {IntMod}.\nTelekinetic Movement - You can move an object or a creature with your mind. As an action, you target one loose object that is Large or smaller or one willing creature, other than yourself. If you can see the target and it is within 30 feet of you, you can move it up to 30 feet to an unoccupied space you can see. Alternatively, if it is a Tiny object, you can move it to or from your hand. Either way, you can move the target horizontally, vertically, or both.\nOnce you take this action, you can't do so again until you finish a short or long rest, unless you expend a Psionic Energy die to take it again.")
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Telekinetic Adept (see notes)")
                         Notes.append(f"Telekinetic Adept - You have mastered new ways to use your telekinetic abilities, detailed below.\nPsi-Powered Leap -  As a bonus action, you can propel your body with your mind. You gain a flying speed equal to twice your walking speed until the end of the current turn. Once you take this bonus action, you can't do so again until you finish a short or long rest, unless you expend a Psionic Energy die to take it again.\nTelekinetic Thrust -  When you deal damage to a target with your Psionic Strike, you can force the target to make a Strength saving throw against a DC equal to {8 + ProfBonus + IntMod}. If the save fails, you can knock the target prone or move it up to 10 feet in any direction horizontally.")         
                     if figlvl >= 10:
                         ClassNotes.append("Guarded Mind - The psionic energy flowing through you has bolstered your mind. You have resistance to psychic damage. Moreover, if you start your turn charmed or frightened, you can expend a Psionic Energy die and end every effect on yourself subjecting you to those conditions.")
                     if figlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Bulwark of Force (see notes)")
                         Notes.append(f"Bulwark of Force - You can shield yourself and others with telekinetic force. As a bonus action, you can choose creatures, which can include you, that you can see within 30 feet of you, up to a number of creatures equal to your Intelligence modifier (minimum of one creature), so {IntMod}. Each of the chosen creatures is protected by half cover for 1 minute or until you're incapacitated.\nOnce you take this bonus action, you can't do so again until you finish a long rest, unless you expend a Psionic Energy die to take it again.")
                     if figlvl >= 18:     
-                        ClassNotes.append()
+                        ClassNotes.append("Telekinetic Master (see notes)")
                         Notes.append("Telekinetic Master - Your ability to move creatures and objects with your mind is matched by few. You can cast the Telekinesis spell, requiring no components, and your spellcasting ability for the spell is Intelligence. On each of your turns while you concentrate on the spell, including the turn when you cast it, you can make one attack with a weapon as a bonus action.\nOnce you cast the spell with this feature, you can't do so again until you finish a long rest, unless you expend a Psionic Energy die to cast it again.")                                                            
                 if subclass[i] == "Purple Dragon Knight Archetype Fighter":
-                    ClassNotes.append()
+                    ClassNotes.append("Rallying Cry (see notes)")
                     Notes.append(f"Rallying Cry - When you choose this archetype at 3rd level, you learn how to inspire your allies to fight on past their injuries.\nWhen you use your Second Wind feature, you can choose up to three creatures within 60 feet of you that are allied with you. Each one regains hit points equal to {figlvl}, provided that the creature can see or hear you.")
                     if figlvl >= 7:
                         if Persuasion not in SkillsProf:
@@ -3232,12 +3233,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         else:
                             SkillsList = [AnimalHandling, Insight, Intimidation, Performance]
                             SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
-                        ClassNotes.append()
+                        ClassNotes.append("Royal Envoy (see notes)")
                         Notes.append("Royal Envoy - Knights of high standing are expected to conduct themselves with grace;\nYour proficiency bonus is doubled for any ability check you make that uses Persuasion. You receive this benefit regardless of the skill proficiency you gain from this feature.")     
                     if figlvl >= 10:
                         ClassNotes.append("Inspiring Surge(1) - When you use your Action Surge feature, you can choose one creature within 60 feet of you that is allied with you. That creature can make one melee or ranged weapon attack with its reaction, provided that it can see or hear you.")
                     if figlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Bulwark (see notes)")
                         Notes.append("Bulwark - You can extend the benefit of your Indomitable feature to an ally. When you decide to use Indomitable to reroll an Intelligence, a Wisdom, or a Charisma saving throw and you aren't incapacitated, you can choose one ally within 60 feet of you that also failed its saving throw against the same effect. If that creature can see or hear you, it can reroll its saving throw and must use the new roll.")                            
                     if figlvl >= 18:
                         ClassNotes.append("Inspiring Surge(2) - You can choose two allies within 60 feet of you, rather than one.")                                               
@@ -3253,10 +3254,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if figlvl >= 15:
                         RuneAmount = 5
                     ClassNotes.append(f"Rune Carver - You can use magic runes to enhance your gear. You know {RuneAmount} runes of your choice, from among the runes described below, and each time you gain a level in this class, you can replace one rune you know with a different one from this feature.\nWhenever you finish a long rest, you can touch a number of objects equal to the number of runes you know, and you inscribe a different rune onto each of the objects. To be eligible, an object must be a weapon, a suit of armor, a shield, a piece of jewelry, or something else you can wear or hold in a hand. Your rune remains on an object until you finish a long rest, and an object can bear only one of your runes at a time.\nThe Rune Knight Rune Table shows which runes are available to you when you learn a rune. If a rune has a level requirement, you must be at least that level in this class to learn the rune. If a rune requires a saving throw, your Rune Magic save DC equals {8 + ProfBonus + ConMod}.")
-                    ClassNotes.append()
+                    ClassNotes.append("Giant's Might (see notes)")
                     Notes.append(f"Giant's Might - You have learned how to imbue yourself with the might of giants. As a bonus action, you magically gain the following benefits, which last for 1 minute:\n- If you are smaller than Large, you become Large, along with anything you are wearing. If you lack the room to become Large, your size doesn't change.\n- You have advantage on Strength checks and Strength saving throws.\n- Once on each of your turns, one of your attacks with a weapon or an unarmed strike can deal an extra 1d6 damage to a target on a hit.\nYou can use this feature {ProfBonus} times, and you regain all expended uses of it when you finish a long rest.")
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Runic Shield (see notes)")
                         Notes.append(f"Runic Shield - You learn to invoke your rune magic to protect your allies. When another creature you can see within 60 feet of you is hit by an attack roll, you can use your reaction to force the attacker to reroll the d20 and use the new roll.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if figlvl >= 10:
                         ClassNotes.append("Great Stature - The magic of your runes permanently alters you. When you gain this feature, roll 3d4. You grow a number of inches in height equal to the roll.\nMoreover, the extra damage you deal with your Giant's Might feature increases to 1d8.")
@@ -3289,19 +3290,19 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlLang, SLANG = languagegen(param, PlLang, SLANG)                                            
                     FigSpiritTempHP = 5
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Elegant Courtier (see notes)")
                         Notes.append(f"Elegant Courtier - Your discipline and attention to detail allow you to excel in social situations. Whenever you make a Charisma (Persuasion) check, you gain a bonus to the check equal to {WisMod}.\nYour self-control also causes you to gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice).")
                     if figlvl >= 10:
                         FigSpiritTempHP = 10
                         ClassNotes.append("Tireless Spirit - When you roll initiative and have no uses of Fighting Spirit remaining, you regain one use.")
                     if figlvl >= 15:
                         FigSpiritTempHP = 15
-                        ClassNotes.append()
+                        ClassNotes.append("Rapid Strike (see notes)")
                         Notes.append("Rapid Strike - You learn to trade accuracy for swift strikes. If you take the Attack action on your turn and have advantage on an attack roll against against one of the targets, you can forgo the advantage for that roll to make an additional weapon attack against that target, as part of the same action. You can do so no more than once per turn.")
                     if figlvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Strength Before Death (see notes)")
                         Notes.append("Strength Before Death - Your fighting spirit can delay the grasp of death. If you take damage that reduces you to 0 hit points, you can use your reaction to delay falling unconscious, and you can immediately take an extra turn. While you have 0 hit points during that extra turn, taking damage causes death saving throw failures as normal, and three death saving throw failures can still kill you. When the extra turn ends, you fall unconscious if you still have 0 hit points.\nOnce you use this feature, you can’t use it again until you finish a long rest.") 
-                    ClassNotes.append()
+                    ClassNotes.append("Fighting Spirit (see notes)")
                     Notes.append(f"Fighting Spirit - Your intensity in battle can shield you and help you strike true. As a bonus action on your turn, you can give yourself advantage on all weapon attack rolls until the end of the current turn. When you do so, you also gain {FigSpiritTempHP} temporary hit points.\nYou can use this feature three times. You regain all expended uses of it when you finish a long rest.")                          
                 if subclass[i] == "Scofflaw Archetype Fighter":        
                     if param == "Y":
@@ -3333,7 +3334,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf.append("Improvised Weapons")
                     Notes.append("Brutal Brawler(1) - Your tavernside scuffles have honed your ability to deal damage with just about anything that’s handy. You treat any improvised weapon you handle as if it has the finesse quality.\nAdditionally, whenever you hit with an improvised weapon, you may spend a bonus action to break it over your opponent. Doing this destroys the weapon, but deals the maximum number each of the weapon’s damage dice could deal to the target. Any additional dice added to the attack’s damage roll are not affected by this ability.")
                     if figlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Misdirection (see notes)")
                         Notes.append("Misdirection - You are adept at using words and gestures to taunt or fakeout your opponent, turning their lack of composure against them. This allows you to goad your foe into swinging in ways that can cause them to strike their allies, or which leave them open to a counterattack. As a bonus action you can misdirect an opponent within 5 feet of you. The target must succeed on an Intelligence saving throw against a DC equal to 8 + your proficiency bonus + your Strength or Dexterity modifier. On a failure, they must spend their reaction to attack a creature of your choice within 5 feet of them. If no other creatures are present within 5 feet of them, they waste their reaction attacking the air where you once were.\nIn order for you to misdirect a creature in this way they must be able to see, hear, or otherwise be able to understand you.")
                     if figlvl >= 10:
                         ClassNotes.append("Brutal Brawler(2) (see notes)")
@@ -3344,21 +3345,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         if figlvl >= 18:
                             BlindsideDmg = "9d6"
                         if figlvl >= 18:
-                            ClassNotes.append()
+                            ClassNotes.append("Blindside (see notes)")
                             Notes.append(f"Blindside - You are truly skilled at exploiting the openings you create in combat, hitting off-guard opponents with precise blows that are swift and deadly. You may use this technique against any creature that hasn’t yet taken a turn in combat, or who you have successfully misdirected this turn. You may also apply this technique to any attack roll you make with advantage. On a hit, you exploit an opening in the target's defenses, dealing an extra {BlindsideDmg} points of damage, and if you have no uses of this ability at the beginning of combat on your turn, you regain one use of it. Once you use this ability, you can’t use it again until you have taken a short or long rest.")
                         else:   
-                            ClassNotes.append()
+                            ClassNotes.append("Blindside (see notes)")
                             Notes.append(f"Blindside - You are truly skilled at exploiting the openings you create in combat, hitting off-guard opponents with precise blows that are swift and deadly. You may use this technique against any creature that hasn’t yet taken a turn in combat, or who you have successfully misdirected this turn. You may also apply this technique to any attack roll you make with advantage. On a hit, you exploit an opening in the target's defenses, dealing an extra {BlindsideDmg} points of damage. Once you use this ability, you can’t use it again until you have taken a short or long rest.") 
                     if figlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Infamy (see notes)")
                         Notes.append("Infamy - Your reputation precedes you, making it easy for you to strike fear into the hearts of anyone foolish enough to oppose you. As part of your attack action, you can utter deadly threats to a single target within 30 feet of you, causing them to become frightened of you for 1 minute on a failed Wisdom saving throw. An affected target may repeat this saving throw at the end of each of their turns, ending the effect on a success. The DC for this saving throw is 8 + your proficiency bonus + your Strength or Dexterity modifier. A creature who has witnessed or heard tales of your ruthlessness makes this saving throw with disadvantage.\nIn order for you to use this feature, a creature must be able to see, hear, or otherwise be able to understand you.")
                     if figlvl >= 18:
                         ClassNotes.append("Brutal Brawler(3) (see notes)")
                         Notes.append("Brutal Brawler(3) - You have advantage on attacks you make with improvised weapons.")                       
-                        ClassNotes.append()
+                        ClassNotes.append("Two For Flinching (see notes)")
                         Notes.append("Two For Flinching - You have perfected the art of exploiting your opponent’s weakness. Whenever you take the attack action against an opponent you have successfully misdirected this turn, or an opponent that is afflicted by a condition, you may make one additional attack against that opponent. You may only use this feature once per round.")                                          
             if figlvl >= 4:
-                ClassNotes.append()
+                ClassNotes.append("Martial Versatility (see notes)")
                 Notes.append("Martial Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, as you shift the focus of your martial practice:\n- Replace a fighting style you know with another fighting style available to fighters.\n- If you know any maneuvers from the Battle Master archetype, you can replace one maneuver you know with a different maneuver.")
             if figlvl >= 5:
                 FighterExtraAttack = 2
@@ -3466,7 +3467,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if monklvl >= 2:   
                 KiPoints = 2
                 UnarmoredMovement = "+10 ft"    
-                ClassNotes.append()
+                ClassNotes.append("Dedicated Weapon (see notes)")
                 Notes.append("Dedicated Weapon - You train yourself to use a variety of weapons as monk weapons, not just simple melee weapons and shortswords. Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it, and then count that weapon as a monk weapon until you use this feature again.\nThe chosen weapon must meet these criteria:\n- The weapon must be a simple or martial weapon.\n- You must be proficient with it.\n- It must lack the heavy and special properties.")                                                                                      
             if monklvl >= 3:
                 Mon = ["Way of the Ascendant Dragon Monk", "Way of the Astral Self Monk", "Way of the Cobalt Soul Monk", "Way of the Drunken Master Monk", "Way of the Four Elements Monk", "Way of the Kensei Monk", "Way of the Long Death Monk", "Way of Mercy Monk", "Way of the Open Hand Monk", "Way of the Shadow Monk", "Way of the Sun Soul Monk"]
@@ -3525,45 +3526,45 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlLang.append(Drac)
                     else:
                         PlLang, SLANG = languagegen(param, PlLang, SLANG)
-                    ClassNotes.append()
+                    ClassNotes.append("Draconic Disciple (see notes)")
                     Notes.append("Draconic Disciple - You can channel draconic power to magnify your presence and imbue your unarmed strikes with the essence of a dragon's breath. You gain the following benefits:\nDraconic Presence. If you fail a Charisma (Intimidation) or Charisma (Persuasion) check, you can use your reaction to reroll the check, as you tap into the mighty presence of dragons. Once this feature turns a failure into a success, you can't use it again until you finish a long rest.\nDraconic Strike - When you damage a target with an unarmed strike, you can change the damage type to acid, cold, fire, lightning, or poison.\nTongue of Dragons. You learn to speak, read, and write Draconic or one other language of your choice (already done).") 
-                    ClassNotes.append()
+                    ClassNotes.append("Breath of the Dragon (see notes)")
                     Notes.append("Breath of the Dragon - You can channel destructive waves of energy, like those created by the dragons you emulate. When you take the Attack action on your turn, you can replace one of the attacks with an exhalation of draconic energy in either a 20-foot cone or a 30-foot line that is 5 feet wide (your choice). Choose a damage type: acid, cold, fire, lightning, or poison. Each creature in that area must make a Dexterity saving throw against your ki save DC, taking damage of the chosen type equal to two rolls of your Martial Arts die on a failed save, or half as much damage on a successful one.")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Wings Unfurled (see notes)")
                         Notes.append(f"Wings Unfurled - When you use your Step of the Wind, you can unfurl spectral draconic wings from your back that vanish at the end of your turn. While the wings exist, you have a flying speed equal to your walking speed.\nYou can use this feature a number of times equal to {ProfBonus}, and you regain all expended uses when you finish a long rest.")                     
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Breath of the Dragon(2) (see notes)")
                         Notes.append(f"Breath of the Dragon(2) - The damage of this feature increases to three rolls of your Martial Arts die.You can use this feature a number of times equal {ProfBonus}, and you regain all expended uses when you finish a long rest. While you have no uses available, you can spend 2 ki points to use this feature again.")                     
-                        ClassNotes.append()
+                        ClassNotes.append("Aspect of the Wyrm (see notes)")
                         Notes.append("Aspect of the Wyrm - The power of your draconic spirit now radiates from you, warding your allies or inspiring fear in your enemies. As a bonus action, you can create an aura of draconic power that radiates 10 feet from you for 1 minute. For the duration, you gain one of the following effects of your choice:\nFrightful Presence - When you create this aura, and as a bonus action on subsequent turns, you can choose a creature within the aura. The target must succeed on a Wisdom saving throw against your ki save DC or become frightened of you for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a successful save.\nResistance - Choose a damage type when you activate this aura: acid, cold, fire, lightning, or poison. You and your allies within the aura have resistance to that damage.\nOnce you create this aura, you can't create it again until you finish a long rest, unless you expend 3 ki points to create it again.")                     
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Ascendant Aspect (see notes)")
                         Notes.append("Ascendant Aspect - Your draconic spirit reaches its peak. You gain the following benefits:\nAugment Breath - When you use your Breath of the Dragon, you can spend 1 ki point to augment its shape and power. The exhalation of draconic energy becomes either a 60-foot cone or a 90-foot line that is 5 feet wide (your choice), and each creature in that area takes damage equal to four rolls of your Martial Arts die on a failed save, or half as much damage on a successful one.\nBlindsight - You gain blindsight out to 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\nExplosive Fury - When you activate your Aspect of the Wyrm, draconic fury explodes from you. Choose any number of creatures you can see in your aura. Each of those creatures must succeed on a Dexterity saving throw against your ki save DC or take 3d10 acid, cold, fire, lightning, or poison damage (your choice).") 
                 if subclass[i] == "Way of the Astral Self Monk":
-                    ClassNotes.append()
+                    ClassNotes.append("Forms of Your Astral Self (see notes)")
                     Notes.append("Forms of Your Astral Self - The astral self is a translucent embodiment of the monk's soul. As a result, an astral self can reflect aspects of a monk's background, ideals, flaws, and bonds, and an astral self doesn't necessarily look anything like the monk. for example, the astral self of a lanky human might be reminiscent of a minotaur—the strength of which the monk feels within. Similarly, an orc monk might manifest gossamer arms and a delicate visage, representing the gentle beauty of the orc's soul. Each astral self is unique, and some of the monks of this monastic tradition are known more for the appearance of their astral self than for their physical appearance.\nWhen choosing this path, consider the quirks that define your monk. Are you obsessed with something? Are you driven by justice or a selfish desire? Any of these motivations could manifest in the form of your astral self.")
-                    ClassNotes.append()
+                    ClassNotes.append("Arms of the Astral Self (see notes)")
                     Notes.append("Arms of the Astral Self - Your mastery of your ki allows you to summon a portion of your astral self. As a bonus action, you can spend 1 ki point to summon the arms of your astral self. When you do so, each creature of your choice that you can see within 10 feet of you must succeed on a Dexterity saving throw or take force damage equal to two rolls of your Martial Arts die.\nFor 10 minutes, these spectral arms hover near your shoulders or surround your arms (your choice). You determine the arms' appearance, and they vanish early if you are incapacitated or die.\nWhile the spectral arms are present, you gain the following benefits:\n- You can use your Wisdom modifier in place of your Strength modifier when making Strength checks and Strength saving throws.\n- You can use the spectral arms to make unarmed strikes.\n- When you make an unarmed strike with the arms on your turn, your reach for it is 5 feet greater than normal.\n- The unarmed strikes you make with the arms can use your Wisdom modifier in place of your Strength or Dexterity modifier for the attack and damage rolls, and their damage type is force.")                     
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Visage of the Astral Self (see notes)")
                         Notes.append("Visage of the Astral Self - You can summon the visage of your astral self. As a bonus action, or as part of the bonus action you take to activate Arms of the Astral Self, you can spend 1 ki point to summon this visage for 10 minutes. It vanishes early if you are incapacitated or die.\nThe spectral visage covers your face like a helmet or mask. You determine its appearance.\nWhile the spectral visage is present, you gain the following benefits.\nAstral Sight. You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet.\nWisdom of the Spirit. You have advantage on Wisdom (Insight) and Charisma (Intimidation) checks.\nWord of the Spirit. When you speak, you can direct your words to a creature of your choice that you can see within 60 feet of you, making it so only that creature can hear you. Alternatively, you can amplify your voice so that all creatures within 600 feet can hear you.")                     
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Awakening of the Astral Self (see notes)")
                         Notes.append(f"Awakening of the Astral Self - When you have both your astral arms and visage summoned, you can cause the body of your astral self to appear (no action required). This spectral body covers your physical form like a suit of armor, connecting with the arms and visage. You determine its appearance.\nWhile the spectral body is present, you gain the following benefits.\nDeflect Energy - When you take acid, cold, fire, force, lightning, or thunder damage, you can use your reaction to deflect it. When you do so, the damage you take is reduced by 1d10 + your Wisdom modifier (minimum reduction of 1), or '+ {WisMod}'.\nEmpowered Arms - Once on each of your turns when you hit a target with the Arms of the Astral Self, you can deal extra damage to the target equal to your Martial Arts die.")                     
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Complete Astral Self (see notes)")
                         Notes.append("Complete Astral Self - Your connection to your astral self is complete, allowing you to unleash its full potential. As a bonus action, you can spend 5 ki points to summon the arms, visage, and body of your astral self and awaken it for 10 minutes. This awakening ends early if you are incapacitated or die.\nWhile your astral self is awakened, you gain the following benefits.\nArmor of the Spirit. You gain a +2 bonus to Armor Class.\nAstral Barrage. Whenever you use the Extra Attack feature to attack twice, you can instead attack three times if all the attacks are made with your astral arms.") 
                 if subclass[i] == "Way of the Cobalt Soul Monk":
                     WCSMSkillsList = [Arcana, History, Investigation, Nature, Religion]
-                    ClassNotes.append()
+                    ClassNotes.append("Extract Aspects (see notes)")
                     Notes.append("Extract Aspects - You can strike pressure points to intuit crucial information about a foe. When you hit a creature with one of the attacks granted by your Flurry of Blows, you can analyze it. Whenever an analyzed creature misses you with an attack, you can immediately use your reaction to make an unarmed strike against that creature if it's within your reach. This benefit lasts until you finish a short or long rest.\nAdditionally, when you analyze a creature, you learn all of its damage vulnerabilities, damage resistances, damage immunities, and condition immunities.") 
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Extort Truth (see notes)")
                         Notes.append("Extort Truth - You can precisely strike a hidden cluster of nerves on a creature, temporarily preventing it from masking its true thoughts and intent. When you hit a creature with an unarmed strike, you can spend 1 ki point to force it to make a Charisma saving throw. On a failed save, the creature is unable to speak a deliberate lie, and all Charisma checks directed at the creature are made with advantage for up to 10 minutes. You know if it succeeded or failed on its saving throw.\nAn affected creature is aware of the effect and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive in its answers as long as the effect lasts.\nIf you wish to impose this effect on a creature without injuring it, you can attack the creature to simply touch it, dealing no damage on a hit.") 
                         PlLang, SLANG = languagegen(param, PlLang, SLANG)
                         SkillsProf = oneskillfromlist(param, SkillsProf, WCSMSkillsList)
-                        ClassNotes.append()
+                        ClassNotes.append("Mystical Erudition(1) (see notes)")
                         Notes.append("Mystical Erudition(1) - You have extensively studied the history and lore within the archives of the Cobalt Soul. You learn one language of your choice, and you gain proficiency with one of the following skills of your choice: Arcana, History, Investigation, Nature, or Religion. If you already have proficiency in one of the listed skills, you can instead choose to double your proficiency bonus for any ability check you make that uses the chosen proficiency (both have been addressed and added to your sheet already).\nMore languages and proficiencies are available at higher levels.") 
                     if monklvl >= 11:
                         PlLang, SLANG = languagegen(param, PlLang, SLANG)
@@ -3574,7 +3575,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlLang, SLANG = languagegen(param, PlLang, SLANG)
                         SkillsProf = oneskillfromlist(param, SkillsProf, WCSMSkillsList)     
                         Notes.append("Mystical Erudition(3) - A new language and proficiency (or expertise) has been added.")                    
-                        ClassNotes.append()
+                        ClassNotes.append("Debilitating Barrage (see notes)")
                         Notes.append("Debilitating Barrage - ou've gained the knowledge to manipulate a creature's ki to undermine their fortitude. When you hit a creature with an unarmed strike, you can spend 3 ki points to cause the creature to gain vulnerability to one damage type of your choice for 1 minute, or until the end of a turn in which it has taken damage of that type.\nIf a creature has resistance to the damage type you choose, this resistance is suppressed for 1 minute, rather than gaining vulnerability. A creature that is immune to the damage type you choose is unaffected. A creature who is affected by this feature cannot be affected by it again for 24 hours.") 
                 if subclass[i] == "Way of the Drunken Master Monk":
                     if Performance not in SkillsProf:
@@ -3583,12 +3584,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlProf.append(BrewSupp)
                     ClassNotes.append("Drunken Technique - You learn how to twist and turn quickly as part of your Flurry of Blows. Whenever you use Flurry of Blows, you gain the benefit of the Disengage action, and your walking speed increases by 10 feet until the end of the current turn.")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Tipsy Sway (see notes)")
                         Notes.append("Tipsy Sway - You can move in sudden, swaying ways. You gain the following benefits.\nLeap to Your Feet - When you're prone, you can stand up by spending 5 feet of movement, rather than half your speed.\nRedirect Attack - When a creature misses you with a melee attack roll, you can spend 1 ki point as a reaction to cause that attack to hit one creature of your choice, other than the attacker, that you can see within 5 feet of you.")
                     if monklvl >= 11:
                         ClassNotes.append("Drunkard's Luck - You always seem to get a lucky bounce at the right moment. When you make an ability check, an attack roll, or a saving throw and have disadvantage, you can spend 2 ki points to cancel the disadvantage for that roll.")
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Intoxicated Frenzy (see notes)")
                         Notes.append("Intoxicated Frenzy - You gain the ability to make an overwhelming number of attacks against a group of enemies. When you use your Flurry of Blows, you can make up to three additional attacks with it (up to a total of five Flurry of Blows attacks), provided that each Flurry of Blows attack targets a different creature this turn.")
                 if subclass[i] == "Way of the Four Elements Monk":
                     ElementalDiscipline = 1
@@ -3598,10 +3599,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ElementalDiscipline = 3
                     if monklvl >= 17:
                         ElementalDiscipline = 4
-                    ClassNotes.append()
+                    ClassNotes.append("Disciple of the Elements(1) (see notes)")
                     Notes.append(f"Disciple of the Elements(1) - You learn magical disciplines that harness the power of the four elements. A discipline requires you to spend ki points each time you use it.\nYou know the Elemental Attunement discipline and {ElementalDiscipline} other elemental discipline(s) of your choice, from the Elemental Disciple table.\nWhenever you learn a new elemental discipline, you can also replace one elemental discipline that you already know with a different discipline.\nCasting Elemental Spells - Some elemental disciplines allow you to cast spells. To cast one of these spells, you use its casting time and other rules, but you don't need to provide material components for it.")
                     if monklvl >= 5:
-                        ClassNotes.append()
+                        ClassNotes.append("Disciple of the Elements(2) (see notes)")
                         Notes.append("Disciple of the Elements(2) - You can spend additional ki points to increase the level of an elemental discipline spell that you cast, provided that the spell has an enhanced effect at a higher level, as Burning Hands does. The spell's level increases by 1 for each additional ki point you spend. For example, if you are a 5th-level monk and use Sweeping Cinder Strike to cast Burning Hands, you can spend 3 ki points to cast it as a 2nd-level spell (the discipline's base cost of 2 ki points plus 1).\nThe maximum number of ki points you can spend to cast a spell in this way (including its base ki point cost and any additional ki points you spend to increase its level) is determined by your monk level, as mentioned in the following note.")
                         if ((monklvl >= 5) and (monklvl <= 8)):
                             SpellKi = 3
@@ -3614,32 +3615,32 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         Notes.append(f"Disciple of the Elements(3) - The amount of Ki that can be spent in this way is {SpellKi}.")
                 if subclass[i] == "Way of the Kensei Monk":
                     PlProf = twotoolprof(param, PlProf, CallSupp, PaintSupp)
-                    ClassNotes.append()
+                    ClassNotes.append("Path of the Kensei(1) (see notes)")
                     Notes.append("Path of the Kensei(1) - Your special martial arts training leads you to master the use of certain weapons. This path also includes instruction in the deft strokes of calligraphy or painting. You gain the following benefits:\n- Kensei Weapons. Choose two types of weapons to be your kensei weapons: one melee weapon and one ranged weapon. Each of these weapons can be any simple or martial weapon that lacks the heavy and special properties. The longbow is also a valid choice. You gain proficiency with these weapons if you don't already have it. Weapons of the chosen types are monk weapons for you. Many of this tradition's features work only with your kensei weapons. More kensei weapons are available at higher levels.\n- Agile Parry. If you make an unarmed strike as part of the Attack action on your turn and are holding a kensei weapon, you can use it to defend yourself if it is a melee weapon. You gain a +2 bonus to AC until the start of your next turn, while the weapon is in your hand and you aren’t incapacitated.\n- Kensei's Shot. You can use a bonus action on your turn to make your ranged attacks with a kensei weapon more deadly. When you do so, any target you hit with a ranged attack using a kensei weapon takes an extra 1d4 damage of the weapon’s type. You retain this benefit until the end of the current turn.\n- Way of the Brush (addressed and added to proficiencies). You gain proficiency with your choice of calligrapher's supplies or painter's supplies.") 
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Path of the Kensei(2) (see notes)")
                         Notes.append("Path of the Kensei(2) - You have access to another kensei weapon, melee or ranged.")
-                        ClassNotes.append()
+                        ClassNotes.append("One with the Blade (see notes)")
                         Notes.append("One with the Blade - You extend your ki into your kensei weapons, granting you the following benefits.\nMagic Kensei Weapons - Your attacks with your kensei weapons count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.\nDeft Strike - When you hit a target with a kensei weapon, you can spend 1 ki point to cause the weapon to deal extra damage to the target equal to your Martial Arts die. You can use this feature only once on each of your turns.") 
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Path of the Kensei(3) (see notes)")
                         Notes.append("Path of the Kensei(3) - You have access to another kensei weapon, melee or ranged.")                        
-                        ClassNotes.append()
+                        ClassNotes.append("Sharpen the Blade (see notes)")
                         Notes.append("Sharpen the Blade - You gain the ability to augment your weapons further with your ki. As a bonus action, you can expend up to 3 ki points to grant one kensei weapon you touch a bonus to attack and damage rolls when you attack with it. The bonus equals the number of ki points you spent. This bonus lasts for 1 minute or until you use this feature again. This feature has no effect on a magic weapon that already has a bonus to attack and damage rolls.") 
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Path of the Kensei(4) (see notes)")
                         Notes.append("Path of the Kensei(4) - You have access to another kensei weapon, melee or ranged.")                        
                         ClassNotes.append("Unerring Accuracy - Your mastery of weapons grants you extraordinary accuracy. If you miss with an attack roll using a monk weapon on your turn, you can reroll it. You can use this feature only once on each of your turns.")
                 if subclass[i] == "Way of the Long Death Monk":
-                    ClassNotes.append()
+                    ClassNotes.append("Touch of Death (see notes)")
                     Notes.append(f"Touch of Death - Your study of death allows you to extract vitality from another creature as it nears its demise. When you reduce a creature within 5 feet of you to 0 hit points, you gain temporary hit points equal to {WisMod + monklvl} (minimum of 1 temporary hit point).")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Hour of Reaping (see notes)")
                         Notes.append("Hour of Reaping - You gain the ability to unsettle or terrify those around you as an action, for your soul has been touched by the shadow of death. When you take this action, each creature within 30 feet of you that can see you must succeed on a Wisdom saving throw or be frightened of you until the end of your next turn.")
                     if monklvl >= 11:
                         ClassNotes.append("Mastery of Death - You use your familiarity with death to escape its grasp. When you are reduced to 0 hit points, you can expend 1 ki point (no action required) to have 1 hit point instead.")
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Touch of the Long Death (see notes)")
                         Notes.append("Touch of the Long Death - Your touch can channel the energy of death into a creature. As an action, you touch one creature within 5 feet of you, and you expend 1 to 10 ki points. The target must make a Constitution saving throw, and it takes 2d10 necrotic damage per ki point spent on a failed save, or half as much damage on a successful one.")
                 if subclass[i] == "Way of Mercy Monk":
                     SkillsProf.append(Insight)
@@ -3654,53 +3655,53 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     Mask = [Mask1, Mask2, Mask3, Mask4, Mask5, Mask6]
                     MercyMask = random.choice(Mask)
                     ClassNotes.append(f"Implements of Mercy - You also gain a special mask, which you often wear when using the features of this subclass. Its appearance is determined by you or is random, which is {MercyMask}.")
-                    ClassNotes.append()
+                    ClassNotes.append("Hand of Healing (see notes)")
                     Notes.append(f"Hand of Healing - Your mystical touch can mend wounds. As an action, you can spend 1 ki point to touch a creature and restore a number of hit points equal to a roll of your Martial Arts die + {WisMod}.\nWhen you use your Flurry of Blows, you can replace one of the unarmed strikes with a use of this feature without spending a ki point for the healing.")
                     ClassNotes.append(f"Hand of Harm - You use your ki to inflict wounds. When you hit a creature with an unarmed strike, you can spend 1 ki point to deal extra necrotic damage equal to one roll of your Martial Arts die + {WisMod}. You can use this feature only once per turn.")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Physician's Touch (see notes)")
                         Notes.append("Physician's Touch - You can administer even greater cures with a touch, and if you feel it's necessary, you can use your knowledge to cause harm.\nWhen you use Hand of Healing on a creature, you can also end one disease or one of the following conditions affecting the creature: blinded, deafened, paralyzed, poisoned, or stunned.\nWhen you use Hand of Harm on a creature, you can subject that creature to the poisoned condition until the end of your next turn.")
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Flurry of Healing and Harm (see notes)")
                         Notes.append("Flurry of Healing and Harm - You can now mete out a flurry of comfort and hurt. When you use Flurry of Blows, you can now replace each of the unarmed strikes with a use of your Hand of Healing, without spending ki points for the healing.\nIn addition, when you make an unarmed strike with Flurry of Blows, you can use Hand of Harm with that strike without spending the ki point for Hand of Harm. You can still use Hand of Harm only once per turn.")
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Hand of Mercy (see notes)")
                         Notes.append(f"Hand of Mercy - Your mastery of life energy opens the door to the ultimate mercy. As an action, you can touch the corpse of a creature that died within the past 24 hours and expend 5 ki points. The creature then returns to life, regaining a number of hit points equal to 4d10 + {WisMod}. If the creature died while subject to any of the following conditions, it revives with them removed: blinded, deafened, paralyzed, poisoned, and stunned.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "Way of the Open Hand Monk":
-                    ClassNotes.append()
+                    ClassNotes.append("Open Hand Technique (see notes)")
                     Notes.append("Open Hand Technique - You can manipulate your enemy's ki when you harness your own. Whenever you hit a creature with one of the attacks granted by your Flurry of Blows, you can impose one of the following effects on that target:\n- It must succeed on a Dexterity saving throw or be knocked prone.\n- It must make a Strength saving throw. If it fails, you can push it up to 15 feet away from you.\n- It can't take reactions until the end of your next turn.")
                     if monklvl >= 6:
                         ClassNotes.append(f"Wholeness of Body - You gain the ability to heal yourself. As an action, you can regain hit points equal to {3 * monklvl}. You must finish a long rest before you can use this feature again.")
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Tranquility (see notes)")
                         Notes.append(f"Tranquility - You can enter a special meditation that surrounds you with an aura of peace. At the end of a long rest, you gain the effect of a Sanctuary spell that lasts until the start of your next long rest (the spell can end early as normal). The saving throw DC for the spell equals {8 + WisMod + ProfBonus}.")
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Quivering Palm (see notes)")
                         Notes.append("Quivering Palm - You gain the ability to set up lethal vibrations in someone's body. When you hit a creature with an unarmed strike, you can spend 3 ki points to start these imperceptible vibrations, which last for a number of days equal to your monk level. The vibrations are harmless unless you use your action to end them. To do so, you and the target must be on the same plane of existence. When you use this action, the creature must make a Constitution saving throw. If it fails, it is reduced to 0 hit points. If it succeeds, it takes 10d10 necrotic damage.\nYou can have only one creature under the effect of this feature at a time. You can choose to end the vibrations harmlessly without using an action")
                 if subclass[i] == "Way of the Shadow Monk":
-                    ClassNotes.append()
+                    ClassNotes.append("Shadow Arts (see notes)")
                     Notes.append("Shadow Arts - You can use your ki to duplicate the effects of certain spells. As an action, you can spend 2 ki points to cast Darkness, Darkvision, Pass without Trace, or Silence, without providing material components. Additionally, you gain the Minor Illusion cantrip if you don't already know it.")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Shadow Step (see notes)")
                         Notes.append("Shadow Step - You gain the ability to step from one shadow into another. When you are in dim light or darkness, as a bonus action you can teleport up to 60 feet to an unoccupied space you can see that is also in dim light or darkness. You then have advantage on the first melee attack you make before the end of the turn.")
                     if monklvl >= 11:
                         ClassNotes.append("Cloak of Shadows - You have learned to become one with the shadows. When you are in an area of dim light or darkness, you can use your action to become invisible. You remain invisible until you make an attack, cast a spell, or are in an area of bright light.")
                     if monklvl >= 17:
                         ClassNotes.append("Opportunist - You can exploit a creature's momentary distraction when it is hit by an attack. Whenever a creature within 5 feet of you is hit by an attack made by a creature other than you, you can use your reaction to make a melee attack against that creature.")
                 if subclass[i] == "Way of the Sun Soul Monk":        
-                    ClassNotes.append()
+                    ClassNotes.append("Radiant Sun Bolt (see notes)")
                     Notes.append(f"Radiant Sun Bolt - You can hurl searing bolts of magical radiance.\nYou gain a new attack option that you can use with the Attack action. This special attack is a ranged spell attack with a range of 30 feet. You are proficient with it, and you add your Dexterity modifier, {DexMod}, to its attack and damage rolls. Its damage is radiant, and its damage die is a d4. This die changes as you gain monk levels.\nWhen you take the Attack action on your turn and use this special attack as part of it, you can spend 1 ki point to make the special attack twice as a bonus action.\nWhen you gain the Extra Attack feature, this special attack can be used for any of the attacks you make as part of the Attack action.")
                     if monklvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Searing Arc Strike (see notes)")
                         Notes.append(f"Searing Arc Strike - You gain the ability to channel your ki into searing waves of energy. Immediately after you take the Attack action on your turn, you can spend 2 ki points to cast the Burning Hands spell as a bonus action.\nYou can spend additional ki points to cast Burning Hands as a higher level spell. Each additional ki point you spend increases the spell's level by 1. The maximum number of ki points (2 plus any additional points) that you can spend on the spell equals {math.floor(monklvl/2)} half your monk level.")                        
                     if monklvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Searing Sunburst (see notes)")
                         Notes.append("Searing Sunburst - You gain the ability to create an orb of light that erupts into a devastating explosion. As an action, you magically create an orb and hurl it at a point you choose within 150 feet, where it erupts into a sphere of radiant light for a brief but deadly instant.\nEach creature in that 20-foot-radius sphere must succeed on a Constitution saving throw or take 2d6 radiant damage. A creature doesn't need to make the save if the creature is behind total cover that is opaque.\nYou can increase the sphere's damage by spending ki points. Each point you spend, up to a maximum of 3, increases the damage by 2d6.") 
                     if monklvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Sun Shield (see notes)")
                         Notes.append(f"Sun Shield - You become wreathed in a luminous, magical aura. You shed bright light in a 30-foot radius and dim light for an additional 30 feet. You can extinguish or restore the light as a bonus action.\nIf a creature hits you with a melee attack while this light shines, you can use your reaction to deal radiant damage to the creature. The radiant damage equals {5 + WisMod}.") 
             KiPoints = 3
-            ClassNotes.append()
+            ClassNotes.append("Deflect Missiles (see notes)")
             Notes.append(f"Deflect Missiles - You can use your reaction to deflect or catch the missile when you are hit by a ranged weapon attack. When you do so, the damage you take from the attack is reduced by 1d10 + {DexMod + monklvl}.\nIf you reduce the damage to 0, you can catch the missile if it is small enough for you to hold in one hand and you have at least one hand free. If you catch a missile in this way, you can spend 1 ki point to make a ranged attack with the weapon or piece of ammunition you just caught, as part of the same reaction. You make this attack with proficiency, regardless of your weapon proficiencies, and the missile counts as a monk weapon for the attack, which has a normal range of 20 feet and a long range of 60 feet.")
             ClassNotes.append("Ki-fueled Attack - If you spend 1 ki point or more as part of your action on your turn, you can make one attack with an unarmed strike or a monk weapon as a bonus action before the end of the turn.")
             if monklvl >= 4:
@@ -3711,7 +3712,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 KiPoints = 5
                 MartialArts = "1d6"
                 ClassNotes.append("Extra Attack - You can attack twice, instead of once, whenever you take the Attack action on your turn.")
-                ClassNotes.append()
+                ClassNotes.append("Stunning Strike (see notes)")
                 Notes.append("Stunning Strike - You can interfere with the flow of ki in an opponent’s body. When you hit another creature with a melee weapon attack, you can spend 1 ki point to attempt a stunning strike. The target must succeed on a Constitution saving throw or be stunned until the end of your next turn.")
                 ClassNotes.append("Focused Aim - When you miss with an attack roll, you can spend 1 to 3 ki points to increase your attack roll by 2 for each of these ki points you spend, potentially turning the miss into a hit.")
             if monklvl >= 6:
@@ -3720,7 +3721,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClassNotes.append("Ki-Empowered Strikes - Your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.")
             if monklvl >= 7:
                 KiPoints = 7
-                ClassNotes.append()
+                ClassNotes.append("Evasion (see notes)")
                 Notes.append("Evasion - Your instinctive agility lets you dodge out of the way of certain area effects, such as a blue dragon’s lightning breath or a fireball spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.")
                 ClassNotes.append("Stillness of Mind - You can use your action to end one effect on yourself that is causing you to be charmed or frightened.")
             if monklvl >= 8:
@@ -3754,7 +3755,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if monklvl >= 18:
                 KiPoints = 18
                 UnarmoredMovement = "30"
-                ClassNotes.append()
+                ClassNotes.append("Empty Body (see notes)")
                 Notes.append("Empty Body - You can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage.\nAdditionally, you can spend 8 ki points to cast the Astral Projection spell, without needing material components. When you do so, you can’t take any other creatures with you.")
             if monklvl >= 19:
                 KiPoints = 19
@@ -3926,9 +3927,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)   
-            ClassNotes.append()
+            ClassNotes.append("Divine Sense (see notes)")
             Notes.append(f"Divine Sense - The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.\nYou can use this feature a number of times equal to {1 + ChaMod}. When you finish a long rest, you regain all expended uses.")
-            ClassNotes.append()
+            ClassNotes.append("Lay on Hands (see notes)")
             Notes.append(f"Lay on Hands - Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to {pallvl * 5}.\nAs an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.\nAlternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.\nThis feature has no effect on undead and constructs.")
             if pallvl >= 2:    
                 SpellcastingClass.append("Paladin")
@@ -3940,9 +3941,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 PaladinSpellSlot3 = 0
                 PaladinSpellSlot4 = 0
                 PaladinSpellSlot5 = 0 
-                ClassNotes.append()
+                ClassNotes.append("Fighting Style (see notes)")
                 Notes.append("Fighting Style - You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.\n- Blessed Warrior - You learn two cantrips of your choice from the cleric spell list. They count as paladin spells for you, and Charisma is your spellcasting ability for them. Whenever you gain a level in this class, you can replace one of these cantrips with another cantrip from the cleric spell list.\n- Blind Fighting - You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\n- Defense - While you are wearing armor, you gain a +1 bonus to AC.\n- Dueling - When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.\n- Great Weapon Fighting - When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.\n- Interception - When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.\n- Protection - When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.")
-                ClassNotes.append()
+                ClassNotes.append("Divine Smite (see notes)")
                 Notes.append("Divine Smite - When you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon’s damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8. The damage increases by 1d8 if the target is an undead or a fiend, to a maximum of 6d8.")
             if pallvl >= 3:
                 Pal= ["Oath of the Ancients Paladin", "Oath of Conquest Paladin", "Oath of the Crown Paladin", "Oath of Devotion Paladin", "Oath of Glory Paladin", "Oath of the Open Sea Paladin", "Oath of Redemption Paladin", "Oath of the Watchers Paladin", "Oath of Vengeance Paladin", "Oathbreaker Paladin"]
@@ -4001,19 +4002,19 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Commune with Nature")
                         PaladinOathSpells.append("Tree Stride")
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of the Ancients (see notes)")
                     Notes.append("Tenets of the Ancients - The tenets of the Oath of the Ancients have been preserved for uncounted centuries. This oath emphasizes the principles of good above any concerns of law or chaos. Its four central principles are simple.\nKindle the Light - Through your acts of mercy, kindness, and forgiveness, kindle the light of hope in the world, beating back despair.\nShelter the Light - Where there is good, beauty, love, and laughter in the world, stand against the wickedness that would swallow it. Where life flourishes, stand against the forces that would render it barren.\nPreserve Your Own Light - Delight in song and laughter, in beauty and art. If you allow the light to die in your own heart, you can't preserve it in the world.\nBe the Light - Be a glorious beacon for all who live in despair. Let the light of your joy and courage shine forth in all your deeds.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append("Channel Divinity - You gain the following two Channel Divinity options.\nNature's Wrath - You can use your Channel Divinity to invoke primeval forces to ensnare a foe. As an action, you can cause spectral vines to spring up and reach for a creature within 10 feet of you that you can see. The creature must succeed on a Strength or Dexterity saving throw (its choice) or be restrained. While restrained by the vines, the creature repeats the saving throw at the end of each of its turns. On a success, it frees itself and the vines vanish.\nTurn the Faithless - You can use your Channel Divinity to utter ancient words that are painful for fey and fiends to hear. As an action, you present your holy symbol, and each fey or fiend within 30 feet of you that can hear you must make a Wisdom saving throw. On a failed save, the creature is turned for 1 minute or until it takes damage.\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.\nIf the creature's true form is concealed by an illusion, shapeshifting, or other effect, that form is revealed while it is turned.")
                     if pallvl >= 7:
                         ClassNotes.append("Aura of Warding(1) - Ancient magic lies so heavily upon you that it forms an eldritch ward. You and friendly creatures within 10 feet of you have resistance to damage from spells.")                       
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Undying Sentinel (see notes)")
                         Notes.append("Undying Sentinel - When you are reduced to 0 hit points and are not killed outright, you can choose to drop to 1 hit point instead. Once you use this ability, you can't use it again until you finish a long rest.\nAdditionally, you suffer none of the drawbacks of old age, and you can't be aged magically.")    
                     if pallvl >= 18:
                         ClassNotes.append("Aura of Warding(2) - The range of this aura increases to 30 feet.")                                                     
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Elder Champion (see notes)")
                         Notes.append("Elder Champion - You can assume the form of an ancient force of nature, taking on an appearance you choose. For example, your skin might turn green or take on a bark-like texture, your hair might become leafy or moss-like, or you might sprout antlers or a lion-like mane.\nUsing your action, you undergo a transformation. For 1 minute, you gain the following benefits:\n- At the start of each of your turns, you regain 10 hit points.\n- Whenever you cast a paladin spell that has a casting time of 1 action, you can cast it using a bonus action instead.\n- Enemy creatures within 10 feet of you have disadvantage on saving throws against your paladin spells and Channel Divinity options.\nOnce you use this feature, you can't use it again until you finish a long rest.")                                                   
                 if subclass[i] == "Oath of Conquest Paladin":
                     if pallvl >= 3:
@@ -4031,20 +4032,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Cloudkill")
                         PaladinOathSpells.append("Dominate Person")   
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of Conquest (see notes)")
                     Notes.append("Tenets of Conquest - A paladin who takes this oath has the tenets of conquest seared on the upper arm.\nDouse the Flame of Hope - It is not enough to merely defeat an enemy in battle. Your victory must be so overwhelming that your enemies’ will to fight is shattered forever. A blade can end a life. Fear can end an empire.\nRule with an Iron Fist - Once you have conquered, tolerate no dissent. Your word is law. Those who obey it shall be favored. Those who defy it shall be punished as an example to all who might follow.\nStrength Above All - You shall rule until a stronger one arises. Then you must grow mightier and meet the challenge, or fall to your own ruin.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append("Channel Divinity - You gain the following two Channel Divinity options.\nConquering Presence - You can use your Channel Divinity to exude a terrifying presence. As an action, you force each creature of your choice that you can see within 30 feet of you to make a Wisdom saving throw. On a failed save, a creature becomes frightened of you for 1 minute. The frightened creature can repeat this saving throw at the end of each of its turns, ending the effect on itself on a success.\nGuided Strike - You can use your Channel Divinity to strike with supernatural accuracy. When you make an attack roll, you can use your Channel Divinity to gain a +10 bonus to the roll. You make this choice after you see the roll, but before the DM says whether the attack hits or misses.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Conquest(1) (see notes)")
                         Notes.append(f"Aura of Conquest(1) - You constantly emanate a menacing aura while you’re not incapacitated. The aura extends 10 feet from you in every direction, but not through total cover.\nIf a creature is frightened of you, its speed is reduced to 0 while in the aura, and that creature takes psychic damage equal to {math.floor(pallvl/2)} if it starts its turn there.")                        
                     if pallvl >= 15:
                         ClassNotes.append(f"Scornful Rebuke - Those who dare to strike you are psychically punished for their audacity. Whenever a creature hits you with an attack, that creature takes psychic damage equal to your Charisma modifier (minimum of 1), or {ChaMod}, if you’re not incapacitated.")  
                     if pallvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Conquest(2) (see notes)")
                         Notes.append("Aura of Conquest(2) - The range of this aura increases to 30 feet.")                                                       
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Invincible Conqueror (see notes)")
                         Notes.append("Invincible Conqueror - You gain the ability to harness extraordinary martial prowess. As an action, you can magically become an avatar of conquest, gaining the following benefits for 1 minute:\n- You have resistance to all damage.\n- When you take the Attack action on your turn, you can make one additional attack as part of that action.\n- Your melee weapon attacks score a critical hit on a roll of 19 or 20 on the d20.\nOnce you use this feature, you can’t use it again until you finish a long rest.")                                         
                 if subclass[i] == "Oath of the Crown Paladin":
                     if pallvl >= 3:
@@ -4062,17 +4063,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Circle of Power")
                         PaladinOathSpells.append("Geas")            
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of the Crown (see notes)")
                     Notes.append("Tenets of the Crown - The tenets of the Oath of the Crown are often set by the sovereign to which their oath is sworn, but generally emphasize the following tenets.\nLaw - The law is paramount. It is the mortar that holds the stones of civilization together, and it must be respected.\nLoyalty - Your word is your bond. Without loyalty, oaths and laws are meaningless.\nCourage - You must be willing to do what needs to be done for the sake of order, even in the face of overwhelming odds. If you don't act, then who will?\nResponsibility - You must deal with the consequences of your actions, and you are responsible for fulfilling your duties and obligations.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append(f"Channel Divinity - You gain the following two Channel Divinity options.\nChampion Challenge - As a bonus action, you issue a challenge that compels other creatures to do battle with you. Each creature of your choice that you can see within 30 feet of you must make a Wisdom saving throw. On a failed save, a creature can't willingly move more than 30 feet away from you. This effect ends on the creature if you are incapacitated or die or if the creature is more than 30 feet away from you.\nTurn the Tide - As a bonus action, you can bolster injured creatures with your Channel Divinity. Each creature of your choice that can hear you within 30 feet of you regains hit points equal to 1d6 + your Charisma modifier (minimum of 1), or {ChaMod}, if it has no more than half of its hit points.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Divine Allegiance (see notes)")
                         Notes.append("Divine Allegiance - When a creature within 5 feet of you takes damage, you can use your reaction to magically substitute your own health for that of the target creature, causing that creature not to take the damage. Instead, you take the damage. This damage to you can't be reduced or prevented in any way.")                        
                     if pallvl >= 15:
                         ClassNotes.append("Unyielding Saint - You have advantage on saving throws to avoid becoming paralyzed or stunned.")                              
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Exalted Champion (see notes)")
                         Notes.append("Exalted Champion - Your presence on the field of battle is an inspiration to those dedicated to your cause. You can use your action to gain the following benefits for 1 hour:\n- You have resistance to bludgeoning, piercing, and slashing damage from nonmagical weapons.\n- Your allies have advantage on death saving throws while within 30 feet of you.\n- You have advantage on Wisdom saving throws, as do your allies within 30 feet of you.\nThis effect ends early if you are incapacitated or die. Once you use this feature, you can't use it again until you finish a long rest.")                                    
                 if subclass[i] == "Oath of Devotion Paladin":
                     if pallvl >= 3:
@@ -4090,9 +4091,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Commune")
                         PaladinOathSpells.append("Flame Strike")   
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of Devotion (see notes)")
                     Notes.append("Tenets of Devotion - Though the exact words and strictures of the Oath of Devotion vary, paladins of this oath share these tenets.\nHonesty - Don't lie or cheat. Let your word be your promise.\nCourage - Never fear to act, though caution is wise.\nCompassion - Aid others, protect the weak, and punish those who threaten them. Show mercy to your foes, but temper it with wisdom.\nHonor - Treat others with fairness, and let your honorable deeds be an example to them. Do as much good as possible while causing the least amount of harm.\nDuty - Be responsible for your actions and their consequences, protect those entrusted to your care, and obey those who have just authority over you.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append(f"Channel Divinity - You gain the following two Channel Divinity options.\nSacred Weapon - As an action, you can imbue one weapon that you are holding with positive energy, using your Channel Divinity. For 1 minute, you add your Charisma modifier, or {ChaMod}, to attack rolls made with that weapon (with a minimum bonus of +1). The weapon also emits bright light in a 20-foot radius and dim light 20 feet beyond that. If the weapon is not already magical, it becomes magical for the duration.\nYou can end this effect on your turn as part of any other action. If you are no longer holding or carrying this weapon, or if you fall unconscious, this effect ends.\nTurn the Unholy - As an action, you present your holy symbol and speak a prayer censuring fiends and undead, using your Channel Divinity. Each fiend or undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes damage.\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.")
                     if pallvl >= 7:
                         ClassNotes.append("Aura of Devotion(1) - You and friendly creatures within 10 feet of you can't be charmed while you are conscious.")                      
@@ -4101,7 +4102,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 18:
                         ClassNotes.append("Aura of Devotion(2) - The range of this aura increases to 30 feet.")                                                        
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Holy Nimbus (see notes)")
                         Notes.append("Holy Nimbus - You can emanate an aura of sunlight. For 1 minute, bright light shines from you in a 30-foot radius, and dim light shines 30 feet beyond that.\nWhenever an enemy creature starts its turn in the bright light, the creature takes 10 radiant damage.\nIn addition, for the duration, you have advantage on saving throws against spells cast by fiends or undead.\nOnce you use this feature, you can't use it again until you finish a long rest.")                                        
                 if subclass[i] == "Oath of Glory Paladin":
                     if pallvl >= 3:
@@ -4119,21 +4120,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Commune")
                         PaladinOathSpells.append("Flame Strike")
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of Glory (see notes)")
                     Notes.append("Tenets of Glory - The tenets of the Oath of Glory drive a paladin to attempt heroics that might one day shine in legend.\nActions over Words - Strive to be known by glorious deeds, not words.\nChallenges Are but Tests - Face hardships with courage, and encourage your allies to face them with you.\nHone the Body - Like raw stone, your body must be worked so its potential can be realized.\nDiscipline the Soul - You must marshal the discipline to overcome failings within yourself that threaten to dim the glory of you and your friends.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append(f"Channel Divinity - You gain the following two Channel Divinity options.\nPeerless Athlete - As a bonus action, you can use your Channel Divinity to augment your athleticism. For the next 10 minutes, you have advantage on Strength (Athletics) and Dexterity (Acrobatics) checks; you can carry, push, drag, and lift twice as much weight as normal; and the distance of your long and high jumps increases by 10 feet (this extra distance costs movement as normal).\nInspiring Smite - Immediately after you deal damage to a creature with your Divine Smite feature, you can use your Channel Divinity as a bonus action and distribute temporary hit points to creatures of your choice within 30 feet of you, which can include you. The total number of temporary hit points equals 2d8 + {pallvl}, divided among the chosen creatures however you like.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Alacrity(1) (see notes)")
                         Notes.append("Aura of Alacrity(1) - You emanate an aura that fills you and your companions with supernatural speed, allowing you to race across a battlefield in formation. Your walking speed increases by 10 feet. In addition, if you aren't incapacitated, the walking speed of any ally who starts their turn within 5 feet of you increases by 10 feet until the end of that turn.")                        
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Glorious Defense (see notes)")
                         Notes.append(f"Glorious Defense - You can turn defense into a sudden strike. When you or another creature you can see within 10 feet of you is hit by an attack roll, you can use your reaction to grant a bonus to the target's AC against that attack, potentially causing it to miss. The bonus equals your Charisma modifier, or {ChaMod} (minimum of + 1). If the attack misses, you can make one weapon attack against the attacker as part of this reaction, provided the attacker is within your weapon's range.\nYou can use this feature a number of times equal to your Charisma modifier, or {ChaMod}, minimum of once, and you regain all expended uses when you finish a long rest.")     
                     if pallvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Alacrity(2) (see notes)")
                         Notes.append("Aura of Alacrity(2) - The range of the aura increases to 10 feet.")                                                    
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Living Legend (see notes)")
                         Notes.append("Living Legend - You can empower yourself with the legends-whether true or exaggerated-of your great deeds. As a bonus action, you gain the following benefits for 1 minute:\n- You are blessed with an otherworldly presence, gaining advantage on all Charisma checks.\n- Once on each of your turns when you make a weapon attack and miss, you can cause that attack to hit instead.\n- If you fail a saving throw, you can use your reaction to reroll it. You must use this new roll.\nOnce you use this feature, you can't use it again until you finish a long rest, unless you expend a 5th-level spell slot to use it again.")                     
                 if subclass[i] == "Oath of the Open Sea Paladin":
                     if pallvl >= 3:
@@ -4151,22 +4152,22 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Commune with Nature")
                         PaladinOathSpells.append("Freedom of the Winds")
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of the Open Sea (see notes)")
                     Notes.append("Tenets of the Open Sea - Freedom can be a selfless virtue or a selfish want. For paladins who swear the Oath of the Open Sea, freedom is the highest calling, and a gift to be granted to all.\nNo Greater Life than a Life Lived Free - One should be free to chart their own path without oppression. Those who would exert their power to dominate others shall be smote.\nTrust the Skies - The guidance of a strong breeze. The rumbling warnings of a coming storm. Nature is a source of portent and council that should be heeded.\nAdapt Like the Water - The waters of the ocean can shift around any obstacle—or become the most impassable obstacle of all. They carve away the land to reveal the secrets of the past, or swallow the truth and hide it forever. To embrace this fluidity is to be ready for any challenge.\nExplore the Uncharted - The world is filled with mystery. Through the pursuit of enigmatic ends, one can uncover those who hide their foul deeds, and find the path to becoming something great.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append(f"Channel Divinity - You gain the following two Channel Divinity options.\nMarine Layer - As an action, you channel the sea to create a thick cloud of fog that surrounds you for 20 feet in all directions. The fog moves with you, remaining centered on you and making its area heavily obscured. You and each creature within 5 feet of you instead treat the area as lightly obscured. This fog lasts for 10 minutes, spreads around corners, and cannot be dispersed unless you choose to end this effect (no action required).\nFury of the Tides - As a bonus action, you channel the powerful might of the waves to bolster your attacks for 1 minute. Once per turn for the duration, when you hit a creature with a weapon attack, you can choose to push the target 10 feet away from you. If pushed into an obstacle or another creature, the target takes bludgeoning damage equal to {ChaMod}.")
                     Notes.append("Rules Tip: Visibility - Fog and other effects can obscure vision for you, your enemies, and your allies. When you heavily obscure an area using your Marine Layer Channel Divinity option, all creatures within the area have their vision completely blocked, and creatures outside the area can't see in. Creatures that can't see automatically fail ability checks that require sight. Also, attack rolls against creatures that can't see have advantage, and their own attack rolls have disadvantage.\nCreatures in a lightly obscured area have disadvantage only on Wisdom (Perception) checks that rely on sight. The rules for when your vision is obscured are described completely in the fifth edition core rules.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Liberation(1) (see notes)")
                         Notes.append("Aura of Liberation(1) - You fill nearby creatures with the energy of movement. While you're not incapacitated, you and creatures of your choice within 10 feet of you cannot be grappled or restrained, and ignore penalties on movement and attacks while underwater. Creatures that are already grappled or restrained when they enter the aura can spend 5 feet of movement to automatically escape unless they are bound by magic restraints.")                        
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Stormy Waters (see notes)")
                         Notes.append("Stormy Waters - You can call on the force of crashing waters as a reaction whenever a creature moves into or out of your reach. The creature takes 1d12 bludgeoning damage and must succeed on a Strength saving throw against your spell save DC or be knocked prone.")    
                     if pallvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of Liberation(2) (see notes)")
                         Notes.append("Aura of Liberation(2) - The aura affects creatures within 30 feet of you.")                                                     
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Mythic Swashbuckler (see notes)")
                         Notes.append("Mythic Swashbuckler - You learn to channel the spirits of historic sea captains to briefly become a paragon of heroic adventure. As an action, you embrace these spirits of the sea to gain the following benefits for 1 minute:\n- You have advantage on Strength (Athletics) checks and you gain a climbing speed equal to your walking speed. If you already have a climbing speed, it is doubled.\n- If you are within 5 feet of a creature and no other creatures are within 5 feet of you, you have advantage on attack rolls against that creature.\n- You can take the Dash or Disengage action as a bonus action.\n- You have advantage on Dexterity checks and Dexterity saving throws against effects you can see.\nOnce you use this feature, you can't use it again until you finish a long rest.")                                   
                 if subclass[i] == "Oath of Redemption Paladin":
                     if pallvl >= 3:
@@ -4184,21 +4185,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Hold Monster")
                         PaladinOathSpells.append("Wall of Force")  
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of Redemption (see notes)")
                     Notes.append("Tenets of Redemption - The tenets of the Oath of Redemption hold a paladin to a high standard of peace and justice.\nPeace - Violence is a weapon of last resort. Diplomacy and understanding are the paths to long-lasting peace.\nInnocence - All people begin life in an innocent state, and it is their environment or the influence of dark forces that drives them to evil. By setting the proper example, and working to heal the wounds of a deeply flawed world, you can set anyone on a righteous path.\nPatience - Change takes time. Those who have walked the path of the wicked must be given reminders to keep them honest and true. Once you have planted the seed of righteousness in a creature, you must work day after day to allow it to survive and then flourish.\nWisdom - Your heart and mind must stay clear, for eventually you will be forced to admit defeat. While every creature can be redeemed, some are so far along the path of evil that you have no choice but to end their lives for the greater good. Any such action must be carefully weighed and the consequences fully understood, but once you have made the decision, follow through with it knowing your path is just.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append("Channel Divinity - You gain the following two Channel Divinity options.\nEmissary of Peace - You can use your Channel Divinity to augment your presence with divine power. As a bonus action, you grant yourself a +5 bonus to Charisma (Persuasion) checks for the next 10 minutes.\nRebuke the Violent - You can use your Channel Divinity to rebuke those who use violence. Immediately after an attacker within 30 feet of you deals damage with an attack against a creature other than you, you can use your reaction to force the attacker to make a Wisdom saving throw. On a failed save, the attacker takes radiant damage equal to the damage it just dealt. On a successful save, it takes half as much damage.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of the Guardian(1) (see notes)")
                         Notes.append("Aura of the Guardian(1) - You can shield your allies from harm at the cost of your own health. When a creature within 10 feet of you takes damage, you can use your reaction to magically take that damage, instead of that creature taking it. This feature doesn't transfer any other effects that might accompany the damage, and this damage can't be reduced in any way.")                        
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Protective Spirit (see notes)")
                         Notes.append(f"Protective Spirit - A holy presence mends your wounds in combat. You regain hit points equal to 1d6 + {math.ceil(pallvl/2)} if you end your turn in combat with fewer than half of your hit points remaining and you aren’t incapacitated.")   
                     if pallvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Aura of the Guardian(2) (see notes)")
                         Notes.append("Aura of the Guardian(2) - The range of this aura increases to 30 feet.")                                                      
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Emissary of Redemption (see notes)")
                         Notes.append("Emissary of Redemption - You become an avatar of peace, which gives you the following benefits.\n- You have resistance to all damage dealt by other creatures (their attacks, spells, and other effects).\n- Whenever a creature damages you, it takes radiant damage equal to half the amount it dealt to you.\nIf you attack a creature, cast a spell on it, or deal damage to it by any means but this feature, neither benefit works against that creature until you finish a long rest.")                                   
                 if subclass[i] == "Oath of the Watchers Paladin":
                     if pallvl >= 3:
@@ -4216,19 +4217,19 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Hold Monster")
                         PaladinOathSpells.append("Scrying")    
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of the Watchers (see notes)")
                     Notes.append("Tenets of the Watchers - A paladin who assumes the Oath of the Watchers swears to safeguard mortal realms from otherworldly threats.\nVigilance - The threats you face are cunning, powerful, and subversive. Be ever alert for their corruption.\nLoyalty - Never accept gifts or favors from fiends or those who truck with them. Stay true to your order, your comrades, and your duty.\nDiscipline - You are the shield against the endless terrors that lie beyond the stars. Your blade must be forever sharp and your mind keen to survive what lies beyond.")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append(f"Channel Divinity - You gain the following Channel Divinity options.\nWatcher's Will - You can use your Channel Divinity to invest your presence with the warding power of your faith. As an action, you can choose a number of creatures you can see within 30 feet of you, up to a number equal to your Charisma modifier, or {ChaMod} (minimum of one creature). For 1 minute, you and the chosen creatures have advantage on Intelligence, Wisdom, and Charisma saving throws.\nAbjure the Extraplanar - You can use your Channel Divinity to castigate unworldly beings. As anaction, you present your holy symbol and each aberration, celestial, elemental, fey, or fiend within 30 feet of you that can hear you must make a Wisdom saving throw. On a failed save, the creature is turned for 1 minute or until it takes damage.\nA turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly end its move in a space within 30 feet of you. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can take the Dodge action.")
                     if pallvl >= 7:
                         ClassNotes.append(f"Aura of the Sentinel(1) - You emit an aura of alertness while you aren't incapacitated. When you and any creatures of your choice within 10 feet of you roll initiative, you all gain a bonus to initiative equal to {ProfBonus}.")
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Vigilant Rebuke (see notes)")
                         Notes.append(f"Vigilant Rebuke - You've learned how to chastise anyone who dares wield beguilements against you and your wards. Whenever you or a creature you can see within 30 feet of you succeeds on an Intelligence, a Wisdom, or a Charisma saving throw, you can use your reaction to deal 2d8 + {ChaMod} force damage to the creature that forced the saving throw.")  
                     if pallvl >= 18:
                         ClassNotes.append("Aura of the Sentinel(2) - The range of this aura increases to 30 feet.")                                                       
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Mortal Bulwark (see notes)")
                         Notes.append("Mortal Bulwark - You manifest a spark of divine power in defense of the mortal realms. As a bonus action, you gain the following benefits for 1 minute:\n- You gain truesight with a range of 120 feet.\n- You have advantage on attack rolls against aberrations, celestials, elementals, fey, and fiends.\nWhen you hit a creature with an attack roll and deal damage to it, you can also force it to make a Charisma saving throw against your spell save DC. On a failed save, the creature is magically banished to its native plane of existence if it's currently not there. On a successful save, the creature can't be banished by this feature for 24 hours. Once you use this bonus action, you can't use it again until you finish a long rest, unless you expend a 5th-level spell slot to use it again.")             
                 if subclass[i] == "Oath of Vengeance Paladin":
                     if pallvl >= 3:
@@ -4246,18 +4247,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Hold Monster")
                         PaladinOathSpells.append("Scrying")  
-                    ClassNotes.append()
+                    ClassNotes.append("Tenets of Vengeance (see notes)")
                     Notes.append("Tenets of Vengeance - The tenets of the Oath of Vengeance vary by paladin, but all the tenets revolve around punishing wrongdoers by any means necessary. Paladins who uphold these tenets are willing to sacrifice even their own righteousness to mete out justice upon those who do evil, so the paladins are often neutral or lawful neutral in alignment. The core principles of the tenets are brutally simple.\nFight the Greater Evil - Faced with a choice of fighting my sworn foes or combating a lesser evil, I choose the greater evil.\nNo Mercy for the Wicked - Ordinary foes might win my mercy, but my sworn enemies do not.\nBy Any Means Necessary - My qualms can't get in the way of exterminating my foes.\nRestitution - If my foes wreak ruin on the world, it is because I failed to stop them. I must help those harmed by their misdeeds.")          
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append("Channel Divinity - You gain the following two Channel Divinity options.\nAbjure Enemy - As an action, you present your holy symbol and speak a prayer of denunciation, using your Channel Divinity. Choose one creature within 60 feet of you that you can see. That creature must make a Wisdom saving throw, unless it is immune to being frightened. Fiends and undead have disadvantage on this saving throw.\nOn a failed save, the creature is frightened for 1 minute or until it takes any damage. While frightened, the creature's speed is 0, and it can't benefit from any bonus to its speed.\nOn a successful save, the creature's speed is halved for 1 minute or until the creature takes any damage.\nVow of Enmity - As a bonus action, you can utter a vow of enmity against a creature you can see within 10 feet of you, using your Channel Divinity. You gain advantage on attack rolls against the creature for 1 minute or until it drops to 0 hit points or falls unconscious.")
                     if pallvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Relentless Avenger (see notes)")
                         Notes.append("Relentless Avenger - Your supernatural focus helps you close off a foe's retreat. When you hit a creature with an opportunity attack, you can move up to half your speed immediately after the attack and as part of the same reaction. This movement doesn't provoke opportunity attacks.")                        
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Soul of Vengeance (see notes)")
                         Notes.append("Soul of Vengeance - The authority with which you speak your Vow of Enmity gives you greater power over your foe. When a creature under the effect of your Vow of Enmity makes an attack, you can use your reaction to make a melee weapon attack against that creature if it is within range.")                               
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Avenging Angel (see notes)")
                         Notes.append("Avenging Angel - You can assume the form of an angelic avenger. Using your action, you undergo a transformation. For 1 hour, you gain the following benefits:\n- Wings sprout from your back and grant you a flying speed of 60 feet.\n- You emanate an aura of menace in a 30-foot radius. The first time any enemy creature enters the aura or starts its turn there during a battle, the creature must succeed on a Wisdom saving throw or become frightened of you for 1 minute or until it takes any damage. Attack rolls against the frightened creature have advantage.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                 if subclass[i] == "Oathbreaker Paladin":        
                     if pallvl >= 3:
@@ -4275,17 +4276,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if pallvl >= 17:
                         PaladinOathSpells.append("Contagion")
                         PaladinOathSpells.append("Dominate Person")
-                    ClassNotes.append()
+                    ClassNotes.append("Channel Divinity (see notes)")
                     Notes.append("Channel Divinity - You gain the following two Channel Divinity options.\nControl Undead - As an action, you target one undead creature you can see within 30 feet of you. The target must make a Wisdom saving throw. On a failed save, the target must obey your commands for the next 24 hours, or until you use this Channel Divinity option again. An undead whose challenge rating is equal to or greater than your paladin level is immune to this effect.\nDreadful Aspect - As an action, you channel the darkest emotions and focus them into a burst of magical menace. Each creature of your choice within 30 feet of you must make a Wisdom saving throw if it can see you. On a failed save, the target is frightened of you for 1 minute. If a creature frightened by this effect ends its turn more than 30 feet away from you, it can attempt another Wisdom saving throw to end the effect on it.")
                     if pallvl >= 7:
                         ClassNotes.append(f"Aura of Hate(1) - You, as well any fiends and undead within 10 feet of you, gain a bonus to melee weapon damage rolls equal to your Charisma modifier, or {ChaMod} (minimum of +1). A creature can benefit from this feature from only one paladin at a time.")
                     if pallvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Supernatural Resistance (see notes)")
                         Notes.append("Supernatural Resistance - You gain resistance to bludgeoning, piercing, and slashing damage from nonmagical weapons.")  
                     if pallvl >= 18:
                         ClassNotes.append("Aura of Hate(2) - The range of this aura increases to 30 feet.")                             
                     if pallvl >= 20:           
-                        ClassNotes.append()
+                        ClassNotes.append("Dread Lord (see notes)")
                         Notes.append(f"Dread Lord - You can, as an action, surround yourself with an aura of gloom that lasts for 1 minute. The aura reduces any bright light in a 30-foot radius around you to dim light. Whenever an enemy that is frightened by you starts its turn in the aura, it takes 4d10 psychic damage. Additionally, you and any creatures of your choosing in the aura are draped in deeper shadow. Creatures that rely on sight have disadvantage on attack rolls against creatures draped in this shadow.\nWhile the aura lasts, you can use a bonus action on your turn to cause the shadows in the aura to attack one creature. Make a melee spell attack against the target. If the attack hits, the target takes necrotic damage equal to 3d10 + {ChaMod}.\nAfter activating the aura, you can't do so again until you finish a long rest.")
             ClassNotes.append(f"Paladin Oath Spells - You gain oath spells at certain paladin levels, currently your Oath Spells: {PaladinOathSpells}")
             PaladinSpellSlot1 = 3
@@ -4295,10 +4296,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 HarnessDivinePower = 2
             if pallvl >= 15:
                 HarnessDivinePower = 3   
-            ClassNotes.append()
+            ClassNotes.append("Harness Divine Power (see notes)")
             Notes.append(f"Harness Divine Power - You can expend a use of your Channel Divinity to fuel your spells. As a bonus action, you touch your holy symbol, utter a prayer, and regain one expended spell slot, the level of which is {math.ceil(pallvl/2)}. The number of times you can use this feature is based on your Paladin level, or {HarnessDivinePower} times.\nYou regain all expended uses when you finish a long rest.")
             if pallvl >= 4:
-                ClassNotes.append()
+                ClassNotes.append("Martial Versatility (see notes)")
                 Notes.append("Martial Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can replace a fighting style you know with another fighting style available to paladins. This replacement represents a shift of focus in your martial practice.")
             if pallvl >= 5:
                 PaladinSpellSlot1 = 4
@@ -4318,7 +4319,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if pallvl >= 13:
                 PaladinSpellSlot4 = 1
             if pallvl >= 14:
-                ClassNotes.append()
+                ClassNotes.append("Cleansing Touch (see notes)")
                 Notes.append(f"Cleansing Touch - You can use your action to end one spell on yourself or on one willing creature that you touch.\nYou can use this feature a number of times equal to your Charisma Modifier, or {ChaMod} (a minimum of once). You regain expended uses when you finish a long rest.")
             if pallvl >= 15:
                 PaladinSpellSlot4 = 2
@@ -4481,9 +4482,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)     
                     SkillsList = [AnimalHandling, Athletics, Insight, Investigation, Nature, Perception, Stealth, Survival]
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)       
-            ClassNotes.append()
+            ClassNotes.append("Favored Enemy(1) (see notes)")
             Notes.append("Favored Enemy(1) - You have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\nChoose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all (not adapted into your languages).\nMore options are available at higher levels. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.")
-            ClassNotes.append()
+            ClassNotes.append("Natural Explorer (see notes)")
             Notes.append("Natural Explorer - You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you’re proficient in.\nWhile traveling for an hour or more in your favored terrain, you gain the following benefits:\n- Difficult terrain doesn’t slow your group’s travel.\n- Your group can’t become lost except by magical means.\n- Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.\n- If you are traveling alone, you can move stealthily at a normal pace.\n- When you forage, you find twice as much food as you normally would.\n- While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.\nYou choose additional favored terrain types at 6th and 10th level.")
             if ranlvl >= 2:
                 SpellcastingClass.append("Ranger")
@@ -4533,12 +4534,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "N":
                         subclass[i] = random.choice(Ran)                          
                 if subclass[i] == "Beast Master Archetype Ranger":
-                    ClassNotes.append()
+                    ClassNotes.append("Ranger's Companion (see notes)")
                     Notes.append("Ranger's Companion - You gain a beast companion that accompanies you on your adventures and is trained to fight alongside you. Choose a beast that is no larger than Medium and that has a challenge rating of 1/4 or lower (appendix D of the Player's Handbook presents statistics for the Hawk, Mastiff, and Panther as examples). Add your proficiency bonus to the beast's AC, attack rolls, and damage rolls, as well as to any saving throws and skills it is proficient in. Its hit point maximum equals the hit point number in its stat block or four times your ranger level, whichever is higher. Like any creature, it can spend Hit Dice during a short rest to regain hit points.\nThe beast obeys your commands as best as it can. It takes its turn on your initiative. On your turn, you can verbally command the beast where to move (no action required by you). You can use your action to verbally command it to take the Attack, Dash, Disengage, or Help action. Once you have the Extra Attack feature, you can make one weapon attack yourself when you command the beast to take the Attack action. If you don't issue a command, the beast takes the Dodge action.\nIf you are incapacitated or absent, the beast acts on its own, focusing on protecting you and itself. The beast never requires your command to use its reaction, such as when making an opportunity attack.\nWhile traveling through your favored terrain with only the beast, you can move stealthily at a normal pace.\nIf the beast dies, you can obtain a new companion by spending 8 hours magically bonding with a beast that isn't hostile to you and that meets the requirements.")
-                    ClassNotes.append()
+                    ClassNotes.append("Primal Companion (see notes)")
                     Notes.append("Primal Companion - Instead of Ranger's Companion, if you choose, you magically summon a primal beast, which draws strength from your bond with nature. The beast is friendly to you and your companions and obeys your commands. Choose its stat block-Beast of the Land, Beast of the Sea, or Beast of the Sky-which uses your proficiency bonus (PB) in several places. You also determine the kind of animal the beast is, choosing a kind appropriate for the stat block. Whatever kind you choose, the beast bears primal markings, indicating its mystical origin.\nIn combat, the beast acts during your turn. It can move and use its reaction on its own, but the only action it takes is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. You can also sacrifice one of your attacks when you take the Attack action to command the beast to take the Attack action. If you are incapacitated, the beast can take any action of its choice, not just Dodge.\nIf the beast has died within the last hour, you can use your action to touch it and expend a spell slot of 1st level or higher. The beast returns to life after 1 minute with all its hit points restored.\nWhen you finish a long rest, you can summon a different primal beast. The new beast appears in an unoccupied space within 5 feet of you, and you choose its stat block and appearance. If you already have a beast from this feature, it vanishes when the new beast appears. The beast also vanishes if you die.")
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Exceptional Training (see notes)")
                         Notes.append("Exceptional Training - On any of your turns when your beast companion doesn't attack, you can use a bonus action to command the beast to take the Dash, Disengage, Dodge, or Help action on its turn.\nIn addition, the beast's attacks now count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.")                             
                     if ranlvl >= 11:
                         ClassNotes.append("Bestial Fury - When you command your beast companion to take the Attack action, the beast can make two attacks, or it can take the Multiattack action if it has that action.")                             
@@ -4558,21 +4559,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlLang.append(Drac)
                     else:
                         PlLang, SLANG = languagegen(param, PlLang, SLANG)
-                    ClassNotes.append()
+                    ClassNotes.append("Draconic Gift (see notes)")
                     Notes.append("Draconic Gift - The bond you share with your drake creates a connection to dragonkind, granting you understanding and empowering your presence. You gain the following benefits:\nThaumaturgy - You learn the Thaumaturgy cantrip, which is a ranger spell for you.\nTongue of Dragons - You learn to speak, read, and write Draconic or one other language of your choice (this last one has been addressed).")
-                    ClassNotes.append()
+                    ClassNotes.append("Drake Companion (see notes)")
                     Notes.append("Drake Companion - As an action, you can magically summon the drake that is bound to you. It appears in an unoccupied space of your choice within 30 feet of you.\nThe drake is friendly to you and your companions, and it obeys your commands. See its game statistics in the Drake Companion stat block in 'Fizban's Treasury of Dragons', which uses your proficiency bonus (PB) in several places. Whenever you summon the drake, choose a damage type listed in its Draconic Essence trait. You can determine the cosmetic characteristics of the drake, such as its color, its scale texture, or any visible effect of its Draconic Essence; your choice has no effect on its game statistics.\nIn combat, the drake shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the drake can take any action of its choice, not just Dodge.\nThe drake remains until it is reduced to 0 hit points, until you use this feature to summon the drake again, or until you die. Anything the drake was wearing or carrying is left behind when the drake vanishes.\nOnce you summon the drake, you can't do so again until you finish a long rest, unless you expend a spell slot of 1st level or higher to summon it.")
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Bond of Fang and Scale (see notes)")
                         Notes.append("Bond of Fang and Scale - The bond you share with your drake intensifies, protecting you and stoking the drake's fury. When you summon your drake, it grows wings on its back and gains a flying speed equal to its walking speed.\nIn addition, while your drake is summoned, you and the drake gain the following benefits:\nDrake Mount - The drake grows to Medium size. Reflecting your special bond, you can use the drake as a mount if your size is Medium or smaller. While you are riding your drake, it can't use the flying speed of this feature.\nMagic Fang - The drake's Bite attack deals an extra 1d6 damage of the type chosen for the drake's Draconic Essence.\nResistance - You gain resistance to the damage type chosen for the drake's Draconic Essence.")                             
                     if ranlvl >= 11:
                         DrakesBreathDmg = "8d6"
                         if ranlvl >= 15:
                             DrakesBreathDmg = "10d6"
-                        ClassNotes.append()
+                        ClassNotes.append("Drake's Breath (see notes)")
                         Notes.append(f"Drake's Breath - As an action, you can exhale a 30-foot cone of damaging breath or cause your drake to exhale it. Choose acid, cold, fire, lightning, or poison damage (your choice doesn't have to match your drake's Draconic Essence). Each creature in the cone must make a Dexterity saving throw against your spell save DC, taking {DrakesBreathDmg} damage on a failed save, or half as much damage on a successful one.\nOnce you use this feature, you can't do so again until you finish a long rest, unless you expend a spell slot of 3rd level or higher to use it again.")                             
                     if ranlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Perfected Bond (see notes)")
                         Notes.append(f"Perfected Bond - Your bond to your drake reaches the pinnacle of its power. While your drake is summoned, you and the drake gain the following benefits:\nEmpowered Bite - The drake's Bite attack deals an extra 1d6 damage of the type chosen for its Draconic Essence (for a total of 2d6 extra damage).\nLarge Drake - The drake grows to Large size. When you ride your drake, it is no longer prohibited from using the flying speed of Bond of Fang and Scale.\nReflexive Resistance - When either you or the drake takes damage while you're within 30 feet of each other, you can use your reaction to give yourself or the drake resistance to that instance of damage. You can use this reaction a {ProfBonus} times, and you regain all expended uses when you finish a long rest.") 
                 if subclass[i] == "Fey Wanderer Archetype Ranger":
                     RangerFeyWandererSpells = []
@@ -4589,7 +4590,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     DreadfulStrikeDmg = "1d4"
                     if ranlvl >= 11:
                         DreadfulStrikeDmg = "1d6"
-                    ClassNotes.append()
+                    ClassNotes.append("Dreadful Strikes (see notes)")
                     Notes.append(f"Dreadful Strikes - You can augment your weapon strikes with mind-scarring magic, drawn from the gloomy hollows of the Feywild. When you hit a creature with a weapon, you can deal an extra {DreadfulStrikeDmg} psychic damage to the target, which can take this extra damage only once per turn.")
                     FWG1 = "Illusory butterflies flutter around you while you take a short or long rest."
                     FWG2 = "Fresh, seasonal flowers sprout from your hair each dawn."
@@ -4609,17 +4610,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             FWGChoice = FWG[fwginput - 1]
                     if param == "N":
                         FWGChoice = random.choice(FWG)
-                    ClassNotes.append()
+                    ClassNotes.append("Fey Wanderer Magic (see notes)")
                     Notes.append(f"Fey Wanderer Magic - You learn an additional spell when you reach certain levels in this class. Each spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, as a Fey Wanderer Ranger, you know: {RangerFeyWandererSpells}; You also possess a preternatural blessing from a fey ally or a place of fey power. Your blessing is {FWGChoice}")
-                    ClassNotes.append()
+                    ClassNotes.append("Otherworldly Glamour (see notes)")
                     Notes.append(f"Otherworldly Glamour - Your fey qualities give you a supernatural charm. As a result, whenever you make a Charisma check, you gain a bonus to the check equal to your Wisdom modifier, or {WisMod} (minimum of +1).")
                     SkillsList = [Deception, Performance, Persuasion]
                     SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Beguiling Twist (see notes)")
                         Notes.append("Beguiling Twist - The magic of the Feywild guards your mind. You have advantage on saving throws against being charmed or frightened.\nIn addition, whenever you or a creature you can see within 120 feet of you succeeds on a saving throw against being charmed or frightened, you can use your reaction to force a different creature you can see within 120 feet of you to make a Wisdom saving throw against your spell save DC. If the save fails, the target is charmed or frightened by you (your choice) for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a successful save.")                             
                     if ranlvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Fey Reinforcements (see notes)")
                         Notes.append("Fey Reinforcements - The royal courts of the Feywild have blessed you with the assistance of fey beings: you know summon fey (a spell in chapter 3 of Tasha's Cauldron). It doesn't count against the number of ranger spells you know, and you can cast it without a material component. You can also cast it once without a spell slot, and you regain the ability to do so when you finish a long rest.\nWhenever you start casting the spell, you can modify it so that it doesn't require concentration. If you do so, the spell's duration becomes 1 minute for that casting.")                             
                     if ranlvl >= 15:
                         ClassNotes.append(f"Misty Wanderer - You can slip in and out of the Feywild to move in a blink of an eye: you can cast misty step without expending a spell slot. You can do so a number of times equal to your Wisdom modifier, or {WisMod}, minimum of once, and you regain all expended uses when you finish a long rest.\nIn addition, whenever you cast misty step, you can bring along one willing creature you can see within 5 feet of you. That creature teleports to an unoccupied space of your choice within 5 feet of your destination space.")                        
@@ -4635,11 +4636,11 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         RangerGloomStalkerSpells.append("Greater Invisibility")
                     if ranlvl >= 17:
                         RangerGloomStalkerSpells.append("Seeming")
-                    ClassNotes.append()
+                    ClassNotes.append("Gloom Stalker Magic (see notes)")
                     Notes.append(f"Gloom Stalker Magic - You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, as a Gloom Stalker Ranger, you know: {RangerGloomStalkerSpells}")
-                    ClassNotes.append()
+                    ClassNotes.append("Dread Ambusher (see notes)")
                     Notes.append(f"Dread Ambusher - You master the art of the ambush. You can give yourself a bonus to your initiative rolls equal to {WisMod}.\nAt the start of your first turn of each combat, your walking speed increases by 10 feet, which lasts until the end of that turn. If you take the Attack action on that turn, you can make one additional weapon attack as part of that action. If that attack hits, the target takes an extra 1d8 damage of the weapon's damage type.")
-                    ClassNotes.append()
+                    ClassNotes.append("Umbral Sight (see notes)")
                     Notes.append("Umbral Sight - You gain darkvision out to a range of 60 feet. If you already have darkvision from your race, its range increases by 30 feet.\nYou are also adept at evading creatures that rely on darkvision. While in darkness, you are invisible to any creature that relies on darkvision to see you in that darkness.")
                     if ranlvl >= 7:
                         if WisST not in PlProf:
@@ -4663,34 +4664,34 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         RangerHorizonWalkerSpells.append("Banishment")
                     if ranlvl >= 17:
                         RangerHorizonWalkerSpells.append("Teleportation Circle")                    
-                    ClassNotes.append()
+                    ClassNotes.append("Horizon Walker Magic (see notes)")
                     Notes.append(f"Horizon Walker Magic - You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn’t count against the number of ranger spells you know. Currently, as a Horizon Walker Ranger, you know: {RangerHorizonWalkerSpells}")
-                    ClassNotes.append()
+                    ClassNotes.append("Detect Portal (see notes)")
                     Notes.append("Detect Portal - You gain the ability to magically sense the presence of a planar portal. As an action, you detect the distance and direction to the closest planar portal within 1 mile of you.\nOnce you use this feature, you can't use it again until you finish a short or long rest.\nSee the 'Planar Travel' section in chapter 2 of the Dungeon Master's Guide for examples of planar portals.")
                     PlanarWarriorDmg = "1d8"
                     if ranlvl >= 11:
                         PlanarWarriorDmg = "2d8"
-                    ClassNotes.append()
+                    ClassNotes.append("Planar Warrior (see notes)")
                     Notes.append(f"Planar Warrior - You learn to draw on the energy of the multiverse to augment your attacks.\nAs a bonus action, choose one creature you can see within 30 feet of you. The next time you hit that creature on this turn with a weapon attack, all damage dealt by the attack becomes force damage, and the creature takes an extra {PlanarWarriorDmg} force damage from the attack. When you reach 11th level in this class, the extra damage increases to 2d8.")
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Ethereal Step (see notes)")
                         Notes.append("Ethereal Step - You learn to step through the Ethereal Plane. As a bonus action on your turn, you can cast the Etherealness spell with this feature, without expending a spell slot, but the spell ends at the end of the current turn.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.")                             
                     if ranlvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Distant Strike (see notes)")
                         Notes.append("Distant Strike - You gain the ability to pass between the planes in a blink of an eye. When you use the Attack action, you can teleport up to 10 feet before each attack to an unoccupied space you can see.\nIf you attack at least two different creatures with the action, you can make one additional attack with it against a third creature.")                             
                     if ranlvl >= 15:
                         ClassNotes.append("Spectral Defense - Your ability to move between planes enables you to slip through the planar boundaries to lessen the harm done to you during battle. When you take damage from an attack, you can use your reaction to give yourself resistance to all of that attack's damage on this turn.")
                 if subclass[i] == "Hunter Archetype Ranger":
-                    ClassNotes.append()
+                    ClassNotes.append("Hunter's Prey (see notes)")
                     Notes.append("Hunter's Prey - You gain one of the following features of your choice.\nColossus Slayer - Your tenacity can wear down the most potent foes. When you hit a creature with a weapon attack, the creature takes an extra 1d8 damage if it’s below its hit point maximum. You can deal this extra damage only once per turn.\nGiant Killer - When a Large or larger creature within 5 feet of you hits or misses you with an attack, you can use your reaction to attack that creature immediately after its attack, provided that you can see the creature.\nHorde Breaker - Once on each of your turns when you make a weapon attack, you can make another attack with the same weapon against a different creature that is within 5 feet of the original target and within range of your weapon.")
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Defensive Tactics (see notes)")
                         Notes.append("Defensive Tactics - You gain one of the following features of your choice.\nEscape the Horde - Opportunity attacks against you are made with disadvantage.\nMultiattack Defense - When a creature hits you with an attack, you gain a +4 bonus to AC against all subsequent attacks made by that creature for the rest of the turn.\nSteel Will - You have advantage on saving throws against being frightened.")                             
                     if ranlvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Multiattack (see notes)")
                         Notes.append("Multiattack - You gain one of the following features of your choice.\nVolley - You can use your action to make a ranged attack against any number of creatures within 10 feet of a point you can see within your weapon’s range. You must have ammunition for each target, as normal, and you make a separate attack roll for each target\nWhirlwind Attack - You can use your action to make melee attacks against any number of creatures within 5 feet of you, with a separate attack roll for each target.")                             
                     if ranlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Superior Hunter's Defense (see notes)")
                         Notes.append("Superior Hunter's Defense - You gain one of the following features of your choice.\nEvasion - When you are subjected to an effect, such as a red dragon’s fiery breath or a lightning bolt spell, that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on a saving throw, and only half damage if you fail\nStand Against the Tide - When a hostile creature misses you with a melee attack, you can use your reaction to force that creature to repeat the same attack against another creature (other than itself) of your choice.\nUncanny Dodge - When an attacker that you can see hits you with an attack, you can use your reaction to halve the attack’s damage against you.")
                 if subclass[i] == "Monster Slayer Archetype Ranger":
                     RangerMonsterSlayerSpells = []
@@ -4704,19 +4705,19 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         RangerMonsterSlayerSpells.append("Banishment")
                     if ranlvl >= 17:
                         RangerMonsterSlayerSpells.append("Hold Monster")
-                    ClassNotes.append()
+                    ClassNotes.append("Monster Slayer Magic (see notes)")
                     Notes.append(f"Monster Slayer Magic - You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, your Monster Slayer spells are: {RangerMonsterSlayerSpells}.")                    
-                    ClassNotes.append()
+                    ClassNotes.append("Hunter's Sense (see notes)")
                     Notes.append(f"Hunter's Sense - You gain the ability to peer at a creature and magically discern how best to hurt it. As an action, choose one creature you can see within 60 feet of you. You immediately learn whether the creature has any damage immunities, resistances, or vulnerabilities and what they are. If the creature is hidden from divination magic, you sense that it has no damage immunities, resistances, or vulnerabilities.\nYou can use this feature a number of times equal to your Wisdom modifier, or {WisMod}, minimum of once. You regain all expended uses of it when you finish a long rest.")
-                    ClassNotes.append()
+                    ClassNotes.append("Slayer's Prey (see notes)")
                     Notes.append("Slayer's Prey - You can focus your ire on one foe, increasing the harm you inflict on it. As a bonus action, you designate one creature you can see within 60 feet of you as the target of this feature. The first time each turn that you hit that target with a weapon attack, it takes an extra 1d6 damage from the weapon.\nThis benefit lasts until you finish a short or long rest. It ends early if you designate a different creature.")
                     if ranlvl >= 7:
                         ClassNotes.append("Supernatural Defense - You gain extra resilience against your prey’s assaults on your mind and body. Whenever the target of your Slayer’s Prey forces you to make a saving throw and whenever you make an ability check to escape that target's grapple, add 1d6 to your roll.")
                     if ranlvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Magic-User's Nemesis (see notes)")
                         Notes.append("Magic-User's Nemesis - You gain the ability to thwart someone else's magic. When you see a creature casting a spell or teleporting within 60 feet of you, you can use your reaction to try to magically foil it. The creature must succeed on a Wisdom saving throw against your spell save DC, or its spell or teleport fails and is wasted.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if ranlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Slayer's Counter (see notes)")
                         Notes.append("Slayer's Counter - You gain the ability to counterattack when your prey tries to sabotage you. If the target of your Slayer’s Prey forces you to make a saving throw, you can use your reaction to make one weapon attack against the quarry. You make this attack immediately before making the saving throw. If the attack hits, your save automatically succeeds, in addition to the attack’s normal effects.")
                 if subclass[i] == "Swarmkeeper Archetype Ranger": 
                     Swarm1 = "Swarming insects"
@@ -4747,21 +4748,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         RangerSwarmkeeperSpells.append("Arcane Eye")
                     if ranlvl >= 17:
                         RangerSwarmkeeperSpells.append("Insect Plague")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Gathered Swarm (see notes)")
                     Notes.append(f"Gathered Swarm - A swarm of intangible nature spirits has bonded itself to you and can assist you in battle. Until you die, the swarm remains in your space, crawling on you or flying and skittering around you within your space. You can determine its appearance, which is: {swarmchoice}.\nOnce on each of your turns, you can cause the swarm to assist you in one of the following ways, immediately after you hit a creature with an attack:\n- The attack's target takes 1d6 piercing damage from the swarm.\n- The attack's target must succeed on a Strength saving throw against your spell save DC or be moved by the swarm up to 15 feet horizontally in a direction of your choice.\n- You are moved by the swarm 5 feet horizontally in a direction of your choice.")
-                    ClassNotes.append()
+                    ClassNotes.append("Swarmkeeper Magic (see notes)")
                     Notes.append(f"Swarmkeeper Magic - You learn the Mage Hand cantrip if you don't already know it. When you cast it, the hand takes the form of your swarming nature spirits.\nYou also learn an additional spell of 1st level or higher when you reach certain levels in this class. Each spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, your Swarmkeeper Spells are {RangerSwarmkeeperSpells}")
                     Notes.append("It's Your Swarm - A Swarmkeeper's swarm and spells are reflections of the character's bond with nature spirits. Take the opportunity to describe the swarm and the ranger's magic in play. For example, when your ranger casts gaseous form, they might appear to melt into the swarm, instead of a cloud of mist, or the arcane eye spell could create an extension of your swarm that spies for you. Such descriptions don't change the effects of spells, but they are an exciting opportunity to explore your character's narrative through their class abilities. For more guidance on customizing spells, see the 'Personalizing Spells' section in chapter 3 of the Player's Handbook.\nAlso, remember that the swarm's appearance is yours to customize, and don't feel confined to a single appearance. Perhaps the spirits' look changes with the ranger's mood or with the seasons. You decide!")
                     if ranlvl >= 7:
-                        ClassNotes.append()
+                        ClassNotes.append("Writhing Tide (see notes)")
                         Notes.append(f"Writhing Tide - You can condense part of your swarm into a focused mass that lifts you up. As a bonus action, you gain a flying speed of 10 feet and can hover. This effect lasts for 1 minute or until you are incapacitated.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")                             
                     if ranlvl >= 11:
-                        ClassNotes.append()
+                        ClassNotes.append("Mighty Swarm (see notes)")
                         Notes.append("Mighty Swarm - Your Gathered Swarm grows mightier in the following ways:\n- The damage of Gathered Swarm increases to 1d8.\n- If a creature fails its saving throw against being moved by Gathered Swarm, you can also cause the swarm to knock the creature prone.\n- When you are moved by Gathered Swarm, it gives you half cover until the start of your next turn.")                             
                     if ranlvl >= 15:
-                        ClassNotes.append()
+                        ClassNotes.append("Swarming Dispersal (see notes)")
                         Notes.append(f"Swarming Dispersal - You can discorporate into your swarm, avoiding danger. When you take damage, you can use your reaction to give yourself resistance to that damage. You vanish into your swarm and then teleport to an unoccupied space that you can see within 30 feet of you, where you reappear with the swarm.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")                                            
-            ClassNotes.append()
+            ClassNotes.append("Primeval Awareness (see notes)")
             Notes.append("Primeval Awareness - You can use your action and expend one ranger spell slot to focus your awareness on the region around you. For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead. This feature doesn’t reveal the creatures’ location or number.")                    
             PrimalAwareSpells = []
             PrimalAwareSpells.append("Speak With Animals")
@@ -4774,7 +4775,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if ranlvl >= 17:
                 PrimalAwareSpells.append("Commune With Nature")
                 PrimalAwareSpells_str = ", ".join(f"{spell}" for spell in PrimalAwareSpells)
-                ClassNotes.append()
+                ClassNotes.append("Primal Awareness (see notes)")
                 Notes.append(f"Primal Awareness - [Instead of Primeval Awareness] You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don't already know them. These spells don't count against the number of ranger spells you know.\nThe spells known are: {PrimalAwareSpells_str}.\nYou can cast each of these spells once without expending a spell slot. Once you cast a spell in this way, you can't do so again until you finish a long rest.")
             RangerSpellsKnown = 3
             RangerSpellSlot1 = 3        
@@ -4785,21 +4786,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 RangerSpellSlot2 = 2
                 ClassNotes.append("Extra Attack - You can attack twice, instead of once, whenever you take the Attack action on your turn.")
             if ranlvl >= 6:
-                ClassNotes.append()
+                ClassNotes.append("Favored Enemy(2) (see notes)")
                 Notes.append("Favored Enemy(2) - You have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\nChoose an additional type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.\nMore options are available at higher levels. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.")
             if ranlvl >= 7:
                 RangerSpellsKnown = 5
                 RangerSpellSlot2 = 3
             if ranlvl >= 8:
-                ClassNotes.append()
+                ClassNotes.append("Land’s Stride (see notes)")
                 Notes.append("Land’s Stride - Moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.\nIn addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such those created by the Entangle spell.")
             if ranlvl >= 9:
                 RangerSpellsKnown = 6
                 RangerSpellSlot3 = 2
             if ranlvl >= 10:
-                ClassNotes.append()
+                ClassNotes.append("Hide in Plain Sight (see notes)")
                 Notes.append("Hide in Plain Sight - You can spend 1 minute creating camouflage for yourself. You must have access to fresh mud, dirt, plants, soot, and other naturally occurring materials with which to create your camouflage.\nOnce you are camouflaged in this way, you can try to hide by pressing yourself up against a solid surface, such as a tree or wall, that is at least as tall and wide as you are. You gain a +10 bonus to Dexterity (Stealth) checks as long as you remain there without moving or taking actions. Once you move or take an action or a reaction, you must camouflage yourself again to gain this benefit.")
-                ClassNotes.append()
+                ClassNotes.append("Nature's Veil (see notes)")
                 Notes.append(f"Nature's Veil - You draw on the powers of nature to hide yourself from view briefly. As a bonus action, you can magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
             if ranlvl >= 11:
                 RangerSpellsKnown = 7
@@ -4809,7 +4810,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 RangerSpellSlot4 = 1
             if ranlvl >= 14:
                 ClassNotes.append("Vanish - You can use the Hide action as a bonus action on your turn. Also, you can’t be tracked by nonmagical means, unless you choose to leave a trail.")
-                ClassNotes.append()
+                ClassNotes.append("Favored Enemy(3) (see notes)")
                 Notes.append("Favored Enemy(3) - You have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\nChoose an additional type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.")
             if ranlvl >= 15:
                 RangerSpellsKnown = 9
@@ -4819,13 +4820,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 RangerSpellSlot4 = 3
                 RangerSpellSlot5 = 1
             if ranlvl >= 18:
-                ClassNotes.append()
+                ClassNotes.append("Feral Senses (see notes)")
                 Notes.append("Feral Senses - You gain preternatural senses that help you fight creatures you can’t see. When you attack a creature you can’t see, your inability to see it doesn’t impose disadvantage on your attack rolls against it.\nYou are also aware of the location of any invisible creature within 30 feet of you, provided that the creature isn’t hidden from you and you aren’t blinded or deafened.")                
             if ranlvl >= 19:
                 RangerSpellsKnown = 11
                 RangerSpellSlot5 = 2
             if ranlvl == 20: 
-                ClassNotes.append()
+                ClassNotes.append("Foe Slayer (see notes)")
                 Notes.append("Foe Slayer - You become an unparalleled hunter of your enemies. Once on each of your turns, you can add your Wisdom modifier to the attack roll or the damage roll of an attack you make against one of your favored enemies. You can choose to use this feature before or after the roll, but before any effects of the roll are applied.")
             if ranlvl >= 2:
                 Notes.append(f"You know {RangerSpellsKnown} spells.")
@@ -4962,7 +4963,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if ThievKit not in PlProf:
                         PlProf.append(ThievKit) 
             SneakAttack = "1d6"
-            ClassNotes.append()
+            ClassNotes.append("Thieves’ Cant (see notes)")
             Notes.append("Thieves’ Cant - During your rogue training you learned thieves’ cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves’ cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\nIn addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves’ guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.")
             if roglvl >= 2:
                 ClassNotes.append("Cunning Action - Your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action.")                                      
@@ -5051,7 +5052,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         Notes.append(f"The number of third level spell slots you have as a Arcane Trickster Rogue is: {ATRogueSpellSlot3}.")
                     if ATRogueSpellSlot4 != 0:
                         Notes.append(f"The number of fourth level spell slots you have as a Arcane Trickster Rogue is: {ATRogueSpellSlot4}.")                    
-                    ClassNotes.append()
+                    ClassNotes.append("Mage Hand Legerdemain (see notes)")
                     Notes.append("Mage Hand Legerdemain - When you cast Mage Hand, you can make the spectral hand invisible, and you can perform the following additional tasks with it:\n-You can stow one object the hand is holding in a container worn or carried by another creature.\n- You can retrieve an object in a container worn or carried by another creature.\n- You can use thieves' tools to pick locks and disarm traps at range.\nYou can perform one of these tasks without being noticed by a creature if you succeed on a Dexterity (Sleight of Hand) check contested by the creature's Wisdom (Perception) check.\nIn addition, you can use the bonus action granted by your Cunning Action to control the hand.")
                     if roglvl >= 9:
                         ClassNotes.append("Magical Ambush - If you are hidden from a creature when you cast a spell on it, the creature has disadvantage on any saving throw it makes against the spell this turn.")
@@ -5066,23 +5067,23 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         PlProf.append(PoisKit)
                     ClassNotes.append("Assassinate - You are at your deadliest when you get the drop on your enemies. You have advantage on attack rolls against any creature that hasn't taken a turn in the combat yet. In addition, any hit you score against a creature that is surprised is a critical hit.")
                     if roglvl >= 9:
-                        ClassNotes.append()
+                        ClassNotes.append("Infiltration Expertise (see notes)")
                         Notes.append("Infiltration Expertise - You can unfailingly create false identities for yourself. You must spend seven days and 25 gp to establish the history, profession, and affiliations for an identity. You can't establish an identity that belongs to someone else. For example, you might acquire appropriate clothing, letters of introduction, and official- looking certification to establish yourself as a member of a trading house from a remote city so you can insinuate yourself into the company of other wealthy merchants.\nThereafter, if you adopt the new identity as a disguise, other creatures believe you to be that person until given an obvious reason not to.")
                     if roglvl >= 13:
-                        ClassNotes.append()
+                        ClassNotes.append("Impostor (see notes)")
                         Notes.append("Impostor - You gain the ability to unerringly mimic another person's speech, writing, and behavior. You must spend at least three hours studying these three components of the person's behavior, listening to speech, examining handwriting, and observing mannerisms.\nYour ruse is indiscernible to the casual observer. If a wary creature suspects something is amiss, you have advantage on any Charisma (Deception) check you make to avoid detection.")
                     if roglvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Death Strike (see notes)")
                         Notes.append(f"Death Strike - You become a master of instant death. When you attack and hit a creature that is surprised, it must make a Constitution saving throw (DC 8 + {DexMod} + {ProfBonus}). On a failed save, double the damage of your attack against the creature.")
                 if subclass[i] == "Inquisitive Archetype Rogue":
                     ClassNotes.append("Ear for Deceit - You develop a keen ear for picking out lies. Whenever you make a Wisdom (Insight) check to determine whether a creature is lying, treat a roll of 7 or lower on the d20 as an 8.")
                     ClassNotes.append("Eye for Detail - You can use a bonus action to make a Wisdom (Perception) check to spot a hidden creature or object or to make an Intelligence (Investigation) check to uncover or decipher clues.")
-                    ClassNotes.append()
+                    ClassNotes.append("Insightful Fighting (see notes)")
                     Notes.append("Insightful Fighting - You gain the ability to decipher an opponent’s tactics and develop a counter to them. As a bonus action, you make a Wisdom (Insight) check against a creature you can see that isn’t incapacitated, contested by the target’s Charisma (Deception) check. If you succeed, you can use your Sneak Attack against that target even if you don't have advantage on the attack roll, but not if you have disadvantage on it.\nThis benefit lasts for 1 minute or until you successfully use this feature against a different target.")
                     if roglvl >= 9:
                         ClassNotes.append("Steady Eye - You gain advantage on any Wisdom (Perception) or Intelligence (Investigation) check if you move no more than half your speed on the same turn.")
                     if roglvl >= 13:
-                        ClassNotes.append()
+                        ClassNotes.append("Unerring Eye (see notes)")
                         Notes.append(f"Unerring Eye - Your senses are almost impossible to foil. As an action, you sense the presence of illusions, shapechangers not in their original form, and other magic designed to deceive the senses within 30 feet of you, provided you aren't blinded or deafened. You sense that an effect is attempting to trick you, but you gain no insight into what is hidden or into its true nature.\nYou can use this feature {WisMod} times, a minimum of once, and you regain all expended uses of it when you finish a long rest.")
                     if roglvl >= 17:
                         ClassNotes.append("Eye for Weakness - You learn to exploit a creature’s weaknesses by carefully studying its tactics and movement. While your Insightful Fighting feature applies to a creature, your Sneak Attack damage against that creature increases by 3d6.")                   
@@ -5097,25 +5098,25 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     ClassNotes.append("Master of Intrigue - You can unerringly mimic the speech patterns and accent of a creature that you hear speak for at least 1 minute, enabling you to pass yourself off as a native speaker of a particular land, provided that you know the language.")
                     ClassNotes.append("Master of Tactics - You can use the Help action as a bonus action. Additionally, when you use the Help action to aid an ally in attacking a creature, the target of that attack can be within 30 feet of you, rather than 5 feet of you, if the target can see or hear you.")
                     if roglvl >= 9:
-                        ClassNotes.append()
+                        ClassNotes.append("Insightful Manipulator (see notes)")
                         Notes.append("Insightful Manipulator - If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice:\n- Intelligence score\n- Wisdom score\n- Charisma score\n- Class levels (if any)\nAt the DM's option, you might also realize you know a piece of the creature's history or one of its personality traits, if it has any.")
                     if roglvl >= 13:
                         ClassNotes.append("Misdirection - You can sometimes cause another creature to suffer an attack meant for you. When you are targeted by an attack while a creature within 5 feet of you is granting you cover against that attack, you can use your reaction to have the attack target that creature instead of you.")
                     if roglvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Soul of Deceit (see notes)")
                         Notes.append("Soul of Deceit - Your thoughts can't be read by telepathy or other means, unless you allow it. You can present false thoughts by making a Charisma (Deception) check contested by the mind reader's Wisdom (Insight) check.\nAdditionally, no matter what you say, magic that would determine if you are telling the truth indicates you are being truthful if you so choose, and you can't be compelled to tell the truth by magic.")
                 if subclass[i] == "Phantom Archetype Rogue":
                     ClassNotes.append("Whispers of the Dead - Echoes of those who have died cling to you. Whenever you finish a short or long rest, you can choose one skill or tool proficiency that you lack and gain it, as a ghostly presence shares its knowledge with you. You lose this proficiency when you use this feature to choose a different proficiency that you lack.")
-                    ClassNotes.append()
+                    ClassNotes.append("Wails from the Grave (see notes)")
                     Notes.append(f"Wails from the Grave - As you nudge someone closer to the grave, you can channel the power of death to harm someone else as well. Immediately after you deal your Sneak Attack damage to a creature on your turn, you can target a second creature that you can see within 30 feet of the first creature. Roll half the number of Sneak Attack dice for your level (round up), and the second creature takes necrotic damage equal to the roll's total, as wails of the dead sound around them for a moment.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if roglvl >= 9:
-                        ClassNotes.append()
+                        ClassNotes.append("Tokens of the Departed (see notes)")
                         Notes.append(f"Tokens of the Departed - When a life ends in your presence, you're able to snatch a token from the departing soul, a sliver of its life essence that takes physical form: as a reaction when a creature you can see dies within 30 feet of you, you can open your free hand and cause a Tiny trinket to appear there, a soul trinket. The DM determines the trinket's form or has you roll on the Trinkets table in the Player's Handbook to generate it.\nYou can have a maximum number of soul trinkets equal to {ProfBonus}, and you can't create one while at your maximum.\nYou can use soul trinkets in the following ways:\n- While a soul trinket is on your person, you have advantage on death saving throws and Constitution saving throws, for your vitality is enhanced by the life essence within the object.\n- When you deal Sneak Attack damage on your turn, you can destroy one of your soul trinkets that's on your person and then immediately use Wails from the Grave, without expending a use of that feature.\n- As an action, you can destroy one of your soul trinkets, no matter where it's located. When you do so, you can ask the spirit associated with the trinket one question. The spirit appears to you and answers in a language it knew in life. It's under no obligation to be truthful, and it answers as concisely as possible, eager to be free. The spirit knows only what it knew in life, as determined by the DM.")
                     if roglvl >= 13:
-                        ClassNotes.append()
+                        ClassNotes.append("Ghost Walk (see notes)")
                         Notes.append("Ghost Walk - You can phase partially into the realm of the dead, becoming like a ghost. As a bonus action, you assume a spectral form. While in this form, you have a flying speed of 10 feet, you can hover, and attack rolls have disadvantage against you. You can also move through creatures and objects as if they were difficult terrain, but you take 1d10 force damage if you end your turn inside a creature or an object.\nYou stay in this form for 10 minutes or until you end it as a bonus action. To use this feature again, you must finish a long rest or destroy one of your soul trinkets as part of the bonus action you use to activate Ghost Walk.")
                     if roglvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Death Knell (see notes)")
                         Notes.append("Death Knell - Your association with death has become so close that you gain the following benefits:\n- When you use your Wails from the Grave, you can deal the necrotic damage to both the first and the second creature.\n- At the end of a long rest, a soul trinket appears in your hand if you don't have any soul trinkets, as the spirits of the dead are drawn to you.")
                 if subclass[i] == "Scout Archetype Rogue":
                     ClassNotes.append("Skirmisher - You are difficult to pin down during a fight. You can move up to half your speed as a reaction when an enemy ends its turn within 5 feet of you. This movement doesn’t provoke opportunity attacks.")
@@ -5127,10 +5128,10 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if roglvl >= 9:
                         ClassNotes.append("Superior Mobility - Your walking speed increases by 10 feet. If you have a climbing or swimming speed, this increase applies to that speed as well.")
                     if roglvl >= 13:
-                        ClassNotes.append()
+                        ClassNotes.append("Ambush Master (see notes)")
                         Notes.append("Ambush Master - You excel at leading ambushes and acting first in a fight.\nYou have advantage on initiative rolls. In addition, the first creature you hit during the first round of a combat becomes easier for you and others to strike; attack rolls against that target have advantage until the start of your next turn.")
                     if roglvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Sudden Strike (see notes)")
                         Notes.append("Sudden Strike - You can strike with deadly speed. If you take the Attack action on your turn, you can make one additional attack as a bonus action. This attack can benefit from your Sneak Attack even if you have already used it this turn, but you can't use your Sneak Attack against the same target more than once in a turn.")
                 if subclass[i] == "Soulknife Archetype Rogue":
                     SkPsionicEnergyDice = "d6"
@@ -5140,25 +5141,25 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         SkPsionicEnergyDice = "d10"
                     if roglvl >= 17:
                         SkPsionicEnergyDice = "d12"
-                    ClassNotes.append()
+                    ClassNotes.append("Psionic Power (see notes)")
                     Notes.append(f"Psionic Power - You harbor a wellspring of psionic energy within yourself. This energy is represented by your Psionic Energy dice, which are each a {SkPsionicEnergyDice}. You have a number of these dice equal to twice your proficiency bonus, and they fuel various psionic powers you have, which are detailed below.\nSome of your powers expend the Psionic Energy die they use, as specified in a power's description, and you can't use a power if it requires you to use a die when your dice are all expended. You regain all your expended Psionic Energy dice when you finish a long rest. In addition, as a bonus action, you can regain one expended Psionic Energy die, but you can't do so again until you finish a short or long rest.\nWhen you reach certain levels in this class, the size of your Psionic Energy dice increases (reflected in your damage dice).\nThe powers below use your Psionic Energy dice.\nPsi-Bolstered Knack - When your nonpsionic training fails you, your psionic power can help: if you fail an ability check using a skill or tool with which you have proficiency, you can roll one Psionic Energy die and add the number rolled to the check, potentially turning failure into success. You expend the die only if the roll succeeds.\nPsychic Whispers - You can establish telepathic communication between yourself and others-perfect for quiet infiltration. As an action, choose one or more creatures you can see, up to a number of creatures equal to your proficiency bonus, and then roll one Psionic Energy die. For a number of hours equal to the number rolled, the chosen creatures can speak telepathically with you, and you can speak telepathically with them. To send or receive a message (no action required), you and the other creature must be within 1 mile of each other. A creature can't use this telepathy if it can't speak any languages, and a creature can end the telepathic connection at any time (no action required). You and the creature don't need to speak a common language to understand each other.\nThe first time you use this power after each long rest, you don't expend the Psionic Energy die. All other times you use the power, you expend the die.")
-                    ClassNotes.append()
+                    ClassNotes.append("Psychic Blades (see notes)")
                     Notes.append("Psychic Blades - You can manifest your psionic power as shimmering blades of psychic energy. Whenever you take the Attack action, you can manifest a psychic blade from your free hand and make the attack with that blade. This magic blade is a simple melee weapon with the finesse and thrown properties. It has a normal range of 60 feet and no long range, and on a hit, it deals psychic damage equal to ld6 plus the ability modifier you used for the attack roll. The blade vanishes immediately after it hits or misses its target, and it leaves no mark on its target if it deals damage.\nAfter you attack with the blade, you can make a melee or ranged weapon attack with a second psychic blade as a bonus action on the same turn, provided your other hand is free to create it. The damage die of this bonus attack is 1d4, instead of 1d6.")
                     if roglvl >= 9:
-                        ClassNotes.append()
+                        ClassNotes.append("Soul Blades (see notes)")
                         Notes.append("Soul Blades - Your Psychic Blades are now an expression of your psi-suffused soul, giving you these powers that use your Psionic Energy dice:\nHoming Strikes - If you make an attack roll with your Psychic Blades and miss the target, you can roll one Psionic Energy die and add the number rolled to the attack roll. If this causes the attack to hit, you expend the Psionic Energy die.\nPsychic Teleportation - As a bonus action, you manifest one of your Psychic Blades, expend one Psionic Energy die and roll it, and throw the blade at an unoccupied space you can see, up to a number of feet away equal to 10 times the number rolled. You then teleport to that space, and the blade vanishes.")
                     if roglvl >= 13:
-                        ClassNotes.append()
+                        ClassNotes.append("Psychic Veil (see notes)")
                         Notes.append("Psychic Veil - You can weave a veil of psychic static to mask yourself. As an action, you can magically become invisible, along with anything you are wearing or carrying, for 1 hour or until you dismiss this effect (no action required). This invisibility ends early immediately after you deal damage to a creature or you force a creature to make a saving throw.\nOnce you use this feature, you can't do so again until you finish a long rest, unless you expend a Psionic Energy die to use this feature again.")
                     if roglvl >= 17:
-                        ClassNotes.append()
+                        ClassNotes.append("Rend Mind (see notes)")
                         Notes.append(f"Rend Mind - You can sweep your Psychic Blades directly through a creature's mind. When you use your Psychic Blades to deal Sneak Attack damage to a creature, you can force that target to make a Wisdom saving throw (DC equal to {8 + ProfBonus + DexMod}). If the save fails, the target is stunned for 1 minute. The stunned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\nOnce you use this feature, you can't do so again until you finish a long rest, unless you expend three Psionic Energy dice to use it again.")
                 if subclass[i] == "Swashbuckler Archetype Rogue":
                     ClassNotes.append("Fancy Footwork - You learn how to land a strike and then slip away without reprisal. During your turn, if you make a melee attack against a creature, that creature can't make opportunity attacks against you for the rest of your turn.")
-                    ClassNotes.append()
+                    ClassNotes.append("Rakish Audacity (see notes)")
                     Notes.append(f"Rakish Audacity - Your confidence propels you into battle. You can give yourself a bonus to your initiative rolls equal to {ChaMod}.\nYou also gain an additional way to use your Sneak Attack; you don't need advantage on the attack roll to use your Sneak Attack against a creature if you are within 5 feet of it, no other creatures are within 5 feet of you, and you don't have disadvantage on the attack roll. All the other rules for Sneak Attack still apply to you.")
                     if roglvl >= 9:
-                        ClassNotes.append()
+                        ClassNotes.append("Panache (see notes)")
                         Notes.append("Panache - Your charm becomes extraordinarily beguiling. As an action, you can make a Charisma (Persuasion) check contested by a creature's Wisdom (Insight) check. The creature must be able to hear you, and the two of you must share a language.\nIf you succeed on the check and the creature is hostile to you, it has disadvantage on attack rolls against targets other than you and can't make opportunity attacks against targets other than you. This effect lasts for 1 minute, until one of your companions attacks the target or affects it with a spell, or until you and the target are more than 60 feet apart.\nIf you succeed on the check and the creature isn't hostile to you, it is charmed by you for 1 minute. While charmed, it regards you as a friendly acquaintance. This effect ends immediately if you or your companions do anything harmful to it.")
                     if roglvl >= 13:
                         ClassNotes.append("Elegant Maneuver - You can use a bonus action on your turn to gain advantage on the next Dexterity (Acrobatics) or Strength (Athletics) check you make during the same turn.")
@@ -5183,7 +5184,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClassNotes.append("Expertise - Choose two more of your skill proficiencies, or one more of your skill proficiencies and your proficiency with thieves’ tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.")
             if roglvl >= 7:
                 SneakAttack = "4d6"
-                ClassNotes.append()
+                ClassNotes.append("Evasion (see notes)")
                 Notes.append("Evasion - You can nimbly dodge out of the way of certain area effects, such as an Ancient Red Dragon’s fiery breath or an Ice Storm spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.")
             if roglvl >= 9:
                 SneakAttack = "5d6"
@@ -5393,19 +5394,19 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if sorclvl >= 9:
                         SorcAberrantMindSpells.append("Rary's Telepathic Bond")
                         SorcAberrantMindSpells.append("Telekinesis")
-                    ClassNotes.append()
+                    ClassNotes.append("Psionic Spells (see notes)")
                     Notes.append(f"Psionic Spells - You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know, currently you know: {SorcAberrantMindSpells}\nWhenever you gain a sorcerer level, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be a divination or an enchantment spell from the sorcerer, warlock, or wizard spell list.")
-                    ClassNotes.append()
+                    ClassNotes.append("Telepathic Speech (see notes)")
                     Notes.append(f"Telepathic Speech - You can form a telepathic connection between your mind and the mind of another. As a bonus action, choose one creature you can see within 30 feet of you. You and the chosen creature can speak telepathically with each other while the two of you are within a number of miles of each other equal to your Charisma modifier, {ChaMod}, minimum of 1 mile. To understand each other, you each must speak mentally in a language the other knows.\nThe telepathic connection lasts for {sorclvl} minutes. It ends early if you are incapacitated or die or if you use this ability to form a connection with a different creature.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Psionic Sorcery (see notes)")
                         Notes.append("Psionic Sorcery - When you cast any spell of 1st level or higher from your Psionic Spells feature, you can cast it by expending a spell slot as normal or by spending a number of sorcery points equal to the spell's level. If you cast the spell using sorcery points, it requires no verbal or somatic components, and it requires no material components, unless they are consumed by the spell.")
                         ClassNotes.append("Psychic Defenses - You gain resistance to psychic damage, and you have advantage on saving throws against being charmed or frightened.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Revelation in Flesh (see notes)")
                         Notes.append("Revelation in Flesh - You can unleash the aberrant truth hidden within yourself. As a bonus action, you can spend 1 or more sorcery points to magically transform your body for 10 minutes. For each sorcery point you spend, you can gain one of the following benefits of your choice, the effects of which last until the transformation ends:\n- You can see any invisible creature within 60 feet of you, provided it isn't behind total cover. Your eyes also turn black or become writhing sensory tendrils.\n- You gain a flying speed equal to your walking speed, and you can hover. As you fly, your skin glistens with mucus or shines with an otherworldly light.\n- You gain a swimming speed equal to twice your walking speed, and you can breathe underwater. Moreover, gills grow from your neck or fan out from behind your ears, your fingers become webbed, or you grow writhing cilia that extend through your clothing.\n- Your body, along with any equipment you are wearing or carrying, becomes slimy and pliable. You can move through any space as narrow as 1 inch without squeezing, and you can spend 5 feet of movement to escape from nonmagical restraints or being grappled.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Warping Implosion (see notes)")
                         Notes.append("Warping Implosion - You can unleash your aberrant power as a space-warping anomaly. As an action, you can teleport to an unoccupied space you can see within 120 feet of you. Immediately after you disappear, each creature within 30 feet of the space you left must make a Strength saving throw. On a failed save, a creature takes 3d10 force damage and is pulled straight toward the space you left, ending in an unoccupied space as close to your former space as possible. On a successful save, the creature takes half as much damage and isn't pulled.\nOnce you use this feature, you can't do so again until you finish a long rest, unless you spend 5 sorcery points to use it again.")                       
                 if subclass[i] == "Clockwork Soul Origin Sorcerer":
                     SorcClockworkSoulSpells = []
@@ -5424,7 +5425,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if sorclvl >= 9:
                         SorcClockworkSoulSpells.append("Greater Restoration")
                         SorcClockworkSoulSpells.append("Wall of Force")
-                    ClassNotes.append()
+                    ClassNotes.append("Clockwork Magic (see notes)")
                     Notes.append(f"Clockwork Magic - You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know, currently you know: {SorcClockworkSoulSpells}\nWhenever you gain a sorcerer level, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be an abjuration or a transmutation spell from the sorcerer, warlock, or wizard spell list.")
                     ManOrd1 = "Spectral cogwheels hover behind you."
                     ManOrd2 = "The hands of a clock spin in your eyes."
@@ -5444,18 +5445,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             ManOrdChoice = ManOrd[manordinput-1] 
                     if param == "N":
                          ManOrdChoice = random.choice(ManOrd)
-                    ClassNotes.append()
+                    ClassNotes.append("Clockwork Magic(2) (see notes)")
                     Notes.append(f"Clockwork Magic(2) - In addition, you chose which Manifestation of Order to go with your Clockwork Soul Origin, determining a way your connection to order manifests while you are casting any of your sorcerer spells, which is: {ManOrdChoice}")
-                    ClassNotes.append()
+                    ClassNotes.append("Restore Balance (see notes)")
                     Notes.append(f"Restore Balance - Your connection to the plane of absolute order allows you to equalize chaotic moments. When a creature you can see within 60 feet of you is about to roll a d20 with advantage or disadvantage, you can use your reaction to prevent the roll from being affected by advantage and disadvantage.\nYou can use this feature {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Bastion of Law (see notes)")
                         Notes.append("Bastion of Law - You can tap into the grand equation of existence to imbue a creature with a shimmering shield of order. As an action, you can expend 1 to 5 sorcery points to create a magical ward around yourself or another creature you can see within 30 feet of you. The ward lasts until you finish a long rest or until you use this feature again.\nThe ward is represented by a number of d8s equal to the number of sorcery points spent to create it. When the warded creature takes damage, it can expend a number of those dice, roll them, and reduce the damage taken by the total rolled on those dice.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Trance of Order (see notes)")
                         Notes.append("Trance of Order - You gain the ability to align your consciousness to the endless calculations of Mechanus. As a bonus action, you can enter this state for 1 minute. For the duration, attack rolls against you can't benefit from advantage, and whenever you make an attack roll, an ability check, or a saving throw, you can treat a roll of 9 or lower on the d20 as a 10.\nOnce you use this bonus action, you can't use it again until you finish a long rest, unless you spend 5 sorcery points to use it again.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Clockwork Cavalcade (see notes)")
                         Notes.append("Clockwork Cavalcade - You summon spirits of order to expunge disorder around you. As an action, you summon the spirits in a 30-foot cube originating from you. The spirits look like modrons or other constructs of your choice. The spirits are intangible and invulnerable, and they create the following effects within the cube before vanishing:\n- The spirits restore up to 100 hit points, divided as you choose among any number of creatures of your choice in the cube.\n- Any damaged objects entirely in the cube are repaired instantly.\n- Every spell of 6th level or lower ends on creatures and objects of your choice in the cube.\nOnce you use this action, you can't use it again until you finish a long rest, unless you spend 7 sorcery points to use it again.")                       
                 if subclass[i] == "Divine Soul Origin Sorcerer":
                     SorcDivineSoulSpells = []
@@ -5493,14 +5494,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "N":
                         selected_affinity = random.choice(list(affinity_spells.keys()))
                     selected_spell = affinity_spells[selected_affinity]
-                    ClassNotes.append()
+                    ClassNotes.append("Divine Magic (see notes)")
                     Notes.append(f"Divine Magic - Your link to the divine allows you to learn spells normally associated with the cleric class. When your Spellcasting feature lets you learn a sorcerer cantrip or a sorcerer spell of 1st level or higher, you can choose the new spell from the cleric spell list or the sorcerer spell list. You must otherwise obey all the restrictions for selecting the spell, and it becomes a sorcerer spell for you.\nIn addition, you chose an affinity for the source of your divine power, which is {selected_affinity}, and you lean an additional spell based on that affinity, which is {selected_spell}. It is a sorcerer spell for you, but it doesn't count against your number of sorcerer spells known. If you later replace this spell, you must replace it with a spell from the cleric spell list.")
                     ClassNotes.append("Favored by the Gods - Divine power guards your destiny. If you fail a saving throw or miss with an attack roll, you can roll 2d4 and add it to the total, possibly changing the outcome.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Empowered Healing (see notes)")
                         Notes.append("Empowered Healing - The divine energy coursing through you can empower healing spells. Whenever you or an ally within 5 feet of you rolls dice to determine the number of hit points a spell restores, you can spend 1 sorcery point to reroll any number of those dice once, provided you aren't incapacitated. You can use this feature only once per turn.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Angelic Form (see notes)")
                         Notes.append("Angelic Form - You can use a bonus action to manifest a pair of spectral wings from your back. While the wings are present, you have a flying speed of 30 feet. The wings last until you're incapacitated, you die, or you dismiss them as a bonus action.\nThe affinity you chose for your Divine Magic feature determines the appearance of the spectral wings: eagle wings for good or law, bat wings for evil or chaos, and dragonfly wings for neutrality.")
                     if sorclvl >= 18:
                         ClassNotes.append(f"Unearthly Recovery - You gain the ability to overcome grievous injuries. As a bonus action when you have fewer than half of your hit points remaining, you can regain a number of hit points equal {math.ceil(hitpoints/2)}.\nOnce you use this feature, you can’t use it again until you finish a long rest.")
@@ -5531,17 +5532,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     selected_damage = dragon_damage[selected_color]
                     if Drac not in PlLang:
                         PlLang.append(Drac)
-                    ClassNotes.append()
+                    ClassNotes.append("Dragon Ancestor (see notes)")
                     Notes.append(f"Dragon Ancestor - You choose one type of dragon as your ancestor. The damage type associated with each dragon is used by features you gain later. Your color is {selected_color}, and the damage is {selected_damage}.\nYou can speak, read, and write Draconic(addressed). Additionally, whenever you make a Charisma check when interacting with dragons, your proficiency bonus is doubled if it applies to the check.")
-                    ClassNotes.append()
+                    ClassNotes.append("Draconic Resilience (see notes)")
                     Notes.append(f"Draconic Resilience - As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. Your hit point maximum increases by 1 for every level in this class, meaning your hp is now: {hitpoints + sorclvl}.\nAdditionally, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren't wearing armor, your AC equals {13 + DexMod}.")
                     if sorclvl >= 6:
                         ClassNotes.append(f"Elemental Affinity - When you cast a spell that deals damage of the type associated with your draconic ancestry, add your Charisma modifier, {ChaMod}, to that damage. At the same time, you can spend 1 sorcery point to gain resistance to that damage type for 1 hour.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Dragon Wings (see notes)")
                         Notes.append("Dragon Wings - You gain the ability to sprout a pair of dragon wings from your back, gaining a flying speed equal to your current speed. You can create these wings as a bonus action on your turn. They last until you dismiss them as a bonus action on your turn.\nYou can't manifest your wings while wearing armor unless the armor is made to accommodate them, and clothing not made to accommodate your wings might be destroyed when you manifest them.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Draconic Presence (see notes)")
                         Notes.append("Draconic Presence - You can channel the dread presence of your dragon ancestor, causing those around you to become awestruck or frightened. As an action, you can spend 5 sorcery points to draw on this power and exude an aura of awe or fear (your choice) to a distance of 60 feet. For 1 minute or until you lose your concentration (as if you were casting a concentration spell), each hostile creature that starts its turn in this aura must succeed on a Wisdom saving throw or be charmed (if you chose awe) or frightened (if you chose fear) until the aura ends. A creature that succeeds on this saving throw is immune to your aura for 24 hours.")                       
                 if subclass[i] == "Lunar Magic Origin Sorcerer":
                     MoonPhases = ["Full Moon", "New Moon", "Crescent Moon"]
@@ -5590,20 +5591,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             SorcLunarMagicSpells.append("Hallucinatory Terrain")
                         if sorclvl >= 9:
                             SorcLunarMagicSpells.append("Mislead") 
-                    ClassNotes.append()
+                    ClassNotes.append("Lunar Embodiment (see notes)")
                     Notes.append(f"Lunar Embodiment - You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know.\nWhenever you finish a long rest, you can choose what lunar phase manifests its power through your magic. While in the chosen phase, you can cast the associated spell once without expending a spell slot. Once you cast the associated spell(s) in this way, you can't do so again until you finish a long rest. The spell(s) given in this way currently are: {SorcLunarMagicSpells}")                   
-                    ClassNotes.append()
+                    ClassNotes.append("Moon Fire (see notes)")
                     Notes.append("Moon Fire - You can call down the radiant light of the moon on command. You learn the Sacred Flame spell, which doesn't count against the number of sorcerer cantrips you know. When you cast the spell, you can target one creature as normal or target two creatures within range that are within 5 feet of each other.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Lunar Boons (see notes)")
                         Notes.append(f"Lunar Boons - The current phase of your Lunar Embodiment can affect your Metamagic feature. Each Lunar Embodiment phase is associated with certain schools of magic, as shown here:\nFull Moon - Abjuration and divination spells\nNew Moon - Enchantment and necromancy spells\nCrescent Moon - Illusion and transmutation spells\nWhenever you use Metamagic on a spell of a school of magic associated with your current Lunar Embodiment phase, you can reduce the sorcery points spent by 1 (minimum 0). You can reduce the sorcery points spent for your Metamagic a {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
-                        ClassNotes.append()
+                        ClassNotes.append("Waxing and Waning (see notes)")
                         Notes.append("Waxing and Waning - You gain greater control over the phases of your lunar magic. As a bonus action, you can spend 1 sorcery point to change your current Lunar Embodiment phase to a different one.\nYou can now cast one 1st-level spell from each lunar phase of the Lunar Spells table once without expending a spell slot, provided your current phase is the same as the lunar phase spell. Once you cast a lunar phase spell in this way, you can't do so again until you finish a long rest.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Lunar Empowerment (see notes)")
                         Notes.append("Lunar Empowerment - The power of a lunar phase saturates your being. While you are in a Lunar Embodiment phase, you also gain the following benefit associated with that phase:\nFull Moon - You can use a bonus action to shed bright light in a 10-foot radius and dim light for an additional 10 feet or to douse the light. In addition, you and creatures of your choice have advantage on Intelligence (Investigation) and Wisdom (Perception) checks while within the bright light you shed.\nNew Moon - You have advantage on Dexterity (Stealth) checks. In addition, while you are entirely in darkness, attack rolls have disadvantage against you.\nCrescent Moon - You have resistance to necrotic and radiant damage.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Lunar Phenomenon (see notes)")
                         Notes.append("Lunar Phenomenon - As a bonus action, you can tap into a special power of your current Lunar Embodiment phase. Alternatively, as part of the bonus action you take to change your lunar phase using the Waxing and Waning feature, you can immediately use the power of the lunar phase you are entering:\nFull Moon - You radiate moonlight for a moment. Each creature of your choice within 30 feet of you must succeed on a Constitution saving throw against your spell save DC or be blinded until the end of its next turn. In addition, one creature of your choice in that area regains 3d8 hit points.\nNew Moon - You momentarily emanate gloom. Each creature of your choice within 30 feet of you must succeed on a Dexterity saving throw against your spell save DC or take 3d10 necrotic damage and have its speed reduced to 0 until the end of its next turn. In addition, you become invisible until the end of your next turn, or until immediately after you make an attack roll or cast a spell.\nCrescent Moon - You can magically teleport to an unoccupied space you can see within 60 feet of yourself. You can bring along one willing creature you can see within 5 feet of yourself. That creature teleports to an unoccupied space of your choice that you can see within 5 feet of your destination space. In addition, you and that creature gain resistance to all damage until the start of your next turn.\nOnce you use one of these bonus action benefits, you can't use that benefit again until you finish a long rest, unless you spend 5 sorcery points to use it again.")                       
                 if subclass[i] == "Runechild Origin Sorcerer":
                     SorcRunechildSpells = []
@@ -5622,25 +5623,25 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if sorclvl >= 9:
                         SorcRunechildSpells.append("Greater Restoration")
                         SorcRunechildSpells.append("Telekinesis")
-                    ClassNotes.append()
+                    ClassNotes.append("Runic Magic (see notes)")
                     Notes.append(f"Runic Magic - You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know. You currently know: {SorcRunechildSpells}\nWhen you gain a level in this class, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be an abjuration or transmutation spell from the sorcerer, warlock, or wizard spell list.")
                     GlyphAegisDie = "d6"
                     if sorclvl >= 14:
                         GlyphAegisDie = "d8"
-                    ClassNotes.append()
+                    ClassNotes.append("Glyph of Aegis(1) (see notes)")
                     Notes.append(f"Glyph of Aegis(1) - You can release the stored arcane power within your runes to absorb or deflect threatening attacks. Whenever you take damage, you can expend any number of charged runes as a reaction. Roll a number of {GlyphAegisDie}s equal to the number of runes you expended, and reduce the damage by the total.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Glyph of Aegis(2) (see notes)")
                         Notes.append(f"Glyph of Aegis(2) - You can touch a creature as an action and expend up to 3 charged runes to transfer your protective power to it for up to 1 hour. The next time that creature takes damage within the next hour, it rolls 1{GlyphAegisDie} per charged rune spent and reduces the damage by the total. You can't transfer this power to a creature already under the effect of Glyph of Aegis.")
-                        ClassNotes.append()
+                        ClassNotes.append("Sigilic Augmentation (see notes)")
                         Notes.append("Sigilic Augmentation - You can channel your runes to temporarily bolster your physical capabilities. When you make a Strength, Dexterity, or Constitution ability check, you can expend a charged rune as a reaction to gain advantage on the roll.\nIn addition, when you are forced to make a Strength, Dexterity, or Constitution saving throw, you can use your reaction and expend a charged rune to gain advantage on the saving throw. Once you use this feature in this way, you can't use it in this way again until you complete a long rest.")
-                        ClassNotes.append()
+                        ClassNotes.append("Manifest Inscriptions (see notes)")
                         Notes.append("Manifest Inscriptions - You can reveal hidden glyphs and enchantments that surround you. As an action, you expend one charged rune to reveal hidden or invisible arcane traps, marks, runes, wards, sensors, or glyphs within 60 feet of you. They glow with dim light in a 5-foot radius for 1 minute.\nYou have advantage on Intelligence (Arcana) checks to discern the nature of any magic revealed in this way for the duration. If the glyphs you reveal mean something in a language you can't read, you can understand them while they are glowing as if you knew that language.")                        
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Runic Torrent (see notes)")
                         Notes.append("Runic Torrent - You can channel runic energy to overpower even the staunchest defenses. When you cast a spell, you can expend 2 charged runes to cause the spell to deal force damage instead of its usual damage types. Additionally, all creatures targeted by the spell or within the spell's area must succeed on a Strength saving throw against your spell save DC or be knocked prone or pushed up to 15 feet away from the spell's point of origin (your choice).\nOnce you use this feature, you can't do so again until you complete a short or long rest.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Arcane Exemplar (see notes)")
                         Notes.append("Arcane Exemplar - You can use a bonus action and expend a charged rune to become a being of pure magical energy. While in your exemplar form, you gain the following benefits:\n- You have a flying speed of 60 feet.\n- Creatures have disadvantage on saving throws against your sorcerer spells.\n- You have resistance to damage dealt by spells.\n- Whenever you cast a spell of 1st level or higher, you regain hit points equal to the spell's level.\nYour exemplar form lasts until the end of your turn. However, you can expend a charged rune at the end of your turn (no action required) to extend the duration until the end of your next turn. When your exemplar form ends, you are stunned until the end of your next turn.\nOnce you use this feature, you can't use it again until you complete a long rest.")                    
                 if subclass[i] == "Shadow Origin Sorcerer":
                     ShSorc1 = "You are always icy cold to the touch."
@@ -5662,20 +5663,20 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "N":
                         ShSorc_Choice = random.choice(ShSorc)
                     ClassNotes.append(f"Shadow Sorcerer Quirks - Your Quirk as a Shadow Sorcerer: {ShSorc_Choice}")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Eyes of the Dark(1) (see notes)")
                     Notes.append("Eyes of the Dark(1) - You have darkvision with a range of 120 feet.")                     
-                    ClassNotes.append()
+                    ClassNotes.append("Strength of the Grave (see notes)")
                     Notes.append("Strength of the Grave - Your existence in a twilight state between life and death makes you difficult to defeat. When damage reduces you to 0 hit points, you can make a Charisma saving throw (DC 5 + the damage taken). On a success, you instead drop to 1 hit point. You can't use this feature if you are reduced to 0 hit points by radiant damage or by a critical hit.\nAfter the saving throw succeeds, you can't use this feature again until you finish a long rest.")
                     if sorclvl >= 3:
-                        ClassNotes.append()
+                        ClassNotes.append("Eyes of the Dark(2) (see notes)")
                         Notes.append("Eyes of the Dark(2) - You learn the Darkness spell, which doesn't count against your number of sorcerer spells known. In addition, you can cast it by spending 2 sorcery points or by expending a spell slot. If you cast it with sorcery points, you can see through the darkness created by the spell.")   
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Hound of Ill Omen (see notes)")
                         Notes.append("Hound of Ill Omen - You gain the ability to call forth a howling creature of darkness to harass your foes. As a bonus action, you can spend 3 sorcery points to summon a hound of ill omen to target one creature you can see within 120 feet of you. The hound uses the dire wolf’s statistics, with the following changes:\n- The hound is size Medium, not Large, and it counts as a monstrosity, not a beast.\n- It appears with a number of temporary hit points equal to half your sorcerer level.\n- It can move through other creatures and objects as if they were difficult terrain. The hound takes 5 force damage if it ends its turn inside an object.\n- At the start of its turn, the hound automatically knows its target’s location. If the target was hidden, it is no longer hidden from the hound.\nThe hound appears in an unoccupied space of your choice within 30 feet of the target. Roll initiative for the hound. On its turn, it can move only toward its target by the most direct route, and it can use its action only to attack its target. The hound can make opportunity attacks, but only against its target. Additionally, while the hound is within 5 feet of the target, the target has disadvantage on saving throws against any spell you cast. The hound disappears if it is reduced to 0 hit points, if its target is reduced to 0 hit points, or after 5 minutes.")   
                     if sorclvl >= 14:
                         ClassNotes.append("Shadow Walk - You gain the ability to step from one shadow into another. When you are in dim light or darkness, as a bonus action, you can teleport up to 120 feet to an unoccupied space you can see that is also in dim light or darkness.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Umbral Form (see notes)")
                         Notes.append("Umbral Form - You can spend 6 sorcery points as a bonus action to transform yourself into a shadowy form. In this form, you have resistance to all damage except force and radiant damage, and you can move through other creatures and objects as if they were difficult terrain. You take 5 force damage if you end your turn inside an object.\nYou remain in this form for 1 minute. It ends early if you are incapacitated, if you die, or if you dismiss it as a bonus action.")                                                                                  
                 if subclass[i] == "Storm Origin Sorcerer":  
                     if Prim not in PlLang:
@@ -5683,22 +5684,22 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     ClassNotes.append("Wind Speaker - The arcane magic you command is infused with elemental air. You can speak, read, and write Primordial (addressed). Knowing this language allows you to understand and be understood by those who speak its dialects: Aquan, Auran, Ignan, and Terran.")
                     ClassNotes.append("Tempestuous Magic - You can use a bonus action on your turn to cause whirling gusts of elemental air to briefly surround you, immediately before or after you cast a spell of 1st level or higher. Doing so allows you to fly up to 10 feet without provoking opportunity attacks.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Heart of the Storm (see notes)")
                         Notes.append(f"Heart of the Storm - You gain resistance to lightning and thunder damage. In addition, whenever you start casting a spell of 1st level or higher that deals lightning or thunder damage, stormy magic erupts from you. This eruption causes creatures of your choice that you can see within 10 feet of you to take lightning or thunder damage (choose each time this ability activates) equal to {math.floor(sorclvl/2)}.")
-                        ClassNotes.append()
+                        ClassNotes.append("Storm Guide (see notes)")
                         Notes.append("Storm Guide - You gain the ability to subtly control the weather around you.\nIf it is raining, you can use an action to cause the rain to stop falling in a 20-foot-radius sphere centered on you. You can end this effect as a bonus action.\nIf it is windy, you can use a bonus action each round to choose the direction that the wind blows in a 100-foot-radius sphere centered on you. The wind blows in that direction until the end of your next turn. This feature doesn't alter the speed of the wind.")
                     if sorclvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Storm's Fury (see notes)")
                         Notes.append(f"Storm's Fury - When you are hit by a melee attack, you can use your reaction to deal lightning damage to the attacker. The damage equals {sorclvl}. The attacker must also make a Strength saving throw against your sorcerer spell save DC. On a failed save, the attacker is pushed in a straight line up to 20 feet away from you.")
                     if sorclvl >= 18:
-                        ClassNotes.append()
+                        ClassNotes.append("Wind Soul (see notes)")
                         Notes.append(f"Wind Soul - You gain immunity to lightning and thunder damage.\nYou also gain a magical flying speed of 60 feet. As an action, you can reduce your flying speed to 30 feet for 1 hour and choose a number of creatures within 30 feet of you equal to {3 + ChaMod}. The chosen creatures gain a magical flying speed of 30 feet for 1 hour. Once you reduce your flying speed in this way, you can't do so again until you finish a short or long rest.")                                                                        
                 if subclass[i] == "Wild Magic Origin Sorcerer":                  
                     ClassNotes.append("Wild Magic Surge - Your spellcasting can unleash surges of untamed magic. Immediately after you cast a sorcerer spell of 1st level or higher, the DM can have you roll a d20. If you roll a 1, roll on the Wild Magic Surge table to create a random magical effect.")
-                    ClassNotes.append()
-                    Notes.append("")
+                    ClassNotes.append("Tides of Chaos (see notes)")
+                    Notes.append("Tides of Chaos - You can manipulate the forces of chance and chaos to gain advantage on one attack roll, ability check, or saving throw. Once you do so, you must finish a long rest before you can use this feature again.\nAny time before you regain the use of this feature, the DM can have you roll on the Wild Magic Surge table immediately after you cast a sorcerer spell of 1st level or higher. You then regain the use of this feature.")
                     if sorclvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Bend Luck (see notes)")
                         Notes.append("Bend Luck - You have the ability to twist fate using your wild magic. When another creature you can see makes an attack roll, an ability check, or a saving throw, you can use your reaction and spend 2 sorcery points to roll 1d4 and apply the number rolled as a bonus or penalty (your choice) to the creature's roll. You can do so after the creature rolls but before any effects of the roll occur.")
                     if sorclvl >= 14:
                         ClassNotes.append("Controlled Chaos - You gain a modicum of control over the surges of your wild magic. Whenever you roll on the Wild Magic Surge table, you can roll twice and use either number.")
@@ -5716,12 +5717,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     MetamagicAbilities = "three"
                 if sorclvl > 17:
                     MetamagicAbilities = "four"
-                ClassNotes.append()
+                ClassNotes.append("Metamagic (see notes)")
                 Notes.append(f"Metamagic - You gain the ability to twist your spells to suit your needs. You gain {MetamagicAbilities} of the following Metamagic options of your choice. You gain another one at 10th and 17th level.\nYou can use only one Metamagic option on a spell when you cast it, unless otherwise noted.\nCareful Spell - When you cast a spell that forces other creatures to make a saving throw, you can protect some of those creatures from the spell’s full force. To do so, you spend 1 sorcery point and choose a number of those creatures up to your Charisma modifier (minimum of one creature). A chosen creature automatically succeeds on its saving throw against the spell.\nDistant Spell - When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to double the range of the spell.\nWhen you cast a spell that has a range of touch, you can spend 1 sorcery point to make the range of the spell 30 feet.\nEmpowered Spell - When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls.\nYou can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.\nExtended Spell - When you cast a spell that has a duration of 1 minute or longer, you can spend 1 sorcery point to double its duration, to a maximum duration of 24 hours.\nHeightened Spell - When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.\nQuickened Spell - When you cast a spell that has a casting time of 1 action, you can spend 2 sorcery points to change the casting time to 1 bonus action for this casting.\nSeeking Spell - If you make an attack roll for a spell and miss, you can spend 2 sorcery points to reroll the d20, and you must use the new roll.\nYou can use Seeking Spell even if you have already used a different Metamagic option during the casting of the spell.\nSubtle Spell - When you cast a spell, you can spend 1 sorcery point to cast it without any somatic or verbal components.\nTransmuted Spell - When you cast a spell that deals a type of damage from the following list, you can spend 1 sorcery point to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, thunder.\nTwinned Spell - When you cast a spell that targets only one creature and doesn’t have a range of self, you can spend a number of sorcery points equal to the spell’s level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip).\nTo be eligible, a spell must be incapable of targeting more than one creature at the spell’s current level. For example, Magic Missile and Scorching Ray aren’t eligible, but Ray of Frost and Chromatic Orb are.")                
             if sorclvl >= 4:
                 SorcSpellsKnown = 5
                 SorcSpellSlot2 = 3
-                ClassNotes.append()
+                ClassNotes.append("Sorcerous Versatility (see notes)")
                 Notes.append("Sorcerous Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing the magic within you flowing in new ways:\n- Replace one of the options you chose for the Metamagic feature with a different Metamagic option available to you.\n- Replace one cantrip you learned from this class's Spellcasting feature with another cantrip from the sorcerer spell list.")
             if sorclvl >= 5:
                 SorcSpellsKnown = 6
@@ -5764,7 +5765,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClassNotes.append("Sorcerous Restoration - You regain 4 expended sorcery points whenever you finish a short rest.")                
             if sorclvl > 1:
                 SorceryPoints = sorclvl  
-                ClassNotes.append()
+                ClassNotes.append("Sorcery Points (see notes)")
                 Notes.append("Sorcery Points - You have a number of sorcery points, determined by your level. You can never have more sorcery points than your level. You regain all spent sorcery points when you finish a long rest.\nFlexible Casting - You can use your sorcery points to gain additional spell slots, or sacrifice spell slots to gain additional sorcery points. You learn other ways to use your sorcery points as you reach higher levels.\nCreating Spell Slots - You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th. Any spell slot you create with this feature vanishes when you finish a long rest.\n1st Spell Slot costs 2 Sorcery Points\n2nd Spell Slot costs 3 Sorcery Points\n3rd Spell Slot costs 5 Sorcery Points\n4th Spell Slot costs 6 Sorcery Points\n5th Spell Slot costs 7 Sorcery Points\nConverting a Spell Slot to Sorcery Points. As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot’s level.")
             Notes.append(f"You have {SorcCantripsKnown} cantrips available to you.")
             Notes.append(f"You know {SorcSpellsKnown} spells.")
@@ -5996,18 +5997,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")
-                    ClassNotes.append()
+                    ClassNotes.append("Fey Presence (see notes)")
                     Notes.append("Fey Presence - Your patron bestows upon you the ability to project the beguiling and fearsome presence of the fey. As an action, you can cause each creature in a 10-foot cube originating from you to make a Wisdom saving throw against your warlock spell save DC. The creatures that fail their saving throws are all charmed or frightened by you (your choice) until the end of your next turn.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Misty Escape (see notes)")
                         Notes.append("Misty Escape - You can vanish in a puff of mist in response to harm. When you take damage, you can use your reaction to turn invisible and teleport up to 60 feet to an unoccupied space you can see. You remain invisible until the start of your next turn or until you attack or cast a spell.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Beguiling Defenses (see notes)")
                         Notes.append("Beguiling Defenses - Your patron teaches you how to turn the mind-affecting magic of your enemies against them. You are immune to being charmed, and when another creature attempts to charm you, you can use your reaction to attempt to turn the charm back on that creature. The creature must succeed on a Wisdom saving throw against your warlock spell save DC or be charmed by you for 1 minute or until the creature takes any damage.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Dark Delirium (see notes)")
                         Notes.append("Dark Delirium - You can plunge a creature into an illusory realm. As an action, choose a creature that you can see within 60 feet of you. It must make a Wisdom saving throw against your warlock spell save DC. On a failed save, it is charmed or frightened by you (your choice) for 1 minute or until your concentration is broken (as if you are concentrating on a spell). This effect ends early if the creature takes any damage.\nUntil this illusion ends, the creature thinks it is lost in a misty realm, the appearance of which you choose. The creature can see and hear only itself, you, and the illusion.\nYou must finish a short or long rest before you can use this feature again.")                 
                 if subclass[i] == "Celestial Patron Warlock":
                     Patron = "Celestial"
@@ -6033,18 +6034,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
                     ClassNotes.append("Bonus Cantrips - You learn the Light and Sacred Flame cantrips. They count as warlock cantrips for you, but they don’t count against your number of cantrips known.")
-                    ClassNotes.append()
+                    ClassNotes.append("Healing Light (see notes)")
                     Notes.append(f"Healing Light - You gain the ability to channel celestial energy to heal wounds. You have a pool of d6s that you spend to fuel this healing. The number of dice in the pool equals 1 + {warlvl}.\nAs a bonus action, you can heal one creature you can see within 60 feet of you, spending dice from the pool. The maximum number of dice you can spend at once equals your Charisma modifier, {ChaMod}, (minimum of one die). Roll the dice you spend, add them together, and restore a number of hit points equal to the total.\nYour pool regains all expended dice when you finish a long rest.")
                     if warlvl >= 6:
                         ClassNotes.append(f"Radiant Soul - Your link to the Celestial allows you to serve as a conduit for radiant energy. You have resistance to radiant damage, and when you cast a spell that deals radiant or fire damage, you add your Charisma modifier, {ChaMod} to one radiant or fire damage roll of that spell against one of its targets.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Celestial Resistance (see notes)")
                         Notes.append(f"Celestial Resistance - You gain temporary hit points whenever you finish a short or long rest. These temporary hit points equal your warlock level + your Charisma modifier. Additionally, choose up to five creatures you can see at the end of the rest. Those creatures each gain temporary hit points equal to half your warlock level + your Charisma modifier.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Searing Vengeance (see notes)")
                         Notes.append(f"Searing Vengeance - The radiant energy you channel allows you to resist death. When you have to make a death saving throw at the start of your turn, you can instead spring back to your feet with a burst of radiant energy. You regain hit points equal to {math.ceil(hitpoints/2)}, and then you stand up if you so choose. Each creature of your choice that is within 30 feet of you takes radiant damage equal to 2d8 + {ChaMod}, and is blinded until the end of the current turn.\nOnce you use this feature, you can’t use it again until you finish a long rest.")                
                 if subclass[i] == "The Fathomless Patron Warlock":
                     Patron = "The Fathomless"
@@ -6070,12 +6071,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
                     TentacleDeepsDmg = "1d8"
                     if warlvl >= 10:
                         TentacleDeepsDmg = "2d8"
-                    ClassNotes.append()
+                    ClassNotes.append("Tentacle of the Deeps (see notes)")
                     Notes.append(f"Tentacle of the Deeps - You can magically summon a spectral tentacle that strikes at your foes. As a bonus action, you create a 10-foot-long tentacle at a point you can see within 60 feet of you. The tentacle lasts for 1 minute or until you use this feature to create another tentacle.\nWhen you create the tentacle, you can make a melee spell attack against one creature within 10 feet of it. On a hit, the target takes {TentacleDeepsDmg} cold damage, and its speed is reduced by 10 feet until the start of your next turn.\nAs a bonus action on your turn, you can move the tentacle up to 30 feet and repeat the attack.\nYou can summon the tentacle {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     ClassNotes.append("Gift of the Sea - You gain a swimming speed of 40 feet, and you can breathe underwater.")
                     if warlvl >= 6:
@@ -6083,13 +6084,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         GuardianCoilDmg = "1d8"
                         if warlvl >= 10:
                             GuardianCoilDmg = "2d8"
-                        ClassNotes.append()
+                        ClassNotes.append("Guardian Coil (see notes)")
                         Notes.append(f"Guardian Coil - Your Tentacle of the Deeps can defend you and others, interposing itself between them and harm.\nWhen you or a creature you can see takes damage while within 10 feet of the tentacle, you can use your reaction to choose one of those creatures and reduce the damage to that creature by {GuardianCoilDmg}.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Grasping Tentacles (see notes)")
                         Notes.append(f"Grasping Tentacles - You learn the spell Evard's Black Tentacles. It counts as a warlock spell for you, but it doesn't count against the number of spells you know. You can also cast it once without a spell slot, and you regain the ability to do so when you finish a long rest.\nWhenever you cast this spell, your patron's magic bolsters you, granting you a number of temporary hit points equal to {warlvl}. Moreover, damage can't break your concentration on this spell.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Fathomless Plunge (see notes)")
                         Notes.append("Fathomless Plunge - You can magically open temporary conduits to watery destinations. As an action, you can teleport yourself and up to five other willing creatures that you can see within 30 feet of you. Amid a whirl of tentacles, you all vanish and then reappear up to 1 mile away in a body of water you've seen (pond size or larger) or within 30 feet of it, each of you appearing in an unoccupied space within 30 feet of the others.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")                 
                 if subclass[i] == "Fiend Patron Warlock":
                     Patron = "Fiend"
@@ -6115,16 +6116,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
                     ClassNotes.append(f"Dark One's Blessing - When you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your {ChaMod + warlvl}.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Dark One's Own Luck (see notes)")
                         Notes.append("Dark One's Own Luck - You can call on your patron to alter fate in your favor. When you make an ability check or a saving throw, you can use this feature to add a d10 to your roll. You can do so after seeing the initial roll but before any of the roll's effects occur.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if warlvl >= 10:
                         ClassNotes.append("Fiendish Resilience - You can choose one damage type when you finish a short or long rest. You gain resistance to that damage type until you choose a different one with this feature. Damage from magical weapons or silver weapons ignores this resistance.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Hurl Through Hell (see notes)")
                         Notes.append("Hurl Through Hell - When you hit a creature with an attack, you can use this feature to instantly transport the target through the lower planes. The creature disappears and hurtles through a nightmare landscape.\nAt the end of your next turn, the target returns to the space it previously occupied, or the nearest unoccupied space. If the target is not a fiend, it takes 10d10 psychic damage as it reels from its horrific experience.\nOnce you use this feature, you can't use it again until you finish a long rest")                 
                 if subclass[i] == "The Genie Patron Warlock":
                     GenK1 = "Dao, or Earth Genie"
@@ -6201,7 +6202,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you, and you will also get spells associated with your patron's kind (dao, djinni, efreeti, or marid): {', '.join(spell_list)}.")                
                     Vessel1 = "Oil lamp"
                     Vessel2 = "Urn"
@@ -6221,16 +6222,16 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             GenieVessel = Vessel[gvinput - 1]
                     if param == "N":
                         GenieVessel = random.choice(Vessel)
-                    ClassNotes.append()
+                    ClassNotes.append("Genie's Vessel (see notes)")
                     Notes.append(f"Genie's Vessel - Your patron gifts you a magical vessel that grants you a measure of the genie's power. The vessel is a Tiny object, and you can use it as a spellcasting focus for your warlock spells. The Vessel was decided either randomly or via a questionnaire upon making the character. While you are touching the vessel, you can use it in the following ways:\nBottled Respite - As an action, you can magically vanish and enter your vessel, which remains in the space you left. The interior of the vessel is an extradimensional space in the shape of a 20-foot-radius cylinder, 20 feet high, and resembles your vessel. The interior is appointed with cushions and low tables and is a comfortable temperature. While inside, you can hear the area around your vessel as if you were in its space. You can remain inside the vessel up to a number of hours equal to {ProfBonus * 2}. You exit the vessel early if you use a bonus action to leave, if you die, or if the vessel is destroyed. When you exit the vessel, you appear in the unoccupied space closest to it. Any objects left in the vessel remain there until carried out, and if the vessel is destroyed, every object stored there harmlessly appears in the unoccupied spaces closest to the vessel's former space. Once you enter the vessel, you can't enter again until you finish a long rest.Genie's Wrath - Once during each of your turns when you hit with an attack roll, you can deal extra damage to the target equal to {ProfBonus}. The type of this damage is determined by your patron: bludgeoning (dao), thunder (djinni), fire (efreeti), or cold (marid).\nThe vessel's AC equals your spell save DC. Its hit points equal {warlvl + ProfBonus}, and it is immune to poison and psychic damage.\nIf the vessel is destroyed or you lose it, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and the previous vessel is destroyed if it still exists. The vessel vanishes in a flare of elemental power when you die.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Elemental Gift (see notes)")
                         Notes.append(f"Elemental Gift - You begin to take on characteristics of your patron's kind. You now have resistance to a damage type determined by your patron's kind: bludgeoning (dao), thunder (djinni), fire (efreeti), or cold (marid).\nIn addition, as a bonus action, you can give yourself a flying speed of 30 feet that lasts for 10 minutes, during which you can hover. You can use this bonus action a {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Sanctuary Vessel (see notes)")
                         Notes.append(f"Sanctuary Vessel - When you enter your Genie's Vessel via the Bottled Respite feature, you can now choose up to five willing creatures that you can see within 30 feet of you, and the chosen creatures are drawn into the vessel with you.\nAs a bonus action, you can eject any number of creatures from the vessel, and everyone is ejected if you leave or die or if the vessel is destroyed.\nIn addition, anyone (including you) who remains within the vessel for at least 10 minutes gains the benefit of finishing a short rest, and anyone can add your proficiency bonus, {ProfBonus}, to the number of hit points they regain if they spend any Hit Dice as part of a short rest there.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Limited Wish (see notes)")
                         Notes.append("Limited Wish - You entreat your patron to grant you a small wish. As an action, you can speak your desire to your Genie's Vessel, requesting the effect of one spell that is 6th level or lower and has a casting time of 1 action. The spell can be from any class's spell list, and you don't need to meet the requirements in that spell, including costly components: the spell simply takes effect as part of this action.\nOnce you use this feature, you can't use it again until you finish 1d4 long rests.")
                 if subclass[i] == "Great Old One Patron Warlock":
                     Patron = "Great Old One"
@@ -6256,17 +6257,17 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Awakened Mind (see notes)")
                     Notes.append("Awakened Mind - Your alien knowledge gives you the ability to touch the minds of other creatures. You can communicate telepathically with any creature you can see within 30 feet of you. You don't need to share a language with the creature for it to understand your telepathic utterances, but the creature must be able to understand at least one language.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Entropic Ward (see notes)")
                         Notes.append("Entropic Ward - You learn to magically ward yourself against attack and to turn an enemy's failed strike into good luck for yourself. When a creature makes an attack roll against you, you can use your reaction to impose disadvantage on that roll. If the attack misses you, your next attack roll against the creature has advantage if you make it before the end of your next turn.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if warlvl >= 10:
                         ClassNotes.append("Thought Shield - Your thoughts can't be read by telepathy or other means unless you allow it. You also have resistance to psychic damage, and whenever a creature deals psychic damage to you, that creature takes the same amount of damage that you do.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Create Thrall (see notes)")
                         Notes.append("Create Thrall - You gain the ability to infect a humanoid's mind with the alien magic of your patron. You can use your action to touch an incapacitated humanoid. That creature is then charmed by you until a Remove Curse spell is cast on it, the charmed condition is removed from it, or you use this feature again.\nYou can communicate telepathically with the charmed creature as long as the two of you are on the same plane of existence.")
                 if subclass[i] == "Hexblade Patron Warlock":
                     Patron = "Hexblade"
@@ -6292,9 +6293,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Hexblade's Curse (see notes)")
                     Notes.append(f"Hexblade's Curse - You gain the ability to place a baleful curse on someone. As a bonus action, choose one creature you can see within 30 feet of you. The target is cursed for 1 minute. The curse ends early if the target dies, you die, or you are incapacitated. Until the curse ends, you gain the following benefits:\n- You gain a bonus to damage rolls against the cursed target of {ProfBonus}.\n- Any attack roll you make against the cursed target is a critical hit on a roll of 19 or 20 on the d20.\n- If the cursed target dies, you regain hit points equal to your {warlvl + ChaMod}.\nYou can’t use this feature again until you finish a short or long rest.")
                     for item in MediumArmor:
                         if item not in PlProf:
@@ -6303,15 +6304,15 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                    
-                    ClassNotes.append()
+                    ClassNotes.append("Hex Warrior (see notes)")
                     Notes.append("Hex Warrior - The influence of your patron also allows you to mystically channel your will through a particular weapon. Whenever you finish a long rest, you can touch one weapon that you are proficient with and that lacks the two-handed property. When you attack with that weapon, you can use your Charisma modifier, instead of Strength or Dexterity, for the attack and damage rolls. This benefit lasts until you finish a long rest. If you later gain the Pact of the Blade feature, this benefit extends to every pact weapon you conjure with that feature, no matter the weapon's type.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Accursed Specter (see notes)")
                         Notes.append(f"Accursed Specter - You can curse the soul of a person you slay, temporarily binding it in your service. When you slay a humanoid, you can cause its spirit to rise from its corpse as a Specter. When the specter appears, it gains temporary hit points equal to {math.ceil(warlvl/2)}. Roll initiative for the specter, which has its own turns. It obeys your verbal commands, and it gains a special bonus to its attack rolls equal to {ChaMod}.\nThe specter remains in your service until the end of your next long rest, at which point it vanishes to the afterlife.\nOnce you bind a specter with this feature, you can't use the feature again until you finish a long rest.")
                     if warlvl >= 10:
                         ClassNotes.append("Armor of Hexes - Your hex grows more powerful. If the target cursed by your Hexblade’s Curse hits you with an attack roll, roll a d6. On a 4 or higher, the attack instead misses you, regardless of its roll.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Master of Hexes (see notes)")
                         Notes.append("Master of Hexes - You can spread your Hexblade's Curse from a slain creature to another creature. When the creature cursed by your Hexblade's Curse dies, you can apply the curse to a different creature you can see within 30 feet of you, provided you aren't incapacitated. When you apply the curse in this way, you don't regain hit points from the death of the previously cursed creature.")                
                 if subclass[i] == "Undead Patron Warlock":
                     Patron = "Undead"
@@ -6337,18 +6338,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Form of Dread (see notes)")
                     Notes.append(f"Form of Dread - You manifest an aspect of your patron’s dreadful power. As a bonus action, you transform for 1 minute. You gain the following benets while transformed:\n- You gain temporary hit points equal to 1d10 + {warlvl}.\n- Once during each of your turns, when you hit a creature with an attack roll, you can force it to make a Wisdom saving throw, and if the saving throw fails, the target is frightened of you until the end of your next turn.\n- You are immune to the frightened condition.\nYou can transform {ProfBonus} times, and you regain all expended uses when you finish a long rest.\nThe appearance of your Form of Dread reflects some aspect of your patron. For example, your form could be a shroud of shadows forming the crown and robes of your lich patron, or your body might glow with glyphs from ancient funerary rites and be surrounded by desert winds, suggesting your mummy patron.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Grave Touched (see notes)")
                         Notes.append("Grave Touched - Your patron’s powers have a profound effect on your body and magic. You don’t need to eat, drink, or breathe.\nIn addition, once during each of your turns, when you hit a creature with an attack roll and roll damage against the creature, you can replace the damage type with necrotic damage. While you are using your Form of Dread, you can roll one additional damage die when determining the necrotic damage the target takes.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Necrotic Husk (see notes)")
                         Notes.append(f"Necrotic Husk - Your connection to undeath and necrotic energy now saturates your body. You have resistance to necrotic damage. If you are transformed using your Form of Dread, you instead become immune to necrotic damage.\nIn addition, when you would be reduced to 0 hit points, you can use your reaction to drop to 1 hit point instead and cause your body to erupt with deathly energy. Each creature of your choice that is within 30 feet of you takes necrotic damage equal to 2d10 + {warlvl}. You then gain 1 level of exhaustion. Once you use this reaction, you can’t do so again until you finish 1d4 long rests.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Spirit Projection (see notes)")
                         Notes.append("Spirit Projection - Your spirit can become untethered from your physical form. As an action, you can project your spirit from your body. The body you leave behind is unconscious and in a state of suspended animation.\nYour spirit resembles your mortal form in almost every way, replicating your game statistics but not your possessions. Any damage or other effects that apply to your spirit or physical body affects the other. Your spirit can remain outside your body for up to 1 hour or until your concentration is broken (as if concentrating on a spell). When your projection ends, your spirit returns to your body or your body magically teleports to your spirit’s space (your choice).\nWhile projecting your spirit, you gain the following benefits:\n- Your spirit and body gain resistance to bludgeoning, piercing, and slashing damage.\n- When you cast a spell of the conjuration or necromancy school, the spell doesn’t require verbal or somatic components or material components that lack a gold cost.\n- You have a flying speed equal to your walking speed and can hover. You can move through creatures and objects as if they were difficult terrain, but you take 1d10 force damage if you end your turn inside a creature or an object.\n- While you are using your Form of Dread, once during each of your turns when you deal necrotic damage to a creature, you regain hit points equal to half the amount of necrotic damage dealt.\nOnce you use this feature, you can’t do so again until you finish a long rest.")                
                 if subclass[i] == "Undying Patron Warlock":                 
                     Patron = "Undying"
@@ -6374,18 +6375,18 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")
                         if level == 5:
                             spell_list.append(f"for {level}th level you get {', '.join(spells)}")                                                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - {Patron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {', '.join(spell_list)}.")                        
-                    ClassNotes.append()
+                    ClassNotes.append("Among the Dead (see notes)")
                     Notes.append("Among the Dead - You learn the Spare the Dying cantrip, which counts as a warlock cantrip for you. You also have advantage on saving throws against any disease.\nAdditionally, undead have difficulty harming you. If an undead targets you directly with an attack or a harmful spell, that creature must make a Wisdom saving throw against your spell save DC (an undead needn't make the save when it includes you in an area effect, such as the explosion of Fireball). On a failed save, the creature must choose a new target or forfeit targeting someone instead of you, potentially wasting the attack or spell. On a successful save, the creature is immune to this effect for 24 hours. An undead is also immune to this effect for 24 hours if you target it with an attack or a harmful spell.")
                     if warlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Defy Death (see notes)")
                         Notes.append(f"Defy Death - You can give yourself vitality when you cheat death or when you help someone else cheat it. You can regain hit points equal to 1d8 + your Constitution modifier, or {ChaMod}, minimum of 1 hit point, when you succeed on a death saving throw or when you stabilize a creature with Spare the Dying.\nOnce you use this feature, you can't use it again until you finish a long rest.")
                     if warlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Undying Nature (see notes)")
                         Notes.append("Undying Nature - You can hold your breath indefinitely, and you don't require food, water, or sleep, although you still require rest to reduce exhaustion and still benefit from finishing short and long rests.\nIn addition, you age at a slower rate. For every 10 years that pass, your body ages only 1 year, and you are immune to being magically aged.")
                     if warlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Indestructible Life (see notes)")
                         Notes.append("Indestructible Life - You partake of some of the true secrets of the Undying. On your turn, you can use a bonus action to regain hit points equal to 1d8 + {warlvl}. Additionally, if you put a severed body part of yours back in place when you use this feature, the part reattaches.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")                    
             if warlvl >= 2:
                 WarlockSpellsKnown = 3
@@ -6394,12 +6395,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if warlvl >= 3:                    
                 WarlockSpellsKnown = 4
                 WarlockSlotLevel = "2nd"
-                ClassNotes.append()
+                ClassNotes.append("Pact Boon (see notes)")
                 Notes.append("Pact Boon - Your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice.\nPact of the Blade - You can use your action to create a pact weapon in your empty hand. You can choose the form that this melee weapon takes each time you create it (see the Weapons section for weapon options). You are proficient with it while you wield it. This weapon counts as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.\nYour pact weapon disappears if it is more than 5 feet away from you for 1 minute or more. It also disappears if you use this feature again, if you dismiss the weapon (no action required), or if you die.\nYou can transform one magic weapon into your pact weapon by performing a special ritual while you hold the weapon. You perform the ritual over the course of 1 hour, which can be done during a short rest. You can then dismiss the weapon, shunting it into an extradimensional space, and it appears whenever you create your pact weapon thereafter. You can’t affect an artifact or a sentient weapon in this way. The weapon ceases being your pact weapon if you die, if you perform the 1-hour ritual on a different weapon, or if you use a 1-hour ritual to break your bond to it. The weapon appears at your feet if it is in the extradimensional space when the bond breaks.\nPact of the Chain - You learn the Find Familiar spell and can cast it as a ritual. The spell doesn’t count against your number of spells known.\nWhen you cast the spell, you can choose one of the normal forms for your familiar or one of the following special forms: Imp, Pseudodragon, Quasit, or Sprite.\nAdditionally, when you take the Attack action, you can forgo one of your own attacks to allow your familiar to make one attack with its reaction.\n- Pact of the Talisman - Your patron gives you an amulet, a talisman that can aid the wearer when the need is great. When the wearer fails an ability check, they can add a d4 to the roll, potentially turning the roll into a success. This benefit can be used a number of times equal to your proficiency bonus, and all expended uses are restored when you finish a long rest.\nIf you lose the talisman, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and it destroys the previous amulet. The talisman turns to ash when you die.\n- Pact of the Tome - Your patron gives you a grimoire called a Book of Shadows. When you gain this feature, choose three cantrips from any class’s spell list (the three needn’t be from the same list). While the book is on your person, you can cast those cantrips at will. They don’t count against your number of cantrips known. If they don’t appear on the warlock spell list, they are nonetheless warlock spells for you.\nIf you lose your Book of Shadows, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and it destroys the previous book. The book turns to ash when you die.")
             if warlvl >= 4:
                 WarlockCantripsKnown = 3
                 WarlockSpellsKnown = 5
-                ClassNotes.append()
+                ClassNotes.append("Eldritch Versatility (see notes)")
                 Notes.append("Eldritch Versatility - Whenever you reach a level in this class that grants the Ability Score Improvement feature, you can do one of the following, representing a change of focus in your occult studies:\n- Replace one cantrip you learned from this class's Pact Magic feature with another cantrip from the warlock spell list.\n- Replace the option you chose for the Pact Boon feature with one of that feature's other options.\n= If you're 12th level or higher, replace one spell from your Mystic Arcanum feature with another warlock spell of the same level.\nIf this change makes you ineligible for any of your Eldritch Invocations, you must also replace them now, choosing invocations for which you qualify.")
             if warlvl >= 5:
                 WarlockSpellsKnown = 6
@@ -6431,7 +6432,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 if warlvl >= 17:
                     MysticArcanum.append("9th level spell")
                 MysticArcanum_str = ", ".join(f" one {warspell}" for warspell in MysticArcanum)
-                ClassNotes.append()
+                ClassNotes.append("Mystic Arcanum (see notes)")
                 Notes.append(f"Mystic Arcanum - Your patron bestows upon you a magical secret called an arcanum. The spells acquired by this are: {MysticArcanum}, from the warlock spell list as this arcanum.\nYou can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again.\nMore spells are unlocked at higher levels. You regain all uses of your Mystic Arcanum when you finish a long rest.")
             if warlvl >= 12:
                 WarlockEldritchInvocations = 6
@@ -6448,7 +6449,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if warlvl >= 19:
                 WarlockSpellsKnown = 15
             if warlvl == 20:
-                ClassNotes.append()
+                ClassNotes.append("Eldritch Master (see notes)")
                 Notes.append("Eldritch Master - You can draw on your inner reserve of mystical power while entreating your patron to regain expended spell slots. You can spend 1 minute entreating your patron for aid to regain all your expended spell slots from your Pact Magic feature. Once you regain spell slots with this feature, you must finish a long rest before you can do so again.")
             Notes.append(f"You have {WarlockCantripsKnown} cantrips available to you.")
             Notes.append(f"You know {WarlockSpellsKnown} spells.")
@@ -6565,11 +6566,11 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 WizardSpellSlot7 = 0
                 WizardSpellSlot8 = 0
                 WizardSpellSlot9 = 0  
-                ClassNotes.append()
+                ClassNotes.append("Learning Spells of 1st Level and Higher (see notes)")
                 Notes.append("Learning Spells of 1st Level and Higher - Each time you gain a wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the “Your Spellbook” sidebar).")                                                                                   
-                ClassNotes.append()
+                ClassNotes.append("Your Spellbook (see notes)")
                 Notes.append("Your Spellbook - The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard’s chest, for example, or in a dusty tome in an ancient library.\nCopying a Spell into the Book. When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\nCopying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.\nFor each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.\nReplacing the Book. You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.\nIf you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.\nThe Book’s Appearance. Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.")
-                ClassNotes.append()
+                ClassNotes.append("Arcane Recovery (see notes)")
                 Notes.append("Arcane Recovery - You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.")
             if wizlvl >= 2:
                 Wiz = ["Abjuration Arcane Tradition Wizard", "Bladesinging Arcane Tradition Wizard", "Blood Magic Arcane Tradition Wizard", "Chronurgy Magic Wizard", "Conjuration Arcane Tradition Wizard", "Divination Arcane Tradition Wizard", "Enchantment Arcane Tradition Wizard", "Evocation Arcane Tradition Wizard", "Graviturgy Magic Wizard", "Illusion Arcane Tradition Wizard", "Necromancy Arcane Tradition Wizard", "Order of Scribes Arcane Tradition Wizard", "Transmutation Arcane Tradition Wizard", "War Magic Arcane Tradition Wizard"]
@@ -6625,7 +6626,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         subclass[i] = random.choice(Wiz)                              
                 if subclass[i] == "Abjuration Arcane Tradition Wizard":
                     ClassNotes.append("Abjuration Savant - The gold and time you must spend to copy a abjuration spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Arcane Ward (see notes)")
                     Notes.append(f"Arcane Ward - You can weave magic around yourself for protection. When you cast an abjuration spell of 1st level or higher, you can simultaneously use a strand of the spell's magic to create a magical ward on yourself that lasts until you finish a long rest. The ward has hit points equal to {(2*wizlvl) + IntMod}. Whenever you take damage, the ward takes the damage instead. If this damage reduces the ward to 0 hit points, you take any remaining damage.\nWhile the ward has 0 hit points, it can't absorb damage, but its magic remains. Whenever you cast an abjuration spell of 1st level or higher, the ward regains a number of hit points equal to twice the level of the spell.\nOnce you create the ward, you can't create it again until you finish a long rest.")
                     if wizlvl >= 6:
                         ClassNotes.append("Projected Ward - When a creature that you can see within 30 feet of you takes damage, you can use your reaction to cause your Arcane Ward to absorb that damage. If this damage reduces the ward to 0 hit points, the warded creature takes any remaining damage.")
@@ -6652,7 +6653,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "N":
                         Ohw_choice = random.choice(OneHandedWeapons)
                     PlProf.append(Ohw_choice)
-                    ClassNotes.append()
+                    ClassNotes.append("Bladesong (see notes)")
                     Notes.append(f"Bladesong - You can invoke an elven magic called the Bladesong, provided that you aren't wearing medium or heavy armor or using a shield. It graces you with supernatural speed, agility, and focus.\nYou can use a bonus action to start the Bladesong, which lasts for 1 minute. It ends early if you are incapacitated, if you don medium or heavy armor or a shield, or if you use two hands to make an attack with a weapon. You can also dismiss the Bladesong at any time (no action required).\nWhile your Bladesong is active, you gain the following benefits:\n- You gain a bonus to your AC equal to your Intelligence modifier, or {IntMod} (minimum of +1).\n- Your walking speed increases by 10 feet.\n- You have advantage on Dexterity (Acrobatics) checks.\n- You gain a bonus to any Constitution saving throw you make to maintain your concentration on a spell. The bonus equals your Intelligence modifier, or {IntMod}, minimum of +1.\nYou can use this feature {ProfBonus} times, and you regain all expended uses of it when you finish a long rest.")
                     if wizlvl >= 6:
                         ClassNotes.append("Extra Attack - You can attack twice, instead of once, whenever you take the Attack action on your turn. Moreover, you can cast one of your can trips in place of one of those attacks.")
@@ -6661,21 +6662,21 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if wizlvl >= 14:
                         ClassNotes.append(f"Song of Victory - You can add your Intelligence modifier, or {IntMod}, minimum of +1, to the damage of your melee weapon attacks while your Bladesong is active.")
                 if subclass[i] == "Blood Magic Arcane Tradition Wizard":
-                    ClassNotes.append()
+                    ClassNotes.append("Blood Channeling (see notes)")
                     Notes.append("Blood Channeling - You are able to use your own depleted life essence to channel your magical abilities. Whenever your current hit points are below your hit point maximum, you can use your own body as an arcane focus.\nIn addition, when casting a wizard spell that requires a costly material component, you can forego the component by taking 1d10 necrotic damage per 50 gp of the cost of the component (minimum 1d10). This damage can't be reduced in any way. If this damage reduces you to 0 hit points, the spell fails but the spell slot is not expended.")
-                    ClassNotes.append()
+                    ClassNotes.append("Sanguine Burst (see notes)")
                     Notes.append(f"Sanguine Burst - You learn how to weave your life force into a spell you cast, boosting its intensity at the cost of your vitality. Whenever you roll damage for a spell you've cast of 1st level or higher, you can choose to take necrotic damage equal to the spell's level to reroll a number of the damage dice up to your Intelligence modifier, or {IntMod}, minimum one. This damage can't be reduced in any way, and you must use the new rolls.")
                     if wizlvl >= 6:
                         BondMutualSuffering = "once"
                         if wizlvl >= 14:
                             BondMutualSuffering = "twice"
-                        ClassNotes.append()
+                        ClassNotes.append("Bond of Mutual Suffering (see notes)")
                         Notes.append(f"Bond of Mutual Suffering - When a creature you can see hits you with an attack, you can use your reaction to bind your vitality to the attacker and force them to share your pain. The attacker takes damage equal to the damage you took.\nThis feature cannot be used against constructs or undead. You can use this feature {BondMutualSuffering}. You must finish a short or long rest before you can use it again.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Glyph of Hemorrhaging (see notes)")
                         Notes.append("Glyph of Hemorrhaging - When you damage a creature with a spell, you can choose to curse that creature for 1 minute. While cursed in this way, whenever the creature is hit by an attack, it takes an extra 1d6 necrotic damage. At the end of each of the creature's turns, it can make a Constitution saving throw against your spell save DC, ending the curse on a success.\nThis feature cannot be used against creatures that are undead or constructs. Once you use this feature, you can't use it again until you finish a short or long rest.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Thicker than Water (see notes)")
                         Notes.append(f"Thicker than Water - The blood that flows through your veins is empowered with arcane vigor that mends wounds and helps preserve your life. Whenever a spell or magical effect causes you to regain hit points, you regain an additional number of hit points equal to {ProfBonus}.\nIn addition, while you are concentrating on a spell, you have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.")  
                 if subclass[i] == "Chronurgy Magic Wizard":
                     ChronurgySpells = {
@@ -6694,26 +6695,26 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         else f"{level} : {', '.join(spells)}"
                         for level, spells in ChronurgySpells.items()
                         )
-                    ClassNotes.append() #Magic stuff
-                    Notes.append("Expanded Spell List - The School of Chronurgy Magic lets you choose from an expanded list of spells developed through the manipulation of dunamis. The following Dunamancy Spells are added to the wizard spell list for you: {long_string}")
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
+                    Notes.append(f"Expanded Spell List - The School of Chronurgy Magic lets you choose from an expanded list of spells developed through the manipulation of dunamis. The following Dunamancy Spells are added to the wizard spell list for you: {long_string}")
+                    ClassNotes.append("Chronal Shift (see notes)")
                     Notes.append("Chronal Shift - You can magically exert limited control over the flow of time around a creature. As a reaction, after you or a creature you can see within 30 feet of you makes an attack roll, an ability check, or a saving throw, you can force the creature to reroll. You make this decision after you see whether the roll succeeds or fails. The target must use the result of the second roll.\nYou can use this ability twice, and you regain any expended uses when you finish a long rest.")
                     ClassNotes.append("Temporal Awareness - You can add your Intelligence modifier to your initiative rolls.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Momentary Stasis (see notes)")
                         Notes.append(f"Momentary Stasis - As an action, you can magically force a Large or smaller creature you can see within 60 feet of you to make a Constitution saving throw against your spell save DC. Unless the saving throw is a success, the creature is encased in a field of magical energy until the end of your next turn or until the creature takes any damage. While encased in this way, the creature is incapacitated and has a speed of 0.\nYou can use this feature {IntMod} times, a minimum of once. You regain all expended uses when you finish a long rest.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Arcane Abeyance (see notes)")
                         Notes.append("Arcane Abeyance - When you cast a spell using a spell slot of 4th level or lower, you can condense the spell's magic into a mote. The spell is frozen in time at the moment of casting and held within a gray bead for 1 hour. This bead is a Tiny object with AC 15 and 1 hit point, and it is immune to poison and psychic damage. When the duration ends, or if the bead is destroyed, it vanishes in a flash of light, and the spell is lost.\nA creature holding the bead can use its action to release the spell within, whereupon the bead disappears. The spell uses your spell attack bonus and save DC, and the spell treats the creature who released it as the caster for all other purposes.\nOnce you create a bead with this feature, you can't do so again until you finish a short or long rest.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Convergent Future (see notes)")
                         Notes.append("Convergent Future - You can peer through possible futures and magically pull one of them into events around you, ensuring a particular outcome. When you or a creature you can see within 60 feet of you makes an attack roll, an ability check, or a saving throw, you can use your reaction to ignore the die roll and decide whether the number rolled is the minimum needed to succeed or one less than that number (your choice).\nWhen you use this feature, you gain one level of exhaustion. Only by finishing a long rest can you remove a level of exhaustion gained in this way")  
                 if subclass[i] == "Conjuration Arcane Tradition Wizard":
                     ClassNotes.append("Conjuration Savant - Beginning when you select this school at 2nd level, the gold and time you must spend to copy a Conjuration spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Minor Conjuration (see notes)")
                     Notes.append("Minor Conjuration - You can use your action to conjure up an inanimate object in your hand or on the ground in an unoccupied space that you can see within 10 feet of you. This object can be no larger than 3 feet on a side and weigh no more than 10 pounds, and its form must be that of a nonmagical object that you have seen. The object is visibly magical, radiating dim light out to 5 feet.\nThe object disappears after 1 hour, when you use this feature again, or if it takes any damage.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Benign Transportation (see notes)")
                         Notes.append("Benign Transportation - You can use your action to teleport up to 30 feet to an unoccupied space that you can see. Alternatively, you can choose a space within range that is occupied by a Small or Medium creature. If that creature is willing, you both teleport, swapping places.\nOnce you use this feature, you can't use it again until you finish a long rest or you cast a conjuration spell of 1st level or higher.")
                     if wizlvl >= 10:
                         ClassNotes.append("Focused Conjuration - While you are concentrating on a conjuration spell, your concentration can't be broken as a result of taking damage.")
@@ -6721,38 +6722,38 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         ClassNotes.append("Durable Summons - Any creature that you summon or create with a conjuration spell has 30 temporary hit points.")
                 if subclass[i] == "Divination Arcane Tradition Wizard":
                     ClassNotes.append("Divination Savant - The gold and time you must spend to copy a Divination spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Portent (see notes)")
                     Notes.append("Portent - Glimpses of the future begin to press in on your awareness. When you finish a long rest, roll two d20s and record the numbers rolled. You can replace any attack roll, saving throw, or ability check made by you or a creature that you can see with one of these foretelling rolls. You must choose to do so before the roll, and you can replace a roll in this way only once per turn.\nEach foretelling roll can be used only once. When you finish a long rest, you lose any unused foretelling rolls.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Expert Divination (see notes)")
                         Notes.append("Expert Divination - Casting divination spells comes so easily to you that it expends only a fraction of your spellcasting efforts. When you cast a divination spell of 2nd level or higher using a spell slot, you regain one expended spell slot. The slot you regain must be of a level lower than the spell you cast and can't be higher than 5th level.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("The Third Eye (see notes)")
                         Notes.append("The Third Eye - You can use your action to increase your powers of perception. When you do so, choose one of the following benefits, which lasts until you are incapacitated or you take a short or long rest. You can't use the feature again until you finish a short or long rest.\nDarkvision - You gain darkvision out to a range of 60 feet.\nEthereal Sight - You can see into the Ethereal Plane within 60 feet of you.\nGreater Comprehension - You can read any language.\nSee Invisibility - You can see invisible creatures and objects within 10 feet of you that are within line of sight.")
                     if wizlvl >= 14:
                         ClassNotes.append("Greater Portent - The visions in your dreams intensify and paint a more accurate picture in your mind of what is to come. You roll three d20s for your Portent feature, rather than two.")
                 if subclass[i] == "Enchantment Arcane Tradition Wizard":
                     ClassNotes.append("Enchantment Savant - The gold and time you must spend to copy a Enchantment spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Hypnotic Gaze (see notes)")
                     Notes.append("Hypnotic Gaze - Your soft words and enchanting gaze can magically enthrall another creature. As an action, choose one creature that you can see within 5 feet of you. If the target can see or hear you, it must succeed on a Wisdom saving throw against your wizard spell save DC or be charmed by you until the end of your next turn. The charmed creature's speed drops to 0, and the creature is incapacitated and visibly dazed.\nOn subsequent turns, you can use your action to maintain this effect, extending its duration until the end of your next turn. However, the effect ends if you move more than 5 feet away from the creature, if the creature can neither see nor hear you, or if the creature takes damage.\nOnce the effect ends, or if the creature succeeds on its initial saving throw against this effect, you can't use this feature on that creature again until you finish a long rest.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Instinctive Charm (see notes)")
                         Notes.append("Instinctive Charm - When a creature you can see within 30 feet of you makes an attack roll against you, you can use your reaction to divert the attack, provided that another creature is within the attack's range. The attacker must make a Wisdom saving throw against your wizard spell save DC. On a failed save, the attacker must target the creature that is closest to it, not including you or itself. If multiple creatures are closest, the attacker chooses which one to target.On a successful save, you can't use this feature on the attacker again until you finish a long rest.\nYou must choose to use this feature before knowing whether the attack hits or misses. Creatures that can't be charmed are immune to this effect.")
                     if wizlvl >= 10:
                         ClassNotes.append("Split Enchantment - When you cast an enchantment spell of 1st level or higher that targets only one creature, you can have it target a second creature.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Alter Memories (see notes)")
                         Notes.append(f"Alter Memories - You gain the ability to make a creature unaware of your magical influence on it. When you cast an enchantment spell to charm one or more creatures, you can alter one creature's understanding so that it remains unaware of being charmed.\nAdditionally, once before the spell expires, you can use your action to try to make the chosen creature forget some of the time it spent charmed. The creature must succeed on an Intelligence saving throw against your wizard spell save DC or lose a number of hours of its memories equal to 1 + your Charisma Modifier, or {1+ChaMod}, minimum 1. You can make the creature forget less time, and the amount of time can't exceed the duration of your enchantment spell.")  
                 if subclass[i] == "Evocation Arcane Tradition Wizard":
                     ClassNotes.append("Evocation Savant - The gold and time you must spend to copy a Evocation spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Sculpt Spells (see notes)")
                     Notes.append("Sculpt Spells - You can create pockets of relative safety within the effects of your evocation spells. When you cast an evocation spell that affects other creatures that you can see, you can choose a number of them equal to 1 + the spell's level. The chosen creatures automatically succeed on their saving throws against the spell, and they take no damage if they would normally take half damage on a successful save.")
                     if wizlvl >= 6:
                         ClassNotes.append("Potent Cantrip - Your damaging cantrips affect even creatures that avoid the brunt of the effect. When a creature succeeds on a saving throw against your cantrip, the creature takes half the cantrip's damage (if any) but suffers no additional effect from the cantrip.")
                     if wizlvl >= 10:
                         ClassNotes.append(f"Empowered Evocation - You can add your Intelligence modifier, or {IntMod}, minimum of +1, to the damage roll of any wizard evocation spell that you cast. The damage bonus applies to one damage roll of a spell, not multiple rolls.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Overchannel (see notes)")
                         Notes.append("Overchannel - You can increase the power of your simpler spells. When you cast a wizard spell of 5th level or lower that deals damage and isn't a cantrip, you can deal maximum damage with that spell.\nThe first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.")  
                 if subclass[i] == "Graviturgy Magic Wizard":
                     GraviturgySpells = {
@@ -6772,78 +6773,78 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         else f"{level} : {', '.join(spells)}"
                         for level, spells in GraviturgySpells.items()
                     )                    
-                    ClassNotes.append()
+                    ClassNotes.append("Expanded Spell List (see notes)")
                     Notes.append(f"Expanded Spell List - The School of Graviturgy Magic lets you choose from an expanded list of spells developed through the manipulation of dunamis. The following Dunamancy Spells are added to the wizard spell list for you: {long_string}")
                     AdjustDensity = "Large or Smaller"
                     if wizlvl >= 10:
                         AdjustDensity = "Huge of smaller"
-                    ClassNotes.append()
+                    ClassNotes.append("Adjust Density (see notes)")
                     Notes.append(f"Adjust Density - As an action, you can magically alter the weight of one object or creature you can see within 30 feet of you. The object or creature must be {AdjustDensity}. The target's weight is halved or doubled for up to 1 minute or until your concentration ends (as if you were concentrating on a spell).\nWhile the weight of a creature is halved by this effect, the creature's speed increases by 10 feet, it can jump twice as far as normal, and it has disadvantage on Strength checks and Strength saving throws. While the weight of a creature is doubled by this effect, the creature's speed is reduced by 10 feet, and it has advantage on Strength checks and Strength saving throws.\nUpon reaching 10th level in this class, you can target an object or a creature that is Huge or smaller.")
                     if wizlvl >= 6:
                         ClassNotes.append("Gravity Well - You've learned how to manipulate gravity around a living being: whenever you cast a spell on a creature, you can move the target 5 feet to an unoccupied space of your choice if the target is willing to move, the spell hits it with an attack, or it fails a saving throw against the spell.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Violent Attraction (see notes)")
                         Notes.append(f"Violent Attraction - When another creature that you can see within 60 feet of you hits with a weapon attack, you can use your reaction to increase the attack's velocity, causing the attack's target to take an extra 1d10 damage of the weapon's type.\nAlternatively, if a creature within 60 feet of you takes damage from a fall, you can use your reaction to increase the fall's damage by 2d10.\nYou can use this feature {IntMod} times, a minimum of once. You regain all expended uses when you finish a long rest.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Event Horizon (see notes)")
                         Notes.append("Event Horizon - As an action, you can magically emit a powerful field of gravitational energy that tugs at other creatures for up to 1 minute or until your concentration ends (as if you were concentrating on a spell). For the duration, whenever a creature hostile to you starts its turn within 30 feet of you, it must make a Strength saving throw against your spell save DC. On a failed save, it takes 2d10 force damage, and its speed is reduced to 0 until the start of its next turn. On a successful save, it takes half as much damage, and every foot it moves this turn costs 2 extra feet of movement.\nOnce you use this feature, you can't do so again until you finish a long rest or until you expend a spell slot of 3rd level or higher on it.")  
                 if subclass[i] == "Illusion Arcane Tradition Wizard":
                     ClassNotes.append("Illusion Savant - The gold and time you must spend to copy a Illusion spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Improved Minor Illusion (see notes)")
                     Notes.append("Improved Minor Illusion - You learn the Minor Illusion cantrip. If you already know this cantrip, you learn a different wizard cantrip of your choice. The cantrip doesn't count against your number of cantrips known.\nWhen you cast Minor Illusion, you can create both a sound and an image with a single casting of the spell.")
                     if wizlvl >= 6:
                         ClassNotes.append("Malleable Illusions - When you cast an illusion spell that has a duration of 1 minute or longer, you can use your action to change the nature of that illusion (using the spell's normal parameters for the illusion), provided that you can see the illusion.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Illusory Self (see notes)")
                         Notes.append("Illusory Self - You can create an illusory duplicate of yourself as an instant, almost instinctual reaction to danger. When a creature makes an attack roll against you, you can use your reaction to interpose the illusory duplicate between the attacker and yourself. The attack automatically misses you, then the illusion dissipates.\nOnce you use this feature, you can't use it again until you finish a short or long rest.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Illusory Reality (see notes)")
                         Notes.append("Illusory Reality - You have learned the secret of weaving shadow magic into your illusions to give them a semi-reality. When you cast an illusion spell of 1st level or higher, you can choose one inanimate, nonmagical object that is part of the illusion and make that object real. You can do this on your turn as a bonus action while the spell is ongoing. The object remains real for 1 minute. For example, you can create an illusion of a bridge over a chasm and then make it real long enough for your allies to cross.\nThe object can't deal damage or otherwise directly harm anyone.")  
                 if subclass[i] == "Necromancy Arcane Tradition Wizard":
                     ClassNotes.append("Necromancy Savant - The gold and time you must spend to copy a Necromancy spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Grim Harvest (see notes)")
                     Notes.append("Grim Harvest - You gain the ability to reap life energy from creatures you kill with your spells. Once per turn when you kill one or more creatures with a spell of 1st level or higher, you regain hit points equal to twice the spell's level, or three times its level if the spell belongs to the School of Necromancy. You don't gain this benefit for killing constructs or undead.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Undead Thralls (see notes)")
                         Notes.append(f"Undead Thralls - You add the Animate Dead spell to your spellbook if it is not there already. When you cast Animate Dead, you can target one additional corpse or pile of bones, creating another zombie or skeleton, as appropriate.\nWhenever you create an undead using a necromancy spell, it has additional benefits:\n- The creature's hit point maximum is increased by an amount equal {wizlvl}.\n- The creature adds {ProfBonus} to its weapon damage rolls.")
                     if wizlvl >= 10:
                         ClassNotes.append("Inured to Undeath - You have resistance to necrotic damage, and your hit point maximum can't be reduced. You have spent so much time dealing with undead and the forces that animate them that you have become inured to some of their worst effects.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Command Undead (see notes)")
                         Notes.append("Command Undead - You can use magic to bring undead under your control, even those created by other wizards. As an action, you can choose one undead that you can see within 60 feet of you. That creature must make a Charisma saving throw against your wizard spell save DC. If it succeeds, you can't use this feature on it again. If it fails, it becomes friendly to you and obeys your commands until you use this feature again.\nIntelligent undead are harder to control in this way. If the target has an Intelligence of 8 or higher, it has advantage on the saving throw. If it fails the saving throw and has an Intelligence of 12 or higher, it can repeat the saving throw at the end of every hour until it succeeds and breaks free.")  
                 if subclass[i] == "Order of Scribes Arcane Tradition Wizard":
-                    ClassNotes.append()
+                    ClassNotes.append("Wizardly Quill (see notes)")
                     Notes.append("Wizardly Quill - As a bonus action, you can magically create a Tiny quill in your free hand. The magic quill has the following properties:\n- The quill doesn't require ink. When you write with it, it produces ink in a color of your choice on the writing surface.\n- The time you must spend to copy a spell into your spell book equals 2 minutes per spell level if you use the quill for the transcription.\n- You can erase anything you write with the quill if you wave the feather over the text as a bonus action, provided the text is within 5 feet of you.\nThis quill disappears if you create another one or if you die.")
-                    ClassNotes.append()
+                    ClassNotes.append("Awakened Spellbook (see notes)")
                     Notes.append("Awakened Spellbook - Using specially prepared inks and ancient incantations passed down by your wizardly order, you have awakened an arcane sentience within your spellbook.\nWhile you are holding the book, it grants you the following benefits:\n- You can use the book as a spellcasting focus for your wizard spells.\n- When you cast a wizard spell with a spell slot, you can temporarily replace its damage type with a type that appears in another spell in your spellbook, which magically alters the spell's formula for this casting only. The latter spell must be of the same level as the spell slot you expend.\n- When you cast a wizard spell as a ritual, you can use the spell's normal casting time, rather than adding 10 minutes to it. Once you use this benefit, you can't do so again until you finish a long rest.\nIf necessary, you can replace the book over the course of a short rest by using your Wizardly Quill to write arcane sigils in a blank book or a magic spellbook to which you're attuned. At the end of the rest, your spellbook's consciousness is summoned into the new book, which the consciousness transforms into your spellbook, along with all its spells. If the previous book still existed somewhere, all the spells vanish from its pages.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Manifest Mind (see notes)")
                         Notes.append(f"Manifest Mind - You can conjure forth the mind of your Awakened Spellbook. As a bonus action while the book is on your person, you can cause the mind to manifest as a Tiny spectral object, hovering in an unoccupied space of your choice within 60 feet of you. The spectral mind is intangible and doesn't occupy its space, and it sheds dim light in a 10-foot radius. It looks like a ghostly tome, a cascade of text, or a scholar from the past (your choice).\nWhile manifested, the spectral mind can hear and see, and it has darkvision with a range of 60 feet. The mind can telepathically share with you what it sees and hears (no action required).\nWhenever you cast a wizard spell on your turn, you can cast it as if you were in the spectral mind's space, instead of your own, using its senses. You can do so {ProfBonus} times per day, and you regain all expended uses when you finish a long rest.\nAs a bonus action, you can cause the spectral mind to hover up to 30 feet to an unoccupied space that you or it can see. It can pass through creatures but not objects.\nThe spectral mind stops manifesting if it is ever more than 300 feet away from you, if someone casts Dispel Magic on it, if the Awakened Spellbook is destroyed, if you die, or if you dismiss the spectral mind as a bonus action.\nOnce you conjure the mind, you can't do so again until you finish a long rest, unless you expend a spell slot of any level to conjure it again.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Master Scrivener (see notes)")
                         Notes.append("Master Scrivener - Whenever you finish a long rest, you can create one magic scroll by touching your Wizardly Quill to a blank piece of paper or parchment and causing one spell from your Awakened Spellbook to be copied onto the scroll. The spellbook must be within 5 feet of you when you make the scroll.\nThe chosen spell must be of 1st or 2nd level and must have a casting time of 1 action. Once in the scroll, the spell's power is enhanced, counting as one level higher than normal. You can cast the spell from the scroll by reading it as an action. The scroll is unintelligible to anyone else, and the spell vanishes from the scroll when you cast it or when you finish your next long rest.\nYou are also adept at crafting spell scrolls, which are described in the treasure chapter of the Dungeon Master's Guide. The gold and time you must spend to make such a scroll are halved if you use your Wizardly Quill.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("One with the Word (see notes)")
                         Notes.append("One with the Word - Your connection to your Awakened Spellbook has become so profound that your soul has become entwined with it. While the book is on your person, you have advantage on all Intelligence (Arcana) checks, as the spellbook helps you remember magical lore.\nMoreover, if you take damage while your spellbook's mind is manifested, you can prevent all of that damage to you by using your reaction to dismiss the spectral mind, using its magic to save yourself. Then roll 3d6. The spellbook temporarily loses spells of your choice that have a combined spell level equal to that roll or higher. For example, if the roll's total is 9, spells vanish from the book that have a combined level of at least 9, which could mean one 9th-level spell, three 3rd-level spells, or some other combination. If there aren't enough spells in the book to cover this cost, you drop to 0 hit points.\nUntil you finish 1d6 long rests, you are incapable of casting the lost spells, even if you find them on a scroll or in another spellbook. After you finish the required number of rests, the spells reappear in the spell book.\nOnce you use this reaction, you can't do so again until you finish a long rest.")
                 if subclass[i] == "Transmutation Arcane Tradition Wizard":
                     ClassNotes.append("Transmutation Savant - The gold and time you must spend to copy a Transmutation spell into your spellbook is halved.")
-                    ClassNotes.append()
+                    ClassNotes.append("Minor Alchemy (see notes)")
                     Notes.append("Minor Alchemy - You can temporarily alter the physical properties of one nonmagical object, changing it from one substance into another. You perform a special alchemical procedure on one object composed entirely of wood, stone (but not a gemstone), iron, copper, or silver, transforming it into a different one of those materials. For each 10 minutes you spend performing the procedure, you can transform up to 1 cubic foot of material. After 1 hour, or until you lose your concentration (as if you were concentrating on a spell), the material reverts to its original substance.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Transmuter's Stone (see notes)")
                         Notes.append("Transmuter's Stone - You can spend 8 hours creating a transmuter's stone that stores transmutation magic. You can benefit from the stone yourself or give it to another creature. A creature gains a benefit of your choice as long as the stone is in the creature's possession. When you create the stone, choose the benefit from the following options:\n- Darkvision out to a range of 60 feet\n- An increase to speed of 10 feet while the creature is unencumbered\n- Proficiency in Constitution saving throws\n- Resistance to acid, cold, fire, lightning, or thunder damage (your choice whenever you choose this benefit)\nEach time you cast a transmutation spell of 1st level or higher, you can change the effect of your stone if the stone is on your person.\nIf you create a new transmuter's stone, the previous one ceases to function.")
                     if wizlvl >= 10:
-                        ClassNotes.append()
+                        ClassNotes.append("Shapechanger (see notes)")
                         Notes.append("Shapechanger - You add the Polymorph spell to your spellbook, if it is not there already. You can cast Polymorph without expending a spell slot. When you do so, you can target only yourself and transform into a beast whose challenge rating is 1 or lower.\nOnce you cast Polymorph in this way, you can't do so again until you finish a short or long rest, though you can still cast it normally using an available spell slot.")
                     if wizlvl >= 14:
-                        ClassNotes.append()
+                        ClassNotes.append("Master Transmuter (see notes)")
                         Notes.append("Master Transmuter - You can use your action to consume the reserve of transmutation magic stored within your transmuter's stone in a single burst. When you do so, choose one of the following effects. Your transmuter's stone is destroyed and can't be remade until you finish a long rest.\nMajor Transformation - You can transmute one nonmagical object – no larger than a 5-foot cube – into another nonmagical object of similar size and mass and of equal or lesser value. You must spend 10 minutes handling the object to transform it.\nPanacea - You remove all curses, diseases, and poisons affecting a creature that you touch with the transmuter's stone. The creature also regains all its hit points.\nRestore Life - You cast the Raise Dead spell on a creature you touch with the transmuter's stone, without expending a spell slot or needing to have the spell in your spellbook.\nRestore Youth - You touch the transmuter's stone to a willing creature, and that creature's apparent age is reduced by 3d10 years, to a minimum of 13 years. This effect doesn't extend the creature's lifespan.")                    
                 if subclass[i] == "War Magic Arcane Tradition Wizard":
-                    ClassNotes.append()
+                    ClassNotes.append("Arcane Deflection (see notes)")
                     Notes.append("Arcane Deflection - You have learned to weave your magic to fortify yourself against harm. When you are hit by an attack or you fail a saving throw, you can use your reaction to gain a +2 bonus to your AC against that attack or a +4 bonus to that saving throw.\nWhen you use this feature, you can’t cast spells other than cantrips until the end of your next turn.")
                     ClassNotes.append(f"Tactical Wit - Your keen ability to assess tactical situations allows you to act quickly in battle. You can give yourself a bonus to your initiative rolls equal to your Intelligence modifier, or {IntMod}.")
                     if wizlvl >= 6:
-                        ClassNotes.append()
+                        ClassNotes.append("Power Surge (see notes)")
                         Notes.append(f"Power Surge - You can store magical energy within yourself to later empower your damaging spells.\nYou can store a maximum number of power surges equal to your Intelligence modifier, or {IntMod}, minimum of one. Whenever you finish a long rest, your number of power surges resets to one. Whenever you successfully end a spell with Dispel Magic or Counterspell, you gain one power surge, as you steal magic from the spell you foiled. If you end a short rest with no power surges, you gain one power surge.\nOnce per turn when you deal damage to a creature or object with a wizard spell, you can spend one power surge to deal extra force damage to that target. The extra damage equals half your wizard level, or {math.floor(wizlvl/2)}.")
                     if wizlvl >= 10:
                         ClassNotes.append("Durable Magic - The magic you channel helps ward off harm. While you maintain concentration on a spell, you have a +2 bonus to AC and all saving throws.")
@@ -6853,7 +6854,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
             if wizlvl >= 3:                    
                 WizardSpellSlot1 = 4
                 WizardSpellSlot2 = 2
-                ClassNotes.append()
+                ClassNotes.append("Cantrip Formulas (see notes)")
                 Notes.append("Cantrip Formulas - You have scribed a set of arcane formulas in your spellbook that you can use to formulate a cantrip in your mind. Whenever you finish a long rest and consult those formulas in your spellbook, you can replace one wizard cantrip you know with another cantrip from the wizard spell list.")
             if wizlvl >= 4:
                 WizardCantripsKnown = 4
@@ -6882,13 +6883,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 WizardSpellSlot9 = 1
             if wizlvl >= 18:
                 WizardSpellSlot5 = 3
-                ClassNotes.append()
+                ClassNotes.append("Spell Mastery (see notes)")
                 Notes.append("Spell Mastery - You have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.")
             if wizlvl >= 19:
                 WizardSpellSlot6 = 2
             if wizlvl == 20:                    
                 WizardSpellSlot7 = 2
-                ClassNotes.append()
+                ClassNotes.append("Signature Spells (see notes)")
                 Notes.append("Signature Spells - You gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don’t count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can’t do so again until you finish a short or long rest.\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.")
             Notes.append(f"You have {WizardCantripsKnown} cantrips available to you.")
             Notes.append(f"The number of first level spell slots you have as a Wizard is: {WizardSpellSlot1}.")
