@@ -2669,8 +2669,8 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
         'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillsProf else 0)),
         'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0)),
         'GP':str(BGL),
-        'Height':str(Height) + 'inches',
-        'Weight':str(Weight) + 'pounds',
+        'Height':str(Height) + ' inches',
+        'Weight':str(Weight) + ' pounds',
         'Allies':allies_str,
         'Feat+Traits':add_info_str,
         }
