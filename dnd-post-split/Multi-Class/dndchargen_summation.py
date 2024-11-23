@@ -7,7 +7,7 @@ def d6():
     result = random.randint(1,6)
     return result
 
-def summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, SLANG, PlProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, SLANG, PlProf, SkillsProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     AdditionalInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -504,7 +504,7 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
             DhaOr8 = "A radical experiment changed your body, making you reliant on others for vital fluids."
             DhaOr = [DhaOr1, DhaOr2, DhaOr3, DhaOr4, DhaOr5, DhaOr6, DhaOr7, DhaOr8]
             DhampirOrigin = random.choice(DhaOr)             
-            skillprof2(param, PlProf)
+            SkillsProf = skillprof2(param, SkillsProf)
             AdditionalInfo.append(f"You are a Dhampir in addition to being a(n) {race}, and thus have the Dhampir Hunger for {DhampirHunger}")
             AdditionalInfo.append(f"You also have the Dhampir Origin of: {DhampirOrigin}")
             RaceNotes.append("Ancestral Legacy (see notes)")
@@ -518,7 +518,7 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
             HexO6 = "A slighted druid transformed you and bound you to live only so long as a sacred tree bears fruit."
             HexO = [HexO1, HexO2, HexO3, HexO4, HexO5, HexO6]
             HexbloodOrigin = random.choice(HexO)            
-            skillprof2(param, PlProf)
+            SkillsProf = skillprof2(param, SkillsProf)
             AdditionalInfo.append(f"You are a Hexblood in addition to being a(n) {race}, and thus have the Heblood Origin of {HexbloodOrigin}")
             RaceNotes.append("Ancestral Legacy (see notes)")
             Notes.append("Ancestral Legacy: If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don’t keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice.")
@@ -545,7 +545,7 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
             AdditionalInfo.append(f"You also have the Reborn Origin of: {RebornOrigin}")
             RaceNotes.append("Ancestal Legacy (see notes)")
             Notes.append("Ancestral Legacy: If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don’t keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice.")
-            skillprof2(param, PlProf)          
+            SkillsProf = skillprof2(param, SkillsProf)         
 
 ########################################################################################################
     AlchSupp = "Alchemist's Supplies"
@@ -2189,24 +2189,6 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
             Trinket2 = random.choice(Trin)
     if ((back == "Inheritor") and ((Inheritance == Inh2 or Inheritance == Inh3))):
         EQP.append(Trinket2)
-    AcroNum = skills_dict["AcroNum"]
-    AnHaNum = skills_dict["AnHaNum"]
-    ArcaNum = skills_dict["ArcaNum"]
-    AthlNum = skills_dict["AthlNum"]
-    DeceNum = skills_dict["DeceNum"]
-    HistNum = skills_dict["HistNum"]
-    InsiNum = skills_dict["InsiNum"]
-    IntiNum = skills_dict["IntiNum"]
-    InveNum = skills_dict["InveNum"]
-    MediNum = skills_dict["MediNum"]
-    NatuNum = skills_dict["NatuNum"]
-    PercNum = skills_dict["PercNum"]
-    PerfNum = skills_dict["PerfNum"]
-    PersNum = skills_dict["PersNum"]
-    ReliNum = skills_dict["ReliNum"]
-    SloHNum = skills_dict["SloHNum"]
-    SteaNum = skills_dict["SteaNum"]
-    SurvNum = skills_dict["SurvNum"]
     if param == "Y":        
         print(f"Your Charisma bonuses: {Charisma}")
         print(f"Your Constitution bonuses: {Constitution}") 
@@ -2535,63 +2517,6 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
     SleightofHand = "Sleight of Hand"
     Stealth = "Stealth"
     Survival = "Survival"
-    SkillsProf = []
-    if "Acrobatics" in PlProf:
-        SkillsProf.append(Acrobatics)
-        PlProf.remove(Acrobatics)
-    if "Animal Handling" in PlProf:
-        SkillsProf.append(AnimalHandling)
-        PlProf.remove(AnimalHandling)
-    if "Arcana" in PlProf:
-        SkillsProf.append(Arcana)
-        PlProf.remove(Arcana)
-    if "Athletics" in PlProf:
-        SkillsProf.append(Athletics)
-        PlProf.remove(Athletics)
-    if "Deception" in PlProf:
-        SkillsProf.append(Deception)
-        PlProf.remove(Deception)
-    if "History" in PlProf:
-        SkillsProf.append(History)
-        PlProf.remove(History)
-    if "Insight" in PlProf:
-        SkillsProf.append(Insight)
-        PlProf.remove(Insight)
-    if "Intimidation" in PlProf:
-        SkillsProf.append(Intimidation)
-        PlProf.remove(Intimidation)
-    if "Investigation" in PlProf:
-        SkillsProf.append(Investigation)
-        PlProf.remove(Investigation)
-    if "Medicine" in PlProf:
-        SkillsProf.append(Medicine)
-        PlProf.remove(Medicine)
-    if "Nature" in PlProf:
-        SkillsProf.append(Nature)
-        PlProf.remove(Nature)
-    if "Perception" in PlProf:
-        SkillsProf.append(Perception)
-        PlProf.remove(Perception)
-    if "Performance" in PlProf:
-        SkillsProf.append(Performance)
-        PlProf.remove(Performance)
-    if "Persuasion" in PlProf:
-        SkillsProf.append(Persuasion)
-        PlProf.remove(Persuasion)
-    if "Religion" in PlProf:
-        SkillsProf.append(Religion)
-        PlProf.remove(Religion)
-    if "Sleight of Hand" in PlProf:
-        SkillsProf.append(SleightofHand)
-        PlProf.remove(SleightofHand)
-    if "Stealth" in PlProf:
-        SkillsProf.append(Stealth)
-        PlProf.remove(Stealth)
-    if "Survival" in PlProf:
-        SkillsProf.append(Survival)
-        PlProf.remove(Survival)
-
-
     FeatTrait = OtherBackgroundInfo + RaceNotes    
     add_info_str = '\n'.join(f'- {item}' for item in AdditionalInfo)
     allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
@@ -2626,52 +2551,15 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
         'CONmod':str(ConMod),
         'Flaws':Flaw,
         'INT':str(Intelligence),
-        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillsProf else 0)),
-        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillsProf else 0)),
-        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillsProf else 0)),
-        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillsProf else 0)),
-        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in SkillsProf else 0)),
-        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillsProf else 0)),
-        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillsProf else 0)),
-        'INTmod':str(IntMod),
-        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillsProf else 0)),
-        'WIS':str(Wisdom),
-        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillsProf else 0)),
-        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0)),
+        'INTmod':str(IntMod),        
+        'WIS':str(Wisdom),        
         'WISmod':str(WisMod),
-        'CHA':str(Charisma),
-        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillsProf else 0)),
-        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillsProf else 0)),
-        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillsProf else 0)),
-        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillsProf else 0)),
-        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillsProf else 0)),
-        'Check Box 23':'/Yes' if 'Acrobatics' in SkillsProf else '/No',
-        'Check Box 24':'/Yes' if 'Animal Handling' in SkillsProf else '/No',
-        'Check Box 25':'/Yes' if 'Arcana' in SkillsProf else '/No',
-        'Check Box 26':'/Yes' if 'Athletics' in SkillsProf else '/No',
-        'Check Box 27':'/Yes' if 'Deception' in SkillsProf else '/No',
-        'Check Box 28':'/Yes' if 'History' in SkillsProf else '/No',
-        'Check Box 29':'/Yes' if 'Insight' in SkillsProf else '/No',
-        'Check Box 30':'/Yes' if 'Intimidation' in SkillsProf else '/No',
-        'Check Box 31':'/Yes' if 'Investigation' in SkillsProf else '/No',
-        'Check Box 32':'/Yes' if 'Medicine' in SkillsProf else '/No',
-        'Check Box 33':'/Yes' if 'Nature' in SkillsProf else '/No',
-        'Check Box 34':'/Yes' if 'Perception' in SkillsProf else '/No',
-        'Check Box 35':'/Yes' if 'Performance' in SkillsProf else '/No',
-        'Check Box 36':'/Yes' if 'Persuasion' in SkillsProf else '/No',
-        'Check Box 37':'/Yes' if 'Religion' in SkillsProf else '/No',
-        'Check Box 38':'/Yes' if 'Sleight of Hand' in SkillsProf else '/No',
-        'Check Box 39':'/Yes' if 'Stealth' in SkillsProf else '/No',
-        'Check Box 40':'/Yes' if 'Survival' in SkillsProf else '/No',
-        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillsProf else 0)),
-        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillsProf else 0)),
+        'CHA':str(Charisma),        
         'CHamod':str(ChaMod),
-        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillsProf else 0)),
-        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillsProf else 0)),
         'GP':str(BGL),
         'Height':str(Height) + ' inches',
         'Weight':str(Weight) + ' pounds',
         'Allies':allies_str,
         'Feat+Traits':add_info_str,
         }
-    dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, SLANG, Notes, data, FeatTrait)
+    dndchargen_characterbuilder(param, plLvl, playername, charactername, race, Class, subclass, submulticlass, BeachballFlag, BGL, EQP, SkillsProf, PlProf, PlLang, SLANG, Notes, data, skills_dict, FeatTrait)
