@@ -1178,7 +1178,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append(Darkvision)
         RaceNotes.append("Long-Limbed: When you make a melee attack on your turn, your reach for it is 5 feet greater than normal.")
         RaceNotes.append("Powerful Build: You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
-        PlProf.append(Stealth)
+        SkillsProf.append(Stealth)
         RaceNotes.append("Surprise Attack (see notes)")
         Notes.append("Surprise Attack: If you surprise a creature and hit it with an attack on your first turn in combat, the attack deals an extra 2d6 damage to it. You can use this trait only once per combat." )
     if race == "Centaur":
@@ -1206,7 +1206,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Hooves: Your hooves are natural melee weapons, which you can use to make unarmed strikes. If you hit with them, you deal bludgeoning damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.")
         RaceNotes.append("Equine Build (see notes)")
         Notes.append("Equine Build: You count as one size larger when determining your carrying capacity and the weight you can push or drag.\nIn addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet, instead of the normal 1 extra foot.")
-        PlProf = fourskillprof(param, PlProf, AnimalHandling, Medicine, Nature, Survival)
+        SkillsList = [AnimalHandling, Medicine, Nature, Survival]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
     if race == "Cervan":
         Constitution += 2
         CreatureType = "Humanoid"
@@ -1280,7 +1281,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         CreatureType = "Humanoid"
         RaceNotes.append("Shapechanger (see notes)")
         Notes.append("Shapechanger: As an action, you can change your appearance and your voice. You determine the specifics of the changes, including your coloration, hair length, and sex. You can also adjust your height and weight, but not so much that your size changes. You can make yourself appear as a member of another race, though none of your game statistics change. You can't duplicate the appearance of a creature you've never seen, and you must adopt a form that has the same basic arrangement of limbs that you have. Your clothing and equipment aren't changed by this trait.\nYou stay in the new form until you use an action to revert to your true form or until you die.")
-        PlProf = fourskillprof(param, PlProf, Deception, Insight, Intimidation, Persuasion)
+        SkillsList = [Deception, Insight, Intimidation, Persuasion]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
     if race == "Corginian":
         Hmo1 = d4()
         Hmo2 = d4()
@@ -1334,13 +1336,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Glide: Using your feathered arms, you can slow your fall, and glide short distances. When falling you can use your reaction to spread your arms, stiffen your wing feathers, and slow your descent. While doing so, you continue to fall gently at a speed of 60 feet per round, taking no fall damage when you land. If you would fall at least 10 feet in this way, you may fly up to your movement speed in one direction you choose, although you cannot choose to move upwards, landing in the space you finish your movement. You cannot glide while carrying heavy weapons or wielding a shield (though you may drop any held items as part of your reaction to spread your arms). You cannot glide while wearing heavy armor, or if you are encumbered.")
         RaceNotes.append("Talons (see notes)")
         Notes.append("Talons: Your sharp claws aid you in unarmed combat and while climbing. Your damage for an unarmed strike is 1d4 piercing damage. Additionally, you have advantage on Strength (Athletics) checks made to climb any surface your talons could reasonably grip.")
-        PlProf = fourskillprof(param, PlProf, Arcana, History, Nature, Religion)
+        SkillsList = [Arcana, History, Nature, Religion]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
         RaceNotes.append("Appraising Eye (see notes)")
         Notes.append("Appraising Eye: You have an almost supernatural ability to appraise objects. By spending an action examining any object, you can determine any magical properties the item has, how they might be used or activated, as well as a fair estimation of market price. Using this skill strains the eyes, and you must complete a long or short rest before you can use it again.")
         if subrace == "Dusk Corvum":
             Dexterity += 1
             RaceNotes.append("Skulker: You have advantage on Dexterity (Stealth) checks made in dim light or darkness.")
-            PlProf.append(Insight)
+            SkillsProf.append(Insight)
         if subrace == "Kindled Corvum":
             Charisma += 1
             RaceNotes.append("Convincing (see notes)")
@@ -1424,7 +1427,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if plLvl >= 5:
             RaceNotes.append("Planar Outcast(3) (see notes)")
             Notes.append("Planar Outcast(3): You may cast the Blink spell once per day. Intelligence is your spellcasting ability for this spell.")
-        PlProf.append(Arcana)
+        SkillsProf.append(Arcana)
     if race == "Dragonborn":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -1759,10 +1762,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
         RaceNotes.append("Dwarven Resilience: You have advantage on saving throws against poison, and you have resistance against poison Damage")
-        PlProf.append(Battleaxe)
-        PlProf.append(Handaxe)
-        PlProf.append(LightHammer)
-        PlProf.append(Warhammer)
+        if Battleaxe not in PlProf:
+            PlProf.append(Battleaxe)
+        if Handaxe not in PlProf:
+            PlProf.append(Handaxe)
+        if LightHammer not in PlProf:
+            PlProf.append(LightHammer)
+        if Warhammer not in PlProf:
+            PlProf.append(Warhammer)
         PlProf = threetoolprof(param, PlProf, SmthTools, BrewSupp, MasnTools)
         RaceNotes.append("Stonecunning (see notes)")
         Notes.append(f"Stonecunning: Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, or {2*ProfBonus}, instead of your normal proficiency bonus.")
@@ -1835,19 +1842,17 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Dwarvi)
             SLANG.remove(Dwarvi)
             Strength += 2
-            for item in LightArmor:
-                if item not in PlProf:
-                    PlProf.append(item)
-            for item in MediumArmor:
-                if item not in PlProf:
-                    PlProf.append(item)
+            if "Light Armor" not in PlProf:
+                PlProf.append("Light Armor")
+            if "Medium Armor" not in PlProf:
+                PlProf.append("Medium Armor")
     if race == "Elf":
         walkingspeed = 30
         CreatureType = "Humanoid"
         Dexterity += 2
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
-        PlProf.append(Perception)
+        SkillsProf.append(Perception)
         RaceNotes.append("Fey Ancestry: You have advantage on saving throws against being charmed, and magic can’t put you to sleep.")
         if subrace == "Astral Elf":
             Hmo1 = d6()
@@ -1908,9 +1913,12 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 Notes.append("Drow Magic(3): You can also cast the Darkness spell once per day; you must finish a long rest in order to cast the spell again using this trait. Charisma is your spellcasting ability for this spell.")                             
             RaceNotes.append("Trance (see notes)")
             Notes.append("Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.")                
-            PlProf.append(Rapier)
-            PlProf.append(Shortsword)
-            PlProf.append(HandCrossbow)
+            if Rapier not in PlProf:
+                PlProf.append(Rapier)
+            if Shortsword not in PlProf:
+                PlProf.append(Shortsword)
+            if HandCrossbow not in PlProf:
+                PlProf.append(HandCrossbow)
         if subrace == "Eladrin":
             Hmo1 = d12()
             Hmo2 = d12()
@@ -1951,10 +1959,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Elvi)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)            
             Intelligence += 1
-            PlProf.append(Longsword)
-            PlProf.append(Shortsword)
-            PlProf.append(Shortbow)
-            PlProf.append(Longbow)
+            if Longsword not in PlProf:
+                PlProf.append(Longsword)
+            if Shortsword not in PlProf:
+                PlProf.append(Shortsword)
+            if Shortbow not in PlProf:
+                PlProf.append(Shortbow)
+            if Longbow not in PlProf:
+                PlProf.append(Longbow)
             RaceNotes.append("Wizard Cantrip (see notes)")
             Notes.append("Wizard Cantrip: You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.")
             RaceNotes.append("Trance (see notes)")
@@ -1979,10 +1991,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Aqua)
             SLANG.remove(Aqua)
             Constitution += 1
-            PlProf.append(Spear)
-            PlProf.append(Trident)
-            PlProf.append(LightCrossbow)
-            PlProf.append(Net)
+            if Spear not in PlProf:
+                PlProf.append(Spear)
+            if Trident not in PlProf:
+                PlProf.append(Trident)
+            if LightCrossbow not in PlProf:
+                PlProf.append(LightCrossbow)
+            if Net not in PlProf:
+                PlProf.append(Net)
             RaceNotes.append("Child of the Sea: You have a swimming speed of 30 feet, and you can breathe air and water.")
             RaceNotes.append("Friend of the Sea: Using gestures and sounds, you can communicate simple ideas with any beast that has an innate swimming speed.")
             RaceNotes.append("Trance (see notes)")
@@ -2032,10 +2048,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang.append(Elvi)
             SLANG.remove(Elvi)
             Wisdom += 1
-            PlProf.append(Longsword)
-            PlProf.append(Shortsword)
-            PlProf.append(Shortbow)
-            PlProf.append(Longbow)            
+            if Longsword not in PlProf:
+                PlProf.append(Longsword)
+            if Shortsword not in PlProf:
+                PlProf.append(Shortsword)
+            if Shortbow not in PlProf:
+                PlProf.append(Shortbow)
+            if Longbow not in PlProf:
+                PlProf.append(Longbow)            
             walkingspeed = 35
             RaceNotes.append("Mask of the Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.")
             RaceNotes.append("Trance (see notes)")
@@ -2124,20 +2144,19 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Wing Flap: As a bonus action, you can use your powerful feathered arms to propel yourself upward a distance equal to half your movement speed. You can use it in conjunction with a regular jump, but not while gliding.")
         RaceNotes.append("Communal (see notes)")
         Notes.append(f"Communal: Whenever you make an Intelligence (History) check related to the history of your race, culture, or community, you are considered proficient in the History skill and add double your proficiency bonus to the check, or {2*ProfBonus}, instead of your normal proficiency bonus.")
-        for item in SimpleWeapons:
-            if item not in PlProf:
-                PlProf.append(item)
+        if "Simple Weapons" not in PlProf:
+            PlProf.append("Simple Weapons")
         PlProf = threetoolprof(param, PlProf, BrewSupp, CarpTools, SmthTools)
         if subrace == "Bright Gallus":
             Charisma += 1
             RaceNotes.append("Inspiring (see notes)")
             Notes.append("Inspiring: By spending an action and giving words of advice or encouragement, you can inspire an ally who is able to see and hear you. The ally can roll a d4 and add the number rolled to their next ability check, attack roll, or saving throw.")
-            PlProf.append(Insight)
+            SkillsProf.append(Insight)
         if subrace == "Huden Gallus":
             Dexterity += 1
             RaceNotes.append("Seedspeech (see notes)")
             Notes.append("Seedspeech: Your connection to the Great Rhythm is such that you can speak with the greenery of the forest itself. Through speech and touch you can communicate simple ideas to living plants. You are able to interpret their responses in simple language. Plants in the Wood do not experience the world in terms of sight, but most can feel differences in temperature, describe things that have touched them, as well as hear vibrations that happened around them (including speech).")
-            PlProf.append(Nature)
+            SkillsProf.append(Nature)
     if race == "Genasi":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -2212,9 +2231,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Swim: Your swimming speed is the same as your walking speed")
         RaceNotes.append("Astral Spark (see notes)")
         Notes.append(f"Astral Spark: Your psychic connection to the Astral Plane enables you to mystically access a spark of divine power, which you can channel through your weapons. When you hit a target with a simple or martial weapon, you can cause the target to take an extra {ProfBonus} force damage.\nYou can use this trait {ProfBonus} times, but you can use it no more than once per turn. You regain all expended uses when you finish a long rest.")
-        for item in Firearms:
-            if item not in PlProf:
-                PlProf.append(item)
+        if "Firearms" not in PlProf:
+            PlProf.append("Firearms")
         RaceNotes.append("Firearms Mastery - You have a mystical connection to firearms that traces back to the gods of the giff, who delighted in such weapons. You have proficiency with all firearms (already in proficiencies) and ignore the loading property of any firearm. In addition, attacking at long range with a firearm doesn't impose disadvantage on your attack roll.")
         RaceNotes.append("Hippo Build (see notes)")
         Notes.append("Hippo Build: You have advantage on Strength-based ability checks and Strength saving throws. In addition, you count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
@@ -2241,7 +2259,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             SLANG.remove(GithL)
             Strength += 2
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
-            PlProf = toolskillprof(param, PlProf)
+            PlProf, SkillsProf = toolskillprof(param, PlProf, SkillsProf)
             RaceNotes.append("Githyanki Psionics(1) (see notes). More options are available at higher levels.")
             Notes.append("Githyanki Psionics(1): You know the Mage Hand cantrip, and the hand is invisible when you cast the cantrip with this trait.\nIntelligence is your spellcasting ability for this spell. When you cast it with this trait, it doesn't require components.")
             if plLvl >= 3:
@@ -2250,14 +2268,15 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             if plLvl >= 5:
                 RaceNotes.append("Githyanki Psionics(3) (see notes)")
                 Notes.append("Githyanki Psionics(3): You can cast the Misty Step spell once with this trait, and you regain the ability to do so when you finish a long rest.\nIntelligence is your spellcasting ability for this spell. When you cast it with this trait, it doesn't require components.")
-        for item in LightArmor:
-            if item not in PlProf:
-                PlProf.append(item)
-        for item in MediumArmor:
-            if item not in PlProf:
-                PlProf.append(item)                
+        if "Light Armor" not in PlProf:
+            PlProf.append("Light Armor")
+        if "Medium Armor" not in PlProf:
+            PlProf.append("Medium Armor")                
+        if Shortsword not in PlProf:
             PlProf.append(Shortsword)
+        if Longsword not in PlProf:
             PlProf.append(Longsword)
+        if Greatsword not in PlProf:
             PlProf.append(Greatsword)
         if subrace == "Githzerai":
             Hmo1 = d12()
@@ -2375,7 +2394,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Strength += 2
         Constitution += 1
         walkingspeed = 30
-        PlProf.append(Athletics)
+        SkillsProf.append(Athletics)
         RaceNotes.append("Stone's Endurance (see notes)")
         Notes.append("Stone's Endurance: You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can't use it again until you finish a short or long rest.")
         RaceNotes.append("Powerful Build: You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
@@ -2400,7 +2419,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         SLANG.remove(Grun)
         Dexterity += 2
         Constitution += 1
-        PlProf.append(Perception)
+        SkillsProf.append(Perception)
         walkingspeed = 25
         CreatureType = "Humanoid"
         RaceNotes.append("Your climbing speed is equal to your walking speed.")
@@ -2462,7 +2481,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
         RaceNotes.append("Fey Ancestry: You have advantage on saving throws against being charmed, and magic can’t put you to sleep.")
-        PlProf = skillprof2(param, PlProf)
+        SkillsProf = skillprof2(param, SkillsProf)
         if subrace == "Half-Elf: Aquatic Elf Descent":
             RaceNotes.append("Swim: You gain a swimming speed of 30 ft.")
         if subrace == "Half-Elf: Drow Descent":
@@ -2483,28 +2502,40 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 print("2 - Wizard Cantrip")
                 varfeat = int(input("Which variant feature would you prefer? "))
                 if varfeat == 1:
-                    PlProf.append(Longsword)
-                    PlProf.append(Shortsword)
-                    PlProf.append(Shortbow)
-                    PlProf.append(Longbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)
+                    if Shortbow not in PlProf:
+                        PlProf.append(Shortbow)
+                    if Longbow not in PlProf:
+                        PlProf.append(Longbow)
                 if varfeat == 2:
                     RaceNotes.append("Wizard Cantrip (see notes)")
                     Notes.append("Wizard Cantrip: You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.")
                 if varfeat == 0:
                     if VariantFeatureRand == "Proficiencies":
-                        PlProf.append(Longsword)
-                        PlProf.append(Shortsword)
-                        PlProf.append(Shortbow)
-                        PlProf.append(Longbow)
+                        if Longsword not in PlProf:
+                            PlProf.append(Longsword)
+                        if Shortsword not in PlProf:
+                            PlProf.append(Shortsword)
+                        if Shortbow not in PlProf:
+                            PlProf.append(Shortbow)
+                        if Longbow not in PlProf:
+                            PlProf.append(Longbow)
                     if VariantFeatureRand == "Cantrip":
                         RaceNotes.append("Wizard Cantrip")
                         Notes.append("Wizard Cantrip: You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.")
             if param == "N":
                 if VariantFeatureRand == "Proficiencies":
-                    PlProf.append(Longsword)
-                    PlProf.append(Shortsword)
-                    PlProf.append(Shortbow)
-                    PlProf.append(Longbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)
+                    if Shortbow not in PlProf:
+                        PlProf.append(Shortbow)
+                    if Longbow not in PlProf:
+                        PlProf.append(Longbow)
                 if VariantFeatureRand == "Cantrip":
                     RaceNotes.append("Wizard Cantrip (see notes)")
                     Notes.append("Wizard Cantrip: You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.")               
@@ -2518,10 +2549,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 print("3 - Mask of the Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.")
                 varfeat = int(input("Which variant feature would you prefer? "))
                 if varfeat == 1:
-                    PlProf.append(Longsword)
-                    PlProf.append(Shortsword)
-                    PlProf.append(Shortbow)
-                    PlProf.append(Longbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)
+                    if Shortbow not in PlProf:
+                        PlProf.append(Shortbow)
+                    if Longbow not in PlProf:
+                        PlProf.append(Longbow)
                 if varfeat == 2:
                     walkingspeed = 35
                 if varfeat == 3:
@@ -2529,10 +2564,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                     Notes.append("Mask of the Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.")
                 if varfeat == 0:
                     if VariantFeatureRand == "Proficiencies":
-                        PlProf.append(Longsword)
-                        PlProf.append(Shortsword)
-                        PlProf.append(Shortbow)
-                        PlProf.append(Longbow)
+                        if Longsword not in PlProf:
+                            PlProf.append(Longsword)
+                        if Shortsword not in PlProf:
+                            PlProf.append(Shortsword)
+                        if Shortbow not in PlProf:
+                            PlProf.append(Shortbow)
+                        if Longbow not in PlProf:
+                            PlProf.append(Longbow)
                     if VariantFeatureRand == "Fleet of Foot":
                         walkingspeed = 35  
                     if VariantFeatureRand == "Mask of the Wild":  
@@ -2540,10 +2579,14 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                         Notes.append("Mask of the Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.")
             if param == "N":
                 if VariantFeatureRand == "Proficiencies":
-                    PlProf.append(Longsword)
-                    PlProf.append(Shortsword)
-                    PlProf.append(Shortbow)
-                    PlProf.append(Longbow)
+                    if Longsword not in PlProf:
+                        PlProf.append(Longsword)
+                    if Shortsword not in PlProf:
+                        PlProf.append(Shortsword)
+                    if Shortbow not in PlProf:
+                        PlProf.append(Shortbow)
+                    if Longbow not in PlProf:
+                        PlProf.append(Longbow)                    
                 if VariantFeatureRand == "Fleet of Foot":
                     walkingspeed = 35  
                 if VariantFeatureRand == "Mask of the Wild":  
@@ -2605,7 +2648,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         CreatureType = "Humanoid"
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
-        PlProf.append(Intimidation)
+        SkillsProf.append(Intimidation)
         RaceNotes.append("Relentless Endurance (see notes)")
         Notes.append("Relentless Endurance: When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.")
         RaceNotes.append("Savage Attacks (see notes)")
@@ -2632,7 +2675,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         CreatureType = "Humanoid"
         walkingspeed = 30
         RaceNotes.append(f"Hare-Trigger: You can add your proficiency bonus, {ProfBonus}, to your initiative rolls.")
-        PlProf.append(Perception)
+        SkillsProf.append(Perception)
         RaceNotes.append("Lucky Footwork (see notes)")
         Notes.append("Lucky Footwork: When you fail a Dexterity saving throw, you can use your reaction to roll a d4 and add it to the save, potentially turning the failure into a success. You can't use this reaction if you're prone or your speed is 0.")
         RaceNotes.append("Rabbit Hop (see notes)")
@@ -2717,9 +2760,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
         PlProf = martwepprof2(param, PlProf)
-        for item in LightArmor:
-            if item not in PlProf:
-                PlProf.append(item)
+        if "Light Armor" not in PlProf:
+            PlProf.append("Light Armor")
         RaceNotes.append("Saving Face (see notes)")
         Notes.append("Saving Face: Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest.")
     if race == "Human":
@@ -2750,7 +2792,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Variant Human":
             Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom = singleabilityscore(param, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
             Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom = singleabilityscore(param, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
-            PlProf = skillprof(param, PlProf)
+            SkillsProf = skillprof(param, SkillsProf)
             RaceNotes.append("Feat: You gain one feat of your choice.")  
     if race == "Jerbeen":
         Hmo1 = d4()
@@ -2826,7 +2868,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom = abilityscores(param, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
         CreatureType = "Humanoid"
         walkingspeed = 30
-        PlProf = fiveskillprof(param, PlProf, Insight, Investigation, SleightofHand, Stealth, Survival)
+        SkillsList = [Insight, Investigation, SleightofHand, Stealth, Survival]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
         RaceNotes.append("Fearless (see notes)")
         Notes.append("Fearless: You have advantage on saving throws you make to avoid or end the frightened condition on yourself. When you fail a saving throw to avoid or end the frightened condition on yourself, you can choose to succeed instead. Once you succeed on a saving throw in this way, you can't do so again until you finish a long rest.")
         RaceNotes.append("Taunt (see notes)")
@@ -2854,8 +2897,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         CreatureType = "Avian Humanoid"
         RaceNotes.append("Expert Forgery (see notes)")
         Notes.append("Expert Forgery: You can duplicate other creatures' handwriting and craftwork. You have advantage on all checks made to produce forgeries or duplicates of existing objects.")
-        PlProf = fourskillprof(param, PlProf, Acrobatics, Deception, Stealth, SleightofHand)
-        PlProf = fourskillprof(param, PlProf, Acrobatics, Deception, Stealth, SleightofHand)
+        SkillsList = [Acrobatics, Deception, Stealth, SleightofHand]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
         RaceNotes.append("Mimicry (see notes)")
         Notes.append("Mimicry: You can mimic sounds you have heard, including voices. A creature that hears the sounds can tell they are imitations with a successful Insight check opposed by your Deception check.")
         PlLang.append("In addition to the languages you know, you can only speak using your Mimicry trait.")
@@ -2912,7 +2956,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append(Darkvision)
         RaceNotes.append("Claws (see notes)")
         Notes.append("Claws: Your claws are natural weapons, which you can use to make unarmed strikes. If you hit with them, you can deal slashing damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.")
-        PlProf = fourskillprof(param, PlProf, Athletics, Intimidation, Perception, Survival)
+        SkillsList = [Athletics, Intimidation, Perception, Survival]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
         RaceNotes.append("Daunting Roar (see notes)")
         Notes.append("Daunting Roar: As a bonus action, you can let out an especially menacing roar. Creatures of your choice within 10 feet of you that can hear you must succeed on a Wisdom saving throw or become frightened of you until the end of your next turn. The DC of the save equals 8 + your proficiency bonus + your Constitution modifier. Once you use this trait, you can't use it again until you finish a short or long rest.")
     if race == "Lizardfolk":
@@ -2942,8 +2987,9 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Cunning Artisan (see notes)")
         Notes.append("Cunning Artisan: As part of a short rest, you can harvest bone and hide from a slain beast, construct, dragon, monstrosity, or plant creature of size small or larger to create one of the following items: a shield, a club, a javelin, or 1d4 darts or blowgun needles. To use this trait, you need a blade, such as a dagger, or appropriate artisan's tools, such as leatherworker's tools.")
         RaceNotes.append("Hold Breath: You can hold your breath for up to 15 minutes at a time.")
-        PlProf = fiveskillprof(param, PlProf, AnimalHandling, Nature, Perception, Stealth, Survival)
-        PlProf = fiveskillprof(param, PlProf, AnimalHandling, Nature, Perception, Stealth, Survival) 
+        SkillsList = [AnimalHandling, Nature, Perception, Stealth, Survival]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
         RaceNotes.append("Natural Armor (see notes)")
         Notes.append("Natural Armor: You have tough, scaly skin. When you aren't wearing armor, your AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor.")
         RaceNotes.append("Hungry Jaws (see notes)")
@@ -2970,8 +3016,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Dexterity += 1
         RaceNotes.append("Natural Armor (see notes)")
         Notes.append("Natural Armor: You have tough, scaly skin. When you aren’t wearing armor, your AC is 12 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield’s benefits apply as normal while you use your natural armor.")
-        PlProf.append(Athletics)
-        PlProf.append(Perception)
+        SkillsProf.append(Athletics)
+        SkillsProf.append(Perception)
         RaceNotes.append("Leviathan Will: You have advantage on saving throws against being charmed, frightened, paralyzed, poisoned, stunned, or put to sleep.")
         RaceNotes.append("Limited Amphibiousness: You can breathe air and water, but you need to be submerged at least once every 4 hours to avoid suffocating.")
         walkingspeed = 30
@@ -3040,7 +3086,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append(f"Damage Resistance: {DamageResistance}")
         if subrace == "Sera Luma":
             Wisdom += 1
-            PlProf.append(Performance)
+            SkillsProf.append(Performance)
             RaceNotes.append("Songbird (see notes)")
             Notes.append("Songbird: When you perform, you can demonstrate the innate and mystical power of your Charisma. You may cast the charm person spell once per long rest. This spell does not require any somatic components to cast. Charisma is your spellcasting ability for this spell.")
     if race == "Mapach":
@@ -3101,7 +3147,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Goring Rush: Immediately after you use the Dash action on your turn and move at least 20 feet, you can make one melee attack with your horns as a bonus action.")
         RaceNotes.append("Hammering Horns (see notes)")
         Notes.append("Hammering Horns: Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to shove that target with your horns. The target must be no more than one size larger than you and within 5 feet of you. Unless it succeeds on a Strength saving throw against a DC equal to 8 + your proficiency bonus+ your Strength modifier, you push it up to 10 feet away from you.")
-        PlProf = twoskillprof(param, PlProf, Intimidation, Persuasion)
+        SkillsList = [Intimidation, Persuasion]
+        SkillsProf = oneskillfromlist(param, SkillsProf, SkillsList)
     if race == "Orc":
         Hmo1 = d8()
         Hmo2 = d8()
@@ -3128,7 +3175,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append(Darkvision)
         RaceNotes.append("Aggressive (see notes)")
         Notes.append("Aggressive: As a bonus action, you can move up to your movement speed toward a hostile creature you can see or hear. You must end this move closer to the enemy than you started.")
-        PlProf.append(Intimidation)
+        SkillsProf.append(Intimidation)
         RaceNotes.append("Powerful Build: You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.")
     if race == "Owlin":
         Hmo1 = d10()
@@ -3152,7 +3199,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Darkvision (see notes)")
         Notes.append(Darkvision)
         RaceNotes.append("Flight: Thanks to your wings, you have a flying speed equal to your walking speed. You can't use this flying speed if you're wearing medium or heavy armor.")
-        PlProf.append(Stealth)
+        SkillsProf.append(Stealth)
     if race == "Plasmoid":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -3204,10 +3251,13 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Glide: Using your feathered arms, you can slow your fall, and glide short distances. When falling you can use your reaction to spread your arms, stiffen your wing feathers, and slow your descent. While doing so, you continue to fall gently at a speed of 60 feet per round, taking no fall damage when you land. If you would fall at least 10 feet in this way, you may fly up to your movement speed in one direction you choose, although you cannot choose to move upwards, landing in the space you finish your movement. You cannot glide while carrying heavy weapons or wielding a shield (though you may drop any held items as part of your reaction to spread your arms). You cannot glide while wearing heavy armor, or if you are encumbered.")
         RaceNotes.append("Talons (see notes)")
         RaceNotes.append("Talons: Your sharp claws aid you in unarmed combat andwhile climbing. Your damage for an unarmed strike is 1d4 piercing damage. Additionally, you have advantage on Strength (Athletics) checks made to climb any surface your talons could reasonably grip.")
-        PlProf.append(Perception)
-        PlProf.append(Longbow)
-        PlProf.append(Shortbow)
-        PlProf.append(Spear)
+        SkillsProf.append(Perception)
+        if Longbow not in PlProf:
+            PlProf.append(Longbow)
+        if Shortbow not in PlProf:
+            PlProf.append(Shortbow)
+        if Spear not in PlProf:
+            PlProf.append(Spear)
         RaceNotes.append("Your familiarity with the longbow means that it is not considered a heavy weapon for you.")
         if subrace == "Maran Raptor (Bird)":
             Intelligence += 1
@@ -3215,7 +3265,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             RaceNotes.append("Patient: When you react with a readied action, you have advantage on the first attack roll, skill check, or ability check you make as a part of that action.")
         if subrace == "Mistral Raptor (Bird)":
             Wisdom += 1
-            PlProf.append(Acrobatics)
+            SkillsProf.append(Acrobatics)
             RaceNotes.append("Aerial Defense: Creatures that attack you while you are falling, gliding, or jumping have disadvantage on their attack roll.")
     if race == "Reborn":
         Hmo1 = d10()
@@ -3266,8 +3316,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Magic Resistance: You have advantage on saving throws against spells and other magical effects.")
         RaceNotes.append("Mirthful Leaps (see notes)")
         Notes.append("Mirthful Leaps: Whenever you make a long or high jump, you can roll a d8 and add the number rolled to the number of feet you cover, even when making a standing jump. This extra distance costs movement as normal.")
-        PlProf.append(Performance)
-        PlProf.append(Persuasion)
+        SkillsProf.append(Performance)
+        SkillsProf.append(Persuasion)
         PlProf = musicalinstr(param, PlProf)
     if race == "Sharkin":
         Hmo1 = d4()
@@ -3334,7 +3384,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Cookie Cutter Sharkin":
             RaceNotes.append("Photophores: You chest and stomach can emit 5 feet of dim light in the dark, while underwater you have advantage on Stealth checks.")
-            PlProf.append(Stealth)
+            SkillsProf.append(Stealth)
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
             if ((plLvl >= 5) and (plLvl < 10)):
@@ -3345,7 +3395,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Goblin Sharkin":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.remove("Darkvision (see notes)")
             Notes.remove(Darkvision)
@@ -3361,7 +3411,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Hammerhead Sharkin":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Lateral Vision: You gain a +2 bonus to your passive Perception.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3399,7 +3449,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Nurse Sharkin":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.remove("Darkvision (see notes)")
             Notes.remove(Darkvision)
@@ -3467,7 +3517,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Cladoselache":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Speedy Swimmer: Your swimming speed increases to 90 feet.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3480,7 +3530,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Cretoxyrhina":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Blood Frenzy (see notes)")
             Notes.append(f"Blood Frenzy: With the ability to smell blood from a range of 3 miles, the smell of it can excite your hunger for battle. When you make an attack against a creature that doesn't have all its hit points, you can choose to make the attack with advantage. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
@@ -3494,7 +3544,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Edestus":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Razored Teeth: You gain a +2 bonus to attack and damage rolls against unarmored creatures.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3507,7 +3557,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Helicoprion":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Hacksaw Jaw: You gain an extra 1d4 slashing damage bonus, against creatures that don't have all their hit points.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3540,7 +3590,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Megalodon":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.append("Blood Frenzy (see notes)")
             Notes.append(f"Blood Frenzy: With the ability to smell blood from a range of 3 miles, the smell of it can excite your hunger for battle. When you make an attack against a creature that doesn't have all its hit points, you can choose to make the attack with advantage. You can use this trait {ProfBonus} times, and you regain all expended uses when you finish a long rest.")
@@ -3566,7 +3616,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Scapanorhynchus":
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
             RaceNotes.remove("Darkvision (see notes)")
             Notes.remove(Darkvision)
@@ -3640,7 +3690,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang, SLANG = languagegen(param, PlLang, SLANG) 
             Constitution += 2
             Strength += 1
-            PlProf.append(Athletics)
+            SkillsProf.append(Athletics)
             RaceNotes.append("Shifting Feature: Whenever you shift, you gain 1d6 additional temporary hit points. While shifted, you have a + 1 bonus to your Armor Class.")
         if subrace == "Longtooth Shifter":
             Hmo1 = d8()
@@ -3660,7 +3710,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang, SLANG = languagegen(param, PlLang, SLANG) 
             Strength += 2
             Dexterity += 1
-            PlProf.append(Intimidation)
+            SkillsProf.append(Intimidation)
             RaceNotes.append("Shifting Feature (see notes)")
             Notes.append("Shifting Feature: While shifted, you can use your elongated fangs to make an unarmed strike as a bonus action. If you hit with your fangs, you can deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.")
         if subrace == "Swiftstride Shifter":
@@ -3681,7 +3731,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             Dexterity += 2
             Charisma += 1
-            PlProf.append(Acrobatics)
+            SkillsProf.append(Acrobatics)
             RaceNotes.append("Shifting Feature: While shifted, your walking speed increases by 10 feet. Additionally, you can move up to 10 feet as a reaction when a creature ends its turn within 5 feet of you. This reactive movement doesn't provoke opportunity attacks.")
         if subrace == "Wildhunt Shifter":    
             Hmo1 = d10()
@@ -3701,7 +3751,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
             Wisdom += 2
             Dexterity += 1
-            PlProf.append(Survival)
+            SkillsProf.append(Survival)
             RaceNotes.append("Shifting Feature (see notes)")
             Notes.append("Shifting Feature: While shifted, you have advantage on Wisdom checks, and no creature within 30 feet of you can make an attack roll with advantage against you, unless you're incapacitated.")
     if race == "Simic Hybrid":
@@ -3784,12 +3834,12 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Patterned Feathers: You have advantage on Dexterity (Stealth) checks when you attempt to hide in a forest.")
         if subrace == "Stout Strig":
             Constitution += 1
-            PlProf.append(Intimidation)
+            SkillsProf.append(Intimidation)
             RaceNotes.append("Brawler: When you successfully attack a target with your talons, you can choose to grapple that target as a bonus action.")
         if subrace == "Swift Strig":
             Dexterity += 1
             walkingspeed = 35
-            PlProf.append(Survival)
+            SkillsProf.append(Survival)
     if race == "Tabaxi":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -3816,8 +3866,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Feline Agility: Your reflexes and agility allow you to move with a burst of speed. When you move on your turn in combat, you can double your speed until the end of the turn. Once you use this trait, you can't use it again until you move 0 feet on one of your turns.")
         RaceNotes.append("Cat's Claws (see notes)")
         Notes.append("Cat's Claws: Because of your claws, you have a climbing speed of 20 feet. In addition, your claws are natural weapons, which you can use to make unarmed strikes. If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.")
-        PlProf.append(Perception)
-        PlProf.append(Stealth)
+        SkillsProf.append(Perception)
+        SkillsProf.append(Stealth)
     if race == "Tiefling":
         Hmo1 = d8()
         Hmo2 = d8()
@@ -3992,7 +4042,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Natural Armor: Due to your shell and the shape of your body, you are ill-suited to wearing armor. Your shell provides ample protection, however; it gives you a base AC of 17 (your Dexterity modifier doesn't affect this number). You gain no benefit from wearing armor, but if you are using a shield, you can apply the shield's bonus as normal.")
         RaceNotes.append("Shell Defense (see notes)")
         Notes.append("Shell Defense: You can withdraw into your shell as an action. until you emerge, you gain a +4 bonus to AC, and you have advantage on Strength and Constitution saving throws. While in your shell, you are prone, your speed is 0 and can't increase, you have disadvantage on Dexterity saving throws, you can't take reactions, and the only action you can take is a bonus action to emerge from your shell.")
-        PlProf.append(Survival)
+        SkillsProf.append(Survival)
     if race == "Triton":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -4047,7 +4097,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Wisdom += 1
         walkingspeed = 30
         RaceNotes.append("Vedalken Dispassion: You have advantage on all Intelligence, Wisdom, and Charisma saving throws.")
-        PlProf = vedsixskillprof(param, PlProf, Arcana, History, Investigation, Medicine, Performance, SleightofHand)
+        RaceNotes, SkillsProf = vedsixskillprof(param, RaceNotes, SkillsProf, Arcana, History, Investigation, Medicine, Performance, SleightofHand)
         PlProf = vedartisantools(param, PlProf)
         RaceNotes.append("Partially Amphibious (see notes)")
         Notes.append("Partially Amphibious: By absorbing oxygen through your skin, you can breathe underwater for up to 1 hour. Once you've reached that limit, you can't use this trait again until you finish a long rest.")
@@ -4077,7 +4127,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Black Blood Healing: The black blood that is a sign of your people's connection to That-Which-Endures boosts your natural healing. When you roll a 1 or 2 on any Hit Die you spend at the end of a short rest, you can reroll the die and must use the new roll.")
         RaceNotes.append("Limited Telepathy (see notes)")
         Notes.append("Limited Telepathy: You can telepathically speak to any creature you can see within 30 feet of you. You don't need to share a language with the creature for it to understand your telepathy, but it must be able to understand at least one language. This process of communication is slow and limited, allowing you to transmit and receive only simple ideas and straightforward concepts.")
-        PlProf.append(Persuasion)
+        SkillsProf.append(Persuasion)
         RaceNotes.append("Telepathic Insight: Your mind's connection to the world around you strengthens your will. You have advantage on all Wisdom and Charisma saving throws.")
     if race == "Vulpin":
         Hmo1 = d10()
@@ -4139,7 +4189,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         Notes.append("Sentry's Rest: When you take a long rest, you must spend at least six hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn't render you unconscious, and you can see and hear as normal.")
         RaceNotes.append("Integrated Protection (see notes)")
         Notes.append("Integrated Protection: Your body has built-in defensive layers, which can be enhanced with armor:\nYou gain a +1 bonus to Armor Class.\nYou can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.\nWhile you live, your armor can't be removed from your body against your will.")
-        PlProf = skillprof(param, PlProf)
+        SkillsProf = skillprof(param, SkillsProf)
         PlProf = artisantools(param, PlProf)
     if race == "Wechselkind":
         Hmo1 = d10()
@@ -4169,7 +4219,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("Faerie Glamour (see notes)")
         Notes.append("Faerie Glamour: When the faerie leaves a wechselkind in place of a mortal child, they cover it with a glamour to make it appear identical to the child that was stolen. Over time this glamour fades, but a wechselkind can still call upon it in times of need.\nYou may cast the Disguise Self spell once with this trait, but only to take on the appearance of the child you were intended to replace, and you regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for this spell.")
         RaceNotes.append("Childish Agility: You can move through the space of any creature that is of a size larger than yours.")
-        PlProf.append(Acrobatics)
+        SkillsProf.append(Acrobatics)
     if race == "Yuan-ti":
         Hmo1 = d10()
         Hmo2 = d10()
@@ -4203,4 +4253,4 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         RaceNotes.append("You are immune to the poisoned condition.")
     RaceNotes.append(f"Creature Type: {CreatureType}")
 
-    return Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
+    return Gender, HollowOne, race, subrace, color, gem, metal, Lineage, Height, Weight, walkingspeed, PlLang, SLANG, PlProf, SkillsProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom, RaceNotes
