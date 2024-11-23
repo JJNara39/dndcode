@@ -5922,41 +5922,38 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     if param == "Y":
                         print("0 - Random")
                         print("1 - Archfey Patron Warlock")
-                        print("2 - Celestial Patron Warlock")
-                        print("3 - The Fathomless Patron Warlock")
-                        print("4 - Fiend Patron Warlock")
-                        print("5 - The Genie Patron Warlock")
-                        print("6 - Great Old One Patron Warlock")
-                        print("7 - Hexblade Patron Warlock")
-                        print("8 - Undead Patron Warlock")
-                        print("9 - Undying Patron Warlock")
-                        print("10 - Beachball Patron Warlock")
-                        print("10 - Unsure/Leave Blank")
+                        print("2 - Beachball Patron Warlock")
+                        print("3 - Celestial Patron Warlock")
+                        print("4 - The Fathomless Patron Warlock")
+                        print("5 - Fiend Patron Warlock")
+                        print("6 - The Genie Patron Warlock")
+                        print("7 - Great Old One Patron Warlock")
+                        print("8 - Hexblade Patron Warlock")
+                        print("9 - Undead Patron Warlock")
+                        print("10 - Undying Patron Warlock")
                         subc = int(input("Which subclass would you like? ")) 
                         if subc == 1:
                             subclass.append("Archfey Patron Warlock")
                         if subc == 2:
-                            subclass.append("Celestial Patron Warlock")
-                        if subc == 3:
-                            subclass.append("The Fathomless Patron Warlock")     
-                        if subc == 4:
-                            subclass.append("Fiend Patron Warlock")
-                        if subc == 5:
-                            subclass.append("The Genie Patron Warlock")
-                        if subc == 6:
-                            subclass.append("Great Old One Patron Warlock")  
-                        if subc == 7:
-                            subclass.append("Hexblade Patron Warlock")
-                        if subc == 8:
-                            subclass.append("Undead Patron Warlock")   
-                        if subc == 9:
-                            subclass.append("Undying Patron Warlock")                                                                                                    
-                        if subc == 10:
                             War.remove("Beachball Patron Warlock")
                             subclass.append(random.choice(War))
-                            BeachballFlag = True
-                        if subc == 11:
-                            subclass.append("")
+                            BeachballFlag = True                            
+                        if subc == 3:
+                            subclass.append("Celestial Patron Warlock")
+                        if subc == 4:
+                            subclass.append("The Fathomless Patron Warlock")     
+                        if subc == 5:
+                            subclass.append("Fiend Patron Warlock")
+                        if subc == 6:
+                            subclass.append("The Genie Patron Warlock")
+                        if subc == 7:
+                            subclass.append("Great Old One Patron Warlock")  
+                        if subc == 8:
+                            subclass.append("Hexblade Patron Warlock")
+                        if subc == 9:
+                            subclass.append("Undead Patron Warlock")   
+                        if subc == 10:
+                            subclass.append("Undying Patron Warlock")                                                                                                    
                         if subc == 0:
                             WarRand = random.choice(War)
                             if WarRand == "Beachball Patron Warlock":
@@ -6935,14 +6932,13 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     data['Check Box 22'] = '/Yes' if ChaST in SkillsProf else '/No'
 
     Notes.sort()
-    Notes_str = '-\n\n'.join(f"{item}" for item in Notes)
     filename = f"{charactername}_{playername}_notes.txt"
 
     with open(filename, "w") as file:
         file.write(f"{charactername}'s Notes\n")
         file.write("=" * (len(charactername)+8) + "\n\n") #Decorative Header
         for note in Notes:
-            file.write(note+"\n")
+            file.write("-"+note+"\n\n")
 
     input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
     output_pdf_path = f'{charactername}_{playername}_charsheet.pdf'
