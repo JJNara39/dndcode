@@ -543,6 +543,8 @@ def dndchargen_class(param, plLvl):
                         WarRand = random.choice(War)
                         subclass.append(WarRand)
                         BeachballFlag = True
+                    else:
+                        subclass.append(WarRand)                        
             if cla == "13":
                 Class.append("Wizard")
                 print("0 - Random")
@@ -633,6 +635,8 @@ def dndchargen_class(param, plLvl):
                         WarRand = random.choice(War)
                         subclass.append(WarRand)
                         BeachballFlag = True
+                    else:
+                        subclass.append(WarRand)                        
                 if ClassRandom == "Wizard":
                     subclass.append(random.choice(Wiz))
     if param == "N":
@@ -667,6 +671,8 @@ def dndchargen_class(param, plLvl):
                 WarRand = random.choice(War)
                 subclass.append(WarRand)
                 BeachballFlag = True
+            else:
+                subclass.append(WarRand)
         if ClassRand == "Wizard":
-            subclass.append(random.choice(Wiz))      
+            subclass.append(random.choice(Wiz))   
     return Class, subclass, submulticlass, BeachballFlag
