@@ -6931,7 +6931,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     data['SpellAtkBonus 2'] = SpellAttackMod_str
 
     Notes.sort()
-    Notes_str = '\n'.join(f"{item}" for item in Notes)
+    Notes_str = '-\n\n'.join(f"{item}" for item in Notes)
     filename = f"{charactername}_{playername}_notes.txt"
 
     with open(filename, "w") as file:
