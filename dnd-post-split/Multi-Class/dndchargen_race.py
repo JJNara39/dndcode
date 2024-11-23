@@ -3347,7 +3347,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Goblin Sharkin":
             PlProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
+            Notes.remove(Darkvision)
             RaceNotes.append("Superior Darkvision (see notes)")
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3400,7 +3401,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Nurse Sharkin":
             PlProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
+            Notes.remove(Darkvision)
             RaceNotes.append("Modified Darkvision: You have darkvision up to 90ft. You see dim light as if it were bright light, and you see darkness as if it were dim light.")
             RaceNotes.append("Vicious Bite (see notes)")
             ViciousBiteDmg = "1d6"
@@ -3426,7 +3428,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
                 ViciousBiteDmg = "4d6"
             Notes.append(f"Vicious Bite: When you take the Attack action on your turn, you can replace one of your attacks with a vicious bite attack. This is a natural weapon attack with which you are proficient with and uses your Strength modifier for its attack rolls. This bite does {ViciousBiteDmg} piercing damage.")
         if subrace == "Tiger Sharkin":
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
+            Notes.remove(Darkvision)
             RaceNotes.append("Modified Darkvision: You have darkvision up to 90ft. You see dim light as if it were bright light, and you see darkness as if it were dim light.")
             RaceNotes.append("Shell Crusher: You gain a +2 to attack and damage rolls against armored creatures.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3565,7 +3568,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
         if subrace == "Scapanorhynchus":
             PlProf.append(Investigation)
             RaceNotes.append("Ampullae of Lorenzini: You have advantage on Perception and Investigation checks.")
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
+            Notes.remove(Darkvision)
             RaceNotes.append("Superior Darkvision (see notes)")
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
@@ -3587,7 +3591,8 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             if plLvl >= 20:
                 DorsalStingerDmg = "4d6"
             Notes.append(f"Dorsal Stinger: As a bonus action, you may pierce your foe. Your fins have stingers that does {DorsalStingerDmg} piercing damage.")
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
+            Notes.remove(Darkvision)
             RaceNotes.append("Superior Darkvision (see notes)")
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Vicious Bite (see notes)")
