@@ -322,8 +322,8 @@ def dndCharGen(param, plLvl, charactername, playername):
 
 
 # DMorPlay = int(input("Are you a 1 - DM or 2 - Player? ")) This is not needed
-party = int(input("How many characters will your party have? ")) #This can be used later when I implement CR encounters, it will function on party size
-plLvlList = []
+# party = int(input("How many characters will your party have? ")) #This can be used later when I implement CR encounters, it will function on party size
+# plLvlList = []
 #numMon = 1 #Lets just say for now there is one monster per encounter; Nor is this needed
 
 ##########################################################################################
@@ -450,40 +450,40 @@ if DMorPlay == 1:
             dndCharGen(param, plLvl, charactername, playername)
 else:
 Removing dm/player for now, there for the first part of this if statement is null and the following for loop was shift-tabbed'''
-for p in range(party):
-    playername = input("Who is the player behind this character? ")        
-    charactername = input("What is this character's name? ")
-    plLvlWhile = False
-    while not plLvlWhile:
-        plLvl = int(input(f"What level is {charactername}? "))
-        if (plLvl > 0 and  plLvl <= 20):
-            plLvlWhile = True
-        else:
-            print("Player level is out of range, the range is 1-20, please try again.")
-    plLvlList.append(plLvl)   
+#for p in range(party): #Commented out party, so un-tabbed the following (all the way to dndchargen)
+playername = input("Who is the player behind this character? ")        
+charactername = input("What is this character's name? ")
+plLvlWhile = False
+while not plLvlWhile:
+    plLvl = int(input(f"What level is {charactername}? "))
+    if (plLvl > 0 and  plLvl <= 20):
+        plLvlWhile = True
+    else:
+        print("Player level is out of range, the range is 1-20, please try again.")
+    #plLvlList.append(plLvl)   
 #Add in a level check for classes, if the level is 3+, the subclass is available.
-    para = input(f"Set parameters on {charactername}? Y/N ")
-    if para == "Y":
-        param = "Y"
-    if para == "y":
-        param = "Y"
-    if para == "Yes":
-        param = "Y"
-    if para == "yes":
-        param = "Y"
-    if para == "Ye":
-        param = "Y"
-    if para == "ye":
-        param = "Y"
-    if para == "N":
-        param = "N"
-    if para == "n":
-        param = "N"
-    if para == "No":
-        param = "N"
-    if para == "no":
-        param = "N"    
-    dndCharGen(param, plLvl, charactername, playername)
+para = input(f"Set parameters on {charactername}? Y/N ")
+if para == "Y":
+    param = "Y"
+if para == "y":
+    param = "Y"
+if para == "Yes":
+    param = "Y"
+if para == "yes":
+    param = "Y"
+if para == "Ye":
+    param = "Y"
+if para == "ye":
+    param = "Y"
+if para == "N":
+    param = "N"
+if para == "n":
+    param = "N"
+if para == "No":
+    param = "N"
+if para == "no":
+    param = "N"    
+dndCharGen(param, plLvl, charactername, playername)
 
 '''
 #This block of code is to make sure dndCharGen works
