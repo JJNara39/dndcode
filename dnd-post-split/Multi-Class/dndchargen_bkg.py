@@ -2384,7 +2384,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             skills_dict["SurvNum"] += 1
             PlProf = musicalinstr(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
-            EQP - ["A staff", "A Hunting Trap", "A trophy from an animal you killed", "A set of Traveler's Clothes"]
+            EQP = ["A staff", "A Hunting Trap", "A trophy from an animal you killed", "A set of Traveler's Clothes"]
         if back == "Uthgardt Tribe Member":
             skills_dict["AthlNum"] += 1
             skills_dict["SurvNum"] += 1
