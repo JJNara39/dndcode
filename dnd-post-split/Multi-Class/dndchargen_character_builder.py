@@ -916,8 +916,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf = musicalinstr(param, PlProf)
                     PlProf = musicalinstr(param, PlProf)
                     PlProf = musicalinstr(param, PlProf)
-                    PlProf.append(DexST)
-                    PlProf.append(ChaST)
+                    SkillsProf.append(DexST)
+                    SkillsProf.append(ChaST)
                     PlProf = skillprof3(param, PlProf)  
                     MusicalInstrumentsWOLute = MusicalInstruments
                     MusicalInstrumentsWOLute.remove(Lute)
@@ -1352,8 +1352,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                         if item not in PlProf:
                             PlProf.append(item)
                     PlProf.append(Shield)
-                    PlProf.append(WisST)
-                    PlProf.append(ChaST)
+                    SkillsProf.append(WisST)
+                    SkillsProf.append(ChaST)
                     SkillsList = [History, Insight, Medicine, Persuasion, Religion]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)   
                     StartEquip1 = ["Mace", "Warhammer (if proficient)"]
@@ -2345,9 +2345,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf.append(Sickle)
                     PlProf.append(Sling)
                     PlProf.append(Spear)
-                    PlProf.append("Herbalism Kit")            
-                    PlProf.append(WisST)
-                    PlProf.append(IntST)
+                    PlProf.append(HerbKit)            
+                    SkillsProf.append(WisST)
+                    SkillsProf.append(IntST)
                     SkillsList = [Arcana, AnimalHandling, Insight, Medicine, Nature, Perception, Religion, Survival]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Wooden Shield", "Any Simple Weapon"]
@@ -2856,8 +2856,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                                  
-                    PlProf.append(StrST)
-                    PlProf.append(ConST)
+                    SkillsProf.append(StrST)
+                    SkillsProf.append(ConST)
                     SkillsList = [Acrobatics, AnimalHandling, Athletics, History, Insight, Intimidation, Perception, Survival]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Chain Mail", "Leather Armor, Longbow and 20 Arrows"]
@@ -3401,8 +3401,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                             PlProf.append(item)
                     PlProf.append(Shortsword)      
                     PlProf = artisantoolsmusicalinstr(param, PlProf)
-                    PlProf.append(StrST)
-                    PlProf.append(DexST)
+                    SkillsProf.append(StrST)
+                    SkillsProf.append(DexST)
                     SkillsList = [Acrobatics, Athletics, History, Insight, Religion, Stealth]    
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["Shortsword", "Any Simple Weapon"]
@@ -3645,7 +3645,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 if subclass[i] == "Way of Mercy Monk":
                     SkillsProf.append(Insight)
                     SkillsProf.append(Medicine)
-                    PlProf.append("Herbalism Kit")
+                    PlProf.append(HerbKit)
                     Mask1 = "Raven"
                     Mask2 = "Blank and white"
                     Mask3 = "Crying visage"
@@ -3808,8 +3808,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                               
-                    PlProf.append(WisST)
-                    PlProf.append(ChaST)
+                    SkillsProf.append(WisST)
+                    SkillsProf.append(ChaST)
                     SkillsList = [Athletics, Insight, Intimidation, Medicine, Persuasion, Religion, Religion]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)      
                     StartEquip1 = ["A Martial Weapon and a Shield", "Two Martial Weapons"]
@@ -4375,8 +4375,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in MartialWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                            
-                    PlProf.append(StrST)
-                    PlProf.append(DexST)
+                    SkillsProf.append(StrST)
+                    SkillsProf.append(DexST)
                     SkillsList = [AnimalHandling, Athletics, Insight, Investigation, Nature, Perception, Stealth, Survival]
                     PlProf = threeskillsfromlist(param, SkillsProf, SkillsList)         
                     StartEquip1 = ["Scale Mail", "Leather Armor"]
@@ -4644,9 +4644,9 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     Notes.append("Umbral Sight - You gain darkvision out to a range of 60 feet. If you already have darkvision from your race, its range increases by 30 feet.\nYou are also adept at evading creatures that rely on darkvision. While in darkness, you are invisible to any creature that relies on darkvision to see you in that darkness.")
                     if ranlvl >= 7:
                         if WisST not in PlProf:
-                            PlProf.append(WisST)
+                            SkillsProf.append(WisST)
                         else:
-                            PlProf = twoskillprof(param, PlProf, IntST, ChaST)
+                            SkillsProf = twoskillprof(param, SkillsProf, IntST, ChaST)
                         ClassNotes.append("Iron Mind - You have honed your ability to resist the mind-altering powers of your prey. You gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice), these all have been addressed.")                          
                     if ranlvl >= 11:
                         ClassNotes.append("Stalker's Flurry - You learn to attack with such unexpected speed that you can turn a miss into another strike. Once on each of your turns when you miss with a weapon attack, you can make another weapon attack as part of the same action.")                            
@@ -4870,8 +4870,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf.append(Longsword)
                     PlProf.append(Rapier)
                     PlProf.append(Shortsword)      
-                    PlProf.append(IntST)
-                    PlProf.append(DexST)
+                    SkillsProf.append(IntST)
+                    SkillsProf.append(DexST)
                     SkillsList = [Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, SleightofHand, Stealth]
                     PlProf = fourskillsfromlist(param, SkillsProf, SkillsList)   
                     StartEquip1 = ["Rapier", "Shortsword"]
@@ -5197,7 +5197,7 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 ClassNotes.append("Blindsense - If you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you.")
             if roglvl >= 15:
                 SneakAttack = "8d6"
-                PlProf.append(WisST)
+                SkillsProf.append(WisST)
             if roglvl >= 17:
                 SneakAttack = "9d6"
             if roglvl >= 18:
@@ -5234,8 +5234,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf.append(Sling)
                     PlProf.append(Quarterstaff)
                     PlProf.append(LightCrossbow)      
-                    PlProf.append(ConST)
-                    PlProf.append(ChaST)
+                    SkillsProf.append(ConST)
+                    SkillsProf.append(ChaST)
                     SkillsList = [Arcana, Deception, Insight, Intimidation, Persuasion, Religion]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
@@ -5811,8 +5811,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     for item in SimpleWeapons:
                         if item not in PlProf:
                             PlProf.append(item)                                 
-                    PlProf.append(ChaST)
-                    PlProf.append(WisST)
+                    SkillsProf.append(ChaST)
+                    SkillsProf.append(WisST)
                     SkillsList = [Arcana, Deception, History, Intimidation, Investigation, Nature, Religion]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
@@ -6482,8 +6482,8 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     PlProf.append(Sling)
                     PlProf.append(Quarterstaff)
                     PlProf.append(LightCrossbow)      
-                    PlProf.append(IntST)
-                    PlProf.append(WisST)
+                    SkillsProf.append(IntST)
+                    SkillsProf.append(WisST)
                     SkillsList = [Arcana, History, Insight, Investigation, Medicine, Religion]
                     PlProf = twoskillsfromlist(param, SkillsProf, SkillsList) 
                     StartEquip1 = ["Quarterstaff", "Dagger"]
@@ -6927,6 +6927,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     data['SpellcastingAbility 2'] = SpellcastingAbility_str
     data['SpellSaveDC  2'] = SpellsaveDC_str
     data['SpellAtkBonus 2'] = SpellAttackMod_str
+    data['Check Box 11'] = '/Yes' if StrST in SkillsProf else '/No'
+    data['Check Box 18'] = '/Yes' if DexST in SkillsProf else '/No'
+    data['Check Box 19'] = '/Yes' if ConST in SkillsProf else '/No'
+    data['Check Box 20'] = '/Yes' if IntST in SkillsProf else '/No'
+    data['Check Box 21'] = '/Yes' if WisST in SkillsProf else '/No'
+    data['Check Box 22'] = '/Yes' if ChaST in SkillsProf else '/No'
 
     Notes.sort()
     Notes_str = '-\n\n'.join(f"{item}" for item in Notes)
