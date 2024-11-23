@@ -172,7 +172,7 @@ Splint = "Splint"
 HeavyArmor = [ChainMail, RingMail, Plate, Splint]
 Shield = "Shield"   
 
-def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
+def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, SkillsProf, Notes, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     walkingspeed = 0
     CreatureType = ""
     DamageResistance = ""
