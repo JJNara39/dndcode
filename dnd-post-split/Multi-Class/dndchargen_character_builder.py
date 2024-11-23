@@ -296,12 +296,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                 else:
                     hitpoints += (8 + ConMod + hpcalc(artlvl, d8))
                 if i == 0:
-                    for item in LightArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
-                    for item in MediumArmor:
-                        if item not in PlProf:
-                            PlProf.append(item)
+                    if "LightArmor" not in PlProf:
+                        PlProf.append("LightArmor")
+                    if "MediumArmor" not in PlProf:
+                        PlProf.append("MediumArmor")
+                    if Shield not in PlProf:
+                        PlProf.append(Shield)
                     PlProf.append(Shield)
                     for item in SimpleWeapons:
                         if item not in PlProf:
@@ -723,12 +723,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
                     Notes.append("Ancestral Protectors - Spectral warriors appear when you enter your rage. While you’re raging, the first creature you hit with an attack on your turn becomes the target of the warriors, which hinder its attacks. Until the start of your next turn, that target has disadvantage on any attack roll that isn't against you, and when the target hits a creature other than you with an attack, that creature has resistance to the damage of the target’s attacks.")
                     if barblvl >= 6:
                         SpiritShieldReduction = "2d6"
-                    if barblvl >= 10:
-                        SpiritShieldReduction = "3d6"
-                    if barblvl >= 14:
-                        SpiritShieldReduction = "4d6"
-                    ClassNotes.append(f"Spirit Shield (see notes)")
-                    Notes.append(f"Spirit Shield - The guardian spirits that aid you can provide supernatural protection to those you defend. If you are raging and a creature you can see within 30 feet of you takes damage, you can use your reaction to reduce that damage by {SpiritShieldReduction}.")
+                        if barblvl >= 10:
+                            SpiritShieldReduction = "3d6"
+                        if barblvl >= 14:
+                            SpiritShieldReduction = "4d6"
+                        ClassNotes.append("Spirit Shield (see notes)")
+                        Notes.append(f"Spirit Shield - The guardian spirits that aid you can provide supernatural protection to those you defend. If you are raging and a creature you can see within 30 feet of you takes damage, you can use your reaction to reduce that damage by {SpiritShieldReduction}.")
                     if barblvl >= 10:
                         ClassNotes.append("Consult the Spirits (see notes)")
                         Notes.append("Consult the Spirits - You gain the ability to consult with your ancestral spirits. When you do so, you cast the Augury or Clairvoyance spell, without using a spell slot or material components. Rather than creating a spherical sensor, this use of Clairvoyance invisibly summons one of your ancestral spirits to the chosen location. Wisdom is your spellcasting ability for these spells.\nAfter you cast either spell in this way, you can’t use this feature again until you finish a short or long rest.")
@@ -6915,10 +6915,12 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)                                 
     subclass_str = "\n".join(f"- {item}" for item in subclass)
     feat_trait_str = 'Subclass:' + '\n' + f'{subclass_str}' + '\n' + feat_trait_str    
+    Hitdice_Str = '/'.join(f"{item}" for item in hitdice)
+    Currenthitdice_str = '/'.join(f"{item}" for item in hitdice) #This is update in the combat function
     data['HPMax'] = str(hitpoints)
     data['HPCurrent'] = str(hitpoints) #This is updated in the combat function
     data['Equipment'] = EQP_string
-    data['ProficiencesLang'] = prof_lang_str
+    data['ProficienciesLang'] = prof_lang_str
     data['Features and Traits'] = feat_trait_str
     data['Spellcasting Class 2'] = SpellcastingClass_str
     data['SpellcastingAbility 2'] = SpellcastingAbility_str
@@ -6930,6 +6932,14 @@ def dndchargen_characterbuilder(param, plLvl, playername, charactername, race, C
     data['Check Box 20'] = '/Yes' if IntST in SkillsProf else '/No'
     data['Check Box 21'] = '/Yes' if WisST in SkillsProf else '/No'
     data['Check Box 22'] = '/Yes' if ChaST in SkillsProf else '/No'
+    data['ST Charisma'] = str(ChaMod + (ProfBonus if ChaST in SkillsProf else 0))
+    data['ST Constitution'] = str(ConMod + (ProfBonus if ConST in SkillsProf else 0))
+    data['ST Dexterity'] = str(DexMod + (ProfBonus if DexST in SkillsProf else 0))
+    data['ST Intelligence'] = str(IntMod + (ProfBonus if IntST in SkillsProf else 0))
+    data['ST Strength'] = str(StrMod + (ProfBonus if StrST in SkillsProf else 0))
+    data['ST Wisdom'] = str(WisMod + (ProfBonus if WisST in SkillsProf else 0))
+    data['HDTotal'] = Hitdice_Str
+    data['HD'] = Currenthitdice_str
 
     Notes.sort()
     filename = f"{charactername}_{playername}_notes.txt"
