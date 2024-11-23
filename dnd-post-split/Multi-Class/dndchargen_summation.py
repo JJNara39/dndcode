@@ -2062,7 +2062,6 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
         AdditionalInfo.append("Feature: Witherbloom Initiate - You gain the Strixhaven Initiate feat and must choose Witherbloom within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Witherbloom Spells table are added to the spell list of your spellcasting class.\n1st: Cure Wounds, Inflict Wounds\n2nd: Lesser Restoration, Wither and Bloom\n3rd: Revivify, Vampiric Touch\n4th: Blight, Death Ward\n5th: Antilife Shell, Greater Restoration\nConsider customizing how your spells look when you cast them. Your Witherbloom spells might rely on material components or a spellcasting focus drawn from the swamp environment of Witherbloom, and your spells might take on an appearance suggesting those natural elements. Spectral shapes of swamp animals or plants might form amid your spell effects.")
 ########################################################################################################
 ### Printing section ###
-    print("Note: Any 'random' languages or 'random' skill/tool proficiencies can be discussed with the DM and switched out for more apt languages/skills/tools.")       
     if back == "Ashari":
         OtherBackgroundInfo.append("As an Ashari, you also know a language specifically based on your tribe's elemental affinity.")
     if HollowOne == "Hollow One":
