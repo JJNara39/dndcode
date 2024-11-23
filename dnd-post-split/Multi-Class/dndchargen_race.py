@@ -967,6 +967,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, Notes, Charisma, Constit
             subrace = random.choice(Stri)
         if race == "Tiefling":
             subrace = random.choice(Tie)
+    Lineage = ""
     Line = ["Dhampir", "Hexblood", "Reborn", "No lineage"]
     if param == "Y":
         if ((race != "Dhampir") and (race != "Hexblood") and (race != "Reborn")):
