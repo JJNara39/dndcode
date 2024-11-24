@@ -2522,13 +2522,13 @@ def summation(param, playername, charactername, plLvl, Gender, race, subrace, co
     allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
     classlevel_str = "/".join(f"{item}" for item in Class)
     if subrace == "Chromatic Dragonborn":
-        subrace = f"{color} + {item}"
+        subrace = f"{color} + {subrace}"
     if subrace == "Gem Dragonborn":
-        subrace = f"{gem} + {item}"
+        subrace = f"{gem} + {subrace}"
     if subrace == "Metallic Dragonborn":
-        subrace = f"{metal} + {item}"
+        subrace = f"{metal} + {subrace}"
     if subrace == "Eladrin":
-        subrace = f"{season} + {item}"   
+        subrace = f"{season} + {subrace}"   
     data = {
         'ClassLevel':classlevel_str + ' ' + str(plLvl),
         'Background':back,
