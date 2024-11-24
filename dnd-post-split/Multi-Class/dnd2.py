@@ -5,6 +5,32 @@ from dndchargen_class import *
 #from dndchargen_character_builder import *
 from fractions import Fraction
 
+#Temporary, only here for testing
+fantasy_names = [
+    "Aeloria", "Brynwyn", "Caelthar", "Drevik", "Eryndor", "Fendral", "Galdar", "Halthorin", "Ilyra", "Jorvik",
+    "Kaelorn", "Lutharic", "Myndral", "Nerathis", "Orlwyn", "Pyreth", "Quorath", "Ryndor", "Sylvaris", "Thandric",
+    "Ulthar", "Vaelith", "Wynsera", "Xandrel", "Ylvara", "Zorveth", "Aelindra", "Belthar", "Cyntheris", "Drakos",
+    "Elythar", "Fenril", "Grathis", "Haldrin", "Ilvaris", "Jorath", "Kalven", "Loryn", "Myralis", "Nytheria",
+    "Orynth", "Prythar", "Quindral", "Ralvora", "Syndra", "Thaldrin", "Ulveth", "Vyndral", "Wynthar", "Xorath",
+    "Yndris", "Zalvora", "Arathin", "Bryndor", "Cindrel", "Dalthrin", "Eryndra", "Fandrel", "Galveth", "Haldor",
+    "Ivaris", "Jalvora", "Kaelith", "Lorveth", "Myndril", "Nyndral", "Olthar", "Pyrethrin", "Quorlin", "Rynthar",
+    "Sylorin", "Thandros", "Ultheris", "Vaelrin", "Wyndal", "Xalthrin", "Ylvaris", "Zorthin", "Andralis", "Bralveth",
+    "Calveth", "Drynthar", "Elandra", "Fendrin", "Gryndor", "Halverin", "Ilrath", "Jyral", "Korthal", "Lindral",
+    "Myntheris", "Nytherin", "Orindral", "Pryndal", "Quorind", "Ralveris"
+]
+regular_names = [
+    "Adam", "Bella", "Caleb", "Diana", "Ethan", "Fiona", "Gavin", "Hannah", "Isaac", "Julia",
+    "Kevin", "Laura", "Martin", "Nina", "Oscar", "Paula", "Quinn", "Rachel", "Simon", "Tina",
+    "Umar", "Vera", "Wesley", "Yara", "Zane", "Alice", "Brian", "Cathy", "David", "Emma",
+    "Frank", "Grace", "Henry", "Ivy", "Jack", "Katie", "Liam", "Molly", "Nathan", "Olivia",
+    "Peter", "Quincy", "Rose", "Sam", "Tara", "Uma", "Victor", "Wendy", "Xander", "Yvonne",
+    "Zoe", "Amber", "Ben", "Clara", "Derek", "Ella", "Finn", "Georgia", "Harry", "Iris",
+    "Jordan", "Karen", "Logan", "Mia", "Noah", "Oliver", "Penny", "Quinn", "Ryan", "Sophia",
+    "Tyler", "Ursula", "Violet", "Walter", "Xavier", "Yvette", "Zara", "Aaron", "Becky",
+    "Charlie", "Dylan", "Eva", "Felix", "Gemma", "Hugo", "Isla", "Jake", "Kelly", "Lucas",
+    "Megan", "Nick", "Owen", "Parker", "Reese", "Shane", "Tessa", "Ulysses", "Vivian", "Wyatt"
+]
+
 def dndCharGen(param, plLvl, charactername, playername):
     skills_dict = {
         "AcroNum" : 0,
@@ -318,7 +344,13 @@ def dndCharGen(param, plLvl, charactername, playername):
             back, Trait, Ideal, Bond, Flaw, BGL, PlLang, SLANG, PlProf, skills_dict, EQP = dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict)     
     summation(param, playername, charactername, plLvl, Gender, race, subrace, color, gem, metal, Height, Weight, walkingspeed, RaceNotes, Class, subclass, submulticlass, BeachballFlag, HollowOne, Lineage, PlLang, SLANG, PlProf, SkillsProf, Notes, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom)
 
-
+for j in range(3):
+    for i in range(100):
+        playername = "Marik"
+        charactername = f"({i})Nara"
+        param = "N"
+        plLvl = 5
+        dndCharGen(param, plLvl, charactername, playername)
 
 #Dice are in dndchargen
 
@@ -453,6 +485,7 @@ if DMorPlay == 1:
 else:
 Removing dm/player for now, there for the first part of this if statement is null and the following for loop was shift-tabbed'''
 #for p in range(party): #Commented out party, so un-tabbed the following (all the way to dndchargen)
+''' Commented this out for just a minute so I can test the sheet
 playername = input("Who is the player behind this character? ")        
 charactername = input("What is this character's name? ")
 plLvlWhile = False
@@ -486,11 +519,4 @@ if para == "No":
 if para == "no":
     param = "N"    
 dndCharGen(param, plLvl, charactername, playername)
-
-'''
-#This block of code is to make sure dndCharGen works
-for i in range(500):
-    print(f"For character {i}:")
-    para = "N"
-    dndCharGen(para)
 '''
