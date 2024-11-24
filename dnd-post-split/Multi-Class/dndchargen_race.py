@@ -1794,7 +1794,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, SkillsProf, Notes, Chari
             PlLang.append(Dwarvi)
             SLANG.remove(Dwarvi)            
             Strength += 1
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
             RaceNotes.append("Superior Darkvision (see notes)")
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Duergar Resilience: You have advantage on saving throws against illusions and against being charmed or paralyzed.")
@@ -1898,7 +1898,7 @@ def dndCharGenRace(param, plLvl, PlLang, SLANG, PlProf, SkillsProf, Notes, Chari
             PlLang.append(Elvi)
             SLANG.remove(Elvi)           
             Charisma += 1
-            RaceNotes.remove(Darkvision)
+            RaceNotes.remove("Darkvision (see notes)")
             RaceNotes.append("Superior Darkvision (see notes)")
             Notes.append("Superior Darkvision: You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.")
             RaceNotes.append("Sunlight Sensitivity (see notes)")
