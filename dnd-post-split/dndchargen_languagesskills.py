@@ -1,177 +1,80 @@
 import random
 
-def languagegen(param, PlLang, SLANG):
-    Aara = "Aarakocra"
-    Abys = "Abyssal"
-    Aqua = "Aquan"
-    Aura = "Auran"
-    Bird = "Birdfolk"
-    Cele = "Celestial"
-    Cerva = "Cervan"
-    Comm = "Common"
-    DpSp = "Deep Speech"
-    Drac = "Draconic"
-    Dwarvi = "Dwarvish"
-    Elvi = "Elvish"
-    Gian = "Giant"
-    GithL = "Gith"
-    Gnom = "Gnomish"
-    Gobl = "Goblin"
-    Grun = "Grung"
-    Hafl = "Hafling"
-    Hedg = "Hedge"
-    Infe = "Infernal"
-    Jerb = "Jerbeen"
-    Krau = "Kraul"
-    Leon = "Leonin"
-    Loxo = "Loxodon"
-    Mapa = "Mapach"
-    Mino = "Minotaur"
-    Orc = "Orc"
-    Quo = "Quori"
-    Prim = "Primordial"
-    Sylv = "Sylvan"
-    Unde = "Undercommon"
-    Veda = "Vedalken"
-    Vulp = "Vulpin"
-    Languages = [Aara, Abys, Aqua, Aura, Bird, Cele, Cerva, Comm, DpSp, Drac, Dwarvi, Elvi, Gian, GithL, Gnom, Gobl, Grun, Hafl, Hedg, Infe, Jerb, Krau, Leon, Loxo, Mapa, Mino, Orc, Quo, Prim, Sylv, Unde, Veda, Vulp]
-    if param == "Y": 
-        print("0 - Random")      
-        print("1 - Aarakocra")
-        if Aara in PlLang:
-            print("You already know Aarakocra, therefore this option is unavailable")
-        print("2 - Abyssal")
-        if Abys in PlLang:
-            print("You already know Abyssal, therefore this option is unavailable")
-        print("3 - Aquan")
-        if Aqua in PlLang:
-            print("You already know Aquan, therefore this option is unavailable")
-        print("4 - Auran")
-        if Aura in PlLang:
-            print("You already know Auran, therefore this option is unavailable")
-        print("5 - Birdfolk")
-        if Bird in PlLang:
-            print("You already know Birdfolk, therefore this option is unavailable")
-        print("6 - Celestial")
-        if Cele in PlLang:
-            print("You already know Celestial, therefore this option is unavailable")
-        print("7 - Cervan")
-        if Cerva in PlLang:
-            print("You already know Cervan, therefore this option is unavailable")
-        print("8 - Common")
-        if Comm in PlLang:
-            print("You already know Common, therefore this option is unavailable")
-        print("9 - Deep Speech")
-        if DpSp in PlLang:
-            print("You already know Deep Speech, therefore this option is unavailable")            
-        print("10 - Draconic")
-        if Drac in PlLang:
-            print("You already know Draconic, therefore this option is unavailable")
-        print("11 - Dwarvish")
-        if Dwarvi in PlLang:
-            print("You already know Dwarvish, therefore this option is unavailable")
-        print("12 - Elvish")
-        if Elvi in PlLang:
-            print("You already know Elvish, therefore this option is unavailable")
-        print("13 - Giant")
-        if Gian in PlLang:
-            print("You already know Giant, therefore this option is unavailable")
-        print("14 - Gith")
-        if GithL in PlLang:
-            print("You already know Gith, therefore this option is unavailable")
-        print("15 - Gnomish")
-        if Gnom in PlLang:
-            print("You already know Gnomish, therefore this option is unavailable")
-        print("16 - Goblin")
-        if Gobl in PlLang:
-            print("You already know Goblin, therefore this option is unavailable")
-        print("17 - Grung")
-        if Grun in PlLang:
-            print("You already know Grung, therefore this option is unavailable")
-        print("18 - Halfling")
-        if Hafl in PlLang:
-            print("You already know Halfling, therefore this option is unavailable")
-        print("19 - Hedge")
-        if Hedg in PlLang:
-            print("You already know Hedge, therefore this option is unavailable")
-        print("20 - Infernal")
-        if Infe in PlLang:
-            print("You already know Infernal, therefore this option is unavailable")
-        print("21 - Jerbeen")
-        if Jerb in PlLang:
-            print("You already know Jerbeen, therefore this option is unavailable")
-        print("22 - Kraul")
-        if Krau in PlLang:
-            print("You already know Kraul, therefore this option is unavailable")            
-        print("23 - Leonin")
-        if Leon in PlLang:
-            print("You already know Leonin, therefore this option is unavailable")
-        print("24 - Loxodon")
-        if Loxo in PlLang:
-            print("You already know Loxodon, therefore this option is unavailable")
-        print("25 - Mapach")
-        if Mapa in PlLang:
-            print("You already know Mapach, therefore this option is unavailable")
-        print("26 - Minotaur")
-        if Mino in PlLang:
-            print("You already know Minotaur, therefore this option is unavailable")
-        print("27 - Orc")
-        if Orc in PlLang:
-            print("You already know Orc, therefore this option is unavailable")
-        print("28 - Quori")
-        if Quo in PlLang:
-            print("You already know Quori, therefore this option is unavailable")
-        print("29 - Primordial")
-        if Prim in PlLang:
-            print("You already know Primordial, therefore this option is unavailable")
-        print("30 - Sylvan")
-        if Sylv in PlLang:
-            print("You already know Sylvan, therefore this option is unavailable")
-        print("31 - Undercommon")
-        if Unde in PlLang:
-            print("You already know Undercommon, therefore this option is unavailable")
-        print("32 - Vedalken")
-        if Veda in PlLang:
-            print("You already know Vedalken, therefore this option is unavailable")
-        print("33 - Vulpin")
-        if Vulp in PlLang:
-            print("You already know Vulpin, therefore this option is unavailable")
-        pllang = False
+
+LANGUAGES = [
+    "Aarakocra",
+    "Abyssal",
+    "Aquan",
+    "Auran",
+    "Birdfolk",
+    "Celestial",
+    "Cervan",
+    "Common",
+    "Deep Speech",
+    "Draconic",
+    "Dwarvish",
+    "Elvish",
+    "Giant",
+    "Gith",
+    "Gnomish",
+    "Goblin",
+    "Grung",
+    "Hafling",
+    "Hedge",
+    "Infernal",
+    "Jerbeen",
+    "Kraul",
+    "Leonin",
+    "Loxodon",
+    "Mapach",
+    "Minotaur",
+    "Orc",
+    "Quori",
+    "Primordial",
+    "Sylvan",
+    "Undercommon",
+    "Vedalken",
+    "Vulpin"
+]
+
+
+def languagegen(prompt_user: str, PlLang: list, SLANG: list) -> tuple:
+    """Pops a language from SLANG to PlLang.
+
+    If prompt_user = "Y", unknown languages are listed and the user is prompted to choose from the list.
+    If prompt_user = "N", a language is randomly chosen.
+    """
+    available_languages = sorted(set(SLANG) - set(PlLang))  # alphabetical list of languages NOT known
+    if prompt_user == "Y":
+        print(f"Languages currently known: {', '.join(PlLang)}")
+        print("0 - Random")
+        for i, lang in enumerate(available_languages, start=1):  # loop over unknown languages
+            print(f"{i} - {lang}")
         pllang_input = int(input("Please pick a language from the above list: "))
-        while not pllang:
-            if pllang_input == 0:
-                randLang = False
-                while not randLang:
-                    try:     
-                        PlRandLang = random.choice(SLANG)
-                        SLANG.remove(PlRandLang)           
-                        PlLang.append(PlRandLang)
-                        randLang = True
-                    except ValueError:
-                        pass
-                    except IndexError:
-                        break   
-                pllang = True                 
-            else:
-                if Languages[pllang_input - 1] in PlLang:
-                    print("You know: " + Languages[pllang_input - 1] + ", please select a different option.")
-                else:
-                    PlLang.append(Languages[pllang_input - 1])
-                    SLANG.remove(Languages[pllang_input - 1])
-                    pllang = True
-    if param == "N":
-        randLang = False
-        while not randLang:
+        if pllang_input == 0:
             try:     
                 PlRandLang = random.choice(SLANG)
-                SLANG.remove(PlRandLang)           
+                SLANG.remove(PlRandLang)
                 PlLang.append(PlRandLang)
-                randLang = True
-            except ValueError:
+            except ValueError:  # I don't know what this handling is for so I'm leaving it alone
                 pass
             except IndexError:
-                break      
-    return PlLang, SLANG
+                pass
+        else:
+            PlLang.append(available_languages[pllang_input - 1])
+
+    if prompt_user == "N":
+        try:     
+            PlRandLang = random.choice(SLANG)
+            SLANG.remove(PlRandLang)           
+            PlLang.append(PlRandLang)
+        except ValueError:
+            pass
+        except IndexError:
+            pass
+    return PlLang, SLANG  # strictly speaking you don't need to return these because they are mutable objects which you're modifying in place
+
+
 def gamingsetsmusicalinstr(param, PlProf):
     DiceSet = "Dice Set"
     DrgnChSet = "Dragonchess Set"
