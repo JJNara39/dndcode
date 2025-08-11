@@ -160,7 +160,6 @@ def dndchargen_class(param, player):
         ],
         "Warlock": [
             "Archfey Patron Warlock",
-            "Beachball Patron Warlock",
             "Celestial Patron Warlock",
             "The Fathomless Patron Warlock",
             "Fiend Patron Warlock",
@@ -190,17 +189,18 @@ def dndchargen_class(param, player):
     }
     class_list = list(Classes.keys())
     if param == "Y":
-        if player.level > 1:
-            while True:
-                smclass = input("Do you wish to multi-class? Y/N ").strip().lower()
-                if smclass in {"y", "ye", "yes"}:
-                    player.singlemulticlass = "Y"
-                    break
-                elif smclass in {"n", "no"}:
-                    player.singlemulticlass = "N"
-                    break
-                else:
-                    print("Invalid choice, please select Y/N")  
+        if player.level > 2:
+            if player.multi == True:
+                while True:
+                    smclass = input("Do you wish to multi-class at this level? Y/N ").strip().lower()
+                    if smclass in {"y", "ye", "yes"}:
+                        player.singlemulticlass = "Y"
+                        break
+                    elif smclass in {"n", "no"}:
+                        player.singlemulticlass = "N"
+                        break
+                    else:
+                        print("Invalid choice, please select Y/N")  
             if player.singlemulticlass == "N":
                 player.classnum = 1
             if player.singlemulticlass == "Y":
@@ -209,17 +209,20 @@ def dndchargen_class(param, player):
                         classnum = int(input(f"Given your player level of {player.level}, how many classes are you multiclassing into? "))
                         if classnum == 0:
                             print("You cannot have 0 classes, please try again.")
-                        elif (classnum >= 1) and (classnum <= player.level):
+                        elif (classnum > 1) and (classnum <= player.level):
                             player.classnum = classnum
                             break
                         elif classnum > player.level:
                             print(f"You cannot have more classes than your level of {player.level}, please reselect")
+                        else:
+                            print("Invalid choice, please choose a valid option. At least 2 classes.")
                     except ValueError: #Handles non-numeric choices  
                         print("Invalid input. Please enter a number.")    
             if player.singlemulticlass == "N":
                 player.classnum = 1
         if player.level == 1:
             player.classnum = 1
+            player.singlemulticlass = "N"
         for cn in range(player.classnum):
             print("0 - Random")
             for idx, cl in enumerate(class_list, 1):
@@ -249,23 +252,11 @@ def dndchargen_class(param, player):
                                 subc = int(input("Which subclass would you like? ")) 
                                 if subc == 0:
                                     RandomSubclass = random.choice(subclass_list)
-                                    if RandomSubclass == "Beachball Patron Warlock":
-                                        Classes["Warlock"].remove("Beachball Patron Warlock")
-                                        WarRand = random.choice(Classes["Warlock"])
-                                        player.subclass.append(WarRand)
-                                        player.beachballflag = True
-                                    else:
-                                        player.subclass.append(RandomSubclass)
+                                    player.subclass.append(RandomSubclass)
                                     break                       
                                 elif 1 <= subc <= len(subclass_list):
                                     subcl = subclass_list[subc - 1]
-                                    if subcl == "Beachball Patron Warlock":
-                                        Classes["Warlock"].remove("Beachball Patron Warlock")
-                                        WarRand = random.choice(Classes["Warlock"])
-                                        player.subclass.append(WarRand)
-                                        player.beachballflag = True
-                                    else:
-                                        player.subclass.append(subcl)  
+                                    player.subclass.append(subcl)  
                                     break 
                                 else:
                                     print("Invalid choice, please choose a valid option.")            
@@ -280,20 +271,9 @@ def dndchargen_class(param, player):
 
     if param == "N":
         RandomClass = random.choice(class_list)
-        if RandomClass == "Warlock":
-            WarRand = random.choice(Classes["Warlock"])
-            if WarRand == "Beachball Patron Warlock":
-                Classes["Warlock"].remove("Beachball Patron Warlock")
-                WarRand = random.choice(Classes["Warlock"])
-                player.subclass.append(WarRand)
-                player.beachballflag = True
-            else:
-                player.Class.append(RandomClass)
-                player.subclass.append(WarRand)
-        else:
-            player.Class.append(RandomClass)
-            RandomSubclass = random.choice(Classes[RandomClass])
-            player.subclass.append(RandomSubclass)
+        player.Class.append(RandomClass)
+        RandomSubclass = random.choice(Classes[RandomClass])
+        player.subclass.append(RandomSubclass)
 
 ### This section is for assigning 1-time aspects of the class like equipment
     poollevel = player.level
@@ -339,13 +319,16 @@ def dndchargen_class(param, player):
                             artlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Artificer level? "))
                             if artlvl <= 0:
                                 print("Your Artificer level must be at least 1, please try again.")
-                            elif artlvl <= poollevel:
-                                break
+                            elif artlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                                
-                    poollevel = poollevel - player.artlvl
+                    poollevel = poollevel - artlvl
                     player.classlvl.append(artlvl)
                     player.artlvl = artlvl
                 if player.singlemulticlass == "N":
@@ -389,9 +372,9 @@ def dndchargen_class(param, player):
                                         player.equipment.append("20 Bolts")
                                         RandArtChoice2 = random.choice(ArtChoices2)
                                         if RandArtChoice2 == "Studded Leather Armor":
-                                            player.equipment.append(dnd_tools.light_armor["StuddedLeather"].copy())
+                                            player.equipment.append(dnd_tools.all_armor["StuddedLeather"].copy())
                                         if RandArtChoice2 == "Scale Mail":
-                                            player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                            player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                         player.equipment.append(dnd_tools.kits["ThievKit"].copy())
                                         player.equipment.append(dnd_tools.packs["DungeoneersPack"].copy())
                                     elif RandArtChoice == "Gold":
@@ -411,14 +394,14 @@ def dndchargen_class(param, player):
                                             if artchoice3 == 0:
                                                 RandArtChoice2 = random.choice(ArtChoices2)
                                                 if RandArtChoice2 == "Studded Leather Armor":
-                                                    player.equipment.append(dnd_tools.light_armor["StuddedLeather"].copy())
+                                                    player.equipment.append(dnd_tools.all_armor["StuddedLeather"].copy())
                                                 if RandArtChoice2 == "Scale Mail":
-                                                    player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())                                            
+                                                    player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())                                            
                                             elif artchoice3 == 1:
-                                                player.equipment.append(dnd_tools.light_armor["StuddedLeather"].copy())
+                                                player.equipment.append(dnd_tools.all_armor["StuddedLeather"].copy())
                                                 break
                                             elif artchoice3 == 2:
-                                                player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                                player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                                 break
                                             else:
                                                 print("Invalid choice, please choose a valid option.")                                            
@@ -443,9 +426,9 @@ def dndchargen_class(param, player):
                             player.equipment.append("20 Bolts")
                             RandArtChoice2 = random.choice(ArtChoices2)
                             if RandArtChoice2 == "Studded Leather Armor":
-                                player.equipment.append(dnd_tools.light_armor["StuddedLeather"].copy())
+                                player.equipment.append(dnd_tools.all_armor["StuddedLeather"].copy())
                             if RandArtChoice2 == "Scale Mail":
-                                player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                             player.equipment.append(dnd_tools.kits["ThievKit"].copy())
                             player.equipment.append(dnd_tools.packs["DungeoneersPack"].copy())
                         if RandArtChoice == "Gold":
@@ -480,10 +463,13 @@ def dndchargen_class(param, player):
                             barblvl = int(input(f"Given your pool of levels of {poollevel}, What is your Barbarian level? "))
                             if barblvl <= 0:
                                 print("Your Barbarian level must be at least 1, please try again.")
-                            elif barblvl <= poollevel:
-                                break
+                            elif barblvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                   
                     poollevel = poollevel - barblvl
@@ -636,10 +622,13 @@ def dndchargen_class(param, player):
                             bardlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Bard level? "))
                             if bardlvl <= 0:
                                 print("Your Bard level must be at least 1, please try again.")
-                            elif bardlvl <= poollevel:
-                                break
+                            elif bardlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                  
                     poollevel = poollevel - bardlvl
@@ -780,7 +769,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
                     if param == "N":
                         SE1rand = random.choice(StartEquip1)
@@ -802,7 +791,7 @@ def dndchargen_class(param, player):
                         if SE2rand == "Any Other Musical Instrument":
                             MIWOLRandKey = random.choice(MusicalInstrWOLute)
                             player.equipment.append(dnd_tools.musical_instr[MIWOLRandKey].copy())                           
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())                         
                 else:
                     profs = ["Light Armor"]
@@ -839,10 +828,13 @@ def dndchargen_class(param, player):
                             clerlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Cleric level? "))
                             if clerlvl <= 0:
                                 print("Your Cleric level must be at least 1, please try again.")
-                            elif clerlvl <= poollevel:
-                                break
+                            elif clerlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                 
                     poollevel = poollevel - clerlvl
@@ -911,32 +903,29 @@ def dndchargen_class(param, player):
                                 if se2 == 0:
                                     SE2rand = random.choice(StartEquip2)
                                     if SE2rand == "Scale Mail":
-                                        player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                     if SE2rand == "Leather Armor":
-                                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     if SE2rand == "Chain Mail (if proficient)":
-                                        while True:
-                                            if ("Chain Mail" in player.proficiencies) or ("Heavy Armor" in player.proficiencies):
-                                                player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
-                                                break
-                                            else:
-                                                SE2rand = random.choice(StartEquip2)
-                                                if SE2rand != "Chain Mail (if proficient)":
-                                                    if SE2rand == "Scale Mail":
-                                                        player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
-                                                    if SE2rand == "Leather Armor":
-                                                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
-                                                    break      
+                                        if ("Chain Mail" in player.proficiencies) or ("Heavy Armor" in player.proficiencies):
+                                            player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
+                                        else:
+                                            StartEquip2.remove("Chain Mail (if proficient)")
+                                            SE2rand = random.choice(StartEquip2)
+                                            if SE2rand == "Scale Mail":
+                                                player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
+                                            if SE2rand == "Leather Armor":
+                                                player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     break                          
                                 elif se2 == 1:
-                                    player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                     break
                                 elif se2 == 2:
-                                    player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     break
                                 elif se2 == 3:
                                     if ("Chain Mail" in player.proficiencies) or ("Heavy Armor" in player.proficiencies):
-                                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                                     else:
                                         while True:
                                             try:                                   
@@ -947,15 +936,15 @@ def dndchargen_class(param, player):
                                                 if se2 == 0:
                                                     SE2rand = random.choice(StartEquip2)
                                                     if SE2rand == "Scale Mail":
-                                                        player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                                        player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                                     if SE2rand == "Leather Armor":
-                                                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())   
+                                                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())   
                                                     break   
                                                 elif se2 == 1:
-                                                    player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                                    player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                                     break
                                                 elif se2 == 2:
-                                                    player.equipment.append(dnd_tools.light_armor["Leather"].copy())  
+                                                    player.equipment.append(dnd_tools.all_armor["Leather"].copy())  
                                                     break   
                                                 else:
                                                     print("Invalid choice, please choose a valid option.")
@@ -1032,7 +1021,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")
-                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                         player.equipment.append("A Holy Symbol")
                     if param == "N":
                         SE1rand = random.choice(StartEquip1)
@@ -1045,21 +1034,21 @@ def dndchargen_class(param, player):
                                 player.equipment.append(dnd_tools.simple_weapons["Mace"].copy())           
                         SE2rand = random.choice(StartEquip2)
                         if SE2rand == "Scale Mail":
-                            player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                            player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                         if SE2rand == "Leather Armor":
-                            player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                            player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         if SE2rand == "Chain Mail (if proficient)":
                             while True:
                                 if ("Chain Mail" in player.proficiencies) or ("Heavy Armor" in player.proficiencies):
-                                    player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                                     break
                                 else:
                                     SE2rand = random.choice(StartEquip2)
                                     if SE2rand != "Chain Mail (if proficient)":
                                         if SE2rand == "Scale Mail":
-                                            player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                            player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                         if SE2rand == "Leather Armor":
-                                            player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                            player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                         break
                         SE3rand = random.choice(StartEquip3)
                         if SE3rand == "Light Crossbow w/ 20 Bolts":
@@ -1073,7 +1062,7 @@ def dndchargen_class(param, player):
                             player.equipment.append(dnd_tools.packs["PriestsPack"].copy())
                         if SE4rand == "Explorer's Pack":
                             player.equipment.append(dnd_tools.packs["ExplorersPack"].copy())                           
-                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                         player.equipment.append("A Holy Symbol")      
                 else:
                     profs = ["Light Armor", "Medium Armor", "Shield"]
@@ -1107,10 +1096,13 @@ def dndchargen_class(param, player):
                             drulvl = int(input(f"Given your pool of levels of {poollevel}, What is your Druid level? "))
                             if drulvl <= 0:
                                 print("Your Druid level must be at least 1, please try again.")
-                            elif drulvl <= poollevel:
-                                break
+                            elif drulvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                  
                     poollevel = poollevel - drulvl
@@ -1240,7 +1232,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.packs["ExplorersPack"].copy())
                         player.equipment.append("Druidic Focus")
                     if param == "N":
@@ -1256,7 +1248,7 @@ def dndchargen_class(param, player):
                         if SE2rand == "Any Simple Melee Weapon":
                             SimpRandMKey = random.choice(SimpleMeleeWeapons)
                             player.equipment.append(dnd_tools.simple_weapons[SimpRandMKey].copy())
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.packs["ExplorersPack"].copy())
                         player.equipment.append("Druidic Focus")
                 else:
@@ -1290,10 +1282,13 @@ def dndchargen_class(param, player):
                             figlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Fighter level? "))
                             if figlvl <= 0:
                                 print("Your Fighter level must be at least 1, please try again.")
-                            elif figlvl <= poollevel:
-                                break
+                            elif figlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                     
                     poollevel = poollevel - figlvl
@@ -1335,17 +1330,17 @@ def dndchargen_class(param, player):
                                 if se1 == 0:
                                     SE1rand = random.choice(StartEquip1)
                                     if SE1rand == "Chain Mail":
-                                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                                     if SE1rand == "Leather Armor, Longbow and 20 Arrows":
-                                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                         player.equipment.append(dnd_tools.martial_weapons["Longbow"].copy())
                                         player.equipment.append("20 Arrows")
                                     break
                                 elif se1 == 1:
-                                    player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                                     break
                                 elif se1 == 2:
-                                    player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     player.equipment.append(dnd_tools.martial_weapons["Longbow"].copy())
                                     player.equipment.append("20 Arrows")
                                     break
@@ -1489,9 +1484,9 @@ def dndchargen_class(param, player):
                     if param == "N":
                         SE1rand = random.choice(StartEquip1)
                         if SE1rand == "Chain Mail":
-                            player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                            player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                         if SE1rand == "Leather Armor, Longbow and 20 Arrows":
-                            player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                            player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                             player.equipment.append(dnd_tools.martial_weapons["Longbow"].copy())
                             player.equipment.append("20 Arrows")
                         SE2rand = random.choice(StartEquip2)
@@ -1534,10 +1529,13 @@ def dndchargen_class(param, player):
                             monklvl = int(input(f"Given your pool of levels of {poollevel}, What is your Monk level? "))
                             if monklvl <= 0:
                                 print("Your Monk level must be at least 1, please try again.")
-                            elif monklvl <= poollevel:
-                                break
+                            elif monklvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")          
                     poollevel = poollevel - monklvl
@@ -1663,10 +1661,13 @@ def dndchargen_class(param, player):
                             pallvl = int(input(f"Given your pool of levels of {poollevel}, What is your Paladin level? "))
                             if pallvl <= 0:
                                 print("Your Paladin level must be at least 1, please try again.")
-                            elif pallvl <= poollevel:
-                                break
+                            elif pallvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                 
                     poollevel = poollevel - pallvl
@@ -1842,7 +1843,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")
-                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                         player.equipment.append("A Holy Symbol")
                     if param == "N":
                         SE1rand = random.choice(StartEquip1)
@@ -1867,7 +1868,7 @@ def dndchargen_class(param, player):
                             player.equipment.append(dnd_tools.packs["PriestsPack"].copy())
                         if SE3rand == "Explorer's Pack":
                             player.equipment.append(dnd_tools.packs["ExplorersPack"].copy())                            
-                        player.equipment.append(dnd_tools.heavy_armor["ChainMail"].copy())
+                        player.equipment.append(dnd_tools.all_armor["ChainMail"].copy())
                         player.equipment.append("A Holy Symbol")  
                 else:
                     profs = ["Light Armor", "Medium Armor", "Shield", "Simple Weapons", "Martial Weapons"]
@@ -1887,10 +1888,13 @@ def dndchargen_class(param, player):
                             ranlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Ranger level? "))
                             if ranlvl <= 0:
                                 print("Your Ranger level must be at least 1, please try again.")
-                            elif ranlvl <= poollevel:
-                                break
+                            elif ranlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")               
                     poollevel = poollevel - ranlvl
@@ -1931,15 +1935,15 @@ def dndchargen_class(param, player):
                                 if se1 == 0:
                                     SE1rand = random.choice(StartEquip1)
                                     if SE1rand == "Scale Mail":
-                                        player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                     if SE1rand == "Leather Armor":
-                                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     break
                                 elif se1 == 1:
-                                    player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                                     break
                                 elif se1 == 2:
-                                    player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                                    player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                                     break
                                 else:
                                     print("Invalid choice, please choose a valid option.")
@@ -2036,9 +2040,9 @@ def dndchargen_class(param, player):
                     if param == "N":
                         SE1rand = random.choice(StartEquip1)
                         if SE1rand == "Scale Mail":
-                            player.equipment.append(dnd_tools.medium_armor["ScaleMail"].copy())
+                            player.equipment.append(dnd_tools.all_armor["ScaleMail"].copy())
                         if SE1rand == "Leather Armor":
-                            player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                            player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         SE2rand = random.choice(StartEquip2)
                         if SE2rand == "Two Shortswords":
                              player.equipment.append(dnd_tools.martial_weapons["Shortsword"].copy())
@@ -2086,10 +2090,13 @@ def dndchargen_class(param, player):
                             roglvl = int(input(f"Given your pool of levels of {poollevel}, What is your Rogue level? "))
                             if roglvl <= 0:
                                 print("Your Rogue level must be at least 1, please try again.")
-                            elif roglvl <= poollevel:
-                                break
+                            elif roglvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                 
                     poollevel = poollevel - roglvl
@@ -2207,7 +2214,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
                         player.equipment.append(dnd_tools.kits["ThievKit"].copy())
@@ -2230,7 +2237,7 @@ def dndchargen_class(param, player):
                             player.equipment.append(dnd_tools.packs["DungeoneersPack"].copy())
                         if SE3rand == "Explorer's Pack":
                             player.equipment.append(dnd_tools.packs["ExplorersPack"].copy())                            
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
                         player.equipment.append(dnd_tools.kits["ThievKit"].copy())                                                   
@@ -2268,10 +2275,13 @@ def dndchargen_class(param, player):
                             sorclvl = int(input(f"Given your pool of levels of {poollevel}, What is your Sorcerer level? "))
                             if sorclvl <= 0:
                                 print("Your Sorcerer level must be at least 1, please try again.")
-                            elif sorclvl <= poollevel:
-                                break
+                            elif sorclvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")               
                     poollevel = poollevel - sorclvl
@@ -2444,10 +2454,13 @@ def dndchargen_class(param, player):
                             warlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Warlock level? "))
                             if warlvl <= 0:
                                 print("Your Warlock level must be at least 1, please try again.")
-                            elif warlvl <= poollevel:
-                                break
+                            elif warlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                
                     poollevel = poollevel - warlvl
@@ -2567,7 +2580,7 @@ def dndchargen_class(param, player):
                                     print("Invalid choice, please choose a valid option.")
                             except ValueError: #Handles non-numeric choices  
                                 print("Invalid input. Please enter a number.")                                      
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         while True:
                             try:                           
                                 print("0 - Random")
@@ -2606,7 +2619,7 @@ def dndchargen_class(param, player):
                             player.equipment.append(dnd_tools.packs["ScholarsPack"].copy())
                         if SE3rand == "Dungeoneer's Pack":
                             player.equipment.append(dnd_tools.packs["DungeoneersPack"].copy())                            
-                        player.equipment.append(dnd_tools.light_armor["Leather"].copy())
+                        player.equipment.append(dnd_tools.all_armor["Leather"].copy())
                         SimpRandKey = random.choice(SimpleWeapons)
                         player.equipment.append(dnd_tools.simple_weapons[SimpRandKey].copy())
                         player.equipment.append(dnd_tools.simple_weapons["Dagger"].copy())
@@ -2635,10 +2648,13 @@ def dndchargen_class(param, player):
                             wizlvl = int(input(f"Given your pool of levels of {poollevel}, What is your Wizard level? "))
                             if wizlvl <= 0:
                                 print("Your Wizard level must be at least 1, please try again.")
-                            elif wizlvl <= poollevel:
-                                break
+                            elif wizlvl >= poollevel:
+                                if i == 0:
+                                    print("You cannot invest all of your pool into one class. Please leave some for the other classes.")
+                                else:
+                                    break
                             else:
-                                print("You are only able to invest within your pool.")
+                                break
                         except ValueError: #Handles non-numeric choices  
                             print("Invalid input. Please enter a number.")                 
                     poollevel = poollevel - wizlvl
@@ -2775,3 +2791,4 @@ def dndchargen_class(param, player):
             player.notes["Wizard 9th Level Spell Slots Known"] = 0
             player.notes["Learning Spells of 1st Level and Higher"] = "Each time you gain a Wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the “Your Spellbook” sidebar)."
             player.notes["Your Spellbook"] = "The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.\nCopying a Spell into the Book. When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.\nCopying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.\nFor each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.\nReplacing the Book. You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.\nIf you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.\nThe Book's Appearance. Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin player.notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap."
+            

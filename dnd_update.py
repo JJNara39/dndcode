@@ -1,5 +1,7 @@
 import random
 import math
+import dnd_spells
+import dnd_languagesskills
 
 
 #Define a function called hpcalc that determines your hp, given your level, and what dice you give it
@@ -14,25 +16,21 @@ def dice(sides):
     result = random.randint(1, sides)
     return result
 
-def dnd_update(player):
-    player.ChaMod = math.floor((player.ability_scores["Charisma"]-10)/2)
-    player.ConMod = math.floor((player.ability_scores["Constitution"]-10)/2)
-    player.DexMod = math.floor((player.ability_scores["Dexterity"]-10)/2)
-    player.IntMod = math.floor((player.ability_scores["Intelligence"]-10)/2)
-    player.StrMod = math.floor((player.ability_scores["Strength"]-10)/2)
-    player.WisMod = math.floor((player.ability_scores["Wisdom"]-10)/2)       
 
 
+def dnd_update(param, player):
     #### race section ####
     if player.race == "Aarakocra":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Talons": {
-                'Name' : "Unarmed Strikes: Talons",
-                'Modifier': "STR",
-                'Damage' : "1d6",
-                'Damage Type' : "Slashing",
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Talons"] = {
+            'Name' : "Unarmed Strike Damage: Talons",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d6",
+            'Damage Type' : "Slashing",
         }
+        player.actions["Unarmed Strike Damage: Talons"] = player.attacksspellcasting["Unarmed Strike Damage: Talons"]
     if player.race == "Aasimar":
         player.notes["Healing Hands"] = f"As an action, you can touch a creature and cause it to regain a number of hit points equal to your level, {player.level}. Once you use this trait, you can't use it again until you finish a long rest."
         #Healing Hands falls under general notes, if touch == True and Healing Hands = True, then they heal X hp
@@ -40,7 +38,7 @@ def dnd_update(player):
             if player.level >= 3:
                 player.notes["Radiant Soul"] = f"You can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back.\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level, {player.level}.\nOnce you use this trait, you can't use it again until you finish a long rest."
                 #if flight !in speed and Radiant Soul is active, then they gain following flight
-                player.speed["Flight"] = "30ft"
+                player.speed["Flight"] = 30
         if player.subrace == "Scourge Aasimar":
             if player.level >= 3:
                 player.notes["Radiant Consumption"] = f"You can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you.\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up), or {math.ceil(player.level/2)}. In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level, {player.level}.\nOnce you use this trait, you can't use it again until you finish a long rest."
@@ -52,51 +50,105 @@ def dnd_update(player):
         #Combat notes
         player.armor_class = 13 + player.DexMod
     if player.race == "Centaur":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Hooves": {
-                'Name' : "Unarmed Strikes: Hooves",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Bludgeoning",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Hooves"] = {
+            'Name' : "Unarmed Strike Damage: Hooves",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Bludgeoning",                
         }
+        player.actions["Unarmed Strike Damage: Hooves"] = player.attacksspellcasting["Unarmed Strike Damage: Hooves"]
     if player.race == "Cervan":
         if player.subrace == "Pronghorn Cervan":
-            player.attacksspellcasting = {
-                "Unarmed Strikes: Antlers": {
-                    'Name' : "Unarmed Strikes: Antlers",
-                    'Modifier': "STR",
-                    'Damage' : "1d6",
-                    'Damage Type' : "Piercing",                    
-                }
-            }         
+            player.attacksspellcasting["Unarmed Strike Damage: Antlers"] = {
+                'Name' : "Unarmed Strike Damage: Antlers",
+                'Modifier': "STR",
+                'Attack Type': 'Melee Weapon',
+                'Damage Bonus' : player.StrMod,
+                'Proficient': True,
+                'Damage' : "1d6",
+                'Damage Type' : "Piercing",                    
+            }    
+            player.actions["Unarmed Strike Damage: Antlers"] = player.attacksspellcasting["Unarmed Strike Damage: Antlers"]     
     if player.race == "Corginian":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Strong Jaw": {
-                'Name' : "Unarmed Strikes: Strong Jaw",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Piercing",                
-            }
-        }    
-    if player.race == "Corvum":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Talons": {
-                'Name' : "Unarmed Strikes: Talons",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Piercing",                
-            }
-        }     
-    if player.race == "Dhampir":
-        player.attacksspellcasting = {
-            "Natural Weapon: Fangs": {
-                'Name' : "Natural Weapon: Fangs",
-                'Modifier': "CON",
-                'Damage' : "1d4",
-                'Damage Type' : "Piercing",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Strong Jaw"] = {
+            'Name' : "Unarmed Strike Damage: Strong Jaw",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Piercing",                
         }   
+        player.actions["Unarmed Strike Damage: Strong Jaw"] = player.attacksspellcasting["Unarmed Strike Damage: Strong Jaw"] 
+    if player.race == "Corvum":
+        player.attacksspellcasting["Unarmed Strike Damage: Talons"] = {
+            'Name' : "Unarmed Strike Damage: Talons",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Piercing",                
+        }     
+        player.actions["Unarmed Strike Damage: Talons"] = player.attacksspellcasting["Unarmed Strike Damage: Talons"]
+    if player.race == "Dhampir":
+        player.attacksspellcasting["Natural Weapon: Fangs"] = {
+            'Name' : "Natural Weapon: Fangs",
+            'Modifier': "CON",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.ConMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Piercing",                
+        }  
+        player.actions["Natural Weapon: Fangs"] = player.attacksspellcasting["Natural Weapon: Fangs"] 
+    if player.race == "Dragonborn":
+        if ((player.level >= 1) and (player.level < 6)):
+            player.dragonbornbwdmg = "1d10"
+        if ((player.level >= 6) and (player.level < 11)):
+            player.dragonbornbwdmg = "2d10"
+        if ((player.level >= 11) and (player.level < 16)):
+            player.dragonbornbwdmg = "3d10"
+        if player.level >= 16:
+            player.dragonbornbwdmg = "4d10"  
+        if player.subrace == "Chromatic Dragonborn":
+            if player.level >= 5:
+                player.notes["Chromatic Warding"] = "As an action, you can channel your draconic energy to protect yourself. For 1 minute, you become immune to the damage type associated with your Chromatic Ancestry (color). Once you use this trait, you can't do so again until you finish a long rest."
+                #Combat notes
+        if player.subrace == "Gem Dragonborn":
+            player.notes["Psionic Mind"] = "You can send telepathic messages to any creature you can see within 30 feet of you. You don't need to share a language with the creature for it to understand these messages, but it must be able to understand at least one language to comprehend them."
+            #General notes
+            if player.level >= 5:
+                player.notes["Gem Flight"] = "You can use a bonus action to manifest spectral wings on your body. These wings last for 1 minute. For the duration, you gain a flying speed equal to your walking speed and can hover. Once you use this trait, you can't do so again until you finish a long rest."
+                #General notes? Flight info             
+        if player.subrace == "Metallic Dragonborn":
+            if player.level >= 5:
+                player.notes["Metallic Breath Weapon"] = "You gain a second breath weapon. When you take the Attack action on your turn, you can replace one of your attacks with an exhalation in a 15-foot cone. The save DC for this breath is 8 + your Constitution modifier + your proficiency bonus. Whenever you use this trait, choose one:\nEnervating Breath - Each creature in the cone must succeed on a Constitution saving throw or become incapacitated until the start of your next turn.\nRepulsion Breath - Each creature in the cone must succeed on a Strength saving throw or be pushed 20 feet away from you and be knocked prone.\nOnce you use your Metallic Breath Weapon, you can't do so again until you finish a long rest."
+                #Combat noted                        
+        player.attacksspellcasting["Breath Weapon"] = {
+            'Name' : "Breath Weapon",
+            'Attack Type' : 'Spell',
+            'Save': "DEX",
+            'Proficient': True,
+            "Modifier" : "CON", 
+            'Uses' : player.profbonus,
+            'Current Uses' : player.profbonus,      
+            "Effect": {
+                "Type": "Damage",
+                "Damage Type": f"{player.dragonbornbreathdamagetype}",
+                "Scaling": {
+                    1: "1d10",
+                    5: "2d10",
+                    11: "3d10",
+                    17: "4d10"
+                }
+            }            
+        }  
+        player.actions["Breath Weapon"] = player.attacksspellcasting["Breath Weapon"] 
+        
     if player.race == "Elf":
         if player.subrace == "Eladrin":
             if player.season == "Spring":
@@ -113,23 +165,27 @@ def dnd_update(player):
         if player.curlup == True: #currently this isn't implemented
             player.armor_class = 19
     if player.race == "Leonin":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Claws": {
-                'Name' : "Unarmed Strikes: Claws",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Slashing",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Claws"] = {
+            'Name' : "Unarmed Strike Damage: Claws",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,                
+            'Damage' : "1d4",
+            'Damage Type' : "Slashing",                
         }      
+        player.actions["Unarmed Strike Damage: Claws"] = player.attacksspellcasting["Unarmed Strike Damage: Claws"]
     if player.race == "Lizardfolk":
-        player.attacksspellcasting = {
-            "Unarmed Strike: Bite": {
-                'Name' : "Unarmed Strike: Bite",
-                'Modifier': "STR",
-                'Damage' : "1d6",
-                'Damage Type' : "Piercing",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Bite"] = {
+            'Name' : "Unarmed Strike Damage: Bite",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d6",
+            'Damage Type' : "Piercing",                
         }   
+        player.actions["Unarmed Strike Damage: Bite"] = player.attacksspellcasting["Unarmed Strike Damage: Bite"]
         if player.armordon == False: #armordon is not implemented, but also there is an additional note
             player.armor_class = 13+player.DexMod
     if player.race == "Locathah":
@@ -139,23 +195,27 @@ def dnd_update(player):
         if player.armordon == False: #armordon is not implemented, but also there is an additional note
             player.armor_class = 12+player.ConMod                               
     if player.race == "Minotaur":
-        player.attacksspellcasting = {
-            "Unarmed Strike: Horns": {
-                'Name' : "Unarmed Strike: Horns",
-                'Modifier': "STR",
-                'Damage' : "1d6",
-                'Damage Type' : "Piercing",                
-            }
-        }      
+        player.attacksspellcasting["Unarmed Strike Damage: Horns"] = {
+            'Name' : "Unarmed Strike Damage: Horns",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d6",
+            'Damage Type' : "Piercing",                
+        }   
+        player.actions["Unarmed Strike Damage: Horns"] = player.attacksspellcasting["Unarmed Strike Damage: Horns"]   
     if player.race == "Raptor (Bird)":
-        player.attacksspellcasting = {
-            "Unarmed Strike: Talons": {
-                'Name' : "Unarmed Strike: Talons",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Piercing",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Talons"] = {
+            'Name' : "Unarmed Strike Damage: Talons",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Piercing",                
         }       
+        player.actions["Unarmed Strike Damage: Talons"] = player.attacksspellcasting["Unarmed Strike Damage: Talons"]
     if player.race == "Sharkin":
         player.sharkinviciousbitedmg = "1d6"
         if ((player.level >= 5) and (player.level < 10)):
@@ -164,64 +224,78 @@ def dnd_update(player):
             player.sharkinviciousbitedmg = "3d6"
         if player.level == 20:
             player.sharkinviciousbitedmg = "4d6"
-        player.attacksspellcasting = {
-            "Vicious Bite": {
-                'Name' : "Vicious Bite",
-                'Modifier': "STR",
-                'Damage' : "ViciousBite",
-                'Damage Type' : "Piercing",                
-            }
+        player.attacksspellcasting["Vicious Bite"] = {
+            'Name' : "Vicious Bite",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : player.sharkinviciousbitedmg,
+            'Damage Type' : "Piercing",                
         }       
+        player.actions["Vicious Bite"] = player.attacksspellcasting["Vicious Bite"]
     if player.race == "Shifter":
         if player.subrace == "Beasthide Shifter":
             if player.shiftershift == True: #not implemented yet
                 player.armor_class += 1            
         if player.subrace == "Longtooth Shifter":
-            player.attacksspellcasting = {
-                "Unarmed Strikes: Fangs": {
-                    'Name' : "Unarmed Strikes: Fangs",
-                    'Modifier': "STR",
-                    'Damage' : "1d6",
-                    'Damage Type' : "Piercing",                    
-                }
-            }         
+            player.attacksspellcasting["Unarmed Strike Damage: Fangs"] = {
+                'Name' : "Unarmed Strike Damage: Fangs",
+                'Modifier': "STR",
+                'Attack Type': 'Melee Weapon',
+                'Damage Bonus' : player.StrMod,
+                'Proficient': True,
+                'Damage' : "1d6",
+                'Damage Type' : "Piercing",                    
+            }     
+            player.actions["Unarmed Strike Damage: Fangs"] = player.attacksspellcasting["Unarmed Strike Damage: Fangs"]    
     if player.race == "Strig":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Talons": {
-                'Name' : "Unarmed Strikes: Talons",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Piercing",                
-            }
+        player.attacksspellcasting["Unarmed Strike Damage: Talons"] = {
+            'Name' : "Unarmed Strike Damage: Talons",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Piercing",                
         }      
+        player.actions["Unarmed Strike Damage: Talons"] = player.attacksspellcasting["Unarmed Strike Damage: Talons"]
     if player.race == "Tabaxi":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Cat Claws": {
-                'Name' : "Unarmed Strikes: Cat Claws",
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Slashing",                
-            }
-        }        
+        player.attacksspellcasting["Unarmed Strike Damage: Cat Claws"] = {
+            'Name' : "Unarmed Strike Damage: Cat Claws",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Slashing",                
+        }      
+        player.actions["Unarmed Strike Damage: Cat Claws"] = player.attacksspellcasting["Unarmed Strike Damage: Cat Claws"]  
     if player.race == "Thri-Kreen":
         if player.armordon == False: #armordon is not implemented, but also there is an additional note
             player.armor_class = 13+player.DexMod #if not wearing armor        
     if player.race == "Tortle":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Claws": {
-                'Modifier': "STR",
-                'Damage' : "1d4",
-                'Damage Type' : "Slashing",                
-            }
-        }       
+        player.attacksspellcasting["Unarmed Strike Damage: Claws"] = {
+            'Name': "Unarmed Strike Damage: Claws",
+            'Modifier': "STR",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : player.StrMod,
+            'Proficient': True,
+            'Damage' : "1d4",
+            'Damage Type' : "Slashing",               
+        }    
+        player.actions["Unarmed Strike Damage: Claws"] = player.attacksspellcasting["Unarmed Strike Damage: Claws"]   
     if player.race == "Vulpin":
-        player.attacksspellcasting = {
-            "Unarmed Strikes: Bite": {
-                'Modifier': "Finesse",
-                'Damage' : "1d6",
-                'Damage Type' : "Piercing",                
-            }
-        }       
+        player.attacksspellcasting["Unarmed Strike Damage: Bite"] = {
+            'Name': "Unarmed Strike Damage: Bite",
+            'Modifier': "Finesse",
+            'Attack Type': 'Melee Weapon',
+            'Damage Bonus' : max(player.StrMod, player.DexMod),
+            'Proficient': True,
+            'Damage' : "1d6",
+            'Damage Type' : "Piercing",                
+        }  
+        player.actions["Unarmed Strike Damage: Bite"] = player.attacksspellcasting["Unarmed Strike Damage: Bite"]     
 
 #### class section
 
@@ -236,14 +310,25 @@ def dnd_update(player):
     if player.level >= 19:
         player.notes["Ability Score/Feat(5)"] = "You can increase one score by 2, two by one, or a feat. As normal, you can't increase an ability score above 20 using this feature."          
 
+
     for i in range(len(player.Class)):
 
         if player.Class[i] == "Artificer":
+            if player.singlemulticlass == "N":
+                player.artlvl = player.level
             player.hitdice["Artificer Hitdie"] = f"{player.artlvl}d8"
-            if player.artlvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.artlvl, dice, 8))
+            if player.artlvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.artlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.artlvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.artlvl, dice, 8))
+                    player.hitpointsset = True
             if player.artlvl >= 2:
                 player.artinfknown = 4
                 player.artinfitems = 2
@@ -287,11 +372,21 @@ def dnd_update(player):
             player.spellattackmod["Artificer Spell Attack Mod"] = player.profbonus + player.IntMod
 
         if player.Class[i] == "Barbarian":
+            if player.singlemulticlass == "N":
+                player.barblvl = player.level                        
             player.hitdice["Barbarian Hitdie"] = f"{player.barblvl}d12"
-            if player.barblvl == 1:
-                player.hitpoints += (12 + player.ConMod)
-            else:
-                player.hitpoints += (12 + player.ConMod + hpcalc(player.barblvl, dice, 12))
+            if player.barblvl == 1 and not player.firsthp:
+                    player.hitpoints += (12 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.barblvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (12 + player.ConMod + hpcalc(player.barblvl, dice, 12))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.barblvl, dice, 12))
+                    player.hitpointsset = True
             if player.barblvl >= 3:
                 player.barbrages = 3
             if player.barblvl >= 6:
@@ -308,13 +403,24 @@ def dnd_update(player):
                 player.barbrages = "Unlimited"
             player.notes["Rage"] = f"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\nWhile raging, you gain the following benefits if you aren’t wearing heavy armor:\nYou have advantage on Strength checks and Strength saving throws.\nWhen you make a melee weapon attack using Strength, you gain a +{player.barbragedmg} to your damage roll.\nYou have resistance to bludgeoning, piercing, and slashing damage.\nIf you are able to cast spells, you can’t cast them or concentrate on them while raging.\nYour rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.\nOnce you have raged {player.barbrages} times, you must finish a long rest before you can rage again."
             player.notes["Unarmored Defense"] = f"While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier, or AC {10 + player.DexMod + player.ConMod}. You can use a shield and still gain this benefit."
-        
+            player.armor_class = 10 + player.DexMod + player.ConMod
+
         if player.Class[i] == "Bard":
+            if player.singlemulticlass == "N":
+                player.barldlv = player.level            
             player.hitdice["Bard Hitdie"] = f"{player.bardlvl}d8"
-            if player.bardlvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.bardlvl, dice, 8))        
+            if player.bardlvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.bardlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.bardlvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.bardlvl, dice, 8))
+                    player.hitpointsset = True   
             if player.bardlvl >= 2:  
                 player.bardsongrest = "d6"           
                 player.notes["Bard Spells Known"] = 5
@@ -381,11 +487,21 @@ def dnd_update(player):
             player.spellattackmod["Bard Spell Attack Mod"] = player.profbonus + player.ChaMod
 
         if player.Class[i] == "Cleric":
+            if player.singlemulticlass == "N":
+                player.clerlvl = player.level            
             player.hitdice["Cleric Hitdie"] = f"{player.clerlvl}d8"
-            if player.clerlvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.clerlvl, dice, 8))   
+            if player.clerlvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.clerlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.clerlvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.clerlvl, dice, 8))
+                    player.hitpointsset = True     
             player.spellsavedc["Cleric Spell Save DC"] = 8 + player.profbonus + player.WisMod
             player.spellattackmod["Cleric Spell Attack Mod"] = player.profbonus + player.WisMod        
             if player.clerlvl >= 2: 
@@ -437,11 +553,21 @@ def dnd_update(player):
             player.notes["Channel Divinity"] = f"You gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description.When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again.\nSome Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC, or against {player.spellsavedc['Cleric Spell Save DC']}.\nYou can use Channel Divinity {player.clericchanneldivinity} times between rests. When you finish a short or long rest, you regain your expended uses."
 
         if player.Class[i] == "Druid":
+            if player.singlemulticlass == "N":
+                player.druidlvl = player.level            
             player.hitdice["Druid Hitdie"] = f"{player.druidlvl}d8"
-            if player.druidlvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.druidlvl, dice, 8))  
+            if player.druidlvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.druidlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.druidlvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.druidlvl, dice, 8))
+                    player.hitpointsset = True
             player.spellsavedc['Druid Spell Save DC'] = 8 + player.profbonus + player.WisMod
             player.spellattackmod["Druid Spell Attack Mod"] = player.profbonus + player.WisMod 
             
@@ -491,11 +617,21 @@ def dnd_update(player):
             player.notes["Wild Companion"] = f"You gain the ability to summon a spirit that assumes an animal form: as an action, you can expend a use of your Wild Shape feature to cast the Find Familiar spell, without material components.\nWhen you cast the spell in this way, the familiar is a fey instead of a beast, and the familiar disappears after a number of hours equal to half your Druid level, rounded down, or {math.floor(player.druidlvl / 2)} hours. This beast follows the same rules as Wild Shape, in that the Max CR is {player.druidwildshapecr} and if it is limited, it is limited by {player.druidwildshapelimit}."            
 
         if player.Class[i] == "Fighter":
+            if player.singlemulticlass == "N":
+                player.figlvl = player.level             
             player.hitdice["Fighter Hitdie"] = f"{player.figlvl}d10"
-            if player.figlvl == 1:
-                player.hitpoints += (10 + player.ConMod)
-            else:
-                player.hitpoints += (10 + player.ConMod + hpcalc(player.figlvl, dice, 10))
+            if player.figlvl == 1 and not player.firsthp:
+                    player.hitpoints += (10 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.figlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (10 + player.ConMod + hpcalc(player.figlvl, dice, 10))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.figlvl, dice, 10))
+                    player.hitpointsset = True
             player.notes["Fighting Style"] = f"You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.\n- Archery - You gain a +2 bonus to attack rolls you make with ranged weapons.\n- Blind Fighting - You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\n- Defense - While you are wearing armor, you gain a +1 bonus to AC.\n- Dueling - When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.\n- Great Weapon Fighting - When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.\n- Interception - When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your Proficiency Bonus, or reduction by 1d10 + {player.profbonus}, to a minimum of 0 damage. You must be wielding a shield or a simple or martial weapon to use this reaction.\n- Protection - When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.\n- Superior Technique - You learn one maneuver of your choice from among those available to the Battle Master archetype. If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your Proficiency Bonus, {8 + player.profbonus}, + your Strength or Dexterity modifier (your choice). You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it. You regain your expended superiority dice when you finish a short or long rest.\n- Thrown Weapon Fighting - You can draw a weapon that has the thrown property as part of the attack you make with the weapon. In addition, when you hit with a ranged attack using a thrown weapon, you gain a +2 bonus to the damage roll.\n- Two-Weapon Fighting - When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.\n- Unarmed Fighting - Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier, or 1d6 + {player.StrMod} bludgeoning damage, on a hit. If you aren't wielding any weapons or a shield when you make the attack roll, the d6 becomes a d8. At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you."
             player.notes["Second Wind"] = f"You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your Fighter level, or 1d10 + {player.figlvl} hit points. Once you use this feature, you must finish a short or long rest before you can use it again."
             if player.figlvl >= 2:
@@ -559,11 +695,21 @@ def dnd_update(player):
                     player.notes["Eldritch Knight Fighter Spells Known"] = 13
                 
         if player.Class[i] == "Monk":
+            if player.singlemulticlass == "N":
+                player.monklvl = player.level                   
             player.hitdice["Monk Hitdie"] = f"{player.monklvl}d8"
-            if player.monklvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.monklvl, dice, 8)) 
+            if player.monklvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.monklvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.monklvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.monklvl, dice, 8))
+                    player.hitpointsset = True
             player.notes["Unarmored Defense"] = f"While you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier, or AC {10 + player.DexMod + player.WisMod}."
             if player.monklvl >= 2:
                 player.monkkipoints = player.monklvl
@@ -590,11 +736,21 @@ def dnd_update(player):
             player.notes["Martial Arts"] = f"Your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property.\nYou gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:\n- You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.\n- You can roll a {player.monkmartialarts} in place of the normal damage of your unarmed strike or monk weapon.\n- When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.\nCertain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon in the Weapons section."            
 
         if player.Class[i] == "Paladin":
+            if player.singlemulticlass == "N":
+                player.pallvl = player.level            
             player.hitdice["Paladin Hitdie"] = f"{player.pallvl}d10"
-            if player.pallvl == 1:
-                player.hitpoints += (10 + player.ConMod)
-            else:
-                player.hitpoints += (10 + player.ConMod + hpcalc(player.pallvl, dice, 10))      
+            if player.pallvl == 1 and not player.firsthp:
+                    player.hitpoints += (10 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.pallvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (10 + player.ConMod + hpcalc(player.pallvl, dice, 10))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.pallvl, dice, 10))
+                    player.hitpointsset = True
             player.notes["Divine Sense"] = f"The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the hallow spell.\nYou can use this feature a number of times equal to 1 + your Charisma modifier, or {1 + player.ChaMod} times. When you finish a long rest, you regain all expended uses."
             player.notes["Lay on Hands"] = f"Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to {player.pallvl * 5}.\nAs an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.\nAlternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.\nThis feature has no effect on undead and constructs."
             if player.pallvl >= 2:
@@ -626,11 +782,21 @@ def dnd_update(player):
                 player.notes["Paladin 5th Level Spell Slots Known"] = 2
 
         if player.Class[i] == "Ranger":
+            if player.singlemulticlass == "N":
+                player.ranlvl = player.level                
             player.hitdice["Ranger Hitdie"] = f"{player.ranlvl}d10"
-            if player.ranlvl == 1:
-                player.hitpoints += (10 + player.ConMod)
-            else:
-                player.hitpoints += (10 + player.ConMod + hpcalc(player.ranlvl, dice, 10))   
+            if player.ranlvl == 1 and not player.firsthp:
+                    player.hitpoints += (10 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.ranlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (10 + player.ConMod + hpcalc(player.ranlvl, dice, 10))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.ranlvl, dice, 10))
+                    player.hitpointsset = True
             if player.ranlvl >= 2:
                 if "Ranger" not in player.spellcastingclass:
                     player.spellcastingclass.append("Ranger")
@@ -670,11 +836,21 @@ def dnd_update(player):
                 player.notes["Ranger 5th Level Spell Slots Known"] = 2
 
         if player.Class[i] == "Rogue":
+            if player.singlemulticlass == "N":
+                player.roglvl = player.level              
             player.hitdice["Rogue Hitdie"] = f"{player.roglvl}d8"
-            if player.roglvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.roglvl, dice, 8))     
+            if player.roglvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.roglvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.roglvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.roglvl, dice, 8))
+                    player.hitpointsset = True 
             player.rogsnkatk = "1d6"
             if player.roglvl >= 3:
                 player.rogsnkatk = "2d6"
@@ -735,11 +911,21 @@ def dnd_update(player):
                     player.notes["Arcane Trickster Rogue Spells Known"] = 13                
 
         if player.Class[i] == "Sorcerer":
+            if player.singlemulticlass == "N":
+                player.sorclvl = player.level              
             player.hitdice["Sorcerer Hitdie"] = f"{player.sorclvl}d6"
-            if player.sorclvl == 1:
-                player.hitpoints += (6 + player.ConMod)
-            else:
-                player.hitpoints += (6 + player.ConMod + hpcalc(player.sorclvl, dice, 6))   
+            if player.sorclvl == 1 and not player.firsthp:
+                    player.hitpoints += (6 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.sorclvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (6 + player.ConMod + hpcalc(player.sorclvl, dice, 6))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.sorclvl, dice, 6))
+                    player.hitpointsset = True 
             player.spellsavedc["Sorcerer Spell Save DC"] = 8 + player.profbonus + player.ChaMod
             player.spellattackmod["Sorcerer Spell Attack Mod"] = player.profbonus + player.ChaMod                             
             if player.sorclvl >= 2:
@@ -795,15 +981,30 @@ def dnd_update(player):
             player.notes["Sorcery Points"] = f"You have a number of sorcery points, determined by your level, or {player.sorcsorcerypoints} points. You can never have more sorcery points than your level. You regain all spent sorcery points when you finish a long rest.\nFlexible Casting - You can use your sorcery points to gain additional spell slots, or sacrifice spell slots to gain additional sorcery points. You learn other ways to use your sorcery points as you reach higher levels.\nCreating Spell Slots - You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th. Any spell slot you create with this feature vanishes when you finish a long rest.\n1st Spell Slot costs 2 Sorcery Points\n2nd Spell Slot costs 3 Sorcery Points\n3rd Spell Slot costs 5 Sorcery Points\n4th Spell Slot costs 6 Sorcery Points\n5th Spell Slot costs 7 Sorcery Points\nConverting a Spell Slot to Sorcery Points. As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level."
 
         if player.Class[i] == "Warlock":   
+            if player.singlemulticlass == "N":
+                player.warlvl = player.level             
             player.hitdice["Warlock Hitdie"] = f"{player.warlvl}d8"
-            if player.warlvl == 1:
-                player.hitpoints += (8 + player.ConMod)
-            else:
-                player.hitpoints += (8 + player.ConMod + hpcalc(player.warlvl, dice, 8))       
+            if player.warlvl == 1 and not player.firsthp:
+                    player.hitpoints += (8 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.warlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (8 + player.ConMod + hpcalc(player.warlvl, dice, 8))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.warlvl, dice, 8))
+                    player.hitpointsset = True      
             player.spellsavedc["Warlock Spell Save DC"] = 8 + player.profbonus + player.ChaMod
-            player.spellattackmod["Warlock Spell Attack Mod"] = player.profbonus + player.ChaMod       
+            player.spellattackmod["Warlock Spell Attack Mod"] = player.profbonus + player.ChaMod   
+            player.notes["Warlock Cantrips Known"] = 2   
+            player.notes["Warlock Spells Known"] = 2
+            player.notes["Warlock Spell Slots"] = 1
+            player.notes["Warlock Spell Slot Level"] = "1st"
             if player.warlvl >= 2:
                 player.notes["Warlock Spells Known"] = 3
+                player.notes["Warlock Spell Slots"] = 2
                 player.wareldinv = 2
             if player.warlvl >= 3:
                 player.notes["Warlock Spells Known"] = 4
@@ -831,6 +1032,7 @@ def dnd_update(player):
                 player.notes["Warlock Cantrips Known"] = 4
             if player.warlvl >= 11:
                 player.notes["Warlock Spells Known"] = 11
+                player.notes["Warlock Spell Slots"] = 3
                 player.warmysticarcanum = "One 6th Level Spell Slot"
             if player.warlvl >= 12:
                 player.wareldinv = 6
@@ -843,6 +1045,7 @@ def dnd_update(player):
                 player.warmysticarcanum == "One 6th Level Spell Slot, One 7th Level Spell Slot, One 8th Level Spell Slot"
             if player.warlvl >= 17:
                 player.notes["Warlock Spells Known"] = 14
+                player.notes["Warlock Spell Slots"] = 4
                 player.warmysticarcanum == "One 6th Level Spell Slot, One 7th Level Spell Slot, One 8th Level Spell Slot, One 9th Level Spell Slot"
             if player.warlvl >= 18:
                 player.wareldinv = 8
@@ -852,11 +1055,21 @@ def dnd_update(player):
             player.notes["Warlock Eldritch Invocations"] = f"In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. A level prerequisite refers to your level in this class.\nYou have {player.wareldinv} available to you, of your choice.\nAdditionally, when you gain a level in this class, you can choose one of the invocations you know and replace it with another invocation that you could learn at that level.\nIf an eldritch invocation has prerequisites, you must meet them to learn it. You can learn the invocation at the same time that you meet its prerequisites. A level prerequisite refers to your level in this class."
 
         if player.Class[i] == "Wizard":
+            if player.singlemulticlass == "N":
+                player.warlvl = player.level             
             player.hitdice["Wizard Hitdie"] = f"{player.wizlvl}d6"
-            if player.wizlvl == 1:
-                player.hitpoints += (6 + player.ConMod)
-            else:
-                player.hitpoints += (6 + player.ConMod + hpcalc(player.wizlvl, dice, 6))    
+            if player.wizlvl == 1 and not player.firsthp:
+                    player.hitpoints += (6 + player.ConMod)
+                    player.firsthp = True
+                    player.hitpointsset = True
+            elif player.wizlvl > 1 and not player.hitpointsset:
+                    if not player.firsthp:
+                        player.hitpoints += (6 + player.ConMod + hpcalc(player.wizlvl, dice, 6))
+                        player.firsthp = True
+                    else:
+                        for boost in range(1, player.leveldiff):
+                            player.hitpoints += (player.ConMod + hpcalc(player.wizlvl, dice, 6))
+                    player.hitpointsset = True  
             player.spellsavedc["Wizard Spell Save DC"] = 8 + player.profbonus + player.ChaMod
             player.spellattackmod["Wizard Spell Attack Mod"] = player.profbonus + player.ChaMod                    
             player.notes["Arcane Recovery"] = f"You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your Wizard level (rounded up), or {math.ceil(player.wizlvl/2)}, and none of the slots can be 6th level or higher."
@@ -896,6 +1109,7 @@ def dnd_update(player):
                 player.notes["Wizard 6th Level Spell Slots Known"] = 2
             if player.wizlvl == 20:
                 player.notes["Wizard 7th Level Spell Slots Known"] = 1
+          
 
     #Add in smth here, does the player want to multiclass?
     #Occurs at every level

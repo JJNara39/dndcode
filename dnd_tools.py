@@ -387,564 +387,955 @@ kits = {
 firearms = {
     "AntimatterRifle": {
         "Name": "Antimatter Rifle",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "6d8",
         "Damage Type" : "Necrotic",
         "Modifier" : "DEX",
         "Weight": "10 lbs",
-        "Properties": "Ammunition (Firearms), (Range 120/360), Reload (2), Two-Handed"
+        "Properties": {
+            "Ammunition": "Force", 
+            "Range": {
+                "Min": 120, 
+                "Max": 360
+            }, 
+            "Reload": 2, 
+            "Two-Handed": None
+        }
     },
     "AutomaticPistol": {
         "Name": "Automatic Pistol",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "2d6",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "3 lbs",
-        "Properties": "Ammunition (Firearms), (Range 50/150), Reload (15)"
+        "Properties": {
+            "Ammunition": "Bullet", 
+            "Range": {
+                "Min": 50, 
+                "Max": 150
+            },
+            "Reload": 15
+        }
     },
     "AutomaticRifle": {
         "Name": "Automatic Rifle",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "2d8",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "8 lbs",
-        "Properties": "Ammunition (Firearms), (Range 80/240), Reload (30), Two-Handed, Burst Fire"
+        "Properties": {
+            "Ammunition": "Bullet",
+            "Range": {
+                "Min": 80, 
+                "Max": 240
+            },
+            "Reload": 30, 
+            "Two-Handed": None, 
+            "Burst Fire": None
+        }
     },
     "HuntingRifle": {
         "Name": "Hunting Rifle",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "2d10",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "8 lbs",
-        "Properties": "Ammunition (Firearms), (Range 80/240), Reload (5), Two-Handed"
+        "Properties": {
+            "Ammunition": "Bullet",
+            "Range": {
+                "Min": 80, 
+                "Max": 240
+            },
+            "Reload": 5,
+            "Two-Handed": None
+        }
     },
     "LaserPistol": {
         "Name": "Laser Pistol",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "3d6",
         "Damage Type" : "Radiant",
         "Modifier" : "DEX",        
         "Weight": "2 lbs",
-        "Properties": "Ammunition (Firearms), (Range 40/120), Reload (50)"
+        "Properties": {
+            "Ammunition": "Force", 
+            "Range": {
+                "Min": 40, 
+                "Max": 120
+            },
+            "Reload": 50
+        }
     },
     "LaserRifle": {
         "Name": "Laser Rifle",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "3d8",
         "Damage Type" : "Radiant",
         "Modifier" : "DEX",        
         "Weight": "7 lbs",
-        "Properties": "Ammunition (Firearms), (Range 100/300), Reload (30), Two-Handed"
+        "Properties": {
+            "Ammunition": "Force", 
+            "Range": {
+                "Min": 100, 
+                "Max": 300
+            },
+            "Reload": 30,
+            "Two-Handed": None
+        }
     },
     "Musket": {
         "Name": "Musket",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "500 gp",
         "Damage": "1d12",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "10 lbs",
-        "Properties": "Ammunition (Firearms), (Range 40/120), Loading, Two-Handed"
+        "Properties": {
+            "Ammunition": "Bullet", 
+            "Range": {
+                "Min": 40, 
+                "Max": 120
+            },
+            "Loading": None, 
+            "Two-Handed": None
+        }
     },
     "Pistol": {
         "Name": "Pistol",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "250 gp",
         "Damage": "1d10",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "3 lbs",
-        "Properties": "Ammunition (Firearms), (Range 30/90), Loading"
+        "Properties": {
+            "Ammunition": "Bullet", 
+            "Range": {
+                "Min": 30, 
+                "Max": 90
+            },
+            "Loading": None
+        }
     },
     "Revolver": {
         "Name": "Revolver",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "2d8",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "3 lbs",
-        "Properties": "Ammunition (Firearms), (Range 40/120), Reload (6)"
+        "Properties": {
+            "Ammunition": "Bullet", 
+            "Range": {
+                "Min": 40, 
+                "Max": 120
+            },
+            "Reload": 6
+        }
     },
     "Shotgun": {
         "Name": "Shotgun",
+        "Weapon Type": "Firearms",
+        "Attack Type": "Ranged Weapon",
         "Cost": "N/A",
         "Damage": "2d8",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "7 lbs",
-        "Properties": "Ammunition (Firearms), (Range 30/90), Reload (2), Two-Handed"
+        "Properties": {
+            "Ammunition": "Bullet", 
+            "Range": {
+                "Min": 30, 
+                "Max": 90
+            },
+            "Reload": 2,
+            "Two-Handed": None
+        }
     }
 }
 
 simple_weapons = {
     "Club": {
         "Name": "Club",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "1 sp",
         "Damage": "1d4",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Light"
+        "Properties": {
+            "Light": None
+        }
     },
     "Dagger": {
         "Name": "Dagger",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "2 gp",
         "Damage": "1d4",
         "Damage Type" : "Piercing",
         "Modifier" : "Finesse",        
         "Weight": "1 lb",
-        "Properties": "Finesse, Light, Thrown (range 20/60)"
+        "Properties": {
+            "Finesse": None,
+            "Light": None,
+            "Type": "Thrown",
+            "Range": {
+               "Min": 20,
+               "Max": 60
+            }, 
+        }
     },
     "Dart": {
         "Name": "Dart",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "5 cp",
         "Damage": "1d4",
         "Damage Type" : "Piercing",
         "Modifier" : "Finesse",        
         "Weight": "1/4 lb",
-        "Properties": "Finesse, Thrown (range 20/60)"
+        "Properties": {
+            "Finesse": None,
+            "Type": "Thrown",
+            "Range": {
+               "Min": 20,
+               "Max": 60
+            },             
+        }
     },
     "Greatclub": {
         "Name": "Greatclub",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "2 sp",
         "Damage": "1d8",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "10 lbs",
-        "Properties": "Two-Handed"
+        "Properties": {
+            "Two-Handed": None
+        }
     },
     "Handaxe": {
         "Name": "Handaxe",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 gp",
         "Damage": "1d6",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Light, Thrown (range 20/60)"
+        "Properties": {
+            "Light": None,
+            "Type": "Thrown",
+            "Range": {
+               "Min": 20,
+               "Max": 60
+            }, 
+        }
     },
     "Javelin": {
         "Name": "Javelin",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 sp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Thrown (range 30/120)"
+        "Properties": {
+            "Type": "Thrown",
+            "Range": {
+               "Min": 30,
+               "Max": 120
+            },             
+        }
     },
     "LightCrossbow": {
         "Name": "Light Crossbow",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "25 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "5 lbs",
-        "Properties": "Ammunition, Loading, (Range 80/320), Two-Handed"
+        "Properties": {
+            "Ammunition": "Bolt",
+            "Loading": None,
+            "Range": {
+               "Min": 80,
+               "Max": 320
+            },             
+            "Two-Handed": None
+        }
     },
     "LightHammer": {
         "Name": "Light Hammer",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "2 gp",
         "Damage": "1d4",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Light, Thrown (range 20/60)"
+        "Properties": {
+            "Light": None,
+            "Type": "Thrown",
+            "Range": {
+               "Min": 20,
+               "Max": 60
+            },             
+        }
     },
     "Mace": {
         "Name": "Mace",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 gp",
         "Damage": "1d6",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "4 lbs",
-        "Properties": "N/A"
+        "Properties": {}
     },
     "Quarterstaff": {
         "Name": "Quarterstaff",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "2 sp",
         "Damage": "1d6",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "4 lbs",
-        "Properties": "Versatile (1d8)"
+        "Properties": {
+            "Versatile": "1d8"
+        }
     },
     "Shortbow": {
         "Name": "Shortbow",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "25 gp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "2 lbs",
-        "Properties": "Ammunition, (Range 80/320), Two-Handed"
+        "Properties": {
+            "Ammunition": "Arrow",
+            "Range": {
+               "Min": 80,
+               "Max": 320
+            },             
+            "Two-Handed": None
+        }
     },
     "Sickle": {
         "Name": "Sickle",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "1 gp",
         "Damage": "1d4",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Light"
+        "Properties": {
+            "Light": None
+        }
     },
     "Sling": {
         "Name": "Sling",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "1 sp",
         "Damage": "1d4",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "DEX",        
         "Weight": "",
-        "Properties": "Ammunition, (Range 30/120)"
+        "Properties": {
+            "Ammunition": "Bullet",
+            "Range": {
+               "Min": 30,
+               "Max": 120
+            },             
+        }
     },
     "Spear": {
         "Name": "Spear",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "1 gp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "3 lbs",
-        "Properties": "Thrown (range 20/60), Versatile (1d8)"
+        "Properties": {
+            "Type": "Thrown",
+            "Range": {
+                "Min": 20,
+                "Max": 60
+            }, 
+            "Versatile": "1d8"
+        }
     },
     "Yklwa": {
         "Name": "Yklwa",
+        "Weapon Type": "Simple Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "1 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Thrown (range 10/30)"
+        "Properties": {
+            "Type": "Thrown",
+            "Range": {
+               "Min": 10,
+               "Max": 30
+            },             
+        }
     }
 }
 
 martial_weapons = {
     "Battleaxe": {
         "Name": "Battleaxe",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "10 gp",
         "Damage": "1d8",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "4 lbs",
-        "Properties": "Versatile (1d10)"
+        "Properties": {
+            "Versatile": "1d10"
+        }
     },
     "DoubleBladedScimitar": {
         "Name": "Double-Bladed Scimitar",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "100 gp",
         "Damage": "2d4",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Special, Two-Handed"
+        "Properties": {
+            "Special": None,
+            "Two-Handed": None
+        }
     },
     "Flail": {
         "Name": "Flail",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "10 gp",
         "Damage": "1d8",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "N/A"
+        "Properties": {}
     },
     "Glaive": {
         "Name": "Glaive",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "20 gp",
         "Damage": "1d10",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Heavy, Reach, Two-Handed"
+        "Properties": {
+            "Heavy": None,
+            "Reach": None,
+            "Two-Handed": None
+        }
     },
     "Greataxe": {
         "Name": "Greataxe",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "30 gp",
         "Damage": "1d12",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Heavy, Two-Handed"
+        "Properties": {
+            "Heavy": None,
+            "Two-Handed": None
+        }
     },
     "Greatsword": {
         "Name": "Greatsword",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "50 gp",
         "Damage": "2d6",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Heavy, Two-Handed"
+        "Properties": {
+            "Heavy": None,
+            "Two-Handed": None
+        }
     },
     "Halberd": {
         "Name": "Halberd",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "20 gp",
         "Damage": "1d10",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Heavy, Reach, Two-Handed"
+        "Properties": {
+            "Heavy": None,
+            "Reach": None,
+            "Two-Handed": None
+        }
     },
     "Lance": {
         "Name": "Lance",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "10 gp",
         "Damage": "1d12",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "6 lbs",
-        "Properties": "Reach, Special"
+        "Properties": {
+            "Reach": None,
+            "Special": None
+        }
     },
     "Longsword": {
         "Name": "Longsword",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "15 gp",
         "Damage": "1d8",
         "Damage Type" : "Slashing",
         "Modifier" : "STR",        
         "Weight": "3 lbs",
-        "Properties": "Versatile (1d10)"
+        "Properties": {
+            "Versatile": "1d10"
+        }
     },
     "Maul": {
         "Name": "Maul",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "10 gp",
         "Damage": "2d6",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "10 lbs",
-        "Properties": "Heavy, Two-Handed"
+        "Properties": {
+            "Heavy": None, 
+            "Two-Handed": None
+        }
     },
     "Morningstar": {
         "Name": "Morningstar",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "15 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "4 lbs",
-        "Properties": "N/A"
+        "Properties": {}
     },
     "Pike": {
         "Name": "Pike",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 gp",
         "Damage": "1d10",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "18 lbs",
-        "Properties": "Heavy, Reach, Two-Handed"
+        "Properties": {
+            "Heavy": None,
+            "Reach": None,
+            "Two-Handed": None
+        }
     },
     "Rapier": {
         "Name": "Rapier",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "25 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "Finesse",        
         "Weight": "2 lbs",
-        "Properties": "Finesse"
+        "Properties": {
+            "Finesse": None
+        }
     },
     "Scimitar": {
         "Name": "Scimitar",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "25 gp",
         "Damage": "1d6",
         "Damage Type" : "Slashing",
         "Modifier" : "Finesse",        
         "Weight": "3 lbs",
-        "Properties": "Finesse, Light"
+        "Properties": {
+            "Finesse": None,
+            "Light": None
+        }
     },
     "Shortsword": {
         "Name": "Shortsword",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "10 gp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "Finesse",        
         "Weight": "2 lbs",
-        "Properties": "Finesse, Light"
+        "Properties": {
+            "Finesse": None,
+            "Light": None
+        }
     },
     "Trident": {
         "Name": "Trident",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 gp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "4 lbs",
-        "Properties": "Thrown (range 20/60), Versatile (1d8)"
+        "Properties": {
+            "Type": "Thrown",
+            "Range": {
+               "Min": 20,
+               "Max": 60
+            }, 
+        "Versatile": "1d8"
+        }
     },
     "WarPick": {
         "Name": "War Pick",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "5 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "N/A"
+        "Properties": {}
     },
     "Warhammer": {
         "Name": "Warhammer",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "15 gp",
         "Damage": "1d8",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "STR",        
         "Weight": "2 lbs",
-        "Properties": "Versatile (1d10)"
+        "Properties": {
+            "Versatile": "1d10"
+        }
     },
     "Whip": {
         "Name": "Whip",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Melee Weapon",
         "Cost": "2 gp",
         "Damage": "1d4",
         "Damage Type" : "Slashing",
         "Modifier" : "Finesse",        
         "Weight": "3 lbs",
-        "Properties": "Finesse, Reach"
+        "Properties": {
+            "Finesse": None,
+            "Reach": None
+        }
     },
     "Blowgun": {
         "Name": "Blowgun",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "10 gp",
         "Damage": "1",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "1 lb",
-        "Properties": "Ammunition, Loading, (Range 25/100)"
+        "Properties": {
+            "Ammunition": "Needle",
+            "Loading": None,
+            "Range": {
+               "Min": 25,
+               "Max": 100
+            }, 
+        }
     },
     "HeavyCrossbow": {
         "Name": "Heavy Crossbow",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "50 gp",
         "Damage": "1d10",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "18 lbs",
-        "Properties": "Ammunition, Heavy, Loading, (Range 100/400), Two-Handed"
+        "Properties": {
+            "Ammunition": "Bolt",
+            "Heavy": None,
+            "Loading": None,
+            "Range": {
+               "Min": 100,
+               "Max": 400
+            },             
+            "Two-Handed": None
+        }
     },
     "HandCrossbow": {
         "Name": "Hand Crossbow",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "75 gp",
         "Damage": "1d6",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "3 lbs",
-        "Properties": "Ammunition, (Range 30/120), Light, Loading"
+        "Properties": {
+            "Ammunition": "Bolt",
+            "Range": {
+               "Min": 30,
+               "Max": 120
+            },             
+            "Light": None,
+            "Loading": None
+        }
     },
     "Longbow": {
         "Name": "Longbow",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "50 gp",
         "Damage": "1d8",
         "Damage Type" : "Piercing",
         "Modifier" : "DEX",        
         "Weight": "2 lbs",
-        "Properties": "Ammunition, Heavy, (Range 150/600), Two-Handed"
+        "Properties": {
+            "Ammunition": "Arrow",
+            "Heavy": None,
+            "Range": {
+               "Min": 150,
+               "Max": 600
+            },             
+            "Two-Handed": None
+        }
     },
     "Net": {
         "Name": "Net",
+        "Weapon Type": "Martial Weapons",
+        "Attack Type": "Ranged Weapon",
         "Cost": "1 gp",
         "Damage": "0",
         "Damage Type" : "Bludgeoning",
         "Modifier" : "DEX",        
         "Weight": "3 lbs",
-        "Properties": "Special, Thrown (range 5/15)"
+        "Properties": {
+            "Special": None,
+            "Type": "Thrown",
+            "Range": {
+               "Min": 5,
+               "Max": 15
+            },             
+        }
     }
 }
 
-light_armor = {
+all_armor = {   
     "Leather": {
         "Name": "Leather",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Light Armor",
+        "Cost": "10 gp",
+        "Armor Class": 1,
+        'DexMod' : True,
+        "Strength": 0,
+        "Stealth": "N/A",
+        "Weight": "10 lbs",
+        "DonTime": 1,
+        "DoffTime": 1,
     },
     "StuddedLeather": {
         "Name": "Studded Leather",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Light Armor",
+        "Cost": "45 gp",
+        "Armor Class": 2,
+        'DexMod' : True,
+        "Strength": 0,
+        "Stealth": "N/A",
+        "Weight": "13 lbs",
+        "DonTime": 1,
+        "DoffTime": 1,        
     },
     "Padded": {
         "Name": "Padded",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
-    }
-}
-
-medium_armor = {
+        "Armor Type": "Light Armor",
+        "Cost": "5 gp",
+        "Armor Class": 1,
+        'DexMod' : True,
+        "Strength": 0,
+        "Stealth": "Disadvantage",
+        "Weight": "8 lbs",
+        "DonTime": 1,
+        "DoffTime": 1,        
+    },
     "Breastplate": {
         "Name": "Breastplate",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Medium Armor",
+        "Cost": "400 gp",
+        "Armor Class": 2,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "N/A",
+        "Weight": "20 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,        
     },
     "ChainShirt": {
         "Name": "Chain Shirt",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Medium Armor",
+        "Cost": "50 gp",
+        "Armor Class": 3,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "N/A",
+        "Weight": "20 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,            
     },
     "HalfPlate": {
         "Name": "Half Plate",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Medium Armor",
+        "Cost": "750 gp",
+        "Armor Class": 5,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "Disadvantage",
+        "Weight": "40 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,            
     },
     "Hide": {
         "Name": "Hide",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Medium Armor",
+        "Cost": "10 gp",
+        "Armor Class": 2,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "N/A",
+        "Weight": "12 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,            
     },
     "ScaleMail": {
         "Name": "Scale Mail",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Medium Armor",
+        "Cost": "50 gp",
+        "Armor Class": 4,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "Disadvantage",
+        "Weight": "45 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,            
     },
     "SpikedArmor": {
         "Name": "Spiked Armor",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
-    }
-}
-
-heavy_armor = {
+        "Armor Type": "Medium Armor",
+        "Cost": "75 gp",
+        "Armor Class": 4,
+        'DexMod' : True,
+        'DexMod max': 2,
+        "Strength": 0,
+        "Stealth": "Disadvantage",
+        "Weight": "45 lbs",
+        "DonTime": 5,
+        "DoffTime": 1,    
+    },    
     "ChainMail": {
         "Name": "Chain Mail",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Heavy Armor",
+        "Cost": "75 gp",
+        "Armor Class": 6,
+        "Strength": 13,
+        "Stealth": "Disadvantage",
+        "Weight": "55 lbs",
+        "DonTime": 10,
+        "DoffTime": 5,            
     },
     "RingMail": {
         "Name": "Ring Mail",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Heavy Armor",
+        "Cost": "30 gp",
+        "Armor Class": 4,
+        "Strength": 0,
+        "Stealth": "Disadvantage",
+        "Weight": "40 lbs",
+        "DonTime": 10,
+        "DoffTime": 5,        
     },
     "Plate": {
         "Name": "Plate",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
+        "Armor Type": "Heavy Armor",
+        "Cost": "1500 gp",
+        "Armor Class": 8,
+        "Strength": 15,
+        "Stealth": "Disadvantage",
+        "Weight": "65 lbs",
+        "DonTime": 10,
+        "DoffTime": 5,        
     },
     "Splint": {
         "Name": "Splint",
-        "Cost": "",
-        "Armor Class": "",
-        "Strength": "",
-        "Stealth": "",
-        "Weight": ""
-    }
+        "Armor Type": "Heavy Armor",
+        "Cost": "200 gp",
+        "Armor Class": 7,
+        "Strength": 15,
+        "Stealth": "Disadvantage",
+        "Weight": "60",
+        "DonTime": 10,
+        "DoffTime": 5,        
+    }    
+
 }
 
 packs = {
@@ -1079,35 +1470,6 @@ packs = {
         "cost": "40 gp",
         "weight": "10 lbs"
     }
-}
-
-
-
-
-spells = {
-    "Light": {
-        "name" : "Light",
-        "level": 0,
-        "type": "Evocation Cantrip",
-        "casting_time": "1 action",
-        "range": "Touch",
-        "duration": "1 hour",
-        "components": ["V", "M (a firefly or phosphorescent moss)"],
-        "description": "You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\nIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell."
-    },
-    "Mage Hand": {
-        "name": "Mage Hand",
-        "level": 0,
-        "type": "Conjuration Cantrip",
-        "casting_time": "1 action",
-        "range": "30 feet",
-        "duration": "1 minute",
-        "components": ["V", "S"],
-        "description": "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n\n"
-                       "You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n\n"
-                       "The hand can’t attack, activate magical items, or carry more than 10 pounds."
-    }    
-    # Add other spells here
 }
 
 shields = {

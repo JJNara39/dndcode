@@ -6,6 +6,7 @@ import random
 import math
 from dnd_languagesskills import *
 import dnd_tools
+import dnd_spells
 
 
 def dice(sides):
@@ -21,7 +22,6 @@ def hpcalc(chlvl, dicefunc, sides):
     return result
 
 def dndchargen_characterbuilder(param, player):
-    print(f"Your classes are {player.Class}")
     for i in range(len(player.Class)):
         if player.Class[i] == "Artificer":
             if player.artlvl >= 3:
@@ -265,6 +265,9 @@ def dndchargen_characterbuilder(param, player):
                     if player.barblvl >= 14:
                         player.notes["Totemic Attunement"] = f"You gain a magical benefit based on a totem animal of your choice. You can choose the same animal you selected previously or a different one.\nBear - While you're raging, any creature within 5 feet of you that's hostile to you has disadvantage on attack rolls against targets other than you or another character with this feature. An enemy is immune to this effect if it can't see or hear you or if it can't be frightened.\nEagle - While raging, you have a flying speed equal to your current walking speed. This benefit works only in short bursts; you fall if you end your turn in the air and nothing else is holding you aloft.\nElk - While raging, you can use a bonus action during your move to pass through the space of a Large or smaller creature. That creature must succeed on a Strength saving throw, the DC equal to 8 + your Strength modifier + your Proficiency Bonus, or DC of {8 + player.StrMod + player.profbonus}, or be knocked prone and take bludgeoning damage equal to 1d12 + your Strength modifier, or 1d12 + {player.StrMod} bludgeoning damage.\nTiger - While you're raging, if you move at least 20 feet in a straight line toward a Large or smaller target right before making a melee weapon attack against it, you can use a bonus action to make an additional melee weapon attack against it.\nWolf - While you're raging, you can use a bonus action on your turn to knock a Large or smaller creature prone when you hit it with melee weapon attack."
                 if player.subclass[i] == "Path of the Zealot Barbarian":
+                    if player.beachballflag == True:
+                        player.notes["God/Deity"] = "Because of your boon given to you by Beachball, any God/Deity you serve is the Trickster Deity, Beachball, and as such he has awarded you Wild Magic."
+                        player.beachballflag == False                    
                     player.notes["Divine Fury"] = f"You can channel divine fury into your weapon strikes. While you're raging, the first creature you hit on each of your turns with a weapon attack takes extra damage equal to 1d6 + half your Barbarian level, or 1d6 + {math.floor(player.barblvl/2)} extra damage. The extra damage is necrotic or radiant; you choose the type of damage when you gain this feature."
                     player.notes["Warrior of the Gods"] = "Your soul is marked for endless battle. If a spell, such as Raise Dead, has the sole effect of restoring you to life (but not undeath), the caster doesn't need material components to cast the spell on you."
                     if player.barblvl >= 6:
@@ -473,6 +476,9 @@ def dndchargen_characterbuilder(param, player):
                 player.notes["Superior Inspiration"] = "When you roll initiative and have no uses of Bardic Inspiration left, you regain one use."
         
         if player.Class[i] == "Cleric":
+            if player.beachballflag == True:
+                player.notes["God/Deity"] = "Because of your boon given to you by Beachball, any God/Deity you serve is the Trickster Deity, Beachball, and as such he has awarded you Wild Magic."
+                player.beachballflag == False
             if player.subclass[i] == "Arcana Domain Cleric":
                 ArcanaDomainSpells = {
                     1: ["Detect Magic", "Magic Missile"],
@@ -486,9 +492,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in ArcanaDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericarcanadomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericarcanadomainspells = list(player.clericarcanadomainspells.keys())
                 clericarcanadomain_str = ", ".join(spell for spell in clericarcanadomainspells)    
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericarcanadomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -522,9 +531,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in BloodDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericblooddomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                    
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericblooddomain_spells = list(player.clericblooddomainspells.keys())
                 clericblooddomain_str = ", ".join(spell for spell in clericblooddomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericblooddomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -559,9 +571,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in CommunityDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericcommunitydomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericcommunitydomain_spells = list(player.clericcommunitydomainspells.keys())
                 clericcommunitydomain_str = ", ".join(spell for spell in clericcommunitydomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericcommunitydomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -594,9 +609,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in DeathDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericdeathdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericdeathdomain_spells = list(player.clericdeathdomainspells.keys())
                 clericdeathdomain_str = ", ".join(spell for spell in clericdeathdomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericdeathdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -629,9 +647,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in ForgeDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericforgedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericforgedomain_spells = list(player.clericforgedomainspells.keys())
                 clericforgedomain_str = ", ".join(spell for spell in clericforgedomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericforgedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -664,9 +685,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in GraveDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericgravedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericgravedomain_spells = list(player.clericgravedomainspells.keys())
                 clericgravedomain_str = ", ".join(spell for spell in clericgravedomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericgravedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -693,9 +717,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in KnowledgeDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericknowledgedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericknowledgedomain_spells = list(player.clericknowledgedomainspells.keys())
                 clericknowledgedomain_str = ", ".join(spell for spell in clericknowledgedomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericknowledgedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -725,9 +752,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in LifeDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericlifedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericlifedomain_spells = list(player.clericlifedomainspells.keys())
                 clericlifedomain_str = ", ".join(spell for spell in clericlifedomain_spells)  
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericlifedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -760,9 +790,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in LightDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericlightdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericlightdomain_spells = list(player.clericlightdomainspells.keys())
                 clericlightdomain_str = ", ".join(spell for spell in clericlightdomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericlightdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -789,9 +822,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in MoonDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericmoondomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericmoondomain_spells = list(player.clericmoondomainspells.keys())
                 clericmoondomain_str = ", ".join(spell for spell in clericmoondomain_spells) 
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericmoondomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -817,9 +853,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in NatureDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericnaturedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericnaturedomain_spells = list(player.clericnaturedomainspells.keys())
                 clericnaturedomain_str = ", ".join(spell for spell in clericnaturedomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericnaturedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -860,9 +899,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in NightDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericnightdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericnightdomain_spells = list(player.clericnightdomainspells.keys())
                 clericnightdomain_str = ", ".join(spell for spell in clericnightdomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericnightdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -892,9 +934,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in OrderDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericorderdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericorderdomain_spells = list(player.clericorderdomainspells.keys())
                 clericorderdomain_str = ", ".join(spell for spell in clericorderdomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericorderdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -934,9 +979,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in PeaceDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericpeacedomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericpeacedomain_spells = list(player.clericpeacedomainspells.keys())
                 clericpeacedomain_str = ", ".join(spell for spell in clericpeacedomain_spells)    
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericpeacedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -970,9 +1018,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in TempestDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clerictempestdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clerictempestdomain_spells = list(player.clerictempestdomainspells.keys())
                 clerictempestdomain_str = ", ".join(spell for spell in clerictempestdomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clerictempestdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -1005,9 +1056,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in TrickeryDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clerictrickerydomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clerictrickerydomain_spells = list(player.clerictrickerydomainspells.keys())
                 clerictrickerydomain_str = ", ".join(spell for spell in clerictrickerydomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clerictrickerydomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -1036,9 +1090,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in TwilightDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clerictwilightdomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clerictwilightdomain_spells = list(player.clerictwilightdomainspells.keys())
                 clerictwilightdomain_str = ", ".join(spell for spell in clerictwilightdomain_spells)  
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clerictwilightdomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -1072,9 +1129,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in WarDomainSpells.items():
                     if player.clerlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.clericwardomainspells[spell] = spell_data  # Assign to domain spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 clericwardomain_spells = list(player.clericwardomainspells.keys())
                 clericwardomain_str = ", ".join(spell for spell in clericwardomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericwardomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
@@ -1227,9 +1287,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in druid_land_spells[player.druidlandchoice].items():
                         if player.druidlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
-                                player.druidcirclelandspells[spell] = dnd_tools.spells[spell]
-                                player.spelllist[spell] = spell_data  # Assign to general spell list                               
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
+                                player.druidcirclelandspells[spell] = dnd_spells.spells[spell]
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     druid_circle_spells = list(player.druidcirclelandspells.keys())
                     druid_circle_spells_str = ", ".join(spell for spell in druid_circle_spells)                                      
                     player.notes["Bonus Cantrip"] = "You learn one additional druid cantrip of your choice."
@@ -1274,9 +1337,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in druid_spores_spells.items():
                         if player.druidlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
-                                player.druidcirclesporesspells[spell] = dnd_tools.spells[spell]
-                                player.spelllist[spell] = spell_data  # Assign to general spell list  
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
+                                player.druidcirclesporesspells[spell] = dnd_spells.spells[spell]
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     # Get the spell names for display
                     druidcircle_spells = list(player.druidcirclesporesspells.keys())
                     druidcircle_str = ", ".join(druidcircle_spells)                  
@@ -1328,9 +1394,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in druid_wildfire_spells.items():
                         if player.druidlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
-                                player.druidcirclewildfirespells[spell] = dnd_tools.spells[spell]
-                                player.spelllist[spell] = spell_data                                 
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
+                                player.druidcirclewildfirespells[spell] = dnd_spells.spells[spell]
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     # Get the spell names for display
                     druidcircle_spells = list(player.druidcirclewildfirespells.keys())
                     druidcircle_str = ", ".join(druidcircle_spells)
@@ -1390,9 +1459,10 @@ def dndchargen_characterbuilder(param, player):
                     if player.figlvl >= 15:
                         player.figsuperioritydie = "six"
                     player.notes["Combat Superiority"] = f"You learn maneuvers that are fueled by special dice called superiority dice.\nManeuvers - You learn three maneuvers (from Maneuvers table) of your choice. Many maneuvers enhance an attack in some way. You can use only one maneuver per attack. You learn two additional maneuvers of your choice at 7th, 10th, and 15th level. Each time you learn new maneuvers, you can also replace one maneuver you know with a different one.\nSuperiority Dice - You have {player.figsuperioritydie} superiority dice, which are d8s. A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.\nSaving Throws - Some of your maneuvers require your target to make a saving throw to resist the maneuver's effects. The saving throw DC is calculated as follows:\nManeuver save DC = 8 + your Proficiency Bonus, or {8 + player.profbonus}, + your Strength or Dexterity modifier (your choice)"
+                    print("Going into artisantools")
                     if player.figbattlemasterprof == False:
-                        player.proficiencies = artisantools(param, player.proficiencies)                 
-                        player.figbattlemasterprof = True   
+                        player.proficiencies = artisantools(param, player.proficiencies)  
+                        player.figbattlemasterprof = True  
                     if player.figlvl >= 7:
                         player.notes["Know Your Enemy"] = "If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice:\n- Strength score\n- Dexterity score\n- Constitution score\n- Armor Class\n- Current hit points\n- Total class levels, if any\n- Fighter class levels, if any"
                     if player.figlvl >= 10:
@@ -1926,6 +1996,9 @@ def dndchargen_characterbuilder(param, player):
                 player.notes["Perfect Self"] = "When you roll for initiative and have no ki points remaining, you regain 4 ki points."
         
         if player.Class[i] == "Paladin":
+            if player.beachballflag == True:
+                player.notes["God/Deity"] = "Because of your boon given to you by Beachball, any God/Deity you serve is the Trickster Deity, Beachball, and as such he has awarded you Wild Magic."
+                player.beachballflag == False            
             if player.pallvl >= 2:    
                 player.notes["Fighting Style"] = f"You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.\n- Blessed Warrior - You learn two cantrips of your choice from the cleric spell list. They count as paladin spells for you, and Charisma is your spellcasting ability for them. Whenever you gain a level in this class, you can replace one of these cantrips with another cantrip from the cleric spell list.\n- Blind Fighting - You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.\n- Defense - While you are wearing armor, you gain a +1 bonus to AC.\n- Dueling - When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.\n- Great Weapon Fighting - When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.\n- Interception - When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your Proficiency Bonus, or reduction by 1d10 + {player.profbonus}, to a minimum of 0 damage. You must be wielding a shield or a simple or martial weapon to use this reaction.\n- Protection - When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield."
                 player.notes["Divine Smite"] = "When you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage. The extra damage is 2d8 for a 1st-level spell slot, plus 1d8 for each spell level higher than 1st, to a maximum of 5d8. The damage increases by 1d8 if the target is an undead or a fiend, to a maximum of 6d8."
@@ -1964,9 +2037,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfTheAncientsSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathancspells[spell] = spell_data  # Assign to Oath of the Ancients spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathancspells_list = list(player.paloathancspells.keys())
                     paloathancspells_str = ", ".join(spell for spell in paloathancspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels, currently your Oath Spells: {paloathancspells_str}"
@@ -1993,9 +2069,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfConquestSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathconqspells[spell] = spell_data  # Assign to Oath of Conquest spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathconqspells_list = list(player.paloathconqspells.keys())
                     paloathconqspells_str = ", ".join(spell for spell in paloathconqspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels, currently your Oath Spells: {paloathconqspells_str}"
@@ -2022,9 +2101,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfCrownSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathcrownspells[spell] = spell_data  # Assign to Oath of the Crown spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathcrownspells_list = list(player.paloathcrownspells.keys())
                     paloathcrownspells_str = ", ".join(spell for spell in paloathcrownspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathcrownspells_str}"        
@@ -2049,9 +2131,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfDevotionSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathdevspells[spell] = spell_data  # Assign to Oath of Devotion spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathdevspells_list = list(player.paloathdevspells.keys())
                     paloathdevspells_str = ", ".join(spell for spell in paloathdevspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathdevspells_str}"
@@ -2078,9 +2163,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfGlorySpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathgloryspells[spell] = spell_data  # Assign to Oath of Glory spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathgloryspells_list = list(player.paloathgloryspells.keys())
                     paloathgloryspells_str = ", ".join(spell for spell in paloathgloryspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathgloryspells_str}"
@@ -2107,9 +2195,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfTheOpenSeaSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathseaspells[spell] = spell_data  # Assign to Oath of the Open Sea spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathseaspells_list = list(player.paloathseaspells.keys())
                     paloathseaspells_str = ", ".join(spell for spell in paloathseaspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathseaspells_str}"
@@ -2137,9 +2228,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfRedemptionSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathredspells[spell] = spell_data  # Assign to Oath of Redemption spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathredspells_list = list(player.paloathredspells.keys())
                     paloathredspells_str = ", ".join(spell for spell in paloathredspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathredspells_str}" 
@@ -2166,9 +2260,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfWatchersSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathwatchspells[spell] = spell_data  # Assign to Oath of Watchers spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathwatchspells_list = list(player.paloathwatchspells.keys())
                     paloathwatchspells_str = ", ".join(spell for spell in paloathwatchspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathwatchspells_str}"  
@@ -2195,9 +2292,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathOfVengeanceSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathvengspells[spell] = spell_data  # Assign to Oath of Vengeance spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathvengspells_list = list(player.paloathvengspells.keys())
                     paloathvengspells_str = ", ".join(spell for spell in paloathvengspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathvengspells_str}"
@@ -2222,9 +2322,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in OathbreakerSpells.items():
                         if player.pallvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.paloathoathbreakspells[spell] = spell_data  # Assign to Oathbreaker spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     paloathoathbreakspells_list = list(player.paloathoathbreakspells.keys())
                     paloathoathbreakspells_str = ", ".join(spell for spell in paloathoathbreakspells_list)
                     player.notes["Paladin Oath Spells"] = f"You gain oath spells at certain Paladin levels. Your Oath Spells: {paloathoathbreakspells_str}"
@@ -2334,9 +2437,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in FeyWandererSpells.items():
                         if player.ranlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.ranfeywandererspells[spell] = spell_data  # Assign to Fey Wanderer spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     ranfeywandererspells_list = list(player.ranfeywandererspells.keys())
                     ranfeywandererspells_str = ", ".join(spell for spell in ranfeywandererspells_list)
                     player.ranfwdreadfulstrikedmg = "1d4"
@@ -2399,9 +2505,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in GloomStalkerSpells.items():
                         if player.ranlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.rangloomstalkerspells[spell] = spell_data  # Assign to Gloom Stalker spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     rangloomstalkerspells_list = list(player.rangloomstalkerspells.keys())
                     rangloomstalkerspells_str = ", ".join(spell for spell in rangloomstalkerspells_list)
                     player.notes["Gloom Stalker Magic"] = f"You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, as a Gloom Stalker Ranger, you know: {rangloomstalkerspells_str}"
@@ -2433,9 +2542,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in HorizonWalkerSpells.items():
                         if player.ranlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.ranhorizonwalkerspells[spell] = spell_data  # Assign to Horizon Walker spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     ranhorizonwalkerspells_list = list(player.ranhorizonwalkerspells.keys())
                     ranhorizonwalkerspells_str = ", ".join(spell for spell in ranhorizonwalkerspells_list)                 
                     player.notes["Horizon Walker Magic"] = f"You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, as a Horizon Walker Ranger, you know: {ranhorizonwalkerspells_str}"
@@ -2471,9 +2583,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in MonsterSlayerSpells.items():
                         if player.ranlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.ranmonsterslayerspells[spell] = spell_data  # Assign to Monster Slayer spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     ranmonsterslayerspells_list = list(player.ranmonsterslayerspells.keys())
                     ranmonsterslayerspells_str = ", ".join(spell for spell in ranmonsterslayerspells_list)
                     player.notes["Monster Slayer Magic"] = f"You learn an additional spell when you reach certain levels in this class. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know. Currently, your Monster Slayer spells are: {ranmonsterslayerspells_str}."
@@ -2523,9 +2638,12 @@ def dndchargen_characterbuilder(param, player):
                     for level, spells in SwarmkeeperSpells.items():
                         if player.ranlvl >= level:
                             for spell in spells:
-                                spell_data = dnd_tools.spells[spell]
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
                                 player.ranswarmkeeperspells[spell] = spell_data  # Assign to Swarmkeeper spell list
-                                player.spelllist[spell] = spell_data  # Assign to general spell list
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                     ranswarmkeeperspells_list = list(player.ranswarmkeeperspells.keys())
                     ranswarmkeeperspells_str = ", ".join(spell for spell in ranswarmkeeperspells_list)                 
                     player.notes["Gathered Swarm"] = f"A swarm of intangible nature spirits has bonded itself to you and can assist you in battle. Until you die, the swarm remains in your space, crawling on you or flying and skittering around you within your space. You can determine its appearance, which is: {player.ranswarmchoice}.\nOnce on each of your turns, you can cause the swarm to assist you in one of the following ways, immediately after you hit a creature with an attack:\n- The attack's target takes 1d6 piercing damage from the swarm.\n- The attack's target must succeed on a Strength saving throw against your spell save DC, or against {player.spellsavedc['Ranger Spell Save DC']}, or be moved by the swarm up to 15 feet horizontally in a direction of your choice.\n- You are moved by the swarm 5 feet horizontally in a direction of your choice."
@@ -2550,9 +2668,12 @@ def dndchargen_characterbuilder(param, player):
             for level, spells in PrimalAwarenessSpells.items():
                 if player.ranlvl >= level:
                     for spell in spells:
-                        spell_data = dnd_tools.spells[spell]
+                        spell_data = dnd_spells.spells[spell]
+                        spell_data["Using Class"] = player.Class[i]
                         player.ranprimalawarepells[spell] = spell_data  # Assign to Primal Awareness spell list
-                        player.spelllist[spell] = spell_data  # Assign to general spell list
+                        if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                            spell_data["Spell List"].append(player.Class[i])                              
+                        player.spelllist[spell] = spell_data  # Assign to general spell list                            
             ranprimalawarepells_list = list(player.ranprimalawarepells.keys())
             ranprimalawarepells_str = ", ".join(spell for spell in ranprimalawarepells_list)
             player.notes["Primal Awareness"] = f"[Instead of Primeval Awareness] You can focus your awareness through the interconnections of nature: you learn additional spells when you reach certain levels in this class if you don't already know them. These spells don't count against the number of ranger spells you know.\nThe spells known are: {ranprimalawarepells_str}.\nYou can cast each of these spells once without expending a spell slot. Once you cast a spell in this way, you can't do so again until you finish a long rest."
@@ -2601,7 +2722,7 @@ def dndchargen_characterbuilder(param, player):
                     if param == "N":
                         player.subclass[i] = random.choice(Rog)                               
                 if player.subclass[i] == "Arcane Trickster Archetype Rogue":   
-                    player.spelllist["Mage Hand"] = dnd_tools.spells["Mage Hand"]          
+                    player.spelllist["Mage Hand"] = dnd_spells.spells["Mage Hand"]          
                     player.notes["Mage Hand Legerdemain"] = "When you cast Mage Hand, you can make the spectral hand invisible, and you can perform the following additional tasks with it:\n-You can stow one object the hand is holding in a container worn or carried by another creature.\n- You can retrieve an object in a container worn or carried by another creature.\n- You can use thieves' tools to pick locks and disarm traps at range.\nYou can perform one of these tasks without being noticed by a creature if you succeed on a Dexterity (Sleight of Hand) check contested by the creature's Wisdom (Perception) check.\nIn addition, you can use the bonus action granted by your Cunning Action to control the hand."
                     if player.roglvl >= 9:
                         player.notes["Magical Ambush"] = "If you are hidden from a creature when you cast a spell on it, the creature has disadvantage on any saving throw it makes against the spell this turn."
@@ -2746,9 +2867,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in AberrantMindSpells.items():
                     if player.sorclvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.sorcaberrantmindspells[spell] = spell_data  # Assign to Aberrant Mind spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 sorcaberrantmindspells_list = list(player.sorcaberrantmindspells.keys())
                 sorcaberrantmindspells_str = ", ".join(spell for spell in sorcaberrantmindspells_list)
                 player.notes["Psionic Spells"] = f"You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know, currently you know: {sorcaberrantmindspells_str}\nWhenever you gain a Sorcerer level, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be a divination or an enchantment spell from the sorcerer, warlock, or wizard spell list."
@@ -2762,7 +2886,7 @@ def dndchargen_characterbuilder(param, player):
                     player.notes["Warping Implosion"] = "You can unleash your aberrant power as a space-warping anomaly. As an action, you can teleport to an unoccupied space you can see within 120 feet of you. Immediately after you disappear, each creature within 30 feet of the space you left must make a Strength saving throw. On a failed save, a creature takes 3d10 force damage and is pulled straight toward the space you left, ending in an unoccupied space as close to your former space as possible. On a successful save, the creature takes half as much damage and isn't pulled.\nOnce you use this feature, you can't do so again until you finish a long rest, unless you spend 5 sorcery points to use it again."
             if player.subclass[i] == "Clockwork Soul Origin Sorcerer":
                 ClockworkSoulSpells = {
-                    1: ["Alarm", "Protection From Evil and Good"],
+                    1: ["Alarm", "Protection from Evil and Good"],
                     3: ["Aid", "Lesser Restoration"],
                     5: ["Dispel Magic", "Protection From Energy"],
                     7: ["Freedom of Movement", "Summon Construct"],
@@ -2773,9 +2897,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in ClockworkSoulSpells.items():
                     if player.sorclvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.sorcclockworksoulspells[spell] = spell_data  # Assign to Clockwork Soul spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 sorcclockworksoulspells_list = list(player.sorcclockworksoulspells.keys())
                 sorcclockworksoulspells_str = ", ".join(spell for spell in sorcclockworksoulspells_list)
                 player.notes["Clockwork Magic"] = f"You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know, currently you know: {sorcclockworksoulspells_str}\nWhenever you gain a Sorcerer level, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be an abjuration or a transmutation spell from the sorcerer, warlock, or wizard spell list."
@@ -2819,11 +2946,11 @@ def dndchargen_characterbuilder(param, player):
                 #Now this tells me I should double check all subclasses that give spells
                 
                 affinity_spells = {
-                    "Good": dnd_tools.spells["Cure Wounds"],
-                    "Evil": dnd_tools.spells["Inflict Wounds"],
-                    "Law": dnd_tools.spells["Bless"],
-                    "Chaos": dnd_tools.spells["Bane"],
-                    "Neutrality": dnd_tools.spells["Protection from Evil and Good"]
+                    "Good": dnd_spells.spells["Cure Wounds"],
+                    "Evil": dnd_spells.spells["Inflict Wounds"],
+                    "Law": dnd_spells.spells["Bless"],
+                    "Chaos": dnd_spells.spells["Bane"],
+                    "Neutrality": dnd_spells.spells["Protection from Evil and Good"]
                 }
                 if player.sorcdivsoulaffinity == None:
                     if param == "Y":
@@ -2846,8 +2973,11 @@ def dndchargen_characterbuilder(param, player):
                     if param == "N":
                         player.sorcdivsoulaffinity = random.choice(list(affinity_spells.keys()))
                 selected_spell = affinity_spells[player.sorcdivsoulaffinity]
+                selected_spell["Using Class"] = player.Class[i]
+                if player.Class[i] not in selected_spell["Spell List"]: #Adds it to the spell list, not prepared list
+                    selected_spell["Spell List"].append(player.Class[i])    
+                selected_spell_name = selected_spell["Name"]
                 player.spelllist[selected_spell_name] = selected_spell
-                selected_spell_name = selected_spell["name"]
                 player.notes["Divine Magic"] = f"Your link to the divine allows you to learn spells normally associated with the cleric class. When your Spellcasting feature lets you learn a sorcerer cantrip or a sorcerer spell of 1st level or higher, you can choose the new spell from the cleric spell list or the sorcerer spell list. You must otherwise obey all the restrictions for selecting the spell, and it becomes a sorcerer spell for you.\nIn addition, you chose an affinity for the source of your divine power, which is {player.sorcdivsoulaffinity}, and you lean an additional spell based on that affinity, which is {selected_spell}. It is a sorcerer spell for you, but it doesn't count against your number of sorcerer spells known. If you later replace this spell, you must replace it with a spell from the cleric spell list."
                 player.notes["Favored by the Gods"] = "Divine power guards your destiny. If you fail a saving throw or miss with an attack roll, you can roll 2d4 and add it to the total, possibly changing the outcome.\nOnce you use this feature, you can't use it again until you finish a short or long rest."
                 if player.sorclvl >= 6:
@@ -2949,9 +3079,12 @@ def dndchargen_characterbuilder(param, player):
                 if player.sorclunarmagicphase in lunar_phases_spells:
                     for level, spell in lunar_phases_spells[player.sorclunarmagicphase].items():
                         if player.sorclvl >= level:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.sorclunarmagicspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 lunar_spells_list = list(player.sorclunarmagicspells.keys())
                 lunar_spells_str = ", ".join(lunar_spells_list)
                 player.notes["Lunar Embodiment"] = f"You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know.\nWhenever you finish a long rest, you can choose what lunar phase manifests its power through your magic. While in the chosen phase, you can cast the associated spell once without expending a spell slot. Once you cast the associated spell(s) in this way, you can't do so again until you finish a long rest. The spell(s) given in this way currently are: {lunar_spells_str}"
@@ -2976,9 +3109,12 @@ def dndchargen_characterbuilder(param, player):
                 for level, spells in RunechildSpells.items():
                     if player.sorclvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.sorcrunechildspells[spell] = spell_data  # Assign to Runechild Sorcerer spell list
-                            player.spelllist[spell] = spell_data  # Assign to general spell list
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 sorcrunechildspells_list = list(player.sorcrunechildspells.keys())
                 sorcrunechildspells_str = ", ".join(sorcrunechildspells_list)
                 player.notes["Runic Magic"] = f"You learn additional spells when you reach certain levels in this class. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know. You currently know: {sorcrunechildspells_str}\nWhen you gain a level in this class, you can replace one spell you gained from this feature with another spell of the same level. The new spell must be an abjuration or transmutation spell from the sorcerer, warlock, or wizard spell list."
@@ -3084,10 +3220,13 @@ def dndchargen_characterbuilder(param, player):
                 }
                 # Assign spells based on player level
                 for level, spells in WarArchfeySpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.wararchfeyspells[spell] = spell_data
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
                             player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 wararchfeyspells_list = list(player.wararchfeyspells.keys())
                 wararchfeyspells_str = ", ".join(wararchfeyspells_list)                                               
@@ -3114,11 +3253,14 @@ def dndchargen_characterbuilder(param, player):
                 }
                 # Assign spells based on player level
                 for level, spells in WarCelestialSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warcelestialspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                                
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warcelestialspells_list = list(player.warcelestialspells.keys())
                 warcelestialspells_str = ", ".join(warcelestialspells_list)                                               
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warcelestialspells_str}."
@@ -3145,11 +3287,14 @@ def dndchargen_characterbuilder(param, player):
                 }
                 # Assign spells based on player level
                 for level, spells in WarFathomlessSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warfathomlessspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                               
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warfathomlessspells_list = list(player.warfathomlessspells.keys())
                 warfathomlessspells_str = ", ".join(warfathomlessspells_list)                     
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warfathomlessspells_str}."
@@ -3157,7 +3302,8 @@ def dndchargen_characterbuilder(param, player):
                 if player.warlvl >= 10:
                     player.wartentacledeepsdmg = "2d8"
                 player.notes["Tentacle of the Deeps"] = f"You can magically summon a spectral tentacle that strikes at your foes. As a bonus action, you create a 10-foot-long tentacle at a point you can see within 60 feet of you. The tentacle lasts for 1 minute or until you use this feature to create another tentacle.\nWhen you create the tentacle, you can make a melee spell attack against one creature within 10 feet of it. On a hit, the target takes {player.wartentacledeepsdmg} cold damage, and its speed is reduced by 10 feet until the start of your next turn.\nAs a bonus action on your turn, you can move the tentacle up to 30 feet and repeat the attack.\nYou can summon the tentacle a number of times equal to your Proficiency Bonus, or {player.profbonus} times, and you regain all expended uses when you finish a long rest."
-                player.notes["Gift of the Sea"] = "You gain a swimming speed of 40 feet, and you can breathe underwater."
+                player.notes["Gift of the Sea"] = "You can breathe underwater."
+                player.speed["Swim"] = 40
                 if player.warlvl >= 6:
                     player.notes["Oceanic Soul"] = "You are now even more at home in the depths. You gain resistance to cold damage. In addition, when you are fully submerged, any creature that is also fully submerged can understand your speech, and you can understand theirs."
                     player.warguardiancoildmg = "1d8"
@@ -3183,11 +3329,14 @@ def dndchargen_characterbuilder(param, player):
                 }
                 # Assign spells based on player level
                 for level, spells in WarFiendSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warfiendspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                              
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warfiendspells_list = list(player.warfiendspells.keys())
                 warfiendspells_str = ", ".join(warfiendspells_list)                                                       
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warfiendspells_str}."
@@ -3213,10 +3362,16 @@ def dndchargen_characterbuilder(param, player):
                                     print(f"{w} - {genie}")
                                 genieinput = int(input("Choose the kind of Genie your patron will be. "))
                                 if genieinput == 0:
-                                    player.wargeniekind = random.choice(GenK)
+                                    genie = random.choice(GenK)
+                                    geniefirstword = genie.split()[0]
+                                    geniefirstword = geniefirstword.replace(",", "")
+                                    player.wargeniekind = geniefirstword
                                     break
                                 elif 1 <= genieinput <= len(GenK):
-                                    player.wargeniekind = GenK[genieinput - 1]
+                                    genie = GenK[genieinput - 1]
+                                    geniefirstword = genie.split()[0]
+                                    geniefirstword = geniefirstword.replace(",", "")
+                                    player.wargeniekind = geniefirstword
                                     break
                                 else:
                                     print("Invalid choice, please choose a valid option.")
@@ -3262,12 +3417,18 @@ def dndchargen_characterbuilder(param, player):
                         5: ["Cone of Cold", "Wall of Ice"]
                     }
                 }
-                for level, spells in WarGenieSpells[geniekind].items():
-                    if player.warlocklvl >= level:
+                full_genie = player.wargeniekind
+                cleaned_words = full_genie.replace(",", "")  # Remove commas
+                genie = cleaned_words.split()[0]
+                for level, spells in WarGenieSpells[genie].items():
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.wargeniespells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                                  
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 wargeniespells_list = list(player.wargeniespells.keys())
                 wargeniespells_str = ", ".join(wargeniespells_list)                                                                             
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you, and you will also get spells associated with your patron's kind (dao, djinni, efreeti, or marid): {wargeniespells_str}."
@@ -3298,6 +3459,7 @@ def dndchargen_characterbuilder(param, player):
                                 print("Invalid input. Please enter a number.")
                     if param == "N":
                         player.wargenievessel = random.choice(Vessel)
+                print(f"Spell save DC: {player.spellsavedc}")
                 player.notes["Genie's Vessel"] = f"Your patron gifts you a magical vessel that grants you a measure of the genie's power. The vessel is a Tiny object, and you can use it as a spellcasting focus for your warlock spells. The Vessel was decided either randomly or via a questionnaire upon making the character. While you are touching the vessel, you can use it in the following ways:\nBottled Respite - As an action, you can magically vanish and enter your vessel, which remains in the space you left. The interior of the vessel is an extradimensional space in the shape of a 20-foot-radius cylinder, 20 feet high, and resembles your vessel. The interior is appointed with cushions and low tables and is a comfortable temperature. While inside, you can hear the area around your vessel as if you were in its space. You can remain inside the vessel up to a number of hours equal to twice your Proficiency Bonus, or {player.profbonus * 2} hours. You exit the vessel early if you use a bonus action to leave, if you die, or if the vessel is destroyed. When you exit the vessel, you appear in the unoccupied space closest to it. Any objects left in the vessel remain there until carried out, and if the vessel is destroyed, every object stored there harmlessly appears in the unoccupied spaces closest to the vessel's former space. Once you enter the vessel, you can't enter again until you finish a long rest.Genie's Wrath - Once during each of your turns when you hit with an attack roll, you can deal extra damage to the target equal to your Proficiency Bonus, or {player.profbonus}. The type of this damage is determined by your patron: bludgeoning (dao), thunder (djinni), fire (efreeti), or cold (marid).\nThe vessel's AC equals your spell save DC, or {player.spellsavedc['Warlock Spell Save DC']}. Its hit points equal your Warlock level + your Proficiency Bonus, or {player.warlvl + player.profbonus} hit points, and it is immune to poison and psychic damage.\nIf the vessel is destroyed or you lose it, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and the previous vessel is destroyed if it still exists. The vessel vanishes in a flare of elemental power when you die. Your vessel is: {player.wargenievessel}"
                 if player.warlvl >= 6:
                     player.notes["Elemental Gift"] = f"You begin to take on characteristics of your patron's kind. You now have resistance to a damage type determined by your patron's kind: bludgeoning (dao), thunder (djinni), fire (efreeti), or cold (marid).\nIn addition, as a bonus action, you can give yourself a flying speed of 30 feet that lasts for 10 minutes, during which you can hover. You can use this bonus action a number of times equal to your Proficieny Bonus, or {player.profbonus} times, and you regain all expended uses when you finish a long rest."
@@ -3319,11 +3481,14 @@ def dndchargen_characterbuilder(param, player):
                     5: ["Dominate Person", "Telekinesis"]
                 }
                 for level, spells in WarGreatOldOneSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.wargreatoldonespells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                               
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 wargreatoldonespells_list = list(player.wargreatoldonespells.keys())
                 wargreatoldonespells_str = ", ".join(wargreatoldonespells_list)                                             
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {wargreatoldonespells_str}."
@@ -3348,11 +3513,14 @@ def dndchargen_characterbuilder(param, player):
                     5: ["Banishing Smite", "Cone of Cold"]
                 }
                 for level, spells in WarHexbladeSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warhexbladespells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                              
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warhexbladespells_list = list(player.warhexbladespells.keys())
                 warhexbladespells_str = ", ".join(warhexbladespells_list)                                               
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warhexbladespells_str}."
@@ -3382,11 +3550,14 @@ def dndchargen_characterbuilder(param, player):
                     5: ["Antilife Shell", "Cloudkill"]
                 }
                 for level, spells in WarUndeadSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warundeadspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                               
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warundeadspells_list = list(player.warundeadspells.keys())
                 warundeadspells_str = ", ".join(warundeadspells_list)                                                  
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warundeadspells_str}."
@@ -3411,11 +3582,14 @@ def dndchargen_characterbuilder(param, player):
                     5: ["Contagion", "Legend Lore"]
                 }
                 for level, spells in WarUndyingSpells.items():
-                    if player.warlocklvl >= level:
+                    if player.warlvl >= level:
                         for spell in spells:
-                            spell_data = dnd_tools.spells[spell]
+                            spell_data = dnd_spells.spells[spell]
+                            spell_data["Using Class"] = player.Class[i]
                             player.warundyingspells[spell] = spell_data
-                            player.spelllist[spell] = spell_data  # Assign to general spell list                                
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
                 warundyingspells_list = list(player.warundyingspells.keys())
                 warundyingspells_str = ", ".join(warundyingspells_list)                                                  
                 player.notes["Expanded Spell List"] = f"{player.warpatron} lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you: {warundyingspells_str}."
@@ -3497,17 +3671,17 @@ def dndchargen_characterbuilder(param, player):
                         player.notes["Thicker than Water"] = f"The blood that flows through your veins is empowered with arcane vigor that mends wounds and helps preserve your life. Whenever a spell or magical effect causes you to regain hit points, you regain an additional number of hit points equal to your Proficiency Bonus, or {player.profbonus} hit points.\nIn addition, while you are concentrating on a spell, you have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks."
                 if player.subclass[i] == "Chronurgy Magic Wizard":
                     ChronurgySpells = {
-                        "Cantrip": dnd_tools.spells["Sapping Sting"],
-                        "1st Level Spell": dnd_tools.spells["Gift of Alacrity"],
+                        "Cantrip": dnd_spells.spells["Sapping Sting"],
+                        "1st Level Spell": dnd_spells.spells["Gift of Alacrity"],
                         "2nd Level Spell": [
-                            dnd_tools.spells["Fortune's Favor"], 
-                            dnd_tools.spells["Wristpocket"]
+                            dnd_spells.spells["Fortune's Favor"], 
+                            dnd_spells.spells["Wristpocket"]
                         ],
-                        "3rd Level Spell": dnd_tools.spells["Pulse Wave"],
-                        "5th Level Spell": dnd_tools.spells["Temporal Shunt"],
-                        "7th Level Spell": dnd_tools.spells["Tether Essence"],
-                        "8th Level Spell": dnd_tools.spells["Reality Break"],
-                        "9th Level Spell": dnd_tools.spells["Time Ravage"],
+                        "3rd Level Spell": dnd_spells.spells["Pulse Wave"],
+                        "5th Level Spell": dnd_spells.spells["Temporal Shunt"],
+                        "7th Level Spell": dnd_spells.spells["Tether Essence"],
+                        "8th Level Spell": dnd_spells.spells["Reality Break"],
+                        "9th Level Spell": dnd_spells.spells["Time Ravage"],
                     }                    
                     # Initialize an empty list to store spell descriptions
                     spell_summary = []
@@ -3537,9 +3711,17 @@ def dndchargen_characterbuilder(param, player):
                     for spell_level, spells in ChronurgySpells.items():
                         if isinstance(spells, list):  # If there are multiple spells for a level
                             for spell in spells:
-                                player.spelllist[spell["name"]] = spell  # Add each spell to the spelllist
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                         else:  # If there's a single spell for a level
-                            player.spelllist[spells["name"]] = spells  # Add the single spell to the spelllist                    
+                            spell_data = dnd_spells.spells[spells]
+                            spell_data["Using Class"] = player.Class[i]
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
 
                     player.notes["Expanded Spell List"] = f"The School of Chronurgy Magic lets you choose from an expanded list of spells developed through the manipulation of dunamis. The following Dunamancy Spells are added to the wizard spell list for you: {chronurgy_spells_str}"
                     player.notes["Chronal Shift"] = "You can magically exert limited control over the flow of time around a creature. As a reaction, after you or a creature you can see within 30 feet of you makes an attack roll, an ability check, or a saving throw, you can force the creature to reroll. You make this decision after you see whether the roll succeeds or fails. The target must use the result of the second roll.\nYou can use this ability twice, and you regain any expended uses when you finish a long rest."
@@ -3588,19 +3770,19 @@ def dndchargen_characterbuilder(param, player):
                         player.notes["Overchannel"] = "You can increase the power of your simpler spells. When you cast a wizard spell of 5th level or lower that deals damage and isn't a cantrip, you can deal maximum damage with that spell.\nThe first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity."
                 if player.subclass[i] == "Graviturgy Magic Wizard":
                     GraviturgySpells = {
-                        "Cantrip": dnd_tools.spells["Sapping Sting"],
-                        "1st Level Spell": dnd_tools.spells["Magnify Gravity"],
+                        "Cantrip": dnd_spells.spells["Sapping Sting"],
+                        "1st Level Spell": dnd_spells.spells["Magnify Gravity"],
                         "2nd Level Spell": [
-                            dnd_tools.spells["Fortune's Favor"], 
-                            dnd_tools.spells["Immovable Object"], 
-                            dnd_tools.spells["Wristpocket"]
+                            dnd_spells.spells["Fortune's Favor"], 
+                            dnd_spells.spells["Immovable Object"], 
+                            dnd_spells.spells["Wristpocket"]
                         ],
-                        "3rd Level Spell": dnd_tools.spells["Pulse Wave"],
-                        "4th Level Spell": dnd_tools.spells["Gravity Sinkhole"],
-                        "6th Level Spell": dnd_tools.spells["Gravity Fissure"],
-                        "7th Level Spell": dnd_tools.spells["Tether Essence"],
-                        "8th Level Spell": dnd_tools.spells["Dark Star"],
-                        "9th Level Spell": dnd_tools.spells["Ravenous Void"]
+                        "3rd Level Spell": dnd_spells.spells["Pulse Wave"],
+                        "4th Level Spell": dnd_spells.spells["Gravity Sinkhole"],
+                        "6th Level Spell": dnd_spells.spells["Gravity Fissure"],
+                        "7th Level Spell": dnd_spells.spells["Tether Essence"],
+                        "8th Level Spell": dnd_spells.spells["Dark Star"],
+                        "9th Level Spell": dnd_spells.spells["Ravenous Void"]
                     }
 
                     # Initialize an empty list to store spell descriptions
@@ -3632,9 +3814,17 @@ def dndchargen_characterbuilder(param, player):
                     for spell_level, spells in GraviturgySpells.items():
                         if isinstance(spells, list):  # If there are multiple spells for a level
                             for spell in spells:
-                                player.spelllist[spell["name"]] = spell  # Add each spell to the spelllist
+                                spell_data = dnd_spells.spells[spell]
+                                spell_data["Using Class"] = player.Class[i]
+                                if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                    spell_data["Spell List"].append(player.Class[i])                              
+                                player.spelllist[spell] = spell_data  # Assign to general spell list                            
                         else:  # If there's a single spell for a level
-                            player.spelllist[spells["name"]] = spells  # Add the single spell to the spelllist                    
+                            spell_data = dnd_spells.spells[spells]
+                            spell_data["Using Class"] = player.Class[i]
+                            if player.Class[i] not in spell_data["Spell List"]: #Adds it to the spell list, not prepared list
+                                spell_data["Spell List"].append(player.Class[i])                              
+                            player.spelllist[spell] = spell_data  # Assign to general spell list                            
 
                     player.notes["Expanded Spell List"] = f"The School of Graviturgy Magic lets you choose from an expanded list of spells developed through the manipulation of dunamis. The following Dunamancy Spells are added to the wizard spell list for you: {graviturgy_spells_str}"
                     player.wizadjustdensity = "Large or Smaller"
@@ -3698,5 +3888,4 @@ def dndchargen_characterbuilder(param, player):
                 player.notes["Spell Mastery"] = "You have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels."
             if player.wizlvl == 20:                    
                 player.notes["Signature Spells"] = "You gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal."
-
     ##after coding the feats list, do the skill/feat decision on the ability score increases, and one on.... at least variant human has it.

@@ -1,5 +1,7 @@
 import random
+import math
 import dnd_tools
+import dnd_spells
 
 def languagegen(param, PlLang, SLANG):
     if param == "Y":
@@ -160,7 +162,7 @@ def choicefourlang(param, PlLang, SLANG, langlist):
     return PlLang, SLANG  
  
 def artisantools(param, PlProf):
-    artisantools = [tool["Name"] for tool in dnd_tools.artisan_tools.values()]
+    artisantools = [tool['Name'] for tool in dnd_tools.artisan_tools.values()]
     if param == "Y":
         while True:
             try:
@@ -172,6 +174,9 @@ def artisantools(param, PlProf):
                     PlProf.append(random.choice(artisantools))
                     break
                 elif 1 <= arttools <= len(artisantools):
+                    print(f"Choice: You chose {arttools}")
+                    selected = artisantools[arttools - 1]
+                    print(f"Aka, you picked {selected}")
                     PlProf.append(artisantools[arttools - 1])     
                     break
                 else:
@@ -379,8 +384,10 @@ def choicefourskill2(param, skills_dict, skill1, skill2, skill3, skill4, skillna
     return (skills_dict[skill1], skills_dict[skill2], skills_dict[skill3], skills_dict[skill4])
 
 def musicalinstrthiev(param, PlProf):
+    print(f"PlProf is {PlProf}")
     musicalinstr = [tool["Name"] for tool in dnd_tools.musical_instr.values()] 
     all_tools = musicalinstr+[dnd_tools.kits["ThievKit"]["Name"]]
+    print(f"All tools are: {all_tools}")
 
     if param == "Y":
         while True:
@@ -401,6 +408,7 @@ def musicalinstrthiev(param, PlProf):
                 print("Invalid input. Please enter a number.") 
     if param == "N": 
         PlProf.append(random.choice(all_tools))
+    return PlProf
 
 def ArtTlNavTlLang(param, PlProf, PlLang, SLANG):
     artisantools = [tool["Name"] for tool in dnd_tools.artisan_tools.values()]
@@ -411,9 +419,9 @@ def ArtTlNavTlLang(param, PlProf, PlLang, SLANG):
             try:
                 print("0 - Random")
                 for idx, atll in enumerate(all_tools_langs, 1):
-                    if attl in SLANG:
-                        attl = dnd_tools.languages[attl]
-                    print(f"{idx} - {atll}")        
+                    if atll in SLANG:
+                        all_tool_lang = dnd_tools.languages[atll]
+                        print(f"{idx} - {all_tool_lang}")        
                 arttlnavtlslang = int(input("Choose an artisan tool, navigation tools, or language to be proficient in. "))
                 if arttlnavtlslang == 0:
                     rand_tool_lang = random.choice(all_tools_langs)
@@ -601,7 +609,7 @@ def abilityscores(param, abil_scores_dict):
     return abil_scores_dict
 
 def arttool2(param, PlProf):
-    artisantools = list(dnd_tools.artisan_tools.keys())
+    artisantools = [tool['Name'] for tool in dnd_tools.artisan_tools.values()]
     if param == "Y":
         while True:
             try:
@@ -1208,3 +1216,315 @@ def onehandedweaponprof(param, PlProf):
         Ohw_choice_rand = random.choice(OneHandedWeaponsNames)
         PlProf.append(Ohw_choice_rand)
     return PlProf
+
+
+def determine_modifier(casting_class):
+    class_to_stat = {
+        "Warlock": "CHA",
+        "Sorcerer": "CHA",
+        "Bard": "CHA",
+        "Wizard": "INT",
+        "Artificer": "INT",
+        "Cleric": "WIS",
+        "Druid": "WIS",
+        "Paladin": "CHA",
+        "Ranger": "WIS"
+    }
+
+    return class_to_stat.get(casting_class, "")
+
+def choose_spells(player, param):
+    for i, cl in enumerate(player.Class):
+        spelllistkeys = list(player.spelllist.keys())
+        for sp in spelllistkeys:               
+            using_class = player.spelllist[sp].get('Using Class', None)
+            spell_list = player.spelllist[sp]['Spell List']
+            if not using_class:
+                using_class = random.choice(player.Class)                
+            if using_class not in spell_list:
+                spell_list.append(using_class) #This for sp block adds using class to the class list of the spell if its not in there  
+        spell_levels = [
+            "1st Level Spell", "2nd Level Spell", "3rd Level Spell",
+            "4th Level Spell", "5th Level Spell", "6th Level Spell",
+            "7th Level Spell", "8th Level Spell", "9th Level Spell"
+        ]
+        ordinal_to_number = {
+            "1st": 1, "2nd": 2, "3rd": 3,
+            "4th": 4, "5th": 5, "6th": 6,
+            "7th": 7, "8th": 8, "9th": 9
+        }      
+
+        cantrips_known = player.notes.get(f"{cl} Cantrips Known", 0)
+        class_cantrips = []        
+        for dnd_sp in dnd_spells.spells:
+            dnd_spell = dnd_spells.spells[dnd_sp]
+            if ((dnd_spell["Level"] == 0) and (cl in dnd_spell["Spell List"]) and (dnd_sp not in player.spelllist)): 
+                class_cantrips.append(dnd_sp)
+        spells_known = player.notes.get(f"{cl} Spells Known", 6) #6 is the default start for a Wizard, really the # is the length of their spellbook, once i write the ability for wizards to write a spellbook, I will put the spell portion in an if cl is not "Wizard" check
+        class_spells = []
+        if cl == "Warlock":
+            spellslot_level = player.notes[f"{cl} Spell Slot Level"]
+            print(f"Spellslot Level is {spellslot_level}")
+            highest_ss = ordinal_to_number.get(spellslot_level)
+        else:
+            spell_slots_ordinal = []
+            for key in player.notes:
+                for spell_level in spell_levels:
+                    if f"{cl} {spell_level} Slots Known" in key:
+                        # Extract the ordinal ("1st", "2nd", etc.)
+                        first_word = key.split()[1]
+                        if first_word in ordinal_to_number and player.notes[key] > 0:
+                            spell_slots_ordinal.append(ordinal_to_number[first_word])
+            if len(spell_slots_ordinal) != 0:
+                highest_ss = max(spell_slots_ordinal)
+            else:
+                continue        
+        for dnd_sp in dnd_spells.spells:
+            dnd_spell = dnd_spells.spells[dnd_sp]
+            if (
+                0 < dnd_spell["Level"] <= highest_ss and
+                cl in dnd_spell["Spell List"] and
+                dnd_sp not in player.spelllist
+            ): 
+                class_spells.append(dnd_sp)         
+        if param == "Y":
+            cantrips_known_while = cantrips_known
+            #print(f"You can know {cantrips_known} cantrips") #debug
+            while cantrips_known_while != 0:
+                try:
+                    print("0 - Random")
+                    for idx, cc in enumerate(class_cantrips, 1):
+                        print(f"{idx} - {cc}")
+                    choice = int(input("Which cantrip would you like to add to your spelllist? "))
+                    if choice == 0:
+                        sp_choice = random.choice(class_cantrips)
+                        spell_choice = dnd_spells.spells[sp_choice].copy()
+                        spell_choice["Original Name"] = spell_choice['Name']
+                        if not spell_choice.get('Using Class'):
+                            spell_choice["Using Class"] = cl
+                        spell_choice["Modifier"] = determine_modifier(cl)                        
+                        spell_choice['Name'] = f"{spell_choice['Name']} ({cl} Cantrip)"
+                        player.spelllist[spell_choice['Name']] = spell_choice
+                        class_cantrips.remove(sp_choice)
+                        cantrips_known_while -= 1
+                    elif 1 <= choice <= len(class_cantrips):
+                        sp_choice = class_cantrips[choice - 1]
+                        spell_choice = dnd_spells.spells[sp_choice].copy()
+                        spell_choice["Original Name"] = spell_choice['Name']
+                        spell_choice["Using Class"] = cl
+                        spell_choice["Modifier"] = determine_modifier(cl)                        
+                        spell_choice['Name'] = f"{spell_choice['Name']} ({cl} Cantrip)"
+                        player.spelllist[spell_choice['Name']] = spell_choice
+                        class_cantrips.remove(sp_choice)
+                        cantrips_known_while -= 1                        
+                    else:
+                        print("Invalid choice, please choose a valid option.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")                          
+            spells_known_while = spells_known
+            #print(f"You can know {spells_known} spells") #debug
+            while spells_known_while != 0:
+                try:
+                    print("0 - Random")
+                    for idx, cs in enumerate(class_spells, 1):
+                        print(f"{idx} - {cs}")
+                    choice = int(input("Which spell would you like to add to your spelllist? "))
+                    if choice == 0:
+                        sp_choice = random.choice(class_spells)
+                        spell_choice = dnd_spells.spells[sp_choice].copy()
+                        spell_choice["Original Name"] = spell_choice['Name']
+                        spell_choice["Using Class"] = cl
+                        spell_choice["Modifier"] = determine_modifier(cl)
+                        spell_choice['Name'] = f"{spell_choice['Name']} ({cl} Spell)"
+                        player.spelllist[spell_choice['Name']] = spell_choice
+                        class_spells.remove(sp_choice)
+                        spells_known_while -= 1
+                    elif 1 <= choice <= len(class_spells):
+                        sp_choice = class_spells[choice - 1]
+                        spell_choice = dnd_spells.spells[sp_choice].copy()
+                        spell_choice["Original Name"] = spell_choice['Name']
+                        spell_choice["Using Class"] = cl
+                        spell_choice["Modifier"] = determine_modifier(cl)
+                        spell_choice['Name'] = f"{spell_choice['Name']} ({cl} Spell)"
+                        player.spelllist[spell_choice['Name']] = spell_choice
+                        class_spells.remove(sp_choice)
+                        spells_known_while -= 1                        
+                    else:
+                        print("Invalid choice, please choose a valid option.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")                 
+        elif param == "N":
+            random_cantrips = random.sample(class_cantrips, min(cantrips_known, len(class_cantrips)))
+            random_spells = random.sample(class_spells, min(spells_known, len(class_spells)))
+            print(f"Random cantrips are:\n{random_cantrips}")
+            print(f"Random cantrips are:\n{random_spells}")
+            for spell_name in random_cantrips:
+                spell = dnd_spells.spells[spell_name].copy()
+                spell["Original Name"] = spell['Name']
+                spell["Using Class"] = cl
+                spell["Modifier"] = determine_modifier(cl)                
+                spell['Name'] = f"{spell['Name']} ({cl} Cantrip)"
+                player.spelllist[spell['Name']] = spell
+
+            for spell_name in random_spells:
+                spell = dnd_spells.spells[spell_name].copy()
+                spell["Original Name"] = spell['Name']
+                spell["Using Class"] = cl
+                spell["Modifier"] = determine_modifier(cl)                
+                spell['Name'] = f"{spell['Name']} ({cl} Spell)"
+                player.spelllist[spell['Name']] = spell   
+        spelllistkeys = list(player.spelllist.keys())
+        spellllistkeys_all_before = '\n'.join(sp for sp in spelllistkeys) #debug
+        #print(f"{player.name} knows, before modification:" + "\n" + f"{spellllistkeys_all_before}") #debug
+        for sp in spelllistkeys:
+            #print(f"{player.name} now knows {sp}") #debug
+            spell = player.spelllist[sp]
+            spell['Attack Type'] = "Spell"
+            #print(f"Spell before hand, is {spell}") #debug
+            if cl == spell["Using Class"] or spell['Flavor'] == True: #added this line to stop wizard from overwriting warlock
+                if spell.get('Effect', {}).get('Type') == 'Damage':
+                    spell_level = spell.get('Level', None)
+                    spell['Proficient'] = True
+                    player.attacksspellcasting[sp] = spell.copy() 
+                    player.actions[sp] = spell.copy() 
+                    #print(f"This spell, after modifying, is: {player.actions[sp]}")
+                    #print(f"{player.attacksspellcasting[sp]['Name']} learned, added to attacks") #debug
+                else:
+                    player.actions[sp] = spell
+                    #player.actions[sp]['Name'] = f"{spell['Name']} ({cl} {spell_levels[lvl]})"
+            #print(f"Spell after hand is {spell}") #debug
+        #spelllistkeys = list(player.spelllist.keys())
+        #spellllistkeys_all_after = '\n'.join(sp for sp in spelllistkeys)
+        #print(f"{player.name} knows, after:" + "\n" + f"{spellllistkeys_all_after}") #This block of 3 is a debug block
+                 
+def switch_spells(player, cantrip, count):
+    spell_levels = [
+        "1st Level Spell", "2nd Level Spell", "3rd Level Spell",
+        "4th Level Spell", "5th Level Spell", "6th Level Spell",
+        "7th Level Spell", "8th Level Spell", "9th Level Spell"
+    ]
+    ordinal_to_number = {
+        "1st": 1, "2nd": 2, "3rd": 3,
+        "4th": 4, "5th": 5, "6th": 6,
+        "7th": 7, "8th": 8, "9th": 9
+    }       
+    for cl in player.Class:
+        class_spells = []
+        if cl == "Warlock":
+            spellslot_level = player.notes[f"{cl} Spell Slot Level"]
+            print(f"Spellslot Level is {spellslot_level}")
+            highest_ss = ordinal_to_number.get(spellslot_level)
+        else:
+            spell_slots_ordinal = []
+            for key in player.notes:
+                for spell_level in spell_levels:
+                    if f"{cl} {spell_level} Slots Known" in key:
+                        # Extract the ordinal ("1st", "2nd", etc.)
+                        first_word = key.split()[1]
+                        if first_word in ordinal_to_number and player.notes[key] > 0:
+                            spell_slots_ordinal.append(ordinal_to_number[first_word])
+            highest_ss = max(spell_slots_ordinal)             
+        spelllistkeys = list(player.spelllist.keys())
+        class_cantrips = []        
+        for dnd_sp in dnd_spells.spells:
+            dnd_spell = dnd_spells.spells[dnd_sp]
+            if (
+                dnd_spell["Level"] == 0 and
+                cl in dnd_spell["Spell List"] and
+                not any(dnd_sp in sp for sp in player.spelllist)
+            ): 
+                class_cantrips.append(dnd_sp)
+        for dnd_sp in dnd_spells.spells:
+            dnd_spell = dnd_spells.spells[dnd_sp]
+            #print(f"Dnd spell is {dnd_spell}") #debug
+            #print(f"Highest spell slot is {highest_ss}") #debug
+            #print(f"Dnd sp is {dnd_sp}") #debug
+            #print(f"Their spelllist is {player.spelllist}") #debug
+            if (
+                0 < dnd_spell["Level"] <= highest_ss and
+                cl in dnd_spell["Spell List"] and
+                not any(dnd_sp in sp for sp in player.spelllist)
+            ): 
+                class_spells.append(dnd_sp)                   
+        spells_switch = []
+        if cantrip == True:
+            for sp in spelllistkeys:
+                full_spell = player.spelllist[sp]
+                if full_spell['Level'] == 0:
+                    spells_switch.append(sp)
+        elif cantrip == False:
+            for sp in spelllistkeys:
+                full_spell = player.spelllist[sp]
+                if full_spell['Level'] != 0:
+                    spells_switch.append(sp)                    
+        #print(f"Currently you know:\n{'\n'.join(sp for sp in spelllistkeys)}") #debug
+        if cantrip == True:
+            spell_cantrip = "Cantrip" 
+            if count > 1:
+                spell_cantrip = "Cantrips"
+        elif cantrip == False:
+            spell_cantrip = "Spell" 
+            if count > 1:
+                spell_cantrip = "Spells"                
+        print(f"You can switch out {count} {spell_cantrip}")
+        print(f"Spells_switch looks like {spells_switch}")
+        #Gonna comment this while loop for the moment so we can debug this
+        while count > 0:
+            try:
+                print("0 - Skip exchanging spell")
+                for idx, splk in enumerate(spells_switch, 1):
+                    print(f"{idx} - {splk}")
+                choice = int(input("Which spell would you like to switch out, or would you? "))
+                if choice == 0:
+                    break
+                elif 1 <= choice <= len(spells_switch):
+                    if cantrip == True:
+                        known_cantrip = spells_switch[choice - 1]
+                        known_full_cantrip = player.spelllist[known_cantrip]
+                        while True:
+                            try:
+                                for idx, can in enumerate(class_cantrips, 1):
+                                    print(f"{idx} - {can}")
+                                switch_choice = int(input("Pick a new spell. "))
+                                if 1 <= switch_choice <= len(class_cantrips):
+                                    replace_cantrip = class_cantrips[switch_choice - 1]
+                                    replace_full_cantrip = dnd_spells.spells[replace_cantrip]
+                                    del player.spelllist[known_full_cantrip["Name"]]
+                                    replace_full_cantrip["Original Name"] = replace_full_cantrip["Name"]
+                                    replace_full_cantrip["Modifier"] = determine_modifier(cl)
+                                    replace_full_cantrip["Name"] = f"{replace_full_cantrip['Name']} ({cl} Cantrip)"
+                                    player.spelllist[replace_full_cantrip["Name"]] = replace_full_cantrip.copy()
+                                    break
+                                else:
+                                    print("Invalid choice, please choose a valid option.")
+                            except ValueError:
+                                print("Invalid input. Please enter a number.")                                   
+                    elif cantrip == False:
+                        #print(f"Class spells looks like {class_spells}") #debug
+                        known_spell = spells_switch[choice - 1]
+                        #print(f"You chose known spell to be {known_spell}") #debug
+                        known_full_spell = player.spelllist[known_spell]
+                        #print(f"So the full spell is {known_full_spell}") #debug
+                        while True:
+                            try:
+                                for idx, clsp in enumerate(class_spells, 1):
+                                    print(f"{idx} - {clsp}")
+                                switch_choice = int(input("Pick a new spell. "))
+                                if 1 <= switch_choice <= len(class_spells):
+                                    replace_spell = class_spells[switch_choice - 1]
+                                    replace_full_spell = dnd_spells.spells[replace_spell]
+                                    del player.spelllist[known_full_spell["Name"]]
+                                    replace_full_spell["Original Name"] = replace_full_spell["Name"]
+                                    replace_full_spell["Modifier"] = determine_modifier(cl)
+                                    replace_full_spell["Name"] = f"{replace_full_spell['Name']} ({cl} Cantrip)"
+                                    player.spelllist[replace_full_spell["Name"]] = replace_full_spell.copy()
+                                    break
+                                else:
+                                    print("Invalid choice, please choose a valid option.")
+                            except ValueError:
+                                print("Invalid input. Please enter a number.")                                   
+                    count -= 1
+                else:
+                    print("Invalid choice, please choose a valid option.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")

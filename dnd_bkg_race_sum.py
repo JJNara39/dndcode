@@ -14,7 +14,7 @@ def summation(param, player):
         CelesFeat = random.choice(CF)
         player.adtlinfonotes["Aasimar Celestial Feat"] = f"As an Aasimar, your Celestial Feature is {CelesFeat}"
         if player.subrace == "Protector Aasimar":
-            player.ability_scores["Wisdom"] += 1
+            player.ability_scores["WIS"] += 1
             AngG1 = "Tadriel"
             AngG2 = "Myllandra"
             AngG3 = "Seraphina"
@@ -34,9 +34,9 @@ def summation(param, player):
             player.adtlinfonotes["Protector Aasimar Angelic Guide"] = f"As an aasimar who has not turned evil, your Angelic Guide is {AngelicGuide}"
             player.adtlinfonotes["Protector Aasimar Angelic Nature"] = f"As an aasimar who has not turned evil, your Angelic Nature is {AngelicNature}"
         if player.subrace == "Scourge Aasimar":
-            player.ability_scores["Constitution"] += 1
+            player.ability_scores["CON"] += 1
         if player.subrace == "Fallen Aasimar":
-            player.ability_scores["Strength"] += 1
+            player.ability_scores["STR"] += 1
     if player.race == "Autognome":
         AgnHist1 = "Your creator gave you autonomy and urged you to follow your dreams."
         AgnHist2 = "Your creator died, leaving you to fend for yourself."

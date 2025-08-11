@@ -1628,11 +1628,11 @@ def dndCharGenBkg(param, player):
                     mpinv = int(input("Choose either a Musket or Pistol to add to your inventory. "))
                     if mpinv == 0:
                         chosen_weapon = random.choice(mskpi)
-                        player.equipment.append(dnd_tools.firearms[chosen_weapon].copy())
+                        player.equipment.append(chosen_weapon.copy())
                         break
                     elif 1 <= gsinv <= len(mskpi):
                         chosen_weapon = mskpi[mpinv - 1]
-                        player.equipment.append(dnd_tools.firearms[chosen_weapon].copy()) 
+                        player.equipment.append(chosen_weapon.copy()) 
                         break
                     else:
                         print("Invalid choice, please choose a valid option.")
@@ -1640,7 +1640,7 @@ def dndCharGenBkg(param, player):
                     print("Invalid input. Please enter a number.")
         if param == "N": 
             chosen_weapon = random.choice(mskpi)
-            player.equipment.append(dnd_tools.firearms[chosen_weapon].copy())          
+            player.equipment.append(chosen_weapon.copy())          
         player.skills_dict["AthlNum"], player.skills_dict["PercNum"], player.skills_dict["SurvNum"] = choicethreeskill2(param, player.skills_dict, "AthlNum", "PercNum", "SurvNum", dnd_tools.skills["Athletics"], dnd_tools.skills["Perception"], dnd_tools.skills["Survival"])
         player.languages, player.slang = languagegen(param, player.languages, player.slang)            
     if player.background == "Grinner":
@@ -1678,7 +1678,9 @@ def dndCharGenBkg(param, player):
         GrinF6 = "I can't afford to trust anyone. Not. Anyone"
         GrinF = [GrinF1, GrinF2, GrinF3, GrinF4, GrinF5, GrinF6]
         player.Flaw = random.choice(GrinF)
-        player.proficiencies = musicalinstrthiev(param, player.proficiencies)                                                         
+        
+        player.proficiencies = musicalinstrthiev(param, player.proficiencies)   
+        print(f"Proficiencies should be {player.proficiencies}")                                                      
         player.gold = 15
         eqp_items = ["A set of Fine Clothes", "A gold-plated ring depicting a smiling face"]
         player.equipment.append(dnd_tools.kits["DisgKit"].copy())
@@ -1966,7 +1968,7 @@ def dndCharGenBkg(param, player):
                     try:
                         print("0 - Random")
                         for idx, atmc in enumerate(ArtisanToolsMuleCartNames, 1):
-                            print(f"{idx} - {at}")
+                            print(f"{idx} - {atmc}")
                         atmcinv = int(input("Choose an Artisan Tool or a Mule/Cart to add to your inventory. "))
                         if atmcinv == 0:
                             atmc_rand = random.choice(ArtisanToolsMuleCart)
@@ -3634,7 +3636,7 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")
         if param == "N": 
-            chosen_item = random.choice(MusicalInstrDisgKit) 
+            chosen_item = random.choice(MusicalInstrDisgKitNames) 
             if chosen_item == "DisgKit":
                 player.equipment.append(dnd_tools.kits['DisgKit'].copy())
             else:
