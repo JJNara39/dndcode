@@ -1,11 +1,38 @@
 import random
+import math
 from dndchargen_languagesskills import *
+from PyPDF2 import PdfReader, PdfWriter
 
 def d6():
     result = random.randint(1,6)
     return result
 
-def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL):
+def fill_pdf(input_pdf_path, output_pdf_path, data):
+    # Read input file
+    with open(input_pdf_path, 'rb') as pdf_file:
+        reader = PdfReader(pdf_file)
+        writer = PdfWriter()
+
+        # Loop through all the pages
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            writer.add_page(page)
+
+            #Get form fields from that page
+            fields = reader.get_fields()
+
+            # If there are fields, fill them with field name
+            if fields:
+                for key, value in data.items():
+                    #Fill each field with name
+                    writer.update_page_form_field_values(
+                        writer.pages[page_num], {key: value}
+                    )
+        # Write the output pdf
+        with open(output_pdf_path, 'wb') as output_pdf:
+            writer.write(output_pdf)
+
+def summation(param, playername, charactername, plLvl, Gender, race, subrace, Height, Weight, walkingspeed, RaceNotes, Class, subclass, HollowOne, Lineage, PlLang, PlProf, back, Trait, Ideal, Bond, Flaw, BGL, EQP, skills_dict, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
     OtherRaceInfo = []
     if race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
@@ -72,8 +99,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
     if race == "Dragonborn":
         OtherRaceInfo.append("As a Dragonborn, if the DM allows, you come with Dragon Fear (feat) and Dragon Hide (feat).")
         if subrace == "Chromatic Dragonborn":
+            colors = ['Black', 'Blue', 'Green', 'Red', 'White']
             if param == "Y":
-                colors = ['Black', 'Blue', 'Green', 'Red', 'White']
                 print("0 - Random")
                 print("1 - Black")
                 print("2 - Blue")
@@ -112,8 +139,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
                 BWDT = "Cold"    
             print(f"You are a {Gender} {DragonColor} {subrace}, if need be, please see Fizban's Treasury of Dragons (tm) for more details.")
         if subrace == "Gem Dragonborn":
+            Gemgems = ['Amethyst', 'Crystal', 'Emerald', 'Sapphire', 'Topaz']            
             if param == "Y":        
-                Gemgems = ['Amethyst', 'Crystal', 'Emerald', 'Sapphire', 'Topaz']
                 print("0 - Random")
                 print("1 - Amethyst")
                 print("2 - Crystal")
@@ -152,8 +179,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
                 BWDT = "Necrotic"  
             print(f"You are a {Gender} {DragonGem} {subrace}, if need be, please see Fizban's Treasury of Dragons (tm) for more details.")
         if subrace == "Metallic Dragonborn":
+            metals = ['Brass', 'Bronze', 'Copper', 'Gold', 'Silver']
             if param == "Y":
-                metals = ['Brass', 'Bronze', 'Copper', 'Gold', 'Silver']
                 print("0 - Random")
                 print("1 - Brass")
                 print("2 - Bronze")
@@ -371,8 +398,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         ETrk7 = "A small songbird made of enamel, gold wire, and pre-cious stone; uttering the songbird's name in Elvish causes the trinket to emit that bird's birdsong."
         ETrk8 = "A smallenamel flower that, when put in one's hair, animates, tying back the wearer's hair with a living vine with flowers; plucking a single flower from this vine returns it to its inanimate form."
         ETrk = [ETrk1, ETrk2, ETrk3, ETrk4, ETrk5, ETrk6, ETrk7, ETrk8]
-        ElvenTrinket = random.choice(ETrk)    
-        OtherRaceInfo.append(f"As an elf, you also get a trinket: {ElvenTrinket}")
+        ElvenTrinket = random.choice(ETrk)  
+        EQP.append(ElvenTrinket)  
         OtherRaceInfo.append("As an Elf, if the DM allows, you also have Elven Accuracy (feat).")
 
     if race == "Fairy":
@@ -773,6 +800,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
     MusicalInstrumentsRand = random.choice(MusicalInstruments)    
     
     OtherBackgroundInfo = []
+    AdditionalInfo = []
+    AlliesOrg = []
+    if back == "Acolyte":
+        AdditionalInfo.append("Feature: Shelter of the Faithful - As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle. You might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.")
+    if back == "Anthropologist":
+        AdditionalInfo.append("Feature: Cultural Chameleon - Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a race whose culture you've adopted.")
+        AdditionalInfo.append("Feature: Adept Linguist - You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level.")        
     if back == "Archaeologist":
         ArchSI1 = "10-foot pole"
         ArchSI2 = "Medallion"
@@ -782,9 +816,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         ArchSI6 = "Sledgehammer"
         ArchSI7 = "Hooded lantern"
         ArchSI8 = "Whip"
-        ArchSI = [ArchSI1,  ArchSI2, ArchSI3, ArchSI4, ArchSI5, ArchSI6, ArchSI7, ArchSI8]
+        ArchSI = [ArchSI1, ArchSI2, ArchSI3, ArchSI4, ArchSI5, ArchSI6, ArchSI7, ArchSI8]
         ArchaeSigItem = random.choice(ArchSI)
-        OtherBackgroundInfo.append(f"As an Archaeologist, your Signature Item is: {ArchaeSigItem}")    
+        EQP.append(ArchaeSigItem)
+        AdditionalInfo.append(f"Feature: Dust Digger - Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you., that item being {ArchaeSigItem}")    
+        AdditionalInfo.append("Feature: Historical Knowledge - When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old.")
+    if back == "Ashari":
+        AdditionalInfo.append("Feature: Elemental Harmony - Growing up surrounded by wild elemental magics has attuned your senses to those chaotic forces, enabling you to subtly bend them to your will. As an action, you channel minor magic involving the element of your chosen Ashari order, giving you one of the following abilities: Pyrah - You instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, you snuff out a flame of the same size; Terrah - You instantaneously create a small rock no larger than a gold coin. The rock appears in your hand, then turns to dust after 1 minute; Vesrah - You instantaneously create enough hot or cold water to fill a small drinking vessel; Zephrah - You create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone's hair.")
     if back == "Astral Drifter":
         AsDrDC1 = "Corellon, god of art and magic (chaotic good)"
         AsDrDC2 = "Tymora, god of good fortune (chaotic good)"
@@ -798,7 +836,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         AsDrDC10 = "Ptah, god of knowledge and secrets (lawful neutral)"
         AsDrDC = [AsDrDC1, AsDrDC2, AsDrDC3, AsDrDC4, AsDrDC5, AsDrDC6, AsDrDC7, AsDrDC8, AsDrDC9, AsDrDC10]
         AstralDrifDivCont = random.choice(AsDrDC)
-        OtherBackgroundInfo.append(f"As an Astral Drifter, your Divine Contact: {AstralDrifDivCont}")
+        AdditionalInfo.append("Longevity - You are 20d6 years older than you look, because you have spent that much time in the Astral Sea without aging.")
+        AdditionalInfo.append(f"Feature: Divine Contact - You gain the Magic Initiate feat from the Player's Handbook and must choose cleric for the feat; In the Astral Sea, you crossed paths with a wandering deity. The encounter was brief and nonviolent, yet it made a lasting impression on you. This deity saw fit to share one secret or obscure bit of cosmic lore with you. Work with your DM to determine the details of this knowledge and its impact on the campaign; that contact being {AstralDrifDivCont}.")
     if back == "Athlete":
         AthFavEv1 = "Marathon"
         AthFavEv2 = "Long-distance running"
@@ -810,8 +849,11 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         AthFavEv8 = "Pentathlon (running, long jump, discus, javelin, wrestling)"
         AthFavEv = [AthFavEv1, AthFavEv2, AthFavEv3, AthFavEv4, AthFavEv5, AthFavEv6, AthFavEv7, AthFavEv8]
         AthleteFavoriteEvent = random.choice(AthFavEv)    
-        OtherBackgroundInfo.append(f"As an Athlete, your Favorite Event is: {AthleteFavoriteEvent}")
+        AdditionalInfo.append(f"Favored Event - While many athletes practice various games and events, most excel at a single form of competition. You excel in {AthleteFavoriteEvent}.")
+        AdditionalInfo.append("Feature: Echoes of Victory - You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories. When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone there who admires you and is willing to provide information or temporary shelter. Between adventures, you might compete in athletic events sufficient enough to maintain a comfortable lifestyle, as per the 'Practicing a Profession' downtime activity in chapter 8 of the Player's Handbook.")
     if back == "Azorius Functionary":
+        AdditionalInfo.append("Feature: Legal Authority - You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace. People mind their manners in your presence and avoid drawing your attention; they assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to (though it might cause more problems than it solves when you're dealing with incorrigible lawbreakers). If you abuse this privilege, though, you can get in serious trouble with your superiors and even be stripped of your position.")
+        AlliesOrg.append("Azorius Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature; For you, the spells on the Azorius Guild Spells table are added to the spell list of your spellcasting class. (If you are a multiclass character with multiple spell lists, these spells are added to all of them.) Cantrip: Friends, Message; 1st: Command, Ensnaring Strike; 2nd: Arcane Lock, Calm Emotions, Hold Person; 3rd: Clairvoyance, Counterspell; 4th: Compulsion, Divination; 5th: Dominate Person. Your magic often takes the form of blue or golden runes floating and glowing in the air in circular patterns or of shimmering azure barriers of magical energy.")
         AzFuAzC1 = "As a teenager, I was a page for a prominent judge."
         AzFuAzC2 = "One of my childhood friends is now a precognitive mage in service of the guild."
         AzFuAzC3 = "I joined the Azorius hoping to impress an arrester whom I admire."
@@ -842,9 +884,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         AzFuNAC10 = "While growing up, I was bullied by a brat who's now a hybrid in the Simic Combine."
         AzFuNAC = [AzFuNAC1, AzFuNAC2, AzFuNAC3, AzFuNAC4, AzFuNAC5, AzFuNAC6, AzFuNAC7, AzFuNAC8, AzFuNAC9, AzFuNAC10]
         AzoriusFuncNonAzoriusCont = random.choice(AzFuNAC)
-        OtherBackgroundInfo.append(f"Your Azorius Contact Ally: {AzoriusFuncAzoriusCont1}")
-        OtherBackgroundInfo.append(f"Your Azorius Contact Rival: {AzoriusFuncAzoriusCont2}")
-        OtherBackgroundInfo.append(f"Your Non-Azorius Contact: {AzoriusFuncNonAzoriusCont}")        
+        AlliesOrg.append(f"Your Azorius Contact Ally: {AzoriusFuncAzoriusCont1}")
+        AlliesOrg.append(f"Your Azorius Contact Rival: {AzoriusFuncAzoriusCont2}")
+        AlliesOrg.append(f"Your Non-Azorius Contact: {AzoriusFuncNonAzoriusCont}")        
     if back == "Bandit Defector":
         BanSp1 = "Lookout"
         BanSp2 = "Lifter"
@@ -854,7 +896,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         BanSp6 = "Captain"
         BanSp = [BanSp1,  BanSp2, BanSp3, BanSp4, BanSp5, BanSp6]
         BanditDefSpec = random.choice(BanSp)   
-        OtherBackgroundInfo.append(f"As a Bandit Defector, your Bandit Specialty is: {BanditDefSpec}")  
+        AdditionalInfo.append(f"Bandit Specialty - The Bandit Coalition is a rather loose organization of rogues and brigands, but there is still a degree of specialization within the ranks. This ensures that everyone knows what their job is and lessens confusion in the heat of a robbery. Your bandit specialty is {BanditDefSpec}. Lookouts typically watch the roads for any signs of Perch Guard patrols, signalling the team to bail if a heist looks too risky. They also keep an eye out for potential marks. Lifters are the specialist thieves of an operation. They are usually as adept at pick-pocketing as they are at sneaking up behind a cart to liberate its valuables. Thugs are the muscle of a bandit group, and use their size and strength to intimidate merchants into giving up without a fight. They also keep other bandits in line, at the captain’s discretion. Runners are the messengers and scouts of the Coalition, serving to smuggle pilfered goods to fences. Additionally, they pass information throughout the different camps of the organization. Their job often finds them working alone which makes them particularly vulnerable. Hustlers are inveterate con-artists. Through careful planning and execution, their diversions can keep cart drivers occupied just long enough for the lifters to do their work, or create a seamless opening for an ambush. Captains are the glue that holds each bandit team together, providing leadership, and stamping out dissention where necessary, often with force. They are figures that inspire with their skill and bravado.")
+        AdditionalInfo.append("Feature: Bandit Routes - As someone who once assisted in countless highway robberies, you are familiar with the roads of the Wood and escape paths used by bandits. When you are not in combat, you (and companions you lead) can travel between locations that cut through forested areas twice as fast as your speed would normally allow.")
     if back == "Boros Legionnaire":             
         BoLgC1 = "A former comrade in arms was promoted into the prestigious Sunhome Guard."
         BoLgC2 = "One of my parents is a ranking Boros officer."
@@ -886,9 +929,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         BoLgNonC10 = "I keep running into a particular Simic biomancer, and I enjoy the arguments that inevitably result."
         BoLgNonC = [BoLgNonC1, BoLgNonC2, BoLgNonC3, BoLgNonC4, BoLgNonC5, BoLgNonC6, BoLgNonC7, BoLgNonC8, BoLgNonC9, BoLgNonC10]
         BorosLegonNonCont = random.choice(BoLgNonC)        
-        OtherBackgroundInfo.append(f"Your Boros Contact Ally: {BorosLegonCont1}")
-        OtherBackgroundInfo.append(f"Your Boros Contact Rival: {BorosLegonCont2}")
-        OtherBackgroundInfo.append(f"Your Non-Boros Contact: {BorosLegonNonCont}")   
+        AlliesOrg.append(f"Your Boros Contact Ally: {BorosLegonCont1}")
+        AlliesOrg.append(f"Your Boros Contact Rival: {BorosLegonCont2}")
+        AlliesOrg.append(f"Your Non-Boros Contact: {BorosLegonNonCont}")
+        AdditionalInfo.append("Feature: Legion Station - You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use, and you can gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid a salary of 1 gp (a Boros-minted 1-zino coin) per week, which (combined with free lodging in your garrison) enables you to maintain a poor lifestyle between adventures.")  
+        AlliesOrg.append("Boros Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature; For you, the spells on the Boros Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Fire Bolt, Sacred Flame; 1st: Guiding Bolt, Heroism; 2nd: Aid, Scorching Ray; 3rd: Beacon of Hope, Blinding Smite; 4th: Death Ward, Wall of Fire; 5th: Flame Strike. Your magic often features dramatic bursts of flame or radiance. When you cast beneficial spells on your allies, they appear momentarily surrounded with halos of bright fire.")
+    if back == "Celebrity Adventurer's Scion":
+        AdditionalInfo.append("Feature: Name Dropping - You know and have met any number of powerful people across the land—and some of them might even remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Additionally, the common folk treat you with deference, and your heritage and the stories you tell might be good for a free meal or a place to sleep.")
     if back == "Charlatan":
         S1 = "I cheat at games of chance."
         S2 = "I shave coins or forge documents."
@@ -898,8 +945,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S6 = "I convince people that worthless junk is worth their hard-earned money."
         SCM = [S1, S2, S3, S4, S5, S6]
         Scam = random.choice(SCM)   
-        OtherBackgroundInfo.append(f"Your favored scam: {Scam}")     
-    if (back == "Criminal") or (back == "Spy") or (back == "Urban Bounty Hunter"):
+        AdditionalInfo.append(f"Feature: Favorite Schemes - Every charlatan has an angle they use in preference to other schemes, your favorite scam being: {Scam}")
+        AdditionalInfo.append("Feature: False Identity - You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.")  
+    if back == "City Watch":
+        AdditionalInfo.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
+    if back == "Clasp Member":
+        AdditionalInfo.append("Feature: A Favor in Turn - You have gained enough clout in the Clasp that you can call in a favor from your contacts whenever you're close enough to a center of syndicate activity. A request for a favor can be no longer than 20 words, and is passed up the chain to an undisclosed Spireling for approval. This favor can take on any form subject to the approval of the GM, who decides how it is fulfilled. If muscle is requested, an NPC member of the Clasp can temporarily aid your party. If money is needed, a small loan can be provided. If you've been imprisoned, Clasp operatives can look into breaking you out or paying off the jailer. At some point, the favor will be called in for repayment, often without warning. Refusing the call will result in your termination—literally. You might be called on to commit a specific burglary, or to pressure an Emonian dignitary to reveal a secret at an upcoming ball. The Clasp might even demand that you assassinate a specific person, with no questions asked or answered. It's the GM's prerogative to ensure that the syndicate's request is proportionate to the favor they bestowed—or that they compensate you in other ways for a service that goes beyond the scope of repaying the initial favor.")
+    if (back == "Criminal") or (back == "Spy"): 
         S1 = "Blackmailer"
         S2 = "Burglar"
         S3 = "Enforcer"
@@ -910,7 +962,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S8 = "Smuggler"
         SPC = [S1, S2, S3, S4, S5, S6]
         Specialty = random.choice(SPC)
-        OtherBackgroundInfo.append(f"Your criminal speciality: {Specialty}")    
+        AdditionalInfo.append(f"Feature: Criminal Specialty - There are many kinds of criminals, and within a thieves' guild or similar criminal organization, individual members have particular specialties. Even criminals who operate outside of such organizations have strong preferences for certain kinds of crimes over others. Your specialty is {Specialty}")  
+        AdditionalInfo.append("Feature: Criminal Contact - You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you.")
+    if back == "Urban Bounty Hunter":
+        AdditionalInfo.append("Feature: Ear to the Ground - You are in frequent contact with people in the segment of society that your chosen quarries move through. These people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of high society. This connection comes in the form of a contact in any city you visit, a person who provides information about the people and places of the local area.")
     if back == "Dimir Operative":
         DORI1 = "My parents belong to this guild, and I let them think I'm following in their footsteps."
         DORI2 = "I've been assigned to track this guild's activities."
@@ -948,10 +1003,12 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
                 randDimirOperGuild2Rival = True
             except IndexError:
                 DimirOperGuild2Rival = random.choice(DimOpC)
-        OtherBackgroundInfo.append(f"Your Reason for Infiltrating: {DimirOperReasonInfil}")  
-        OtherBackgroundInfo.append(f"Your Dimir Guild Contact: {DimirOperGuildCon}")
-        OtherBackgroundInfo.append(f"Your 2nd Guild Contact Ally: {DimirOperGuild2Ally}")
-        OtherBackgroundInfo.append(f"Your 2nd Guild Contact Rival: {DimirOperGuild2Rival}")    
+        AdditionalInfo.append(f"Feature: False Identity - You have more than one identity. The one you wear most of the time makes you appear to be a member of a guild other than House Dimir. You have documentation, established acquaintances, and disguises that allow you to assume that persona and fit into the secondary guild. Whenever you choose, you can drop this identity and blend into the guildless masses of the city. The reason for your infiltration is {DimirOperReasonInfil}")
+        AlliesOrg.append(f"Your Dimir Guild Contact: {DimirOperGuildCon}")
+        AlliesOrg.append(f"Your 2nd Guild Contact Ally: {DimirOperGuild2Ally}")
+        AlliesOrg.append(f"Your 2nd Guild Contact Rival: {DimirOperGuild2Rival}")    
+        AdditionalInfo.append("Dimir Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature: For you, the spells on the Dimir Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Encode Thoughts, Mage Hand; 1st: Disguise Self, Sleep; 2nd: Detect Thoughts, Pass Without Trace; 3rd: Gaseous Form, Meld into Stone, Nondetection; 4th: Arcane Eye, Freedom of Movement; 5th: Modify Memory. Your magic is meant to be subtle and undetectable, but it might pull shadows or clouds of mist around you as you cast your spells.")
+        EQP.append("The starting equipment for your secondary guild")
     if (back == "Entertainer") or (back == "Gladiator"):
         S1 = "Actor"
         S2 = "Dancer"
@@ -965,7 +1022,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S10 = "Tumbler"
         ROU = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Routine = random.choice(ROU)     
-        OtherBackgroundInfo.append(f"Your entertainer routine: {Routine}")            
+        AdditionalInfo.append(f"Feature: Entertainer Routines - A good entertainer is versatile, spicing up every performance with a variety of different routines, your routine being {Routine}.")
+        AdditionalInfo.append("Feature: By Popular Demand - You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you.")   
     if back == "Faceless":  
         FacPers1 = "A flamboyant spy or brigand"
         FacPers2 = "The incarnation of a nation or people"
@@ -979,7 +1037,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         FacPers10 = "A disguise with animalistic or monstrous characteristics, meant to inspire fear"
         FacPers = [FacPers1, FacPers2, FacPers3, FacPers4, FacPers5, FacPers6, FacPers7, FacPers8, FacPers9, FacPers10]
         FacelessPersona = random.choice(FacPers)  
-        OtherBackgroundInfo.append(f"As a Faceless, your Persona is: {FacelessPersona}") 
+        AdditionalInfo.append(f"Faceless Persona - A faceless character adventures behind the mask of a public persona. This persona is as natural to them as their hidden, true face, but it disguises their identity, your Faceless Persona being {FacelessPersona}")
+        AdditionalInfo.append("Feature: Dual Personalities - Most of your fellow adventurers and the world know you as your persona. Those who seek to learn more about you- your weaknesses, your origins, your purpose-find themselves stymied by your disguise. Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self. By removing your disguise and revealing your true face, you are no longer identifiable as your persona. This allows you to change appearances between your two personalities as often as you wish, using one to hide the other or serve as convenient camouflage. However, should someone realize the connection between your persona and your true self, your deception might lose its effectiveness.")
+    if back == "Faction Agent":
+        AdditionalInfo.append("Feature: Factions of the Sword Coast - The lack of large, centralized governments in the North and along the Sword Coast is likely directly responsible for the proliferation of secret societies and conspiracies in those lands. If your background is as an agent for one of the main factions of the North and Sword Coast, here are some possibilities. The Harpers: Founded more than a millennium ago, disbanded and reorganized several times, the Harpers remain a powerful, behind-the-scenes agency, which acts to thwart evil and promote fairness through knowledge, rather than brute force. Harper agents are often proficient in Investigation, enabling them to be adept at snooping and spying. They often seek aid from other Harpers, sympathetic bards and innkeepers, rangers, and the clergy of gods that are aligned with the Harpers' ideals. The Order of the Gauntlet: One of the newest power groups in Faerûn, the Order of the Gauntlet has an agenda similar to that of the Harpers. Its methods are vastly different, however: bearers of the gauntlet are holy warriors on a righteous quest to crush evil and promote justice, and they never hide in the shadows. Order agents tend to be proficient in Religion, and frequently seek aid from law enforcement friendly to the order's ideals, and the clergy of the order's patron gods. The Emerald Enclave: Maintaining balance in the natural order and combating the forces that threaten that balance is the twofold goal of the Emerald Enclave. Those who serve the faction are masters of survival and living off the land. They are often proficient in Nature, and can seek assistance from woodsmen, hunters, rangers, barbarian tribes, druid circles, and priests who revere the gods of nature. The Lords' Alliance: On one level, the agents of the Lords' Alliance are representatives of the cities and other governments that constitute the alliance. But, as a faction with interests and concerns that transcend local politics and geography, the Alliance has its own cadre of individuals who work on behalf of the organizations, wider agenda. Alliance agents are required to be knowledgeable in History, and can always rely on the aid of the governments that are part of the Alliance, plus other leaders and groups who uphold the Alliance's ideals. The Zhentarim: In recent years, the Zhentarim have become more visible in the world at large, as the group works to improve its reputation among the common people. The faction draws employees and associates from many walks of life, setting them to tasks that serve the goals of the Black Network but aren't necessarily criminal in nature. Agents of the Black Network must often work in secret, and are frequently proficient in Deception. They seek aid from the wizards, mercenaries, merchants and priesthoods allied with the Zhentarim.")
+        AdditionalInfo.append("Feature: Save Hamen - As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities.")
+    if back == "Failed Merchant":
+        AdditionalInfo.append("Feature: Supply Chain - From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information.")
     if back == "Far Traveler":
         WhyH1 = "Emissary"
         WhyH2 = "Exile"
@@ -989,7 +1053,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WhyH6 = "Wanderer"
         WhyH = [WhyH1, WhyH2, WhyH3, WhyH4, WhyH5, WhyH6]
         WhyHere = random.choice(WhyH)  
-        OtherBackgroundInfo.append(f"Your Reason for being here: {WhyHere}")       
+        AdditionalInfo.append(f"Feature: Why Are You Here? - A far traveler might have set out on a journey for one of a number of reasons, and the departure from his or her homeland could have been voluntary or involuntary, that reason being {WhyHere}.")   
+        AdditionalInfo.append("Feature: Where Are You From? - The most important decision in creating a far traveler background is determining your homeland. The places discussed here are all sufficiently distant from the North and the Sword Coast to justify the use of this background. Evermeet: The fabled elven islands far to the west are home to elves who have never been to Faerun. They often find it a harsher place than they expected when they do make the trip. If you are an elf, Evermeet is a logical (though not mandatory) choice for your homeland. Most of those who emigrate from Evermeet are either exiles, forced out for committing some infraction of elven law, or emissaries who come to Faerun for a purpose that benefits elven culture or society; Halruaa: Located on the southern edges of the Shining South, and hemmed in by mountains all around, the magocracy of Halruaa is a bizarre land to most in Faerun who know about it. Many folk have heard of the strange skyships the Halruaans sail, and a few know of the tales that even the least of their people can work magic. Halruaans usually make their journeys into Faerun for personal reasons, since their government has a strict stance against unauthorized involvement with other nations and organizations. You might have been exiled for breaking one of Halruaa's many byzantine laws, or you could be a pilgrim who seeks the shrines of the gods of magic; Kara-Tur: The continent of Kara-Tur, far to the east of Faerûn, is home to people whose customs are unfamiliar to the folk of the Sword Coast. If you come from Kara-Tur, the people of Faerûn likely refer to you as Shou, even if that isn't your true ethnicity, because that's the blanket term they use for everyone who shares your origin. The folk of Kara-Tur occasionally travel to Faerûn as diplomats or to forge trade relations with prosperous merchant cartels. You might have come here as part of some such delegation, then decided to stay when the mission was over; Mulhorand: From the terrain to the architecture to the god-kings who rule over these lands, nearly everything about Mulhorand is a lien to someone from the Sword Coast. You likely experienced the same sort of culture shock when you left your desert home and traveled to the unfamiliar climes of northern Faerûn. Recent events in your homeland have led to the abolition of slavery, and a corresponding increase in the traffic between Mulhorand and the distant parts of Faerun; Those who leave behind Mulhorand's sweltering deserts and ancient pyramids for a glimpse at a different life do so for many reasons. You might be in the North simply to see the strangeness this wet land has to offer, or because you have made too many enemies among the desert communities of your home; Sossal: Few have heard of your homeland, but many have questions about it upon seeing you. Humans from Sossal seem crafted from snow, with alabaster skin and white hair, and typically dressed in white. Sossal exists far to the northeast, hard up against the endless ice to the north and bounded on its other sides by hundreds of miles of the Great Glacier and the Great Ice Sea. No one from your nation makes the effort to cross such colossal barriers without a convincing reason. You must fear something truly terrible or seek something incredibly important; Zakhara: As the saying goes among those in Faerûn who know of the place, 'To get to Zakhara, go south. Then go south some more.' Of course, you followed an equally long route when you came north from your place of birth. Though it isn't unusual for Zakharans to visit the southern extremes of Faerûn for trading purposes, few of them stray as far from home as you have. You might be traveling to discover what wonders are to be found outside the deserts and sword-like mountains of your homeland, or perhaps you are on a pilgrimage to understand the gods that others worship, so that you might better appreciate your own deities; The Underdark: Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the race that occupies the place but you might also have grown up there after being captured and brought below when you were a child. If you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving 'home' probably has something to do with getting away from a bad situation.")  
+        AdditionalInfo.append("Feature: All Eyes on You - Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign. Curious glances are directed your way wherever you go, which can be a nuisance, but you also gain the friendly interest of scholars and others intrigued by far-off lands, to say nothing of everyday folk who are eager to hear stories of your homeland. You can parley this attention into access to people and places you might not otherwise have, for you and your traveling companions. Noble lords, scholars, and merchant princes, to name a few, might be interested in hearing about your distant homeland and people.")
     if back == "Feylost": 
         FeyWMa1 = "Your eyes swirl with iridescent colors."
         FeyWMa2 = "You have a sweet scent, like that of nectar or honey."
@@ -1011,8 +1077,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         FeyWV8 = "Unicorn"
         FeyWV = [FeyWV1, FeyWV2, FeyWV3, FeyWV4, FeyWV5, FeyWV6, FeyWV7, FeyWV8]
         FeywildVisitor = random.choice(FeyWV)     
-        OtherBackgroundInfo.append(f"As a Feylost, your Feywild Mark: {FeyMark}")
-        OtherBackgroundInfo.append(f"As a Feylost, your Feywild Visitor: {FeywildVisitor}")      
+        AdditionalInfo.append(f"Fey Mark - You were transformed in some small way by your stay in the Feywild and gained a fey mark: {FeyMark}")
+        AdditionalInfo.append(f"Feywild Visitor - Whenever you're sound asleep or in a deep trance during a long rest, a spirit of the Feywild might pay you a visit: {FeywildVisitor}, No harm ever comes to you as a result of such visits, which can last for minutes or hours, and you remember each visit when you wake up. Conversations that occur with a visitor can contain any number of things, from messages and insights to nonsense and red herrings, at the DM's discretion. Such conversations are always conducted in a language you can understand, even if the Feywild visitor can't speak that language normally.")      
+        AdditionalInfo.append("Feature: Feywild Connection - Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Because of this, friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.")
     if back == "Fisher":  
         FshT1 = "Lobster Wrestling. You fought in hand-to-hand combat with an immense lobster."
         FshT2 = "It Dragged the Boat. You nearly caught a fish of monstrous size that pulled your boat for miles."
@@ -1024,7 +1091,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         FshT8 = "Love Story. You fell in love with a creature of pure water, but your brief romance ended tragically."
         FshT = [FshT1, FshT2, FshT3, FshT4, FshT5, FshT6, FshT7, FshT8]
         FisherTale = random.choice(FshT)   
-        OtherBackgroundInfo.append(f"As a Fisher, your Fisher Tale: {FisherTale}")                                      
+        AdditionalInfo.append("Feature: Harvest The Water - You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle while working as a fisher, and you can catch enough food to feed yourself and up to ten other people each day.")
+        AdditionalInfo.append(f"Fishing Tale - You can tell a compelling tale. whether tall or true. to impress and entertain others. Once a day, you can tell your story to willing listeners. At the DM's discretion, a number of those listeners become friendly toward you; this is not a magical effect, and continued amicability on their part depends on your actions. That tale being: {FisherTale}")                                      
     if back == "Folk Hero":
         S1 = "I stood up to a tyrant’s agents."
         S2 = "I saved people during a natural disaster."
@@ -1038,20 +1106,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S10 = "Recruited into a lord’s army, I rose to leadership and was commended for my heroism."
         DEF = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Event = random.choice(DEF)        
-        OtherBackgroundInfo.append(f"Your defining event: {Event}")
-    if back == "Inheritor":
-        S1 = "I stood up to a tyrant’s agents."
-        S2 = "I saved people during a natural disaster."
-        S3 = "I stood alone against a terrible monster."
-        S4 = "I stole from a corrupt merchant to help the poor."
-        S5 = "I led a militia to fight off an invading army."
-        S6 = "I broke into a tyrant’s castle and stole weapons to arm the people."
-        S7 = "I trained the peasantry to use farm implements as weapons against a tyrant’s soldiers."
-        S8 = "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
-        S9 = "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin."
-        S10 = "Recruited into a lord’s army, I rose to leadership and was commended for my heroism."
-        DEF = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
-        Event = random.choice(DEF)  
+        AdditionalInfo.append(f"Feature: Defining Event - You previously pursued a simple profession among the peasantry, perhaps as a farmer, miner, servant, shepherd, woodcutter, or gravedigger. But something happened that set you on a different path and marked you for greater things, that event being: {Event}")        
+    if back == "Inheritor":  
         Inh1 = "A document such as a map, a letter, or a journal."
         Inh2 = "A trinket (see 'Trinkets' in chapter 5 of PHB)."
         Inh3 = "A trinket (see 'Trinkets' in chapter 5 of PHB)."
@@ -1062,8 +1118,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         Inh8 = "A tattoo or other body marking."
         Inh = [Inh1, Inh2, Inh3, Inh4, Inh5, Inh6, Inh7, Inh8]
         Inheritance = random.choice(Inh)
-        OtherBackgroundInfo.append(f"Your defining event: {Event}")
-        OtherBackgroundInfo.append(f"Your inheritance: {Inheritance}")
+        EQP.append(Inheritance)
+        AdditionalInfo.append("Feature: Inheritance - Work with your DM to come up with details for your inheritance: Why is your inheritance so important, and what is its full story? You might prefer for the DM to invent these details as part of the game, allowing you to learn more about your inheritance as your character does. The DM is free to use your inheritance as a story hook, sending you on quests to learn more about its history or true nature, or confronting you with foes who want to claim it for themselves or prevent you from learning what you seek. The DM also determines the properties of your inheritance and how they figure into the item's history and importance. For instance, the object might be a minor magic item, or one that begins with a modest ability and increases in potency with the passage of time. Or, the true nature of your inheritance might not be apparent at first and is revealed only when certain conditions are met. When you begin your adventuring career, you can decide whether to tell your companions about your inheritance right away. Rather than attracting attention to yourself, you might want to keep your inheritance a secret until you learn more about what it means to you and what it can do for you.")
+    if back == "Gambler":
+        AdditionalInfo.append("Feature: Never Tell Me the Odds - Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.")
     if back == "Gate Warden":
         GtWPT1 = "Strange events and otherworldly creatures don't faze me."
         GtWPT2 = "I think in terms of exchange: something for something, nothing for nothing."
@@ -1072,7 +1130,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GtWPT5 = "I've seen enough to know that you can't take anyone at face value, so I scrutinize everyone."
         GtWPT6 = "I have a superstitious habit I picked up from my gate-town, such as touching iron when I'm nervous or arranging objects in a specific order."
         GtWPT = [GtWPT1, GtWPT2, GtWPT3, GtWPT4, GtWPT5, GtWPT6]
-        GateWardenPersTrait = random.choice(GtWPT)
+        Trait = random.choice(GtWPT)
         GtWTr1 = "A tiny vial pendant filled with a drop of honey that glows faintly"
         GtWTr2 = "A small lead ingot that has a strange thumbprint pressed into it and whispers when held tightly"
         GtWTr3 = "Two lodestone spheres that chime when they attract each other"
@@ -1081,8 +1139,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GtWTr6 = "A ring made from a chain link that, once donned, won't come off without pulling painfully hard"
         GtWTr = [GtWTr1, GtWTr2, GtWTr3, GtWTr4, GtWTr5, GtWTr6]
         GateWardenTrinket = random.choice(GtWTr)
-        OtherBackgroundInfo.append(f"Your personality trait: {GateWardenPersTrait}")
-        OtherBackgroundInfo.append(f"As a Gate Warden, your Trinket: {GateWardenTrinket}")
+        EQP.append(GateWardenTrinket)
+        AdditionalInfo.append("Feature: Planar Infusion - Living in a gate-town or a similar location steeped you in planar energy. You gain the Scion of the Outer Planes feat. In addition, you know where to find free, modest lodging and food in the community you grew up in.")
     if back == "Giant Foundling":
         FoundO1 = "You were found as a baby by a family of nomadic giants who raised you as one of their own."
         FoundO2 = "A family of stone giants rescued you when you fell into a mountain chasm, and you have lived with them underground ever since."
@@ -1100,8 +1158,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GFPT6 = "The world always feels too big, and I'm afraid I'll never find my place in it."
         GFPT = [GFPT1, GFPT2, GFPT3, GFPT4, GFPT5, GFPT6]
         GiantFoundlingPT = random.choice(GFPT)        
-        OtherBackgroundInfo.append(f"As a Giant Foundling, your Foundling Origin: {FoundlingOrigin}")
-        OtherBackgroundInfo.append(f"As a Giant Foundling, your Personality Trait: {GiantFoundlingPT}")        
+        AdditionalInfo.append(f"As a Giant Foundling, your Foundling Origin: {FoundlingOrigin}")
+        AlliesOrg.append(f"As a Giant Foundling, your Personality Trait: {GiantFoundlingPT}")        
         OtherBackgroundInfo.append("With the Giant Foundling background, if the DM allows, you can have the feats: Skilled (feat) or Tough (feat), as well as Strike of the Giants (feat).")
     if back == "Golgari Agent":
         GoAgC1 = "One of my parents is an elite assassin, a member of the Ochran."
@@ -1134,9 +1192,11 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GoAgNonC10 = "I regularly pick up refuse from beneath a Simic laboratory, and sometimes I talk to the researcher who dumps it there."
         GoAgNonC = [GoAgNonC1, GoAgNonC2, GoAgNonC3, GoAgNonC4, GoAgNonC5, GoAgNonC6, GoAgNonC7, GoAgNonC8, GoAgNonC9, GoAgNonC10]
         GolgariAgentNonGolgariCont = random.choice(GoAgNonC)
-        OtherBackgroundInfo.append(f"Your Golgari Contact Ally: {GolgariAgentContactAlly}")
-        OtherBackgroundInfo.append(f"Your Golgari Contact Rival: {GolgariAgentContactRival}")
-        OtherBackgroundInfo.append(f"Your Golgari Non-Guild Contact: {GolgariAgentNonGolgariCont}")
+        AlliesOrg.append(f"Your Golgari Contact Ally: {GolgariAgentContactAlly}")
+        AlliesOrg.append(f"Your Golgari Contact Rival: {GolgariAgentContactRival}")
+        AlliesOrg.append(f"Your Golgari Non-Guild Contact: {GolgariAgentNonGolgariCont}")
+        AdditionalInfo.append("Feature: Undercity Paths - You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city. When you aren't in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths of the undercity are haunted by dangers that rarely brave the light of the surface world, so your journey isn't guaranteed to be safe.")
+        AdditionalInfo.append("Golgari Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Golgari Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Dancing Lights, Spare the Dying; 1st: Entangle, Ray of Sickness; 2nd: Protection from Poison, Ray of Enfeeblement, Spider Climb; 3rd: Animate Dead, Plant Growth; 4th: Giant Insect, Grasping Vine; 5th: Cloudkill, Insect Plague. Golgari magic is often accompanied by a sickly green glow and a rotting stench.")
     if (back == "Grey Hunter") or (back == "Whitestone Rifle Corps"):
         CurRel1 = "I retired honorably from the Rifle Corps—and now it's time for me to pursue my own adventures."
         CurRel2 = "I'm on an important mission to protect Whitestone or guard one of our allies."
@@ -1146,7 +1206,11 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         CurRel6 = "My weapon was stolen. I built a new one, but I can't return home until I've tracked down the thief and recovered the original."
         CurRel = [CurRel1, CurRel2, CurRel3, CurRel4, CurRel5, CurRel6]
         CurrentRelationship = random.choice(CurRel)
-        OtherBackgroundInfo.append(f"Your current relationship: {CurrentRelationship}")        
+        AdditionalInfo.append(f"You are—or were—a member of an elite and trusted band of Whitestone's staunchest defenders. Your current relationship: {CurrentRelationship}")
+        if back == "Grey Hunter":
+            AdditionalInfo.append("Feature: Grey Hunter - As elite as they are, the members of the Whitestone Rifle Corps do not represent the apex of firearms skill in Whitestone. A clandestine group of elite soldiers and survivalists is drawn secretly from the Rifle Corps ranks. Called the Grey Hunters, these soldiers are special operatives of the de Rolo family, and loyally serve as spies, bodyguards, and even assassins when the job requires it. Though few officially know of them, rumors of the Grey Hunters' existence swirl constantly throughout the city-state, often in response to their activities after having been loaned out to protect Whitestone's allies. You are one of these Grey Hunters, even if just a trainee (if you're starting your campaign at low levels). You have the ear of the lord and lady of Whitestone, though you must exercise this privilege graciously lest you lose it.")
+        if back == "Whitestone Rifle Corps":    
+            AdditionalInfo.append("Feature: Legacy of Secrecy - You have been entrusted with the use and care of a weapon both powerful and terrifying. The rifle you wield might transform the face of warfare and life in Tal'Dorei. It is a weapon that haunts the mind of its creator, Percival de Rolo, manifesting as a pain that lives always behind his kind eyes. You were granted a musket or a pistol by your commander in the Whitestone Rifle Corps. This weapon is a symbol of your status, and when you display it, other folk around you—particularly adventurers, mercenaries, guards, engineers, and weapons enthusiasts—treat you differently. You might be seen as a noble defender of the people, a selfish hoarder of power, or anything in between, at the GM's discretion.")
     if back == "Grinner":
         FavCS1 = "Zan's Comin' Back. This hopeful Tal 'Dorei folk song declares the inevitable return of a just ruler. Use it to seek out potential allies."
         FavCS2 = "Blow Fire Down the Coast. A rowdy fighting song from the Clovis Concord, this ditty talks of blasting up pirate ships. Use it to encourage battle."
@@ -1156,7 +1220,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         FavCS6 = "Dirge for the Emerald Fire. This elven song supposedly has thousands of obscure verses. Use the first two verses to spread news of death or defeat."
         FavCS = [FavCS1, FavCS2, FavCS3, FavCS4, FavCS5, FavCS6]
         FavoriteCodeSong = random.choice(FavCS)
-        OtherBackgroundInfo.append(f"Your Favorite Code-Song: {FavoriteCodeSong}")
+        AdditionalInfo.append(f"Favorite Code-Song - All members of the Golden Grin have learned a handful of folk songs in their travels, and use those songs to send secret codes and alert fellow Grinners to danger. Your Favorite Code-Song: {FavoriteCodeSong}")
+        AdditionalInfo.append("Feature: Ballad of The Grinning Fool - Like every Grinner, you know how to find a hideout. In any city of 10,000 people or more on the Menagerie Coast or in the lands of the Dwendalian Empire, you can play the 'Ballad of the Grinning Fool' in a major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. This shelter might be discontinued if it becomes too dangerous to hide you, at the DM's discretion. This feature must be used with caution, for not all who know the ballad are your friends. Some are traitors, counterspies, or agents of tyranny.")
     if back == "Grounded": 
         GrComPl1 = "I am considered weak or unskilled and many treat me like a fledgling."
         GrComPl2 = "I am looked upon as a traitor to my people."
@@ -1166,7 +1231,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GrComPl6 = "I have found a new community on the forest floor."
         GrComPl = [GrComPl1, GrComPl2, GrComPl3, GrComPl4, GrComPl5, GrComPl6]
         GroundedCommunityPlace = random.choice(GrComPl)
-        OtherBackgroundInfo.append(f"As a Grounded, your Community Place: {GroundedCommunityPlace}")
+        AdditionalInfo.append(f"An Odd Bird - Among birdfolk you are somewhere between an oddity and an outcast. Some consider your aversion to heights a rejection of birdfolk culture, leading many to find you off-putting. As a Grounded, your Community Place: {GroundedCommunityPlace}")
+        AdditionalInfo.append("Feature: Find Another Path - Since you have lived your life close to the ground, you are familiar with the undergrowth in the same way other birdfolk are familiar with the canopy. You can always recall the general layout of the terrain around you while traveling along the forest floor. If your path is ever blocked by an obstacle that requires you to climb or otherwise gain height to circumvent it, you can always find a way around, so long as such a path exists. Additionally, you are adept at finding shelter in the Wood while traveling, and can usually locate a suitable safe shelter (a cave, a tree hollow, or bramble thicket) somewhere on the forest floor for you and up to five other creatures.")
     if back == "Gruul Anarch":
         GrAnGC1 = "One of my parents is a renowned warrior in my clan."
         GrAnGC2 = "My sibling has the ear of the clan chief."
@@ -1190,9 +1256,15 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         GrAnNGC10 = "I stopped a Simic biomancer from trapping wild beasts to perform vile experiments on them."
         GrAnNGC = [GrAnNGC1, GrAnNGC2, GrAnNGC3, GrAnNGC4, GrAnNGC5, GrAnNGC6, GrAnNGC7, GrAnNGC8, GrAnNGC9, GrAnNGC10]
         GruulAnarchNonGuildContact = random.choice(GrAnNGC)
-        OtherBackgroundInfo.append(f"Your Gruul Guild Contact: {GruulAnarchGuildContact}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {GruulAnarchNonGuildContact}")
-    if (back == "Clan Crafter") or (back == "Courtier") or (back == "Guild Artisan") or (back == "Guild Merchant"):
+        AlliesOrg.append(f"Your Gruul Guild Contact: {GruulAnarchGuildContact}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {GruulAnarchNonGuildContact}")
+        AdditionalInfo.append("Feature: Rubblebelt Refuge - You are intimately familiar with areas of the city that most people shun: ruined neighborhoods where wurms rampaged, overgrown parks that no hand has tended in decades, and the vast, sprawling rubblebelts of broken terrain that civilized folk have long abandoned. You can find a suitable place for you and your allies to hide or rest in these areas. In addition, you can find food and fresh water in these areas for yourself and up to five other people each day.")
+        AdditionalInfo.append("Gruul Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Gruul Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Fire Bolt, Produce Flame; 1st: Compelled Duel, Speak With Animals, Thunderwave; 2nd: Beast Sense, Shatter; 3rd: Conjure Animals, Conjure Barrage; 4th: Dominate Beast, Stoneskin; 5th: Destructive Wave. Fueled by the fire of rage burning in your heart, your magic is almost always accompanied by fiery effects, such as flames smoldering behind your eyes or dancing over your hands.")
+    if back == "Clan Crafter":
+        AdditionalInfo.append("Feature: Respect of the Stout Folk - As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do. You always have free room and board in any place where shield dwarves or gold dwarves dwell, and the individuals in such a settlement might vie among themselves to determine who can offer you (and possibly your compatriots) the finest accommodations and assistance.")
+    if back == "Courtier":
+        AdditionalInfo.append("Feature: Court Functionary - Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for the favors you seek, and what the current intrigues of interest in the group are.")
+    if (back == "Guild Artisan") or (back == "Guild Merchant"):
         S1 = "Alchemists and apothecaries"
         S2 = "Armorers, locksmiths, and fine smiths"
         S3 = "Brewers, distillers, and vintners"
@@ -1215,7 +1287,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S20 = "Woodcarvers, coopers, and bowyers"
         BUS = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S20]
         Business = random.choice(BUS)                
-        OtherBackgroundInfo.append(f"Your Guild Business: {Business}")
+        AdditionalInfo.append(f"Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Your Guild Business: {Business}")
+        AdditionalInfo.append("Feature: Guild Membership - As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings. Guilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers. You must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.")
     if back == "Haunted One":
         HaOHarE1 = "A monster that slaughtered dozens of innocent people spared your life, and you don’t know why."
         HaOHarE2 = "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night."
@@ -1229,7 +1302,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         HaOHarE10 = "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams."
         HaOHarE = [HaOHarE1, HaOHarE2, HaOHarE3, HaOHarE4, HaOHarE5, HaOHarE6, HaOHarE7, HaOHarE8, HaOHarE9, HaOHarE10]
         HauntedOneHarrowingEvent = random.choice(HaOHarE)        
-        OtherBackgroundInfo.append(f"As a Haunted one, your Harrowing Event: {HauntedOneHarrowingEvent}")
+        AdditionalInfo.append(f"Feature: Harrowing Event - Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape. Your Harrowing Event: {HauntedOneHarrowingEvent}")
+        AdditionalInfo.append("Feature: Heart of Darkness - Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone.")
     if back == "Hermit":
         S1 = "I was searching for spiritual enlightenment."
         S2 = "I was partaking of communal living in accordance with the dictates of a religious order."
@@ -1241,7 +1315,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S8 = "I was a pilgrim in search of a person, place, or relic of spiritual significance."
         SEC = [S1, S2, S3, S4, S5, S6, S7, S8]
         Seclusion = random.choice(SEC)
-        OtherBackgroundInfo.append(f"Your life of seclusion: {Seclusion}")
+        AdditionalInfo.append(f"Feature: Life of Seclusion - What was the reason for your isolation, and what changed to allow you to end your solitude? Your life of seclusion: {Seclusion}")
+        AdditionalInfo.append("Feature: Discovery - The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society. Work with your DM to determine the details of your discovery and its impact on the campaign.")
     if back == "House Agent":
         HoAg1 = "Cannith, which specializes in Alchemist's supplies and tinker's tools"
         HoAg1Skl = [AlchSupp, TinkTools]
@@ -1272,20 +1347,20 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         HoAg = [HoAg1, HoAg2, HoAg3, HoAg4, HoAg5, HoAg6, HoAg7, HoAg8, HoAg9, HoAg10, HoAg11, HoAg12, HoAg13]
         HouseAgentProf = random.choice(HoAg)
         if param == "Y":
-            OtherBackgroundInfo.append(f"0 - Random")
-            OtherBackgroundInfo.append(f"1 - Cannith, which specializes in Alchemist's supplies and tinker's tools")
-            OtherBackgroundInfo.append(f"2 - Deneith, which specializes in One gaming set and vehicles (land)")
-            OtherBackgroundInfo.append(f"3 - Ghallanda, which specializes in Brewer's supplies and cook's utensils")
-            OtherBackgroundInfo.append(f"4 - Jorasco, which specializes in Alchemist's supplies and herbalism kit")
-            OtherBackgroundInfo.append(f"5 - Kundarak, which specializes in Thieves' tools and tinker's tools")
-            OtherBackgroundInfo.append(f"6 - Lyrandar, which specializes in Navigator's tools and vehicles (air and sea)")
-            OtherBackgroundInfo.append(f"7 - Medani, which specializes in Disguise kit and thieves' tools")
-            OtherBackgroundInfo.append(f"8 - Orien, which specializes in One gaming set and vehicles (land)")
-            OtherBackgroundInfo.append(f"9 - Phiarlan, which specializes in Disguise kit and one musical instrument")
-            OtherBackgroundInfo.append(f"10 - Sivis, which specializes in Calligrapher's tools and forgery kit")
-            OtherBackgroundInfo.append(f"11 - Tharashk, which specializes in One gaming set and thieves' tools")
-            OtherBackgroundInfo.append(f"12 - Thuranni, which specializes in One musical instrument and poisoner's kit")
-            OtherBackgroundInfo.append(f"13 - Vadalis, which specializes in Herbalism kit and vehicles (land)")      
+            print(f"0 - Random")
+            print(f"1 - Cannith, which specializes in Alchemist's supplies and tinker's tools")
+            print(f"2 - Deneith, which specializes in One gaming set and vehicles (land)")
+            print(f"3 - Ghallanda, which specializes in Brewer's supplies and cook's utensils")
+            print(f"4 - Jorasco, which specializes in Alchemist's supplies and herbalism kit")
+            print(f"5 - Kundarak, which specializes in Thieves' tools and tinker's tools")
+            print(f"6 - Lyrandar, which specializes in Navigator's tools and vehicles (air and sea)")
+            print(f"7 - Medani, which specializes in Disguise kit and thieves' tools")
+            print(f"8 - Orien, which specializes in One gaming set and vehicles (land)")
+            print(f"9 - Phiarlan, which specializes in Disguise kit and one musical instrument")
+            print(f"10 - Sivis, which specializes in Calligrapher's tools and forgery kit")
+            print(f"11 - Tharashk, which specializes in One gaming set and thieves' tools")
+            print(f"12 - Thuranni, which specializes in One musical instrument and poisoner's kit")
+            print(f"13 - Vadalis, which specializes in Herbalism kit and vehicles (land)")      
             hoag = int(input("Choose which house you wish to be an agent of. "))
             if hoag == 1:
                 for item in HoAg1Skl:
@@ -1342,8 +1417,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         HoAgR8 = "Covert Operations"
         HoAgR = [HoAgR1, HoAgR2, HoAgR3, HoAgR4, HoAgR5, HoAgR6, HoAgR7, HoAgR8]
         HouseAgentRole = random.choice(HoAgR)  
-        OtherBackgroundInfo.append(f"Your House, and thus proficiencies, is: {HouseAgentProf}")
-        OtherBackgroundInfo.append(f"Your House Role: {HouseAgentRole}")    
+        AdditionalInfo.append(f"Your House, and thus proficiencies, is: {HouseAgentProf}")
+        AdditionalInfo.append(f"Role - You always gather information for your house, but when a baron give you a specific mission, what sort of work do you do? Your House Role: {HouseAgentRole}")    
+        AdditionalInfo.append("Feature: House Connections - As an agent of your house, you can always get food and lodging for yourself and your friends at a house enclave. When the house assigns you a mission, it will usually provide you with the necessary supplies and transportation. Beyond this, you have many old friends, mentors, and rivals in your house, and you may encounter one of them when you interact with a house business. The degree to which such acquaintances are willing to help you depends on your current standing in your house.")
     if back == "Investigator":
         InvFirstCa1 = "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend’s innocence and starting your career as a detective."
         InvFirstCa2 = "You’re told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you."
@@ -1355,7 +1431,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         InvFirstCa8 = "You got a job with an agency that investigates crimes that local law enforcement can’t solve. You often wonder which you value more, the truth or your pay."
         InvFirstCa = [InvFirstCa1, InvFirstCa2, InvFirstCa3, InvFirstCa4, InvFirstCa5, InvFirstCa6, InvFirstCa7, InvFirstCa8]
         InvestigatorFirstCase = random.choice(InvFirstCa) 
-        OtherBackgroundInfo.append(f"As an Investigator, your first case: {InvestigatorFirstCase}") 
+        AdditionalInfo.append(f"As an Investigator, your first case: {InvestigatorFirstCase}") 
+        AdditionalInfo.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
     if back == "Izzet Engineer":
         IzEnC1 = "An older relative is a member of the guild's board of directors."
         IzEnC2 = "I know a sprite who carries important messages among the guild's laboratories."
@@ -1387,9 +1464,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         IzEnNIC10 = "I compare notes and techniques with a Simic scientist over lunch sometimes."
         IzEnNIC = [IzEnNIC1, IzEnNIC2, IzEnNIC3, IzEnNIC4, IzEnNIC5, IzEnNIC6, IzEnNIC7, IzEnNIC8, IzEnNIC9, IzEnNIC10]
         IzzetEngrNonIzzetCont = random.choice(IzEnNIC)  
-        OtherBackgroundInfo.append(f"Your Izzet Guild Contact Ally: {IzzetEngrContAlly}")
-        OtherBackgroundInfo.append(f"Your Izzet Guild Contact Rival: {IzzetEngrContRival}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {IzzetEngrNonIzzetCont}")              
+        AlliesOrg.append(f"Your Izzet Guild Contact Ally: {IzzetEngrContAlly}")
+        AlliesOrg.append(f"Your Izzet Guild Contact Rival: {IzzetEngrContRival}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {IzzetEngrNonIzzetCont}")    
+        AdditionalInfo.append("Feature: Urban Infrastructure - The popular conception of the Izzet League is based on mad inventions, dangerous experiments, and explosive blasts. Much of that perception is accurate, but the league is also involved with mundane tasks of construction and architecture — primarily in crafting the infrastructure that allows Ravnicans to enjoy running water, levitating platforms, and other magical and technological wonders. You have a basic knowledge of the structure of buildings, including the stuff behind the walls. You can also find blueprints of a specific building in order to learn the details of its construction. Such blueprints might provide knowledge of entry points, structural weaknesses, or secret spaces. Your access to such information isn't unlimited. If obtaining or using the information gets you in trouble with the law, the guild can't shield you from the repercussions.")          
+        AdditionalInfo.append("Izzet Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Izzet Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Produce Flame, Shocking Grasp; 1st: Chaos Bolt, Create or Destroy Water, Unseen Servant; 2nd: Heat Metal, Rope Trick; 3rd: Call Lightning, Elemental Weapon, Glyph of Warding; 4th: Conjure Minor Elementals, Divination, Otiluke's Resilient Sphere; 5th: Animate Objects, Conjure Elemental. Your spells tend to be loud, flashy, or explosive, even when the effect is unremarkable. If you use an arcane focus, it probably takes the form of an intricate device that could include metal gauntlets, glass canisters, copper tubing, and leather straps attaching it to your body.")
+    if back == "Knight":
+        AdditionalInfo.append("Feature: Retainers - If your character has a noble background, you may select this background feature instead of Position of Privilege. You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.")
     if back == "Knight of Solamnia":
         KnSolTr1 = "A flat silver disk you record your heroics upon"
         KnSolTr2 = "A piece of a fallen knight's armor"
@@ -1406,9 +1487,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         KnSolPT5 = "I wish my deeds to become the stuff of legends just like those of the knighthoods heroic founders."
         KnSolPT6 = "A dishonorable act drove me to become a knight. I have acted with honor ever since."
         KnSolPT = [KnSolPT1, KnSolPT2, KnSolPT3, KnSolPT4, KnSolPT5, KnSolPT6]
-        KnightSolamniaPersTrait = random.choice(KnSolPT)    
-        OtherBackgroundInfo.append(f"As a Knight of Solamnia, your Trinket: {KnightSolamniaTrinket}")
-        OtherBackgroundInfo.append(f"Your personality trait: {KnightSolamniaPersTrait}")
+        Trait = random.choice(KnSolPT)    
+        EQP.append(KnightSolamniaTrinket)
+        AdditionalInfo.append("Feature: Squire of Solamnia - You gain the Squire of Solamnia feat. In addition, the Knights of Solamnia provide you free, modest lodging and food at any of their fortresses or encampments.")
     if back == "Lorehold Student":   
         LoStPT1 = "I thrive on esoteric lore. The more obscure the historical references I can include in everyday conversation, the better."
         LoStPT2 = "By searching for these lost artifacts, I hope to find who I really am along the way."
@@ -1417,7 +1498,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         LoStPT5 = "I can speak eloquently about the historical ramifications of an ancient war. But ask me to add two-digit numbers together, and I'm a mess."
         LoStPT6 = "In the end, it's all just entropy. Everything falls apart someday."
         LoStPT = [LoStPT1, LoStPT2, LoStPT3, LoStPT4, LoStPT5, LoStPT6]
-        LoreholdStuPersTrait = random.choice (LoStPT)
+        Trait = random.choice(LoStPT)
         LoStTr1 = "A map made of concentric circles that can be rotated around the page"
         LoStTr2 = "A puzzle box bedecked with amber"
         LoStTr3 = "A dented brass compass with a red needle"
@@ -1426,8 +1507,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         LoStTr6 = "A broken dagger with a wavy blade and a serpentine hilt"
         LoStTr = [LoStTr1, LoStTr2, LoStTr3, LoStTr4, LoStTr5, LoStTr6]
         LoreholdStuTrinket = random.choice (LoStTr)  
-        OtherBackgroundInfo.append(f"Your personality trait: {LoreholdStuPersTrait}")
-        OtherBackgroundInfo.append(f"As a Lorehold Student, your Trinket: {LoreholdStuTrinket}")              
+        EQP.append(LoreholdStuTrinket)
+        AdditionalInfo.append("Feature: Lorehold Initiate - You gain the Strixhaven Initiate feat and must choose Lorehold within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Lorehold Spells table are added to the spell list of your spellcasting class. 1st: Comprehend Languages, Identify; 2nd: Borrowed Knowledge, Locate Object; 3rd: Speak with Dead, Spirit Guardians; 4th: Arcane Eye, Stone Shape; 5th: Flame Strike, Legend Lore. Consider customizing how your spells look when you cast them. Your Lorehold spells might create displays of golden light. You might use a tome or a scroll as a spellcasting focus, and your spell effects might reflect the appearance of the reference books you study.")
+    if back == "Lyceum Scholar":
+        AdditionalInfo.append("Feature: Academic Requisition - You've cleared enough lessons—and have gained an ally or two among the staff—to enable access to certain private areas within the Lyceum and other allied universities. Whenever you're on Lyceum grounds or at another major academic institution, you can requisition any set of tools found in the fifth edition rules. Each set of tools is magically marked to sound an alarm if they are removed from the university's grounds. When you seek services such as spellcasting from an NPC at the Alabaster Lyceum or a related institution, you can use those services at a 25 percent discount, at the GM's discretion.")
     if back == "Mage of High Sorcery":
         MaHSTr1 = "An unopened letter from your first teacher"
         MaHSTr2 = "A broken wand made of black, red, or white wood"
@@ -1444,9 +1527,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         MaHSPT5 = "I use my magic to maintain the balance between all things."
         MaHSPT6 = "Whether in the past, present, or future, I will be the greatest mage ever known."
         MaHSPT = [MaHSPT1, MaHSPT2, MaHSPT3, MaHSPT4, MaHSPT5, MaHSPT6]
-        MageHighSorcPersTrait = random.choice(MaHSPT)    
-        OtherBackgroundInfo.append(f"As a Mage of High Sorcery, your Trinket: {MageHighSorcTrinket}")
-        OtherBackgroundInfo.append(f"Your personality trait: {MageHighSorcPersTrait}")
+        Trait = random.choice(MaHSPT)    
+        EQP.append(MageHighSorcTrinket)
+        AdditionalInfo.append("Feature: Initiate of High Sorcery - You gain the Initiate of High Sorcery feat. In addition, the Mages of High Sorcery provide you with free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.")
     if back == "Marine":   
         MarH1 = "Nearly Drowned. You hid underwater to avoid detection by enemies and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence."
         MarH2 = "Captured. You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke."
@@ -1456,7 +1539,13 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         MarH6 = "Leave None Behind. You carried an injured marine for miles to avoid capture and death."
         MarH = [MarH1, MarH2, MarH3, MarH4, MarH5, MarH6]
         MarineHardship = random.choice(MarH) 
-        OtherBackgroundInfo.append(f"As a Marine, your Hardship: {MarineHardship}")       
+        AdditionalInfo.append(f"Hardship Endured - Hardship in your past has forged you into an unstoppable living weapon. This hardship is essential to you and is at the heart of a personal philosophy or ethos that often guides your actions, your Hardship: {MarineHardship}")       
+        AdditionalInfo.append("Feature: Steady - You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see 'Travel Pace' in chapter 8 of the Player's Handbook). Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists.")
+    if back == "Myriad Operative":
+        AdditionalInfo.append("Feature: Myriad Operative - Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed.")
+    if back == "Noble":
+        AdditionalInfo.append("Feature: Retainers - If your character has a noble background, you may select this background feature instead of Position of Privilege. You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.")
+        AdditionalInfo.append("Feature: Position of Privilege - Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.")
     if back == "Orzhov Representative":
         OrzRepC1 = "The spirit of an ancestor has taken an interest in me."
         OrzRepC2 = "An older cousin has the ear of a powerful oligarch."
@@ -1488,10 +1577,12 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         OrzRepNOC10 = "I was married to a Simic bioengineer."
         OrzRepNOC = [OrzRepNOC1, OrzRepNOC2, OrzRepNOC3, OrzRepNOC4, OrzRepNOC5, OrzRepNOC6, OrzRepNOC7, OrzRepNOC8, OrzRepNOC9, OrzRepNOC10]
         OrzhovRepNonOrzCont = random.choice(OrzRepNOC)   
-        OtherBackgroundInfo.append(f"Your Orzhov Guild Contact Ally: {OrzhovRepContAlly}")
-        OtherBackgroundInfo.append(f"Your Orzhov Guild Contact Rival: {OrzhovRepContRival}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {OrzhovRepNonOrzCont}")    
-    if (back == "Outlander") or (back == "Uthgardt Tribe Member"):
+        AlliesOrg.append(f"Your Orzhov Guild Contact Ally: {OrzhovRepContAlly}")
+        AlliesOrg.append(f"Your Orzhov Guild Contact Rival: {OrzhovRepContRival}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {OrzhovRepNonOrzCont}")    
+        AdditionalInfo.append("Feature: Leverage - You can exert leverage over one or more individuals below you in the guild's hierarchy and demand their help as needs warrant. For example, you can have a message carried across a neighborhood, procure a short carriage ride without paying, or have others clean up a bloody mess you left in an alley. The DM decides if your demands are reasonable and if there are subordinates available to fulfill them. As your status in the guild improves, you gain influence over more people, including ones in greater positions of power.")
+        AdditionalInfo.append("Orzhov Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Orzhov Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Friends, Guidance; 1st: Command, Illusory Script; 2nd: Enthrall, Ray of Enfeeblement, Zone of Truth; 3rd: Bestow Curse, Speak With Dead, Spirit Guardians; 4th: Blight, Death Ward, Secret Chest | Leomund's Secret Chest ; 5th: Geas. Your magic tends to manifest as swirling shadows, brilliant light, or sometimes the momentary appearance of shadowy spirit forms. Your spells might draw the blood of your enemies, or even directly touch their souls.")
+    if back == "Outlander":
         S1 = "Forester"
         S2 = "Trapper"
         S3 = "Homesteader"
@@ -1504,7 +1595,19 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S10 = "Tribal marauder"
         ORI = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Origin = random.choice(ORI)
-        OtherBackgroundInfo.append(f"Your Outlander origin: {Origin}")
+        AdditionalInfo.append(f"Feature: Origin - You've been to strange places and seen things that others cannot begin to fathom. Consider some of the distant lands you have visited, and how they impacted you. Your occupation during your time in the wild: {Origin}")
+        AdditionalInfo.append("Feature: Wanderer - You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you. In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game, water, and so forth.")
+    if back == "Uthgardt Tribe Member":
+        AdditionalInfo.append("Feature: Barbarian Tribes of Faerun - Though this section details the Uthgardt specifically, either it or the Outlander background can be used for a character whose origin lies with one of the other barbarian tribes in Faerun. You might be a fair-haired barbarian of the Reghed, dwelling in the shadow of the Reghed Glacier in the far North near Icewind Dale. You might also be of the nomadic Rashemi, noted for their savage berserkers and their masked witches. Perhaps you hail from one of the wood elf tribes in the Chondalwood, or the magic-hating human tribes of the sweltering jungles of Chult.")
+        AdditionalInfo.append("Feature: Uthgardt Tribes and Their Territories - For most Uthgardt tribes, the only stability in their history is the site of their ancestral mound. Most of the Uthgardt holy sites have existed since antiquity, but the fortunes of the tribes that revere them have hardly been static. Following are brief descriptions of the Uthgardt tribes today; Blue Bear: The easternmost of the Uthgardt are the Blue Bear – thought destroyed more than a century ago – who have recently emerged from inside the High Forest and reclaimed their ancestral mound at Stone Stand, just south of the Moon Pass and north of the forest. The Blue Bears have reoccupied much of their old territory in the time since they returned to prominence, though they don't venture near Hellgate Keep, considering it a taboo place; Black Lion and Red Tiger: North of Blue Bear territory, in the Glimmering Wood, is Beorunna's Well, a settlement of some size that near the ancient ancestral mound of the Red Tiger tribe. The settlement was founded some time ago by members of the Black Lion tribe, who put down roots here rather than continuing to live as nomads. Though the Red Tigers are less than comfortable with the present situation, they consider Beorunna's Well their holy site, so they make the best of things. Bands of Red Tiger tribespeople often winter in Beorunna's Well, and many of its hunters and trappers use the settlement as a place to sell the leather and furs they acquire in nearby forests; Sky Pony: In a part of the Glimmerwood called the Moonwood stands the One Stone, the ancestral mound of the Sky Pony tribe. These are a people divided; half of the tribe has settled and built a sizable steading around the One Stone, similar to what Black Lion has done at Beorunna's Well. The other half of the tribe considers this act an insult to their totem, so they launch raids on the settlement, burning as much of it as they can and then escaping, often on pegasus-back; Tree Ghost: In the depths of the High Forest stands the Grandfather Tree, the ancestral mound of the Tree Ghost tribe. The Tree Ghosts split off from the Blue Bears long ago and all but disappeared into the forest, although occasional reports reach civilization that they are still alive and can sometimes be seen clustered around the Grandfather Tree. Some sages postulate that the newly reborn Blue Bear tribe might well be Tree Ghost Uthgardt who are following a call from a revived Blue Bear totem; Great Worm: The Frost Hills, a small southern spike of the Spine of the World Mountains just north of the Evermoors, is the site of Great Worm Cavern, the ancestral mound of the Great Worm tribe. These Uthgardt are notoriously reclusive; it has been twenty years since the tribe has sent raiding parties out anywhere but against the ores of the Spine Mountains; Black Raven: As forbidding as the Spine of the World Mountains they roam, the Black Ravens are fanatical in their adherence to the old Uthgardt ways. Ranging out from Raven Rock, their ancestral mound deep inside the mountains, they have been known to send raiding parties as far south as Silverymoon, but their most frequent targets are the caravans that come in and out of Mithral Hall; Elk: Flint Rock in the midst of the Evermoors is the ancestral mound of the Elk tribe. The Elk were once prolific raiders, extending their reach even into Nesme and Mithral Hall, but the tribe was shattered a handful of decades past by the forces of those cities. Though their numbers have replenished, the Elk remain mostly hunters and foragers. They are masters at avoiding or repulsing the threats of the Evermoors, and often hire themselves out as guides for outsiders; Thunderbeast: The Thunderbeast tribe has not been heard from in several years. When the Thunderbeasts made their annual pilgrimage to Morgur's Mound in Neverwinter Wood, they found their holy site desecrated. Soon thereafter, their chieftain took them back into the depths of the High Forest, and they have not emerged since; Gray Wolf: The Gray Wolf tribe, made up of lycanthropes, was destroyed by a Selunite crusade because of the tribe's curse. Some of the surviving Gray Wolves took shelter among other Uthgardt tribes; Griffon: The Griffon tribe came to an untimely end when it rose against the forces of Luruar allied with giants and orcs; Red Pony and Golden Eagle: The Red Pony and Golden Eagle tribes vanished centuries ago. They were last seen in the vicinity of the One Stone, the ancestral mound those tribes shared with Sky Pony.")
+        AdditionalInfo.append("Feature: Uthgardt Heritage - You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North. You are familiar enough with any wilderness area that you find twice as much food and water as you normally would when you forage there. Additionally, you can call upon the hospitality of your people, and those folk allied with your tribe, often including members of druid circles, tribes of nomadic elves, the Harpers, and the priesthoods devoted to the gods of the First Circle.")
+    if back == "Pirate":
+        AdditionalInfo.append("Feature: Bad Reputation - No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.")
+    if back == "Sailor":
+        AdditionalInfo.append("Feature: Ship's Passage - When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.")
+        AdditionalInfo.append("Feature: Bad Reputation - If your character has a sailor background, you may select this background feature instead of Ship's Passage. No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.")
+    if back == "Plaintiff":
+        AdditionalInfo.append("Feature: Legalese - Your experience with your local legal system has given you a firm knowledge of the ins and outs of that system. Even when the law is not on your side, you can use complex terms like ex injuria jus non oritur and cogitationis poenam nemo patitur to frighten people into thinking you know what you're talking about. With common folks who don't know any better, you might be able to intimidate or deceive to get favors or special treatment.")
     if back == "Planar Philosopher": 
         PlaPhiSF1 = "Athar, and the skill associated with that faction is: Religion"
         PlaPhiSF2 = "Bleak Cabal, and the skill associated with that faction is: Insight"
@@ -1521,23 +1624,23 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         PlaPhiSF = [PlaPhiSF1, PlaPhiSF2, PlaPhiSF3, PlaPhiSF4, PlaPhiSF5, PlaPhiSF6, PlaPhiSF7, PlaPhiSF8, PlaPhiSF9, PlaPhiSF10, PlaPhiSF11, PlaPhiSF12]
         PlanarPhilSigilFaction = random.choice(PlaPhiSF)
         if param == "Y":
-            OtherBackgroundInfo.append(f"0 - Random")
-            OtherBackgroundInfo.append(f"1 - Increase skill based on the faction you choose?")
+            print(f"0 - Random")
+            print(f"1 - Increase skill based on the faction you choose?")
             facskl = int(input("Would you like to increase a skill based on a faction you can decide, or keep it random? "))
             if facskl == 1:
-                OtherBackgroundInfo.append(f"0 - Random")
-                OtherBackgroundInfo.append(f"1 - Athar, and the skill associated with that faction is: Religion")
-                OtherBackgroundInfo.append(f"2 - Bleak Cabal, and the skill associated with that faction is: Insight")
-                OtherBackgroundInfo.append(f"3 - Doomguard, and the skill associated with that faction is: Nature")
-                OtherBackgroundInfo.append(f"4 - Fated, and the skill associated with that faction is: Intimidation")
-                OtherBackgroundInfo.append(f"5 - Fraternity of Order, and the skill associated with that faction is: History")
-                OtherBackgroundInfo.append(f"6 - Hands of Havoc, and the skill associated with that faction is: Stealth")
-                OtherBackgroundInfo.append(f"7 - Harmonium, and the skill associated with that faction is: Perception")
-                OtherBackgroundInfo.append(f"8 - Heralds of Dust, and the skill associated with that faction is: Medicine")
-                OtherBackgroundInfo.append(f"9 - Mercykillers, and the skill associated with that faction is: Survival")
-                OtherBackgroundInfo.append(f"10 - Mind's Eye, and the skill associated with that faction is: Persuasion")
-                OtherBackgroundInfo.append(f"11 - Society of Sensation, and the skill associated with that faction is: Performance")
-                OtherBackgroundInfo.append(f"12 - Transcendent Order, and the skill associated with that faction is: Athletics")
+                print(f"0 - Random")
+                print(f"1 - Athar, and the skill associated with that faction is: Religion")
+                print(f"2 - Bleak Cabal, and the skill associated with that faction is: Insight")
+                print(f"3 - Doomguard, and the skill associated with that faction is: Nature")
+                print(f"4 - Fated, and the skill associated with that faction is: Intimidation")
+                print(f"5 - Fraternity of Order, and the skill associated with that faction is: History")
+                print(f"6 - Hands of Havoc, and the skill associated with that faction is: Stealth")
+                print(f"7 - Harmonium, and the skill associated with that faction is: Perception")
+                print(f"8 - Heralds of Dust, and the skill associated with that faction is: Medicine")
+                print(f"9 - Mercykillers, and the skill associated with that faction is: Survival")
+                print(f"10 - Mind's Eye, and the skill associated with that faction is: Persuasion")
+                print(f"11 - Society of Sensation, and the skill associated with that faction is: Performance")
+                print(f"12 - Transcendent Order, and the skill associated with that faction is: Athletics")
                 facfacskl = int(input("Choose a faction and thus a skill to increase. "))
                 if facfacskl == 1:
                     PlanarPhilSigilFaction = "Athar"
@@ -1657,7 +1760,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         PlaPhiPT5 = "When others make plans, the multiverse laughs and so do I."
         PlaPhiPT6 = "I know what's right, and none will stand in my way."
         PlaPhiPT = [PlaPhiPT1, PlaPhiPT2, PlaPhiPT3, PlaPhiPT4, PlaPhiPT5, PlaPhiPT6]
-        PlanarPhilPersTrait = random.choice(PlaPhiPT)
+        Trait = random.choice(PlaPhiPT)
         PlaPhiTr1 = "Locket with a picture of my mentor and an inscription I can't read"
         PlaPhiTr2 = "Bleached cranium rat skull with colored glass beads in its eye sockets"
         PlaPhiTr3 = "Torn parchment with half a rebus painted on it"
@@ -1666,9 +1769,33 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         PlaPhiTr6 = "Broken holy symbol of a forgotten god"
         PlaPhiTr = [PlaPhiTr1, PlaPhiTr2, PlaPhiTr3, PlaPhiTr4, PlaPhiTr5, PlaPhiTr6]
         PlanarPhilTrinket = random.choice(PlaPhiTr)
-        OtherBackgroundInfo.append(f"As a Planar Philosopher, your Sigil Faction, and thus your extra skill: {PlanarPhilSigilFaction}")
-        OtherBackgroundInfo.append(f"Your personality trait: {PlanarPhilPersTrait}")
-        OtherBackgroundInfo.append(f"As a Planar Philosopher, your Trinket: {PlanarPhilTrinket}")
+        AlliesOrg.append(f"As a Planar Philosopher, your Sigil Faction, and thus your extra skill: {PlanarPhilSigilFaction}")
+        EQP.append(PlanarPhilTrinket) 
+        if PlanarPhilSigilFaction == "Athar":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Deities are frauds and merely channel the might of a true, higher power.")
+        if PlanarPhilSigilFaction == "Bleak Cabal":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: There is no greater truth to the multiverse. Each being must discover their own meaning.")
+        if PlanarPhilSigilFaction == "Doomguard":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Nothing lasts forever. The purpose of everything is to crumble and decay.")
+        if PlanarPhilSigilFaction == "Fated":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Everyone makes their own fate and is entitled to whatever they can take and hold.")
+        if PlanarPhilSigilFaction == "Fraternity of Order":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: All of existence is governed by laws, and power comes from understanding and exploiting them.")
+        if PlanarPhilSigilFaction == "Hands of Havoc":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Those who try to impose a single order on the multiverse are doomed to fail.")
+        if PlanarPhilSigilFaction == "Harmonium":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: The multiverse will be perfect only when everything is acting in harmony, whether it wants to or not.")
+        if PlanarPhilSigilFaction == "Heralds of Dust":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Everyone is already dead; the entirety of the multiverse is an afterlife. Undeath holds the key to the next stage of existence.")
+        if PlanarPhilSigilFaction == "Mercykillers":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Cold, relentless justice is absolute, and no one is above it.")
+        if PlanarPhilSigilFaction == "Mind's Eye":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: The multiverse exists to be explored. It shapes us, and we shape it in turn.")
+        if PlanarPhilSigilFaction == "Society of Sensation":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Sensation is the proof of existence. By experiencing everything, we can understand the multiverse in all its complexity.")
+        if PlanarPhilSigilFaction == "Transcendent Order":
+            AdditionalInfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Thought clouds action. To fall in step with the multiverse, one must act on instinct alone.")
+        AdditionalInfo.append("Feature: Conviction - You gain the Scion of the Outer Planes feat. In addition, members of your organization provide you free, modest lodging and food at any of their holdings or the homes of other faction members.")
     if back == "Prismari Student": 
         PriStuPT1 = "I'm the life of the party, and I expect everyone's attention when I walk into a room."
         PriStuPT2 = "Two weeks ago, I was enthralled with my latest project. Now, I think it's garbage and deserves to be destroyed."
@@ -1677,7 +1804,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         PriStuPT5 = "I'm beset with such an overwhelming sense of ennui regarding my art. Nothing quite captures my attention anymore."
         PriStuPT6 = "Instead of confronting my negative emotions, I channel them into explosive artistic displays."
         PriStuPT = [PriStuPT1, PriStuPT2, PriStuPT3, PriStuPT4, PriStuPT5, PriStuPT6]
-        PrismariStudentPersTrait = random.choice(PriStuPT)
+        Trait = random.choice(PriStuPT)
         PriStuTr1 = "A pair of rose-tinted glasses with glittery frames"
         PriStuTr2 = "A stoppered glass bottle that, when opened, plays a brassy orchestral piece"
         PriStuTr3 = "A quartet of hovering water motes in a vial"
@@ -1686,8 +1813,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         PriStuTr6 = "An iridescent quill"
         PriStuTr = [PriStuTr1, PriStuTr2, PriStuTr3, PriStuTr4, PriStuTr5, PriStuTr6]
         PrismariStudentTrinket = random.choice(PriStuTr)     
-        OtherBackgroundInfo.append(f"Your personality trait: {PrismariStudentPersTrait}")
-        OtherBackgroundInfo.append(f"As a Prismari Student, your Trinket: {PrismariStudentTrinket}")               
+        EQP.append(PrismariStudentTrinket)       
+        AdditionalInfo.append("Feature: Prismari Initiate - You gain the Strixhaven Initiate feat and must choose Prismari within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Prismari Spells table are added to the spell list of your spellcasting class. 1st: Chromatic Orb, Thunderwave; 2nd: Flaming Sphere, Kinetic Jaunt; 3rd: Haste, Water Walk; 4th: Freedom of Movement, Wall of Fire; 5th: Cone of Cold, Conjure Elemental. Consider customizing how your spells look when you cast them. You might wield your Prismari spells with dynamic, gestural movement—as much dance as somatic component. Even a blast of fire in your hands is a sculpted work of art; elemental forces make grand designs as you hurl spells. These forces might linger on your body or in your clothes as decorative elements after your spells are dissipated, as sparks dance in your hair and your touch leaves tracings of frost on whatever you touch.")
     if back == "Quandrix Student":  
         QuaStuPT1 = "When I find a subject I'm interested in, I won't stop studying until I know everything about it. It keeps me up at night."
         QuaStuPT2 = "I hope this all makes sense to me one day. Until then, I'm going to keep faking it."
@@ -1696,7 +1823,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         QuaStuPT5 = "If these classes have taught me anything, it's that reality is a lie, and nothing matters. So why bother?"
         QuaStuPT6 = "Before I graduate, I want to achieve something mathematically impossible. I must leave a legacy!"
         QuaStuPT = [QuaStuPT1, QuaStuPT2, QuaStuPT3, QuaStuPT4, QuaStuPT5, QuaStuPT6]
-        QuandrixStudentPersTrait = random.choice(QuaStuPT)
+        Trait = random.choice(QuaStuPT)
         QuaStuTr1 = "A small succulent in a dodecahedral clay pot"
         QuaStuTr2 = "A blue knit hat that looks a bit like a bottle folding in on itself"
         QuaStuTr3 = "A model hypercube carved from green crystal, showcasing the fourth dimension"
@@ -1705,8 +1832,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         QuaStuTr6 = "A round bread roll cut so that someone could spread butter on both halves without ever lifting the knife"
         QuaStuTr = [QuaStuTr1, QuaStuTr2, QuaStuTr3, QuaStuTr4, QuaStuTr5, QuaStuTr6]
         QuandrixStudentTrinket = random.choice(QuaStuTr)  
-        OtherBackgroundInfo.append(f"Your personality trait: {QuandrixStudentPersTrait}")
-        OtherBackgroundInfo.append(f"As a Quandrix Student, your Trinket: {QuandrixStudentTrinket}")
+        EQP.append(QuandrixStudentTrinket)
+        AdditionalInfo.append("Feature: Quandrix Initiate - You gain the Strixhaven Initiate feat and must choose Quandrix within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Quandrix Spells table are added to the spell list of your spellcasting class. 1st: Entangle, Guiding Bolt; 2nd: Enlarge/Reduce, Vortex Warp; 3rd: Aura of Vitality, Haste; 4th: Control Water, Freedom of Movement; 5th: Circle of Power, Passwall. Consider customizing how your spells look when you cast them. Your Quandrix spells might manifest amid kaleidoscopic swirls of fractal patterns, amplifying the tiniest movements of your somatic components. When your magic creates or alters creatures, it might briefly surround the targets with shimmering fractal designs or tessellated patterns.")
     if back == "Rakdos Cultist":
         RCPerf1 = "Spikewheel acrobat"
         RCPerf2 = "Lampooning satirist"
@@ -1748,10 +1875,14 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RakCulNRC10 = "A Simic biomancer provides mutant monsters to add a taste of the bizarre to our shows."
         RakCulNRC = [RakCulNRC1, RakCulNRC2, RakCulNRC3, RakCulNRC4, RakCulNRC5, RakCulNRC6, RakCulNRC7, RakCulNRC8, RakCulNRC9, RakCulNRC10]
         RakdosCultNonRakCon = random.choice(RakCulNRC)        
-        OtherBackgroundInfo.append(f"Your Rakdos Cultist Performance: {RakdosCultPerformance}")
-        OtherBackgroundInfo.append(f"Your Rakdos Guild Contact Ally: {RakdosCultConAlly}")
-        OtherBackgroundInfo.append(f"Your Rakdos Guild Contact Rival: {RakdosCultConRival}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {RakdosCultNonRakCon}")   
+        AdditionalInfo.append(f"Rakdos performance styles typically fuse standard circus-style acrobatics with fire, wrought-iron spikes and hooks, and monsters; Your Performance: {RakdosCultPerformance}")
+        AdditionalInfo.append("Feature: Fearsome Reputation - People recognize you as a member of the Cult of Rakdos, and they're careful not to draw your anger or ridicule. You can get away with minor criminal offenses, such as refusing to pay for food at a restaurant or breaking down a door at a local shop, if no legal authorities witness the crime. Most people are too daunted by you to report your wrongdoing to the Azorius.")
+        AdditionalInfo.append("Rakdos Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Rakdos Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Fire Bolt, Vicious Mockery; 1st: Burning Hands, Dissonant Whispers, Hellish Rebuke; 2nd: Crown of Madness, Enthrall, Flaming Sphere; 3rd: Fear, Haste; 4th: Confusion, Wall of Fire; 5th: Dominate Person. Your magic often produces a flashy spectacle, wreathing you or your targets in a mixture of harmless flame and shadowy shapes. When you manipulate an opponent's mind, a flaming symbol of Rakdos might momentarily appear like a mask over the target's face.")
+        AlliesOrg.append(f"Your Rakdos Guild Contact Ally: {RakdosCultConAlly}")
+        AlliesOrg.append(f"Your Rakdos Guild Contact Rival: {RakdosCultConRival}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {RakdosCultNonRakCon}")   
+    if back == "Reformed Cultist":
+        AdditionalInfo.append("Feature: Fell Teachings - You were inundated with knowledge about one of the Betrayer Gods, and know by heart everything from their basic commandments to some of their most esoteric secrets. Choose one of the Betrayer Gods. You have advantage on Intelligence (Religion) checks to know information about their faith, including obscure secrets unknown to most worshipers. Additionally, you can work with your GM to create a secret that you learned during your time in the cult. This secret might be the seed of a conspiracy, a myth of a legendary hero whose true meaning has mutated over the years, or even the location of a fabled artifact of the gods.")
     if back == "Rewarded":      
         RewPT1 = "A safe home is a foundation on which anything else can be built. (Key, Throne)"
         RewPT2 = "I was elevated to heights I could never otherwise attain, and I won't waste my fortune. (Star, Sun)"
@@ -1760,7 +1891,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RewPT5 = "My good fortune means I can lift others up as well. (Gem, Moon)"
         RewPT6 = "Having the right answers is the first step to solving any problem, no matter how dire. (Fates, Sage)"
         RewPT = [RewPT1, RewPT2, RewPT3, RewPT4, RewPT5, RewPT6]
-        RewardedPersTrait = random.choice(RewPT)
+        Trait = random.choice(RewPT)
         RewTr1 = "A perfumed silk scarf from an admirer"
         RewTr2 = "A crystal bead that glows like a candle in the dark"
         RewTr3 = "A letter of introduction and invitation from an influential person in a far-off city"
@@ -1769,8 +1900,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RewTr6 = "Half a medallion designed to be rejoined to its other half"
         RewTr = [RewTr1, RewTr2, RewTr3, RewTr4, RewTr5, RewTr6]
         RewardedTrinket = random.choice(RewTr) 
-        OtherBackgroundInfo.append(f"Your personality trait: {RewardedPersTrait}")
-        OtherBackgroundInfo.append(f"As a Rewarded, your Trinket: {RewardedTrinket}")      
+        EQP.append(RewardedTrinket)      
+        AdditionalInfo.append("Feature: Fortune's Favor - Your unexpected good fortune is reflected by a minor boon. You gain the Lucky, Magic Initiate, or Skilled feat (your choice). Your choice of feat reflects the transformation that changed your life. An encounter with a genie who gave you three wishes might have resulted in magical powers represented by Magic Initiate. If you paid off all your family debts with a fortuitous round of three-dragon ante, you might be Lucky instead. Alternatively, you could use the Skilled feat to reflect whatever trial you endured to secure your new destiny and to model the knowledge and abilities imparted to you by whatever force transformed your life.")
+    if back == "Rival Intern":
+        AdditionalInfo.append("Feature: Inside Informant - You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion.")
     if back == "Ruined":     
         RuPT1 = "I've changed from my past, and I work to live up to my new path. (Balance, Throne)"
         RuPT2 = "Every moment is a gift I refuse to squander. (Euryale, Skull)"
@@ -1779,7 +1912,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RuPT5 = "I interpret every event as part of a larger pattern I just haven't worked out yet. (Puzzle, Star)"
         RuPT6 = "I must make up for so much time I've already lost. (Donjon, Void)"
         RuPT = [RuPT1, RuPT2, RuPT3, RuPT4, RuPT5, RuPT6]
-        RuinedPersTrait = random.choice(RuPT)
+        Trait = random.choice(RuPT)
         RuTr1 = "A rusted scrap of a once-beloved family heirloom"
         RuTr2 = "A land deed, but all the names and markings that once tied it to you have faded into obscurity"
         RuTr3 = "A bauble once imbued with powerful magic"
@@ -1788,8 +1921,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RuTr6 = "A keepsake from someone you were once close to but who is now your enemy"
         RuTr = [RuTr1, RuTr2, RuTr3, RuTr4, RuTr5, RuTr6]
         RuinedTrinket = random.choice(RuTr)    
-        OtherBackgroundInfo.append(f"Your personality trait: {RuinedPersTrait}")
-        OtherBackgroundInfo.append(f"As a Ruined, your Trinket: {RuinedTrinket}")                     
+        EQP.append(RuinedTrinket)
+        AdditionalInfo.append("Feature: Still Standing - You have weathered ruinous misfortune, and you possess hidden reserves others don't expect. You gain the Alert, Skilled, or Tough feat (your choice). Your choice of feat reflects how you've dealt with the terrible loss that changed your life forever. If you've kept your senses sharp for every opportunity and climbed your way out of misery by seizing the tiniest scrap of hope, choose Alert. If you've redoubled your efforts to reclaim what was once yours, choose Skilled. If you've stoically persevered through your misfortune, select Tough.")         
     if back == "Rune Carver":
         RS1 = "You inscribe runes in wax or clay with a fine metal needle."
         RS2 = "You whittle pieces of wood into small figurines you mark with runes."
@@ -1806,11 +1939,12 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         RCPT5 = "Life may be a whirlwind of chaos, but whenever I create my runes, I feel at peace."
         RCPT6 = "My brain struggles to process words written in ink, but the feeling of carved runes makes my mind sing."
         RCPT = [RCPT1, RCPT2, RCPT3, RCPT4, RCPT5, RCPT6]
-        RuneCarverPT = random.choice(RCPT)        
-        OtherBackgroundInfo.append(f"As a Rune Carver, your Rune Style: {RuneStyle}")
-        OtherBackgroundInfo.append(f"As a Rune Carver, your Personality Trait: {RuneCarverPT}")
+        Trait = random.choice(RCPT)        
+        AdditionalInfo.append(f"Rune Styles - Each rune carver has a unique style and preferred medium for creating runes, your Rune Style: {RuneStyle}")
         OtherBackgroundInfo.append("With the Rune Carver background, if the DM allows you, can have the feats Skilled (feat) or Tough (feat), as well as Rune Shaper (feat).")
-    if (back == "Cloistered Solder") or (back == "Sage"):
+    if back == "Cloistered Scholar":
+        AdditionalInfo.append("Feature: Library Access - Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access. You have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease. Additionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy shown to a fellow scholar.")
+    if back == "Sage":
         S1 = "Alchemist"
         S2 = "Astronomer"
         S3 = "Discredited academic"
@@ -1821,7 +1955,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S8 = "Scribe"
         SPE = [S1, S2, S3, S4, S5, S6, S7, S8]
         Specialty = random.choice(SPE)        
-        OtherBackgroundInfo.append(f"Your Sage specialty: {Specialty}")
+        AdditionalInfo.append(f"The nature of your scholary training is: {Specialty}")
+        AdditionalInfo.append("Feature: Researcher - When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature. Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found. Unearthing the deepest secrets of the multiverse can require an aDventure or even a whole campaign.")
     if back == "Selesnya Initiate":
         SelesInC1 = "A wise centaur trainer believed in me even though I was a terrible student."
         SelesInC2 = "A good friend has risen to become a Ledev guardian."
@@ -1853,9 +1988,11 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         SelesInNSC10 = "I have a sibling in the Simic Combine, and we argue every time we see each other."
         SelesInNSC = [SelesInNSC1, SelesInNSC2, SelesInNSC3, SelesInNSC4, SelesInNSC5, SelesInNSC6, SelesInNSC7, SelesInNSC8, SelesInNSC9, SelesInNSC10]
         SelesInitNonSelesCon = random.choice(SelesInNSC)
-        OtherBackgroundInfo.append(f"Your Seles Guild Contact Ally: {SelesInitConAlly}")
-        OtherBackgroundInfo.append(f"Your Seles Guild Contact Rival: {SelesInitConRival}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {SelesInitNonSelesCon}")        
+        AlliesOrg.append(f"Your Seles Guild Contact Ally: {SelesInitConAlly}")
+        AlliesOrg.append(f"Your Seles Guild Contact Rival: {SelesInitConRival}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {SelesInitNonSelesCon}")        
+        AdditionalInfo.append("Feature: Conclave's Shelter - As a member of the Selesnya Conclave, you can count on your guild mates to provide shelter and aid. You and your companions can find a place to hide or rest in any Selesnya enclave in the city, unless you have proven to be a danger to them. The members of the enclave will shield you from the law or anyone else searching for you, though they will not risk their lives in this effort. In addition, as a guild member you can receive free healing and care at a Selesnya enclave, though you must provide any material components needed for spells.")
+        AdditionalInfo.append("Selesnya Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Selesnya Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Druidcraft, Friends; 1st: Animal Friendship, Charm Person; 2nd: Aid, Animal Messenger, Calm Emotions, Warding Bond; 3rd: Plant Growth, Speak With Plants; 4th: Aura of Life, Conjure Minor Elementals; 5th: Awaken, Commune With Nature. Members of the Selesnya Conclave refer to their magic as 'doruvati,' a Sylvan word meaning 'gift.' When you use these gifts of Mat'Selesnya, graceful swirls of green and silver light dance in the air around you, and phantasmal green leaves might waft through the air. A sensation of gentle warmth and the smell of spring flowers or autumn leaves might accompany your spells.")
     if back == "Shipwright": 
         ShipwSI1 = "Grand Designs. You are working on plans and schematics for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure the success of your design."
         ShipwSI2 = "Solid and Sound. You patched up a war galley and prevented it from sinking. The local navy regards you as a friend."
@@ -1864,7 +2001,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         ShipwSI5 = "Low Places. You have contacts in the smuggling outfits along the coast; you occasionally repair the criminals' ships in exchange for coin and favors."
         ShipwSI6 = "Mysteries of the Deep. You experienced an encounter with a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters of the sea that this entity revealed to you."
         ShipwSI = [ShipwSI1, ShipwSI2, ShipwSI3, ShipwSI4, ShipwSI5, ShipwSI6]
-        ShipwrightSignatureItem = random.choice(ShipwSI)
+        ShipwrightSeaInfluence = random.choice(ShipwSI)
         ShipwSMCon1 = "Eda Oweland"
         ShipwSMCon2 = "Eda Oweland"
         ShipwSMCon3 = "Gellan Primewater"
@@ -1873,8 +2010,9 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         ShipwSMCon6 = "Anders Solmor"
         ShipwSMCon = [ShipwSMCon1, ShipwSMCon2, ShipwSMCon3, ShipwSMCon4, ShipwSMCon5, ShipwSMCon6]
         ShipwrightSaltwaterMarshContact = random.choice(ShipwSMCon)
-        OtherBackgroundInfo.append(f"As a Shipwright, your Signature Item: {ShipwrightSignatureItem}")
-        OtherBackgroundInfo.append(f"As a Shipwright, your Saltwater Marsh Contact: {ShipwrightSaltwaterMarshContact}")
+        AdditionalInfo.append(f"Life At Sea - Your life at sea and in port has shaped you; your Sea's Influence: {ShipwrightSeaInfluence}")
+        AdditionalInfo.append(f"As a Shipwright, your Saltwater Marsh Contact: {ShipwrightSaltwaterMarshContact}")
+        AdditionalInfo.append("Feature: I'll Patch It! - Provided you have carpenter's tools and wood. you can perform repairs on a water vehicle. When you use this ability, you restore a number of hit points co the hull of a water vehicle equal to 5 x your proficiency modifier. A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired.")
     if back == "Silverquill Student":
         SilvStuPT1 = "I'll say whatever I need to in order to maintain my high social status."
         SilvStuPT2 = "I prefer saying the blunt truth over a pretty lie, and I don't particularly care whose feelings I hurt."
@@ -1883,7 +2021,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         SilvStuPT5 = "I always wait before speaking, analyzing the situation for whichever angle is most advantageous to my goals."
         SilvStuPT6 = "No one knows about the all-nighters I've pulled to keep my magic looking effortless, and I'm going to keep it that way."
         SilvStuPT = [SilvStuPT1, SilvStuPT2, SilvStuPT3, SilvStuPT4, SilvStuPT5, SilvStuPT6]
-        SilverquillInitiatePersTrait = random.choice(SilvStuPT)
+        Trait = random.choice(SilvStuPT)
         SilvStuTr1 = "A black leather notebook filled with half-finished poems"
         SilvStuTr2 = "A set of flashcards detailing different colloquialisms and their meanings"
         SilvStuTr3 = "A canteen that makes any liquid drunk from it taste sweet"
@@ -1892,8 +2030,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         SilvStuTr6 = "A stack of small pieces of parchment, each enchanted to stick to whatever surface it's pressed against and peel off easily"
         SilvStuTr = [SilvStuTr1, SilvStuTr2, SilvStuTr3, SilvStuTr4, SilvStuTr5, SilvStuTr6]
         SilverquillInitiateTrinket = random.choice(SilvStuTr)
-        OtherBackgroundInfo.append(f"Your personality trait: {SilverquillInitiatePersTrait}")
-        OtherBackgroundInfo.append(f"As a Silverquill Student, your Trinket: {SilverquillInitiateTrinket}")
+        EQP.append(SilverquillInitiateTrinket)
+        AdditionalInfo.append("Feature: Silverquill Initiate - You gain the Strixhaven Initiate feat and must choose Silverquill within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Silverquill Spells table are added to the spell list of your spellcasting class. 1st: Dissonant Whispers, Silvery Barbs; 2nd: Calm Emotions, Darkness; 3rd: Beacon of Hope, Daylight; 4th: Compulsion, Confusion; 5th: Dominate Person, Rary's Telepathic Bond. Consider customizing how your spells look when you cast them. Your Silverquill spells might be accompanied by visual effects resembling splotches of ink or radiating ripples of golden light. Any auditory effects of your spells often sound like amplified echoes of your own voice speaking the spells' verbal components—even amid the crash of lightning or a fiery eruption.")
     if back == "Simic Scientist":
         SSProj1 = "Hull Clade, focused on protection and durability"
         SSProj2 = "Fin Clade, focused on movement"
@@ -1933,10 +2071,12 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         SimSciNSC10 = "Roll an additional Simic contact; you can decide if the contact is an ally or a rival."
         SimSciNSC = [SimSciNSC1, SimSciNSC2, SimSciNSC3, SimSciNSC4, SimSciNSC5, SimSciNSC6, SimSciNSC7, SimSciNSC8, SimSciNSC9, SimSciNSC10]
         SimicSciNonSimicCon = random.choice(SimSciNSC)        
-        OtherBackgroundInfo.append(f"Your Simic Project: {SimisSciProject}")
-        OtherBackgroundInfo.append(f"Your Simic Guild Contact Ally: {SimicSciConAlly}")
-        OtherBackgroundInfo.append(f"Your Simic Guild Contact Rival: {SimicSciConRival}")
-        OtherBackgroundInfo.append(f"Your Non-Guild Contact: {SimicSciNonSimicCon}")        
+        AdditionalInfo.append(f"As a Simic researcher, you are part of a clade — a diverse group of individuals combining disparate talents in pursuit of a common goal—or a researcher on a specialized, short-term project focused on addressing an immediate need. Your Simic Project: {SimisSciProject}")
+        AlliesOrg.append(f"Your Simic Guild Contact Ally: {SimicSciConAlly}")
+        AlliesOrg.append(f"Your Simic Guild Contact Rival: {SimicSciConRival}")
+        AlliesOrg.append(f"Your Non-Guild Contact: {SimicSciNonSimicCon}")        
+        AdditionalInfo.append("Feature: Researcher - When you attempt to learn or recall a magical or scientific fact, if you don't know that information, you know where and from whom you can obtain it. Usually, this information comes from a Simic laboratory, or sometimes from an Izzet facility, a library, a university, or an independent scholar or other learned person or creature. Knowing where the information can be found doesn't automatically enable you to learn it; you might need to offer bribes, favors, or other incentives to induce people to reveal their secrets. Your DM might rule that the knowledge you seek is secreted away in an inaccessible place, or that it simply can't be found. Unearthing the deepest secrets of the multiverse can require an adventure or even a whole campaign.")
+        AdditionalInfo.append("Simic Guild Spells - Prerequisite: Spellcasting or Pact Magic class feature. For you, the spells on the Simic Guild Spells table are added to the spell list of your spellcasting class. Cantrip: Acid Splash, Druidcraft; 1st: Detect Poison and Disease, Expeditious Retreat, Jump; 2nd: Alter Self, Enhance Ability, Enlarge/Reduce; 3rd: Gaseous Form, Water Breathing, Wind Wall; 4th: Freedom of Movement, Polymorph; 5th: Creation. When your magic causes physical alterations in yourself or others, the result often displays the characteristics of fish, amphibians, or other water-dwelling creatures. Blue-green eddies of magical energy sometimes accompany your spellcasting, forming spirals that reflect the mathematical perfection of nature.")
     if back == "Smuggler":
         SmuAcc1 = "Spirit of the Whale. You smuggled stolen dwarven spirits in the body of a dead whale being pulled behind a fishing boat. When you delivered the goods, the corpse suddenly exploded, sending whale meat and whiskey bottles for half a mile."
         SmuAcc2 = "Cart and Sword. You drove a cart filled with stolen art through the middle of a battlefield while singing sea shanties to confuse the combatants."
@@ -1946,8 +2086,15 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         SmuAcc6 = "Playing Both Sides. You once smuggled crates of crossbow bolts and bundles of arrows, each destined for an opposing side in a regional war, at the same time. The buyers arrived within moments of each other but did not discover your trickery."
         SmuAcc = [SmuAcc1, SmuAcc2, SmuAcc3, SmuAcc4, SmuAcc5, SmuAcc6]
         SmugglerAccomplishment = random.choice(SmuAcc)
-        OtherBackgroundInfo.append(f"As a Smuggler, your Accomplishment: {SmugglerAccomplishment}")
-    if (back == "City Watch") or (back == "Knight of the Order") or (back == "Mercenary Veteran") or (back == "Soldier"):
+        AdditionalInfo.append(f"Claim To Fame - Every smuggler has that one tale that sets them apart from common criminals. By wits, sailing skill, or a silver tongue, you lived co tell the story- and you tell it often, your Accomplishment: {SmugglerAccomplishment}")
+        AdditionalInfo.append("Feature: Down Low - You are acquainted with a network of smugglers who are willing to help you out of tight situations. White in a particular town, city. or other similarly sized community (DM's discretion). you and you r companions can stay for free in safe houses. Safe houses provide a poor lifestyle. While staying at a safe house, you can choose to keep your presence (and that of your companions) a secret.")
+    if back == "Mercenary Veteran":
+        AdditionalInfo.append("Feature: Mercenaries of the North - Countless mercenary companies operate up and down the Sword Coast and throughout the North. Most are small-scale operations that employ a dozen to a hundred folk who offer security services, hunt monsters and brigands, or go to war in exchange for gold. Some organizations, such as the Zhentarim, Flaming Fist, and the nation of Mintarn have hundreds or thousands of members and can provide private armies to those with enough funds. A few organizations operating in the North are described - The Chill: The cold and mysterious Lurkwood serves as the home of numerous groups of goblinoids that have banded together into one tribe called the Chill. Unlike most of their kind, the Chill refrain s from raiding the people of the North and maintains relatively good relations so that they can hire them selves out as warriors. Few city-states in the North are willing to field an army alongside the Chill, but several are happy to quietly pay the Chill to battle the Uthgardt, ores, trolls of the Evermoors, and other threats to civilization; Silent Rain: Consisting solely of elves, Silent Rain is a legendary mercenary company operating out of Evereska. Caring little for gold or fame, Silent Rain agrees only to jobs that either promote elven causes or involve destroying ores, gnolls, and the like. Prospective employers must leave written word (in Elvish) near Evereska, and the Silent Rain sends a representative if interested; The Bloodaxes: Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races , but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes.")
+        AdditionalInfo.append("Feature: Mercenary Life - You know the mercenary life as only someone who has experienced it can. You are able to identify mercenary companies by their emblems, and you know a little about any such company, including the names and reputations of its commanders and leaders, and who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language. You can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.")
+    if back == "Knight of the Order":
+        AdditionalInfo.append("Many who rightfully call themselves 'knight' earn that title as part of an order in service to a deity, such as Kelemvor's Eternal Order or Mystra's Knights of the Mystic Fire. Other knightly orders serve a government, royal family, or are the elite military of a feudal state, such as the brutal Warlock Knights of Vaasa. Other knighthoods are secular and non-governmental organizations of warriors who follow a particular philosophy, or consider themselves a kind of extended family, similar to an order of monks. Although there are organizations, such as the Knights of the Shield, that use the trappings of knighthood without necessarily being warriors, most folk of Faerûn who hear the word 'knight' think of a mounted warrior in armor beholden to a code. Following are a few knightly organizations: Knights of the Unicorn - The Knights of the Unicorn began as a fad of romantically minded sons and daughters of patriar families in Baldur's Gate. On a lark, they took the unicorn goddess Lurue as their mascot and went on various adventures for fun. The reality of the dangers they faced eventually sank in, as did Lurue's tenets. Over time the small group grew and spread, gaining a following in places as far as Cormyr. The Knights of the Unicorn are chivalric adventurers who follow romantic ideals: life is to be relished and lived with laughter, quests should be taken on a dare, impossible dreams should be pursued for the sheer wonder of their completion, and everyone should be praised for their strengths and comforted in their weaknesses; Knights of Myth Drannor: Long ago, the Knights of Myth Drannor were a famous adventuring band, and Dove Falconhand, one of the famous Seven Sisters, was one of them. The band took its name to honor the great but fallen city, just as the new Knights of Myth Drannor do today. With the city once again in ruins, Dove Falconhand decided to reform the group with the primary goal of building alliances and friendship between the civilized races of the world and goodly people in order to combat evil. The Knights of Myth Drannor once again ride the roads of the Dalelands, and they've begun to spread to the lands beyond. Their members, each accepted by Dove herself, are above all valiant and honest; Knights of the Silver Chalice: The Knights of the Silver Chalice was formed by edict of the demigod Siamorphe in Waterdeep a century ago. Siamorphe's ethos is the nobility's right and responsibility to rule, and the demigod is incarnated as a different noble mortal in each generation. By the decree of the Siamorphe at that time, the Knights of the Silver Chalice took it upon themselves to put a proper heir on the throne of Tethyr and reestablish order in that kingdom. Since then they have grown to be the most popular knighthood in Tethyr, a nation that has hosted many knighthoods in fealty to the crown.")
+        AdditionalInfo.append("Feature: Knightly Regard - You receive shelter and succor from members of your knightly order and those who are sympathetic to its aims. If your order is a religious one, you can gain aid from temples and other religious communities of your deity. Knights of civic orders can get help from the community – whether a lone settlement or a great nation that they serve, and knights of philosophical orders can find help from those they have aided in pursuit of their ideals, and those who share those ideals. This help comes in the form of shelter and meals, and healing when appropriate, as well as occasionally risky assistance, such as a band of local citizens rallying to aid a sorely pressed knight in a fight, or those who support the order helping to smuggle a knight out of town when he or she is being hunted unjustly.")
+    if back == "Soldier":
         S1 = "Officer"
         S2 = "Scout"
         S3 = "Infantry"
@@ -1958,7 +2105,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         S8 = "Support staff (cook, blacksmith, or the like)"
         SPE = [S1, S2, S3, S4, S5, S6, S7, S8]
         Specialty = random.choice(SPE)
-        OtherBackgroundInfo.append(f"Your Soldier specialty: {Specialty}")
+        AdditionalInfo.append(f"Feature: Specialty - During your time as a soldier, you had a specific role to play in your unit or arm, that specialty being: {Specialty}")
+        AdditionalInfo.append("Feature: Military Rank - You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You can also usually gain access to friendly military encampments and fortresses where your rank is recognized.")
+    if back == "Urchin":
+        AdditionalInfo.append("Feature: City Secrets - You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.")
     if back == "Volstrucker Agent":
         VolsAgTrag1 = "Familicide. Through deceit or manipulation, the Volstrucker convinced you to slaughter your own family."
         VolsAgTrag2 = "Amnesia. You were forced to study magic so potent that it strained your mind beyond mortal limits, stealing away the memories of your past."
@@ -1968,7 +2118,10 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         VolsAgTrag6 = "Vicissitude. You were once the scion of a wealthy family who lost their entire fortune in the blink of an eye."
         VolsAgTrag = [VolsAgTrag1, VolsAgTrag2, VolsAgTrag3, VolsAgTrag4, VolsAgTrag5, VolsAgTrag6]
         VolstruckerAgentTragedy = random.choice(VolsAgTrag)
-        OtherBackgroundInfo.append(f"As a Volstrucker Agent, your Tragedy: {VolstruckerAgentTragedy}")
+        AdditionalInfo.append(f"Tragedy - Happy people aren't selected to join the Volstrucker. The Cerberus Assembly preys upon talented individuals who have been broken by tragedy-in some cases, tragedy that the Volstrucker has arranged for. A slightly broken mind is more easily reshaped and reeducated, your Tragedy: {VolstruckerAgentTragedy}")
+        AdditionalInfo.append("Feature: Shadow Network - You have access to the Volstrucker shadow network, which allows you to communicate with other members of the order over long distances. If you write a letter in a special arcane ink, address it to a member of the Volstrucker, and cast it into a fire, the letter will burn to cinders and materialize whole again on the person of the agent you addressed it to. The ink used to send a letter across the shadow network is the same as that used by a wizard to scribe spells in a spellbook. Writing a letter in this ink costs 10 gp per page.")
+    if back == "Waterdhavian Noble":
+        AdditionalInfo.append("Feature: Kept in Style - While you are in Waterdeep or elsewhere in the North your house sees to your everyday needs. Your name a~d signet are sufficient to cover most of your expenses; the inns, taverns, and festhalls you frequent are glad to record your debt and send an accounting to your family's estate in Waterdeep to settle what you owe. This advantage enables you to live a comfortable lifestyle without having to pay 2 gp a day for it, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. You may not maintain a less affluent lifestyle and use the difference as income – the benefit is a line of credit, not an actual monetary reward.")
     if back == "Wildspacer":
         WildSpClE1 = "Beholder"
         WildSpClE2 = "Cosmic Horror"
@@ -1982,7 +2135,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WildSpClE10 = "Void Scavver"
         WildSpClE = [WildSpClE1, WildSpClE2, WildSpClE3, WildSpClE4, WildSpClE5, WildSpClE6, WildSpClE7, WildSpClE8, WildSpClE9, WildSpClE10]
         WildSpacerCloseEnc = random.choice(WildSpClE)
-        OtherBackgroundInfo.append(f"As a Wildspacer, your Close Encounter: {WildSpacerCloseEnc}")
+        AdditionalInfo.append(f"Close Encounter - You had a harrowing encounter with one of Wildspace's many terrors. You escaped with your life, but the encounter left you with a scar or two, or perhaps a recurring nightmare, your Close Encounter: {WildSpacerCloseEnc}")
+        AdditionalInfo.append("Feature: Wildspace Adaptation - You gain the Tough feat from the Player's Handbook. In addition, you learned how to adapt to zero gravity. Being weightless doesn't give you disadvantage on any of your melee attack rolls (see 'Weightlessness' in chapter 2).")
     if back == "Wind-Touched":
         WiToAccep1 = "I am truly blessed and have power over the wind itself."
         WiToAccep2 = "I am devoted to the wind spirits, in action and title."
@@ -1992,7 +2146,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WiToAccep6 = "I feel nothing for this title, and carry it against my will."
         WiToAccep = [WiToAccep1, WiToAccep2, WiToAccep3, WiToAccep4, WiToAccep5, WiToAccep6]
         WindTouchedAcceptance = random.choice(WiToAccep)    
-        OtherBackgroundInfo.append(f"As a Wind-Touched, your Acceptance: {WindTouchedAcceptance}")
+        AdditionalInfo.append(f"Title and Blessing - For some birdfolk, the moniker of Wind-Touched is merely a title, a symbol of their devotion to the wind and the natural world. Others have been told since birth that they were blessed by the wind, much in the way the Amaranthine Reya was in the old tales, your Acceptance: {WindTouchedAcceptance}")
+        AdditionalInfo.append("Feature: Supernatural Presence - Whether or not you are truly Wind-Touched, there are folk all across Everden that believe that you have been divinely blessed. If you make a show of power or skill that can be attributed to the wind or air, such as feats of acrobatics or commanding unseen forces, those believers will be bolstered by your supernatural presence. They will support you and, depending on how well you have convinced them of your powers, treat you with reverence and possibly even worship.")
     if back == "Witchlight Hand":
         WitHCC1 = "Old, cantankerous Witchlight hand"
         WitHCC2 = "Young, impressionable Witchlight hand"
@@ -2004,7 +2159,8 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WitHCC8 = "Harmless, magical wisp of light (no stat block required) that has a flying speed of 30 feet, can hover, and sheds bright light in a 5-foot radius and dim light for an additional 5 feet"
         WitHCC = [WitHCC1, WitHCC2, WitHCC3, WitHCC4, WitHCC5, WitHCC6, WitHCC7, WitHCC8]
         WitchlHandCreatComp = random.choice(WitHCC)
-        OtherBackgroundInfo.append(f"As a Witchlight Hand, your Creature Companion: {WitchlHandCreatComp}")
+        AdditionalInfo.append("Feature: Carnival Fixture - The Witchlight Carnival provides you with free, modest lodging and food. In addition, you may wander about the carnival and partake of its many wonders at no cost to you, provided you don't disrupt its shows or cause any other trouble.")
+        AdditionalInfo.append(f"Carnival Companion - Over the years, you have earned the friendship of another carnival fixture, your Creature Companion: {WitchlHandCreatComp}")
     if back == "Witherbloom Student":    
         WitStuPT1 = "I love brewing up a new recipe, even if some might be repulsed by my choice of ingredients. Or the final product. Or both."
         WitStuPT2 = "My fashion sense is like my garden: withered, black, and weird."
@@ -2013,7 +2169,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WitStuPT5 = "I know we just met, but when you die, may I have your bones? For research."
         WitStuPT6 = "Don't interrupt me; I'm brooding."
         WitStuPT = [WitStuPT1, WitStuPT2, WitStuPT3, WitStuPT4, WitStuPT5, WitStuPT6]
-        WitherbloomStudentPersTrait = random.choice(WitStuPT)
+        Trait = random.choice(WitStuPT)
         WitStuTr1 = "A black bird-shaped mask, trimmed with glowing green thread"
         WitStuTr2 = "A set of rabbit bones"
         WitStuTr3 = "A pair of thick knee-high waders, stained with muck and moss"
@@ -2022,48 +2178,17 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         WitStuTr6 = "A necklace of five small vials, each filled with luminescent white liquid"
         WitStuTr = [WitStuTr1, WitStuTr2, WitStuTr3, WitStuTr4, WitStuTr5, WitStuTr6]
         WitherbloomStudentTrinket = random.choice(WitStuTr)
-        OtherBackgroundInfo.append(f"Your personality trait: {WitherbloomStudentPersTrait}")
-        OtherBackgroundInfo.append(f"As a Witherbloom Student, your Trinket: {WitherbloomStudentTrinket}")
+        EQP.append(WitherbloomStudentTrinket)
+        AdditionalInfo.append("Feature: Witherbloom Initiate - You gain the Strixhaven Initiate feat and must choose Witherbloom within it. In addition, if you have the Spellcasting or Pact Magic feature, the spells on the Witherbloom Spells table are added to the spell list of your spellcasting class. 1st: Cure Wounds, Inflict Wounds; 2nd: Lesser Restoration, Wither and Bloom; 3rd: Revivify, Vampiric Touch; 4th: Blight, Death Ward; 5th: Antilife Shell, Greater Restoration. Consider customizing how your spells look when you cast them. Your Witherbloom spells might rely on material components or a spellcasting focus drawn from the swamp environment of Witherbloom, and your spells might take on an appearance suggesting those natural elements. Spectral shapes of swamp animals or plants might form amid your spell effects.")
 ########################################################################################################
 ### Printing section ###
-    print("Note: Any 'random' languages or 'random' skill/tool proficiencies can be discussed with the DM and switched out for more apt languages/skills/tools.")
-
-    if subrace != "":
-        print(f"You are a {Gender} {subrace}")
-    else:
-        print(f"You are a {Gender} {race}")
-    print("Abilities given by Race:")
-    for i,raceitem in enumerate(RaceNotes,1):
-        print(f"    {raceitem}")
-    for otherraceitem in OtherRaceInfo:
-        print(f"    {otherraceitem}")
-        print("")
-    print(f"Your height is {Height} inches")
-    print(f"Your weight is {Weight} pounds")
-    print(f"Your background is: {back}")
-    for backitem in OtherBackgroundInfo:
-        print(backitem)
-        print("")
-    if Trait != "":
-        print(f"Your personality trait: {Trait}")
-    if Ideal != "":
-        print(f"Your ideal: {Ideal}")
-    if Bond != "":
-        print(f"Your bond: {Bond}")
-    if Flaw != "":
-        print(f"Your flaw: {Flaw}")     
+    print("Note: Any 'random' languages or 'random' skill/tool proficiencies can be discussed with the DM and switched out for more apt languages/skills/tools.")       
     if back == "Ashari":
-        for lang in PlLang:
-            print(f"You speak/know: {lang}")
-        print("As an Ashari, you also know a language specifically based on your tribe's elemental affinity.")
-    else:
-        for lang in PlLang:
-            print(f"You speak/know: {lang}")
+        OtherBackgroundInfo.append("As an Ashari, you also know a language specifically based on your tribe's elemental affinity.")
     if HollowOne == "Hollow One":
-        print("You are a Hollow One, or a zombie, in addition to your race, meaning you have a few extra traits.")    
+        RaceNotes.append("You are a Hollow One, or a zombie, in addition to your race, meaning you have a few extra traits.")    
 
     Gold = str(BGL)
-    print(f"Your starting gold: {Gold}")
     AA = "A mummified goblin hand"
     AB = "A piece of crystal that faintly glows in the moonlight"
     AC = "A gold coin minted in an unknown land"
@@ -2174,6 +2299,7 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
     TRT = random.choice(Trt)
     Trin = [TRI, TRN, TRK, TRT]
     Trinket = random.choice(Trin)
+    EQP.append(Trinket)
     Trin.remove(Trinket)
     randtrk = False
     while not randtrk:
@@ -2183,30 +2309,25 @@ def summation(param, Gender, race, subrace, Height, Weight, RaceNotes, HollowOne
         except IndexError:
             Trinket2 = random.choice(Trin)
     if ((back == "Inheritor") and ((Inheritance == Inh2 or Inheritance == Inh3))):
-        print(f"An an Inheritor with an Inheritance of a Trinket, you inherit: {Trinket2}")
-    print(f"Your trinket: {Trinket}")
-
-def skillsummation(PlProf, AcroNum, AnHaNum, ArcaNum, AthlNum, DeceNum, HistNum, InsiNum, IntiNum, InveNum, MediNum, NatuNum, PercNum, PerfNum, PersNum, ReliNum, SloHNum, SteaNum, SurvNum, Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom):
-    for item in PlProf:
-        print(f"You are proficient in: {item}")
-    print(f"Your Acrobatics score: {AcroNum}") 
-    print(f"Your Animal Handling score: {AnHaNum}") 
-    print(f"Your Arcana score: {ArcaNum}") 
-    print(f"Your Athletics score: {AthlNum}") 
-    print(f"Your Deception score: {DeceNum}") 
-    print(f"Your History score: {HistNum}") 
-    print(f"Your Insight score: {InsiNum}") 
-    print(f"Your Intimidation score: {IntiNum}") 
-    print(f"Your Investigation score: {InveNum}") 
-    print(f"Your Medicine score: {MediNum}") 
-    print(f"Your Nature score: {NatuNum}") 
-    print(f"Your Perception score: {PercNum}") 
-    print(f"Your Performance score: {PerfNum}") 
-    print(f"Your Persuasion score: {PersNum}") 
-    print(f"Your Religion score: {ReliNum}") 
-    print(f"Your Sleight of Hand score: {SloHNum}") 
-    print(f"Your Stealth score: {SteaNum}") 
-    print(f"Your Survival score: {SurvNum}") 
+        EQP.append(Trinket2)
+    AcroNum = skills_dict["AcroNum"]
+    AnHaNum = skills_dict["AnHaNum"]
+    ArcaNum = skills_dict["ArcaNum"]
+    AthlNum = skills_dict["AthlNum"]
+    DeceNum = skills_dict["DeceNum"]
+    HistNum = skills_dict["HistNum"]
+    InsiNum = skills_dict["InsiNum"]
+    IntiNum = skills_dict["IntiNum"]
+    InveNum = skills_dict["InveNum"]
+    MediNum = skills_dict["MediNum"]
+    NatuNum = skills_dict["NatuNum"]
+    PercNum = skills_dict["PercNum"]
+    PerfNum = skills_dict["PerfNum"]
+    PersNum = skills_dict["PersNum"]
+    ReliNum = skills_dict["ReliNum"]
+    SloHNum = skills_dict["SloHNum"]
+    SteaNum = skills_dict["SteaNum"]
+    SurvNum = skills_dict["SurvNum"]        
     print(f"Your Charisma score: {Charisma}")
     print(f"Your Constitution score: {Constitution}") 
     print(f"Your Dexterity score: {Dexterity}")
@@ -2216,10 +2337,9 @@ def skillsummation(PlProf, AcroNum, AnHaNum, ArcaNum, AthlNum, DeceNum, HistNum,
     
     print("Six Scores to choose from to apply to your abilities:")
     n=0
-    m=0
+    Sums = []
     run = True
     while run:
-
         Value1 = d6()
         Value2 = d6()
         Value3 = d6()
@@ -2233,7 +2353,446 @@ def skillsummation(PlProf, AcroNum, AnHaNum, ArcaNum, AthlNum, DeceNum, HistNum,
         sum = 0
         for k in range(len(Value)):
             sum += Value[k]
-        print(sum)
+        Sums.append(sum)
         n += 1
         if n >= 6:
             run = False
+        #Figure out how to assign each sum to a value, and figure out what each value is assigned to, then after printing all 6, make sure to THEN ask what abilityscore to assign each value to, and make sure to set the score += the value shown, not just change it to the new value
+    AbilityScoresList = ["Charisma", "Constitution", "Dexterity", "Intelligence", "Strength", "Wisdom"]
+    if param == "Y":
+        for i, sum in enumerate(Sums, 1):
+            print(f"Score {i} to apply: {sum}")        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc1 = int(input("Which ability score would you like to apply the first score to? "))
+        if absc1 == 0:
+            AbilityScoresListRand1 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand1 == "Charisma":
+                Charisma += Sums[0]
+            if AbilityScoresListRand1 == "Constitution":
+                Constitution += Sums[0]
+            if AbilityScoresListRand1 == "Dexterity":
+                Dexterity += Sums[0]
+            if AbilityScoresListRand1 == "Intelligence":
+                Intelligence += Sums[0]
+            if AbilityScoresListRand1 == "Strength":
+                Strength += Sums[0]
+            if AbilityScoresListRand1 == "Wisdom":
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(AbilityScoresListRand1)
+        elif 1 <= absc1 <= 6:
+            first_absc_choice = AbilityScoresList[absc1 - 1]
+            if first_absc_choice == "Charisma":
+                Charisma += Sums[0]
+            if first_absc_choice == "Constitution":
+                Constitution += Sums[0]
+            if first_absc_choice == "Dexterity":
+                Dexterity += Sums[0]
+            if first_absc_choice == "Intelligence":
+                Intelligence += Sums[0]
+            if first_absc_choice == "Strength":
+                Strength += Sums[0]
+            if first_absc_choice == "Wisdom":            
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(first_absc_choice)
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc2 = int(input("Which ability score would you like to apply the second score to? "))
+        if absc2 == 0:
+            AbilityScoresListRand2 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand2 == "Charisma":
+                Charisma += Sums[1]
+            if AbilityScoresListRand2 == "Constitution":
+                Constitution += Sums[1]
+            if AbilityScoresListRand2 == "Dexterity":
+                Dexterity += Sums[1]
+            if AbilityScoresListRand2 == "Intelligence":
+                Intelligence += Sums[1]
+            if AbilityScoresListRand2 == "Strength":
+                Strength += Sums[1]
+            if AbilityScoresListRand2 == "Wisdom":
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(AbilityScoresListRand2)
+        elif 1 <= absc2 <= 5:
+            second_absc_choice = AbilityScoresList[absc2 - 1]
+            if second_absc_choice == "Charisma":
+                Charisma += Sums[1]
+            if second_absc_choice == "Constitution":
+                Constitution += Sums[1]
+            if second_absc_choice == "Dexterity":
+                Dexterity += Sums[1]
+            if second_absc_choice == "Intelligence":
+                Intelligence += Sums[1]
+            if second_absc_choice == "Strength":
+                Strength += Sums[1]
+            if second_absc_choice == "Wisdom":            
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(second_absc_choice)        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc3 = int(input("Which ability score would you like to apply the third score to? "))
+        if absc3 == 0:
+            AbilityScoresListRand3 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand3 == "Charisma":
+                Charisma += Sums[2]
+            if AbilityScoresListRand3 == "Constitution":
+                Constitution += Sums[2]
+            if AbilityScoresListRand3 == "Dexterity":
+                Dexterity += Sums[2]
+            if AbilityScoresListRand3 == "Intelligence":
+                Intelligence += Sums[2]
+            if AbilityScoresListRand3 == "Strength":
+                Strength += Sums[2]
+            if AbilityScoresListRand3 == "Wisdom":
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(AbilityScoresListRand3)
+        elif 1 <= absc3 <= 4:
+            third_absc_choice = AbilityScoresList[absc3 - 1]
+            if third_absc_choice == "Charisma":
+                Charisma += Sums[2]
+            if third_absc_choice == "Constitution":
+                Constitution += Sums[2]
+            if third_absc_choice == "Dexterity":
+                Dexterity += Sums[2]
+            if third_absc_choice == "Intelligence":
+                Intelligence += Sums[2]
+            if third_absc_choice == "Strength":
+                Strength += Sums[2]
+            if third_absc_choice == "Wisdom":            
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(third_absc_choice)                    
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc4 = int(input("Which ability score would you like to apply the fourth score to? "))
+        if absc4 == 0:
+            AbilityScoresListRand4 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand4 == "Charisma":
+                Charisma += Sums[3]
+            if AbilityScoresListRand4 == "Constitution":
+                Constitution += Sums[3]
+            if AbilityScoresListRand4 == "Dexterity":
+                Dexterity += Sums[3]
+            if AbilityScoresListRand4 == "Intelligence":
+                Intelligence += Sums[3]
+            if AbilityScoresListRand4 == "Strength":
+                Strength += Sums[3]
+            if AbilityScoresListRand4 == "Wisdom":
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(AbilityScoresListRand4)
+        elif 1 <= absc4 <= 3:
+            fourth_absc_choice = AbilityScoresList[absc4 - 1]
+            if fourth_absc_choice == "Charisma":
+                Charisma += Sums[3]
+            if fourth_absc_choice == "Constitution":
+                Constitution += Sums[3]
+            if fourth_absc_choice == "Dexterity":
+                Dexterity += Sums[3]
+            if fourth_absc_choice == "Intelligence":
+                Intelligence += Sums[3]
+            if fourth_absc_choice == "Strength":
+                Strength += Sums[3]
+            if fourth_absc_choice == "Wisdom":            
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(fourth_absc_choice)        
+        print("0 - Random")        
+        for i, option in enumerate(AbilityScoresList, 1):
+            print(f"{i} - {option}")
+        absc5 = int(input("Which ability score would you like to apply the fifth score to? "))
+        if absc5 == 0:
+            AbilityScoresListRand5 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand5 == "Charisma":
+                Charisma += Sums[4]
+            if AbilityScoresListRand5 == "Constitution":
+                Constitution += Sums[4]
+            if AbilityScoresListRand5 == "Dexterity":
+                Dexterity += Sums[4]
+            if AbilityScoresListRand5 == "Intelligence":
+                Intelligence += Sums[4]
+            if AbilityScoresListRand5 == "Strength":
+                Strength += Sums[4]
+            if AbilityScoresListRand5 == "Wisdom":
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(AbilityScoresListRand5)
+        elif 1 <= absc5 <= 2:
+            fifth_absc_choice = AbilityScoresList[absc5 - 1]
+            if fifth_absc_choice == "Charisma":
+                Charisma += Sums[4]
+            if fifth_absc_choice == "Constitution":
+                Constitution += Sums[4]
+            if fifth_absc_choice == "Dexterity":
+                Dexterity += Sums[4]
+            if fifth_absc_choice == "Intelligence":
+                Intelligence += Sums[4]
+            if fifth_absc_choice == "Strength":
+                Strength += Sums[4]
+            if fifth_absc_choice == "Wisdom":            
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(fifth_absc_choice)        
+        last_absc_choice = AbilityScoresList[0]
+        if last_absc_choice == "Charisma":
+            Charisma += Sums[5]
+        if last_absc_choice == "Constitution":
+            Constitution += Sums[5]
+        if last_absc_choice == "Dexterity":
+            Dexterity += Sums[5]
+        if last_absc_choice == "Intelligence":
+            Intelligence += Sums[5]
+        if last_absc_choice == "Strength":
+            Strength += Sums[5]
+        if last_absc_choice == "Wisdom":            
+            Wisdom += Sums[5]
+    if param == "N":
+            AbilityScoresListRand1 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand1 == "Charisma":
+                Charisma += Sums[0]
+            if AbilityScoresListRand1 == "Constitution":
+                Constitution += Sums[0]
+            if AbilityScoresListRand1 == "Dexterity":
+                Dexterity += Sums[0]
+            if AbilityScoresListRand1 == "Intelligence":
+                Intelligence += Sums[0]
+            if AbilityScoresListRand1 == "Strength":
+                Strength += Sums[0]
+            if AbilityScoresListRand1 == "Wisdom":
+                Wisdom += Sums[0]
+            AbilityScoresList.remove(AbilityScoresListRand1)
+            AbilityScoresListRand2 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand2 == "Charisma":
+                Charisma += Sums[1]
+            if AbilityScoresListRand2 == "Constitution":
+                Constitution += Sums[1]
+            if AbilityScoresListRand2 == "Dexterity":
+                Dexterity += Sums[1]
+            if AbilityScoresListRand2 == "Intelligence":
+                Intelligence += Sums[1]
+            if AbilityScoresListRand2 == "Strength":
+                Strength += Sums[1]
+            if AbilityScoresListRand2 == "Wisdom":
+                Wisdom += Sums[1]
+            AbilityScoresList.remove(AbilityScoresListRand2)           
+            AbilityScoresListRand3 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand3 == "Charisma":
+                Charisma += Sums[2]
+            if AbilityScoresListRand3 == "Constitution":
+                Constitution += Sums[2]
+            if AbilityScoresListRand3 == "Dexterity":
+                Dexterity += Sums[2]
+            if AbilityScoresListRand3 == "Intelligence":
+                Intelligence += Sums[2]
+            if AbilityScoresListRand3 == "Strength":
+                Strength += Sums[2]
+            if AbilityScoresListRand3 == "Wisdom":
+                Wisdom += Sums[2]
+            AbilityScoresList.remove(AbilityScoresListRand3)   
+            AbilityScoresListRand4 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand4 == "Charisma":
+                Charisma += Sums[3]
+            if AbilityScoresListRand4 == "Constitution":
+                Constitution += Sums[3]
+            if AbilityScoresListRand4 == "Dexterity":
+                Dexterity += Sums[3]
+            if AbilityScoresListRand4 == "Intelligence":
+                Intelligence += Sums[3]
+            if AbilityScoresListRand4 == "Strength":
+                Strength += Sums[3]
+            if AbilityScoresListRand4 == "Wisdom":
+                Wisdom += Sums[3]
+            AbilityScoresList.remove(AbilityScoresListRand4)   
+            AbilityScoresListRand5 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand5 == "Charisma":
+                Charisma += Sums[4]
+            if AbilityScoresListRand5 == "Constitution":
+                Constitution += Sums[4]
+            if AbilityScoresListRand5 == "Dexterity":
+                Dexterity += Sums[4]
+            if AbilityScoresListRand5 == "Intelligence":
+                Intelligence += Sums[4]
+            if AbilityScoresListRand5 == "Strength":
+                Strength += Sums[4]
+            if AbilityScoresListRand5 == "Wisdom":
+                Wisdom += Sums[4]
+            AbilityScoresList.remove(AbilityScoresListRand5)    
+            AbilityScoresListRand6 = random.choice(AbilityScoresList)
+            if AbilityScoresListRand6 == "Charisma":
+                Charisma += Sums[5]
+            if AbilityScoresListRand6 == "Constitution":
+                Constitution += Sums[5]
+            if AbilityScoresListRand6 == "Dexterity":
+                Dexterity += Sums[5]
+            if AbilityScoresListRand6 == "Intelligence":
+                Intelligence += Sums[5]
+            if AbilityScoresListRand6 == "Strength":
+                Strength += Sums[5]
+            if AbilityScoresListRand6 == "Wisdom":
+                Wisdom += Sums[5]
+
+    ChaMod = math.floor((Charisma-10)/2)
+    ConMod = math.floor((Constitution-10)/2)
+    DexMod = math.floor((Dexterity-10)/2)
+    IntMod = math.floor((Intelligence-10)/2)
+    StrMod = math.floor((Strength-10)/2)
+    WisMod = math.floor((Wisdom-10)/2)
+    ProfBonus = math.ceil(plLvl/4)+1
+    Acrobatics = "Acrobatics"
+    AnimalHandling = "Animal Handling"
+    Arcana = "Arcana"
+    Athletics = "Athletics"
+    Deception = "Deception"
+    History = "History"
+    Insight = "Insight"
+    Intimidation = "Intimidation"
+    Investigation = "Investigation"
+    Medicine = "Medicine"
+    Nature = "Nature"
+    Perception = "Perception"
+    Performance = "Performance"
+    Persuasion = "Persuasion"
+    Religion = "Religion"
+    SleightofHand = "Sleight of Hand"
+    Stealth = "Stealth"
+    Survival = "Survival"
+    SkillProf = []
+    if "Acrobatics" in PlProf:
+        SkillProf.append(Acrobatics)
+        PlProf.remove(Acrobatics)
+    if "Animal Handling" in PlProf:
+        SkillProf.append(AnimalHandling)
+        PlProf.remove(AnimalHandling)
+    if "Arcana" in PlProf:
+        SkillProf.append(Arcana)
+        PlProf.remove(Arcana)
+    if "Athletics" in PlProf:
+        SkillProf.append(Athletics)
+        PlProf.remove(Athletics)
+    if "Deception" in PlProf:
+        SkillProf.append(Deception)
+        PlProf.remove(Deception)
+    if "History" in PlProf:
+        SkillProf.append(History)
+        PlProf.remove(History)
+    if "Insight" in PlProf:
+        SkillProf.append(Insight)
+        PlProf.remove(Insight)
+    if "Intimidation" in PlProf:
+        SkillProf.append(Intimidation)
+        PlProf.remove(Intimidation)
+    if "Investigation" in PlProf:
+        SkillProf.append(Investigation)
+        PlProf.remove(Investigation)
+    if "Medicine" in PlProf:
+        SkillProf.append(Medicine)
+        PlProf.remove(Medicine)
+    if "Nature" in PlProf:
+        SkillProf.append(Nature)
+        PlProf.remove(Nature)
+    if "Perception" in PlProf:
+        SkillProf.append(Perception)
+        PlProf.remove(Perception)
+    if "Performance" in PlProf:
+        SkillProf.append(Performance)
+        PlProf.remove(Performance)
+    if "Persuasion" in PlProf:
+        SkillProf.append(Persuasion)
+        PlProf.remove(Persuasion)
+    if "Religion" in PlProf:
+        SkillProf.append(Religion)
+        PlProf.remove(Religion)
+    if "Sleight of Hand" in PlProf:
+        SkillProf.append(SleightofHand)
+        PlProf.remove(SleightofHand)
+    if "Stealth" in PlProf:
+        SkillProf.append(Stealth)
+        PlProf.remove(Stealth)
+    if "Survival" in PlProf:
+        SkillProf.append(Survival)
+        PlProf.remove(Survival)
+
+    ProfLang = PlProf + PlLang
+    prof_lang_str = '\n'.join(f'- {item}' for item in ProfLang)
+    FeatTrait = OtherBackgroundInfo + RaceNotes    
+    feat_trait_str = '\n'.join(f'- {item}' for item in FeatTrait)
+    if subclass != "":
+        feat_trait_str = f'- Subclass: {subclass}' + '\n' + feat_trait_str
+    add_info_str = '\n'.join(f'- {item}' for item in AdditionalInfo)
+    allies_str = '\n'.join(f'- {item}' for item in AlliesOrg)
+    data = {
+        'ClassLevel':str(Class) + ' ' + str(plLvl),
+        'Background':back,
+        'PlayerName':playername,
+        'CharacterName':charactername + f'({Gender})',
+        'Race ':race,
+        'STR':str(Strength),
+        'ProfBonus':str(ProfBonus),
+        'AC':'10',
+        'Initiative': str(DexMod),
+        'Speed': str(walkingspeed),
+        'PersonalityTraits ':Trait,
+        'STRmod':str(StrMod),
+        'DEX':str(Dexterity),
+        'Ideals':Ideal,
+        'DEXmod ':str(DexMod),
+        'Bonds':Bond,
+        'CON':str(Constitution),
+        'CONmod':str(ConMod),
+        'Flaws':Flaw,
+        'INT':str(Intelligence),
+        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillProf else 0)),
+        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillProf else 0)),
+        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillProf else 0)),
+        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillProf else 0)),
+        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in SkillProf else 0)),
+        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillProf else 0)),
+        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillProf else 0)),
+        'INTmod':str(IntMod),
+        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillProf else 0)),
+        'WIS':str(Wisdom),
+        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillProf else 0)),
+        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'WISmod':str(WisMod),
+        'CHA':str(Charisma),
+        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillProf else 0)),
+        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillProf else 0)),
+        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillProf else 0)),
+        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillProf else 0)),
+        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillProf else 0)),
+        'Check Box 23':'/Yes' if 'Acrobatics' in SkillProf else '/No',
+        'Check Box 24':'/Yes' if 'Animal Handling' in SkillProf else '/No',
+        'Check Box 25':'/Yes' if 'Arcana' in SkillProf else '/No',
+        'Check Box 26':'/Yes' if 'Athletics' in SkillProf else '/No',
+        'Check Box 27':'/Yes' if 'Deception' in SkillProf else '/No',
+        'Check Box 28':'/Yes' if 'History' in SkillProf else '/No',
+        'Check Box 29':'/Yes' if 'Insight' in SkillProf else '/No',
+        'Check Box 30':'/Yes' if 'Intimidation' in SkillProf else '/No',
+        'Check Box 31':'/Yes' if 'Investigation' in SkillProf else '/No',
+        'Check Box 32':'/Yes' if 'Medicine' in SkillProf else '/No',
+        'Check Box 33':'/Yes' if 'Nature' in SkillProf else '/No',
+        'Check Box 34':'/Yes' if 'Perception' in SkillProf else '/No',
+        'Check Box 35':'/Yes' if 'Performance' in SkillProf else '/No',
+        'Check Box 36':'/Yes' if 'Persuasion' in SkillProf else '/No',
+        'Check Box 37':'/Yes' if 'Religion' in SkillProf else '/No',
+        'Check Box 38':'/Yes' if 'Sleight of Hand' in SkillProf else '/No',
+        'Check Box 39':'/Yes' if 'Stealth' in SkillProf else '/No',
+        'Check Box 40':'/Yes' if 'Survival' in SkillProf else '/No',
+        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillProf else 0)),
+        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillProf else 0)),
+        'CHamod':str(ChaMod),
+        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillProf else 0)),
+        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
+        'GP':str(BGL),
+        #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
+        'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
+        #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
+        #All spellcasting info will be provided in our creator function
+        'Height':str(Height) + 'inches',
+        'Weight':str(Weight) + 'pounds',
+        'Allies':allies_str,
+        'Feat+Traits':add_info_str,
+        }
+    input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
+    output_pdf_path = f'{charactername}_charsheet.pdf'
+    fill_pdf(input_pdf_path, output_pdf_path, data)

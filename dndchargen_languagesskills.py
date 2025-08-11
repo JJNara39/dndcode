@@ -144,19 +144,17 @@ def languagegen(param, PlLang, SLANG):
                 while not randLang:
                     try:     
                         PlRandLang = random.choice(SLANG)
-                        if PlRandLang in SLANG:
-                            SLANG.remove(PlRandLang)           
-                            PlLang.append(PlRandLang)
-                            randLang = True
-                        else:
-                            PlRandLang = random.choice(SLANG)
+                        SLANG.remove(PlRandLang)           
+                        PlLang.append(PlRandLang)
+                        randLang = True
                     except ValueError:
                         pass
                     except IndexError:
-                        break                    
+                        break   
+                pllang = True                 
             else:
                 if Languages[pllang_input - 1] in PlLang:
-                    print("You know: " + FourLang[flang_input - 1] + ", please select a different option.")
+                    print("You know: " + Languages[pllang_input - 1] + ", please select a different option.")
                 else:
                     PlLang.append(Languages[pllang_input - 1])
                     SLANG.remove(Languages[pllang_input - 1])
@@ -166,12 +164,9 @@ def languagegen(param, PlLang, SLANG):
         while not randLang:
             try:     
                 PlRandLang = random.choice(SLANG)
-                if PlRandLang in SLANG:
-                    SLANG.remove(PlRandLang)           
-                    PlLang.append(PlRandLang)
-                    randLang = True
-                else:
-                    PlRandLang = random.choice(SLANG)
+                SLANG.remove(PlRandLang)           
+                PlLang.append(PlRandLang)
+                randLang = True
             except ValueError:
                 pass
             except IndexError:
@@ -544,7 +539,6 @@ def musicalinstr(param, PlProf):
     return PlProf
 def choicefourlang(param, PlLang, SLANG, lang1, lang2, lang3, lang4):
     FourLang = [lang1, lang2, lang3, lang4]
-    fourlangrand = random.choice(FourLang)
     if param == "Y":
         print("0 - Random")
         print(f"1 - {lang1}")
@@ -566,12 +560,10 @@ def choicefourlang(param, PlLang, SLANG, lang1, lang2, lang3, lang4):
                 randflang = False
                 while not randflang:
                     try:
-                        if fourlangrand in SLANG:
-                            SLANG.remove(fourlangrand)
-                            PlLang.append(fourlangrand)
-                            randflang = True
-                        else:
-                            fourlangrand = random.choice(FourLang)
+                        fourlangrand = random.choice(FourLang)
+                        SLANG.remove(fourlangrand)
+                        PlLang.append(fourlangrand)
+                        randflang = True
                     except ValueError:
                         pass
                     except IndexError:
@@ -588,10 +580,10 @@ def choicefourlang(param, PlLang, SLANG, lang1, lang2, lang3, lang4):
         randflang = False
         while not randflang:
             try:
-                if fourlangrand in SLANG:
-                    SLANG.remove(fourlangrand)
-                    PlLang.append(fourlangrand)
-                    randflang = True
+                fourlangrand = random.choice(SLANG)
+                SLANG.remove(fourlangrand)
+                PlLang.append(fourlangrand)
+                randflang = True
             except ValueError:
                 pass 
             except IndexError:
@@ -705,7 +697,6 @@ def gamingsets(param, PlProf):
     return PlProf
 def choicethreelang(param, PlLang, SLANG, lang1, lang2, lang3):
     ThreeLang = [lang1, lang2, lang3]
-    threelangrand = random.choice(ThreeLang)
     if param == "Y":
         print("0 - Random")
         print(f"1 - {lang1}")
@@ -724,12 +715,10 @@ def choicethreelang(param, PlLang, SLANG, lang1, lang2, lang3):
                 randtlang = False
                 while not randtlang:
                     try:
-                        if threelangrand in SLANG:
-                            SLANG.remove(threelangrand)
-                            PlLang.append(threelangrand)
-                            randtlang = True
-                        else:
-                            threelangrand = random.choice(ThreeLang)
+                        threelangrand = random.choice(ThreeLang)
+                        SLANG.remove(threelangrand)
+                        PlLang.append(threelangrand)
+                        randtlang = True
                     except ValueError:
                         pass
                     except IndexError:
@@ -746,18 +735,16 @@ def choicethreelang(param, PlLang, SLANG, lang1, lang2, lang3):
         randtlang = False
         while not randtlang:
             try:
-                if threelangrand in SLANG:
-                    SLANG.remove(threelangrand)
-                    PlLang.append(threelangrand)
-                    randtlang = True
-                else:
-                    threelangrand = random.choice(ThreeLang)
+                threelangrand = random.choice(ThreeLang)
+                SLANG.remove(threelangrand)
+                PlLang.append(threelangrand)
+                randtlang = True
             except ValueError:
                 pass
             except IndexError:
-                break 
+                break
     return PlLang, SLANG
-def choicefourskill(param, skill1, skill2, skill3, skill4, skillname1, skillname2, skillname3, skillname4):
+def choicefourskill(param, skills_dict, skill1, skill2, skill3, skill4, skillname1, skillname2, skillname3, skillname4):
     FourSkill = [skill1, skill2, skill3, skill4]
     fourskillrand = random.randint(0, len(FourSkill) - 1)
     if param == "Y":
@@ -768,13 +755,13 @@ def choicefourskill(param, skill1, skill2, skill3, skill4, skillname1, skillname
         print(f"4 - {skillname4}")
         fskl = int(input("Please pick a skill from the above list. "))
         if fskl == 0:
-            FourSkill[fourskillrand] += 1
+            skills_dict[FourSkill[fourskillrand]] += 1
         else:
-            FourSkill[fskl - 1] += 1
+            skills_dict[FourSkill[fskl - 1]] += 1
     if param == "N":
-        FourSkill[fourskillrand] += 1
-    return FourSkill
-def choicethreeskill(param, skill1, skill2, skill3, skillname1, skillname2, skillname3):
+        skills_dict[FourSkill[fourskillrand]] += 1
+    return [skills_dict[skill] for skill in FourSkill]
+def choicethreeskill(param, skills_dict, skill1, skill2, skill3, skillname1, skillname2, skillname3):
     ThreeSkill = [skill1, skill2, skill3]
     threeskillrand = random.randint(0, len(ThreeSkill) - 1)
     if param == "Y":
@@ -784,13 +771,13 @@ def choicethreeskill(param, skill1, skill2, skill3, skillname1, skillname2, skil
         print(f"3 - {skillname3}")
         thrskl = int(input("Please pick a skill from the above list. "))
         if thrskl == 0:
-            ThreeSkill[threeskillrand] += 1
+            skills_dict[ThreeSkill[threeskillrand]] += 1
         else:
-            ThreeSkill[thrskl - 1] += 1
+            skills_dict[ThreeSkill[thrskl - 1]] += 1
     if param == "N":
-        ThreeSkill[threeskillrand] += 1
-    return ThreeSkill
-def choicethreeskill2(param, skill1, skill2, skill3, skillname1, skillname2, skillname3):
+        skills_dict[ThreeSkill[threeskillrand]] += 1
+    return [skills_dict[skill] for skill in ThreeSkill]
+def choicethreeskill2(param, skills_dict, skill1, skill2, skill3, skillname1, skillname2, skillname3):
     ThreeSkill = [skill1, skill2, skill3]
     threeskillrand = random.randint(0, len(ThreeSkill) - 1)
     threeskillrand2 = random.randint(0, len(ThreeSkill) - 1)
@@ -802,19 +789,19 @@ def choicethreeskill2(param, skill1, skill2, skill3, skillname1, skillname2, ski
         thrskl = int(input("Please pick a skill from the above list. "))
         thrskl2 = int(input("Please pick a second skill from the above list. "))
         if thrskl == 0:
-            ThreeSkill[threeskillrand] += 1
+            skills_dict[ThreeSkill[threeskillrand]] += 1
         else:
-            ThreeSkill[thrskl - 1] += 1   
+            skills_dict[ThreeSkill[thrskl - 1]] += 1   
 
         if thrskl2 == 0:
-            ThreeSkill[threeskillrand2] += 1
+            skills_dict[ThreeSkill[threeskillrand2]] += 1
         else:
-            ThreeSkill[thrskl2 - 1] += 1
+            skills_dict[ThreeSkill[thrskl2 - 1]] += 1
     if param == "N":
-        ThreeSkill[threeskillrand] += 1    
-        ThreeSkill[threeskillrand2] += 1    
-    return ThreeSkill
-def choicefourskill2(param, skill1, skill2, skill3, skill4, skillname1, skillname2, skillname3, skillname4):
+        skills_dict[ThreeSkill[threeskillrand]] += 1    
+        skills_dict[ThreeSkill[threeskillrand2]] += 1    
+    return [skills_dict[skill] for skill in ThreeSkill]
+def choicefourskill2(param, skills_dict, skill1, skill2, skill3, skill4, skillname1, skillname2, skillname3, skillname4):
     FourSkill = [skill1, skill2, skill3, skill4]
     fourskillrand = random.randint(0, len(FourSkill) - 1)
     fourskillrand2 = random.randint(0, len(FourSkill) - 1)
@@ -827,18 +814,18 @@ def choicefourskill2(param, skill1, skill2, skill3, skill4, skillname1, skillnam
         fskl = int(input("Please pick a skill from the above list. "))
         fskl2 = int(input("Please pick a second skill from the above list. "))
         if fskl == 0:
-            FourSkill[fourskillrand] += 1
+            skills_dict[FourSkill[fourskillrand]] += 1
         else:
-            FourSkill[fskl - 1] += 1    
+            skills_dict[FourSkill[fskl - 1]] += 1    
 
         if fskl2 == 0:
-            FourSkill[fourskillrand2] += 1   
+            skills_dict[FourSkill[fourskillrand2]] += 1   
         else:
-            FourSkill[fskl2 - 1] += 1             
+            skills_dict[FourSkill[fskl2 - 1]] += 1             
     if param == "N":
-        FourSkill[fourskillrand] += 1
-        FourSkill[fourskillrand2] += 1
-    return FourSkill
+        skills_dict[FourSkill[fourskillrand]] += 1
+        skills_dict[FourSkill[fourskillrand2]] += 1
+    return [skills_dict[skill] for skill in FourSkill]
 def musicalinstrthiev(param, PlProf):
     Bagpipes = "Bagpipes"
     Birdpipes = "Birdpipes"
@@ -928,7 +915,7 @@ def musicalinstrthiev(param, PlProf):
         if musit == 20:
             PlProf.append(Zulkoon)
         if musit == 21:
-            PlProf.append(Thievkit)    
+            PlProf.append(ThievKit)    
         if musit == 0:
             PlProf.append(MusInstrThievRand)
     if param == "N":
@@ -1384,12 +1371,10 @@ def ArtTlNavTlLang(param, PlProf, PlLang, SLANG):
                     arttlnavtlslangwhile = False
                     while not arttlnavtlslangwhile:
                         try:
-                            if ArtTlNavTlSLANGrand in SLANG:
-                                PlLang.append(ArtTlNavTlSLANGrand)
-                                SLANG.remove(ArtTlNavTlSLANGrand)
-                                arttlnavtlslangwhile = True
-                            else:
-                                ArtTlNavTlSLANGrand = random.choice(ArtTlNavTlLang)
+                            ArtTlNavTlSLANGrand = random.choice(ArtTlNavTlSLANGlang)
+                            PlLang.append(ArtTlNavTlSLANGrand)
+                            SLANG.remove(ArtTlNavTlSLANGrand)
+                            arttlnavtlslangwhile = True
                         except ValueError:
                             pass
                         except IndexError:
@@ -1401,12 +1386,10 @@ def ArtTlNavTlLang(param, PlProf, PlLang, SLANG):
             arttlnavtlslangwhile = False
             while not arttlnavtlslangwhile:
                 try:
-                    if ArtTlNavTlSLANGrand in SLANG:
-                        PlLang.append(ArtTlNavTlSLANGrand)
-                        SLANG.remove(ArtTlNavTlSLANGrand)
-                        arttlnavtlslangwhile = True
-                    else:
-                        ArtTlNavTlSLANGrand = random.choice(ArtTlNavTlLang)
+                    ArtTlNavTlSLANGrand = random.choice(ArtTlNavTlSLANGlang)
+                    PlLang.append(ArtTlNavTlSLANGrand)
+                    SLANG.remove(ArtTlNavTlSLANGrand)
+                    arttlnavtlslangwhile = True  
                 except ValueError:
                     pass
                 except IndexError:
@@ -1422,7 +1405,6 @@ def ExoticLang(param, PlLang, SLANG):
     Sylv = "Sylvan"
     Unde = "Undercommon"
     ExoticLang = [Abys, Cele, DpSp, Drac, Infe, Prim, Sylv, Unde]
-    ExoticLangRand = random.choice(ExoticLang)
     if param == "Y":
         print("0 - Random")
         print("1 - Abyssal")
@@ -1449,19 +1431,17 @@ def ExoticLang(param, PlLang, SLANG):
         print("8 - Undercommon")
         if Unde in PlLang:
             print("You already know: " + Unde + ", therefore this option is unavailable.")
-        exoticlang_input = int(input("Choose an instrument, navigation tools, or language to be proficient in. "))
+        exoticlang_input = int(input("Please pick a language from the above list: "))
         exoticlang = False
         while not exoticlang:
             if exoticlang_input == 0:
                 exoticlang_while = False
                 while not exoticlang_while:
                     try:
-                        if ExoticLangRand in SLANG:
-                            PlLang.append(ExoticLangRand)
-                            SLANG.remove(ExoticLangRand)
-                            exoticlang_while = True
-                        else:
-                            ExoticLangRand = random.choice(ExoticLang)
+                        ExoticLangRand = random.choice(ExoticLang)
+                        PlLang.append(ExoticLangRand)
+                        SLANG.remove(ExoticLangRand)
+                        exoticlang_while = True
                     except ValueError:
                         pass
                     except IndexError:
@@ -1478,12 +1458,10 @@ def ExoticLang(param, PlLang, SLANG):
         exoticlang_while = False
         while not exoticlang_while:
             try:
-                if ExoticLangRand in SLANG:
-                    PlLang.append(ExoticLangRand)
-                    SLANG.remove(ExoticLangRand)
-                    exoticlang_while = True
-                else:
-                    ExoticLangRand = random.choice(ExoticLang)
+                ExoticLangRand = random.choice(ExoticLang)
+                PlLang.append(ExoticLangRand)
+                SLANG.remove(ExoticLangRand)
+                exoticlang_while = True
             except ValueError:
                 pass
             except IndexError:
@@ -2399,7 +2377,7 @@ def martwepprof2(param, PlProf):
         if martwep1 == 22:
             PlProf.append(HandCrossbow)
         if martwep1 == 23:
-            PlProf.append(HeavyLongbow)
+            PlProf.append(Longbow)
         if martwep1 == 24:
             PlProf.append(Net)
         if martwep1 == 0:
@@ -2723,3 +2701,117 @@ def skillprof(param, PlProf):
     if param == "N":
         PlProf.append(RandSklProf1)
     return PlProf
+
+def twoskillsfromlist(param, SkillsProf, skill1, skill2, skill3, skill4, skill5, skill6, skill7):
+    SleightofHand = "Sleight of Hand"
+    SkillsList = [skill1, skill2, skill3, skill4, skill5, skill6, skill7]
+    if param == "Y":
+        print("0 - Random")
+        for i, skill in enumerate(SkillsList, 1):
+            print(f"{i} - {skill}")
+        skillone = int(input("Which is the first skill to be proficient in? "))
+        skilltwo = int(input("Which is the second skill to be proficient in? "))
+        if skillone == 1:
+            SkillsProf.append(skill1)
+        if skillone == 2:
+            SkillsProf.append(skill2)
+        if skillone == 3:
+            SkillsProf.append(skill3)
+        if skillone == 4:
+            SkillsProf.append(skill4)
+        if skillone == 5:
+            SkillsProf.append(skill5)
+        if skillone == 6:
+            SkillsProf.append(skill6)
+        if skillone == 7:
+            SkillsProf.append(skill7)
+        if skillone == 0:
+            SkillsListRand1 = random.choice(SkillsList)
+            SkillsProf.append(SkillsListRand1)
+        if skilltwo == 1:
+            SkillsProf.append(skill1)
+        if skilltwo == 2:
+            SkillsProf.append(skill2)
+        if skilltwo == 3:
+            SkillsProf.append(skill3)
+        if skilltwo == 4:
+            SkillsProf.append(skill4)
+        if skilltwo == 5:
+            SkillsProf.append(skill5)
+        if skilltwo == 6:
+            SkillsProf.append(skill6)
+        if skilltwo == 7:
+            SkillsProf.append(skill7)
+        if skilltwo == 0:
+            SkillsListRand2 = random.choice(SkillsList)
+            SkillsProf.append(SkillsListRand2)
+    if param == "N":
+        SkillsListRand1 = random.choice(SkillsList)
+        SkillsProf.append(SkillsListRand1)
+        SkillsListRand2 = random.choice(SkillsList)
+        SkillsProf.append(SkillsListRand2)
+    return SkillsProf
+
+def twosimpleweapons(param, EQP):
+    Club = "Club"
+    Dagger = "Dagger"
+    Dart = "Dart"
+    Greatclub = "Greatclub"
+    Handaxe = "Handaxe"
+    Javelin = "Javelin"
+    LightCrossbow = "Light Crossbow"
+    LightHammer = "Light Hammer"
+    Mace = "Mace"
+    Quarterstaff = "Quarterstaff"
+    Shortbow = "Shortbow"
+    Sickle = "Sickle"
+    Sling = "Sling"
+    Spear = "Spear"
+    Yklwa = "Yklwa"
+    SimpleWeapons = ["Club", "Dagger", "Dart", "Greatclub", "Handaxe", "Javelin", "LightCrossbow", "LightHammer", "Mace", "Quarterstaff", "Shortbow", "Sickle", "Sling", "Spear", "Yklwa"]
+    if param == "Y":
+        print("0 - Random")
+        for i, sw in enumerate(SimpleWeapons,1):
+            print(f"{i} - {sw}")
+        simpleweapon1 = int(input("Which simple weapon do you want to be proficient in first? "))
+        simpleweapon2 = int(input("Which simple weapon do you want to be proficient in second? "))
+        if ((simpleweapon1 == 1) or (simpleweapon2 == 1)):
+            EQP.append(Club)
+        if ((simpleweapon1 == 2) or (simpleweapon2 == 2)):
+            EQP.append(Dagger)
+        if ((simpleweapon1 == 3) or (simpleweapon2 == 3)):
+            EQP.append(Dart)
+        if ((simpleweapon1 == 4) or (simpleweapon2 == 4)):
+            EQP.append(Greatclub)
+        if ((simpleweapon1 == 5) or (simpleweapon2 == 5)):
+            EQP.append(Handaxe)
+        if ((simpleweapon1 == 6) or (simpleweapon2 == 6)):
+            EQP.append(Javelin)
+        if ((simpleweapon1 == 7) or (simpleweapon2 == 7)):
+            EQP.append(LightCrossbow)
+        if ((simpleweapon1 == 8) or (simpleweapon2 == 8)):
+            EQP.append(LightHammer)
+        if ((simpleweapon1 == 9) or (simpleweapon2 == 9)):
+            EQP.append(Mace)
+        if ((simpleweapon1 == 10) or (simpleweapon2 == 10)):
+            EQP.append(Quarterstaff)
+        if ((simpleweapon1 == 11) or (simpleweapon2 == 11)):
+            EQP.append(Shortbow)
+        if ((simpleweapon1 == 12) or (simpleweapon2 == 12)):
+            EQP.append(Sickle)
+        if ((simpleweapon1 == 13) or (simpleweapon2 == 13)):
+            EQP.append(Sling)
+        if ((simpleweapon1 == 14) or (simpleweapon2 == 14)):
+            EQP.append(Spear)
+        if ((simpleweapon1 == 15) or (simpleweapon2 == 15)):
+            EQP.append(Yklwa)
+        if ((simpleweapon1 == 0) or (simpleweapon2 == 0)):
+            RandomSW = random.choice(SimpleWeapons)
+            EQP.append(RandomSW)
+    if param == "N":
+        RandomSW1 = random.choice(SimpleWeapons)
+        EQP.append(RandomSW1)
+        SimpleWeapons.remove(RandomSW1)
+        RandomSW2 = random.choice(SimpleWeapons)
+        EQP.append(RandomSW2)
+    return EQP

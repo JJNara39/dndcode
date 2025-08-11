@@ -1,0 +1,34 @@
+This section is my second version of the DnD code.
+As the name suggests I split the code up into different sections, for race, background, class, and summary.
+
+Every file lists all tools and languages, this will be fixed in future versions.
+
+In dnd2.py I initialized all of the info at the beginning, and more accurately had decision loops for Race, Class, or Background
+-Giving you the chance to decide which aspect of the character to decide first
+-I began learning for idx loops a lot better and used them.
+-After all 3 options have been picked, it will move on to summation
+-This allowed the person to create a CR encounter instead of making a character.
+-Finally it allowed for a party to be made in theory, even though I have yet to implement a save feature.
+
+dndchargen_bkg.py collects all of the background information, more fleshed out than in the previous version.
+-This lists all 85 background options as well as what skills each increases
+-Each option gives what is listed for proficiencies and equipment
+
+dnd_chargen_character_builder.py attempts to provide some of the class information and finally build a character. This was paused due to lack of ability.
+
+dndchargen_class.py lets the player choose their class and their subclass (just options, not the details)
+
+dndchargen_languageskills.py accomplishes the same as in the previous version: listing the different functions used across all of my files.
+
+dndchargen_race.py initializes many of the traits given by different races, and tries to award as much of each racial info
+
+dndchargen_summation.py accomplishes what the last version did, summarizing the info collected by my files
+-However I implemented my idea I came up with during this run, which is to summarize collected info on a form-fillable pdf of a dnd5e sheet
+
+Both pdfplay.py and pdfplay2.py are files meant for getting more familiar with form filling and realizing checkboxes can also be filled
+
+Misc other files were DnD_5E_CharacterSheet_FormFillable.pdf which is used as the 'blank slate' file
+-As well as dnd5e_sheet_filled.pdf which is the sheet filled with form names
+-And Form_Fields_Dnd_Form.txt which tells what each form's field info is (useful for checkboxes)
+
+This set was uploaded in late October, 2024.
