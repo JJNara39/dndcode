@@ -1,0 +1,27 @@
+Let me attempt to explain how every file works.
+This is adapted from the code listed by Jadey Catgirl99
+
+dnd.py is a file I created that tries to add a Dm or Player option. 
+-This is so that a DM can calculate a CR based on a party of players.
+-Ended up being a test for running a randomized code many times
+
+dndchargenv3.py contains the meat of the code and closely resembles the original code.
+-I also added in as many skills/tools/items as possible
+-This combines race/background all in one file, from all source materials as well
+
+dndchargen_class.py adds Class/Subclass choices for a character.
+-This also adds in any text info that a subclass choice provides
+
+dndchargen_summation.py collects other text information and appends them to a list called OtherRaceInfo
+-This file also means to summarize and print the information collected from the other files.
+-This also summarizes Skill Scores and Ability Scores 
+
+dndchargenOG.py is the original code from Jadey Catgirl99
+
+Language-Creatordnd.py is the file I used to print all of the lists used in the functions in dndchargen_languageskills.py
+
+dndchargen_languageskills.py Collects the functions I have used for races and backgrounds
+
+I believe 'Python-DndCharGenLists.py' was the start of a future dnd_tools.py, which collects all of the tools and starts my double language while loop
+
+This was uploaded to GitHub on October 4, 2024, but I suspect this stage of code was completed in late July/Mid August 2024
