@@ -1,0 +1,14 @@
+This set of files means to accomplish the name of the folder. Multi-classing.
+-Based on some printed files here, this is when the 'notes' file is created as well
+
+These files are more or less the same as the previous version, but I will note some specific changes.
+
+In dndchargen_summation.py the for loops are more utilized.
+-It collects a good amount of information and sums it all up in a data dictionary, but we are not done yet, as it progresses into dndchargen_character_builder.py
+
+In dndchargen_character_builder.py, we finalize our character information, by detailing more of what each class provides
+-Adding a notes collection system as well
+-More of the data dictionary is filled out thanks to information provided by a class. 
+-In addition to our pdf being written with the data dictionary, a notes.txt file is also created, meant to collect more detailed information that would not fit on a sheet
+
+This folder was created towards the end of November, 2024

@@ -77,79 +77,7 @@ VehLand = "Vehicles (Land)"
 VehSea = "Vehicles (Sea)"
 VehSpace = "Vehicles (Space)"
 VehProf = [VehLand, VehSea, VehSpace]
-ToolProficiencies = [ARTISANTOOLS, GamingSets, MusicalInstruments, Kits]
-AntimatterRifle = "Antimatter Rifle"
-AutomaticPistol = "Automatic Pistol"
-AutomaticRifle = "Automatic Rifle"
-HuntingRifle = "Hunting Rifle"
-LaserPistol = "Laser Pistol"
-LaserRifle = "Laser Rifle"
-Musket = "Musket"
-Pistol = "Pistol"
-Revolver = "Revolver"
-Shotgun = "Shotgun"
-Firearms = [AntimatterRifle, AutomaticPistol, AutomaticRifle, HuntingRifle, LaserPistol, LaserRifle, Musket, Pistol, Revolver, Shotgun]
-Club = "Club"
-Dagger = "Dagger"
-Dart = "Dart"
-Greatclub = "Greatclub"
-Handaxe = "Handaxe"
-Javelin = "Javelin"
-LightCrossbow = "Light Crossbow"
-LightHammer = "Light Hammer"
-Mace = "Mace"
-Quarterstaff = "Quarterstaff"
-Shortbow = "Shortbow"
-Sickle = "Sickle"
-Sling = "Sling"
-Spear = "Spear"
-Yklwa = "Yklwa"
-SimpleWeapons = [Club, Dagger, Dart, Greatclub, Handaxe, Javelin, LightCrossbow, LightHammer, Mace, Quarterstaff, Shortbow, Sickle, Sling, Spear, Yklwa]
-Battleaxe = "Battleaxe"
-DoubleBladedScimitar = "Double-Bladed Scimitar"
-Flail = "Flail"
-Glaive = "Glaive"
-Greataxe = "Greataxe"
-Greatsword = "Greatsword"
-Halberd = "Halberd"
-Lance = "Lance"
-Longsword = "Longsword"
-Maul = "Maul"
-Morningstar = "Morningstar"
-Pike = "Pike"
-Rapier = "Rapier"
-Scimitar = "Scimitar"
-Shortsword = "Shortsword"
-Trident = "Trident"
-WarPick = "War Pick"
-Warhammer = "Warhammer"
-Whip = "Whip"
-Blowgun = "Blowgun"
-Crossbow = "Crossbow"
-HandCrossbow = "Hand Crossbow"
-Longbow = "Longbow"
-Net = "Net"
-MartialWeapons = [
-        Battleaxe, DoubleBladedScimitar, Flail, Glaive, Greataxe, Greatsword, Halberd, Lance, Longsword, Maul, Morningstar, Pike, Rapier, Scimitar,
-        Shortsword, Trident, WarPick, Warhammer, Whip, Blowgun, Crossbow, HandCrossbow, Longbow, Net
-    ]
-Leather = "Leather"
-StuddedLeather = "Studded Leather"
-Padded = "Padded"
-LightArmor = [Leather, StuddedLeather, Padded]
-Breastplate = "Breastplate"
-ChainShirt = "Chain Shirt"
-HalfPlate = "Half Plate"
-Hide = "Hide"
-ScaleMail = "Scale Mail"
-SpikedArmor ="Spiked Armor"
-MediumArmor = [Breastplate, ChainShirt, HalfPlate, Hide, ScaleMail, SpikedArmor]
-ChainMail = "Chain Mail"
-RingMail = "Ring Mail"
-Plate = "Plate"
-Splint = "Splint"
-HeavyArmor = [ChainMail, RingMail, Plate, Splint]
-Shield = "Shield"  
+ToolProficiencies = [ARTISANTOOLS, GamingSets, MusicalInstruments, Kits] 
 Aara = "Aarakocra"
 Abys = "Abyssal"
 Aqua = "Aquan"
@@ -187,6 +115,7 @@ TCant = "Thieves Cant"
 SLANG = [Aara, Abys, Aqua, Aura, Bird, Cele, Cerva, Comm, DpSp, Drac, Dwarvi, Elvi, Gian, GithL, Gnom, Gobl, Grun, Hafl, Hedg, Infe, Jerb, Krau, Leon, Loxo, Mapa, Mino, Orc, Quo, Prim, Sylv, Unde, Veda, Vulp]
 
 def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):    
+    EQP = []
     AcroNum = skills_dict["AcroNum"]
     AnHaNum = skills_dict["AnHaNum"]
     ArcaNum = skills_dict["ArcaNum"]
@@ -763,7 +692,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         Trait = ""
         Ideal = ""
         Bond = ""
-        Flaw = ""               
+        Flaw = ""        
     if back == "Athlete":
         AthPT1 = "I feel most at peace during physical exertion, be it exercise or battle."
         AthPT2 = "I don't like to sit idle."
@@ -1756,7 +1685,8 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
         BGL = 10
         EQP = ["Your choice of a musket or a pistol, A set of common clothes"]
         skills_dict["AthlNum"], skills_dict["PercNum"], skills_dict["SurvNum"] = choicethreeskill2(param, skills_dict, "AthlNum", "PercNum", "SurvNum", Athletics, Perception, Survival)
-        PlProf.append(Firearms)
+        if "Firearms" not in PlProf:
+            PlProf.append("Firearms")
         PlLang, SLANG = languagegen(param, PlLang, SLANG)            
     if back == "Grinner":
         GrPT1 = "I love the spotlight. Everyone, look at me!"
@@ -2454,7 +2384,7 @@ def dndCharGenBkg(param, PlLang, SLANG, PlProf, skills_dict):
             skills_dict["SurvNum"] += 1
             PlProf = musicalinstr(param, PlProf)
             PlLang, SLANG = languagegen(param, PlLang, SLANG)
-            EQP - ["A staff", "A Hunting Trap", "A trophy from an animal you killed", "A set of Traveler's Clothes"]
+            EQP = ["A staff", "A Hunting Trap", "A trophy from an animal you killed", "A set of Traveler's Clothes"]
         if back == "Uthgardt Tribe Member":
             skills_dict["AthlNum"] += 1
             skills_dict["SurvNum"] += 1

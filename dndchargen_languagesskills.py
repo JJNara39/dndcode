@@ -1724,8 +1724,8 @@ def abilityscores(param, Charisma, Constitution, Dexterity, Intelligence, Streng
     AbilityScores = [Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom]
     if param == "Y":
         print("0 - Random")
-        print("1 - Increase One Skill by 2 and One Skill by 1")
-        print("2 - Increase Three Skills by 1")
+        print("1 - Increase One Ability Score by 2 and One Ability Score by 1")
+        print("2 - Increase Three Ability Scores by 1")
         abinc = int(input("Choose how to increase ability scores. "))
         if abinc == 1:
             print("0 - Random")
@@ -1735,8 +1735,8 @@ def abilityscores(param, Charisma, Constitution, Dexterity, Intelligence, Streng
             print("4 - Intelligence")
             print("5 - Strength")
             print("6 - Wisdom")
-            mskill1 = int(input("Choose a skill to increase by 2. "))
-            mskill2 = int(input("Choose an additional skill (could be the same skill) to increase by 1. "))
+            mskill1 = int(input("Choose an Ability Score to increase by 2. "))
+            mskill2 = int(input("Choose an additional Ability Score (could be the same score) to increase by 1. "))
             if mskill1 == 0:
                 skill2inc = random.randint(0, len(AbilityScores) - 1)
                 AbilityScores[skill2inc] += 2
@@ -1756,9 +1756,9 @@ def abilityscores(param, Charisma, Constitution, Dexterity, Intelligence, Streng
             print("4 - Intelligence")
             print("5 - Strength")
             print("6 - Wisdom")
-            mskill3one1 = int(input("Choose the first skill to increase by 1. "))
-            mskill3one2 = int(input("Choose the second skill to increase by 1. "))
-            mskill3one3 = int(input("Choose the third skill to increase by 1. "))
+            mskill3one1 = int(input("Choose the first Ability Score to increase by 1. "))
+            mskill3one2 = int(input("Choose the second Ability Score to increase by 1. "))
+            mskill3one3 = int(input("Choose the third Ability Score to increase by 1. "))
             if mskill3one1 == 0:
                 randabsc1 = random.randint(0, len(AbilityScores) - 1)
                 AbilityScores[randabsc1] += 1
@@ -1944,31 +1944,8 @@ def singleabilityscore(param, Charisma, Constitution, Dexterity, Intelligence, S
             MainSkills[abinc-1] += 1
     if param == "N":       
         MainSkills[mainSkillRand] += 1    
-    return MainSkills
-def fourskillprof(param, PlProf, skillname1, skillname2, skillname3, skillname4):
-    ProfFourSkill = [skillname1, skillname2, skillname3, skillname4]
-    randprofskill = random.choice(ProfFourSkill)
-    if param == "Y":
-        print("0 - Random")
-        print(f"1 - {skillname1}")
-        print(f"2 - {skillname2}")
-        print(f"3 - {skillname3}")
-        print(f"4 - {skillname4}")
-        profsklfour = int(input("Choose a skill to be proficient in. "))
-        if profsklfour == 1:
-            PlProf.append(skillname1)
-        if profsklfour == 2:
-            PlProf.append(skillname2)
-        if profsklfour == 3:
-            PlProf.append(skillname3)
-        if profsklfour == 4:
-            PlProf.append(skillname4)
-        if profsklfour == 0:
-            PlProf.append(randprofskill)
-    if param == "N":
-        PlProf.append(randprofskill) 
-    return PlProf        
-def skillprof2(param, PlProf):
+    return MainSkills      
+def skillprof2(param, SkillsProf):
     Acrobatics = "Acrobatics"
     AnimalHandling = "Animal Handling"
     Arcana = "Arcana"
@@ -2017,85 +1994,102 @@ def skillprof2(param, PlProf):
         sklprof1 = int(input("Choose a skill to be proficient in. "))
         sklprof2 = int(input("Choose a second skill to be proficient in. "))
         if sklprof1 == 1:
-            PlProf.append(Acrobatics)
+            SkillsProf.append(Acrobatics)
         if sklprof1 == 2:
-            PlProf.append(AnimalHandling)
+            SkillsProf.append(AnimalHandling)
         if sklprof1 == 3:
-            PlProf.append(Arcana)
+            SkillsProf.append(Arcana)
         if sklprof1 == 4:
-            PlProf.append(Athletics)
+            SkillsProf.append(Athletics)
         if sklprof1 == 5:
-            PlProf.append(Deception)
+            SkillsProf.append(Deception)
         if sklprof1 == 6:
-            PlProf.append(History)
+            SkillsProf.append(History)
         if sklprof1 == 7:
-            PlProf.append(Insight)
+            SkillsProf.append(Insight)
         if sklprof1 == 8:
-            PlProf.append(Intimidation)
+            SkillsProf.append(Intimidation)
         if sklprof1 == 9:
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
         if sklprof1 == 10:
-            PlProf.append(Medicine)
+            SkillsProf.append(Medicine)
         if sklprof1 == 11:
-            PlProf.append(Nature)
+            SkillsProf.append(Nature)
         if sklprof1 == 12:
-            PlProf.append(Perception)
+            SkillsProf.append(Perception)
         if sklprof1 == 13:
-            PlProf.append(Performance)
+            SkillsProf.append(Performance)
         if sklprof1 == 14:
-            PlProf.append(Persuasion)
+            SkillsProf.append(Persuasion)
         if sklprof1 == 15:
-            PlProf.append(Religion)
+            SkillsProf.append(Religion)
         if sklprof1 == 16:
-            PlProf.append(SleightofHand)
+            SkillsProf.append(SleightofHand)
         if sklprof1 == 17:
-            PlProf.append(Stealth)
+            SkillsProf.append(Stealth)
         if sklprof1 == 18:
-            PlProf.append(Survival)
+            SkillsProf.append(Survival)
         if sklprof1 == 0:
-            PlProf.append(RandSklProf1)
+            SkillsProf.append(RandSklProf1)
         if sklprof2 == 1:
-            PlProf.append(Acrobatics)
+            SkillsProf.append(Acrobatics)
         if sklprof2 == 2:
-            PlProf.append(AnimalHandling)
+            SkillsProf.append(AnimalHandling)
         if sklprof2 == 3:
-            PlProf.append(Arcana)
+            SkillsProf.append(Arcana)
         if sklprof2 == 4:
-            PlProf.append(Athletics)
+            SkillsProf.append(Athletics)
         if sklprof2 == 5:
-            PlProf.append(Deception)
+            SkillsProf.append(Deception)
         if sklprof2 == 6:
-            PlProf.append(History)
+            SkillsProf.append(History)
         if sklprof2 == 7:
-            PlProf.append(Insight)
+            SkillsProf.append(Insight)
         if sklprof2 == 8:
-            PlProf.append(Intimidation)
+            SkillsProf.append(Intimidation)
         if sklprof2 == 9:
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
         if sklprof2 == 10:
-            PlProf.append(Medicine)
+            SkillsProf.append(Medicine)
         if sklprof2 == 11:
-            PlProf.append(Nature)
+            SkillsProf.append(Nature)
         if sklprof2 == 12:
-            PlProf.append(Perception)
+            SkillsProf.append(Perception)
         if sklprof2 == 13:
-            PlProf.append(Performance)
+            SkillsProf.append(Performance)
         if sklprof2 == 14:
-            PlProf.append(Persuasion)
+            SkillsProf.append(Persuasion)
         if sklprof2 == 15:
-            PlProf.append(Religion)
+            SkillsProf.append(Religion)
         if sklprof2 == 16:
-            PlProf.append(SleightofHand)
+            SkillsProf.append(SleightofHand)
         if sklprof2 == 17:
-            PlProf.append(Stealth)
+            SkillsProf.append(Stealth)
         if sklprof2 == 18:
-            PlProf.append(Survival)        
+            SkillsProf.append(Survival)        
         if sklprof2 == 0:
-            PlProf.append(RandSklProf2)
+            SkillsProf.append(RandSklProf2)
     if param == "N":
-        PlProf.append(RandSklProf1)
-        PlProf.append(RandSklProf2)
-    return PlProf
+        SkillsProf.append(RandSklProf1)
+        SkillsProf.append(RandSklProf2)
+    return SkillsProf
+def twotoolprof(param, PlProf, tool1, tool2):
+    TwoTools = [tool1, tool2]
+    twotoolrand = random.choice(TwoTools)
+    if param == "Y":
+        print("0 - Random")
+        print(f"1 - {tool1}")
+        print(f"2 - {tool2}")
+        twtl = int(input("Please pick a skill from the above list. "))
+        if twtl == 1:
+            PlProf.append(tool1)
+        if twtl == 2:
+            PlProf.append(tool2)
+        if twtl == 0:
+            PlProf.append(twotoolrand)
+    if param == "N":
+        PlProf.append(twotoolrand)  
+    return PlProf   
 def threetoolprof(param, PlProf, tool1, tool2, tool3):
     ThreeTools = [tool1, tool2, tool3]
     threetoolrand = random.choice(ThreeTools)
@@ -2116,7 +2110,8 @@ def threetoolprof(param, PlProf, tool1, tool2, tool3):
     if param == "N":
         PlProf.append(threetoolrand)  
     return PlProf    
-def toolskillprof(param, PlProf):
+def toolskillprof(param, PlProf, SkillsProf):
+    #Do more of the SkillsProf editting of above functions, this function is done
     Acrobatics = "Acrobatics"
     AnimalHandling = "Animal Handling"
     Arcana = "Arcana"
@@ -2152,6 +2147,9 @@ def toolskillprof(param, PlProf):
     TinkTools = "Tinker's Tools"
     WeavTools = "Weaver's Tools"
     WdcrvTools = "Woodcarver's Tools"      
+    Skills = [Acrobatics, AnimalHandling, Arcana, Athletics, Deception, History, Insight,
+        Intimidation, Investigation, Medicine, Nature, Perception, Performance,
+        Persuasion, Religion, SleightofHand, Stealth, Survival]
     SklTlProf = [
         Acrobatics, AnimalHandling, Arcana, Athletics, Deception, History, Insight,
         Intimidation, Investigation, Medicine, Nature, Perception, Performance,
@@ -2159,7 +2157,6 @@ def toolskillprof(param, PlProf):
         CallSupp, CarpTools, CartTools, CobbTools, CooksUten, GlasTools, JeweTools,
         LthrwrkTools, MasnTools, PaintSupp, PottTools, SmthTools, TinkTools, WeavTools, WdcrvTools
     ]
-    SklTlProfRand = random.choice(SklTlProf)
     if param == "Y":
         print("0 - Random")
         print("1 - Acrobatics")
@@ -2199,41 +2196,41 @@ def toolskillprof(param, PlProf):
         print("35 - Woodcarver's Tools")
         arttoolskl = int(input("Choose a skill or an artisan tool to be proficient in. "))
         if arttoolskl == 1:
-            PlProf.append(Acrobatics)
+            SkillsProf.append(Acrobatics)
         if arttoolskl == 2:
-            PlProf.append(AnimalHandling)
+            SkillsProf.append(AnimalHandling)
         if arttoolskl == 3:
-            PlProf.append(Arcana)
+            SkillsProf.append(Arcana)
         if arttoolskl == 4:
-            PlProf.append(Athletics)
+            SkillsProf.append(Athletics)
         if arttoolskl == 5:
-            PlProf.append(Deception)
+            SkillsProf.append(Deception)
         if arttoolskl == 6:
-            PlProf.append(History)
+            SkillsProf.append(History)
         if arttoolskl == 7:
-            PlProf.append(Insight)
+            SkillsProf.append(Insight)
         if arttoolskl == 8:
-            PlProf.append(Intimidation)
+            SkillsProf.append(Intimidation)
         if arttoolskl == 9:
-            PlProf.append(Investigation)
+            SkillsProf.append(Investigation)
         if arttoolskl == 10:
-            PlProf.append(Medicine)
+            SkillsProf.append(Medicine)
         if arttoolskl == 11:
-            PlProf.append(Nature)
+            SkillsProf.append(Nature)
         if arttoolskl == 12:
-            PlProf.append(Perception)
+            SkillsProf.append(Perception)
         if arttoolskl == 13:
-            PlProf.append(Performance)
+            SkillsProf.append(Performance)
         if arttoolskl == 14:
-            PlProf.append(Persuasion)
+            SkillsProf.append(Persuasion)
         if arttoolskl == 15:
-            PlProf.append(Religion)
+            SkillsProf.append(Religion)
         if arttoolskl == 16:
-            PlProf.append(SleightofHand)
+            SkillsProf.append(SleightofHand)
         if arttoolskl == 17:
-            PlProf.append(Stealth)
+            SkillsProf.append(Stealth)
         if arttoolskl == 18:
-            PlProf.append(Survival)     
+            SkillsProf.append(Survival)     
         if arttoolskl == 19:
             PlProf.append(AlchSupp)
         if arttoolskl == 20:
@@ -2269,10 +2266,18 @@ def toolskillprof(param, PlProf):
         if arttoolskl == 35:
             PlProf.append(WdcrvTools)
         if arttoolskl == 0:
-            PlProf.append(SklTlProfRand)
+            SklTlProfRand = random.choice(SklTlProf)
+            if SklTlProfRand in Skills:
+                SkillsProf.append(SklTlProfRand)
+            else:
+                PlProf.append(SklTlProfRand)
     if param == "N":
-        PlProf.append(SklTlProfRand)
-    return PlProf
+        SklTlProfRand = random.choice(SklTlProf)
+        if SklTlProfRand in Skills:
+            SkillsProf.append(SklTlProfRand)
+        else:
+            PlProf.append(SklTlProfRand)
+    return PlProf, SkillsProf
 def martwepprof2(param, PlProf):
     Battleaxe = "Battleaxe"
     DoubleBladedScimitar = "Double-Bladed Scimitar"
@@ -2436,50 +2441,7 @@ def martwepprof2(param, PlProf):
         PlProf.append(MartWepRand1)
         PlProf.append(MartWepRand2)
     return PlProf
-def fiveskillprof(param, PlProf, skillname1, skillname2, skillname3, skillname4, skillname5):
-    ProfFiveSkill = [skillname1, skillname2, skillname3, skillname4, skillname5]
-    randprofskill = random.choice(ProfFiveSkill)
-    if param == "Y":
-        print("0 - Random")
-        print(f"1 - {skillname1}")
-        print(f"2 - {skillname2}")
-        print(f"3 - {skillname3}")
-        print(f"4 - {skillname4}")
-        print(f"5 - {skillname5}")
-        profsklfive = int(input("Choose a skill to be proficient in. "))
-        if profsklfive == 1:
-            PlProf.append(skillname1)
-        if profsklfive == 2:
-            PlProf.append(skillname2)
-        if profsklfive == 3:
-            PlProf.append(skillname3)
-        if profsklfive == 4:
-            PlProf.append(skillname4)
-        if profsklfive == 5:
-            PlProf.append(skillname5)           
-        if profsklfive == 0:
-            PlProf.append(randprofskill)
-    if param == "N":
-        PlProf.append(randprofskill)   
-    return PlProf  
-def twoskillprof(param, PlProf, skillname1, skillname2):
-    ProfTwoSkill = [skillname1, skillname2]
-    randprofskill = random.choice(ProfTwoSkill)
-    if param == "Y":
-        print("0 - Random")
-        print(f"1 - {skillname1}")
-        print(f"2 - {skillname2}")
-        profskltwo = int(input("Choose a skill to be proficient in. "))
-        if profskltwo == 1:
-            PlProf.append(skillname1)
-        if profskltwo == 2:
-            PlProf.append(skillname2)
-        if profskltwo == 0:
-            PlProf.append(randprofskill)
-    if param == "N":
-        PlProf.append(randprofskill)    
-    return PlProf
-def vedsixskillprof(param, PlProf, skillname1, skillname2, skillname3, skillname4, skillname5, skillname6):
+def vedsixskillprof(param, RaceNotes, SkillsProf, skillname1, skillname2, skillname3, skillname4, skillname5, skillname6):
     ProfSixSkill = [skillname1, skillname2, skillname3, skillname4, skillname5, skillname6]
     randprofskill = random.choice(ProfSixSkill)
     if param == "Y":
@@ -2492,30 +2454,30 @@ def vedsixskillprof(param, PlProf, skillname1, skillname2, skillname3, skillname
         print(f"6 - {skillname6}")
         profsklsix = int(input("Choose a skill to be proficient in. "))
         if profsklsix == 1:
-            PlProf.append(skillname1)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")
+            SkillsProf.append(skillname1)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname1}, roll a d4 and add the number rolled to the check's total.")
         if profsklsix == 2:
-            PlProf.append(skillname2)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")
+            SkillsProf.append(skillname2)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname2}, roll a d4 and add the number rolled to the check's total.")
         if profsklsix == 3:
-            PlProf.append(skillname3)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")
+            SkillsProf.append(skillname3)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname3}, roll a d4 and add the number rolled to the check's total.")
         if profsklsix == 4:
-            PlProf.append(skillname4)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")
+            SkillsProf.append(skillname4)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname4}, roll a d4 and add the number rolled to the check's total.")
         if profsklsix == 5:
-            PlProf.append(skillname5)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")  
+            SkillsProf.append(skillname5)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname5}, roll a d4 and add the number rolled to the check's total.")  
         if profsklsix == 6:
-            PlProf.append(skillname6)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")                       
+            SkillsProf.append(skillname6)
+            RaceNotes.append(f"Whenever you make an ability check with {skillname6}, roll a d4 and add the number rolled to the check's total.")                       
         if profsklsix == 0:
-            PlProf.append(randprofskill)
-            PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")
+            SkillsProf.append(randprofskill)
+            RaceNotes.append(f"Whenever you make an ability check with {randprofskill}, roll a d4 and add the number rolled to the check's total.")
     if param == "N": 
-        PlProf.append(randprofskill)
-        PlProf.append("Whenever you make an ability check with the chosen skill, roll a d4 and add the number rolled to the check's total.")    
-    return PlProf
+        SkillsProf.append(randprofskill)
+        RaceNotes.append(f"Whenever you make an ability check with {randprofskill}, roll a d4 and add the number rolled to the check's total.")    
+    return RaceNotes, SkillsProf
 def vedartisantools(param, PlProf):
     AlchSupp = "Alchemist's Supplies"
     BrewSupp = "Brewer's Supplies"
@@ -2702,54 +2664,93 @@ def skillprof(param, PlProf):
         PlProf.append(RandSklProf1)
     return PlProf
 
-def twoskillsfromlist(param, SkillsProf, skill1, skill2, skill3, skill4, skill5, skill6, skill7):
+def fourskillsfromlist(param, SkillsProf, SkillsList):
     SleightofHand = "Sleight of Hand"
-    SkillsList = [skill1, skill2, skill3, skill4, skill5, skill6, skill7]
     if param == "Y":
         print("0 - Random")
         for i, skill in enumerate(SkillsList, 1):
             print(f"{i} - {skill}")
         skillone = int(input("Which is the first skill to be proficient in? "))
         skilltwo = int(input("Which is the second skill to be proficient in? "))
-        if skillone == 1:
-            SkillsProf.append(skill1)
-        if skillone == 2:
-            SkillsProf.append(skill2)
-        if skillone == 3:
-            SkillsProf.append(skill3)
-        if skillone == 4:
-            SkillsProf.append(skill4)
-        if skillone == 5:
-            SkillsProf.append(skill5)
-        if skillone == 6:
-            SkillsProf.append(skill6)
-        if skillone == 7:
-            SkillsProf.append(skill7)
+        skillthree = int(input("Which is the third skill to be proficient in? "))
+        skillfour = int(input("Which is the fourth skill to be proficient in? "))
         if skillone == 0:
-            SkillsListRand1 = random.choice(SkillsList)
-            SkillsProf.append(SkillsListRand1)
-        if skilltwo == 1:
-            SkillsProf.append(skill1)
-        if skilltwo == 2:
-            SkillsProf.append(skill2)
-        if skilltwo == 3:
-            SkillsProf.append(skill3)
-        if skilltwo == 4:
-            SkillsProf.append(skill4)
-        if skilltwo == 5:
-            SkillsProf.append(skill5)
-        if skilltwo == 6:
-            SkillsProf.append(skill6)
-        if skilltwo == 7:
-            SkillsProf.append(skill7)
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillone <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillone-1])
         if skilltwo == 0:
-            SkillsListRand2 = random.choice(SkillsList)
-            SkillsProf.append(SkillsListRand2)
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skilltwo <= len(SkillsList):
+            SkillsProf.append(SkillsList[skilltwo-1])    
+        if skillthree == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillthree <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillthree-1])   
+        if skillfour == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillfour <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillfour-1])                                 
     if param == "N":
-        SkillsListRand1 = random.choice(SkillsList)
-        SkillsProf.append(SkillsListRand1)
-        SkillsListRand2 = random.choice(SkillsList)
-        SkillsProf.append(SkillsListRand2)
+        SkillsProf.extend(random.sample(SkillsList, 4))
+    return SkillsProf
+
+def threeskillsfromlist(param, SkillsProf, SkillsList):
+    SleightofHand = "Sleight of Hand"
+    if param == "Y":
+        print("0 - Random")
+        for i, skill in enumerate(SkillsList, 1):
+            print(f"{i} - {skill}")
+        skillone = int(input("Which is the first skill to be proficient in? "))
+        skilltwo = int(input("Which is the second skill to be proficient in? "))
+        skillthree = int(input("Which is the third skill to be proficient in? "))
+        if skillone == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillone <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillone-1])
+        if skilltwo == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skilltwo <= len(SkillsList):
+            SkillsProf.append(SkillsList[skilltwo-1])    
+        if skillthree == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillthree <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillthree-1])                      
+    if param == "N":
+        SkillsProf.extend(random.sample(SkillsList, 3))
+    return SkillsProf
+
+def twoskillsfromlist(param, SkillsProf, SkillsList):
+    SleightofHand = "Sleight of Hand"
+    if param == "Y":
+        print("0 - Random")
+        for i, skill in enumerate(SkillsList, 1):
+            print(f"{i} - {skill}")
+        skillone = int(input("Which is the first skill to be proficient in? "))
+        skilltwo = int(input("Which is the second skill to be proficient in? "))
+        if skillone == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillone <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillone-1])
+        if skilltwo == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skilltwo <= len(SkillsList):
+            SkillsProf.append(SkillsList[skilltwo-1])            
+    if param == "N":
+        SkillsProf.extend(random.sample(SkillsList, 2))
+    return SkillsProf
+
+def oneskillfromlist(param, SkillsProf, SkillsList):
+    if param == "Y":
+        print("0 - Random")
+        for i, skill in enumerate(SkillsList, 1):
+            print(f"{i} - {skill}")
+        skillone = int(input("Which skill would you like to be proficient in? "))
+        if skillone == 0:
+            SkillsProf.append(random.choice(SkillsList))
+        elif 1 <= skillone <= len(SkillsList):
+            SkillsProf.append(SkillsList[skillone-1])           
+    if param == "N":
+        SkillsProf.append(random.choice(SkillsList))
     return SkillsProf
 
 def twosimpleweapons(param, EQP):
@@ -2815,3 +2816,173 @@ def twosimpleweapons(param, EQP):
         RandomSW2 = random.choice(SimpleWeapons)
         EQP.append(RandomSW2)
     return EQP
+
+def skillprof3(param, SkillsProf):
+    Acrobatics = "Acrobatics"
+    AnimalHandling = "Animal Handling"
+    Arcana = "Arcana"
+    Athletics = "Athletics"
+    Deception = "Deception"
+    History = "History"
+    Insight = "Insight"
+    Intimidation = "Intimidation"
+    Investigation = "Investigation"
+    Medicine = "Medicine"
+    Nature = "Nature"
+    Perception = "Perception"
+    Performance = "Performance"
+    Persuasion = "Persuasion"
+    Religion = "Religion"
+    SleightofHand = "Sleight of Hand"
+    Stealth = "Stealth"
+    Survival = "Survival"
+    SklProf = [
+        Acrobatics, AnimalHandling, Arcana, Athletics, Deception, History, Insight,
+        Intimidation, Investigation, Medicine, Nature, Perception, Performance,
+        Persuasion, Religion, SleightofHand, Stealth, Survival    
+    ]
+    RandSklProf1 = random.choice(SklProf)
+    RandSklProf2 = random.choice(SklProf)
+    RandSklProf3 = random.choice(SklProf)
+    if param == "Y":
+        print("0 - Random")
+        print("1 - Acrobatics")
+        print("2 - Animal Handling")
+        print("3 - Arcana")
+        print("4 - Athletics")
+        print("5 - Deception")
+        print("6 - History")
+        print("7 - Insight")
+        print("8 - Intimidation")
+        print("9 - Investigation")
+        print("10 - Medicine")
+        print("11 - Nature")
+        print("12 - Perception")
+        print("13 - Performance")
+        print("14 - Persuasion")
+        print("15 - Religion")
+        print("16 - Sleight of Hand")
+        print("17 - Stealth")
+        print("18 - Survival")
+        sklprof1 = int(input("Choose a skill to be proficient in. "))
+        sklprof2 = int(input("Choose a second skill to be proficient in. "))
+        sklprof3 = int(input("Choose a third skill to be proficient in. "))
+        if sklprof1 == 1:
+            SkillsProf.append(Acrobatics)
+        if sklprof1 == 2:
+            SkillsProf.append(AnimalHandling)
+        if sklprof1 == 3:
+            SkillsProf.append(Arcana)
+        if sklprof1 == 4:
+            SkillsProf.append(Athletics)
+        if sklprof1 == 5:
+            SkillsProf.append(Deception)
+        if sklprof1 == 6:
+            SkillsProf.append(History)
+        if sklprof1 == 7:
+            SkillsProf.append(Insight)
+        if sklprof1 == 8:
+            SkillsProf.append(Intimidation)
+        if sklprof1 == 9:
+            SkillsProf.append(Investigation)
+        if sklprof1 == 10:
+            SkillsProf.append(Medicine)
+        if sklprof1 == 11:
+            SkillsProf.append(Nature)
+        if sklprof1 == 12:
+            SkillsProf.append(Perception)
+        if sklprof1 == 13:
+            SkillsProf.append(Performance)
+        if sklprof1 == 14:
+            SkillsProf.append(Persuasion)
+        if sklprof1 == 15:
+            SkillsProf.append(Religion)
+        if sklprof1 == 16:
+            SkillsProf.append(SleightofHand)
+        if sklprof1 == 17:
+            SkillsProf.append(Stealth)
+        if sklprof1 == 18:
+            SkillsProf.append(Survival)
+        if sklprof1 == 0:
+            SkillsProf.append(RandSklProf1)
+        if sklprof2 == 1:
+            SkillsProf.append(Acrobatics)
+        if sklprof2 == 2:
+            SkillsProf.append(AnimalHandling)
+        if sklprof2 == 3:
+            SkillsProf.append(Arcana)
+        if sklprof2 == 4:
+            SkillsProf.append(Athletics)
+        if sklprof2 == 5:
+            SkillsProf.append(Deception)
+        if sklprof2 == 6:
+            SkillsProf.append(History)
+        if sklprof2 == 7:
+            SkillsProf.append(Insight)
+        if sklprof2 == 8:
+            SkillsProf.append(Intimidation)
+        if sklprof2 == 9:
+            SkillsProf.append(Investigation)
+        if sklprof2 == 10:
+            SkillsProf.append(Medicine)
+        if sklprof2 == 11:
+            SkillsProf.append(Nature)
+        if sklprof2 == 12:
+            SkillsProf.append(Perception)
+        if sklprof2 == 13:
+            SkillsProf.append(Performance)
+        if sklprof2 == 14:
+            SkillsProf.append(Persuasion)
+        if sklprof2 == 15:
+            SkillsProf.append(Religion)
+        if sklprof2 == 16:
+            SkillsProf.append(SleightofHand)
+        if sklprof2 == 17:
+            SkillsProf.append(Stealth)
+        if sklprof2 == 18:
+            SkillsProf.append(Survival)        
+        if sklprof2 == 0:
+            SkillsProf.append(RandSklProf2)
+        if sklprof3 == 1:
+            SkillsProf.append(Acrobatics)
+        if sklprof3 == 2:
+            SkillsProf.append(AnimalHandling)
+        if sklprof3 == 3:
+            SkillsProf.append(Arcana)
+        if sklprof3 == 4:
+            SkillsProf.append(Athletics)
+        if sklprof3 == 5:
+            SkillsProf.append(Deception)
+        if sklprof3 == 6:
+            SkillsProf.append(History)
+        if sklprof3 == 7:
+            SkillsProf.append(Insight)
+        if sklprof3 == 8:
+            SkillsProf.append(Intimidation)
+        if sklprof3 == 9:
+            SkillsProf.append(Investigation)
+        if sklprof3 == 10:
+            SkillsProf.append(Medicine)
+        if sklprof3 == 11:
+            SkillsProf.append(Nature)
+        if sklprof3 == 12:
+            SkillsProf.append(Perception)
+        if sklprof3 == 13:
+            SkillsProf.append(Performance)
+        if sklprof3 == 14:
+            SkillsProf.append(Persuasion)
+        if sklprof3 == 15:
+            SkillsProf.append(Religion)
+        if sklprof3 == 16:
+            SkillsProf.append(SleightofHand)
+        if sklprof3 == 17:
+            SkillsProf.append(Stealth)
+        if sklprof3 == 18:
+            SkillsProf.append(Survival)        
+        if sklprof3 == 0:
+            SkillsProf.append(RandSklProf3)            
+    if param == "N":
+        SkillsProf.append(RandSklProf1)
+        SkillsProf.append(RandSklProf2)
+        SkillsProf.append(RandSklProf3)
+    return SkillsProf    
