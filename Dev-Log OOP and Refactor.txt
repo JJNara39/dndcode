@@ -1,0 +1,20 @@
+This folder accomplishes what the title states.
+-These files function using Object-Orientd Programming as well as the code itself is refactored.
+The same Dnd_form file is in this folder to be used.
+
+In dnd.py the loops are a tad more optified, but now instead of very long dndchargen functions each is a function using the Object and the parameter choice
+dnd_languageskills.py's functions are refactored and smaller than before
+dnd_tools.py collects all tools, languages into one file
+dnd_race_gen.py,dnd_class_gen.py,dnd_bkg_gen.py are all refactored and remade to be based on an Object, putting certain information into note dictionaries.
+dnd_bkg_race_sum.py details race and background info and append proper dictionaries.
+dnd_class_expl.py provides explained information for classes and appends proper dictionaries.
+dnd_python_classes.py accomplishes what the many-parameter functions did before but in a much cleaner way
+-Every aspect is initialized, with a select few in dnd.py before the character is made.
+-This also has functions for designing aspects of a character, and then updating them and saving all relevant info to a pdf-sheet or a txt-notes.
+
+A Feats.py was also created, but nothing has been done with it. For now it is just a dictionary for future use.
+
+This folder was uploaded at the beginning of January, 2025.
+
+
+
