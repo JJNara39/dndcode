@@ -1,0 +1,24 @@
+This folder focuses on updates throughout all of my files.
+
+Many other features were added as well, laying the groundwork for what could happen in future updates.
+
+In dnd.py, a save/load feature was implemented, allowing you to choose to make or load a character from the start.
+-In addition to this if loading, you can choose what happens to this character due to loading, allowing leveling up to finally occur,
+letting you save a leveled up version of the character.
+-The for and while loops were updated in such a way that the code is even cleaner, and the code can no longer have an incorrect decision made.
+--This means a person can no longer select a number outside a number range, or use letters when numbers are required, or enter incorrect responses to Y/N.
+
+Across all files, every choice, every input has been wrapped in an appropriate while loop, making sure an incorrect response cannot be given.
+
+In dnd_race_gen.py the Zombie/Lineage options were commented out as they are a tad bit stronger race additions and campaign-dependent.
+
+Now as for the name-sake of this folder. Update.py.
+In this I have collected all information depending on a changing-modifier or a level.
+-Made the notes-list a dictionary instead so these notes can update as needed.
+-The race-weapons were finally added to the Attacks/Spellcasting section
+-The inventory was worked on in such a way that any weapon is also added to attacks/spellcasting
+--And the full item dictionary is added to the inventory, possibly as a tooltip? It is better to just have that info and never use it than change all of my code again later.
+
+So far this should work more/less completely for all Martial Classes (barbarian, non-magic-monk, fighter) since the rest require spells.
+
+This folder was completed and should be uploaded at the end of March 2025.

@@ -6,6 +6,7 @@ import dnd_class_expl
 import dnd_class_gen
 import dnd_race_gen
 import dnd_tools
+import dnd_update
 from PyPDF2 import PdfReader, PdfWriter
 
 
@@ -19,8 +20,10 @@ class Player:
         self.name = name
         self.playername = plName
         self.level = PlayerLevel  
-        self.classlvl = []     
+        self.classlvl = []
+        self.feattrait = {}     
         self.race = None
+        self.sharkinviciousbitedmg = None
         self.subrace = None
         self.color = None
         self.gem = None
@@ -33,13 +36,11 @@ class Player:
         self.hollowone = False
         self.languages = []
         self.slang = list(dnd_tools.languages.keys())
-        self.speed = {}
+        self.walkingspeed = 0
         self.damresimm = []
-        self.racenotes = []
-        self.notes = []
+        self.notes = {}
         self.proficiencies = []
         self.skills = []
-        self.spells = []
         self.ability_scores = {
             "Strength": 0,
             "Dexterity": 0,
@@ -56,6 +57,9 @@ class Player:
         self.singlemulticlass = None
         self.classnum = 1
         self.beachballflag = False
+        self.curlup = False
+        self.shiftershift = False
+        self.armordon = False
         self.background = None
         self.skills_dict = {
             "AcroNum" : 0,
@@ -86,18 +90,169 @@ class Player:
         self.silver = 0
         self.electrum = 0
         self.copper = 0
-        self.equipment = None        
+        self.equipment = []        
         self.hitpoints = 0 
-        self.additionalinfo = []  
-        self.attacksspellcasting = [] 
-        self.otherbackgroundinfo = []
+        self.adtlinfonotes = {}
+        self.attacksspellcasting = {} 
         self.alliesorg = []
-        self.classnotes = []
-        self.hitdice = []
+        self.hitdice = {}
+        self.spelllist = {}
         self.spellcastingclass = []
         self.spellcastingability = []
-        self.spellsavedc = []
-        self.spellattackmod = []
+        self.spellsavedc = {}
+        self.spellattackmod = {}
+        self.spellcastingfocus = None
+        self.artlvl = 0
+        self.artinfknown = 0
+        self.artinfitems = 0
+        self.artelixirs = 0
+        self.artalcprof = False
+        self.artarmprof = False
+        self.artartprof = False
+        self.artbattlesmithprof = False
+        self.barblvl = 0
+        self.barbrages = 0
+        self.barbragedmg = 0
+        self.barbbrutwep = 0
+        self.barbpathbeastorigin = None
+        self.barbssred = None
+        self.barbwildmagic = None
+        self.barbextraskill1 = False
+        self.barbextraskill2 = False
+        self.bardlvl = 0
+        self.bardicinspiration = None
+        self.bardsongrest = None
+        self.bardperfcreation = None
+        self.bardcgtemp = 0
+        self.bardpsychicbladedmg = None
+        self.clerlvl = 0
+        self.clericarcanadomainspells = {}
+        self.clericarcanebanishment = None
+        self.clericblooddomainspells = {}
+        self.clericdivinestrike = None
+        self.clericcommunitydomainspells = {}
+        self.clericdeathdomainspells = {}
+        self.clericforgedomainspells = {}
+        self.clericgravedomainspells = {}
+        self.clericknowledgedomainspells = {}
+        self.clericknowledgelanguages = False
+        self.clericlifedomainspells = {}
+        self.clericlightdomainspells = {}
+        self.clericmoondomainspells = {}
+        self.clericnaturedomainspells = {}
+        self.clericnatureskl = False
+        self.clericnightdomainspells = {}
+        self.clericorderdomainspells = {}
+        self.clericorderskl = False
+        self.clericpeacedomainspells = {}
+        self.clericpeaceskl = False
+        self.clerictempestdomainspells = {}
+        self.clerictrickerydomainspells = {}
+        self.clerictwilightdomainspells = {}
+        self.clericwardomainspells = {}
+        self.clericchanneldivinity = 0
+        self.clericdestroyundeadcr = None
+        self.druidlvl = 0
+        self.druidwildshapecr = None
+        self.druidwildshapelimit = None
+        self.druiddefilegrounddmg = None
+        self.druidlandchoice = None
+        self.druidcirclelandspells = {}
+        self.druidcirclesporespells = {}
+        self.druidhalosporesdmg = None
+        self.druidstarmap = None
+        self.druidcirclewildfirespells = {}
+        self.figlvl = 0
+        self.figactionsurge = None
+        self.figextraatk = 0
+        self.figindomitable = None
+        self.figsuperioritydie = None
+        self.figbattlemasterprof = False
+        self.figsuperioritydievalue = None
+        self.figcavskllang = False
+        self.figpsionicenergydice = None
+        self.figpurpdragkngtskl = False
+        self.figruneamount = 0 
+        self.figsamskllang = False
+        self.figspirittemphp = 0
+        self.figscoffskllang = False
+        self.figblindsidedmg = None
+        self.monklvl = 0
+        self.monkmartialarts = None
+        self.monkkipoints = 0
+        self.monkunmov = 0
+        self.monkascdragonorigin = None
+        self.monkcobaltmonkskllang1 = False
+        self.monkcobaltmonkskllang2 = False
+        self.monkcobaltmonkskllang3 = False
+        self.monkelementaldiscipline = 0
+        self.monkspellki = 0
+        self.monkkenseitl = False
+        self.monkmercymask = None
+        self.pallvl = 0
+        self.palharnessdivinepower = 0
+        self.paloathancspells = {}
+        self.paloathconqspells = {}
+        self.paloathcrownspells = {}
+        self.paloathdevspells = {}
+        self.paloathgloryspells = {}
+        self.paloathseaspells = {}
+        self.paloathredspells = {}
+        self.paloathwatchspells = {}
+        self.paloathvengspells = {}
+        self.paloathoathbreakspells = {}
+        self.ranlvl = 0
+        self.randrakewardenorigin = None
+        self.randrakewardenbreathdmg = None
+        self.randwdreadfulstrikedmg = None
+        self.ranfeywandererspells = {}
+        self.ranfeywanderergift = None
+        self.ranfeywandererskl = False
+        self.rangloomstalkerspells = {}
+        self.rangloomstalkerskl = False
+        self.ranhorizonwalkerspells = {}
+        self.ranplanarwarrdmg = None
+        self.ranmonsterslayerspells = {}
+        self.ranswarmchoice = None
+        self.ranswarmkeeperspells = {}
+        self.ranprimalawarepells = {}
+        self.roglvl = 0
+        self.rogassassinskl = False
+        self.rogmastermindskl = False
+        self.rogskpsionicdmg = None
+        self.rogsnkatk = None
+        self.sorclvl = 0
+        self.sorcmetamagicabilities = 0
+        self.sorcsorcerypoints = 0
+        self.sorcabermindorigin = None
+        self.sorcaberrantmindspells = {}
+        self.sorcclockworksoulspells = {}
+        self.sorccwmanord = None
+        self.sorcdivsoulaffinity = None
+        self.sorcdracbloodcolor = None
+        self.sorclunarmagicphase = None
+        self.sorcglyphaegisdice = None
+        self.sorcshadowchoice = None
+        self.warlvl = 0
+        self.warpatron = None
+        self.wararchfeyspells = {}
+        self.warfathomlessspells = {}
+        self.wartentacledeepsdmg = None
+        self.warguardiancoildmg = None
+        self.warfiendspells = {}
+        self.wargeniekind = None
+        self.wargeniespells = {}
+        self.wargenievessel = None
+        self.wargreatoldonespells = {}
+        self.warhexbladespells = {}
+        self.warundeadspells = {}
+        self.warundyingspells = {}
+        self.wareldinv = 0
+        self.warmysticarcanum = None
+        self.wizlvl = 0
+        self.wizbladesingwep = False
+        self.wizbloodmagicbondms = None
+        self.wizadjustdensity = None
 
     def choose_race(self, param):
         dnd_race_gen.dndCharGenRace(param, self)
@@ -111,26 +266,26 @@ class Player:
     def class_explained(self, param):
         dnd_class_expl.dndchargen_characterbuilder(param, self)
 
-
     def update(self):
-        self.ChaMod = math.floor((self.ability_scores["Charisma"]-10)/2)
-        self.ConMod = math.floor((self.ability_scores["Constitution"]-10)/2)
-        self.DexMod = math.floor((self.ability_scores["Dexterity"]-10)/2)
-        self.IntMod = math.floor((self.ability_scores["Intelligence"]-10)/2)
-        self.StrMod = math.floor((self.ability_scores["Strength"]-10)/2)
-        self.WisMod = math.floor((self.ability_scores["Wisdom"]-10)/2)   
-        if self.race == "Autognome":
-            self.armor_class = 13+self.DexMod
-        else:
-            self.armor_class = 10+self.DexMod
+        dnd_update.dnd_update(self)
         self.currenthitpoints = self.hitpoints #This updates in combat function
-        self.feattrait = self.otherbackgroundinfo + self.racenotes + self.classnotes
-        add_info_str = '\n'.join(f'- {item}' for item in self.additionalinfo)
+        for note_title, note in sorted(self.notes.items()):
+            self.feattrait[note_title] = f"{note_title} - {note}"
+        feattrait = []
+        for note_title, note in sorted(self.feattrait.items()):
+            if len(note) >= 100:
+                feattrait.append(f"{note_title} (see notes)")
+            else:
+                feattrait.append(f"{note}")
+        feat_trait_str = "\n".join(f'- {item}' for item in feattrait)
         allies_str = '\n'.join(f'- {item}' for item in self.alliesorg)
         classlevel_str = "/".join(f"{item}" for item in self.Class)
-        speed_str = "\n".join(f"{key} : {value}ft" for key,value in self.speed.items())     
         EQP_string = "\n".join(
-            f" - {item['Name']}" if isinstance(item, dict) and 'Name' in item else f" - {item}"
+            f" - {item['Name']}" + 
+            ("\n" + "\n".join(f" -- {content}" for content in item['Contents']) 
+            if 'Contents' in item and isinstance(item['Contents'], list) else "")
+            if isinstance(item, dict) and 'Name' in item 
+            else f" - {item}"
             for item in self.equipment
         )
         ProfLang = self.proficiencies + self.languages
@@ -139,11 +294,11 @@ class Player:
         SpellcastingAbility_str = '/'.join(f"{item}" for item in self.spellcastingability)
         SpellsaveDC_str = '/'.join(f"{item}" for item in self.spellsavedc)
         SpellAttackMod_str = '/'.join(f"{item}" for item in self.spellattackmod)
-        feat_trait_str = '\n'.join(f'- {item}' for item in self.feattrait)                                 
         subclass_str = "\n".join(f"- {item}" for item in self.subclass)
         feat_trait_str = 'Subclass:' + '\n' + f'{subclass_str}' + '\n' + feat_trait_str    
-        Hitdice_Str = '/'.join(f"{item}" for item in self.hitdice)
-        Currenthitdice_str = '/'.join(f"{item}" for item in self.hitdice) #This is update in the combat function           
+        hitdie = list(self.hitdice.values())
+        Hitdice_Str = ', '.join(f"{item}" for item in hitdie)
+        Currenthitdice_str = ', '.join(f"{item}" for item in hitdie) #This is update in the combat function     
         self.data = {
             'ClassLevel':classlevel_str + ' ' + str(self.level),
             'Background':self.background,
@@ -155,7 +310,7 @@ class Player:
             'ProfBonus':str(self.profbonus),
             'AC':self.armor_class,
             'Initiative': str(self.DexMod),
-            'Speed': speed_str,
+            'Speed': str(self.walkingspeed) + "ft",
             'PersonalityTraits ':self.Trait,
             'STRmod':str(self.StrMod),
             'DEX':str(self.ability_scores["Dexterity"]),
@@ -175,7 +330,6 @@ class Player:
             'Height':str(self.height) + ' inches',
             'Weight':str(self.weight) + ' pounds',
             'Allies':allies_str,
-            'Feat+Traits':add_info_str,
             'HPMax' : str(self.hitpoints),
             'HPCurrent' : str(self.currenthitpoints), #This is updated in the combat function
             'Equipment' : EQP_string,
@@ -237,6 +391,65 @@ class Player:
             'Survival' : str(self.skills_dict["SurvNum"] + self.WisMod + (self.profbonus if 'Survival' in self.skills else 0)),
             'Passive' : str(10 + self.skills_dict["PercNum"] + self.WisMod + (self.profbonus if 'Perception' in self.skills else 0)),
             }            
+        for item in self.equipment:
+            if isinstance(item, dict) and "Damage" in item:
+                self.attacksspellcasting[item["Name"]] = item.copy()
+        
+        atksclist = sorted(self.attacksspellcasting.keys())  # Sort attack names
+        atkscdict = {}
+        for i, atk in enumerate(atksclist, 1):  # Enumerate from 1          
+            attack_data = self.attacksspellcasting[atk]  # Get attack details, atk is the key for attacksspellcasting
+
+            if i <= 3:
+                if i == 1:
+                    self.data['Wpn Name'] = atk
+                    if attack_data['Modifier'] == 'STR':
+                        self.data[f'Wpn{i} AtkBonus'] = f"{'+' if self.StrMod >= 0 else '-'}" + f"{self.StrMod}"
+                    elif attack_data['Modifier'] == 'DEX':
+                        self.data[f'Wpn{i} AtkBonus'] = f"{'+' if self.DexMod >= 0 else '-'}" + f"{self.DexMod}"
+                    elif attack_data['Modifier'] == 'CON':
+                        self.data[f'Wpn{i} AtkBonus'] = f"{'+' if self.ConMod >= 0 else '-'}" + f"{self.ConMod}"
+                    elif attack_data['Modifier'] == 'Finesse':
+                        MaxMod = max(self.StrMod, self.DexMod)
+                        self.data[f'Wpn{i} AtkBonus'] = f"{'+' if MaxMod >= 0 else '-'}" + f"{MaxMod}"    
+                    self.data[f'Wpn{i} Damage'] = f"{attack_data['Damage']} " + f"{'+' if int(self.data[f'Wpn{i} AtkBonus']) >= 0 else '-'} " + f"{abs(int(self.data[f'Wpn{i} AtkBonus']))} " + f"{attack_data['Damage Type']}" 
+                elif i == 2:
+                    self.data[f'Wpn Name {i}'] = atk
+                    if attack_data['Modifier'] == 'STR':
+                        self.data[f'Wpn{i} AtkBonus '] = f"{'+' if self.StrMod >= 0 else '-'}" + f"{self.StrMod}"
+                    elif attack_data['Modifier'] == 'DEX':
+                        self.data[f'Wpn{i} AtkBonus '] = f"{'+' if self.DexMod >= 0 else '-'}" + f"{self.DexMod}"
+                    elif attack_data['Modifier'] == 'CON':
+                        self.data[f'Wpn{i} AtkBonus '] = f"{'+' if self.ConMod >= 0 else '-'}" + f"{self.ConMod}"
+                    elif attack_data['Modifier'] == 'Finesse':
+                        MaxMod = max(self.StrMod, self.DexMod)
+                        self.data[f'Wpn{i} AtkBonus '] = f"{'+' if MaxMod >= 0 else '-'}" + f"{MaxMod}"    
+                    self.data[f'Wpn{i} Damage '] = f"{attack_data['Damage']} " + f"{'+' if int(self.data[f'Wpn{i} AtkBonus ']) >= 0 else '-'} " + f"{abs(int(self.data[f'Wpn{i} AtkBonus ']))} " + f"{attack_data['Damage Type']}"
+                elif i == 3:
+                    self.data[f'Wpn Name {i}'] = atk
+                    if attack_data['Modifier'] == 'STR':
+                        self.data[f'Wpn{i} AtkBonus  '] = f"{'+' if self.StrMod >= 0 else '-'}" + f"{self.StrMod}"
+                    elif attack_data['Modifier'] == 'DEX':
+                        self.data[f'Wpn{i} AtkBonus  '] = f"{'+' if self.DexMod >= 0 else '-'}" + f"{self.DexMod}"
+                    elif attack_data['Modifier'] == 'CON':
+                        self.data[f'Wpn{i} AtkBonus  '] = f"{'+' if self.ConMod >= 0 else '-'}" + f"{self.ConMod}"
+                    elif attack_data['Modifier'] == 'Finesse':
+                        MaxMod = max(self.StrMod, self.DexMod)
+                        self.data[f'Wpn{i} AtkBonus  '] = f"{'+' if MaxMod >= 0 else '-'}" + f"{MaxMod}"    
+                    self.data[f'Wpn{i} Damage '] = f"{attack_data['Damage']} " + f"{'+' if int(self.data[f'Wpn{i} AtkBonus  ']) >= 0 else '-'} " + f"{abs(int(self.data[f'Wpn{i} AtkBonus  ']))} " + f"{attack_data['Damage Type']}"
+            else:
+                if attack_data['Modifier'] == 'STR':
+                    atkscdict[atk] = f"{atk} - {attack_data['Modifier']} - {attack_data['Damage']} " + f"{'+' if self.StrMod >= 0 else '-'} " + f"{abs(self.StrMod)} " + f"{attack_data['Damage Type']}"
+                elif attack_data['Modifier'] == 'DEX':
+                    atkscdict[atk] = f"{atk} - {attack_data['Modifier']} - {attack_data['Damage']} " + f"{'+' if self.DexMod >= 0 else '-'} " + f"{abs(self.DexMod)} " + f"{attack_data['Damage Type']}"
+                elif attack_data['Modifier'] == 'CON':
+                    atkscdict[atk] = f"{atk} - {attack_data['Modifier']} - {attack_data['Damage']} " + f"{'+' if self.ConMod >= 0 else '-'} " + f"{abs(self.ConMod)} " + f"{attack_data['Damage Type']}"
+                elif attack_data['Modifier'] == 'Finesse':
+                    MaxMod = max(self.StrMod, self.DexMod)
+                    atkscdict[atk] = f"{atk} - {attack_data['Modifier']} - {attack_data['Damage']} " + f"{'+' if MaxMod >= 0 else '-'} " + f"{abs(MaxMod)} " + f"{attack_data['Damage Type']}"
+        # Convert remaining attacks into a string for the Attacks & Spellcasting section
+        attacksspellcasting_str = "\n".join(atkscdict.values())
+        self.data['AttacksSpellcasting'] = attacksspellcasting_str        
 
     def summation(self, param):
         ability_score_names = list(self.ability_scores.keys())
@@ -265,22 +478,35 @@ class Player:
             for i, sum in enumerate(Sums, 1):
                 print(f"Score {i} to apply: {sum}")  
             for _ in range(len(Sums)):
-                print("0 - Random")
-                for jdx, asname in enumerate(ability_score_names, 1):
-                    print(f"{jdx} - {asname}")
-                abil_score_choice = int(input(f"Which score would you like to apply {Sums[0]} to? "))
-                if abil_score_choice == 0:
-                    rand_ab_sc = random.choice(ability_score_names)
-                    sum_applied = Sums[0]
-                    self.ability_scores[rand_ab_sc] = sum_applied
-                    ability_score_names.remove(rand_ab_sc)
-                    Sums.remove(sum_applied)
-                elif 1 <= abil_score_choice <= len(Sums):
-                    picked_score = ability_score_names[abil_score_choice - 1]
-                    number = Sums[0]
-                    self.ability_scores[picked_score] = number
-                    ability_score_names.remove(picked_score)
-                    Sums.remove(number)
+                if len(Sums) == 1:
+                    last_score = Sums[0]
+                    last_ability_score = ability_score_names[0]
+                    self.ability_scores[last_ability_score] = last_score
+                    break #This way it leaves the for loop and does not run the rest
+                while True:
+                    try:
+                        print("0 - Random")
+                        for jdx, asname in enumerate(ability_score_names, 1):
+                            print(f"{jdx} - {asname}")
+                        abil_score_choice = int(input(f"Which score would you like to apply {Sums[0]} to? "))
+                        if abil_score_choice == 0:
+                            rand_ab_sc = random.choice(ability_score_names)
+                            sum_applied = Sums[0]
+                            self.ability_scores[rand_ab_sc] = sum_applied
+                            ability_score_names.remove(rand_ab_sc)
+                            Sums.remove(sum_applied)
+                            break
+                        elif 1 <= abil_score_choice <= len(Sums):
+                            picked_score = ability_score_names[abil_score_choice - 1]
+                            number = Sums[0]
+                            self.ability_scores[picked_score] = number
+                            ability_score_names.remove(picked_score)
+                            Sums.remove(number)
+                            break
+                        else:
+                            print("Invalid choice, please choose a valid option.")
+                    except ValueError:
+                        print("Invalid input. Please enter a number.")
         if param == "N":
             for _ in range(len(Sums)):
                 rand_ab_sc = random.choice(ability_score_names)
@@ -296,7 +522,9 @@ class Player:
         self.WisMod = math.floor((self.ability_scores["Wisdom"]-10)/2)  
         dnd_bkg_race_sum.summation(param, self)
 
-    def create_sheet(self, input_pdf_path, output_pdf_path):
+    def create_sheet(self):
+        input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
+        output_pdf_path = f'{self.name}_{self.playername}_level{self.level}_charsheet.pdf'        
         # Read input file
         with open(input_pdf_path, 'rb') as pdf_file:
             reader = PdfReader(pdf_file)
@@ -321,14 +549,13 @@ class Player:
             with open(output_pdf_path, 'wb') as output_pdf:
                 writer.write(output_pdf)
 
-        def write_notes(self):
-            self.notes.sort()
-            filename = f"{self.name}_{self.playername}_notes.txt"
-            with open(filename, "w") as file:
-                file.write(f"{self.name}'s Notes\n")
-                file.write("=" * (len(self.name)+8) + "\n\n") #Decorative Header
-                for note in self.notes:
-                    file.write("-"+note+"\n\n")              
+    def write_notes(self):
+        filename = f"{self.name}_{self.playername}_level{self.level}_notes.txt"
+        with open(filename, "w") as file:
+            file.write(f"{self.name}'s Notes\n")
+            file.write("=" * (len(self.name)+8) + "\n\n") #Decorative Header
+            for note_title, note in self.notes.items():
+                file.write("-"+note_title + ": " + str(note)+"\n\n")              
 
 '''
 #Several Characters

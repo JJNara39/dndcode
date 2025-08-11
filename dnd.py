@@ -1,58 +1,92 @@
 import random
+import os
 from fractions import Fraction
 from dnd_python_classes import Player
+import json
+
+def save_character(player):
+    with open(f"{player.name}_{player.playername}_level{player.level}.json", "w") as file:
+        json.dump(player.__dict__, file, indent=4)
+
+def load_character(choice):
+    with open(f"{choice}.json", "r") as file:
+        data = json.load(file)
+    
+    # Create the Player object using values from the JSON file
+    player = Player(data["name"], data["playername"], data["level"])
+
+    player.__dict__.update(data)  # Update attributes from the file
+    return player
+
 
 
 def dndCharGen(param, player):
-    input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
-    output_pdf_path = f'{player.name}_{player.playername}_charsheet.pdf'
     CharacterGen = ["Race", "Class", "Background"]
     if param == "Y":
+        
         print("0 - Random")
         print("1 - Race")
         print("2 - Class")
         print("3 - Background")
-        chargen1 = int(input("Which aspect of your character do you want to define first? "))
-        if chargen1 == 0:
-            CharacterGenRand1 = random.choice(CharacterGen)
-            if CharacterGenRand1 == "Race":
-                player.choose_race(param)
-            if CharacterGenRand1 == "Class":
-                player.choose_class(param)
-            if CharacterGenRand1 == "Background":
-                player.choose_bkg(param)
-            CharacterGen.remove(CharacterGenRand1)
-        elif 1 <= chargen1 <= 3:
-            first_choice = CharacterGen[chargen1 - 1]
-            if first_choice == "Race":
-                player.choose_race(param)
-            if first_choice == "Class":
-                player.choose_class(param)
-            if first_choice == "Background":
-                player.choose_bkg(param)
-            CharacterGen.remove(first_choice)
+        while True:
+            try:
+                chargen1 = int(input("Which aspect of your character do you want to define first? "))
+                if chargen1 == 0:
+                    CharacterGenRand1 = random.choice(CharacterGen)
+                    if CharacterGenRand1 == "Race":
+                        player.choose_race(param)
+                    if CharacterGenRand1 == "Class":
+                        player.choose_class(param)
+                    if CharacterGenRand1 == "Background":
+                        player.choose_bkg(param)
+                    CharacterGen.remove(CharacterGenRand1)
+                    break
+                elif 1 <= chargen1 <= 3:
+                    first_choice = CharacterGen[chargen1 - 1]
+                    if first_choice == "Race":
+                        player.choose_race(param)
+                    if first_choice == "Class":
+                        player.choose_class(param)
+                    if first_choice == "Background":
+                        player.choose_bkg(param)
+                    CharacterGen.remove(first_choice)
+                    break
+                else:
+                    print("Invalid choice. Please choose a valid option (0-3).")           
+            except ValueError:
+                print("Invalid input. Please enter a number.") 
+
         print("0 - Random")        
         for i, option in enumerate(CharacterGen, 1):
             print(f"{i} - {option}")
-        chargen2 = int(input("Which aspect of your character do you want to define next? "))
-        if chargen2 == 0:
-            CharacterGenRand2 = random.choice(CharacterGen)
-            if CharacterGenRand2 == "Race":
-                player.choose_race(param)
-            if CharacterGenRand2 == "Class":
-                player.choose_class(param)
-            if CharacterGenRand2 == "Background":
-                player.choose_bkg(param)
-            CharacterGen.remove(CharacterGenRand2)
-        elif 1 <= chargen2 <= len(CharacterGen):
-            second_choice = CharacterGen[chargen2 - 1]
-            if second_choice == "Race":
-                player.choose_race(param)
-            if second_choice == "Class":
-                player.choose_class(param)
-            if second_choice == "Background":
-                player.choose_bkg(param)
-            CharacterGen.remove(second_choice)
+        while True:
+            try:
+                chargen2 = int(input("Which aspect of your character do you want to define next? "))
+                if chargen2 == 0:
+                    CharacterGenRand2 = random.choice(CharacterGen)
+                    if CharacterGenRand2 == "Race":
+                        player.choose_race(param)
+                    if CharacterGenRand2 == "Class":
+                        player.choose_class(param)
+                    if CharacterGenRand2 == "Background":
+                        player.choose_bkg(param)
+                    CharacterGen.remove(CharacterGenRand2)
+                    break
+                elif 1 <= chargen2 <= len(CharacterGen):
+                    second_choice = CharacterGen[chargen2 - 1]
+                    if second_choice == "Race":
+                        player.choose_race(param)
+                    if second_choice == "Class":
+                        player.choose_class(param)
+                    if second_choice == "Background":
+                        player.choose_bkg(param)
+                    CharacterGen.remove(second_choice)
+                    break
+                else:
+                    print("Invalid choice. Please choose a valid option (0-2).")           
+            except ValueError:
+                print("Invalid input. Please enter a number.") 
+
         last_choice = CharacterGen[0]
         if last_choice == "Race":
             player.choose_race(param)
@@ -60,6 +94,7 @@ def dndCharGen(param, player):
             player.choose_class(param)
         if last_choice == "Background":
             player.choose_bkg(param)
+
     if param == "N":
         CharacterGenRand1 = random.choice(CharacterGen)
         if CharacterGenRand1 == "Race":
@@ -84,13 +119,31 @@ def dndCharGen(param, player):
             player.choose_class(param)
         if CharacterGenRand3 == "Background":       
             player.choose_bkg(param)
+    
     player.summation(param)
     if player.proficiencies is None:
         player.proficiencies = []
     player.class_explained(param)
     player.update()
-    player.create_sheet(input_pdf_path, output_pdf_path)
+    player.create_sheet()
     player.write_notes()
+
+    while True:
+        savepara = input(f"Save parameters for {player.name}? Y/N ").strip().lower()
+        if savepara in {"y", "ye", "yes"}:
+            saveparam = "Y"
+            break
+        elif savepara in {"n", "no"}:
+            saveparam = "N"
+            break   
+        else:
+            print("Invalid choice, please choose a valid option.")
+    if saveparam == "Y":
+        player_list.append(f"{player.name}_{player.playername}_level{player.level}")
+        with open("player_list.json", "w") as file:
+            json.dump(player_list, file, indent=4)
+        save_character(player)
+
 
     #If a player wants to know what attributes the character has before making the sheet
     #for attribute, value in player.data.items():
@@ -228,22 +281,111 @@ if DMorPlay == 1:
 else:
 Removing dm/player for now, there for the first part of this if statement is null and the following for loop was shift-tabbed'''
 #for p in range(party): #Commented out party, so un-tabbed the following (all the way to dndchargen)
+player_list = [] #later i will load a player list
 
-playername = input("Who is the player behind this character? ")        
-charactername = input("What is this character's name? ")
-plLvlWhile = False
-while not plLvlWhile:
-    plLvl = int(input(f"What level is {charactername}? "))
-    if (plLvl > 0 and  plLvl <= 20):
-        plLvlWhile = True
-    else:
-        print("Player level is out of range, the range is 1-20, please try again.")
-    #plLvlList.append(plLvl)   
-#Add in a level check for classes, if the level is 3+, the subclass is available.
-player = Player(charactername, playername, plLvl) 
-para = input(f"Set parameters on {charactername}? Y/N ").strip().lower()
-if para in {"y", "ye", "yes"}:
-    param = "Y"
-elif para in {"n", "no"}:
-    param = "N"   
-dndCharGen(param, player)
+
+while True:
+    print("1 - Create a Character")
+    print("2 - Load a Character")
+    print("3 - Exit")
+    try:
+        start_choice = int(input("What would you like to do first? "))
+        if start_choice == 1:
+            playername = input("Who is the player behind this character? ")        
+            charactername = input("What is this character's name? ")
+            while True:
+                try:
+                    plLvl = int(input(f"What level is {charactername}? "))
+                    if (plLvl > 0 and plLvl <= 20):
+                        break   
+                    else:
+                        print("Player level is out of range, the range is 1-20, please try again.")
+                except ValueError:  # Handles non-numeric input
+                    print("Invalid input. Please enter a number.")            
+                #plLvlList.append(plLvl)   
+            player = Player(charactername, playername, plLvl) 
+            while True:
+                para = input(f"Set parameters on {charactername}? Y/N ").strip().lower()
+                if para in {"y", "ye", "yes"}:
+                    param = "Y"
+                    break
+                elif para in {"n", "no"}:
+                    param = "N"   
+                    break
+                else:
+                    print("Invalid choice, please choose a valid option.")
+            dndCharGen(param, player)
+            break
+        elif start_choice == 2:
+            if os.path.exists("player_list.json"):
+                with open("player_list.json", "r") as file:
+                    player_list = json.load(file)
+            if not player_list:
+                print("Player list is empty, please create a character and add to list.")
+            else:
+                print("Available characters:")
+                for pl, player in enumerate(player_list, 1):
+                    print(f"{pl} - {player}")
+                while True:
+                    try:
+                        character_choice = int(input("Which character would you like to load? "))
+                        if 1 <= character_choice <= len(player_list):
+                            selected_player = player_list[character_choice - 1]
+                            player = load_character(selected_player)
+                            break
+                        else:
+                            print("Invalid choice. Please enter a number from the list.")
+                    except ValueError:
+                        print("Invalid input. Please enter a valid number.")          
+                    while True: #While true will let this be infinite
+                        print("1 - Rest")
+                        print("2 - Level Up")
+                        try:
+                            update_choice = int(input(f"How is {player.name} changing? "))            
+                            if update_choice == 1:
+                                #Rest Notes
+                                print("Resting...")
+                                break
+                            elif update_choice == 2:
+                                while True:
+                                    try:
+                                        level_up = int(input(f"What level is {player.name} now? "))
+                                        if (level_up > player.level and level_up <= 20):
+                                            break   
+                                        else:
+                                            print(f"Player level is out of range, the range is {player.level}-20, please try again.")
+                                    except ValueError:  # Handles non-numeric input
+                                        print("Invalid input. Please enter a number.")
+                                player.level = level_up
+                                player.class_explained(param = "Y")
+                                player.update()  
+                                player.create_sheet()
+                                player.write_notes()
+                                while True:
+                                    savepara = input(f"Save parameters for {player.name}? Y/N ").strip().lower()
+                                    if savepara in {"y", "ye", "yes"}:
+                                        saveparam = "Y"
+                                        break
+                                    elif savepara in {"n", "no"}:
+                                        saveparam = "N"
+                                        break   
+                                    else:
+                                        print("Invalid Response, try again.")
+                                if saveparam == "Y":
+                                    player_list.append(f"{player.name}_{player.playername}_level{player.level}")
+                                    with open("player_list.json", "w") as file:
+                                        json.dump(player_list, file, indent=4)
+                                    save_character(player)        
+                                    continue
+                                if saveparam == "N":
+                                    continue       
+                            else:
+                                print("Invalid choice, please choose a valid option.")
+                        except ValueError: #Handles non-numeric choices  
+                            print("Invalid input. Please enter a number.")   
+        elif start_choice == 3:
+            break            
+        else:
+            print("Invalid choice, please choose a valid option.")
+    except ValueError: #Handles non-numeric choices  
+        print("Invalid input. Please enter a number.") 

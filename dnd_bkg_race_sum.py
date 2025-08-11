@@ -3,8 +3,6 @@ import math
 from dnd_languagesskills import *
 
 def summation(param, player):
-    if player.race == "Aarakocra":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Talons - 1d6 + {player.StrMod} slashing")
     if player.race == "Aasimar":
         CF1 = "A dusting of metallic, white, or charcoal freckles"
         CF2 = "Metallic, luminous, or dark eyes"
@@ -14,9 +12,7 @@ def summation(param, player):
         CF6 = "Rainbows gleaming on your skin"
         CF = [CF1, CF2, CF3, CF4, CF5, CF6]
         CelesFeat = random.choice(CF)
-        player.additionalinfo.append(f"As an Aasimar, your Celestial Feature is {CelesFeat}")
-        player.notes.append(f"Healing Hands: As an action, you can touch a creature and cause it to regain a number of hit points equal to your level, {player.level}. Once you use this trait, you can't use it again until you finish a long rest.")
-        #Healing Hands falls under general notes, if touch == True and Healing Hands = True, then they heal X hp
+        player.adtlinfonotes["Aasimar Celestial Feat"] = f"As an Aasimar, your Celestial Feature is {CelesFeat}"
         if player.subrace == "Protector Aasimar":
             player.ability_scores["Wisdom"] += 1
             AngG1 = "Tadriel"
@@ -35,22 +31,12 @@ def summation(param, player):
             AngN6 = "Kind and parental"
             AngN = [AngN1, AngN2, AngN3, AngN4, AngN5, AngN6]
             AngelicNature = random.choice(AngN)   
-            player.additionalinfo.append(f"As an aasimar who has not turned evil, your Angelic Guide is {AngelicGuide} and your Angelic Nature is {AngelicNature}")     
-            if player.level >= 3:
-                player.racenotes.append("Radiant Soul (see notes)")
-                player.notes.append(f"Radiant Soul: You can use your action to unleash the divine energy within yourself, causing your eyes to glimmer and two luminous, incorporeal wings to sprout from your back.\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you have a flying speed of 30 feet, and once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level, {player.level}.\nOnce you use this trait, you can't use it again until you finish a long rest.")
-                #if flight !in speed and Radiant Soul is active, then they gain following flight
-                player.speed["Flight"] = "30ft"
+            player.adtlinfonotes["Protector Aasimar Angelic Guide"] = f"As an aasimar who has not turned evil, your Angelic Guide is {AngelicGuide}"
+            player.adtlinfonotes["Protector Aasimar Angelic Nature"] = f"As an aasimar who has not turned evil, your Angelic Nature is {AngelicNature}"
         if player.subrace == "Scourge Aasimar":
             player.ability_scores["Constitution"] += 1
-            if player.level >= 3:
-                player.racenotes.append("Radiant Consumption (see notes)")
-                player.notes.append(f"Radiant Consumption: You can use your action to unleash the divine energy within yourself, causing a searing light to radiate from you, pour out of your eyes and mouth, and threaten to char you.\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up), or {math.ceil(player.level/2)}. In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level, {player.level}.\nOnce you use this trait, you can't use it again until you finish a long rest.")
         if player.subrace == "Fallen Aasimar":
             player.ability_scores["Strength"] += 1
-            if player.level >= 3:
-                player.racenotes.append("Necrotic Shroud (see notes)")
-                player.notes.append(f"Necrotic Shroud: You can use your action to unleash the divine energy within yourself, causing your eyes to turn into pools of darkness and two skeletal, ghostly, flightless wings to sprout from your back. The instant you transform, other creatures within 10 feet of you that can see you must succeed on a Charisma saving throw, DC 8 + your proficiency bonus + your Charisma modifier, or DC = {8+player.profbonus+player.ChaMod} or become frightened of you until the end of your next turn.\nYour transformation lasts for 1 minute or until you end it as a bonus action. During it, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level, {player.level}.\nOnce you use this trait, you can't use it again until you finish a long rest.")    
     if player.race == "Autognome":
         AgnHist1 = "Your creator gave you autonomy and urged you to follow your dreams."
         AgnHist2 = "Your creator died, leaving you to fend for yourself."
@@ -60,21 +46,8 @@ def summation(param, player):
         AgnHist6 = "You felt trapped in the role for which you were built and abandoned your creator, determined to find a greater purpose."
         AgnHist = [AgnHist1, AgnHist2, AgnHist3, AgnHist4, AgnHist5, AgnHist6]
         AutognomeHistory = random.choice(AgnHist)
-        player.additionalinfo.append(f"As an Autognome, your history: {AutognomeHistory}")
-        player.racenotes.append("Armored Casing: You are encased in thin metal or some other durable material. While you aren't wearing armor, your base Armor Class is 13 + your Dexterity modifier.")
-        player.notes.append(f"Healing Machine: If the Mending spell is cast on you, you can spend a Hit Die, roll it, and regain a number of hit points equal to the roll plus your Constitution modifier, roll + {player.ConMod}, minimum of 1 hit point.\nIn addition, your creator designed you to benefit from several spells that preserve life but that normally don't affect Constructs: Cure Wounds, Healing Word, Mass Cure Wounds, Mass Healing Word, and Spare the Dying.")
-        #Combat notes
-    if player.race == "Centaur":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Hooves - 1d4 + {player.StrMod} Bludgeoning")
-    if player.race == "Cervan":
-        if player.subrace == "Pronghorn Cervan":
-            player.attacksspellcasting.append(f"Unarmed Strikes: Antlers - 1d6 + {player.StrMod} Piercing")
-    if player.race == "Corginian":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Strong Jaw - 1d4 + {player.StrMod} Piercing")
-    if player.race == "Corvum":
-        player.attacksspellcasting.append("Unarmed Strikes: Talons - 1d4 Piercing")
-    if player.race == "Dhampir":
-        player.attacksspellcasting.append(f"Natural Weapon: Fangs - 1d4 + {player.ConMod} Piercing")
+        player.adtlinfonotes["Autognome History"] = f"As an Autognome, your history: {AutognomeHistory}"
+        player.notes["Armored Casing"] = "You are encased in thin metal or some other durable material. While you aren't wearing armor, your base Armor Class is 13 + your Dexterity modifier."
     if player.race == "Dwarf":
         if player.subrace == "Duergar":
             DASH1 = "You are a heretic,drawn to worship of Morad in."
@@ -93,8 +66,8 @@ def summation(param, player):
             DuerQ6 = "Humans fascinate you, and you collect odd trinkets of their culture."
             DuerQ = [DuerQ1, DuerQ2, DuerQ3, DuerQ4, DuerQ5, DuerQ6]
             DuergarQuirk = random.choice(DuerQ)
-            player.additionalinfo.append(f"As a Duergar, your Story Hook: {DuergarHook}")
-            player.additionalinfo.append(f"As a Duergar, your Duergar Quirk: {DuergarQuirk}") 
+            player.adtlinfonotes["Duergar Story Hook"] = f"As a Duergar, your Story Hook is {DuergarHook}"
+            player.adtlinfonotes["Duergar Quirk"] = f"As a Duergar, your Duergar Quirk is {DuergarQuirk}" 
         else:
             DwaSH1 = "You were accused of stealing a fellow artisan's item and claiming it as your work. Innocent or guilty, you were made an outcast."
             DwaSH2 = "Your wanderlust prompted you to shirk your duties as a crafter in favor of wandering the world. Your clan isn't pleased with this choice."
@@ -113,38 +86,17 @@ def summation(param, player):
             DwaQ7 = "For you, relaxation is putting in a day at the forge."
             DwaQ8 = "You avoid contact with other dwarves, since you mistrust those who would leave their strongholds."
             DwaQ = [DwaQ1, DwaQ2, DwaQ3, DwaQ4, DwaQ5, DwaQ6, DwaQ7, DwaQ8]             
-            DwarvenQuirk = random.choice(DwaQ)  
-            player.additionalinfo.append(f"As a Dwarf, your Story Hook: {DwarvenHook}")
-            player.additionalinfo.append(f"As a Dwarf, your Dwarven Quirk: {DwarvenQuirk}")
-        player.additionalinfo.append("As a Dwarf, if the DM allows, you also have Dwarven Fortitude (feat) and Squat Nimbleness (feat).")   
+            DwarvenQuirk = random.choice(DwaQ)
+            player.adtlinfonotes["Dwarf Story Hook"] = f"As a Dwarf, your Story Hook is {DwarvenHook}"
+            player.adtlinfonotes["Dwarf Quirk"] = f"As a Dwarf, your Dwarven Quirk is {DwarvenQuirk}"        
+        player.adtlinfonotes["Dwarven Feats"] = "As a Dwarf, if the DM allows, you also have Dwarven Fortitude (feat) and Squat Nimbleness (feat)." #Feat
     if player.race == "Elf":
         if player.subrace == "High Elf":
-            player.additionalinfo.append("As a High Elf, if the DM allows, you also have Fey Teleportation (feat).")
+            player.adtlinfonotes["High Elf Feat"] = "As a High Elf, if the DM allows, you also have Fey Teleportation (feat)." #Feat
         if player.subrace == "Wood Elf":
-            player.additionalinfo.append("As a Wood Elf, if the DM allows, you also have Wood Elf Magic (feat).")        
+            player.adtlinfonotes["Woof Elf Feat"] = "As a Wood Elf, if the DM allows, you also have Wood Elf Magic (feat)." #feat 
         if player.subrace == "Eladrin":
-            ElaSea = ["Spring", "Summer", "Autumn/Fall", "Winter"]
-            if param == "Y":
-                print("Pick a season of Eladrin? ")
-                print("0 - Random")
-                print("1 - Spring")
-                print("2 - Summer")
-                print("3 - Autumn/Fall")
-                print("4 - Winter")
-                sn = input("Season? ")
-                if sn == "1":
-                    season = "Spring"
-                if sn == "2":
-                    season = "Summer"
-                if sn == "3":
-                    season = "Autumn/Fall"
-                if sn == "4":
-                    season = "Winter"
-                if sn == "0":
-                    season = random.choice(ElaSea)
-            if param == "N":
-                season = random.choice(ElaSea)
-            if season == "Spring":
+            if player.season == "Spring":
                 SpPT1 = "Every day is the greatest day of your life."
                 SpPT2 = "You approach everything with enthusiasm, even the most mundane chores."
                 SpPT3 = "You love music and song. You supply a tune yourself if no one else can."
@@ -157,10 +109,9 @@ def summation(param, player):
                 SpF4 = "Anything worth doing is worth doing again and again."
                 SpF = [SpF1, SpF2, SpF3, SpF4]
                 SpringFlaw = random.choice(SpF)
-                player.additionalinfo.append(f"Your Spring Personalty Trait: {SpringPT} and your Spring Flaw: {SpringFlaw}")
-                if player.level >= 3:
-                    player.racenotes.append("Fey Step(Spring): When you use your Fey Step, you can touch one willing creature within 5 feet of you. That creature then teleports instead of you, appearing in an unoccupied space of your choice that you can see within 30 feet of you.")
-            if season == "Summer":
+                player.adtlinfonotes["Spring Eladrin Personality Trait"] = f"As a Spring Eladrin, your Spring Personalty Trait: {SpringPT}"
+                player.adtlinfonotes["Spring Eladrin Flaw"] = f"As a Spring Eladrin, your Spring Flaw: {SpringFlaw}"
+            if player.season == "Summer":
                 SuPT1 = "You believe that direct confrontation is the best way to solve problems."
                 SuPT2 = "Overwhelming force can accomplish almost anything. The tougher the problem, the more force you apply."
                 SuPT3 = "You stand tall and strong so that others can lean on you."
@@ -173,10 +124,9 @@ def summation(param, player):
                 SuF4 = "Your fury can carry you through anything."
                 SuF = [SuF1, SuF2, SuF3, SuF4]
                 SummerFlaw = random.choice(SuF)
-                player.additionalinfo.append(f"Your Summer Personality Trait: {SummerPT} and your Summer Flaw {SummerFlaw}")
-                if player.level >= 3:
-                    player.racenotes.append("Fey Step(Summer): Immediately after you use your Fey Step, each creature of your choice that you can see within 5 feet of you takes fire damage equal to your Charisma modifier (minimum of 1 damage).")
-            if season == "Autumn/Fall":
+                player.adtlinfonotes["Summer Eladrin Personality Trait"] = f"As a Summer Eladrin, your Summer Personalty Trait: {SummerPT}"
+                player.adtlinfonotes["Summer Eladrin Flaw"] = f"As a Summer Eladrin, your Summer Flaw: {SummerFlaw}"
+            if player.season == "Autumn/Fall":
                 APT1 = "If someone is in need, you never withhold aid."
                 APT2 = "You share what you have, with little regard for your own needs."
                 APT3 = "There are no simple meals, only lavish feasts."
@@ -189,10 +139,9 @@ def summation(param, player):
                 AF4 = "You stock up on fine food and drink. You hate going without such comforts."
                 AF = [AF1, AF2, AF3, AF4]
                 AutumnFlaw = random.choice(AF)
-                player.additionalinfo.append(f"Your Autumn Personalty Trait: {AutumnPT} and your Autumn Flaw: {AutumnFlaw}")
-                if player.level >= 3:
-                    player.racenotes.append("Fey Step(Autumn/Fall): Immediately after you use your Fey Step, up to two creatures of your choice that you can see within 10 feet of you must succeed on a Wisdom saving throw or be charmed by you for 1 minute, or until you or your companions deal any damage to it.")
-            if season == "Winter":
+                player.adtlinfonotes["Autumn/Fall Eladrin Personality Trait"] = f"As a Autumn Eladrin, your Autumn Personalty Trait: {AutumnPT}"
+                player.adtlinfonotes["Autumn/Fall Eladrin Flaw"] = f"As a Autumn Eladrin, your Autumn Flaw: {AutumnFlaw}"
+            if player.season == "Winter":
                 WPT1 = "The worst case is the most likely to occur."
                 WPT2 = "You preserve what you have. Better to be hungry today and have food for tomorrow."
                 WPT3 = "Life is full of dangers, but you are ready for them."
@@ -205,9 +154,8 @@ def summation(param, player):
                 WF4 = "You speak only to point out the flaws in others' plans."
                 WF = [WF1, WF2, WF3, WF4]
                 WinterFlaw = random.choice(WF)
-                player.additionalinfo.append(f"Your Winter Personality Trait: {WinterPT} and your Winter Flaw: {WinterFlaw}")
-                if player.level >= 3:
-                    player.racenotes.append("Fey Step(Winter): When you use your Fey Step, one creature of your choice that you can see within 5 feet of you before you teleport must succeed on a Wisdom saving throw or be frightened of you until the end of your next turn.")
+                player.adtlinfonotes["Winter Eladrin Personality Trait"] = f"As a Winter Eladrin, your Winter Personalty Trait: {WinterPT}"
+                player.adtlinfonotes["Winter Eladrin Flaw"] = f"As a Winter Eladrin, your Winter Flaw: {WinterFlaw}"
         if player.subrace != "Dark Elf":
             ElfASH1 = "You believe the key to reuniting the elves with CorelIon lies somewhere in the wider world, not within elven society, and you're determined to find it."
             ElfASH2 = "Your sibling was killed by a rampaging monster. You won't rest until you track it down and slay it."
@@ -219,7 +167,7 @@ def summation(param, player):
             ElfASH8 = "When you were born, your grandmother prophesied you would one day rule a human kingdom. You've gone in search of that destiny."
             ElfASH = [ElfASH1, ElfASH2, ElfASH3, ElfASH4, ElfASH5, ElfASH6, ElfASH7, ElfASH8]
             ElfHook = random.choice(ElfASH)
-            player.additionalinfo.append(f"Your Elvish Story Hook: {ElfHook}")
+            player.adtlinfonotes["Dark Elf Story Hook"] = f"Your Elvish Story Hook: {ElfHook}"
         if player.subrace == "Dark Elf":
             DrowASH1 = "You overheard members of your own house plotting to poison you, so you fled from the Underdark to save yourself. You won't return until you've amassed enough fortune to surround yourself with loyal mercenary bodyguards."
             DrowASH2 = "You were enslaved as punishment for trying to poison an influential rival, but you escaped and fled to the surface. If you return to the Underdark and are captured,you'll be re-enslaved."
@@ -243,9 +191,9 @@ def summation(param, player):
             DrowSpe10 = "Reptilian beasts of burden"
             DrowSpe = [DrowSpe1, DrowSpe2, DrowSpe3, DrowSpe4, DrowSpe5, DrowSpe6, DrowSpe7, DrowSpe8, DrowSpe9, DrowSpe10]
             DrowSpecialty = random.choice(DrowSpe) 
-            player.additionalinfo.append(f"Your Drow Story Hook: {DrowHook}")
-            player.additionalinfo.append(f"As a Drow, you specialize in: {DrowSpecialty}")
-            player.additionalinfo.append("As a Dark Elf, if the DM allows, you also have Drow High Magic (feat).")
+            player.adtlinfonotes["Drow Story Hook"] = f"As a Drow, your Story Hook: {DrowHook}" 
+            player.adtlinfonotes["Drow Specialty"] = f"As a Drow, you specialize in: {DrowSpecialty}"
+            player.adtlinfonotes["Dark Elf Feat"] = "As a Dark Elf, if the DM allows, you also have Drow High Magic (feat)." #feats
         ETrk1 = "A small notebook that causes anything written in it to disappear after 1 hour."
         ETrk2 = "A crystal les nmade of ivory and gold that causes any-thing observed through it to appear to be surrounded by motes of multicolored light."
         ETrk3 = "A small gold pyramid inscribed with elven symbols and about the size of a walnut."
@@ -257,7 +205,7 @@ def summation(param, player):
         ETrk = [ETrk1, ETrk2, ETrk3, ETrk4, ETrk5, ETrk6, ETrk7, ETrk8]
         ElvenTrinket = random.choice(ETrk)  
         player.equipment.append(ElvenTrinket)  
-        player.additionalinfo.append("As an Elf, if the DM allows, you also have Elven Accuracy (feat).")
+        player.adtlinfonotes["Elf Feat"] = "As an Elf, if the DM allows, you also have Elven Accuracy (feat)."
 
     if player.race == "Fairy":
         FaCh1 = "Your wings are like those of a bird."
@@ -270,7 +218,7 @@ def summation(param, player):
         FaCh8 = "A noticeable, harmless chill surrounds you."
         FaCh = [FaCh1, FaCh2, FaCh3, FaCh4, FaCh5, FaCh6, FaCh7, FaCh8]
         FairyChar = random.choice(FaCh)      
-        player.additionalinfo.append(f"As a Fairy, your Fairy Characteristic: {FairyChar}")
+        player.adtlinfonotes["Fairy Characteristic"] = f"As a Fairy, your Fairy Characteristic: {FairyChar}"
 
     if player.race == "Firbolg":  
         A1 = "Outcast for murder."
@@ -283,7 +231,7 @@ def summation(param, player):
         A8 = "Dispatched on a quest by tribe leaders."
         Adv = [A1, A2, A3, A4, A5, A6, A7, A8]
         Adve = random.choice(Adv)   
-        player.additionalinfo.append(f"Your reason for adventuring: {Adve}")     
+        player.adtlinfonotes["Firbolg Adventuring Reason"] = f"As as Firbolg, your reason for adventuring: {Adve}"
 
     if player.race == "Gith":        
         if player.subrace == "Githyanki":
@@ -310,11 +258,11 @@ def summation(param, player):
             GithyF3 = "I follow orders, regardless of their implications."
             GithyF4 = "I start projects but never finish them."
             GithyF = [GithyF1, GithyF2, GithyF3, GithyF4]
-            GithyankiFlaw = random.choice(GithyF)     
-            player.additionalinfo.append(f"As a Githyanki, your Personality Trait: {GithyankiPersTrait}")
-            player.additionalinfo.append(f"As a Githyanki, your Ideal: {GithyankiIdeal}")
-            player.additionalinfo.append(f"As a Githyanki, your Bond: {GithyankiBond}")
-            player.additionalinfo.append(f"As a Githyanki, your Flaw: {GithyankiFlaw}")                
+            GithyankiFlaw = random.choice(GithyF)  
+            player.adtlinfonotes["Githyanki Personality Trait"] = f"As a Githyanki, your Personality Trait: {GithyankiPersTrait}"
+            player.adtlinfonotes["Githyanki Ideal"] = f"As a Githyanki, your Ideal: {GithyankiIdeal}"
+            player.adtlinfonotes["Githyanki Bond"] = f"As a Githyanki, your Bond: {GithyankiBond}"
+            player.adtlinfonotes["Githyanki Flaw"] = f"As a Githyanki, your Flaw: {GithyankiFlaw}"
         if player.subrace == "Githzerai":   
             GithzPT1 = "All energy must be expended to a useful end. Frivolity is the first step to defeat."
             GithzPT2 = "Patience in all things. The first step in any venture is the most treacherous."
@@ -340,10 +288,10 @@ def summation(param, player):
             GithzF4 = "The next time I laugh will be the first. The sound of merriment takes me to the edge of violence."
             GithzF = [GithzF1, GithzF2, GithzF3, GithzF4]
             GithzeraiFlaw = random.choice(GithzF)            
-            player.additionalinfo.append(f"As a Githzerai, your Personality Trait: {GithzeraiPersTrait}")
-            player.additionalinfo.append(f"As a Githzerai, your Ideal: {GithzeraiIdeal}")
-            player.additionalinfo.append(f"As a Githzerai, your Bond: {GithzeraiBond}")
-            player.additionalinfo.append(f"As a Githzerai, your Flaw: {GithzeraiFlaw}")
+            player.adtlinfonotes["Githzerai Personality Trait"] = f"As a Githzerai, your Personality Trait: {GithzeraiPersTrait}"
+            player.adtlinfonotes["Githzerai Ideal"] = f"As a Githzerai, your Ideal: {GithzeraiIdeal}"
+            player.adtlinfonotes["Githzerai Bond"] = f"As a Githzerai, your Bond: {GithzeraiBond}"
+            player.adtlinfonotes["Githzerai Flaw"] = f"As a Githzerai, your Flaw: {GithzeraiFlaw}"
 
     if player.race == "Gnome":
         GnPT1 = "Once you develop a liking for something, you quickly become obsessed with it."
@@ -375,26 +323,31 @@ def summation(param, player):
         GnF3 = "There is no difference between what you think and what you say."
         GnF4 = "You can't keep a secret."
         GnF = [GnF1, GnF2, GnF3, GnF4]
-        GnomeFlaw = random.choice(GnF)       
-        player.additionalinfo.append(f"As a Gnome, your Personality Trait: {GnomePT}")
-        player.additionalinfo.append(f"As a Gnome, your Ideal: {GnomeIdeal}")
-        player.additionalinfo.append(f"As a Gnome, your Bond: {GnomeBond}")
-        player.additionalinfo.append(f"As a Gnome, your Flaw: {GnomeFlaw}")         
-        player.additionalinfo.append("As a Gnome, if the DM allows, you also have Fade Away (feat) and Squat Nimbleness (feat).")
+        GnomeFlaw = random.choice(GnF)      
+        player.adtlinfonotes["Gnome Personality Trait"] = f"As a Gnome, your Personality Trait: {GnomePT}"
+        player.adtlinfonotes["Gnome Ideal"] = f"As a Gnome, your Ideal: {GnomeIdeal}"
+        player.adtlinfonotes["Gnome Bond"] = f"As a Gnome, your Bond: {GnomeBond}"
+        player.adtlinfonotes["Gnome Flaw"] = f"As a Gnome, your Flaw: {GnomeFlaw}"
+
+        player.adtlinfonotes["Gnome Feats"] = "As a Gnome, if the DM allows, you also have Fade Away (feat) and Squat Nimbleness (feat)."
         if player.subrace == "Svirfneblin (Deep) Gnome":
-            player.additionalinfo.append("As a Deep Gnome, if the DM allows, you also optionally have Swirfneblin Magic (feat)")
+            player.adtlinfonotes["Svirfneblin Gnome Feat"] = "As a Deep Gnome, if the DM allows, you also optionally have Swirfneblin Magic (feat)"
 
     if player.race == "Half-Elf":
-        player.additionalinfo.append("As a Half-Elf, if the DM allows, you also have Elven Accuracy (feat) and Prodigy (feat).")
+        player.adtlinfonotes["Half-Elf Feats"] = "As a Half-Elf, if the DM allows, you also have Elven Accuracy (feat) and Prodigy (feat)."
 
     if player.race == "Half-Orc":
-        player.additionalinfo.append("As a Half-Orc, if the DM allows, you also have Orcish Fury (feat) and Prodigy (feat).")
+        player.adtlinfonotes["Half-Orc Feats"] = "As a Half-Orc, if the DM allows, you also have Orcish Fury (feat) and Prodigy (feat)."
 
     if player.race == "Halfling":
-        player.additionalinfo.append("As a Halfling, if the DM allows, you also have Bountiful Luck (feat), Second Change (feat) and Squat Nimbleness (feat).")
+        player.adtlinfonotes["Halfling Feats"] = "As a Halfling, if the DM allows, you also have Bountiful Luck (feat), Second Change (feat) and Squat Nimbleness (feat)."
+
+    if player.race == "Hedge":
+        player.notes["Spiny Quills"] = "The backs of hedges are covered with spiny quills, which makes it impossible for hedges to wear armor. These quills provide exceptional protection, therefore you have a base armor class of 14 + your Dexterity modifier. Even though you can't wear armor, you can still benefit from the armor class bonus provided by shields so long as you are proficient with them."
+        player.notes["Curl Up"] = "You can use your action to curl up, exposing attackers to a wall of your toughened quills. While curled up you cannot move, attack, or cast spells with somatic components, and your base armor class becomes 19. You cannot benefit from any Dexterity bonus to armor class while curled up, but you can still use shields.\nAny creature that misses you with a melee attack while you are curled up takes 2d4 points of piercing damage from your sharp quills. If a creature hits you while you are curled up, you are knocked prone in your space at the end of the turn. You may uncurl yourself at any point during your turn."
 
     if player.race == "Human":
-        player.additionalinfo.append("As a Human, if the DM allows, you also have Prodigy (feat).")
+        player.adtlinfonotes["Human Feat"] = "As a Human, if the DM allows, you also have Prodigy (feat)."
 
     if player.race == "Leonin":
         LeonGods1 = "I'm amused by the antics of the gods and their earnest, but ultimately deluded, mortal champions, and I feel smugly superior in my detachment."
@@ -405,8 +358,7 @@ def summation(param, player):
         LeonGods6 = "I don't talk about it among other leonin, but I actually revere the gods and try to please them by my actions."
         LeonGods = [LeonGods1, LeonGods2, LeonGods3, LeonGods4, LeonGods5, LeonGods6]
         LeoninGods = random.choice(LeonGods)
-        player.additionalinfo.append(f"As a Leonin, your relationship with the Gods: {LeoninGods}")
-        player.attacksspellcasting.append(f"Unarmed Strikes: Claws - 1d4 + {player.StrMod} Slashing")
+        player.adtlinfonotes["Leonin God Relationship"] = f"As a Leonin, your relationship with the Gods: {LeoninGods}"
 
     if player.race == "Lizardfolk":
         LQ1 = "You hate waste and see no reason not to scavenge fallen enemies. Fingers are tasty and portable!"
@@ -419,8 +371,14 @@ def summation(param, player):
         LQ8 = "You enjoy eating your food while it's still wriggling."
         LQ = [LQ1, LQ2, LQ3, LQ4, LQ5, LQ6, LQ7, LQ8]
         LizQui = random.choice(LQ)        
-        player.additionalinfo.append(f"Your Lizardfolk Quirk: {LizQui}")
-        player.attacksspellcasting.append(f"Unarmed Strike: Bite - 1d6 + {player.StrMod} Piercing")
+        player.adtlinfonotes["Lizardfolk Quirk"] = f"Your Lizardfolk Quirk: {LizQui}"
+        player.notes["Natural Armor"] = "You have tough, scaly skin. When you aren't wearing armor, your AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor."
+
+    if player.race == "Locathah":
+        player.notes["Natural Armor"] = "You have tough, scaly skin. When you aren't wearing armor, your AC is 12 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor."
+
+    if player.race == "Loxodon":
+        player.notes["Natural Armor"] = "You have thick, leathery skin. When you aren't wearing armor, your AC is 12 + your Constitution modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor."
 
     if player.race == "Minotaur":
         MinoNameSa1 = "My namesake defeated a massive enemy."
@@ -433,11 +391,7 @@ def summation(param, player):
         MinoNameSa8 = "My namesake was a great oracle."
         MinoNameSa = [MinoNameSa1, MinoNameSa2, MinoNameSa3, MinoNameSa4, MinoNameSa5, MinoNameSa6, MinoNameSa7, MinoNameSa8]
         MinotaurNamesake = random.choice(MinoNameSa)
-        player.additionalinfo.append(f"As a Minotaur, your namesake: {MinotaurNamesake}")    
-        player.attacksspellcasting.append(f"Unarmed Strike: Horns - 1d6 + {player.StrMod} Piercing") 
-
-    if player.race == "Raptor (Bird)":
-        player.attacksspellcasting.append("Unarmed Strike: Talons - 1d4 Piercing")
+        player.adtlinfonotes["Minotaur Namesake"] = f"As a Minotaur, your namesake: {MinotaurNamesake}"  
 
     if player.race == "Satyr":   
         SatEcc1 = "Flowers are the most amazing things ever. I want to pick them, wear them, and discover their silent secrets."
@@ -450,17 +404,7 @@ def summation(param, player):
         SatEcc8 = "If I have something really important to say, I always make sure to sing it."
         SatEcc = [SatEcc1, SatEcc2, SatEcc3, SatEcc4, SatEcc5, SatEcc6, SatEcc7, SatEcc8]
         SatyrEccentricities = random.choice(SatEcc)
-        player.additionalinfo.append(f"As a Satyr, you have certain Eccentricities, which are: {SatyrEccentricities}")  
-
-    if player.race == "Sharkin":
-        ViciousBiteDmg = "1d6"
-        if ((player.level >= 5) and (player.level < 10)):
-            ViciousBiteDmg = "2d6"
-        if ((player.level >= 10) and (player.level < 20)):
-            ViciousBiteDmg = "3d6"
-        if player.level == 20:
-            ViciousBiteDmg = "4d6"
-        player.attacksspellcasting.append(f"Vicious Bite: {ViciousBiteDmg} + {player.StrMod} Piercing")  
+        player.adtlinfonotes["Satyr Eccentricities"] = f"As a Satyr, you have certain Eccentricities, which are: {SatyrEccentricities}"
 
     if player.race == "Shifter":
         LycAn1 = "Werebear"
@@ -471,12 +415,9 @@ def summation(param, player):
         LycAn6 = "Werewolf (doglike)"
         LycAn = [LycAn1, LycAn2, LycAn3, LycAn4, LycAn5, LycAn6]
         LycanAnces = random.choice(LycAn)        
-        player.additionalinfo.append(f"As a Shifter, your Lycanthrope Ancestor: {LycanAnces}")
-        if player.subrace == "Longtooth Shifter":
-            player.attacksspellcasting.append(f"Unarmed Strikes: Fangs - 1d6 + {player.StrMod} Piercing")
-
-    if player.race == "Strig":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Talons - 1d4 Piercing")
+        player.adtlinfonotes["Shifter Lycanthrope Ancestor"] = f"As a Shifter, your Lycanthrope Ancestor: {LycanAnces}"
+        if player.subrace == "Beasthide Shifter":
+            player.notes["Shifting Feature"] = "Whenever you shift, you gain 1d6 additional temporary hit points. While shifted, you have a + 1 bonus to your Armor Class."
 
     if player.race == "Tabaxi":
         TO1 = "A god or planar entity"
@@ -501,15 +442,19 @@ def summation(param, player):
         TaQ10 = "You can't help but pocket interesting objects you come across."
         TaQ = [TaQ1, TaQ2, TaQ3, TaQ4, TaQ5, TaQ6, TaQ7, TaQ8, TaQ9, TaQ10]
         TabQui = random.choice(TaQ)    
-        player.additionalinfo.append(f"Your obsession as a Tabaxi: {TabObs}")
-        player.additionalinfo.append(f"Your quirk as a Tabaxi: {TabQui}")       
-        player.attacksspellcasting.append(f"Unarmed Strikes: Cat Claws - 1d4 + {player.StrMod}")     
+        player.adtlinfonotes["Tabaxi Obsession"] = f"Your obsession as a Tabaxi: {TabObs}"
+        player.adtlinfonotes["Tabaxi Quirk"] = f"Your quirk as a Tabaxi: {TabQui}"
+    
+    if player.race == "Thri-Kreen":
+        player.notes["Chameleon Carapace"] = "While you aren't wearing armor, your carapace gives you a base Armor Class of 13 + your Dexterity modifier.\nAs an action, you can change the color of your carapace to match the color and texture of your surroundings, giving you advantage on Dexterity (Stealth) checks made to hide in those surroundings."
 
     if player.race == "Tiefling":
-        player.additionalinfo.append("As a Tiefling, if the DM allows, you also have Flames of Phlegethos (feat) and Infernal Constitution (feat).")
+        player.adtlinfonotes["Tiefling Feats"] = "As a Tiefling, if the DM allows, you also have Flames of Phlegethos (feat) and Infernal Constitution (feat)."
 
     if player.race == "Tortle":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Claws - 1d4 + {player.StrMod} Slashing")
+        player.notes["Natural Armor"] = "Due to your shell and the shape of your body, you are ill-suited to wearing armor. Your shell provides ample protection, however; it gives you a base AC of 17 (your Dexterity modifier doesn't affect this number). You gain no benefit from wearing armor, but if you are using a shield, you can apply the shield's bonus as normal."
+        player.armor_class = 17
+
 
     if player.race == "Triton":
         TrQ1 = "You phrase requests as orders that you expect to be obeyed."
@@ -520,10 +465,7 @@ def summation(param, player):
         TrQ6 = "You mistakenly assume that surface folk know about and are impressed by your people's history."
         TrQ = [TrQ1, TrQ2, TrQ3, TrQ4, TrQ5, TrQ6]
         TriQui = random.choice(TrQ)
-        player.additionalinfo.append(f"Your Triton Quirk: {TriQui}")
-
-    if player.race == "Vulpin":
-        player.attacksspellcasting.append(f"Unarmed Strikes: Bite - 1d6 + {max(player.DexMod, player.StrMod)} Piercing")
+        player.adtlinfonotes["Triton Quirk"] = f"Your Triton Quirk: {TriQui}"
 
     if player.race == "Warforged":      
         WarfQ1 = "You analyze-out loud-the potential threat posed by every creature you meet."
@@ -536,7 +478,9 @@ def summation(param, player):
         WarfQ8 = "War is the only thing that makes sense to you, and you're always looking for a fight."
         WarfQ = [WarfQ1, WarfQ2, WarfQ3, WarfQ4, WarfQ5, WarfQ6, WarfQ7, WarfQ8]
         WarforgedQuirk = random.choice(WarfQ)
-        player.additionalinfo.append(f"As a Warforged, your quirk: {WarforgedQuirk}")    
+        player.adtlinfonotes["Warforged Quirk"] = f"As a Warforged, your quirk: {WarforgedQuirk}"  
+        player.notes["Integrated Protection"] = "Your body has built-in defensive layers, which can be enhanced with armor:\nYou gain a +1 bonus to Armor Class.\nYou can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.\nWhile you live, your armor can't be removed from your body against your will."
+        player.armor_class += 1
 
     if ((player.race != "Dhampir") and (player.race != "Hexblood") and (player.race != "Reborn")):
         if player.lineage == "Dhampir":
@@ -559,13 +503,12 @@ def summation(param, player):
             DhaOr = [DhaOr1, DhaOr2, DhaOr3, DhaOr4, DhaOr5, DhaOr6, DhaOr7, DhaOr8]
             DhampirOrigin = random.choice(DhaOr)             
             player.skills = skillprof2(param, player.skills)
-            player.additionalinfo.append(f"You are a Dhampir in addition to being a(n) {player.race}, and thus have the Dhampir Hunger for {DhampirHunger}")
-            player.additionalinfo.append(f"You also have the Dhampir Origin of: {DhampirOrigin}")
-            player.racenotes.append("Ancestral Legacy (see notes)")
-            player.notes.append("Ancestral Legacy: If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don’t keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice.")
+            player.adtlinfonotes["Dhampir"] = f"You are a Dhampir in addition to being a(n) {player.race}, and thus have the Dhampir Hunger for {DhampirHunger}"
+            player.adtlinfonotes["Dhampir Origin"] = f"You also have the Dhampir Origin of: {DhampirOrigin}"
+            player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
         if player.lineage == "Hexblood":
             HexO1 = "Seeking a child, your parent made a bargain with a hag. You are the result of that arrangement."
-            HexO2 = "Fey kidnappers swapped you and your parents’ child."
+            HexO2 = "Fey kidnappers swapped you and your parents' child."
             HexO3 = "A coven of hags lost one of its members. You were created to replace the lost hag."
             HexO4 = "You were cursed as a child. A deal with the spirits of the forest transformed you into a hexblood, now free of the curse."
             HexO5 = "You began life as a fey creature, but an accident changed you and forced you from your home."
@@ -573,43 +516,39 @@ def summation(param, player):
             HexO = [HexO1, HexO2, HexO3, HexO4, HexO5, HexO6]
             HexbloodOrigin = random.choice(HexO)            
             player.skills = skillprof2(param, player.skills)
-            player.additionalinfo.append(f"You are a Hexblood in addition to being a(n) {player.race}, and thus have the Heblood Origin of {HexbloodOrigin}")
-            player.racenotes.append("Ancestral Legacy (see notes)")
-            player.notes.append("Ancestral Legacy: If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don’t keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice.")
+            player.adtlinfonotes["Hexblood"] = f"You are a Hexblood in addition to being a(n) {player.race}, and thus have the Heblood Origin of {HexbloodOrigin}"
+            player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
         if player.lineage == "Reborn":
             RebLoMe1 = "You recall a physically painful moment. What mark or scar on your body does it relate to?"
             RebLoMe2 = "A memory brings tears to your eyes. Is it a bitter or cheerful memory? Does recalling it make you feel the same way?"
             RebLoMe3 = "You recall a childhood memory. What about that event or who you were still inuences you?"
             RebLoMe4 = "A memory brings with it the voice of someone once close to you. How do they advise you?"
-            RebLoMe5 = "You recall enjoying something that you can’t stand doing now. What is it? Why don’t you like it now?"
+            RebLoMe5 = "You recall enjoying something that you can't stand doing now. What is it? Why don't you like it now?"
             RebLoMe6 = "A memory carries a vivid smell or sensation. What are you going to do to recreate that experience?"
             RebLoMe = [RebLoMe1, RebLoMe2, RebLoMe3, RebLoMe4, RebLoMe5, RebLoMe6]
             RebornLostMemories = random.choice(RebLoMe)
             RebO1 = "You were magically resurrected, but something went wrong."
-            RebO2 = "Stitches bind your body’s mismatched pieces, and your memories come from multiple different lives."
+            RebO2 = "Stitches bind your body's mismatched pieces, and your memories come from multiple different lives."
             RebO3 = "After clawing free from your grave, you realized you have no memories except for a single name."
-            RebO4 = "You were a necromancer’s undead servant for years. One day, your consciousness returned."
+            RebO4 = "You were a necromancer's undead servant for years. One day, your consciousness returned."
             RebO5 = "You awoke in an abandoned laboratory alongside complex designs for clockwork organs."
-            RebO6 = "You were released after being petried for generations. Your memories have faded, though, and your body isn’t what it once was."
+            RebO6 = "You were released after being petried for generations. Your memories have faded, though, and your body isn't what it once was."
             RebO7 = "Your body hosts a possessing spirit that shares its memories and replaces your missing appendages with phantasmal limbs."
             RebO8 = "In public, you pass as an unremarkable individual, but you can feel the itchy straw stung inside you."
             RebO = [RebO1, RebO2, RebO3, RebO4, RebO5, RebO6, RebO7, RebO8]
             RebornOrigin = random.choice(RebO)             
-            player.additionalinfo.append(f"You are a Reborn in addition to being a(n) {player.race}, and thus have Lost Memories of: {RebornLostMemories}")
-            player.additionalinfo.append(f"You also have the Reborn Origin of: {RebornOrigin}")
-            player.racenotes.append("Ancestal Legacy (see notes)")
-            player.notes.append("Ancestral Legacy: If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don’t keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice.")
+            player.adtlinfonotes["Reborn"] = f"You are a Reborn in addition to being a(n) {player.race}, and thus have Lost Memories of: {RebornLostMemories}"
+            player.adtlinfonotes["Reborn Origin"] = f"You also have the Reborn Origin of: {RebornOrigin}"
+            player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
             player.skills = skillprof2(param, player.skills)         
+  
 
 ########################################################################################################
     if player.background == "Acolyte":
-        player.additionalinfo.append("Feature: Shelter of the Faithful (see notes)")
-        player.notes.append("Feature: Shelter of the Faithful - As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.\nYou might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple.")
+        player.adtlinfonotes["Feature: Shelter of the Faithful"] = "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.\nYou might also have ties to a specific temple dedicated to your chosen deity or pantheon, and you have a residence there. This could be the temple where you used to serve, if you remain on good terms with it, or a temple where you have found a new home. While near your temple, you can call upon the priests for assistance, provided the assistance you ask for is not hazardous and you remain in good standing with your temple."
     if player.background == "Anthropologist":
-        player.additionalinfo.append("Feature: Cultural Chameleon (see notes)")
-        player.notes.append("Feature: Cultural Chameleon - Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a race whose culture you've adopted.")
-        player.additionalinfo.append("Feature: Adept Linguist (see notes)")
-        player.notes.append("Feature: Adept Linguist - You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level.")        
+        player.adtlinfonotes["Feature: Cultural Chameleon"] = "Before becoming an adventurer, you spent much of your adult life away from your homeland, living among people different from your kin. You came to understand these foreign cultures and the ways of their people, who eventually treated you as one of their own. One culture had more of an influence on you than any other, shaping your beliefs and customs. Choose a race whose culture you've adopted."
+        player.adtlinfonotes["Feature: Adept Linguist"] = "You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures – enough to communicate on a rudimentary level."
     if player.background == "Archaeologist":
         ArchSI1 = "10-foot pole"
         ArchSI2 = "Medallion"
@@ -622,12 +561,10 @@ def summation(param, player):
         ArchSI = [ArchSI1, ArchSI2, ArchSI3, ArchSI4, ArchSI5, ArchSI6, ArchSI7, ArchSI8]
         ArchaeSigItem = random.choice(ArchSI)
         player.equipment.append(ArchaeSigItem)
-        player.additionalinfo.append(f"Feature: Dust Digger - Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you.\nThat item being {ArchaeSigItem}")    
-        player.additionalinfo.append("Feature: Historical Knowledge (see notes)")
-        player.notes.append("Feature: Historical Knowledge - When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old.")
+        player.adtlinfonotes["Feature: Dust Digger"] = f"Prior to becoming an adventurer, you spent most of your young life crawling around in the dust, pilfering relics of questionable value from crypts and ruins. Though you managed to sell a few of your discoveries and earn enough coin to buy proper adventuring gear, you have held onto an item that has great emotional value to you.\nThat item being {ArchaeSigItem}"
+        player.adtlinfonotes["Feature: Historical Knowledge"] = "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether those were dwarves, elves, humans, yuan-ti, or some other known race. In addition, you can determine the monetary value of art objects more than a century old."
     if player.background == "Ashari":
-        player.additionalinfo.append("Feature: Elemental Harmony (see notes)")
-        player.notes.append("Feature: Elemental Harmony - Growing up surrounded by wild elemental magics has attuned your senses to those chaotic forces, enabling you to subtly bend them to your will. As an action, you channel minor magic involving the element of your chosen Ashari order, giving you one of the following abilities:\nPyrah. You instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, you snuff out a flame of the same size.\nTerrah. You instantaneously create a small rock no larger than a gold coin. The rock appears in your hand, then turns to dust after 1 minute.\nVesrah. You instantaneously create enough hot or cold water to fill a small drinking vessel.\nZephrah. You create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone's hair.")
+        player.adtlinfonotes["Feature: Elemental Harmony"] = "Growing up surrounded by wild elemental magics has attuned your senses to those chaotic forces, enabling you to subtly bend them to your will. As an action, you channel minor magic involving the element of your chosen Ashari order, giving you one of the following abilities:\nPyrah. You instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, you snuff out a flame of the same size.\nTerrah. You instantaneously create a small rock no larger than a gold coin. The rock appears in your hand, then turns to dust after 1 minute.\nVesrah. You instantaneously create enough hot or cold water to fill a small drinking vessel.\nZephrah. You create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone's hair."
     if player.background == "Astral Drifter":
         AsDrDC1 = "Corellon, god of art and magic (chaotic good)"
         AsDrDC2 = "Tymora, god of good fortune (chaotic good)"
@@ -641,8 +578,8 @@ def summation(param, player):
         AsDrDC10 = "Ptah, god of knowledge and secrets (lawful neutral)"
         AsDrDC = [AsDrDC1, AsDrDC2, AsDrDC3, AsDrDC4, AsDrDC5, AsDrDC6, AsDrDC7, AsDrDC8, AsDrDC9, AsDrDC10]
         AstralDrifDivCont = random.choice(AsDrDC)
-        player.additionalinfo.append("Longevity - You are 20d6 years older than you look, because you have spent that much time in the Astral Sea without aging.")
-        player.additionalinfo.append(f"Feature: Divine Contact - You gain the Magic Initiate feat from the Player's Handbook and must choose cleric for the feat.\nIn the Astral Sea, you crossed paths with a wandering deity. The encounter was brief and nonviolent, yet it made a lasting impression on you. This deity saw fit to share one secret or obscure bit of cosmic lore with you. Work with your DM to determine the details of this knowledge and its impact on the campaign\nThat contact being {AstralDrifDivCont}.")
+        player.adtlinfonotes["Longevity"] = "You are 20d6 years older than you look, because you have spent that much time in the Astral Sea without aging."
+        player.adtlinfonotes["Feature: Divine Contact"] = f"You gain the Magic Initiate feat from the Player's Handbook and must choose cleric for the feat.\nIn the Astral Sea, you crossed paths with a wandering deity. The encounter was brief and nonviolent, yet it made a lasting impression on you. This deity saw fit to share one secret or obscure bit of cosmic lore with you. Work with your DM to determine the details of this knowledge and its impact on the campaign\nThat contact being {AstralDrifDivCont}."
     if player.background == "Athlete":
         AthFavEv1 = "Marathon"
         AthFavEv2 = "Long-distance running"
@@ -654,12 +591,10 @@ def summation(param, player):
         AthFavEv8 = "Pentathlon (running, long jump, discus, javelin, wrestling)"
         AthFavEv = [AthFavEv1, AthFavEv2, AthFavEv3, AthFavEv4, AthFavEv5, AthFavEv6, AthFavEv7, AthFavEv8]
         AthleteFavoriteEvent = random.choice(AthFavEv)    
-        player.additionalinfo.append(f"Favored Event - While many athletes practice various games and events, most excel at a single form of competition.\nYou excel in {AthleteFavoriteEvent}.")
-        player.additionalinfo.append("Feature: Echoes of Victory (see notes)")
-        player.notes.append("Feature: Echoes of Victory - You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories. When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone there who admires you and is willing to provide information or temporary shelter.\nBetween adventures, you might compete in athletic events sufficient enough to maintain a comfortable lifestyle, as per the 'Practicing a Profession' downtime activity in chapter 8 of the Player's Handbook.")
+        player.adtlinfonotes["Favored Event"] = f"While many athletes practice various games and events, most excel at a single form of competition.\nYou excel in {AthleteFavoriteEvent}."
+        player.adtlinfonotes["Feature: Echoes of Victory"] = "You have attracted admiration among spectators, fellow athletes, and trainers in the region that hosted your past athletic victories. When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone there who admires you and is willing to provide information or temporary shelter.\nBetween adventures, you might compete in athletic events sufficient enough to maintain a comfortable lifestyle, as per the 'Practicing a Profession' downtime activity in chapter 8 of the Player's Handbook."
     if player.background == "Azorius Functionary":
-        player.additionalinfo.append("Feature: Legal Authority (see notes)")
-        player.notes.append("Feature: Legal Authority - You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace. People mind their manners in your presence and avoid drawing your attention; they assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to (though it might cause more problems than it solves when you're dealing with incorrigible lawbreakers). If you abuse this privilege, though, you can get in serious trouble with your superiors and even be stripped of your position.")
+        player.adtlinfonotes["Feature: Legal Authority"] = "You have the authority to enforce the laws of Ravnica, and that status inspires a certain amount of respect and even fear in the populace. People mind their manners in your presence and avoid drawing your attention; they assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to (though it might cause more problems than it solves when you're dealing with incorrigible lawbreakers). If you abuse this privilege, though, you can get in serious trouble with your superiors and even be stripped of your position."
         player.alliesorg.append("Azorius Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Azorius Guild Spells table are added to the spell list of your spellcasting class. (If you are a multiclass character with multiple spell lists, these spells are added to all of them.)\nCantrip: Friends, Message\n1st: Command, Ensnaring Strike\n2nd: Arcane Lock, Calm Emotions, Hold Person\n3rd: Clairvoyance, Counterspell\n4th: Compulsion, Divination\n5th: Dominate Person\nYour magic often takes the form of blue or golden runes floating and glowing in the air in circular patterns or of shimmering azure barriers of magical energy.")
         AzFuAzC1 = "As a teenager, I was a page for a prominent judge."
         AzFuAzC2 = "One of my childhood friends is now a precognitive mage in service of the guild."
@@ -697,9 +632,8 @@ def summation(param, player):
         BanSp6 = "Captain"
         BanSp = [BanSp1,  BanSp2, BanSp3, BanSp4, BanSp5, BanSp6]
         BanditDefSpec = random.choice(BanSp)   
-        player.additionalinfo.append(f"Bandit Specialty - The Bandit Coalition is a rather loose organization of rogues and brigands, but there is still a degree of specialization within the ranks. This ensures that everyone knows what their job is and lessens confusion in the heat of a robbery. Your bandit specialty is {BanditDefSpec}.\nLookouts typically watch the roads for any signs of Perch Guard patrols, signalling the team to bail if a heist looks too risky. They also keep an eye out for potential marks.\nLifters are the specialist thieves of an operation. They are usually as adept at pick-pocketing as they are at sneaking up behind a cart to liberate its valuables.\nThugs are the muscle of a bandit group, and use their size and strength to intimidate merchants into giving up without a fight. They also keep other bandits in line, at the captain’s discretion.\nRunners are the messengers and scouts of the Coalition, serving to smuggle pilfered goods to fences. Additionally, they pass information throughout the different camps of the organization. Their job often finds them working alone which makes them particularly vulnerable.\nHustlers are inveterate con-artists. Through careful planning and execution, their diversions can keep cart drivers occupied just long enough for the lifters to do their work, or create a seamless opening for an ambush.\nCaptains are the glue that holds each bandit team together, providing leadership, and stamping out dissention where necessary, often with force. They are figures that inspire with their skill and bravado.")
-        player.additionalinfo.append("Feature: Bandit Routes (see notes)")
-        player.notes.append("Feature: Bandit Routes - As someone who once assisted in countless highway robberies, you are familiar with the roads of the Wood and escape paths used by bandits. When you are not in combat, you (and companions you lead) can travel between locations that cut through forested areas twice as fast as your speed would normally allow.")
+        player.adtlinfonotes["Bandit Specialty"] = f"The Bandit Coalition is a rather loose organization of rogues and brigands, but there is still a degree of specialization within the ranks. This ensures that everyone knows what their job is and lessens confusion in the heat of a robbery. Your bandit specialty is {BanditDefSpec}.\nLookouts typically watch the roads for any signs of Perch Guard patrols, signalling the team to bail if a heist looks too risky. They also keep an eye out for potential marks.\nLifters are the specialist thieves of an operation. They are usually as adept at pick-pocketing as they are at sneaking up behind a cart to liberate its valuables.\nThugs are the muscle of a bandit group, and use their size and strength to intimidate merchants into giving up without a fight. They also keep other bandits in line, at the captain's discretion.\nRunners are the messengers and scouts of the Coalition, serving to smuggle pilfered goods to fences. Additionally, they pass information throughout the different camps of the organization. Their job often finds them working alone which makes them particularly vulnerable.\nHustlers are inveterate con-artists. Through careful planning and execution, their diversions can keep cart drivers occupied just long enough for the lifters to do their work, or create a seamless opening for an ambush.\nCaptains are the glue that holds each bandit team together, providing leadership, and stamping out dissention where necessary, often with force. They are figures that inspire with their skill and bravado."
+        player.adtlinfonotes["Feature: Bandit Routes"] = "As someone who once assisted in countless highway robberies, you are familiar with the roads of the Wood and escape paths used by bandits. When you are not in combat, you (and companions you lead) can travel between locations that cut through forested areas twice as fast as your speed would normally allow."
     if player.background == "Boros Legionnaire":             
         BoLgC1 = "A former comrade in arms was promoted into the prestigious Sunhome Guard."
         BoLgC2 = "One of my parents is a ranking Boros officer."
@@ -728,12 +662,10 @@ def summation(param, player):
         player.alliesorg.append(f"Your Boros Contact Ally: {BorosLegonCont1}")
         player.alliesorg.append(f"Your Boros Contact Rival: {BorosLegonCont2}")
         player.alliesorg.append(f"Your Non-Boros Contact: {BorosLegonNonCont}")
-        player.additionalinfo.append("Feature: Legion Station (see notes)")
-        player.notes.append("Feature: Legion Station - You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use, and you can gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid a salary of 1 gp (a Boros-minted 1-zino coin) per week, which (combined with free lodging in your garrison) enables you to maintain a poor lifestyle between adventures.")  
+        player.adtlinfonotes["Feature: Legion Station"] = "You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use, and you can gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid a salary of 1 gp (a Boros-minted 1-zino coin) per week, which (combined with free lodging in your garrison) enables you to maintain a poor lifestyle between adventures."
         player.alliesorg.append("Boros Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Boros Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Fire Bolt, Sacred Flame\n1st: Guiding Bolt, Heroism\n2nd: Aid, Scorching Ray\n3rd: Beacon of Hope, Blinding Smite\n4th: Death Ward, Wall of Fire\n5th: Flame Strike\nYour magic often features dramatic bursts of flame or radiance. When you cast beneficial spells on your allies, they appear momentarily surrounded with halos of bright fire.")
     if player.background == "Celebrity Adventurer's Scion":
-        player.additionalinfo.append("Feature: Name Dropping (see notes)")
-        player.notes.append("Feature: Name Dropping - You know and have met any number of powerful people across the land—and some of them might even remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Additionally, the common folk treat you with deference, and your heritage and the stories you tell might be good for a free meal or a place to sleep.")
+        player.adtlinfonotes["Feature: Name Dropping"] = "You know and have met any number of powerful people across the land—and some of them might even remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Additionally, the common folk treat you with deference, and your heritage and the stories you tell might be good for a free meal or a place to sleep."
     if player.background == "Charlatan":
         S1 = "I cheat at games of chance."
         S2 = "I shave coins or forge documents."
@@ -743,15 +675,12 @@ def summation(param, player):
         S6 = "I convince people that worthless junk is worth their hard-earned money."
         SCM = [S1, S2, S3, S4, S5, S6]
         Scam = random.choice(SCM)   
-        player.additionalinfo.append(f"Feature: Favorite Schemes - Every charlatan has an angle they use in preference to other schemes\nYour favorite scam being: {Scam}")
-        player.additionalinfo.append("Feature: False Identity (see notes)")
-        player.notes.append("Feature: False Identity - You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.")  
+        player.adtlinfonotes["Feature: Favorite Schemes"] = f"Every charlatan has an angle they use in preference to other schemes\nYour favorite scam being: {Scam}"
+        player.adtlinfonotes["Feature: False Identity"] = "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy."
     if player.background == "City Watch":
-        player.additionalinfo.append("Feature: Watcher's Eye (see notes)")
-        player.notes.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
+        player.adtlinfonotes["Feature: Watcher's Eye"] = "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter."
     if player.background == "Clasp Member":
-        player.additionalinfo.append("Feature: A Favor in Turn (see notes)")
-        player.notes.append("Feature: A Favor in Turn - You have gained enough clout in the Clasp that you can call in a favor from your contacts whenever you're close enough to a center of syndicate activity. A request for a favor can be no longer than 20 words, and is passed up the chain to an undisclosed Spireling for approval. This favor can take on any form subject to the approval of the GM, who decides how it is fulfilled. If muscle is requested, an NPC member of the Clasp can temporarily aid your party. If money is needed, a small loan can be provided. If you've been imprisoned, Clasp operatives can look into breaking you out or paying off the jailer.\nAt some point, the favor will be called in for repayment, often without warning. Refusing the call will result in your termination—literally. You might be called on to commit a specific burglary, or to pressure an Emonian dignitary to reveal a secret at an upcoming ball. The Clasp might even demand that you assassinate a specific person, with no questions asked or answered. It's the GM's prerogative to ensure that the syndicate's request is proportionate to the favor they bestowed—or that they compensate you in other ways for a service that goes beyond the scope of repaying the initial favor.")
+        player.adtlinfonotes["Feature: A Favor in Turn"] = "You have gained enough clout in the Clasp that you can call in a favor from your contacts whenever you're close enough to a center of syndicate activity. A request for a favor can be no longer than 20 words, and is passed up the chain to an undisclosed Spireling for approval. This favor can take on any form subject to the approval of the GM, who decides how it is fulfilled. If muscle is requested, an NPC member of the Clasp can temporarily aid your party. If money is needed, a small loan can be provided. If you've been imprisoned, Clasp operatives can look into breaking you out or paying off the jailer.\nAt some point, the favor will be called in for repayment, often without warning. Refusing the call will result in your termination—literally. You might be called on to commit a specific burglary, or to pressure an Emonian dignitary to reveal a secret at an upcoming ball. The Clasp might even demand that you assassinate a specific person, with no questions asked or answered. It's the GM's prerogative to ensure that the syndicate's request is proportionate to the favor they bestowed—or that they compensate you in other ways for a service that goes beyond the scope of repaying the initial favor."
     if (player.background == "Criminal") or (player.background == "Spy"): 
         S1 = "Blackmailer"
         S2 = "Burglar"
@@ -763,12 +692,10 @@ def summation(param, player):
         S8 = "Smuggler"
         SPC = [S1, S2, S3, S4, S5, S6]
         Specialty = random.choice(SPC)
-        player.additionalinfo.append(f"Feature: Criminal Specialty - There are many kinds of criminals, and within a thieves' guild or similar criminal organization, individual members have particular specialties. Even criminals who operate outside of such organizations have strong preferences for certain kinds of crimes over others.\nYour specialty is {Specialty}")  
-        player.additionalinfo.append("Feature: Criminal Contact (see notes)")
-        player.notes.append("Feature: Criminal Contact - You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you.")
+        player.adtlinfonotes["Feature: Criminal Specialty"] = f"There are many kinds of criminals, and within a thieves' guild or similar criminal organization, individual members have particular specialties. Even criminals who operate outside of such organizations have strong preferences for certain kinds of crimes over others.\nYour specialty is {Specialty}"
+        player.adtlinfonotes["Feature: Criminal Contact"] = "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you."
     if player.background == "Urban Bounty Hunter":
-        player.additionalinfo.append("Feature: Ear to the Ground (see notes)")
-        player.notes.append("Feature: Ear to the Ground - You are in frequent contact with people in the segment of society that your chosen quarries move through. These people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of high society. This connection comes in the form of a contact in any city you visit, a person who provides information about the people and places of the local area.")
+        player.adtlinfonotes["Feature: Ear to the Ground"] = "You are in frequent contact with people in the segment of society that your chosen quarries move through. These people might be associated with the criminal underworld, the rough-and-tumble folk of the streets, or members of high society. This connection comes in the form of a contact in any city you visit, a person who provides information about the people and places of the local area."
     if player.background == "Dimir Operative":
         DORI1 = "My parents belong to this guild, and I let them think I'm following in their footsteps."
         DORI2 = "I've been assigned to track this guild's activities."
@@ -794,7 +721,7 @@ def summation(param, player):
         DimirOperGuild2Ally = random.choice(DimOpC)         
         DimOpC.remove(DimirOperGuild2Ally)
         DimirOperGuild2Rival = random.choice(DimOpC)
-        player.additionalinfo.append(f"Feature: False Identity - You have more than one identity. The one you wear most of the time makes you appear to be a member of a guild other than House Dimir. You have documentation, established acquaintances, and disguises that allow you to assume that persona and fit into the secondary guild.\nWhenever you choose, you can drop this identity and blend into the guildless masses of the city. The reason for your infiltration is {DimirOperReasonInfil}")
+        player.adtlinfonotes["Feature: False Identity"] = f"You have more than one identity. The one you wear most of the time makes you appear to be a member of a guild other than House Dimir. You have documentation, established acquaintances, and disguises that allow you to assume that persona and fit into the secondary guild.\nWhenever you choose, you can drop this identity and blend into the guildless masses of the city. The reason for your infiltration is {DimirOperReasonInfil}"
         player.alliesorg.append(f"Your Dimir Guild Contact: {DimirOperGuildCon}")
         player.alliesorg.append(f"Your 2nd Guild Contact Ally: {DimirOperGuild2Ally}")
         player.alliesorg.append(f"Your 2nd Guild Contact Rival: {DimirOperGuild2Rival}")    
@@ -813,9 +740,8 @@ def summation(param, player):
         S10 = "Tumbler"
         ROU = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Routine = random.choice(ROU)     
-        player.additionalinfo.append(f"Feature: Entertainer Routines - A good entertainer is versatile, spicing up every performance with a variety of different routines.\nYour routine being {Routine}.")
-        player.additionalinfo.append("Feature: By Popular Demand (see notes)")
-        player.notes.append("Feature: By Popular Demand - You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you.")   
+        player.adtlinfonotes["Feature: Entertainer Routines"] = f"A good entertainer is versatile, spicing up every performance with a variety of different routines.\nYour routine being {Routine}."
+        player.adtlinfonotes["Feature: By Popular Demand"] = "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you."
     if player.background == "Faceless":  
         FacPers1 = "A flamboyant spy or brigand"
         FacPers2 = "The incarnation of a nation or people"
@@ -829,17 +755,13 @@ def summation(param, player):
         FacPers10 = "A disguise with animalistic or monstrous characteristics, meant to inspire fear"
         FacPers = [FacPers1, FacPers2, FacPers3, FacPers4, FacPers5, FacPers6, FacPers7, FacPers8, FacPers9, FacPers10]
         FacelessPersona = random.choice(FacPers)  
-        player.additionalinfo.append(f"Faceless Persona - A faceless character adventures behind the mask of a public persona. This persona is as natural to them as their hidden, true face, but it disguises their identity.\nYour Faceless Persona being {FacelessPersona}")
-        player.notes.append("Feature: Dual Personalities (see notes)")
-        player.additionalinfo.append("Feature: Dual Personalities - Most of your fellow adventurers and the world know you as your persona. Those who seek to learn more about you- your weaknesses, your origins, your purpose-find themselves stymied by your disguise. Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self. By removing your disguise and revealing your true face, you are no longer identifiable as your persona. This allows you to change appearances between your two personalities as often as you wish, using one to hide the other or serve as convenient camouflage. However, should someone realize the connection between your persona and your true self, your deception might lose its effectiveness.")
+        player.adtlinfonotes["Faceless Persona"] = f"A faceless character adventures behind the mask of a public persona. This persona is as natural to them as their hidden, true face, but it disguises their identity.\nYour Faceless Persona being {FacelessPersona}"
+        player.adtlinfonotes["Feature: Dual Personalities"] = "Most of your fellow adventurers and the world know you as your persona. Those who seek to learn more about you- your weaknesses, your origins, your purpose-find themselves stymied by your disguise. Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self. By removing your disguise and revealing your true face, you are no longer identifiable as your persona. This allows you to change appearances between your two personalities as often as you wish, using one to hide the other or serve as convenient camouflage. However, should someone realize the connection between your persona and your true self, your deception might lose its effectiveness."
     if player.background == "Faction Agent":
-        player.additionalinfo.append("Feature: Factions of the Sword Coast (see notes)")
-        player.notes.append("Feature: Factions of the Sword Coast - The lack of large, centralized governments in the North and along the Sword Coast is likely directly responsible for the proliferation of secret societies and conspiracies in those lands. If your background is as an agent for one of the main factions of the North and Sword Coast, here are some possibilities.\nThe Harpers. Founded more than a millennium ago, disbanded and reorganized several times, the Harpers remain a powerful, behind-the-scenes agency, which acts to thwart evil and promote fairness through knowledge, rather than brute force. Harper agents are often proficient in Investigation, enabling them to be adept at snooping and spying. They often seek aid from other Harpers, sympathetic bards and innkeepers, rangers, and the clergy of gods that are aligned with the Harpers' ideals.\nThe Order of the Gauntlet. One of the newest power groups in Faerûn, the Order of the Gauntlet has an agenda similar to that of the Harpers. Its methods are vastly different, however: bearers of the gauntlet are holy warriors on a righteous quest to crush evil and promote justice, and they never hide in the shadows. Order agents tend to be proficient in Religion, and frequently seek aid from law enforcement friendly to the order's ideals, and the clergy of the order's patron gods.\nThe Emerald Enclave. Maintaining balance in the natural order and combating the forces that threaten that balance is the twofold goal of the Emerald Enclave. Those who serve the faction are masters of survival and living off the land. They are often proficient in Nature, and can seek assistance from woodsmen, hunters, rangers, barbarian tribes, druid circles, and priests who revere the gods of nature.\nThe Lords' Alliance. On one level, the agents of the Lords' Alliance are representatives of the cities and other governments that constitute the alliance. But, as a faction with interests and concerns that transcend local politics and geography, the Alliance has its own cadre of individuals who work on behalf of the organizations, wider agenda. Alliance agents are required to be knowledgeable in History, and can always rely on the aid of the governments that are part of the Alliance, plus other leaders and groups who uphold the Alliance's ideals.\nThe Zhentarim. In recent years, the Zhentarim have become more visible in the world at large, as the group works to improve its reputation among the common people. The faction draws employees and associates from many walks of life, setting them to tasks that serve the goals of the Black Network but aren't necessarily criminal in nature. Agents of the Black Network must often work in secret, and are frequently proficient in Deception. They seek aid from the wizards, mercenaries, merchants and priesthoods allied with the Zhentarim.")
-        player.additionalinfo.append("Feature: Save Haven (see notes)")
-        player.notes.append("Feature: Save Haven - As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities.")
+        player.adtlinfonotes["Feature: Factions of the Sword Coast"] = "The lack of large, centralized governments in the North and along the Sword Coast is likely directly responsible for the proliferation of secret societies and conspiracies in those lands. If your background is as an agent for one of the main factions of the North and Sword Coast, here are some possibilities.\nThe Harpers. Founded more than a millennium ago, disbanded and reorganized several times, the Harpers remain a powerful, behind-the-scenes agency, which acts to thwart evil and promote fairness through knowledge, rather than brute force. Harper agents are often proficient in Investigation, enabling them to be adept at snooping and spying. They often seek aid from other Harpers, sympathetic bards and innkeepers, rangers, and the clergy of gods that are aligned with the Harpers' ideals.\nThe Order of the Gauntlet. One of the newest power groups in Faerûn, the Order of the Gauntlet has an agenda similar to that of the Harpers. Its methods are vastly different, however: bearers of the gauntlet are holy warriors on a righteous quest to crush evil and promote justice, and they never hide in the shadows. Order agents tend to be proficient in Religion, and frequently seek aid from law enforcement friendly to the order's ideals, and the clergy of the order's patron gods.\nThe Emerald Enclave. Maintaining balance in the natural order and combating the forces that threaten that balance is the twofold goal of the Emerald Enclave. Those who serve the faction are masters of survival and living off the land. They are often proficient in Nature, and can seek assistance from woodsmen, hunters, rangers, barbarian tribes, druid circles, and priests who revere the gods of nature.\nThe Lords' Alliance. On one level, the agents of the Lords' Alliance are representatives of the cities and other governments that constitute the alliance. But, as a faction with interests and concerns that transcend local politics and geography, the Alliance has its own cadre of individuals who work on behalf of the organizations, wider agenda. Alliance agents are required to be knowledgeable in History, and can always rely on the aid of the governments that are part of the Alliance, plus other leaders and groups who uphold the Alliance's ideals.\nThe Zhentarim. In recent years, the Zhentarim have become more visible in the world at large, as the group works to improve its reputation among the common people. The faction draws employees and associates from many walks of life, setting them to tasks that serve the goals of the Black Network but aren't necessarily criminal in nature. Agents of the Black Network must often work in secret, and are frequently proficient in Deception. They seek aid from the wizards, mercenaries, merchants and priesthoods allied with the Zhentarim."
+        player.adtlinfonotes["Feature: Save Haven"] = "As a faction agent, you have access to a secret network of supporters and operatives who can provide assistance on your adventures. You know a set of secret signs and passwords you can use to identify such operatives, who can provide you with access to a hidden safe house, free room and board, or assistance in finding information. These agents never risk their lives for you or risk revealing their true identities."
     if player.background == "Failed Merchant":
-        player.additionalinfo.append("Feature: Supply Chain (see notes)")
-        player.notes.append("Feature: Supply Chain - From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information.")
+        player.adtlinfonotes["Feature: Supply Chain"] = "From your time as a merchant, you retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call upon these connections when looking for items or information."
     if player.background == "Far Traveler":
         WhyH1 = "Emissary"
         WhyH2 = "Exile"
@@ -849,11 +771,9 @@ def summation(param, player):
         WhyH6 = "Wanderer"
         WhyH = [WhyH1, WhyH2, WhyH3, WhyH4, WhyH5, WhyH6]
         WhyHere = random.choice(WhyH)  
-        player.additionalinfo.append(f"Feature: Why Are You Here? - A far traveler might have set out on a journey for one of a number of reasons, and the departure from his or her homeland could have been voluntary or involuntary.\nThat reason being {WhyHere}.")   
-        player.additionalinfo.append("Feature: Where Are You From? (see notes)")
-        player.notes.append("Feature: Where Are You From? - The most important decision in creating a far traveler background is determining your homeland. The places discussed here are all sufficiently distant from the North and the Sword Coast to justify the use of this background.\nEvermeet. The fabled elven islands far to the west are home to elves who have never been to Faerun. They often find it a harsher place than they expected when they do make the trip. If you are an elf, Evermeet is a logical (though not mandatory) choice for your homeland.\nMost of those who emigrate from Evermeet are either exiles, forced out for committing some infraction of elven law, or emissaries who come to Faerun for a purpose that benefits elven culture or society.\nHalruaa. Located on the southern edges of the Shining South, and hemmed in by mountains all around, the magocracy of Halruaa is a bizarre land to most in Faerun who know about it. Many folk have heard of the strange skyships the Halruaans sail, and a few know of the tales that even the least of their people can work magic.\nHalruaans usually make their journeys into Faerun for personal reasons, since their government has a strict stance against unauthorized involvement with other nations and organizations. You might have been exiled for breaking one of Halruaa's many byzantine laws, or you could be a pilgrim who seeks the shrines of the gods of magic.\nKara-Tur. The continent of Kara-Tur, far to the east of Faerûn, is home to people whose customs are unfamiliar to the folk of the Sword Coast. If you come from Kara-Tur, the people of Faerûn likely refer to you as Shou, even if that isn't your true ethnicity, because that's the blanket term they use for everyone who shares your origin.\nThe folk of Kara-Tur occasionally travel to Faerûn as diplomats or to forge trade relations with prosperous merchant cartels. You might have come here as part of some such delegation, then decided to stay when the mission was over.\nMulhorand. From the terrain to the architecture to the god-kings who rule over these lands, nearly everything about Mulhorand is a lien to someone from the Sword Coast. You likely experienced the same sort of culture shock when you left your desert home and traveled to the unfamiliar climes of northern Faerûn. Recent events in your homeland have led to the abolition of slavery, and a corresponding increase in the traffic between Mulhorand and the distant parts of Faerûn.\nThose who leave behind Mulhorand's sweltering deserts and ancient pyramids for a glimpse at a different life do so for many reasons. You might be in the North simply to see the strangeness this wet land has to offer, or because you have made too many enemies among the desert communities of your home.\nSossal. Few have heard of your homeland, but many have questions about it upon seeing you. Humans from Sossal seem crafted from snow, with alabaster skin and white hair, and typically dressed in white.\nSossal exists far to the northeast, hard up against the endless ice to the north and bounded on its other sides by hundreds of miles of the Great Glacier and the Great Ice Sea. No one from your nation makes the effort to cross such colossal barriers without a convincing reason. You must fear something truly terrible or seek something incredibly important.\nZakhara. As the saying goes among those in Faerûn who know of the place, 'To get to Zakhara, go south. Then go south some more.' Of course, you followed an equally long route when you came north from your place of birth. Though it isn't unusual for Zakharans to visit the southern extremes of Faerûn for trading purposes, few of them stray as far from home as you have.\nYou might be traveling to discover what wonders are to be found outside the deserts and sword-like mountains of your homeland, or perhaps you are on a pilgrimage to understand the gods that others worship, so that you might better appreciate your own deities.\nThe Underdark. Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the race that occupies the place but you might also have grown up there after being captured and brought below when you were a child.\nIf you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving 'home' probably has something to do with getting away from a bad situation.")
-        player.additionalinfo.append("Feature: All Eyes on You (see notes)")
-        player.notes.append("Feature: All Eyes on You - Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign. Curious glances are directed your way wherever you go, which can be a nuisance, but you also gain the friendly interest of scholars and others intrigued by far-off lands, to say nothing of everyday folk who are eager to hear stories of your homeland.\nYou can parley this attention into access to people and places you might not otherwise have, for you and your traveling companions. Noble lords, scholars, and merchant princes, to name a few, might be interested in hearing about your distant homeland and people.")
+        player.adtlinfonotes["Feature: Why Are You Here?"] = f"A far traveler might have set out on a journey for one of a number of reasons, and the departure from his or her homeland could have been voluntary or involuntary.\nThat reason being {WhyHere}."
+        player.adtlinfonotes["Feature: Where Are You From?"] = "The most important decision in creating a far traveler background is determining your homeland. The places discussed here are all sufficiently distant from the North and the Sword Coast to justify the use of this background.\nEvermeet. The fabled elven islands far to the west are home to elves who have never been to Faerun. They often find it a harsher place than they expected when they do make the trip. If you are an elf, Evermeet is a logical (though not mandatory) choice for your homeland.\nMost of those who emigrate from Evermeet are either exiles, forced out for committing some infraction of elven law, or emissaries who come to Faerun for a purpose that benefits elven culture or society.\nHalruaa. Located on the southern edges of the Shining South, and hemmed in by mountains all around, the magocracy of Halruaa is a bizarre land to most in Faerun who know about it. Many folk have heard of the strange skyships the Halruaans sail, and a few know of the tales that even the least of their people can work magic.\nHalruaans usually make their journeys into Faerun for personal reasons, since their government has a strict stance against unauthorized involvement with other nations and organizations. You might have been exiled for breaking one of Halruaa's many byzantine laws, or you could be a pilgrim who seeks the shrines of the gods of magic.\nKara-Tur. The continent of Kara-Tur, far to the east of Faerûn, is home to people whose customs are unfamiliar to the folk of the Sword Coast. If you come from Kara-Tur, the people of Faerûn likely refer to you as Shou, even if that isn't your true ethnicity, because that's the blanket term they use for everyone who shares your origin.\nThe folk of Kara-Tur occasionally travel to Faerûn as diplomats or to forge trade relations with prosperous merchant cartels. You might have come here as part of some such delegation, then decided to stay when the mission was over.\nMulhorand. From the terrain to the architecture to the god-kings who rule over these lands, nearly everything about Mulhorand is a lien to someone from the Sword Coast. You likely experienced the same sort of culture shock when you left your desert home and traveled to the unfamiliar climes of northern Faerûn. Recent events in your homeland have led to the abolition of slavery, and a corresponding increase in the traffic between Mulhorand and the distant parts of Faerûn.\nThose who leave behind Mulhorand's sweltering deserts and ancient pyramids for a glimpse at a different life do so for many reasons. You might be in the North simply to see the strangeness this wet land has to offer, or because you have made too many enemies among the desert communities of your home.\nSossal. Few have heard of your homeland, but many have questions about it upon seeing you. Humans from Sossal seem crafted from snow, with alabaster skin and white hair, and typically dressed in white.\nSossal exists far to the northeast, hard up against the endless ice to the north and bounded on its other sides by hundreds of miles of the Great Glacier and the Great Ice Sea. No one from your nation makes the effort to cross such colossal barriers without a convincing reason. You must fear something truly terrible or seek something incredibly important.\nZakhara. As the saying goes among those in Faerûn who know of the place, 'To get to Zakhara, go south. Then go south some more.' Of course, you followed an equally long route when you came north from your place of birth. Though it isn't unusual for Zakharans to visit the southern extremes of Faerûn for trading purposes, few of them stray as far from home as you have.\nYou might be traveling to discover what wonders are to be found outside the deserts and sword-like mountains of your homeland, or perhaps you are on a pilgrimage to understand the gods that others worship, so that you might better appreciate your own deities.\nThe Underdark. Though your home is physically closer to the Sword Coast than the other locations discussed here, it is far more unnatural. You hail from one of the settlements in the Underdark, each of which has its own strange customs and laws. If you are a native of one of the great subterranean cities or settlements, you are probably a member of the race that occupies the place but you might also have grown up there after being captured and brought below when you were a child.\nIf you are a true Underdark native, you might have come to the surface as an emissary of your people, or perhaps to escape accusations of criminal behavior (whether warranted or not). If you aren't a native, your reason for leaving 'home' probably has something to do with getting away from a bad situation."
+        player.adtlinfonotes["Feature: All Eyes on You"] = "Your accent, mannerisms, figures of speech, and perhaps even your appearance all mark you as foreign. Curious glances are directed your way wherever you go, which can be a nuisance, but you also gain the friendly interest of scholars and others intrigued by far-off lands, to say nothing of everyday folk who are eager to hear stories of your homeland.\nYou can parley this attention into access to people and places you might not otherwise have, for you and your traveling companions. Noble lords, scholars, and merchant princes, to name a few, might be interested in hearing about your distant homeland and people."
     if player.background == "Feylost": 
         FeyWMa1 = "Your eyes swirl with iridescent colors."
         FeyWMa2 = "You have a sweet scent, like that of nectar or honey."
@@ -875,10 +795,9 @@ def summation(param, player):
         FeyWV8 = "Unicorn"
         FeyWV = [FeyWV1, FeyWV2, FeyWV3, FeyWV4, FeyWV5, FeyWV6, FeyWV7, FeyWV8]
         FeywildVisitor = random.choice(FeyWV)     
-        player.additionalinfo.append(f"Fey Mark - You were transformed in some small way by your stay in the Feywild and gained a fey mark.\nYour Fey Mark: {FeyMark}")
-        player.additionalinfo.append(f"Feywild Visitor - Whenever you're sound asleep or in a deep trance during a long rest, a spirit of the Feywild might pay you a visit: {FeywildVisitor}\nNo harm ever comes to you as a result of such visits, which can last for minutes or hours, and you remember each visit when you wake up. Conversations that occur with a visitor can contain any number of things, from messages and insights to nonsense and red herrings, at the DM's discretion. Such conversations are always conducted in a language you can understand, even if the Feywild visitor can't speak that language normally.")      
-        player.additionalinfo.append("Feature: Feywild Connection (see notes)")
-        player.notes.append("Feature: Feywild Connection - Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Because of this, friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.")
+        player.adtlinfonotes["Fey Mark"] = f"You were transformed in some small way by your stay in the Feywild and gained a fey mark.\nYour Fey Mark: {FeyMark}"
+        player.adtlinfonotes["Feywild Visitor"] = f"Whenever you're sound asleep or in a deep trance during a long rest, a spirit of the Feywild might pay you a visit: {FeywildVisitor}\nNo harm ever comes to you as a result of such visits, which can last for minutes or hours, and you remember each visit when you wake up. Conversations that occur with a visitor can contain any number of things, from messages and insights to nonsense and red herrings, at the DM's discretion. Such conversations are always conducted in a language you can understand, even if the Feywild visitor can't speak that language normally."
+        player.adtlinfonotes["Feature: Feywild Connection"] = "Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Because of this, friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild."
     if player.background == "Fisher":  
         FshT1 = "Lobster Wrestling. You fought in hand-to-hand combat with an immense lobster."
         FshT2 = "It Dragged the Boat. You nearly caught a fish of monstrous size that pulled your boat for miles."
@@ -890,23 +809,22 @@ def summation(param, player):
         FshT8 = "Love Story. You fell in love with a creature of pure water, but your brief romance ended tragically."
         FshT = [FshT1, FshT2, FshT3, FshT4, FshT5, FshT6, FshT7, FshT8]
         FisherTale = random.choice(FshT)   
-        player.additionalinfo.append("Feature: Harvest The Water (see notes)")
-        player.notes.append("Feature: Harvest The Water - You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle while working as a fisher, and you can catch enough food to feed yourself and up to ten other people each day.")
-        player.additionalinfo.append(f"Fishing Tale - You can tell a compelling tale. whether tall or true. to impress and entertain others. Once a day, you can tell your story to willing listeners. At the DM's discretion, a number of those listeners become friendly toward you; this is not a magical effect, and continued amicability on their part depends on your actions.\nThat tale being: {FisherTale}")                                      
+        player.adtlinfonotes["Feature: Harvest The Water"] = "You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle while working as a fisher, and you can catch enough food to feed yourself and up to ten other people each day."
+        player.adtlinfonotes["Fishing Tale"] = f"You can tell a compelling tale. whether tall or true. to impress and entertain others. Once a day, you can tell your story to willing listeners. At the DM's discretion, a number of those listeners become friendly toward you; this is not a magical effect, and continued amicability on their part depends on your actions.\nThat tale being: {FisherTale}"
     if player.background == "Folk Hero":
-        S1 = "I stood up to a tyrant’s agents."
+        S1 = "I stood up to a tyrant's agents."
         S2 = "I saved people during a natural disaster."
         S3 = "I stood alone against a terrible monster."
         S4 = "I stole from a corrupt merchant to help the poor."
         S5 = "I led a militia to fight off an invading army."
-        S6 = "I broke into a tyrant’s castle and stole weapons to arm the people."
-        S7 = "I trained the peasantry to use farm implements as weapons against a tyrant’s soldiers."
+        S6 = "I broke into a tyrant's castle and stole weapons to arm the people."
+        S7 = "I trained the peasantry to use farm implements as weapons against a tyrant's soldiers."
         S8 = "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
         S9 = "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin."
-        S10 = "Recruited into a lord’s army, I rose to leadership and was commended for my heroism."
+        S10 = "Recruited into a lord's army, I rose to leadership and was commended for my heroism."
         DEF = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Event = random.choice(DEF)        
-        player.additionalinfo.append(f"Feature: Defining Event - You previously pursued a simple profession among the peasantry, perhaps as a farmer, miner, servant, shepherd, woodcutter, or gravedigger. But something happened that set you on a different path and marked you for greater things,\nThat event being: {Event}")        
+        player.adtlinfonotes["Feature: Defining Event"] = f"You previously pursued a simple profession among the peasantry, perhaps as a farmer, miner, servant, shepherd, woodcutter, or gravedigger. But something happened that set you on a different path and marked you for greater things,\nThat event being: {Event}"
     if player.background == "Inheritor":  
         Inh1 = "A document such as a map, a letter, or a journal."
         Inh2 = "A trinket (see 'Trinkets' in chapter 5 of PHB)."
@@ -919,11 +837,9 @@ def summation(param, player):
         Inh = [Inh1, Inh2, Inh3, Inh4, Inh5, Inh6, Inh7, Inh8]
         Inheritance = random.choice(Inh)
         player.equipment.append(Inheritance)
-        player.additionalinfo.append("Feature: Inheritance (see notes)")
-        player.notes.append("Feature: Inheritance - Work with your DM to come up with details for your inheritance: Why is your inheritance so important, and what is its full story? You might prefer for the DM to invent these details as part of the game, allowing you to learn more about your inheritance as your character does.\nThe DM is free to use your inheritance as a story hook, sending you on quests to learn more about its history or true nature, or confronting you with foes who want to claim it for themselves or prevent you from learning what you seek. The DM also determines the properties of your inheritance and how they figure into the item's history and importance. For instance, the object might be a minor magic item, or one that begins with a modest ability and increases in potency with the passage of time. Or, the true nature of your inheritance might not be apparent at first and is revealed only when certain conditions are met. When you begin your adventuring career, you can decide whether to tell your companions about your inheritance right away. Rather than attracting attention to yourself, you might want to keep your inheritance a secret until you learn more about what it means to you and what it can do for you.")
+        player.adtlinfonotes["Feature: Inheritance"] = "Work with your DM to come up with details for your inheritance: Why is your inheritance so important, and what is its full story? You might prefer for the DM to invent these details as part of the game, allowing you to learn more about your inheritance as your character does.\nThe DM is free to use your inheritance as a story hook, sending you on quests to learn more about its history or true nature, or confronting you with foes who want to claim it for themselves or prevent you from learning what you seek. The DM also determines the properties of your inheritance and how they figure into the item's history and importance. For instance, the object might be a minor magic item, or one that begins with a modest ability and increases in potency with the passage of time. Or, the true nature of your inheritance might not be apparent at first and is revealed only when certain conditions are met. When you begin your adventuring career, you can decide whether to tell your companions about your inheritance right away. Rather than attracting attention to yourself, you might want to keep your inheritance a secret until you learn more about what it means to you and what it can do for you."
     if player.background == "Gambler":
-        player.additionalinfo.append("Feature: Never Tell Me the Odds (see notes)")
-        player.notes.append("Feature: Never Tell Me the Odds - Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination.")
+        player.adtlinfonotes["Feature: Never Tell Me the Odds"] = "Odds and probability are your bread and butter. During downtime activities that involve games of chance or figuring odds on the best plan, you can get a solid sense of which choice is likely the best one and which opportunities seem too good to be true, at the DM's determination."
     if player.background == "Gate Warden":
         GtWPT1 = "Strange events and otherworldly creatures don't faze me."
         GtWPT2 = "I think in terms of exchange: something for something, nothing for nothing."
@@ -942,8 +858,7 @@ def summation(param, player):
         GtWTr = [GtWTr1, GtWTr2, GtWTr3, GtWTr4, GtWTr5, GtWTr6]
         GateWardenTrinket = random.choice(GtWTr)
         player.equipment.append(GateWardenTrinket)
-        player.additionalinfo.append("Feature: Planar Infusion (see notes)")
-        player.notes.append("Feature: Planar Infusion - Living in a gate-town or a similar location steeped you in planar energy. You gain the Scion of the Outer Planes feat. In addition, you know where to find free, modest lodging and food in the community you grew up in.")
+        player.adtlinfonotes["Feature: Planar Infusion"] = "Living in a gate-town or a similar location steeped you in planar energy. You gain the Scion of the Outer Planes feat. In addition, you know where to find free, modest lodging and food in the community you grew up in."
     if player.background == "Giant Foundling":
         FoundO1 = "You were found as a baby by a family of nomadic giants who raised you as one of their own."
         FoundO2 = "A family of stone giants rescued you when you fell into a mountain chasm, and you have lived with them underground ever since."
@@ -961,8 +876,8 @@ def summation(param, player):
         GFPT6 = "The world always feels too big, and I'm afraid I'll never find my place in it."
         GFPT = [GFPT1, GFPT2, GFPT3, GFPT4, GFPT5, GFPT6]
         Trait = random.choice(GFPT)        
-        player.additionalinfo.append(f"Origin Stories - How you came to live among colossal creatures is up to you to determine, but the Foundling Origin table suggests a variety of possibilities.\nAs a Giant Foundling, your Foundling Origin: {FoundlingOrigin}")
-        player.otherbackgroundinfo.append("With the Giant Foundling background, if the DM allows, you can have the feats: Skilled (feat) or Tough (feat), as well as Strike of the Giants (feat).")
+        player.adtlinfonotes["Origin Stories"] = f"How you came to live among colossal creatures is up to you to determine, but the Foundling Origin table suggests a variety of possibilities.\nAs a Giant Foundling, your Foundling Origin: {FoundlingOrigin}"
+        player.adtlinfonotes["Giant Foundling Feats"] = "With the Giant Foundling background, if the DM allows, you can have the feats: Skilled (feat) or Tough (feat), as well as Strike of the Giants (feat)."
     if player.background == "Golgari Agent":
         GoAgC1 = "One of my parents is an elite assassin, a member of the Ochran."
         GoAgC2 = "I learned combat from a kraul."
@@ -997,8 +912,7 @@ def summation(param, player):
         player.alliesorg.append(f"Your Golgari Contact Ally: {GolgariAgentContactAlly}")
         player.alliesorg.append(f"Your Golgari Contact Rival: {GolgariAgentContactRival}")
         player.alliesorg.append(f"Your Golgari Non-Guild Contact: {GolgariAgentNonGolgariCont}")
-        player.additionalinfo.append("Feature: Undercity Paths (see notes)")
-        player.notes.append("Feature: Undercity Paths - You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city. When you aren't in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths of the undercity are haunted by dangers that rarely brave the light of the surface world, so your journey isn't guaranteed to be safe.")
+        player.adtlinfonotes["Feature: Undercity Paths"] = "You know hidden, underground pathways that you can use to bypass crowds, obstacles, and observation as you move through the city. When you aren't in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths of the undercity are haunted by dangers that rarely brave the light of the surface world, so your journey isn't guaranteed to be safe."
         player.alliesorg.append("Golgari Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature.\nFor you, the spells on the Golgari Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Dancing Lights, Spare the Dying\n1st: Entangle, Ray of Sickness\n2nd: Protection from Poison, Ray of Enfeeblement, Spider Climb\n3rd: Animate Dead, Plant Growth\n4th: Giant Insect, Grasping Vine\n5th: Cloudkill, Insect Plague.\nGolgari magic is often accompanied by a sickly green glow and a rotting stench.")
     if (player.background == "Grey Hunter") or (player.background == "Whitestone Rifle Corps"):
         CurRel1 = "I retired honorably from the Rifle Corps—and now it's time for me to pursue my own adventures."
@@ -1009,13 +923,11 @@ def summation(param, player):
         CurRel6 = "My weapon was stolen. I built a new one, but I can't return home until I've tracked down the thief and recovered the original."
         CurRel = [CurRel1, CurRel2, CurRel3, CurRel4, CurRel5, CurRel6]
         CurrentRelationship = random.choice(CurRel)
-        player.additionalinfo.append(f"You are—or were—a member of an elite and trusted band of Whitestone's staunchest defenders.\nYour current relationship: {CurrentRelationship}")
+        player.adtlinfonotes["Whitestone Relationship"] = f"You are—or were—a member of an elite and trusted band of Whitestone's staunchest defenders.\nYour current relationship: {CurrentRelationship}"
         if player.background == "Grey Hunter":
-            player.additionalinfo.append("Feature: Grey Hunter (see notes)")
-            player.notes.append("Feature: Grey Hunter - As elite as they are, the members of the Whitestone Rifle Corps do not represent the apex of firearms skill in Whitestone. A clandestine group of elite soldiers and survivalists is drawn secretly from the Rifle Corps ranks. Called the Grey Hunters, these soldiers are special operatives of the de Rolo family, and loyally serve as spies, bodyguards, and even assassins when the job requires it. Though few officially know of them, rumors of the Grey Hunters' existence swirl constantly throughout the city-state, often in response to their activities after having been loaned out to protect Whitestone's allies.\nYou are one of these Grey Hunters, even if just a trainee (if you're starting your campaign at low levels). You have the ear of the lord and lady of Whitestone, though you must exercise this privilege graciously lest you lose it.")
+            player.adtlinfonotes["Feature: Grey Hunter"] = "As elite as they are, the members of the Whitestone Rifle Corps do not represent the apex of firearms skill in Whitestone. A clandestine group of elite soldiers and survivalists is drawn secretly from the Rifle Corps ranks. Called the Grey Hunters, these soldiers are special operatives of the de Rolo family, and loyally serve as spies, bodyguards, and even assassins when the job requires it. Though few officially know of them, rumors of the Grey Hunters' existence swirl constantly throughout the city-state, often in response to their activities after having been loaned out to protect Whitestone's allies.\nYou are one of these Grey Hunters, even if just a trainee (if you're starting your campaign at low levels). You have the ear of the lord and lady of Whitestone, though you must exercise this privilege graciously lest you lose it."
         if player.background == "Whitestone Rifle Corps":    
-            player.additionalinfo.append("Feature: Legacy of Secrecy (see notes)")
-            player.notes.append("Feature: Legacy of Secrecy - You have been entrusted with the use and care of a weapon both powerful and terrifying. The rifle you wield might transform the face of warfare and life in Tal'Dorei. It is a weapon that haunts the mind of its creator, Percival de Rolo, manifesting as a pain that lives always behind his kind eyes.\nYou were granted a musket or a pistol by your commander in the Whitestone Rifle Corps. This weapon is a symbol of your status, and when you display it, other folk around you—particularly adventurers, mercenaries, guards, engineers, and weapons enthusiasts—treat you differently. You might be seen as a noble defender of the people, a selfish hoarder of power, or anything in between, at the GM's discretion.")
+            player.adtlinfonotes["Feature: Legacy of Secrecy"] = "You have been entrusted with the use and care of a weapon both powerful and terrifying. The rifle you wield might transform the face of warfare and life in Tal'Dorei. It is a weapon that haunts the mind of its creator, Percival de Rolo, manifesting as a pain that lives always behind his kind eyes.\nYou were granted a musket or a pistol by your commander in the Whitestone Rifle Corps. This weapon is a symbol of your status, and when you display it, other folk around you—particularly adventurers, mercenaries, guards, engineers, and weapons enthusiasts—treat you differently. You might be seen as a noble defender of the people, a selfish hoarder of power, or anything in between, at the GM's discretion."
     if player.background == "Grinner":
         FavCS1 = "Zan's Comin' Back. This hopeful Tal 'Dorei folk song declares the inevitable return of a just ruler. Use it to seek out potential allies."
         FavCS2 = "Blow Fire Down the Coast. A rowdy fighting song from the Clovis Concord, this ditty talks of blasting up pirate ships. Use it to encourage battle."
@@ -1025,21 +937,19 @@ def summation(param, player):
         FavCS6 = "Dirge for the Emerald Fire. This elven song supposedly has thousands of obscure verses. Use the first two verses to spread news of death or defeat."
         FavCS = [FavCS1, FavCS2, FavCS3, FavCS4, FavCS5, FavCS6]
         FavoriteCodeSong = random.choice(FavCS)
-        player.additionalinfo.append(f"Favorite Code-Song - All members of the Golden Grin have learned a handful of folk songs in their travels, and use those songs to send secret codes and alert fellow Grinners to danger.\nYour Favorite Code-Song: {FavoriteCodeSong}")
-        player.additionalinfo.append("Feature: Ballad of The Grinning Fool (see notes)")
-        player.notes.append("Feature: Ballad of The Grinning Fool - Like every Grinner, you know how to find a hideout. In any city of 10,000 people or more on the Menagerie Coast or in the lands of the Dwendalian Empire, you can play the 'Ballad of the Grinning Fool' in a major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. This shelter might be discontinued if it becomes too dangerous to hide you, at the DM's discretion.\nThis feature must be used with caution, for not all who know the ballad are your friends. Some are traitors, counterspies, or agents of tyranny.")
+        player.adtlinfonotes["Favorite Code-Song"] = f"All members of the Golden Grin have learned a handful of folk songs in their travels, and use those songs to send secret codes and alert fellow Grinners to danger.\nYour Favorite Code-Song: {FavoriteCodeSong}"
+        player.adtlinfonotes["Feature: Ballad of The Grinning Fool"] = "Like every Grinner, you know how to find a hideout. In any city of 10,000 people or more on the Menagerie Coast or in the lands of the Dwendalian Empire, you can play the 'Ballad of the Grinning Fool' in a major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. This shelter might be discontinued if it becomes too dangerous to hide you, at the DM's discretion.\nThis feature must be used with caution, for not all who know the ballad are your friends. Some are traitors, counterspies, or agents of tyranny."
     if player.background == "Grounded": 
         GrComPl1 = "I am considered weak or unskilled and many treat me like a fledgling."
         GrComPl2 = "I am looked upon as a traitor to my people."
-        GrComPl3 = "My family wants me to return to the perch, but I just can’t."
+        GrComPl3 = "My family wants me to return to the perch, but I just can't."
         GrComPl4 = "I am not welcome back in my home perch."
         GrComPl5 = "I am viewed as an oddity, someone for others to laugh at and tease."
         GrComPl6 = "I have found a new community on the forest floor."
         GrComPl = [GrComPl1, GrComPl2, GrComPl3, GrComPl4, GrComPl5, GrComPl6]
         GroundedCommunityPlace = random.choice(GrComPl)
-        player.additionalinfo.append(f"An Odd Bird - Among birdfolk you are somewhere between an oddity and an outcast. Some consider your aversion to heights a rejection of birdfolk culture, leading many to find you off-putting.\nAs a Grounded, your Community Place: {GroundedCommunityPlace}")
-        player.additionalinfo.append("Feature: Find Another Path (see notes)")
-        player.notes.append("Feature: Find Another Path - Since you have lived your life close to the ground, you are familiar with the undergrowth in the same way other birdfolk are familiar with the canopy. You can always recall the general layout of the terrain around you while traveling along the forest floor. If your path is ever blocked by an obstacle that requires you to climb or otherwise gain height to circumvent it, you can always find a way around, so long as such a path exists. Additionally, you are adept at finding shelter in the Wood while traveling, and can usually locate a suitable safe shelter (a cave, a tree hollow, or bramble thicket) somewhere on the forest floor for you and up to five other creatures.")
+        player.adtlinfonotes["An Odd Bird"] = f"Among birdfolk you are somewhere between an oddity and an outcast. Some consider your aversion to heights a rejection of birdfolk culture, leading many to find you off-putting.\nAs a Grounded, your Community Place: {GroundedCommunityPlace}"
+        player.adtlinfonotes["Feature: Find Another Path"] = "Since you have lived your life close to the ground, you are familiar with the undergrowth in the same way other birdfolk are familiar with the canopy. You can always recall the general layout of the terrain around you while traveling along the forest floor. If your path is ever blocked by an obstacle that requires you to climb or otherwise gain height to circumvent it, you can always find a way around, so long as such a path exists. Additionally, you are adept at finding shelter in the Wood while traveling, and can usually locate a suitable safe shelter (a cave, a tree hollow, or bramble thicket) somewhere on the forest floor for you and up to five other creatures."
     if player.background == "Gruul Anarch":
         GrAnGC1 = "One of my parents is a renowned warrior in my clan."
         GrAnGC2 = "My sibling has the ear of the clan chief."
@@ -1065,15 +975,12 @@ def summation(param, player):
         GruulAnarchNonGuildContact = random.choice(GrAnNGC)
         player.alliesorg.append(f"Your Gruul Guild Contact: {GruulAnarchGuildContact}")
         player.alliesorg.append(f"Your Non-Guild Contact: {GruulAnarchNonGuildContact}")
-        player.additionalinfo.append("Feature: Rubblebelt Refuge (see notes)")
-        player.notes.append("Feature: Rubblebelt Refuge - You are intimately familiar with areas of the city that most people shun: ruined neighborhoods where wurms rampaged, overgrown parks that no hand has tended in decades, and the vast, sprawling rubblebelts of broken terrain that civilized folk have long abandoned. You can find a suitable place for you and your allies to hide or rest in these areas. In addition, you can find food and fresh water in these areas for yourself and up to five other people each day.")
+        player.adtlinfonotes["Feature: Rubblebelt Refuge"] = "You are intimately familiar with areas of the city that most people shun: ruined neighborhoods where wurms rampaged, overgrown parks that no hand has tended in decades, and the vast, sprawling rubblebelts of broken terrain that civilized folk have long abandoned. You can find a suitable place for you and your allies to hide or rest in these areas. In addition, you can find food and fresh water in these areas for yourself and up to five other people each day."
         player.alliesorg.append("Gruul Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Gruul Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Fire Bolt, Produce Flame\n1st: Compelled Duel, Speak With Animals, Thunderwave\n2nd: Beast Sense, Shatter; 3rd: Conjure Animals, Conjure Barrage\n4th: Dominate Beast, Stoneskin\n5th: Destructive Wave\nFueled by the fire of rage burning in your heart, your magic is almost always accompanied by fiery effects, such as flames smoldering behind your eyes or dancing over your hands.")
     if player.background == "Clan Crafter":
-        player.additionalinfo.append("Feature: Respect of the Stout Folk (see notes)")
-        player.notes.append("Feature: Respect of the Stout Folk - As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do. You always have free room and board in any place where shield dwarves or gold dwarves dwell, and the individuals in such a settlement might vie among themselves to determine who can offer you (and possibly your compatriots) the finest accommodations and assistance.")
+        player.adtlinfonotes["Feature: Respect of the Stout Folk"] = "As well respected as clan crafters are among outsiders, no one esteems them quite so highly as dwarves do. You always have free room and board in any place where shield dwarves or gold dwarves dwell, and the individuals in such a settlement might vie among themselves to determine who can offer you (and possibly your compatriots) the finest accommodations and assistance."
     if player.background == "Courtier":
-        player.additionalinfo.append("Feature: Court Functionary (see notes)")
-        player.notes.append("Feature: Court Functionary - Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for the favors you seek, and what the current intrigues of interest in the group are.")
+        player.adtlinfonotes["Feature: Court Functionary"] = "Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for the favors you seek, and what the current intrigues of interest in the group are."
     if (player.background == "Guild Artisan") or (player.background == "Guild Merchant"):
         S1 = "Alchemists and apothecaries"
         S2 = "Armorers, locksmiths, and fine smiths"
@@ -1097,13 +1004,12 @@ def summation(param, player):
         S20 = "Woodcarvers, coopers, and bowyers"
         BUS = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S20]
         Business = random.choice(BUS)                
-        player.additionalinfo.append(f"Feature: Guild Business - Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Your Guild Business: {Business}\nAs a member of your guild, you know the skills needed to create finished items from raw materials (reflected in your proficiency with a certain kind of artisan's tools), as well as the principles of trade and good business practices. The question now is whether you abandon your trade for adventure, or take on the extra effort to weave adventuring and trade together.")
-        player.additionalinfo.append("Feature: Guild Membership (see notes)")
-        player.notes.append("Feature: Guild Membership - As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces.")
+        player.adtlinfonotes["Feature: Guild Business"] = f"Guilds are generally found in cities large enough to support several artisans practicing the same trade. However, your guild might instead be a loose network of artisans who each work in a different village within a larger realm. Your Guild Business: {Business}\nAs a member of your guild, you know the skills needed to create finished items from raw materials (reflected in your proficiency with a certain kind of artisan's tools), as well as the principles of trade and good business practices. The question now is whether you abandon your trade for adventure, or take on the extra effort to weave adventuring and trade together."
+        player.adtlinfonotes["Feature: Guild Membership"] = "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet potential patrons, allies, or hirelings.\nGuilds often wield tremendous political power. If you are accused of a crime, your guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access to powerful political figures through the guild, if you are a member in good standing. Such connections might require the donation of money or magic items to the guild's coffers.\nYou must pay dues of 5 gp per month to the guild. If you miss payments, you must make up back dues to remain in the guild's good graces."
     if player.background == "Haunted One":
-        HaOHarE1 = "A monster that slaughtered dozens of innocent people spared your life, and you don’t know why."
+        HaOHarE1 = "A monster that slaughtered dozens of innocent people spared your life, and you don't know why."
         HaOHarE2 = "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night."
-        HaOHarE3 = "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone."
+        HaOHarE3 = "An apparition that has haunted your family for generations now haunts you. You don't know what it wants, and it won't leave you alone."
         HaOHarE4 = "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror."
         HaOHarE5 = "An oni took your sibling one cold, dark night, and you were unable to stop it."
         HaOHarE6 = "You were cursed with lycanthropy and later cured. You are now haunted by the innocents you slaughtered."
@@ -1113,9 +1019,8 @@ def summation(param, player):
         HaOHarE10 = "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams."
         HaOHarE = [HaOHarE1, HaOHarE2, HaOHarE3, HaOHarE4, HaOHarE5, HaOHarE6, HaOHarE7, HaOHarE8, HaOHarE9, HaOHarE10]
         HauntedOneHarrowingEvent = random.choice(HaOHarE)        
-        player.additionalinfo.append(f"Feature: Harrowing Event - Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape.\nYour Harrowing Event: {HauntedOneHarrowingEvent}")
-        player.additionalinfo.append("Feature: Heart of Darkness (see notes)")
-        player.notes.append("Feature: Heart of Darkness - Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone.")
+        player.adtlinfonotes["Feature: Harrowing Event"] = f"Prior to becoming an adventurer, your path in life was defined by one dark moment, one fateful decision, or one tragedy. Now you feel a darkness threatening to consume you, and you fear there may be no hope of escape.\nYour Harrowing Event: {HauntedOneHarrowingEvent}"
+        player.adtlinfonotes["Feature: Heart of Darkness"] = "Those who look into your eyes can see that you have faced unimaginable horror and that you are no stranger to darkness. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you, should you find yourself facing an enemy alone."
     if player.background == "Hermit":
         S1 = "I was searching for spiritual enlightenment."
         S2 = "I was partaking of communal living in accordance with the dictates of a religious order."
@@ -1127,9 +1032,8 @@ def summation(param, player):
         S8 = "I was a pilgrim in search of a person, place, or relic of spiritual significance."
         SEC = [S1, S2, S3, S4, S5, S6, S7, S8]
         Seclusion = random.choice(SEC)
-        player.additionalinfo.append(f"Feature: Life of Seclusion - What was the reason for your isolation, and what changed to allow you to end your solitude?\nYour life of seclusion: {Seclusion}")
-        player.additionalinfo.append("Feature: Discovery (see notes)")
-        player.notes.append("Feature: Discovery - The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society.\nWork with your DM to determine the details of your discovery and its impact on the campaign.")
+        player.adtlinfonotes["Feature: Life of Seclusion"] = f"What was the reason for your isolation, and what changed to allow you to end your solitude?\nYour life of seclusion: {Seclusion}"
+        player.adtlinfonotes["Feature: Discovery"] = "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. The exact nature of this revelation depends on the nature of your seclusion. It might be a great truth about the cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen. You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might be information that would be damaging to the people who or consigned you to exile, and hence the reason for your return to society.\nWork with your DM to determine the details of your discovery and its impact on the campaign."
     if player.background == "House Agent":
         specializations = [
             "Cannith, which specializes in Alchemist's supplies and tinker's tools",
@@ -1185,14 +1089,22 @@ def summation(param, player):
             return HouseAgentProf
                 
         if param == "Y":
-            print(f"0 - Random")   
-            for idx, spec in enumerate(specializations, 1):
-                print(f"{idx} - {spec}")
-            hoag = int(input("Choose which house you wish to be an agent of. "))
-            if hoag == 0:
-                HouseAgentProf = handle_random_choice(player, specializations, specialization_actions)
-            elif 1 <= hoag <= len(specializations):
-                HouseAgentProf = process_choice(player, hoag, specialization_actions)
+            while True:
+                try:
+                    print(f"0 - Random")   
+                    for idx, spec in enumerate(specializations, 1):
+                        print(f"{idx} - {spec}")
+                    hoag = int(input("Choose which house you wish to be an agent of. "))
+                    if hoag == 0:
+                        HouseAgentProf = handle_random_choice(player, specializations, specialization_actions)
+                        break
+                    elif 1 <= hoag <= len(specializations):
+                        HouseAgentProf = process_choice(player, hoag, specialization_actions)
+                        break
+                    else:
+                        print("Invalid choice, please choose a valid option.")
+                except ValueError: #Handles non-numeric choices  
+                    print("Invalid input. Please enter a number.")
         if param == "N":
             HouseAgentProf = handle_random_choice(player, specializations, specialization_actions)        
         HoAgR1 = "Acquisition"
@@ -1205,24 +1117,22 @@ def summation(param, player):
         HoAgR8 = "Covert Operations"
         HoAgR = [HoAgR1, HoAgR2, HoAgR3, HoAgR4, HoAgR5, HoAgR6, HoAgR7, HoAgR8]
         HouseAgentRole = random.choice(HoAgR)  
-        player.additionalinfo.append(f"Your House, and thus proficiencies, is: {HouseAgentProf}")
-        player.additionalinfo.append(f"Role - You always gather information for your house, but when a baron give you a specific mission, what sort of work do you do?\nYour House Role: {HouseAgentRole}")    
-        player.additionalinfo.append("Feature: House Connections (see notes)")
-        player.notes.append("Feature: House Connections - As an agent of your house, you can always get food and lodging for yourself and your friends at a house enclave. When the house assigns you a mission, it will usually provide you with the necessary supplies and transportation. Beyond this, you have many old friends, mentors, and rivals in your house, and you may encounter one of them when you interact with a house business. The degree to which such acquaintances are willing to help you depends on your current standing in your house.")
+        player.adtlinfonotes["House"] = f"Your House, and thus proficiencies, is: {HouseAgentProf}"
+        player.adtlinfonotes["Role"] = f"You always gather information for your house, but when a baron give you a specific mission, what sort of work do you do?\nYour House Role: {HouseAgentRole}"
+        player.adtlinfonotes["Feature: House Connections"] = "As an agent of your house, you can always get food and lodging for yourself and your friends at a house enclave. When the house assigns you a mission, it will usually provide you with the necessary supplies and transportation. Beyond this, you have many old friends, mentors, and rivals in your house, and you may encounter one of them when you interact with a house business. The degree to which such acquaintances are willing to help you depends on your current standing in your house."
     if player.background == "Investigator":
-        InvFirstCa1 = "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend’s innocence and starting your career as a detective."
-        InvFirstCa2 = "You’re told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you."
+        InvFirstCa1 = "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend's innocence and starting your career as a detective."
+        InvFirstCa2 = "You're told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you."
         InvFirstCa3 = "You helped a spirit nd peace by finding its missing corpse. Ever since, other spectral clients have sought you out to help them nd rest."
-        InvFirstCa4 = "You revealed that the monsters terrorizing your home were illusions created by a cruel mage. The magic-user escaped, but you’ve continued to uncover magical hoaxes."
+        InvFirstCa4 = "You revealed that the monsters terrorizing your home were illusions created by a cruel mage. The magic-user escaped, but you've continued to uncover magical hoaxes."
         InvFirstCa5 = "You were wrongfully accused and convicted of a crime. You managed to escape and seek to help others avoid the experience you suffered, even while still being pursued by the law."
         InvFirstCa6 = "You survived the destructive use of a magic device that wiped out your home. Members of a secret organization found you. You now work with them, tracking down dangerous supernatural phenomena and preventing them from doing harm."
-        InvFirstCa7 = "You found evidence of a conspiracy underpinning society. You tried to expose this mysterious cabal, but no one believed you. You’re still trying to prove what you know is true."
-        InvFirstCa8 = "You got a job with an agency that investigates crimes that local law enforcement can’t solve. You often wonder which you value more, the truth or your pay."
+        InvFirstCa7 = "You found evidence of a conspiracy underpinning society. You tried to expose this mysterious cabal, but no one believed you. You're still trying to prove what you know is true."
+        InvFirstCa8 = "You got a job with an agency that investigates crimes that local law enforcement can't solve. You often wonder which you value more, the truth or your pay."
         InvFirstCa = [InvFirstCa1, InvFirstCa2, InvFirstCa3, InvFirstCa4, InvFirstCa5, InvFirstCa6, InvFirstCa7, InvFirstCa8]
         InvestigatorFirstCase = random.choice(InvFirstCa) 
-        player.additionalinfo.append(f"Path to Mystery - Your first case influenced the types of mysteries you’re interested in. Why was this case so impactful, personal, or traumatic? Whom did it affect besides you? Why and how did you get involved? Was it solved? How did it set you on the path to investigating other mysteries?\nAs an Investigator, your first case: {InvestigatorFirstCase}") 
-        player.additionalinfo.append("Feature: Watcher's Eye (see notes)")
-        player.notes.append("Feature: Watcher's Eye - Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter.")
+        player.adtlinfonotes["Path to Mystery"] = f"Your first case influenced the types of mysteries you're interested in. Why was this case so impactful, personal, or traumatic? Whom did it affect besides you? Why and how did you get involved? Was it solved? How did it set you on the path to investigating other mysteries?\nAs an Investigator, your first case: {InvestigatorFirstCase}"
+        player.adtlinfonotes["Feature: Watcher's Eye"] = "Your experience in enforcing the law, and dealing with lawbreakers, gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former locations rather than the latter."
     if player.background == "Izzet Engineer":
         IzEnC1 = "An older relative is a member of the guild's board of directors."
         IzEnC2 = "I know a sprite who carries important messages among the guild's laboratories."
@@ -1257,12 +1167,10 @@ def summation(param, player):
         player.alliesorg.append(f"Your Izzet Guild Contact Ally: {IzzetEngrContAlly}")
         player.alliesorg.append(f"Your Izzet Guild Contact Rival: {IzzetEngrContRival}")
         player.alliesorg.append(f"Your Non-Guild Contact: {IzzetEngrNonIzzetCont}")    
-        player.additionalinfo.append("Feature: Urban Infrastructure (see notes)")
-        player.notes.append("Feature: Urban Infrastructure - The popular conception of the Izzet League is based on mad inventions, dangerous experiments, and explosive blasts. Much of that perception is accurate, but the league is also involved with mundane tasks of construction and architecture — primarily in crafting the infrastructure that allows Ravnicans to enjoy running water, levitating platforms, and other magical and technological wonders.\nYou have a basic knowledge of the structure of buildings, including the stuff behind the walls. You can also find blueprints of a specific building in order to learn the details of its construction. Such blueprints might provide knowledge of entry points, structural weaknesses, or secret spaces. Your access to such information isn't unlimited. If obtaining or using the information gets you in trouble with the law, the guild can't shield you from the repercussions.")
+        player.adtlinfonotes["Feature: Urban Infrastructure"] = "The popular conception of the Izzet League is based on mad inventions, dangerous experiments, and explosive blasts. Much of that perception is accurate, but the league is also involved with mundane tasks of construction and architecture — primarily in crafting the infrastructure that allows Ravnicans to enjoy running water, levitating platforms, and other magical and technological wonders.\nYou have a basic knowledge of the structure of buildings, including the stuff behind the walls. You can also find blueprints of a specific building in order to learn the details of its construction. Such blueprints might provide knowledge of entry points, structural weaknesses, or secret spaces. Your access to such information isn't unlimited. If obtaining or using the information gets you in trouble with the law, the guild can't shield you from the repercussions."
         player.alliesorg.append("Izzet Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Izzet Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Produce Flame, Shocking Grasp\n1st: Chaos Bolt, Create or Destroy Water, Unseen Servant\n2nd: Heat Metal, Rope Trick\n3rd: Call Lightning, Elemental Weapon, Glyph of Warding\n4th: Conjure Minor Elementals, Divination, Otiluke's Resilient Sphere\n5th: Animate Objects, Conjure Elemental\nYour spells tend to be loud, flashy, or explosive, even when the effect is unremarkable. If you use an arcane focus, it probably takes the form of an intricate device that could include metal gauntlets, glass canisters, copper tubing, and leather straps attaching it to your body.")
     if player.background == "Knight":
-        player.additionalinfo.append("Feature: Retainers (see notes)")
-        player.notes.append("Feature: Retainers - You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.")
+        player.adtlinfonotes["Feature: Retainers"] = "You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused."
     if player.background == "Knight of Solamnia":
         KnSolTr1 = "A flat silver disk you record your heroics upon"
         KnSolTr2 = "A piece of a fallen knight's armor"
@@ -1281,8 +1189,7 @@ def summation(param, player):
         KnSolPT = [KnSolPT1, KnSolPT2, KnSolPT3, KnSolPT4, KnSolPT5, KnSolPT6]
         Trait = random.choice(KnSolPT)    
         player.equipment.append(KnightSolamniaTrinket)
-        player.additionalinfo.append("Feature: Squire of Solamnia (see notes)")
-        player.notes.append("Feature: Squire of Solamnia - You gain the Squire of Solamnia feat.\nIn addition, the Knights of Solamnia provide you free, modest lodging and food at any of their fortresses or encampments.")
+        player.adtlinfonotes["Feature: Squire of Solamnia"] = "You gain the Squire of Solamnia feat.\nIn addition, the Knights of Solamnia provide you free, modest lodging and food at any of their fortresses or encampments."
     if player.background == "Lorehold Student":   
         LoStPT1 = "I thrive on esoteric lore. The more obscure the historical references I can include in everyday conversation, the better."
         LoStPT2 = "By searching for these lost artifacts, I hope to find who I really am along the way."
@@ -1301,10 +1208,9 @@ def summation(param, player):
         LoStTr = [LoStTr1, LoStTr2, LoStTr3, LoStTr4, LoStTr5, LoStTr6]
         LoreholdStuTrinket = random.choice (LoStTr)  
         player.equipment.append(LoreholdStuTrinket)
-        player.additionalinfo.append("Feature: Lorehold Initiate - You gain the Strixhaven Initiate feat and must choose Lorehold within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Lorehold Spells table are added to the spell list of your spellcasting class.\n1st: Comprehend Languages, Identify\n2nd: Borrowed Knowledge, Locate Object\n3rd: Speak with Dead, Spirit Guardians\n4th: Arcane Eye, Stone Shape\n5th: Flame Strike, Legend Lore\nConsider customizing how your spells look when you cast them. Your Lorehold spells might create displays of golden light. You might use a tome or a scroll as a spellcasting focus, and your spell effects might reflect the appearance of the reference books you study.")
+        player.adtlinfonotes["Feature: Lorehold Initiate"] = "You gain the Strixhaven Initiate feat and must choose Lorehold within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Lorehold Spells table are added to the spell list of your spellcasting class.\n1st: Comprehend Languages, Identify\n2nd: Borrowed Knowledge, Locate Object\n3rd: Speak with Dead, Spirit Guardians\n4th: Arcane Eye, Stone Shape\n5th: Flame Strike, Legend Lore\nConsider customizing how your spells look when you cast them. Your Lorehold spells might create displays of golden light. You might use a tome or a scroll as a spellcasting focus, and your spell effects might reflect the appearance of the reference books you study."
     if player.background == "Lyceum Scholar":
-        player.additionalinfo.append("Feature: Academic Requisition (see notes)")
-        player.notes.append("Feature: Academic Requisition - You've cleared enough lessons—and have gained an ally or two among the staff—to enable access to certain private areas within the Lyceum and other allied universities. Whenever you're on Lyceum grounds or at another major academic institution, you can requisition any set of tools found in the fifth edition rules. Each set of tools is magically marked to sound an alarm if they are removed from the university's grounds.\nWhen you seek services such as spellcasting from an NPC at the Alabaster Lyceum or a related institution, you can use those services at a 25 percent discount, at the GM's discretion.")
+        player.adtlinfonotes["Feature: Academic Requisition"] = "You've cleared enough lessons—and have gained an ally or two among the staff—to enable access to certain private areas within the Lyceum and other allied universities. Whenever you're on Lyceum grounds or at another major academic institution, you can requisition any set of tools found in the fifth edition rules. Each set of tools is magically marked to sound an alarm if they are removed from the university's grounds.\nWhen you seek services such as spellcasting from an NPC at the Alabaster Lyceum or a related institution, you can use those services at a 25 percent discount, at the GM's discretion."
     if player.background == "Mage of High Sorcery":
         MaHSTr1 = "An unopened letter from your first teacher"
         MaHSTr2 = "A broken wand made of black, red, or white wood"
@@ -1314,7 +1220,7 @@ def summation(param, player):
         MaHSTr6 = "A lens through which you can see Krynn's invisible black moon, Nuitari"
         MaHSTr = [MaHSTr1, MaHSTr2, MaHSTr3, MaHSTr4, MaHSTr5, MaHSTr6]
         MageHighSorcTrinket = random.choice(MaHSTr)
-        MaHSPT1 = "I wish to use my knowledge of magic to better people’s lives."
+        MaHSPT1 = "I wish to use my knowledge of magic to better people's lives."
         MaHSPT2 = "My study of magic might reveal all manner of secrets."
         MaHSPT3 = "Magic is a means to power, and I will use it to pursue my ambitions."
         MaHSPT4 = "I learned magic so I'd be able to protect those I care about."
@@ -1323,7 +1229,7 @@ def summation(param, player):
         MaHSPT = [MaHSPT1, MaHSPT2, MaHSPT3, MaHSPT4, MaHSPT5, MaHSPT6]
         Trait = random.choice(MaHSPT)    
         player.equipment.append(MageHighSorcTrinket)
-        player.additionalinfo.append("Feature: Initiate of High Sorcery - You gain the Initiate of High Sorcery feat.\nIn addition, the Mages of High Sorcery provide you with free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.")
+        player.adtlinfonotes["Feature: Initiate of High Sorcery"] = "You gain the Initiate of High Sorcery feat.\nIn addition, the Mages of High Sorcery provide you with free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member."
     if player.background == "Marine":   
         MarH1 = "Nearly Drowned. You hid underwater to avoid detection by enemies and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence."
         MarH2 = "Captured. You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke."
@@ -1333,17 +1239,13 @@ def summation(param, player):
         MarH6 = "Leave None Behind. You carried an injured marine for miles to avoid capture and death."
         MarH = [MarH1, MarH2, MarH3, MarH4, MarH5, MarH6]
         MarineHardship = random.choice(MarH) 
-        player.additionalinfo.append(f"Hardship Endured - Hardship in your past has forged you into an unstoppable living weapon. This hardship is essential to you and is at the heart of a personal philosophy or ethos that often guides your actions.\nYour Hardship: {MarineHardship}")       
-        player.additionalinfo.append("Feature: Steady (see notes)")
-        player.notes.append("Feature: Steady - You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see 'Travel Pace' in chapter 8 of the Player's Handbook). Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists.")
+        player.adtlinfonotes["Hardship Endured"] = f"Hardship in your past has forged you into an unstoppable living weapon. This hardship is essential to you and is at the heart of a personal philosophy or ethos that often guides your actions.\nYour Hardship: {MarineHardship}"
+        player.adtlinfonotes["Feature: Steady"] = "You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march (see 'Travel Pace' in chapter 8 of the Player's Handbook). Additionally, you can automatically find a safe route to land a boat on shore, provided such a route exists."
     if player.background == "Myriad Operative":
-        player.additionalinfo.append("Feature: Myriad Operative (see notes)")
-        player.notes.append("Feature: Myriad Operative - Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed.")
+        player.adtlinfonotes["Feature: Myriad Operative"] = "Your skill set might be similar to that of many members of the Clasp, but you work for a criminal organization that is far more sophisticated—and even less scrupulous. As a Myriad operative in Tal'Dorei, you might have been given a specific task that furthers that syndicate's hunger to expand beyond Wildemount, or which gives them an edge in their rivalry with the Clasp. Moreover, you understand the wisdom of keeping your activities secret from fellow criminals as well as law enforcement, since the agents of the Clasp will show you no mercy if your true identity is ever revealed."
     if player.background == "Noble":
-        player.additionalinfo.append("Feature: Retainers (see notes)")
-        player.notes.append("Feature: Retainers - If your character has a noble background, you may select this background feature instead of Position of Privilege. You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused.")
-        player.additionalinfo.append("Feature: Position of Privilege (see notes)")
-        player.notes.append("Feature: Position of Privilege - Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to.")
+        player.adtlinfonotes["Feature: Retainers"] = "If your character has a noble background, you may select this background feature instead of Position of Privilege. You have the service of three retainers loyal to your family. These retainers can be attendants or messengers, and one might be a majordomo. Your retainers are commoners who can perform mundane tasks for you, but they do not fight for you, will not follow you into obviously dangerous areas (such as dungeons), and will leave if they are frequently endangered or abused."
+        player.adtlinfonotes["Feature: Position of Privilege"] = "Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. The common folk make every effort to accommodate you and avoid your displeasure, and other people of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to."
     if player.background == "Orzhov Representative":
         OrzRepC1 = "The spirit of an ancestor has taken an interest in me."
         OrzRepC2 = "An older cousin has the ear of a powerful oligarch."
@@ -1378,8 +1280,7 @@ def summation(param, player):
         player.alliesorg.append(f"Your Orzhov Guild Contact Ally: {OrzhovRepContAlly}")
         player.alliesorg.append(f"Your Orzhov Guild Contact Rival: {OrzhovRepContRival}")
         player.alliesorg.append(f"Your Non-Guild Contact: {OrzhovRepNonOrzCont}")    
-        player.additionalinfo.append("Feature: Leverage (see notes)")
-        player.notes.append("Feature: Leverage - You can exert leverage over one or more individuals below you in the guild's hierarchy and demand their help as needs warrant. For example, you can have a message carried across a neighborhood, procure a short carriage ride without paying, or have others clean up a bloody mess you left in an alley. The DM decides if your demands are reasonable and if there are subordinates available to fulfill them. As your status in the guild improves, you gain influence over more people, including ones in greater positions of power.")
+        player.adtlinfonotes["Feature: Leverage"] = "You can exert leverage over one or more individuals below you in the guild's hierarchy and demand their help as needs warrant. For example, you can have a message carried across a neighborhood, procure a short carriage ride without paying, or have others clean up a bloody mess you left in an alley. The DM decides if your demands are reasonable and if there are subordinates available to fulfill them. As your status in the guild improves, you gain influence over more people, including ones in greater positions of power."
         player.alliesorg.append("Orzhov Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Orzhov Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Friends, Guidance\n1st: Command, Illusory Script\n2nd: Enthrall, Ray of Enfeeblement, Zone of Truth\n3rd: Bestow Curse, Speak With Dead, Spirit Guardians\n4th: Blight, Death Ward, Secret Chest | Leomund's Secret Chest\n5th: Geas\nYour magic tends to manifest as swirling shadows, brilliant light, or sometimes the momentary appearance of shadowy spirit forms. Your spells might draw the blood of your enemies, or even directly touch their souls.")
     if player.background == "Outlander":
         S1 = "Forester"
@@ -1394,172 +1295,107 @@ def summation(param, player):
         S10 = "Tribal marauder"
         ORI = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10]
         Origin = random.choice(ORI)
-        player.additionalinfo.append(f"Feature: Origin - You've been to strange places and seen things that others cannot begin to fathom. Consider some of the distant lands you have visited, and how they impacted you.\nYour occupation during your time in the wild: {Origin}")
-        player.additionalinfo.append("Feature: Wanderer (see notes)")
-        player.notes.append("Feature: Wanderer - You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you. In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game, water, and so forth.")
+        player.adtlinfonotes["Feature: Origin"] = f"You've been to strange places and seen things that others cannot begin to fathom. Consider some of the distant lands you have visited, and how they impacted you.\nYour occupation during your time in the wild: {Origin}"
+        player.adtlinfonotes["Feature: Wanderer"] = "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you. In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game, water, and so forth."
     if player.background == "Uthgardt Tribe Member":
-        player.additionalinfo.append("Feature: Barbarian Tribes of Faerun (see notes)")
-        player.notes.append("Feature: Barbarian Tribes of Faerun - Though this section details the Uthgardt specifically, either it or the Outlander background can be used for a character whose origin lies with one of the other barbarian tribes in Faerûn.\nYou might be a fair-haired barbarian of the Reghed, dwelling in the shadow of the Reghed Glacier in the far North near Icewind Dale. You might also be of the nomadic Rashemi, noted for their savage berserkers and their masked witches. Perhaps you hail from one of the wood elf tribes in the Chondalwood, or the magic-hating human tribes of the sweltering jungles of Chult.")
-        player.additionalinfo.append("Feature: Uthgardt Tribes and Their Territories (see notes)")
-        player.notes.append("Feature: Uthgardt Tribes and Their Territories - For most Uthgardt tribes, the only stability in their history is the site of their ancestral mound. Most of the Uthgardt holy sites have existed since antiquity, but the fortunes of the tribes that revere them have hardly been static. Following are brief descriptions of the Uthgardt tribes today.\nBlue Bear. The easternmost of the Uthgardt are the Blue Bear – thought destroyed more than a century ago – who have recently emerged from inside the High Forest and reclaimed their ancestral mound at Stone Stand, just south of the Moon Pass and north of the forest. The Blue Bears have reoccupied much of their old territory in the time since they returned to prominence, though they don't venture near Hellgate Keep, considering it a taboo place.\nBlack Lion and Red Tiger. North of Blue Bear territory, in the Glimmering Wood, is Beorunna's Well, a settlement of some size that near the ancient ancestral mound of the Red Tiger tribe. The settlement was founded some time ago by members of the Black Lion tribe, who put down roots here rather than continuing to live as nomads. Though the Red Tigers are less than comfortable with the present situation, they consider Beorunna's Well their holy site, so they make the best of things. Bands of Red Tiger tribespeople often winter in Beorunna's Well, and many of its hunters and trappers use the settlement as a place to sell the leather and furs they acquire in nearby forests.\nSky Pony. In a part of the Glimmerwood called the Moonwood stands the One Stone, the ancestral mound of the Sky Pony tribe. These are a people divided; half of the tribe has settled and built a sizable steading around the One Stone, similar to what Black Lion has done at Beorunna's Well. The other half of the tribe considers this act an insult to their totem, so they launch raids on the settlement, burning as much of it as they can and then escaping, often on pegasus-back.\nTree Ghost. In the depths of the High Forest stands the Grandfather Tree, the ancestral mound of the Tree Ghost tribe. The Tree Ghosts split off from the Blue Bears long ago and all but disappeared into the forest, although occasional reports reach civilization that they are still alive and can sometimes be seen clustered around the Grandfather Tree. Some sages postulate that the newly reborn Blue Bear tribe might well be Tree Ghost Uthgardt who are following a call from a revived Blue Bear totem.\nGreat Worm. The Frost Hills, a small southern spike of the Spine of the World Mountains just north of the Evermoors, is the site of Great Worm Cavern, the ancestral mound of the Great Worm tribe. These Uthgardt are notoriously reclusive; it has been twenty years since the tribe has sent raiding parties out anywhere but against the ores of the Spine Mountains.\nBlack Raven. As forbidding as the Spine of the World Mountains they roam, the Black Ravens are fanatical in their adherence to the old Uthgardt ways. Ranging out from Raven Rock, their ancestral mound deep inside the mountains, they have been known to send raiding parties as far south as Silverymoon, but their most frequent targets are the caravans that come in and out of Mithral Hall.\nElk. Flint Rock in the midst of the Evermoors is the ancestral mound of the Elk tribe. The Elk were once prolific raiders, extending their reach even into Nesme and Mithral Hall, but the tribe was shattered a handful of decades past by the forces of those cities. Though their numbers have replenished, the Elk remain mostly hunters and foragers. They are masters at avoiding or repulsing the threats of the Evermoors, and often hire themselves out as guides for outsiders.\nThunderbeast. The Thunderbeast tribe has not been heard from in several years. When the Thunderbeasts made their annual pilgrimage to Morgur's Mound in Neverwinter Wood, they found their holy site desecrated. Soon thereafter, their chieftain took them back into the depths of the High Forest, and they have not emerged since.\nGray Wolf. The Gray Wolf tribe, made up of lycanthropes, was destroyed by a Selunite crusade because of the tribe's curse. Some of the surviving Gray Wolves took shelter among other Uthgardt tribes.\nGriffon. The Griffon tribe came to an untimely end when it rose against the forces of Luruar allied with giants and orcs.\nRed Pony and Golden Eagle. The Red Pony and Golden Eagle tribes vanished centuries ago. They were last seen in the vicinity of the One Stone, the ancestral mound those tribes shared with Sky Pony.")
-        player.additionalinfo.append("Feature: Uthgardt Heritage (see notes)")
-        player.notes.append("Feature: Uthgardt Heritage - You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North. You are familiar enough with any wilderness area that you find twice as much food and water as you normally would when you forage there.\nAdditionally, you can call upon the hospitality of your people, and those folk allied with your tribe, often including members of druid circles, tribes of nomadic elves, the Harpers, and the priesthoods devoted to the gods of the First Circle.")
+        player.adtlinfonotes["Feature: Barbarian Tribes of Faerun"] = "Though this section details the Uthgardt specifically, either it or the Outlander background can be used for a character whose origin lies with one of the other barbarian tribes in Faerûn.\nYou might be a fair-haired barbarian of the Reghed, dwelling in the shadow of the Reghed Glacier in the far North near Icewind Dale. You might also be of the nomadic Rashemi, noted for their savage berserkers and their masked witches. Perhaps you hail from one of the wood elf tribes in the Chondalwood, or the magic-hating human tribes of the sweltering jungles of Chult."
+        player.adtlinfonotes["Feature: Uthgardt Tribes and Their Territories"] = "For most Uthgardt tribes, the only stability in their history is the site of their ancestral mound. Most of the Uthgardt holy sites have existed since antiquity, but the fortunes of the tribes that revere them have hardly been static. Following are brief descriptions of the Uthgardt tribes today.\nBlue Bear. The easternmost of the Uthgardt are the Blue Bear – thought destroyed more than a century ago – who have recently emerged from inside the High Forest and reclaimed their ancestral mound at Stone Stand, just south of the Moon Pass and north of the forest. The Blue Bears have reoccupied much of their old territory in the time since they returned to prominence, though they don't venture near Hellgate Keep, considering it a taboo place.\nBlack Lion and Red Tiger. North of Blue Bear territory, in the Glimmering Wood, is Beorunna's Well, a settlement of some size that near the ancient ancestral mound of the Red Tiger tribe. The settlement was founded some time ago by members of the Black Lion tribe, who put down roots here rather than continuing to live as nomads. Though the Red Tigers are less than comfortable with the present situation, they consider Beorunna's Well their holy site, so they make the best of things. Bands of Red Tiger tribespeople often winter in Beorunna's Well, and many of its hunters and trappers use the settlement as a place to sell the leather and furs they acquire in nearby forests.\nSky Pony. In a part of the Glimmerwood called the Moonwood stands the One Stone, the ancestral mound of the Sky Pony tribe. These are a people divided; half of the tribe has settled and built a sizable steading around the One Stone, similar to what Black Lion has done at Beorunna's Well. The other half of the tribe considers this act an insult to their totem, so they launch raids on the settlement, burning as much of it as they can and then escaping, often on pegasus-back.\nTree Ghost. In the depths of the High Forest stands the Grandfather Tree, the ancestral mound of the Tree Ghost tribe. The Tree Ghosts split off from the Blue Bears long ago and all but disappeared into the forest, although occasional reports reach civilization that they are still alive and can sometimes be seen clustered around the Grandfather Tree. Some sages postulate that the newly reborn Blue Bear tribe might well be Tree Ghost Uthgardt who are following a call from a revived Blue Bear totem.\nGreat Worm. The Frost Hills, a small southern spike of the Spine of the World Mountains just north of the Evermoors, is the site of Great Worm Cavern, the ancestral mound of the Great Worm tribe. These Uthgardt are notoriously reclusive; it has been twenty years since the tribe has sent raiding parties out anywhere but against the ores of the Spine Mountains.\nBlack Raven. As forbidding as the Spine of the World Mountains they roam, the Black Ravens are fanatical in their adherence to the old Uthgardt ways. Ranging out from Raven Rock, their ancestral mound deep inside the mountains, they have been known to send raiding parties as far south as Silverymoon, but their most frequent targets are the caravans that come in and out of Mithral Hall.\nElk. Flint Rock in the midst of the Evermoors is the ancestral mound of the Elk tribe. The Elk were once prolific raiders, extending their reach even into Nesme and Mithral Hall, but the tribe was shattered a handful of decades past by the forces of those cities. Though their numbers have replenished, the Elk remain mostly hunters and foragers. They are masters at avoiding or repulsing the threats of the Evermoors, and often hire themselves out as guides for outsiders.\nThunderbeast. The Thunderbeast tribe has not been heard from in several years. When the Thunderbeasts made their annual pilgrimage to Morgur's Mound in Neverwinter Wood, they found their holy site desecrated. Soon thereafter, their chieftain took them back into the depths of the High Forest, and they have not emerged since.\nGray Wolf. The Gray Wolf tribe, made up of lycanthropes, was destroyed by a Selunite crusade because of the tribe's curse. Some of the surviving Gray Wolves took shelter among other Uthgardt tribes.\nGriffon. The Griffon tribe came to an untimely end when it rose against the forces of Luruar allied with giants and orcs.\nRed Pony and Golden Eagle. The Red Pony and Golden Eagle tribes vanished centuries ago. They were last seen in the vicinity of the One Stone, the ancestral mound those tribes shared with Sky Pony."
+        player.adtlinfonotes["Feature: Uthgardt Heritage"] = "You have an excellent knowledge of not only your tribe's territory, but also the terrain and natural resources of the rest of the North. You are familiar enough with any wilderness area that you find twice as much food and water as you normally would when you forage there.\nAdditionally, you can call upon the hospitality of your people, and those folk allied with your tribe, often including members of druid circles, tribes of nomadic elves, the Harpers, and the priesthoods devoted to the gods of the First Circle."
     if player.background == "Pirate":
-        player.additionalinfo.append("Feature: Bad Reputation (see notes)")
-        player.notes.append("Feature: Bad Reputation - No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.")
+        player.adtlinfonotes["Feature: Bad Reputation"] = "No matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities."
     if player.background == "Sailor":
-        player.additionalinfo.append("Feature: Ship's Passage (see notes)")
-        player.notes.append("Feature: Ship's Passage - When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage.")
-        player.additionalinfo.append("Feature: Bad Reputation (see notes)")
-        player.notes.append("Feature: Bad Reputation - If your character has a sailor background, you may select this background feature instead of Ship's Passage.\nNo matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities.")
+        player.adtlinfonotes["Feature: Ship's Passage"] = "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet your every need. Your DM will determine how long it takes to get where you need to go. In return for your free passage, you and your companions are expected to assist the crew during the voyage."
+        player.adtlinfonotes["Feature: Bad Reputation"] = "If your character has a sailor background, you may select this background feature instead of Ship's Passage.\nNo matter where you go, people are afraid of you due to your reputation. When you are in a civilized settlement, you can get away with minor criminal offenses, such as refusing to pay for food at a tavern or breaking down doors at a local shop, since most people will not report your activity to the authorities."
     if player.background == "Plaintiff":
-        player.additionalinfo.append("Feature: Legalese (see notes)")
-        player.notes.append("Feature: Legalese - Your experience with your local legal system has given you a firm knowledge of the ins and outs of that system. Even when the law is not on your side, you can use complex terms like ex injuria jus non oritur and cogitationis poenam nemo patitur to frighten people into thinking you know what you're talking about. With common folks who don't know any better, you might be able to intimidate or deceive to get favors or special treatment.")
+        player.adtlinfonotes["Feature: Legalese"] = "Your experience with your local legal system has given you a firm knowledge of the ins and outs of that system. Even when the law is not on your side, you can use complex terms like ex injuria jus non oritur and cogitationis poenam nemo patitur to frighten people into thinking you know what you're talking about. With common folks who don't know any better, you might be able to intimidate or deceive to get favors or special treatment."
     if player.background == "Planar Philosopher": 
-        PlaPhiSF1 = "Athar, and the skill associated with that faction is: Religion"
-        PlaPhiSF2 = "Bleak Cabal, and the skill associated with that faction is: Insight"
-        PlaPhiSF3 = "Doomguard, and the skill associated with that faction is: Nature"
-        PlaPhiSF4 = "Fated, and the skill associated with that faction is: Intimidation"
-        PlaPhiSF5 = "Fraternity of Order, and the skill associated with that faction is: History"
-        PlaPhiSF6 = "Hands of Havoc, and the skill associated with that faction is: Stealth"
-        PlaPhiSF7 = "Harmonium, and the skill associated with that faction is: Perception"
-        PlaPhiSF8 = "Heralds of Dust, and the skill associated with that faction is: Medicine"
-        PlaPhiSF9 = "Mercykillers, and the skill associated with that faction is: Survival"
-        PlaPhiSF10 = "Mind's Eye, and the skill associated with that faction is: Persuasion"
-        PlaPhiSF11 = "Society of Sensation, and the skill associated with that faction is: Performance"
-        PlaPhiSF12 = "Transcendent Order, and the skill associated with that faction is: Athletics"
-        PlaPhiSF = [PlaPhiSF1, PlaPhiSF2, PlaPhiSF3, PlaPhiSF4, PlaPhiSF5, PlaPhiSF6, PlaPhiSF7, PlaPhiSF8, PlaPhiSF9, PlaPhiSF10, PlaPhiSF11, PlaPhiSF12]
-        PlanarPhilSigilFaction = random.choice(PlaPhiSF)
+        FactionDictionary = {
+            "Athar": {
+                "skill": "Religion",
+                "skillnum": "ReliNum",
+                "adhere": "Deities are frauds and merely channel the might of a true, higher power."
+            },
+            "Bleak Cabal": {
+                "skill": "Insight",
+                "skillnum": "InsiNum",
+                "adhere": "There is no greater truth to the multiverse. Each being must discover their own meaning."
+            },
+            "Doomguard": {
+                "skill": "Nature",
+                "skillnum": "NatuNum",
+                "adhere": "Nothing lasts forever. The purpose of everything is to crumble and decay."
+            },
+            "Fated": {
+                "skill": "Intimidation",
+                "skillnum": "IntiNum",
+                "adhere": "Everyone makes their own fate and is entitled to whatever they can take and hold."
+            },
+            "Fraternity of Order": {
+                "skill": "History",
+                "skillnum": "HistNum",
+                "adhere": "All of existence is governed by laws, and power comes from understanding and exploiting them."
+            },
+            "Hands of Havoc": {
+                "skill": "Stealth",
+                "skillnum": "SteaNum",
+                "adhere": "Those who try to impose a single order on the multiverse are doomed to fail."
+            },
+            "Harmonium": {
+                "skill": "Perception",
+                "skillnum": "PercNum",
+                "adhere": "The multiverse will be perfect only when everything is acting in harmony, whether it wants to or not."
+            },
+            "Heralds of Dust": {
+                "skill": "Medicine",
+                "skillnum": "MediNum",
+                "adhere": "Everyone is already dead; the entirety of the multiverse is an afterlife. Undeath holds the key to the next stage of existence."
+            },
+            "Mercykillers": {
+                "skill": "Survival",
+                "skillnum": "SurvNum",
+                "adhere": "Cold, relentless justice is absolute, and no one is above it."
+            },
+            "Mind's Eye": {
+                "skill": "Persuasion",
+                "skillnum": "PersNum",
+                "adhere": "The multiverse exists to be explored. It shapes us, and we shape it in turn."
+            },
+            "Society of Sensation": {
+                "skill": "Performance",
+                "skillnum": "PerfNum",
+                "adhere": "Sensation is the proof of existence. By experiencing everything, we can understand the multiverse in all its complexity."
+            },
+            "Transcendent Order": {
+                "skill": "Athletics",
+                "skillnum": "AthlNum",
+                "adhere": "Thought clouds action. To fall in step with the multiverse, one must act on instinct alone."
+            }
+        }
+
+        factiondictionarykeys = list(FactionDictionary.keys())
         if param == "Y":
-            print(f"0 - Random")
-            print(f"1 - Increase skill based on the faction you choose?")
-            facskl = int(input("Would you like to increase a skill based on a faction you can decide, or keep it random? "))
-            if facskl == 1:
-                print(f"0 - Random")
-                print(f"1 - Athar, and the skill associated with that faction is: Religion")
-                print(f"2 - Bleak Cabal, and the skill associated with that faction is: Insight")
-                print(f"3 - Doomguard, and the skill associated with that faction is: Nature")
-                print(f"4 - Fated, and the skill associated with that faction is: Intimidation")
-                print(f"5 - Fraternity of Order, and the skill associated with that faction is: History")
-                print(f"6 - Hands of Havoc, and the skill associated with that faction is: Stealth")
-                print(f"7 - Harmonium, and the skill associated with that faction is: Perception")
-                print(f"8 - Heralds of Dust, and the skill associated with that faction is: Medicine")
-                print(f"9 - Mercykillers, and the skill associated with that faction is: Survival")
-                print(f"10 - Mind's Eye, and the skill associated with that faction is: Persuasion")
-                print(f"11 - Society of Sensation, and the skill associated with that faction is: Performance")
-                print(f"12 - Transcendent Order, and the skill associated with that faction is: Athletics")
-                facfacskl = int(input("Choose a faction and thus a skill to increase. "))
-                if facfacskl == 1:
-                    PlanarPhilSigilFaction = "Athar"
-                    ReliNum += 1
-                if facfacskl == 2:
-                    PlanarPhilSigilFaction = "Bleak Cabal"
-                    InsiNum += 1
-                if facfacskl == 3:
-                    PlanarPhilSigilFaction = "Doomguard"
-                    NatuNum += 1
-                if facfacskl == 4:
-                    PlanarPhilSigilFaction = "Fated"
-                    IntiNum += 1
-                if facfacskl == 5:
-                    PlanarPhilSigilFaction = "Fraternity of Order"
-                    HistNum += 1
-                if facfacskl == 6:
-                    PlanarPhilSigilFaction = "Hands of Havoc"
-                    SteaNum += 1
-                if facfacskl == 7:
-                    PlanarPhilSigilFaction = "Harmonium"
-                    PercNum += 1
-                if facfacskl == 8:
-                    PlanarPhilSigilFaction = "Heralds of Dust"
-                    MediNum += 1
-                if facfacskl == 9:
-                    PlanarPhilSigilFaction = "Mercykillers"
-                    SurvNum += 1
-                if facfacskl == 10:
-                    PlanarPhilSigilFaction = "Mind's Eye"
-                    PersNum += 1
-                if facfacskl == 11:
-                    PlanarPhilSigilFaction = "Society of Sensation"
-                    PerfNum += 1
-                if facfacskl == 12:
-                    PlanarPhilSigilFaction = "Transcendent Order"
-                    AthlNum += 1
-                if facfacskl == 0:
-                    if PlanarPhilSigilFaction == "Athar":
-                        ReliNum += 1
-                    if PlanarPhilSigilFaction == "Bleak Cabal":
-                        InsiNum += 1
-                    if PlanarPhilSigilFaction == "Doomguard":
-                        NatuNum += 1
-                    if PlanarPhilSigilFaction == "Fated":
-                        IntiNum += 1
-                    if PlanarPhilSigilFaction == "Fraternity of Order":
-                        HistNum += 1
-                    if PlanarPhilSigilFaction == "Hands of Havoc":
-                        SteaNum += 1
-                    if PlanarPhilSigilFaction == "Harmonium":
-                        PercNum += 1
-                    if PlanarPhilSigilFaction == "Heralds of Dust":
-                        MediNum += 1
-                    if PlanarPhilSigilFaction == "Mercykillers":
-                        SurvNum += 1
-                    if PlanarPhilSigilFaction == "Mind's Eye":
-                        PersNum += 1
-                    if PlanarPhilSigilFaction == "Society of Sensation":
-                        PerfNum += 1
-                    if PlanarPhilSigilFaction == "Transcendent Order":
-                        AthlNum += 1
-            if facskl == 0:
-                if PlanarPhilSigilFaction == "Athar":
-                    ReliNum += 1
-                if PlanarPhilSigilFaction == "Bleak Cabal":
-                    InsiNum += 1
-                if PlanarPhilSigilFaction == "Doomguard":
-                    NatuNum += 1
-                if PlanarPhilSigilFaction == "Fated":
-                    IntiNum += 1
-                if PlanarPhilSigilFaction == "Fraternity of Order":
-                    HistNum += 1
-                if PlanarPhilSigilFaction == "Hands of Havoc":
-                    SteaNum += 1
-                if PlanarPhilSigilFaction == "Harmonium":
-                    PercNum += 1
-                if PlanarPhilSigilFaction == "Heralds of Dust":
-                    MediNum += 1
-                if PlanarPhilSigilFaction == "Mercykillers":
-                    SurvNum += 1
-                if PlanarPhilSigilFaction == "Mind's Eye":
-                    PersNum += 1
-                if PlanarPhilSigilFaction == "Society of Sensation":
-                    PerfNum += 1
-                if PlanarPhilSigilFaction == "Transcendent Order":
-                    AthlNum += 1
+            while True:
+                try:
+                    print("0 - Random")
+                    for idx, (faction, data) in enumerate(FactionDictionary.items(), start=1):
+                        print(f"{idx} - {faction}, and the skill associated with that faction is: {data['skill']}") #data collects the values, you just know which value to call
+                    facskl = int(input("Choose a faction to increase an associated skill. "))
+                    if facskl == 0:
+                        selected_faction = random.choice(factiondictionarykeys)
+                        player.skills_dict[FactionDictionary[selected_faction]['skillnum']] += 1
+                        break
+                    elif 1 <= facskl <= len(factiondictionarykeys):
+                        selected_faction = factiondictionarykeys[facskl - 1]
+                        player.skills_dict[FactionDictionary[selected_faction]['skillnum']] += 1
+                        break
+                    else:
+                        print("Invalid choice, please choose a valid option.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
         if param == "N":
-            if PlanarPhilSigilFaction == "Athar":
-                ReliNum += 1
-            if PlanarPhilSigilFaction == "Bleak Cabal":
-                InsiNum += 1
-            if PlanarPhilSigilFaction == "Doomguard":
-                NatuNum += 1
-            if PlanarPhilSigilFaction == "Fated":
-                IntiNum += 1
-            if PlanarPhilSigilFaction == "Fraternity of Order":
-                HistNum += 1
-            if PlanarPhilSigilFaction == "Hands of Havoc":
-                SteaNum += 1
-            if PlanarPhilSigilFaction == "Harmonium":
-                PercNum += 1
-            if PlanarPhilSigilFaction == "Heralds of Dust":
-                MediNum += 1
-            if PlanarPhilSigilFaction == "Mercykillers":
-                SurvNum += 1
-            if PlanarPhilSigilFaction == "Mind's Eye":
-                PersNum += 1
-            if PlanarPhilSigilFaction == "Society of Sensation":
-                PerfNum += 1
-            if PlanarPhilSigilFaction == "Transcendent Order":
-                AthlNum += 1
+            selected_faction = random.choice(factiondictionarykeys)
+            skill_variable = FactionDictionary[selected_faction]['skillnum']
+            player.skills_dict[skill_variable] += 1
         PlaPhiPT1 = "I don't venerate any gods. With time, we can be as powerful as them or greater."
         PlaPhiPT2 = "Experience is everything; live in the moment."
         PlaPhiPT3 = "When things crumble, I find meaning in the dust."
@@ -1576,34 +1412,13 @@ def summation(param, player):
         PlaPhiTr6 = "Broken holy symbol of a forgotten god"
         PlaPhiTr = [PlaPhiTr1, PlaPhiTr2, PlaPhiTr3, PlaPhiTr4, PlaPhiTr5, PlaPhiTr6]
         PlanarPhilTrinket = random.choice(PlaPhiTr)
-        player.alliesorg.append(f"As a Planar Philosopher, your Sigil Faction, and thus your extra skill: {PlanarPhilSigilFaction}")
+        player.alliesorg.append(f"As a Planar Philosopher, your Sigil Faction, and thus your extra skill: {selected_faction}")
         player.equipment.append(PlanarPhilTrinket) 
-        if PlanarPhilSigilFaction == "Athar":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Deities are frauds and merely channel the might of a true, higher power.")
-        if PlanarPhilSigilFaction == "Bleak Cabal":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: There is no greater truth to the multiverse. Each being must discover their own meaning.")
-        if PlanarPhilSigilFaction == "Doomguard":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Nothing lasts forever. The purpose of everything is to crumble and decay.")
-        if PlanarPhilSigilFaction == "Fated":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Everyone makes their own fate and is entitled to whatever they can take and hold.")
-        if PlanarPhilSigilFaction == "Fraternity of Order":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: All of existence is governed by laws, and power comes from understanding and exploiting them.")
-        if PlanarPhilSigilFaction == "Hands of Havoc":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Those who try to impose a single order on the multiverse are doomed to fail.")
-        if PlanarPhilSigilFaction == "Harmonium":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: The multiverse will be perfect only when everything is acting in harmony, whether it wants to or not.")
-        if PlanarPhilSigilFaction == "Heralds of Dust":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Everyone is already dead; the entirety of the multiverse is an afterlife. Undeath holds the key to the next stage of existence.")
-        if PlanarPhilSigilFaction == "Mercykillers":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Cold, relentless justice is absolute, and no one is above it.")
-        if PlanarPhilSigilFaction == "Mind's Eye":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: The multiverse exists to be explored. It shapes us, and we shape it in turn.")
-        if PlanarPhilSigilFaction == "Society of Sensation":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Sensation is the proof of existence. By experiencing everything, we can understand the multiverse in all its complexity.")
-        if PlanarPhilSigilFaction == "Transcendent Order":
-            player.additionalinfo.append(f"Factions of Sigil - Your Faction, {PlanarPhilSigilFaction}, adheres to: Thought clouds action. To fall in step with the multiverse, one must act on instinct alone.")
-        player.additionalinfo.append("Feature: Conviction (see notes)")
-        player.notes.append("Feature: Conviction - You gain the Scion of the Outer Planes feat. In addition, members of your organization provide you free, modest lodging and food at any of their holdings or the homes of other faction members.")
+        if selected_faction in FactionDictionary:
+            player.adtlinfonotes["Factions of Sigil"] = (
+                f"Your faction, {selected_faction}, adheres to: {FactionDictionary[selected_faction]['adhere']}"
+            )
+        player.adtlinfonotes["Feature: Conviction"] = "You gain the Scion of the Outer Planes feat. In addition, members of your organization provide you free, modest lodging and food at any of their holdings or the homes of other faction members."
     if player.background == "Prismari Student": 
         PriStuPT1 = "I'm the life of the party, and I expect everyone's attention when I walk into a room."
         PriStuPT2 = "Two weeks ago, I was enthralled with my latest project. Now, I think it's garbage and deserves to be destroyed."
@@ -1622,7 +1437,7 @@ def summation(param, player):
         PriStuTr = [PriStuTr1, PriStuTr2, PriStuTr3, PriStuTr4, PriStuTr5, PriStuTr6]
         PrismariStudentTrinket = random.choice(PriStuTr)     
         player.equipment.append(PrismariStudentTrinket)       
-        player.additionalinfo.append("Feature: Prismari Initiate - You gain the Strixhaven Initiate feat and must choose Prismari within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Prismari Spells table are added to the spell list of your spellcasting class.\n1st: Chromatic Orb, Thunderwave\n2nd: Flaming Sphere, Kinetic Jaunt\n3rd: Haste, Water Walk\n4th: Freedom of Movement, Wall of Fire\n5th: Cone of Cold, Conjure Elemental\nConsider customizing how your spells look when you cast them. You might wield your Prismari spells with dynamic, gestural movement—as much dance as somatic component. Even a blast of fire in your hands is a sculpted work of art; elemental forces make grand designs as you hurl spells. These forces might linger on your body or in your clothes as decorative elements after your spells are dissipated, as sparks dance in your hair and your touch leaves tracings of frost on whatever you touch.")
+        player.adtlinfonotes["Feature: Prismari Initiate"] = "You gain the Strixhaven Initiate feat and must choose Prismari within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Prismari Spells table are added to the spell list of your spellcasting class.\n1st: Chromatic Orb, Thunderwave\n2nd: Flaming Sphere, Kinetic Jaunt\n3rd: Haste, Water Walk\n4th: Freedom of Movement, Wall of Fire\n5th: Cone of Cold, Conjure Elemental\nConsider customizing how your spells look when you cast them. You might wield your Prismari spells with dynamic, gestural movement—as much dance as somatic component. Even a blast of fire in your hands is a sculpted work of art; elemental forces make grand designs as you hurl spells. These forces might linger on your body or in your clothes as decorative elements after your spells are dissipated, as sparks dance in your hair and your touch leaves tracings of frost on whatever you touch."
     if player.background == "Quandrix Student":  
         QuaStuPT1 = "When I find a subject I'm interested in, I won't stop studying until I know everything about it. It keeps me up at night."
         QuaStuPT2 = "I hope this all makes sense to me one day. Until then, I'm going to keep faking it."
@@ -1641,7 +1456,7 @@ def summation(param, player):
         QuaStuTr = [QuaStuTr1, QuaStuTr2, QuaStuTr3, QuaStuTr4, QuaStuTr5, QuaStuTr6]
         QuandrixStudentTrinket = random.choice(QuaStuTr)  
         player.equipment.append(QuandrixStudentTrinket)
-        player.additionalinfo.append("Feature: Quandrix Initiate - You gain the Strixhaven Initiate feat and must choose Quandrix within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Quandrix Spells table are added to the spell list of your spellcasting class.\n1st: Entangle, Guiding Bolt\n2nd: Enlarge/Reduce, Vortex Warp\n3rd: Aura of Vitality, Haste\n4th: Control Water, Freedom of Movement\n5th: Circle of Power, Passwall\nConsider customizing how your spells look when you cast them. Your Quandrix spells might manifest amid kaleidoscopic swirls of fractal patterns, amplifying the tiniest movements of your somatic components. When your magic creates or alters creatures, it might briefly surround the targets with shimmering fractal designs or tessellated patterns.")
+        player.adtlinfonotes["Feature: Quandrix Initiate"] = "You gain the Strixhaven Initiate feat and must choose Quandrix within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Quandrix Spells table are added to the spell list of your spellcasting class.\n1st: Entangle, Guiding Bolt\n2nd: Enlarge/Reduce, Vortex Warp\n3rd: Aura of Vitality, Haste\n4th: Control Water, Freedom of Movement\n5th: Circle of Power, Passwall\nConsider customizing how your spells look when you cast them. Your Quandrix spells might manifest amid kaleidoscopic swirls of fractal patterns, amplifying the tiniest movements of your somatic components. When your magic creates or alters creatures, it might briefly surround the targets with shimmering fractal designs or tessellated patterns."
     if player.background == "Rakdos Cultist":
         RCPerf1 = "Spikewheel acrobat"
         RCPerf2 = "Lampooning satirist"
@@ -1683,16 +1498,14 @@ def summation(param, player):
         RakCulNRC10 = "A Simic biomancer provides mutant monsters to add a taste of the bizarre to our shows."
         RakCulNRC = [RakCulNRC1, RakCulNRC2, RakCulNRC3, RakCulNRC4, RakCulNRC5, RakCulNRC6, RakCulNRC7, RakCulNRC8, RakCulNRC9, RakCulNRC10]
         RakdosCultNonRakCon = random.choice(RakCulNRC)        
-        player.additionalinfo.append(f"Rakdos Performance: Rakdos performance styles typically fuse standard circus-style acrobatics with fire, wrought-iron spikes and hooks, and monsters.\nYour Performance: {RakdosCultPerformance}")
-        player.additionalinfo.append("Feature: Fearsome Reputation (see notes)")
-        player.notes.append("Feature: Fearsome Reputation - People recognize you as a member of the Cult of Rakdos, and they're careful not to draw your anger or ridicule. You can get away with minor criminal offenses, such as refusing to pay for food at a restaurant or breaking down a door at a local shop, if no legal authorities witness the crime. Most people are too daunted by you to report your wrongdoing to the Azorius.")
+        player.adtlinfonotes["Rakdos Performance"] = f"Rakdos performance styles typically fuse standard circus-style acrobatics with fire, wrought-iron spikes and hooks, and monsters.\nYour Performance: {RakdosCultPerformance}"
+        player.adtlinfonotes["Feature: Fearsome Reputation"] = "People recognize you as a member of the Cult of Rakdos, and they're careful not to draw your anger or ridicule. You can get away with minor criminal offenses, such as refusing to pay for food at a restaurant or breaking down a door at a local shop, if no legal authorities witness the crime. Most people are too daunted by you to report your wrongdoing to the Azorius."
         player.alliesorg.append("Rakdos Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Rakdos Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Fire Bolt, Vicious Mockery\n1st: Burning Hands, Dissonant Whispers, Hellish Rebuke\n2nd: Crown of Madness, Enthrall, Flaming Sphere\n3rd: Fear, Haste\n4th: Confusion, Wall of Fire\n5th: Dominate Person\nYour magic often produces a flashy spectacle, wreathing you or your targets in a mixture of harmless flame and shadowy shapes. When you manipulate an opponent's mind, a flaming symbol of Rakdos might momentarily appear like a mask over the target's face.")
         player.alliesorg.append(f"Your Rakdos Guild Contact Ally: {RakdosCultConAlly}")
         player.alliesorg.append(f"Your Rakdos Guild Contact Rival: {RakdosCultConRival}")
         player.alliesorg.append(f"Your Non-Guild Contact: {RakdosCultNonRakCon}")   
     if player.background == "Reformed Cultist":
-        player.additionalinfo.append("Feature: Fell Teachings (see notes)")
-        player.notes.append("Feature: Fell Teachings - You were inundated with knowledge about one of the Betrayer Gods, and know by heart everything from their basic commandments to some of their most esoteric secrets. Choose one of the Betrayer Gods. You have advantage on Intelligence (Religion) checks to know information about their faith, including obscure secrets unknown to most worshipers.\nAdditionally, you can work with your GM to create a secret that you learned during your time in the cult. This secret might be the seed of a conspiracy, a myth of a legendary hero whose true meaning has mutated over the years, or even the location of a fabled artifact of the gods.")
+        player.adtlinfonotes["Feature: Fell Teachings"] = "You were inundated with knowledge about one of the Betrayer Gods, and know by heart everything from their basic commandments to some of their most esoteric secrets. Choose one of the Betrayer Gods. You have advantage on Intelligence (Religion) checks to know information about their faith, including obscure secrets unknown to most worshipers.\nAdditionally, you can work with your GM to create a secret that you learned during your time in the cult. This secret might be the seed of a conspiracy, a myth of a legendary hero whose true meaning has mutated over the years, or even the location of a fabled artifact of the gods."
     if player.background == "Rewarded":      
         RewPT1 = "A safe home is a foundation on which anything else can be built. (Key, Throne)"
         RewPT2 = "I was elevated to heights I could never otherwise attain, and I won't waste my fortune. (Star, Sun)"
@@ -1711,10 +1524,9 @@ def summation(param, player):
         RewTr = [RewTr1, RewTr2, RewTr3, RewTr4, RewTr5, RewTr6]
         RewardedTrinket = random.choice(RewTr) 
         player.equipment.append(RewardedTrinket)      
-        player.additionalinfo.append("Feature: Fortune's Favor - Your unexpected good fortune is reflected by a minor boon. You gain the Lucky, Magic Initiate, or Skilled feat (your choice). Your choice of feat reflects the transformation that changed your life. An encounter with a genie who gave you three wishes might have resulted in magical powers represented by Magic Initiate. If you paid off all your family debts with a fortuitous round of three-dragon ante, you might be Lucky instead. Alternatively, you could use the Skilled feat to reflect whatever trial you endured to secure your new destiny and to model the knowledge and abilities imparted to you by whatever force transformed your life.")
+        player.adtlinfonotes["Feature: Fortune's Favor"] = "Your unexpected good fortune is reflected by a minor boon. You gain the Lucky, Magic Initiate, or Skilled feat (your choice). Your choice of feat reflects the transformation that changed your life. An encounter with a genie who gave you three wishes might have resulted in magical powers represented by Magic Initiate. If you paid off all your family debts with a fortuitous round of three-dragon ante, you might be Lucky instead. Alternatively, you could use the Skilled feat to reflect whatever trial you endured to secure your new destiny and to model the knowledge and abilities imparted to you by whatever force transformed your life."
     if player.background == "Rival Intern":
-        player.additionalinfo.append("Feature: Inside Informant (see notes)")
-        player.notes.append("Feature: Inside Informant - You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion.")
+        player.adtlinfonotes["Feature: Inside Informant"] = "You have connections to your previous employer or other groups you dealt with during your previous employment. You can communicate with your contacts, gaining information at the DM's discretion."
     if player.background == "Ruined":     
         RuPT1 = "I've changed from my past, and I work to live up to my new path. (Balance, Throne)"
         RuPT2 = "Every moment is a gift I refuse to squander. (Euryale, Skull)"
@@ -1733,8 +1545,7 @@ def summation(param, player):
         RuTr = [RuTr1, RuTr2, RuTr3, RuTr4, RuTr5, RuTr6]
         RuinedTrinket = random.choice(RuTr)    
         player.equipment.append(RuinedTrinket)
-        player.additionalinfo.append("Feature: Still Standing (see notes)")
-        player.notes.append("Feature: Still Standing - You have weathered ruinous misfortune, and you possess hidden reserves others don't expect. You gain the Alert, Skilled, or Tough feat (your choice). Your choice of feat reflects how you've dealt with the terrible loss that changed your life forever. If you've kept your senses sharp for every opportunity and climbed your way out of misery by seizing the tiniest scrap of hope, choose Alert. If you've redoubled your efforts to reclaim what was once yours, choose Skilled. If you've stoically persevered through your misfortune, select Tough.")         
+        player.adtlinfonotes["Feature: Still Standing"] = "You have weathered ruinous misfortune, and you possess hidden reserves others don't expect. You gain the Alert, Skilled, or Tough feat (your choice). Your choice of feat reflects how you've dealt with the terrible loss that changed your life forever. If you've kept your senses sharp for every opportunity and climbed your way out of misery by seizing the tiniest scrap of hope, choose Alert. If you've redoubled your efforts to reclaim what was once yours, choose Skilled. If you've stoically persevered through your misfortune, select Tough."
     if player.background == "Rune Carver":
         RS1 = "You inscribe runes in wax or clay with a fine metal needle."
         RS2 = "You whittle pieces of wood into small figurines you mark with runes."
@@ -1752,11 +1563,10 @@ def summation(param, player):
         RCPT6 = "My brain struggles to process words written in ink, but the feeling of carved runes makes my mind sing."
         RCPT = [RCPT1, RCPT2, RCPT3, RCPT4, RCPT5, RCPT6]
         Trait = random.choice(RCPT)        
-        player.additionalinfo.append(f"Rune Styles - Each rune carver has a unique style and preferred medium for creating runes\nYour Rune Style: {RuneStyle}")
-        player.otherbackgroundinfo.append("With the Rune Carver background, if the DM allows you, can have the feats Skilled (feat) or Tough (feat), as well as Rune Shaper (feat).")
+        player.adtlinfonotes["Rune Styles"] = f"Each rune carver has a unique style and preferred medium for creating runes\nYour Rune Style: {RuneStyle}"
+        player.adtlinfonotes["Rune Carver Feats"] = "With the Rune Carver background, if the DM allows you, can have the feats Skilled (feat) or Tough (feat), as well as Rune Shaper (feat)."
     if player.background == "Cloistered Scholar":
-        player.additionalinfo.append("Feature: Library Access (see notes)")
-        player.notes.append("Feature: Library Access - Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access.\nYou have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease.\nAdditionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy shown to a fellow scholar.")
+        player.adtlinfonotes["Feature: Library Access"] = "Though others must often endure extensive interviews and significant fees to gain access to even the most common archives in your library, you have free and easy access to the majority of the library, though it might also have repositories of lore that are too valuable, magical, or secret to permit anyone immediate access.\nYou have a working knowledge of your cloister's personnel and bureaucracy, and you know how to navigate those connections with some ease.\nAdditionally, you are likely to gain preferential treatment at other libraries across the Realms, as professional courtesy shown to a fellow scholar."
     if player.background == "Sage":
         S1 = "Alchemist"
         S2 = "Astronomer"
@@ -1768,9 +1578,8 @@ def summation(param, player):
         S8 = "Scribe"
         SPE = [S1, S2, S3, S4, S5, S6, S7, S8]
         Specialty = random.choice(SPE)        
-        player.additionalinfo.append(f"Sage Specialty: The nature of your scholary training is: {Specialty}")
-        player.additionalinfo.append("Feature: Researcher (see notes)")
-        player.notes.append("Feature: Researcher - When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature. Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found. Unearthing the deepest secrets of the multiverse can require an aDventure or even a whole campaign.")
+        player.adtlinfonotes["Sage Specialty"] = f"The nature of your scholary training is: {Specialty}"
+        player.adtlinfonotes["Feature: Researcher"] = "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature. Your DM might rule that the knowledge you seek is secreted away in an almost inaccessible place, or that it simply cannot be found. Unearthing the deepest secrets of the multiverse can require an aDventure or even a whole campaign."
     if player.background == "Selesnya Initiate":
         SelesInC1 = "A wise centaur trainer believed in me even though I was a terrible student."
         SelesInC2 = "A good friend has risen to become a Ledev guardian."
@@ -1799,8 +1608,7 @@ def summation(param, player):
         player.alliesorg.append(f"Your Seles Guild Contact Ally: {SelesInitConAlly}")
         player.alliesorg.append(f"Your Seles Guild Contact Rival: {SelesInitConRival}")
         player.alliesorg.append(f"Your Non-Guild Contact: {SelesInitNonSelesCon}")        
-        player.additionalinfo.append("Feature: Conclave's Shelter (see notes)")
-        player.notes.append("Feature: Conclave's Shelter - As a member of the Selesnya Conclave, you can count on your guild mates to provide shelter and aid. You and your companions can find a place to hide or rest in any Selesnya enclave in the city, unless you have proven to be a danger to them. The members of the enclave will shield you from the law or anyone else searching for you, though they will not risk their lives in this effort.\nIn addition, as a guild member you can receive free healing and care at a Selesnya enclave, though you must provide any material components needed for spells.")
+        player.adtlinfonotes["Feature: Conclave's Shelter"] = "As a member of the Selesnya Conclave, you can count on your guild mates to provide shelter and aid. You and your companions can find a place to hide or rest in any Selesnya enclave in the city, unless you have proven to be a danger to them. The members of the enclave will shield you from the law or anyone else searching for you, though they will not risk their lives in this effort.\nIn addition, as a guild member you can receive free healing and care at a Selesnya enclave, though you must provide any material components needed for spells."
         player.alliesorg.append("Selesnya Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Selesnya Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Druidcraft, Friends\n1st: Animal Friendship, Charm Person\n2nd: Aid, Animal Messenger, Calm Emotions, Warding Bond\n3rd: Plant Growth, Speak With Plants\n4th: Aura of Life, Conjure Minor Elementals\n5th: Awaken, Commune With Nature\nMembers of the Selesnya Conclave refer to their magic as 'doruvati,' a Sylvan word meaning 'gift.' When you use these gifts of Mat'Selesnya, graceful swirls of green and silver light dance in the air around you, and phantasmal green leaves might waft through the air. A sensation of gentle warmth and the smell of spring flowers or autumn leaves might accompany your spells.")
     if player.background == "Shipwright": 
         ShipwSI1 = "Grand Designs. You are working on plans and schematics for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure the success of your design."
@@ -1819,10 +1627,9 @@ def summation(param, player):
         ShipwSMCon6 = "Anders Solmor"
         ShipwSMCon = [ShipwSMCon1, ShipwSMCon2, ShipwSMCon3, ShipwSMCon4, ShipwSMCon5, ShipwSMCon6]
         ShipwrightSaltwaterMarshContact = random.choice(ShipwSMCon)
-        player.additionalinfo.append(f"Life At Sea - Your life at sea and in port has shaped you\nYour Sea's Influence: {ShipwrightSeaInfluence}")
-        player.additionalinfo.append(f"As a Shipwright, your Saltwater Marsh Contact: {ShipwrightSaltwaterMarshContact}")
-        player.additionalinfo.append("Feature: I'll Patch It! (see notes)")
-        player.notes.append("Feature: I'll Patch It! - Provided you have carpenter's tools and wood. you can perform repairs on a water vehicle. When you use this ability, you restore a number of hit points co the hull of a water vehicle equal to 5 x your proficiency modifier. A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired.")
+        player.adtlinfonotes["Life At Sea"] = f"Your life at sea and in port has shaped you\nYour Sea's Influence: {ShipwrightSeaInfluence}"
+        player.adtlinfonotes["Saltwater Marsh Contract"] = f"As a Shipwright, your Saltwater Marsh Contact: {ShipwrightSaltwaterMarshContact}"
+        player.adtlinfonotes["Feature: I'll Patch It!"] = "Provided you have carpenter's tools and wood. you can perform repairs on a water vehicle. When you use this ability, you restore a number of hit points co the hull of a water vehicle equal to 5 x your proficiency modifier. A vehicle cannot be patched by you in this way again until after it has been pulled ashore and fully repaired."
     if player.background == "Silverquill Student":
         SilvStuPT1 = "I'll say whatever I need to in order to maintain my high social status."
         SilvStuPT2 = "I prefer saying the blunt truth over a pretty lie, and I don't particularly care whose feelings I hurt."
@@ -1841,7 +1648,7 @@ def summation(param, player):
         SilvStuTr = [SilvStuTr1, SilvStuTr2, SilvStuTr3, SilvStuTr4, SilvStuTr5, SilvStuTr6]
         SilverquillInitiateTrinket = random.choice(SilvStuTr)
         player.equipment.append(SilverquillInitiateTrinket)
-        player.additionalinfo.append("Feature: Silverquill Initiate - You gain the Strixhaven Initiate feat and must choose Silverquill within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Silverquill Spells table are added to the spell list of your spellcasting class.\n1st: Dissonant Whispers, Silvery Barbs\n2nd: Calm Emotions, Darkness\n3rd: Beacon of Hope, Daylight\n4th: Compulsion, Confusion\n5th: Dominate Person, Rary's Telepathic Bond\nConsider customizing how your spells look when you cast them. Your Silverquill spells might be accompanied by visual effects resembling splotches of ink or radiating ripples of golden light. Any auditory effects of your spells often sound like amplified echoes of your own voice speaking the spells' verbal components—even amid the crash of lightning or a fiery eruption.")
+        player.adtlinfonotes["Feature: Silverquill Initiate"] = "You gain the Strixhaven Initiate feat and must choose Silverquill within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Silverquill Spells table are added to the spell list of your spellcasting class.\n1st: Dissonant Whispers, Silvery Barbs\n2nd: Calm Emotions, Darkness\n3rd: Beacon of Hope, Daylight\n4th: Compulsion, Confusion\n5th: Dominate Person, Rary's Telepathic Bond\nConsider customizing how your spells look when you cast them. Your Silverquill spells might be accompanied by visual effects resembling splotches of ink or radiating ripples of golden light. Any auditory effects of your spells often sound like amplified echoes of your own voice speaking the spells' verbal components—even amid the crash of lightning or a fiery eruption."
     if player.background == "Simic Scientist":
         SSProj1 = "Hull Clade, focused on protection and durability"
         SSProj2 = "Fin Clade, focused on movement"
@@ -1875,13 +1682,12 @@ def summation(param, player):
         SimSciNSC10 = "Roll an additional Simic contact; you can decide if the contact is an ally or a rival."
         SimSciNSC = [SimSciNSC1, SimSciNSC2, SimSciNSC3, SimSciNSC4, SimSciNSC5, SimSciNSC6, SimSciNSC7, SimSciNSC8, SimSciNSC9, SimSciNSC10]
         SimicSciNonSimicCon = random.choice(SimSciNSC)        
-        player.additionalinfo.append(f"As a Simic researcher, you are part of a clade — a diverse group of individuals combining disparate talents in pursuit of a common goal—or a researcher on a specialized, short-term project focused on addressing an immediate need.\nYour Simic Project: {SimisSciProject}")
+        player.adtlinfonotes["Simic Researcher Clade"] = f"As a Simic researcher, you are part of a clade — a diverse group of individuals combining disparate talents in pursuit of a common goal—or a researcher on a specialized, short-term project focused on addressing an immediate need.\nYour Simic Project: {SimisSciProject}"
         player.alliesorg.append(f"Your Simic Guild Contact Ally: {SimicSciConAlly}")
         player.alliesorg.append(f"Your Simic Guild Contact Rival: {SimicSciConRival}")
         player.alliesorg.append(f"Your Non-Guild Contact: {SimicSciNonSimicCon}")        
-        player.additionalinfo.append("Feature: Researcher (see notes)")
-        player.notes.append("Feature: Researcher - When you attempt to learn or recall a magical or scientific fact, if you don't know that information, you know where and from whom you can obtain it. Usually, this information comes from a Simic laboratory, or sometimes from an Izzet facility, a library, a university, or an independent scholar or other learned person or creature. Knowing where the information can be found doesn't automatically enable you to learn it; you might need to offer bribes, favors, or other incentives to induce people to reveal their secrets.\nYour DM might rule that the knowledge you seek is secreted away in an inaccessible place, or that it simply can't be found. Unearthing the deepest secrets of the multiverse can require an adventure or even a whole campaign.")
-        player.additionalinfo.append("Simic Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Simic Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Acid Splash, Druidcraft\n1st: Detect Poison and Disease, Expeditious Retreat, Jump\n2nd: Alter Self, Enhance Ability, Enlarge/Reduce\n3rd: Gaseous Form, Water Breathing, Wind Wall\n4th: Freedom of Movement, Polymorph\n5th: Creation\nWhen your magic causes physical alterations in yourself or others, the result often displays the characteristics of fish, amphibians, or other water-dwelling creatures. Blue-green eddies of magical energy sometimes accompany your spellcasting, forming spirals that reflect the mathematical perfection of nature.")
+        player.adtlinfonotes["Feature: Researcher"] = "When you attempt to learn or recall a magical or scientific fact, if you don't know that information, you know where and from whom you can obtain it. Usually, this information comes from a Simic laboratory, or sometimes from an Izzet facility, a library, a university, or an independent scholar or other learned person or creature. Knowing where the information can be found doesn't automatically enable you to learn it; you might need to offer bribes, favors, or other incentives to induce people to reveal their secrets.\nYour DM might rule that the knowledge you seek is secreted away in an inaccessible place, or that it simply can't be found. Unearthing the deepest secrets of the multiverse can require an adventure or even a whole campaign."
+        player.alliesorg.append("Simic Guild Spells\nPrerequisite: Spellcasting or Pact Magic class feature\nFor you, the spells on the Simic Guild Spells table are added to the spell list of your spellcasting class.\nCantrip: Acid Splash, Druidcraft\n1st: Detect Poison and Disease, Expeditious Retreat, Jump\n2nd: Alter Self, Enhance Ability, Enlarge/Reduce\n3rd: Gaseous Form, Water Breathing, Wind Wall\n4th: Freedom of Movement, Polymorph\n5th: Creation\nWhen your magic causes physical alterations in yourself or others, the result often displays the characteristics of fish, amphibians, or other water-dwelling creatures. Blue-green eddies of magical energy sometimes accompany your spellcasting, forming spirals that reflect the mathematical perfection of nature.")
     if player.background == "Smuggler":
         SmuAcc1 = "Spirit of the Whale. You smuggled stolen dwarven spirits in the body of a dead whale being pulled behind a fishing boat. When you delivered the goods, the corpse suddenly exploded, sending whale meat and whiskey bottles for half a mile."
         SmuAcc2 = "Cart and Sword. You drove a cart filled with stolen art through the middle of a battlefield while singing sea shanties to confuse the combatants."
@@ -1891,18 +1697,14 @@ def summation(param, player):
         SmuAcc6 = "Playing Both Sides. You once smuggled crates of crossbow bolts and bundles of arrows, each destined for an opposing side in a regional war, at the same time. The buyers arrived within moments of each other but did not discover your trickery."
         SmuAcc = [SmuAcc1, SmuAcc2, SmuAcc3, SmuAcc4, SmuAcc5, SmuAcc6]
         SmugglerAccomplishment = random.choice(SmuAcc)
-        player.additionalinfo.append(f"Claim To Fame - Every smuggler has that one tale that sets them apart from common criminals. By wits, sailing skill, or a silver tongue, you lived co tell the story- and you tell it often.\nYour Accomplishment: {SmugglerAccomplishment}")
-        player.additionalinfo.append("Feature: Down Low (see notes)")
-        player.notes.append("Feature: Down Low - You are acquainted with a network of smugglers who are willing to help you out of tight situations. White in a particular town, city. or other similarly sized community (DM's discretion). You and your companions can stay for free in safe houses. Safe houses provide a poor lifestyle. While staying at a safe house, you can choose to keep your presence (and that of your companions) a secret.")
+        player.adtlinfonotes["Claim To Fame"] = f"Every smuggler has that one tale that sets them apart from common criminals. By wits, sailing skill, or a silver tongue, you lived co tell the story- and you tell it often.\nYour Accomplishment: {SmugglerAccomplishment}"
+        player.adtlinfonotes["Feature: Down Low"] = "You are acquainted with a network of smugglers who are willing to help you out of tight situations. White in a particular town, city. or other similarly sized community (DM's discretion). You and your companions can stay for free in safe houses. Safe houses provide a poor lifestyle. While staying at a safe house, you can choose to keep your presence (and that of your companions) a secret."
     if player.background == "Mercenary Veteran":
-        player.additionalinfo.append("Feature: Mercenaries of the North (see notes)")
-        player.notes.append("Feature: Mercenaries of the North - Countless mercenary companies operate up and down the Sword Coast and throughout the North. Most are small-scale operations that employ a dozen to a hundred folk who offer security services, hunt monsters and brigands, or go to war in exchange for gold. Some organizations, such as the Zhentarim, Flaming Fist, and the nation of Mintarn have hundreds or thousands of members and can provide private armies to those with enough funds. A few organizations operating in the North are described below.\nThe Chill. The cold and mysterious Lurkwood serves as the home of numerous groups of goblinoids that have banded together into one tribe called the Chill. Unlike most of their kind, the Chill refrain s from raiding the people of the North and maintains relatively good relations so that they can hire them selves out as warriors. Few city-states in the North are willing to field an army alongside the Chill, but several are happy to quietly pay the Chill to battle the Uthgardt, ores, trolls of the Evermoors, and other threats to civilization.\nSilent Rain. Consisting solely of elves, Silent Rain is a legendary mercenary company operating out of Evereska. Caring little for gold or fame, Silent Rain agrees only to jobs that either promote elven causes or involve destroying ores, gnolls, and the like. Prospective employers must leave written word (in Elvish) near Evereska, and the Silent Rain sends a representative if interested.\nThe Bloodaxes. Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races , but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes.")
-        player.additionalinfo.append("Feature: Mercenary Life (see notes)")
-        player.notes.append("Feature: Mercenary Life - You know the mercenary life as only someone who has experienced it can. You are able to identify mercenary companies by their emblems, and you know a little about any such company, including the names and reputations of its commanders and leaders, and who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language. You can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.")
+        player.adtlinfonotes["Feature: Mercenaries of the North"] = "Countless mercenary companies operate up and down the Sword Coast and throughout the North. Most are small-scale operations that employ a dozen to a hundred folk who offer security services, hunt monsters and brigands, or go to war in exchange for gold. Some organizations, such as the Zhentarim, Flaming Fist, and the nation of Mintarn have hundreds or thousands of members and can provide private armies to those with enough funds. A few organizations operating in the North are described below.\nThe Chill. The cold and mysterious Lurkwood serves as the home of numerous groups of goblinoids that have banded together into one tribe called the Chill. Unlike most of their kind, the Chill refrain s from raiding the people of the North and maintains relatively good relations so that they can hire them selves out as warriors. Few city-states in the North are willing to field an army alongside the Chill, but several are happy to quietly pay the Chill to battle the Uthgardt, ores, trolls of the Evermoors, and other threats to civilization.\nSilent Rain. Consisting solely of elves, Silent Rain is a legendary mercenary company operating out of Evereska. Caring little for gold or fame, Silent Rain agrees only to jobs that either promote elven causes or involve destroying ores, gnolls, and the like. Prospective employers must leave written word (in Elvish) near Evereska, and the Silent Rain sends a representative if interested.\nThe Bloodaxes. Founded in Sundabar nearly two centuries ago, the Bloodaxes were originally a group of dwarves outcast from their clans for crimes against the teachings of Moradin Soulforger. They began hiring out as mercenaries to whoever in the North would pay them. Since then the mercenary company has broadened its membership to other races , but every member is an exile, criminal, or misfit of some sort looking for a fresh start and a new family among the bold Bloodaxes."
+        player.adtlinfonotes["Feature: Mercenary Life"] = "You know the mercenary life as only someone who has experienced it can. You are able to identify mercenary companies by their emblems, and you know a little about any such company, including the names and reputations of its commanders and leaders, and who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language. You can find mercenary work between adventures sufficient to maintain a comfortable lifestyle."
     if player.background == "Knight of the Order":
-        player.additionalinfo.append("Feature: Knightly Orders of Faerun (see notes)")
-        player.notes.append("Feature: Knightly Orders of Faerun - Many who rightfully call themselves 'knight' earn that title as part of an order in service to a deity, such as Kelemvor's Eternal Order or Mystra's Knights of the Mystic Fire. Other knightly orders serve a government, royal family, or are the elite military of a feudal state, such as the brutal Warlock Knights of Vaasa. Other knighthoods are secular and non-governmental organizations of warriors who follow a particular philosophy, or consider themselves a kind of extended family, similar to an order of monks. Although there are organizations, such as the Knights of the Shield, that use the trappings of knighthood without necessarily being warriors, most folk of Faerûn who hear the word 'knight' think of a mounted warrior in armor beholden to a code. Below are a few knightly organizations.\nKnights of the Unicorn. The Knights of the Unicorn began as a fad of romantically minded sons and daughters of patriar families in Baldur's Gate. On a lark, they took the unicorn goddess Lurue as their mascot and went on various adventures for fun. The reality of the dangers they faced eventually sank in, as did Lurue's tenets. Over time the small group grew and spread, gaining a following in places as far as Cormyr. The Knights of the Unicorn are chivalric adventurers who follow romantic ideals: life is to be relished and lived with laughter, quests should be taken on a dare, impossible dreams should be pursued for the sheer wonder of their completion, and everyone should be praised for their strengths and comforted in their weaknesses.\nKnights of Myth Drannor. Long ago, the Knights of Myth Drannor were a famous adventuring band, and Dove Falconhand, one of the famous Seven Sisters, was one of them. The band took its name to honor the great but fallen city, just as the new Knights of Myth Drannor do today. With the city once again in ruins, Dove Falconhand decided to reform the group with the primary goal of building alliances and friendship between the civilized races of the world and goodly people in order to combat evil. The Knights of Myth Drannor once again ride the roads of the Dalelands, and they've begun to spread to the lands beyond. Their members, each accepted by Dove herself, are above all valiant and honest.\nKnights of the Silver Chalice. The Knights of the Silver Chalice was formed by edict of the demigod Siamorphe in Waterdeep a century ago. Siamorphe's ethos is the nobility's right and responsibility to rule, and the demigod is incarnated as a different noble mortal in each generation. By the decree of the Siamorphe at that time, the Knights of the Silver Chalice took it upon themselves to put a proper heir on the throne of Tethyr and reestablish order in that kingdom. Since then they have grown to be the most popular knighthood in Tethyr, a nation that has hosted many knighthoods in fealty to the crown.")
-        player.additionalinfo.append("Feature: Knightly Regard - You receive shelter and succor from members of your knightly order and those who are sympathetic to its aims. If your order is a religious one, you can gain aid from temples and other religious communities of your deity. Knights of civic orders can get help from the community – whether a lone settlement or a great nation that they serve, and knights of philosophical orders can find help from those they have aided in pursuit of their ideals, and those who share those ideals.\nThis help comes in the form of shelter and meals, and healing when appropriate, as well as occasionally risky assistance, such as a band of local citizens rallying to aid a sorely pressed knight in a fight, or those who support the order helping to smuggle a knight out of town when he or she is being hunted unjustly.")
+        player.adtlinfonotes["Feature: Knightly Orders of Faerun"] = "Many who rightfully call themselves 'knight' earn that title as part of an order in service to a deity, such as Kelemvor's Eternal Order or Mystra's Knights of the Mystic Fire. Other knightly orders serve a government, royal family, or are the elite military of a feudal state, such as the brutal Warlock Knights of Vaasa. Other knighthoods are secular and non-governmental organizations of warriors who follow a particular philosophy, or consider themselves a kind of extended family, similar to an order of monks. Although there are organizations, such as the Knights of the Shield, that use the trappings of knighthood without necessarily being warriors, most folk of Faerûn who hear the word 'knight' think of a mounted warrior in armor beholden to a code. Below are a few knightly organizations.\nKnights of the Unicorn. The Knights of the Unicorn began as a fad of romantically minded sons and daughters of patriar families in Baldur's Gate. On a lark, they took the unicorn goddess Lurue as their mascot and went on various adventures for fun. The reality of the dangers they faced eventually sank in, as did Lurue's tenets. Over time the small group grew and spread, gaining a following in places as far as Cormyr. The Knights of the Unicorn are chivalric adventurers who follow romantic ideals: life is to be relished and lived with laughter, quests should be taken on a dare, impossible dreams should be pursued for the sheer wonder of their completion, and everyone should be praised for their strengths and comforted in their weaknesses.\nKnights of Myth Drannor. Long ago, the Knights of Myth Drannor were a famous adventuring band, and Dove Falconhand, one of the famous Seven Sisters, was one of them. The band took its name to honor the great but fallen city, just as the new Knights of Myth Drannor do today. With the city once again in ruins, Dove Falconhand decided to reform the group with the primary goal of building alliances and friendship between the civilized races of the world and goodly people in order to combat evil. The Knights of Myth Drannor once again ride the roads of the Dalelands, and they've begun to spread to the lands beyond. Their members, each accepted by Dove herself, are above all valiant and honest.\nKnights of the Silver Chalice. The Knights of the Silver Chalice was formed by edict of the demigod Siamorphe in Waterdeep a century ago. Siamorphe's ethos is the nobility's right and responsibility to rule, and the demigod is incarnated as a different noble mortal in each generation. By the decree of the Siamorphe at that time, the Knights of the Silver Chalice took it upon themselves to put a proper heir on the throne of Tethyr and reestablish order in that kingdom. Since then they have grown to be the most popular knighthood in Tethyr, a nation that has hosted many knighthoods in fealty to the crown."
+        player.adtlinfonotes["Feature: Knightly Regard"] = "You receive shelter and succor from members of your knightly order and those who are sympathetic to its aims. If your order is a religious one, you can gain aid from temples and other religious communities of your deity. Knights of civic orders can get help from the community – whether a lone settlement or a great nation that they serve, and knights of philosophical orders can find help from those they have aided in pursuit of their ideals, and those who share those ideals.\nThis help comes in the form of shelter and meals, and healing when appropriate, as well as occasionally risky assistance, such as a band of local citizens rallying to aid a sorely pressed knight in a fight, or those who support the order helping to smuggle a knight out of town when he or she is being hunted unjustly."
     if player.background == "Soldier":
         S1 = "Officer"
         S2 = "Scout"
@@ -1914,12 +1716,10 @@ def summation(param, player):
         S8 = "Support staff (cook, blacksmith, or the like)"
         SPE = [S1, S2, S3, S4, S5, S6, S7, S8]
         Specialty = random.choice(SPE)
-        player.additionalinfo.append(f"Feature: Specialty - During your time as a soldier, you had a specific role to play in your unit or arm.\nThat specialty being: {Specialty}")
-        player.additionalinfo.append("Feature: Military Rank (see notes)")
-        player.notes.append("Feature: Military Rank - You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You can also usually gain access to friendly military encampments and fortresses where your rank is recognized.")
+        player.adtlinfonotes["Feature: Specialty"] = f"During your time as a soldier, you had a specific role to play in your unit or arm.\nThat specialty being: {Specialty}"
+        player.adtlinfonotes["Feature: Military Rank"] = "You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You can also usually gain access to friendly military encampments and fortresses where your rank is recognized."
     if player.background == "Urchin":
-        player.additionalinfo.append("Feature: City Secrets (see notes)")
-        player.notes.append("Feature: City Secrets - You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.")
+        player.adtlinfonotes["Feature: City Secrets"] = "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow."
     if player.background == "Volstrucker Agent":
         VolsAgTrag1 = "Familicide. Through deceit or manipulation, the Volstrucker convinced you to slaughter your own family."
         VolsAgTrag2 = "Amnesia. You were forced to study magic so potent that it strained your mind beyond mortal limits, stealing away the memories of your past."
@@ -1929,12 +1729,10 @@ def summation(param, player):
         VolsAgTrag6 = "Vicissitude. You were once the scion of a wealthy family who lost their entire fortune in the blink of an eye."
         VolsAgTrag = [VolsAgTrag1, VolsAgTrag2, VolsAgTrag3, VolsAgTrag4, VolsAgTrag5, VolsAgTrag6]
         VolstruckerAgentTragedy = random.choice(VolsAgTrag)
-        player.additionalinfo.append(f"Tragedy - Happy people aren't selected to join the Volstrucker. The Cerberus Assembly preys upon talented individuals who have been broken by tragedy-in some cases, tragedy that the Volstrucker has arranged for. A slightly broken mind is more easily reshaped and reeducated.\nYour Tragedy: {VolstruckerAgentTragedy}")
-        player.additionalinfo.append("Feature: Shadow Network (see notes)")
-        player.notes.append("Feature: Shadow Network - You have access to the Volstrucker shadow network, which allows you to communicate with other members of the order over long distances. If you write a letter in a special arcane ink, address it to a member of the Volstrucker, and cast it into a fire, the letter will burn to cinders and materialize whole again on the person of the agent you addressed it to.\nThe ink used to send a letter across the shadow network is the same as that used by a wizard to scribe spells in a spellbook. Writing a letter in this ink costs 10 gp per page.")
+        player.adtlinfonotes["Tragedy"] = f"Happy people aren't selected to join the Volstrucker. The Cerberus Assembly preys upon talented individuals who have been broken by tragedy-in some cases, tragedy that the Volstrucker has arranged for. A slightly broken mind is more easily reshaped and reeducated.\nYour Tragedy: {VolstruckerAgentTragedy}"
+        player.adtlinfonotes["Feature: Shadow Network"] = "You have access to the Volstrucker shadow network, which allows you to communicate with other members of the order over long distances. If you write a letter in a special arcane ink, address it to a member of the Volstrucker, and cast it into a fire, the letter will burn to cinders and materialize whole again on the person of the agent you addressed it to.\nThe ink used to send a letter across the shadow network is the same as that used by a wizard to scribe spells in a spellbook. Writing a letter in this ink costs 10 gp per page."
     if player.background == "Waterdhavian Noble":
-        player.additionalinfo.append("Feature: Kept in Style (see notes)")
-        player.notes.append("Feature: Kept in Style - While you are in Waterdeep or elsewhere in the North your house sees to your everyday needs. Your name a~d signet are sufficient to cover most of your expenses; the inns, taverns, and festhalls you frequent are glad to record your debt and send an accounting to your family's estate in Waterdeep to settle what you owe.\nThis advantage enables you to live a comfortable lifestyle without having to pay 2 gp a day for it, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. You may not maintain a less affluent lifestyle and use the difference as income – the benefit is a line of credit, not an actual monetary reward.")
+        player.adtlinfonotes["Feature: Kept in Style"] = "While you are in Waterdeep or elsewhere in the North your house sees to your everyday needs. Your name a~d signet are sufficient to cover most of your expenses; the inns, taverns, and festhalls you frequent are glad to record your debt and send an accounting to your family's estate in Waterdeep to settle what you owe.\nThis advantage enables you to live a comfortable lifestyle without having to pay 2 gp a day for it, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. You may not maintain a less affluent lifestyle and use the difference as income – the benefit is a line of credit, not an actual monetary reward."
     if player.background == "Wildspacer":
         WildSpClE1 = "Beholder"
         WildSpClE2 = "Cosmic Horror"
@@ -1948,8 +1746,8 @@ def summation(param, player):
         WildSpClE10 = "Void Scavver"
         WildSpClE = [WildSpClE1, WildSpClE2, WildSpClE3, WildSpClE4, WildSpClE5, WildSpClE6, WildSpClE7, WildSpClE8, WildSpClE9, WildSpClE10]
         WildSpacerCloseEnc = random.choice(WildSpClE)
-        player.additionalinfo.append(f"Close Encounter - You had a harrowing encounter with one of Wildspace's many terrors. You escaped with your life, but the encounter left you with a scar or two, or perhaps a recurring nightmare.\nYour Close Encounter: {WildSpacerCloseEnc}")
-        player.additionalinfo.append("Feature: Wildspace Adaptation - You gain the Tough feat from the Player's Handbook. In addition, you learned how to adapt to zero gravity. Being weightless doesn't give you disadvantage on any of your melee attack rolls (see 'Weightlessness' in chapter 2).")
+        player.adtlinfonotes["Close Encounter"] = f"You had a harrowing encounter with one of Wildspace's many terrors. You escaped with your life, but the encounter left you with a scar or two, or perhaps a recurring nightmare.\nYour Close Encounter: {WildSpacerCloseEnc}"
+        player.adtlinfonotes["Feature: Wildspace Adaptation"] = "You gain the Tough feat from the Player's Handbook. In addition, you learned how to adapt to zero gravity. Being weightless doesn't give you disadvantage on any of your melee attack rolls (see 'Weightlessness' in chapter 2)."
     if player.background == "Wind-Touched":
         WiToAccep1 = "I am truly blessed and have power over the wind itself."
         WiToAccep2 = "I am devoted to the wind spirits, in action and title."
@@ -1959,9 +1757,8 @@ def summation(param, player):
         WiToAccep6 = "I feel nothing for this title, and carry it against my will."
         WiToAccep = [WiToAccep1, WiToAccep2, WiToAccep3, WiToAccep4, WiToAccep5, WiToAccep6]
         WindTouchedAcceptance = random.choice(WiToAccep)    
-        player.additionalinfo.append(f"Title and Blessing - For some birdfolk, the moniker of Wind-Touched is merely a title, a symbol of their devotion to the wind and the natural world. Others have been told since birth that they were blessed by the wind, much in the way the Amaranthine Reya was in the old tales.\nYour Acceptance: {WindTouchedAcceptance}")
-        player.additionalinfo.append("Feature: Supernatural Presence (see notes)")
-        player.notes.append("Feature: Supernatural Presence - Whether or not you are truly Wind-Touched, there are folk all across Everden that believe that you have been divinely blessed. If you make a show of power or skill that can be attributed to the wind or air, such as feats of acrobatics or commanding unseen forces, those believers will be bolstered by your supernatural presence. They will support you and, depending on how well you have convinced them of your powers, treat you with reverence and possibly even worship.")
+        player.adtlinfonotes["Title and Blessing"] = f"For some birdfolk, the moniker of Wind-Touched is merely a title, a symbol of their devotion to the wind and the natural world. Others have been told since birth that they were blessed by the wind, much in the way the Amaranthine Reya was in the old tales.\nYour Acceptance: {WindTouchedAcceptance}"
+        player.adtlinfonotes["Feature: Supernatural Presence"] = "Whether or not you are truly Wind-Touched, there are folk all across Everden that believe that you have been divinely blessed. If you make a show of power or skill that can be attributed to the wind or air, such as feats of acrobatics or commanding unseen forces, those believers will be bolstered by your supernatural presence. They will support you and, depending on how well you have convinced them of your powers, treat you with reverence and possibly even worship."
     if player.background == "Witchlight Hand":
         WitHCC1 = "Old, cantankerous Witchlight hand"
         WitHCC2 = "Young, impressionable Witchlight hand"
@@ -1973,9 +1770,8 @@ def summation(param, player):
         WitHCC8 = "Harmless, magical wisp of light (no stat block required) that has a flying speed of 30 feet, can hover, and sheds bright light in a 5-foot radius and dim light for an additional 5 feet"
         WitHCC = [WitHCC1, WitHCC2, WitHCC3, WitHCC4, WitHCC5, WitHCC6, WitHCC7, WitHCC8]
         WitchlHandCreatComp = random.choice(WitHCC)
-        player.additionalinfo.append("Feature: Carnival Fixture (see notes)")
-        player.notes.append("Feature: Carnival Fixture - The Witchlight Carnival provides you with free, modest lodging and food. In addition, you may wander about the carnival and partake of its many wonders at no cost to you, provided you don't disrupt its shows or cause any other trouble.")
-        player.additionalinfo.append(f"Carnival Companion - Over the years, you have earned the friendship of another carnival fixture.\nYour Creature Companion: {WitchlHandCreatComp}, please use the Witchlight Hand stat block in Ch.1 of 'The Wild Beyond the Witchlight' for stats.")
+        player.adtlinfonotes["Feature: Carnival Fixture"] = "The Witchlight Carnival provides you with free, modest lodging and food. In addition, you may wander about the carnival and partake of its many wonders at no cost to you, provided you don't disrupt its shows or cause any other trouble."
+        player.adtlinfonotes["Carnival Companion"] = f"Over the years, you have earned the friendship of another carnival fixture.\nYour Creature Companion: {WitchlHandCreatComp}, please use the Witchlight Hand stat block in Ch.1 of 'The Wild Beyond the Witchlight' for stats."
     if player.background == "Witherbloom Student":    
         WitStuPT1 = "I love brewing up a new recipe, even if some might be repulsed by my choice of ingredients. Or the final product. Or both."
         WitStuPT2 = "My fashion sense is like my garden: withered, black, and weird."
@@ -1994,13 +1790,13 @@ def summation(param, player):
         WitStuTr = [WitStuTr1, WitStuTr2, WitStuTr3, WitStuTr4, WitStuTr5, WitStuTr6]
         WitherbloomStudentTrinket = random.choice(WitStuTr)
         player.equipment.append(WitherbloomStudentTrinket)
-        player.additionalinfo.append("Feature: Witherbloom Initiate - You gain the Strixhaven Initiate feat and must choose Witherbloom within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Witherbloom Spells table are added to the spell list of your spellcasting class.\n1st: Cure Wounds, Inflict Wounds\n2nd: Lesser Restoration, Wither and Bloom\n3rd: Revivify, Vampiric Touch\n4th: Blight, Death Ward\n5th: Antilife Shell, Greater Restoration\nConsider customizing how your spells look when you cast them. Your Witherbloom spells might rely on material components or a spellcasting focus drawn from the swamp environment of Witherbloom, and your spells might take on an appearance suggesting those natural elements. Spectral shapes of swamp animals or plants might form amid your spell effects.")
+        player.adtlinfonotes["Feature: Witherbloom Initiate"] = "You gain the Strixhaven Initiate feat and must choose Witherbloom within it.\nIn addition, if you have the Spellcasting or Pact Magic feature, the spells on the Witherbloom Spells table are added to the spell list of your spellcasting class.\n1st: Cure Wounds, Inflict Wounds\n2nd: Lesser Restoration, Wither and Bloom\n3rd: Revivify, Vampiric Touch\n4th: Blight, Death Ward\n5th: Antilife Shell, Greater Restoration\nConsider customizing how your spells look when you cast them. Your Witherbloom spells might rely on material components or a spellcasting focus drawn from the swamp environment of Witherbloom, and your spells might take on an appearance suggesting those natural elements. Spectral shapes of swamp animals or plants might form amid your spell effects."
 ########################################################################################################
 ### Printing section ###
     if player.background == "Ashari":
-        player.otherbackgroundinfo.append("As an Ashari, you also know a language specifically based on your tribe's elemental affinity.")
+        player.adtlinfonotes["Ashari Language"] = "As an Ashari, you also know a language specifically based on your tribe's elemental affinity."
     if player.hollowone == "Hollow One":
-        player.racenotes.append("You are a Hollow One, or a zombie, in addition to your race, meaning you have a few extra traits.")    
+        player.notes["Hollow One"] = "You are a Hollow One, or a zombie, in addition to your race, meaning you have a few extra traits."
 
     AA = "A mummified goblin hand"
     AB = "A piece of crystal that faintly glows in the moonlight"

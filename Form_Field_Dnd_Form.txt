@@ -1,0 +1,416 @@
+--- Fields on Page 1 ---
+Field Name: CharacterName 2, Value: 
+Field Name: Age, Value: 
+Field Name: Height, Value: 
+Field Name: Weight, Value: 
+Field Name: Eyes, Value: 
+Field Name: Skin, Value: 
+Field Name: Hair, Value: 
+Field Name: Allies, Value: 
+Field Name: FactionName, Value: 
+Field Name: Backstory, Value: 
+Field Name: Feat+Traits, Value:
+Field Name: Treasure, Value:
+Field Name: CHARACTER IMAGE, Value: None
+Field Name: Faction Symbol Image, Value: None
+Field Name: ClassLevel, Value: None
+Field Name: Background, Value: None
+Field Name: PlayerName, Value: None
+Field Name: CharacterName, Value: None
+Field Name: Race , Value: None
+Field Name: Alignment, Value: None
+Field Name: XP, Value: None
+Field Name: Inspiration, Value: None
+Field Name: STR, Value: None
+Field Name: ProfBonus, Value: None
+Field Name: AC, Value: None
+Field Name: Initiative, Value: None
+Field Name: Speed, Value: None
+Field Name: PersonalityTraits , Value: None
+Field Name: STRmod, Value: None
+Field Name: HPMax, Value: None
+Field Name: ST Strength, Value: None
+Field Name: DEX, Value: None
+Field Name: HPCurrent, Value: None
+Field Name: Ideals, Value: None
+Field Name: DEXmod , Value: None
+Field Name: HPTemp, Value: None
+Field Name: Bonds, Value: None
+Field Name: CON, Value: None
+Field Name: HDTotal, Value: None
+Field Name: Check Box 12, Value: None [Deathsave Success 1]
+Field Name: Check Box 13, Value: None [Deathsave Success 2]
+Field Name: Check Box 14, Value: None [Deathsave Success 3]
+Field Name: CONmod, Value: None
+Field Name: Check Box 15, Value: None [Deathsave Fail 1]
+Field Name: Check Box 16, Value: None [Deathsave Fail 2]
+Field Name: Check Box 17, Value: None [Deathsave Fail 3]
+Field Name: HD, Value: None
+Field Name: Flaws, Value: None
+Field Name: INT, Value: None
+Field Name: ST Dexterity, Value: None
+Field Name: ST Constitution, Value: None
+Field Name: ST Intelligence, Value: None
+Field Name: ST Wisdom, Value: None
+Field Name: ST Charisma, Value: None
+Field Name: Acrobatics, Value: None
+Field Name: Animal, Value: None
+Field Name: Athletics, Value: None
+Field Name: Deception , Value: None
+Field Name: History , Value: None
+Field Name: Insight, Value: None
+Field Name: Intimidation, Value: None
+Field Name: Check Box 11, Value: None [Str ST Checkbox]
+Field Name: Check Box 18, Value: None [Dex ST Checkbox]
+Field Name: Check Box 19, Value: None [Con ST Checkbox]
+Field Name: Check Box 20, Value: None [Int ST Checkbox]
+Field Name: Check Box 21, Value: None [Wis ST Checkbox]
+Field Name: Check Box 22, Value: None [Cha ST Checkbox]
+Field Name: Wpn Name, Value: None
+Field Name: Wpn1 AtkBonus, Value: None
+Field Name: Wpn1 Damage, Value: None
+Field Name: INTmod, Value: None
+Field Name: Wpn Name 2, Value: None
+Field Name: Wpn2 AtkBonus , Value: None
+Field Name: Wpn2 Damage , Value: None
+Field Name: Investigation , Value: None
+Field Name: WIS, Value: None
+Field Name: Wpn Name 3, Value: None
+Field Name: Wpn3 AtkBonus  , Value: None
+Field Name: Arcana, Value: None
+Field Name: Wpn3 Damage , Value: None
+Field Name: Perception , Value: None
+Field Name: WISmod, Value: None
+Field Name: CHA, Value: None
+Field Name: Nature, Value: None
+Field Name: Performance, Value: None
+Field Name: Medicine, Value: None
+Field Name: Religion, Value: None
+Field Name: Stealth , Value: None
+Field Name: Check Box 23, Value: None [Acro Checkbox]
+Field Name: Check Box 24, Value: None [AnHa Checkbox]
+Field Name: Check Box 25, Value: None [Arcana Checkbox]
+Field Name: Check Box 26, Value: None [Athletics Checkbox]
+Field Name: Check Box 27, Value: None [Deception Checkbox]
+Field Name: Check Box 28, Value: None [History Checkbox]
+Field Name: Check Box 29, Value: None [Insight Checkbox]
+Field Name: Check Box 30, Value: None [Intimidation Checkbox]
+Field Name: Check Box 31, Value: None [Investigation Checkbox]
+Field Name: Check Box 32, Value: None [Medicine Checkbox]
+Field Name: Check Box 33, Value: None [Nature Checkbox]
+Field Name: Check Box 34, Value: None [Perception Checkbox]
+Field Name: Check Box 35, Value: None [Performance Checkbox]
+Field Name: Check Box 36, Value: None [Persuasion Checkbox]
+Field Name: Check Box 37, Value: None [Religion Checkbox]
+Field Name: Check Box 38, Value: None [SlOHand Checkbox]
+Field Name: Check Box 39, Value: None [Stealth Checkbox]
+Field Name: Check Box 40, Value: None [Survival Checkbox]
+Field Name: Persuasion, Value: None
+Field Name: SleightofHand, Value: None
+Field Name: CHamod, Value: None
+Field Name: Survival, Value: None
+Field Name: AttacksSpellcasting, Value: None
+Field Name: Passive, Value: None
+Field Name: CP, Value: None
+Field Name: ProficienciesLang, Value: None
+Field Name: SP, Value: None
+Field Name: EP, Value: None
+Field Name: GP, Value: None
+Field Name: PP, Value: None
+Field Name: Equipment, Value: None
+Field Name: Features and Traits, Value: None
+Field Name: Spellcasting Class 2, Value:  [Spellcasting Class page 3]
+Field Name: SpellcastingAbility 2, Value: [Spellcasting Ability page 3]
+Field Name: SpellSaveDC  2, Value: [Spellsave DC page 3]
+Field Name: SpellAtkBonus 2, Value: [Spell Atk Bonus page 3]
+Field Name: SlotsTotal 19, Value: [Slots Lvl 1]
+Field Name: SlotsRemaining 19, Value: [Slots Remaining lvl 1]
+Field Name: Spells 1014, Value: [Cantrip Slot 1]
+Field Name: Spells 1015, Value: [Spell lvl 1, Slot 1]
+Field Name: Spells 1016, Value: [Cantrip Slot 2]
+Field Name: Spells 1017, Value: [Cantrip Slot 3]
+Field Name: Spells 1018, Value: [Cantrip Slot 4]
+Field Name: Spells 1019, Value: [Cantrip Slot 5]
+Field Name: Spells 1020, Value: [Cantrip Slot 6]
+Field Name: Spells 1021, Value: [Cantrip Slot 7]
+Field Name: Spells 1022, Value: [Cantrip Slot 8]
+Field Name: Check Box 314, Value: /Off [Spell lvl 3, checkbox 2]
+Field Name: Check Box 3031, Value: /Off [Spell lvl 3, checkbox 3]
+Field Name: Check Box 3032, Value: /Off [Spell lvl 3, checkbox 4]
+Field Name: Check Box 3033, Value: /Off [Spell lvl 3, checkbox 5]
+Field Name: Check Box 3034, Value: /Off [Spell lvl 3, checkbox 6]
+Field Name: Check Box 3035, Value: /Off [Spell lvl 3, checkbox 7]
+Field Name: Check Box 3036, Value: /Off [Spell lvl 3, checkbox 8]
+Field Name: Check Box 3037, Value: /Off [Spell lvl 3, checkbox 9]
+Field Name: Check Box 3038, Value: /Off [Spell lvl 3, checkbox 10]
+Field Name: Check Box 3039, Value: /Off [Spell lvl 3, checkbox 11]
+Field Name: Check Box 3040, Value: None [Spell lvl 3, checkbox 12]
+Field Name: Check Box 321, Value: None [Spell lvl 6, checkbox 1]
+Field Name: Check Box 320, Value: None [Spell lvl 6, checkbox 2]
+Field Name: Check Box 3060, Value: None [Spell lvl 6, checkbox 3]
+Field Name: Check Box 3061, Value: None [Spell lvl 6, checkbox 4]
+Field Name: Check Box 3062, Value: None [Spell lvl 6, checkbox 5]
+Field Name: Check Box 3063, Value: None [Spell lvl 6, checkbox 6]
+Field Name: Check Box 3064, Value: None [Spell lvl 6, checkbox 7]
+Field Name: Check Box 3065, Value: None [Spell lvl 6, checkbox 8]
+Field Name: Check Box 3066, Value: None [Spell lvl 6, checkbox 9]
+Field Name: Check Box 315, Value: None [Spell lvl 3, checkbox 1]
+Field Name: Check Box 3041, Value: /Off [Spell lvl 3 checkbox 13]
+Field Name: Spells 1023, Value: [Spell lvl 1, Slot 2]
+Field Name: Check Box 251, Value: None [Spell lvl 1, checkbox 1]
+Field Name: Check Box 309, Value: None [Spell lvl 1, checkbox 2]
+Field Name: Check Box 3010, Value: None [Spell lvl 1, checkbox 3]
+Field Name: Check Box 3011, Value: /Off [Spell lvl 1, checkbox 4]
+Field Name: Check Box 3012, Value: /Off [Spell lvl 1, checkbox 5]
+Field Name: Check Box 3013, Value: /Off [Spell lvl 1, checkbox 6]
+Field Name: Check Box 3014, Value: /Off [Spell lvl 1, checkbox 7]
+Field Name: Check Box 3015, Value: /Off [Spell lvl 1, checkbox 8]
+Field Name: Check Box 3016, Value: /Off [Spell lvl 1, checkbox 9]
+Field Name: Check Box 3017, Value: /Off [Spell lvl 1, checkbox 10]
+Field Name: Check Box 3018, Value: /Off [Spell lvl 1, checkbox 11]
+Field Name: Check Box 3019, Value: /Off [Spell lvl 1, checkbox 12]
+Field Name: Spells 1024, Value: [Spell lvl 1, Slot 3]
+Field Name: Spells 1025, Value: [Spell lvl 1, Slot 4]
+Field Name: Spells 1026, Value: [Spell lvl 1, Slot 5]
+Field Name: Spells 1027, Value: [Spell lvl 1, Slot 6]
+Field Name: Spells 1028, Value: [Spell lvl 1, Slot 7]
+Field Name: Spells 1029, Value: [Spell lvl 1, Slot 8]
+Field Name: Spells 1030, Value: [Spell lvl 1, Slot 9]
+Field Name: Spells 1031, Value: [Spell lvl 1, Slot 10]
+Field Name: Spells 1032, Value: [Spell lvl 1, Slot 11]
+Field Name: Spells 1033, Value: [Spell lvl 1, Slot 12]
+Field Name: SlotsTotal 20, Value: [Slots lvl 2]
+Field Name: SlotsRemaining 20, Value: [Slots Remaining lvl 2]
+Field Name: Spells 1034, Value: [Spell lvl 2, Slot 2]
+Field Name: Spells 1035, Value: [Spell lvl 2, Slot 3]
+Field Name: Spells 1036, Value: [Spell lvl 2, Slot 4]
+Field Name: Spells 1037, Value: [Spell lvl 2, Slot 5]
+Field Name: Spells 1038, Value: [Spell lvl 2, Slot 6]
+Field Name: Spells 1039, Value: [Spell lvl 2, Slot 7]
+Field Name: Spells 1040, Value: [Spell lvl 2, Slot 8]
+Field Name: Spells 1041, Value: [Spell lvl 2, Slot 9]
+Field Name: Spells 1042, Value: [Spell lvl 2, Slot 10]
+Field Name: Spells 1043, Value: [Spell lvl 2, Slot 11]
+Field Name: Spells 1044, Value: [Spell lvl 2, Slot 12]
+Field Name: Spells 1045, Value: [Spell lvl 2, Slot 13]
+Field Name: Spells 1046, Value: [Spell lvl 2, Slot 1]
+Field Name: SlotsTotal 21, Value: [Slots lvl 3]
+Field Name: SlotsRemaining 21, Value: [Slots Remaining lvl 3]
+Field Name: Spells 1047, Value: [Spell lvl 3, Slot 2]
+Field Name: Spells 1048, Value: [Spell lvl 3, Slot 1]
+Field Name: Spells 1049, Value: [Spell lvl 3, Slot 3]
+Field Name: Spells 1050, Value: [Spell lvl 3, Slot 4]
+Field Name: Spells 1051, Value: [Spell lvl 3, Slot 5]
+Field Name: Spells 1052, Value: [Spell lvl 3, Slot 6]
+Field Name: Spells 1053, Value: [Spell lvl 3, Slot 7]
+Field Name: Spells 1054, Value: [Spell lvl 3, Slot 8]
+Field Name: Spells 1055, Value: [Spell lvl 3, Slot 9]
+Field Name: Spells 1056, Value: [Spell lvl 3, Slot 10]
+Field Name: Spells 1057, Value: [Spell lvl 3, Slot 11]
+Field Name: Spells 1058, Value: [Spell lvl 3, Slot 12]
+Field Name: Spells 1059, Value: [Spell lvl 3, Slot 13]
+Field Name: SlotsTotal 22, Value: [Slots lvl 4]
+Field Name: SlotsRemaining 22, Value: [Slots Remaining lvl 4]
+Field Name: Spells 1060, Value: [Spell lvl 4, Slot 2]
+Field Name: Spells 1061, Value: [Spell lvl 4, Slot 1]
+Field Name: Spells 1062, Value: [Spell lvl 4, Slot 3]
+Field Name: Spells 1063, Value: [Spell lvl 4, Slot 4]
+Field Name: Spells 1064, Value: [Spell lvl 4, Slot 5]
+Field Name: Check Box 323, Value: /Off [Spell lvl 7, checkbox 1]
+Field Name: Check Box 322, Value: /Off [Spell lvl 7, checkbox 2]
+Field Name: Check Box 3067, Value: /Off [Spell lvl 7, checkbox 3]
+Field Name: Check Box 3068, Value: /Off [Spell lvl 7, checkbox 4]
+Field Name: Check Box 3069, Value: None [Spell lvl 7, checkbox 5]
+Field Name: Check Box 3070, Value: None [Spell lvl 7, checkbox 6]
+Field Name: Check Box 3071, Value: /Off [Spell lvl 7, checkbox 7]
+Field Name: Check Box 3072, Value: None [Spell lvl 7, checkbox 8]
+Field Name: Check Box 3073, Value: None [Spell lvl 7, checkbox 9]
+Field Name: Spells 1065, Value: [Spell lvl 4, Slot 6]
+Field Name: Spells 1066, Value: [Spell lvl 4, Slot 7]
+Field Name: Spells 1067, Value: [Spell lvl 4, Slot 8]
+Field Name: Spells 1068, Value: [Spell lvl 4, Slot 9]
+Field Name: Spells 1069, Value: [Spell lvl 4, Slot 10]
+Field Name: Spells 1070, Value: [Spell lvl 4, Slot 11]
+Field Name: Spells 1071, Value: [Spell lvl 4, Slot 12]
+Field Name: Check Box 317, Value: /Off [Spell lvl 4, checkbox 1]
+Field Name: Spells 1072, Value: [Spell lvl 4, Slot 13]
+Field Name: SlotsTotal 23, Value: [Slots lvl 5]
+Field Name: SlotsRemaining 23, Value: [Slots Remaining lvl 5]
+Field Name: Spells 1073, Value: [Spell lvl 5, Slot 2]
+Field Name: Spells 1074, Value: [Spell lvl 5, Slot 1]
+Field Name: Spells 1075, Value: [Spell lvl 5, Slot 3]
+Field Name: Spells 1076, Value: [Spell lvl 5, Slot 4]
+Field Name: Spells 1077, Value: [Spell lvl 5, Slot 5]
+Field Name: Spells 1078, Value: [Spell lvl 5, Slot 6]
+Field Name: Spells 1079, Value: [Spell lvl 5, Slot 7]
+Field Name: Spells 1080, Value: [Spell lvl 5, Slot 8]
+Field Name: Spells 1081, Value: [Spell lvl 5, Slot 9]
+Field Name: SlotsTotal 24, Value: None [Slots lvl 6]
+Field Name: SlotsRemaining 24, Value: [Slots Remaining lvl 6]
+Field Name: Spells 1082, Value: [Spell lvl 6, Slot 2]
+Field Name: Spells 1083, Value: [Spell lvl 6, Slot 1]
+Field Name: Spells 1084, Value: [Spell lvl 6, Slot 3]
+Field Name: Spells 1085, Value: [Spell lvl 6, Slot 4]
+Field Name: Spells 1086, Value: [Spell lvl 6, Slot 5]
+Field Name: Spells 1087, Value: [Spell lvl 6, Slot 6]
+Field Name: Spells 1088, Value: [Spell lvl 6, Slot 7]
+Field Name: Spells 1089, Value: [Spell lvl 6, Slot 8]
+Field Name: Spells 1090, Value: [Spell lvl 6, Slot 9]
+Field Name: SlotsTotal 25, Value: [Slots lvl 7]
+Field Name: SlotsRemaining 25, Value: [Slots Remaining lvl 7]
+Field Name: Spells 1091, Value: [Spell lvl 7, Slot 2]
+Field Name: Spells 1092, Value: [Spell lvl 7, Slot 1]
+Field Name: Spells 1093, Value: [Spell lvl 7, Slot 3]
+Field Name: Spells 1094, Value: [Spell lvl 7, Slot 4]
+Field Name: Spells 1095, Value: [Spell lvl 7, Slot 5]
+Field Name: Spells 1096, Value: [Spell lvl 7, Slot 6]
+Field Name: Spells 1097, Value: [Spell lvl 7, Slot 7]
+Field Name: Spells 1098, Value: [Spell lvl 7, Slot 8]
+Field Name: Spells 1099, Value: [Spell lvl 7, Slot 9]
+Field Name: SlotsTotal 26, Value: [Slots lvl 8]
+Field Name: SlotsRemaining 26, Value: [Slots Remaining lvl 8]
+Field Name: Spells 10100, Value: [Spell lvl 8, Slot 2]
+Field Name: Spells 10101, Value: [Spell lvl 8, Slot 1]
+Field Name: Spells 10102, Value: [Spell lvl 8, Slot 3]
+Field Name: Spells 10103, Value: [Spell lvl 8, Slot 4]
+Field Name: Check Box 316, Value: /Off [Spell lvl 4, checkbox 2]
+Field Name: Check Box 3042, Value: /Off [Spell lvl 4, checkbox 3]
+Field Name: Check Box 3043, Value: /Off [Spell lvl 4, checkbox 4]
+Field Name: Check Box 3044, Value: /Off [Spell lvl 4, checkbox 5]
+Field Name: Check Box 3045, Value: /Off [Spell lvl 4, checkbox 6]
+Field Name: Check Box 3046, Value: /Off [Spell lvl 4, checkbox 7]
+Field Name: Check Box 3047, Value: /Off [Spell lvl 4, checkbox 8]
+Field Name: Check Box 3048, Value: /Off [Spell lvl 4, checkbox 9]
+Field Name: Check Box 3049, Value: /Off [Spell lvl 4, checkbox 10]
+Field Name: Check Box 3050, Value: /Off [Spell lvl 4, checkbox 11]
+Field Name: Check Box 3051, Value: /Off [Spell lvl 4, checkbox 12]
+Field Name: Check Box 3052, Value: /Off [Spell lvl 4, checkbox 13]
+Field Name: Spells 10104, Value: [Spell lvl 8, Slot 5]
+Field Name: Check Box 325, Value: None [Spell lvl 8, checkbox 1]
+Field Name: Check Box 324, Value: /Off [Spell lvl 8, checkbox 2]
+Field Name: Check Box 3074, Value: /Off [Spell lvl 8, checkbox 3]
+Field Name: Check Box 3075, Value: /Off [Spell lvl 8, checkbox 4]
+Field Name: Check Box 3076, Value: /Off [Spell lvl 8, checkbox 5]
+Field Name: Check Box 3077, Value: /Off [Spell lvl 8, checkbox 6]
+Field Name: Spells 10105, Value: [Spell lvl 8, Slot 6]
+Field Name: Spells 10106, Value: [Spell lvl 8, Slot 7]
+Field Name: Check Box 3078, Value: /Off [Spell lvl 8, checkbox 7]
+Field Name: SlotsTotal 27, Value: [Slots lvl 9]
+Field Name: SlotsRemaining 27, Value: [Slots Remaining lvl 9]
+Field Name: Check Box 313, Value: /Off [Spell lvl 2, checkbox 1]
+Field Name: Check Box 310, Value: /Off [Spell lvl 2, checkbox 2]
+Field Name: Check Box 3020, Value: /Off [Spell lvl 2, checkbox 3]
+Field Name: Check Box 3021, Value: /Off [Spell lvl 2, checkbox 4]
+Field Name: Check Box 3022, Value: /Off [Spell lvl 2, checkbox 5]
+Field Name: Check Box 3023, Value: /Off [Spell lvl 2, checkbox 6]
+Field Name: Check Box 3024, Value: /Off [Spell lvl 2, checkbox 7]
+Field Name: Check Box 3025, Value: /Off [Spell lvl 2, checkbox 8]
+Field Name: Check Box 3026, Value: /Off [Spell lvl 2, checkbox 9]
+Field Name: Check Box 3027, Value: /Off [Spell lvl 2, checkbox 10]
+Field Name: Check Box 3028, Value: /Off [Spell lvl 2, checkbox 11]
+Field Name: Check Box 3029, Value: /Off [Spell lvl 2, checkbox 12]
+Field Name: Check Box 3030, Value: /Off [Spell lvl 2, checkbox 13]
+Field Name: Spells 10107, Value: [Spell lvl 9, Slot 2]
+Field Name: Spells 10108, Value: [Spell lvl 9, Slot 1]
+Field Name: Spells 10109, Value: [Spell lvl 9, Slot 3]
+Field Name: Spells 101010, Value: [Spell lvl 9, Slot 4]
+Field Name: Spells 101011, Value: [Spell lvl 9, Slot 5]
+Field Name: Spells 101012, Value: [Spell lvl 9, Slot 6]
+Field Name: Check Box 319, Value: /Off [Spell lvl 5, checkbox 1]
+Field Name: Check Box 318, Value: /Off [Spell lvl 5, checkbox 2]
+Field Name: Check Box 3053, Value: /Off [Spell lvl 5, checkbox 3]
+Field Name: Check Box 3054, Value: /Off [Spell lvl 5, checkbox 4]
+Field Name: Check Box 3055, Value: /Off [Spell lvl 5, checkbox 5]
+Field Name: Check Box 3056, Value: /Off [Spell lvl 5, checkbox 6]
+Field Name: Check Box 3057, Value: /Off [Spell lvl 5, checkbox 7]
+Field Name: Check Box 3058, Value: /Off [Spell lvl 5, checkbox 8]
+Field Name: Check Box 3059, Value: /Off [Spell lvl 5, checkbox 9]
+Field Name: Check Box 327, Value: None [Spell lvl 9, checkbox 1]
+Field Name: Check Box 326, Value: None [Spell lvl 9, checkbox 2]
+Field Name: Check Box 3079, Value: /Off [Spell lvl 9, checkbox 3]
+Field Name: Check Box 3080, Value: /Off [Spell lvl 9, checkbox 4]
+Field Name: Check Box 3081, Value: /Off [Spell lvl 9, checkbox 5]
+Field Name: Check Box 3082, Value: /Off [Spell lvl 9, checkbox 6]
+Field Name: Spells 101013, Value: [Spell lvl 9, Slot 7]
+Field Name: Check Box 3083, Value: /Off [Spell lvl 9, checkbox 7]
+"/Yes" is the correct value for this!
+pdfplay.py accurately fills certain fields with the correct information
+
+I am done this evening, still working on the lvl 1 Artificer Sheet.
+Before I continue on, see if I can create a function or something that makes a new page in PDF and will be a note page
+
+Actual Dictionary:
+    data = {
+        'ClassLevel':str(Class) + ' ' + str(chLvl),
+        'Background':back,
+        'PlayerName':playername,
+        'CharacterName':charactername + f'({Gender})',
+        'Race ':race,
+        'STR':str(Strength),
+        'ProfBonus':str(ProfBonus),
+        'AC':'10',
+        'Initiative': str(DexMod),
+        'Speed': str(walkingspeed),
+        'PersonalityTraits ':Trait,
+        'STRmod':str(StrMod),
+        'DEX':str(Dexterity),
+        'Ideals':Ideal,
+        'DEXmod ':str(DexMod),
+        'Bonds':Bond,
+        'CON':str(Constitution),
+        'CONmod':str(ConMod),
+        'Flaws':Flaw,
+        'INT':str(Intelligence),
+        'Acrobatics':str(AcroNum + DexMod + (ProfBonus if 'Acrobatics' in SkillProf else 0)),
+        'Animal':str(AnHaNum + WisMod + (ProfBonus if 'Animal Handling' in SkillProf else 0)),
+        'Athletics':str(AthlNum + StrMod + (ProfBonus if 'Athletics' in SkillProf else 0)),
+        'Deception ':str(DeceNum + ChaMod + (ProfBonus if 'Deception' in SkillProf else 0)),
+        'History ':str(HistNum + IntMod + (ProfBonus if 'History' in SkillProf else 0)),
+        'Insight':str(InsiNum + WisMod + (ProfBonus if 'Insight' in SkillProf else 0)),
+        'Intimidation':str(IntiNum + ChaMod + (ProfBonus if 'Intimidation' in SkillProf else 0)),
+        'INTmod':str(IntMod),
+        'Investigation ':str(InveNum + IntMod + (ProfBonus if 'Investigation' in SkillProf else 0)),
+        'WIS':str(Wisdom),
+        'Arcana':str(ArcaNum + IntMod + (ProfBonus if 'Arcana' in SkillProf else 0)),
+        'Perception ':str(PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'WISmod':str(WisMod),
+        'CHA':str(Charisma),
+        'Nature':str(NatuNum + IntMod + (ProfBonus if 'Nature' in SkillProf else 0)),
+        'Performance':str(PerfNum + ChaMod + (ProfBonus if 'Performance' in SkillProf else 0)),
+        'Medicine':str(MediNum + WisMod + (ProfBonus if 'Medicine' in SkillProf else 0)),
+        'Religion':str(ReliNum + IntMod + (ProfBonus if 'Religion' in SkillProf else 0)),
+        'Stealth ':str(SteaNum + DexMod + (ProfBonus if 'Stealth' in SkillProf else 0)),
+        'Check Box 23':'/Yes' if 'Acrobatics' in SkillProf else '/No',
+        'Check Box 24':'/Yes' if 'Animal Handling' in SkillProf else '/No',
+        'Check Box 25':'/Yes' if 'Arcana' in SkillProf else '/No',
+        'Check Box 26':'/Yes' if 'Athletics' in SkillProf else '/No',
+        'Check Box 27':'/Yes' if 'Deception' in SkillProf else '/No',
+        'Check Box 28':'/Yes' if 'History' in SkillProf else '/No',
+        'Check Box 29':'/Yes' if 'Insight' in SkillProf else '/No',
+        'Check Box 30':'/Yes' if 'Intimidation' in SkillProf else '/No',
+        'Check Box 31':'/Yes' if 'Investigation' in SkillProf else '/No',
+        'Check Box 32':'/Yes' if 'Medicine' in SkillProf else '/No',
+        'Check Box 33':'/Yes' if 'Nature' in SkillProf else '/No',
+        'Check Box 34':'/Yes' if 'Perception' in SkillProf else '/No',
+        'Check Box 35':'/Yes' if 'Performance' in SkillProf else '/No',
+        'Check Box 36':'/Yes' if 'Persuasion' in SkillProf else '/No',
+        'Check Box 37':'/Yes' if 'Religion' in SkillProf else '/No',
+        'Check Box 38':'/Yes' if 'Sleight of Hand' in SkillProf else '/No',
+        'Check Box 39':'/Yes' if 'Stealth' in SkillProf else '/No',
+        'Check Box 40':'/Yes' if 'Survival' in SkillProf else '/No',
+        'Persuasion':str(PersNum + ChaMod + (ProfBonus if 'Persuasion' in SkillProf else 0)),
+        'SleightofHand':str(SloHNum + DexMod + (ProfBonus if 'Sleight of Hand' in SkillProf else 0)),
+        'CHamod':str(ChaMod),
+        'Survival':str(SurvNum + WisMod + (ProfBonus if 'Survival' in SkillProf else 0)),
+        'Passive':str(10 + PercNum + WisMod + (ProfBonus if 'Perception' in SkillProf else 0)),
+        'ProficienciesLang':prof_lang_str, #Figure out how to loop through and list each language and proficiency in both PlProf and PlLang
+        'GP':str(BGL),
+        #'Equipment':, #This means I need to back to each background and figure out what each gives you, then pass our equipment variable into our creator function since we will need to update it
+        'Features and Traits':feat_trait_str, #Same as proflang but applies to race/bkg notes too
+        #Once the scores are properly assigned this dictionary can be filled out, eventually leading us to replacing all those print statements with a call of the fill_pdf function here.
+        #All spellcasting info will be provided in our creator function
+        'Height':str(Height) + 'inches',
+        'Weight':str(Weight) + 'pounds',
+        'Allies':allies_str,
+        'Feat+Traits':add_info_str,
+        }

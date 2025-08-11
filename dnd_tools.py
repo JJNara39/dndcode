@@ -355,6 +355,12 @@ kits = {
         "Cost": "5 gp",
         "Weight": "3 lb"
     },
+    "HealKit": {
+        "Name": "Healer's Kit",
+        "Description": "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check.",
+        "Cost": "5 gp",
+        "Weight": "3 lb"
+    },        
     "NavTools": {
         "Name": "Navigator's Tools",
         "Description": "A set of tools used to navigate ships.",
@@ -381,352 +387,450 @@ kits = {
 firearms = {
     "AntimatterRifle": {
         "Name": "Antimatter Rifle",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "6d8",
+        "Damage Type" : "Necrotic",
+        "Modifier" : "DEX",
+        "Weight": "10 lbs",
+        "Properties": "Ammunition (Firearms), (Range 120/360), Reload (2), Two-Handed"
     },
     "AutomaticPistol": {
         "Name": "Automatic Pistol",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "2d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "3 lbs",
+        "Properties": "Ammunition (Firearms), (Range 50/150), Reload (15)"
     },
     "AutomaticRifle": {
         "Name": "Automatic Rifle",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "2d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "8 lbs",
+        "Properties": "Ammunition (Firearms), (Range 80/240), Reload (30), Two-Handed, Burst Fire"
     },
     "HuntingRifle": {
         "Name": "Hunting Rifle",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "2d10",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "8 lbs",
+        "Properties": "Ammunition (Firearms), (Range 80/240), Reload (5), Two-Handed"
     },
     "LaserPistol": {
         "Name": "Laser Pistol",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "3d6",
+        "Damage Type" : "Radiant",
+        "Modifier" : "DEX",        
+        "Weight": "2 lbs",
+        "Properties": "Ammunition (Firearms), (Range 40/120), Reload (50)"
     },
     "LaserRifle": {
         "Name": "Laser Rifle",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "3d8",
+        "Damage Type" : "Radiant",
+        "Modifier" : "DEX",        
+        "Weight": "7 lbs",
+        "Properties": "Ammunition (Firearms), (Range 100/300), Reload (30), Two-Handed"
     },
     "Musket": {
         "Name": "Musket",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "500 gp",
+        "Damage": "1d12",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "10 lbs",
+        "Properties": "Ammunition (Firearms), (Range 40/120), Loading, Two-Handed"
     },
     "Pistol": {
         "Name": "Pistol",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "250 gp",
+        "Damage": "1d10",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "3 lbs",
+        "Properties": "Ammunition (Firearms), (Range 30/90), Loading"
     },
     "Revolver": {
         "Name": "Revolver",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "2d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "3 lbs",
+        "Properties": "Ammunition (Firearms), (Range 40/120), Reload (6)"
     },
     "Shotgun": {
         "Name": "Shotgun",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "N/A",
+        "Damage": "2d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "7 lbs",
+        "Properties": "Ammunition (Firearms), (Range 30/90), Reload (2), Two-Handed"
     }
 }
 
 simple_weapons = {
     "Club": {
         "Name": "Club",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "1 sp",
+        "Damage": "1d4",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Light"
     },
     "Dagger": {
         "Name": "Dagger",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "2 gp",
+        "Damage": "1d4",
+        "Damage Type" : "Piercing",
+        "Modifier" : "Finesse",        
+        "Weight": "1 lb",
+        "Properties": "Finesse, Light, Thrown (range 20/60)"
     },
     "Dart": {
         "Name": "Dart",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 cp",
+        "Damage": "1d4",
+        "Damage Type" : "Piercing",
+        "Modifier" : "Finesse",        
+        "Weight": "1/4 lb",
+        "Properties": "Finesse, Thrown (range 20/60)"
     },
     "Greatclub": {
         "Name": "Greatclub",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "2 sp",
+        "Damage": "1d8",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "10 lbs",
+        "Properties": "Two-Handed"
     },
     "Handaxe": {
         "Name": "Handaxe",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Light, Thrown (range 20/60)"
     },
     "Javelin": {
         "Name": "Javelin",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 sp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Thrown (range 30/120)"
     },
     "LightCrossbow": {
         "Name": "Light Crossbow",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "25 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "5 lbs",
+        "Properties": "Ammunition, Loading, (Range 80/320), Two-Handed"
     },
     "LightHammer": {
         "Name": "Light Hammer",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "2 gp",
+        "Damage": "1d4",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Light, Thrown (range 20/60)"
     },
     "Mace": {
         "Name": "Mace",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "4 lbs",
+        "Properties": "N/A"
     },
     "Quarterstaff": {
         "Name": "Quarterstaff",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "2 sp",
+        "Damage": "1d6",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "4 lbs",
+        "Properties": "Versatile (1d8)"
     },
     "Shortbow": {
         "Name": "Shortbow",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "25 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "2 lbs",
+        "Properties": "Ammunition, (Range 80/320), Two-Handed"
     },
     "Sickle": {
         "Name": "Sickle",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "1 gp",
+        "Damage": "1d4",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Light"
     },
     "Sling": {
         "Name": "Sling",
-        "Cost": "",
-        "Damage": "",
+        "Cost": "1 sp",
+        "Damage": "1d4",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "DEX",        
         "Weight": "",
-        "Properties": ""
+        "Properties": "Ammunition, (Range 30/120)"
     },
     "Spear": {
         "Name": "Spear",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "1 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "3 lbs",
+        "Properties": "Thrown (range 20/60), Versatile (1d8)"
     },
     "Yklwa": {
         "Name": "Yklwa",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "1 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Thrown (range 10/30)"
     }
 }
 
 martial_weapons = {
     "Battleaxe": {
         "Name": "Battleaxe",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "4 lbs",
+        "Properties": "Versatile (1d10)"
     },
     "DoubleBladedScimitar": {
         "Name": "Double-Bladed Scimitar",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "100 gp",
+        "Damage": "2d4",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Special, Two-Handed"
     },
     "Flail": {
         "Name": "Flail",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "N/A"
     },
     "Glaive": {
         "Name": "Glaive",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "20 gp",
+        "Damage": "1d10",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Heavy, Reach, Two-Handed"
     },
     "Greataxe": {
         "Name": "Greataxe",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "30 gp",
+        "Damage": "1d12",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Heavy, Two-Handed"
     },
     "Greatsword": {
         "Name": "Greatsword",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "50 gp",
+        "Damage": "2d6",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Heavy, Two-Handed"
     },
     "Halberd": {
         "Name": "Halberd",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "20 gp",
+        "Damage": "1d10",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Heavy, Reach, Two-Handed"
     },
     "Lance": {
         "Name": "Lance",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "1d12",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "6 lbs",
+        "Properties": "Reach, Special"
     },
     "Longsword": {
         "Name": "Longsword",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "15 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Slashing",
+        "Modifier" : "STR",        
+        "Weight": "3 lbs",
+        "Properties": "Versatile (1d10)"
     },
     "Maul": {
         "Name": "Maul",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "2d6",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "10 lbs",
+        "Properties": "Heavy, Two-Handed"
     },
     "Morningstar": {
         "Name": "Morningstar",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "15 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "4 lbs",
+        "Properties": "N/A"
     },
     "Pike": {
         "Name": "Pike",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 gp",
+        "Damage": "1d10",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "18 lbs",
+        "Properties": "Heavy, Reach, Two-Handed"
     },
     "Rapier": {
         "Name": "Rapier",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "25 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "Finesse",        
+        "Weight": "2 lbs",
+        "Properties": "Finesse"
     },
     "Scimitar": {
         "Name": "Scimitar",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "25 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Slashing",
+        "Modifier" : "Finesse",        
+        "Weight": "3 lbs",
+        "Properties": "Finesse, Light"
     },
     "Shortsword": {
         "Name": "Shortsword",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "Finesse",        
+        "Weight": "2 lbs",
+        "Properties": "Finesse, Light"
     },
     "Trident": {
         "Name": "Trident",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "4 lbs",
+        "Properties": "Thrown (range 20/60), Versatile (1d8)"
     },
     "WarPick": {
         "Name": "War Pick",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "5 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "N/A"
     },
     "Warhammer": {
         "Name": "Warhammer",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "15 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "STR",        
+        "Weight": "2 lbs",
+        "Properties": "Versatile (1d10)"
     },
     "Whip": {
         "Name": "Whip",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "2 gp",
+        "Damage": "1d4",
+        "Damage Type" : "Slashing",
+        "Modifier" : "Finesse",        
+        "Weight": "3 lbs",
+        "Properties": "Finesse, Reach"
     },
     "Blowgun": {
         "Name": "Blowgun",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "10 gp",
+        "Damage": "1",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "1 lb",
+        "Properties": "Ammunition, Loading, (Range 25/100)"
     },
     "HeavyCrossbow": {
         "Name": "Heavy Crossbow",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "50 gp",
+        "Damage": "1d10",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "18 lbs",
+        "Properties": "Ammunition, Heavy, Loading, (Range 100/400), Two-Handed"
     },
     "HandCrossbow": {
         "Name": "Hand Crossbow",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "75 gp",
+        "Damage": "1d6",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "3 lbs",
+        "Properties": "Ammunition, (Range 30/120), Light, Loading"
     },
     "Longbow": {
         "Name": "Longbow",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "50 gp",
+        "Damage": "1d8",
+        "Damage Type" : "Piercing",
+        "Modifier" : "DEX",        
+        "Weight": "2 lbs",
+        "Properties": "Ammunition, Heavy, (Range 150/600), Two-Handed"
     },
     "Net": {
         "Name": "Net",
-        "Cost": "",
-        "Damage": "",
-        "Weight": "",
-        "Properties": ""
+        "Cost": "1 gp",
+        "Damage": "0",
+        "Damage Type" : "Bludgeoning",
+        "Modifier" : "DEX",        
+        "Weight": "3 lbs",
+        "Properties": "Special, Thrown (range 5/15)"
     }
 }
 
@@ -846,7 +950,7 @@ heavy_armor = {
 packs = {
     "BurglarsPack": {
         "Name": "Burglar's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Ball Bearings (1,000)",
             "String (10 feet)",
@@ -867,7 +971,7 @@ packs = {
     },
     "DiplomatsPack": {
         "Name": "Diplomat's Pack",
-        "contents": [
+        "Contents": [
             "Chest",
             "Case for Maps or Scrolls (2)",
             "Fine Clothes",
@@ -885,7 +989,7 @@ packs = {
     },
     "DungeoneersPack": {
         "Name": "Dungeoneer's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Crowbar",
             "Hammer",
@@ -901,7 +1005,7 @@ packs = {
     },
     "EntertainersPack": {
         "Name": "Entertainer's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Bedroll",
             "Costumes (2)",
@@ -915,7 +1019,7 @@ packs = {
     },
     "ExplorersPack": {
         "Name": "Explorer's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Bedroll",
             "Mess Kit",
@@ -930,7 +1034,7 @@ packs = {
     },
     "MonsterHuntersPack": {
         "Name": "Monster Hunter's Pack",
-        "contents": [
+        "Contents": [
             "Chest",
             "Crowbar",
             "Hammer",
@@ -946,7 +1050,7 @@ packs = {
     },
     "PriestsPack": {
         "Name": "Priest's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Blanket",
             "Candles (10)",
@@ -963,7 +1067,7 @@ packs = {
     },
     "ScholarsPack": {
         "Name": "Scholar's Pack",
-        "contents": [
+        "Contents": [
             "Backpack",
             "Book of Lore",
             "Ink Bottle",
@@ -980,8 +1084,9 @@ packs = {
 
 
 
-SPELLS = {
+spells = {
     "Light": {
+        "name" : "Light",
         "level": 0,
         "type": "Evocation Cantrip",
         "casting_time": "1 action",
@@ -990,6 +1095,18 @@ SPELLS = {
         "components": ["V", "M (a firefly or phosphorescent moss)"],
         "description": "You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\nIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell."
     },
+    "Mage Hand": {
+        "name": "Mage Hand",
+        "level": 0,
+        "type": "Conjuration Cantrip",
+        "casting_time": "1 action",
+        "range": "30 feet",
+        "duration": "1 minute",
+        "components": ["V", "S"],
+        "description": "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n\n"
+                       "You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n\n"
+                       "The hand can’t attack, activate magical items, or carry more than 10 pounds."
+    }    
     # Add other spells here
 }
 
@@ -1007,6 +1124,16 @@ shields = {
         "weight" : "6 lbs"
     }
 }
-Darkvision = "Darkvision: You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
+
+
+CompPouch = {
+    "Name" : "Component Pouch",
+    "Description" : "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).",
+    "Contents" : "Current Spell(s) Materials",
+    "Cost" : "25 gp",
+    "Weight" : "2 lb"
+}
+
+Darkvision = "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
 TCant = "Thieves Cant"
 UAur = "You can also understand Auran, though you cannot speak it naturally"
