@@ -1,0 +1,16 @@
+This folder focuses on packaging up the Dnd Code into a runnable file, so that others can test it and provide feedback.
+On Jan-07-2026:
+-Created README.txt
+-Created run_dnd.bat
+-Moved all code to Dnd Code
+-Zipped all files together into DnD EXE_[the current version date]_[the current version time]
+
+On Jan 24 '26:
+-Refactored select_combatants()'s 'm','n' choice to use a loop and functions instead of a loop in a loop in a loop, learned that one function = one loop most times
+On March 4 '26:
+-Refactored weapon_attack to be much simpler and more readable, finally creating more creature-based functions and funneling some code into its own function.
+-Changed the Damage/Damage Type tags of all monsters to "Damage Components" to be more readable for functions
+
+On March 8th '26:
+-Added combat to main menu, hp on turn-start
+--Had to edit combat to run in the event of just monsters
