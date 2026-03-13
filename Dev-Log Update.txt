@@ -14,3 +14,5 @@ On March 4 '26:
 On March 8th '26:
 -Added combat to main menu, hp on turn-start
 --Had to edit combat to run in the event of just monsters
+
+On March 12th '26, added a build workflow so I can generate a .exe and .app from GitHub, removed the .bat and changed the 2 .txt files
