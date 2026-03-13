@@ -23,7 +23,7 @@ jobs:
       run: pip install pyinstaller PyPDF2
 
     - name: Build Windows EXE
-      run: pyinstaller --onefile --paths=dnd_code --hidden-import=PyPDF2 --hidden-import=pygame dnd.py
+      run: pyinstaller --onefile --paths=. --collect-all dnd_code --hidden-import=PyPDF2 --hidden-import=pygame dnd.py
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v4
@@ -48,7 +48,7 @@ jobs:
       run: pip install pyinstaller
 
     - name: Build Mac App
-      run: pyinstaller --windowed dnd.py
+      run: pyinstaller --windowed --paths=. --collect-all dnd_code --hidden-import=PyPDF2 --hidden-import=pygame dnd.py
 
     - name: Upload Mac artifact
       uses: actions/upload-artifact@v4
