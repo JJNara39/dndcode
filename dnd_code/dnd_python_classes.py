@@ -1,13 +1,13 @@
 import random
 import math
-from dnd_code import dnd_bkg_gen
-from dnd_code import dnd_bkg_race_sum
-from dnd_code import dnd_class_expl
-from dnd_code import dnd_class_gen
-from dnd_code import dnd_race_gen
-from dnd_code import dnd_tools
-from dnd_code import dnd_spells
-from dnd_code import dnd_update
+import dnd_code.dnd_bkg_gen as dnd_bkg_gen
+import dnd_code.dnd_bkg_race_sum as dnd_bkg_race_sum
+import dnd_code.dnd_class_expl as dnd_class_expl
+import dnd_code.dnd_class_gen as dnd_class_gen
+import dnd_code.dnd_race_gen as dnd_race_gen
+import dnd_code.dnd_tools as dnd_tools
+import dnd_code.dnd_spells as dnd_spells
+import dnd_code.dnd_update as dnd_update
 from PyPDF2 import PdfReader, PdfWriter
 
 

@@ -4,9 +4,9 @@ import shutil
 from fractions import Fraction
 from dnd_code.dnd_python_classes import Player
 import json
-from dnd_code import dndcombat
+import dnd_code.dndcombat as dndcombat
 from dnd_code.dnd_languagesskills import choose_spells, switch_spells
-from dnd_code import dnd_tools
+import dnd_code.dnd_tools as dnd_tools
 import PyPDF2
 import pygame
 

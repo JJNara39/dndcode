@@ -1,7 +1,7 @@
 import copy
 from dnd_code.dnd_python_classes import Player, Monster, Announcer
-from dnd_code import dnd_spells
-from dnd_code import dnd_tools
+import dnd_code.dnd_spells as dnd_spells
+import dnd_code.dnd_tools as dnd_tools
 import math
 import random
 import re

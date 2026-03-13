@@ -4,9 +4,9 @@
 #This file will have a name similar to "update" while everything that occurs once (equipment) will be moved to dnd_class_gen
 import random
 import math
-from dnd_code import dnd_languagesskills
-from dnd_code import dnd_tools
-from dnd_code import dnd_spells
+import dnd_code.dnd_languagesskills as dnd_languagesskills
+import dnd_code.dnd_tools as dnd_tools
+import dnd_code.dnd_spells as dnd_spells
 
 
 def dice(sides):

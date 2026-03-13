@@ -3,8 +3,8 @@ import copy
 from dnd_code.dnd_python_classes import Player, Monster, Team, Announcer
 from dnd_code.dnd_monsters import monsters
 from dnd_code.dnd_npc import npcs
-from dnd_code.dnd_languagesskills import *
-from dnd_code import dnd_combat_fn
+import dnd_code.dnd_languagesskills as dnd_languagesskills
+import dnd_code.dnd_combat_fn as dnd_combat_fn
 
 def combat(player):
     announcer = Announcer()
