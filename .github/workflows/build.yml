@@ -23,7 +23,24 @@ jobs:
       run: pip install pyinstaller PyPDF2
 
     - name: Build Windows EXE
-      run: pyinstaller --onefile --hidden-import=PyPDF2 dnd_code/dnd.py
+      run: pyinstaller --onefile \
+          --hidden-import=dndcombat \
+          --hidden-import=dnd_tools \
+          --hidden-import=dnd_bkg_gen \
+          --hidden-import=dnd_bkg_race_sum \
+          --hidden-import=dnd_class_expl \
+          --hidden-import=dnd_class_gen \
+          --hidden-import=dnd_languageskills \
+          --hidden-import=dnd_monsters \
+          --hidden-import=dnd_npc \
+          --hidden-import=dnd_race_gen \
+          --hidden-import=dnd_spells \
+          --hidden-import=dnd_update \
+          --hidden-import=Feats \
+          --hidden-import=dnd_python_classes \
+          --hidden-import=PyPDF2 \
+          --hidden-import=pygame \
+          dnd.py
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v4
