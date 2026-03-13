@@ -502,7 +502,7 @@ def summation(param, player):
             DhaOr8 = "A radical experiment changed your body, making you reliant on others for vital fluids."
             DhaOr = [DhaOr1, DhaOr2, DhaOr3, DhaOr4, DhaOr5, DhaOr6, DhaOr7, DhaOr8]
             DhampirOrigin = random.choice(DhaOr)             
-            player.skills = skillprof2(param, player.skills)
+            player.skills = dnd_languagesskills.skillprof2(param, player.skills)
             player.adtlinfonotes["Dhampir"] = f"You are a Dhampir in addition to being a(n) {player.race}, and thus have the Dhampir Hunger for {DhampirHunger}"
             player.adtlinfonotes["Dhampir Origin"] = f"You also have the Dhampir Origin of: {DhampirOrigin}"
             player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
@@ -515,7 +515,7 @@ def summation(param, player):
             HexO6 = "A slighted druid transformed you and bound you to live only so long as a sacred tree bears fruit."
             HexO = [HexO1, HexO2, HexO3, HexO4, HexO5, HexO6]
             HexbloodOrigin = random.choice(HexO)            
-            player.skills = skillprof2(param, player.skills)
+            player.skills = dnd_languagesskills.skillprof2(param, player.skills)
             player.adtlinfonotes["Hexblood"] = f"You are a Hexblood in addition to being a(n) {player.race}, and thus have the Heblood Origin of {HexbloodOrigin}"
             player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
         if player.lineage == "Reborn":
@@ -540,7 +540,7 @@ def summation(param, player):
             player.adtlinfonotes["Reborn"] = f"You are a Reborn in addition to being a(n) {player.race}, and thus have Lost Memories of: {RebornLostMemories}"
             player.adtlinfonotes["Reborn Origin"] = f"You also have the Reborn Origin of: {RebornOrigin}"
             player.notes["Ancestral Legacy"] = "If you replace a race with this lineage, you can keep the following elements of that race: any skill proficiencies you gained from it and any climbing, flying, or swimming speed you gained from it.\nIf you don't keep any of those elements or you choose this lineage at character creation, you gain proficiency in two skills of your choice."
-            player.skills = skillprof2(param, player.skills)         
+            player.skills = dnd_languagesskills.skillprof2(param, player.skills)         
   
 
 ########################################################################################################
@@ -1079,11 +1079,11 @@ def summation(param, player):
             HouseAgentProf = specializations[choice - 1]
             for action_type, action_key in actions:
                 if action_type == "gamingsets":
-                    player.proficiencies = gamingsets(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
                 elif action_type == "musical_instruments":
-                    player.proficiencies = musicalinstr(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
                 elif action_key:
-                    item = getattr(dnd_tools, action_type).get(action_key, {}).get("Name")
+                    item = getattr(dnd_languagesskills.dnd_tools, action_type).get(action_key, {}).get("Name")
                     if item:
                         player.proficiencies.append(item)    
             return HouseAgentProf
