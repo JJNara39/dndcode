@@ -19,17 +19,17 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install PyInstaller
-      run: pip install pyinstaller PyPDF2
+    - name: Install Dependencies
+      run: pip install pygame pyinstaller PyPDF2
 
     - name: Build Windows EXE
-      run: pyinstaller --onefile --paths=. --collect-submodules dnd_code --hidden-import=PyPDF2 --hidden-import=pygame --collect-data dnd_code dnd.py
+      run: pyinstaller --onefile --collect-all dnd_code dnd.py
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v4
       with:
         name: windows-build
-        path: dist/*
+        path: dist/dnd.exe
 
 
   build-mac:
@@ -44,14 +44,14 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install PyInstaller
-      run: pip install pyinstaller
+    - name: Install Dependencies
+      run: pip install pygame PyPDF2 pyinstaller
 
     - name: Build Mac App
-      run: pyinstaller --windowed --paths=. --collect-submodules dnd_code --hidden-import=PyPDF2 --hidden-import=pygame --collect-data dnd_code dnd.py
+      run: pyinstaller --onefile --collect-all dnd_code dnd.py
 
     - name: Upload Mac artifact
       uses: actions/upload-artifact@v4
       with:
         name: mac-build
-        path: dist/*
+        path: dist/dnd.exe
