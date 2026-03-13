@@ -4,7 +4,7 @@ from dnd_code.dnd_python_classes import Player, Monster, Team, Announcer
 from dnd_code.dnd_monsters import monsters
 from dnd_code.dnd_npc import npcs
 from dnd_code.dnd_languagesskills import *
-from dnd_code.dnd_combat_fn import *
+from dnd_code import dnd_combat_fn
 
 def combat(player):
     announcer = Announcer()
@@ -21,7 +21,7 @@ def combat(player):
     print("Who is controlling Team 1? Enter name or 'AI':")
     team1_controller = input("> ").strip()
     print(f"Choose team for {team1_controller}:") #player1[:] makes a shallow copy, so we need to go deeper, with deepcopy
-    contestant1_team = make_team(player, monsters_data, npc_data, team1_controller)
+    contestant1_team = dnd_combat_fn.make_team(player, monsters_data, npc_data, team1_controller)
 
     team1 = Team(team1_controller, contestant1_team)
     for member in team1.members:
@@ -30,7 +30,7 @@ def combat(player):
     print("Who is controlling Team 2? Enter name or 'AI':")
     team2_controller = input("> ").strip()
     print(f"Choose team for {team2_controller}:")
-    contestant2_team = make_team(player, monsters_data, npc_data, team1_controller)
+    contestant2_team = dnd_combat_fn.make_team(player, monsters_data, npc_data, team1_controller)
 
     team2 = Team(team2_controller, contestant2_team)
     for member in team2.members:
@@ -47,7 +47,7 @@ def combat(player):
     all_contestants = contestant1_team + contestant2_team
 
     for creature in all_contestants:
-        initiative = dice(20) + creature.initiative
+        initiative = dnd_combat_fn.dice(20) + creature.initiative
         initiative_tracker.append((creature, initiative))
         combat_state['Participants'].append(creature)
         if isinstance(creature, Player):
@@ -65,10 +65,10 @@ def combat(player):
             print(f"Monster - {fighter.name}: {init}")
 
     #Map stuff will go here after all creatures are made but before combat starts so we can place them
-    setup_battlefield(contestant1_team, contestant2_team)
+    dnd_combat_fn.setup_battlefield(contestant1_team, contestant2_team)
     for c1 in contestant1_team:
         for c2 in contestant2_team:
-            print(f"Distance between {c1.name} and {c2.name} is {distance(c1,c2)}ft.")
+            print(f"Distance between {c1.name} and {c2.name} is {dnd_combat_fn.distance(c1,c2)}ft.")
 
     turn_number = 1
     has_acted_this_round = {fighter.name: False for fighter, _ in initiative_tracker}
@@ -76,8 +76,8 @@ def combat(player):
     while True:
         announcer.announce("start_round", round_num=turn_number) 
         attacker, init = initiative_tracker[0]
-        if controller_of(attacker) == "AI":
-            run_ai_turn(attacker)
+        if dnd_combat_fn.controller_of(attacker) == "AI":
+            dnd_combat_fn.run_ai_turn(attacker)
         else:
             has_acted_this_round[attacker.name] = True
             print(f"{attacker.name}'s turn!")
@@ -91,7 +91,7 @@ def combat(player):
                 
             print(f"Turn number is: {turn_number}")
             turn_status = "Start"
-            remove_expired_conditions(attacker, all_contestants, announcer, turn_number, turn_status)   
+            dnd_combat_fn.remove_expired_conditions(attacker, all_contestants, announcer, turn_number, turn_status)   
             if attacker in contestant1_team:
                 home_team = contestant1_team
                 opponents = contestant2_team
@@ -106,7 +106,7 @@ def combat(player):
                     targets.append(target)
                     print(f"Available Targets: {target.name}")       
             available_attacks = list(attacker.actions.keys())
-            evaluate_trait(creature, target, announcer, home_team) 
+            dnd_combat_fn.evaluate_trait(creature, target, announcer, home_team) 
             #Check Giant Frog, special case
             target = None
             if ("Giant Frog" in attacker.name) or ("Giant Toad" in attacker.name):
@@ -118,14 +118,14 @@ def combat(player):
                         target_size = "Small"
                     if "Giant Toad" in attacker.name:
                         target_size = "Medium"
-                    if SIZE_ORDER.index(target.size) <= SIZE_ORDER.index(target_size):
+                    if dnd_combat_fn.SIZE_ORDER.index(target.size) <= dnd_combat_fn.SIZE_ORDER.index(target_size):
                         grappling_target = target
                         break
                 if grappling_target:
                     atk_key = "Swallow"
                     target = grappling_target  # set target to the one it's grappling
                     if target:
-                        perform_swallow(attacker, target, announcer, turn_number)
+                        dnd_combat_fn.perform_swallow(attacker, target, announcer, turn_number)
                     else:
                         print(f"No target, {attacker.name} skips its attack action.")
                 else:
@@ -133,7 +133,7 @@ def combat(player):
                         atk_key = "Bite"  # default   
                         if targets:
                             target = random.choice(targets)                        
-                            perform_attack(attacker, target, announcer, turn_number, home_team, opponents, initiative_tracker, WeaponorSpell="Weapon", attack_key=atk_key)           
+                            dnd_combat_fn.perform_attack(attacker, target, announcer, turn_number, home_team, opponents, initiative_tracker, WeaponorSpell="Weapon", attack_key=atk_key)           
                         else:
                             print(f"No target, {attacker.name} skips its attack action.")
                     elif "Giant Toad" in attacker.name:
@@ -143,14 +143,14 @@ def combat(player):
                             atk_key = "Bite"
                             if targets:
                                 target = random.choice(targets) 
-                                perform_attack(attacker, target, announcer, turn_number, home_team, opponents, initiative_tracker, WeaponorSpell="Weapon", attack_key=atk_key)           
+                                dnd_combat_fn.perform_attack(attacker, target, announcer, turn_number, home_team, opponents, initiative_tracker, WeaponorSpell="Weapon", attack_key=atk_key)           
             else: 
                 if attacker.currenthitpoints > 0:  
-                    take_turn(attacker, announcer, turn_number, player, contestant1_team, contestant2_team, initiative_tracker)
+                    dnd_combat_fn.take_turn(attacker, announcer, turn_number, player, contestant1_team, contestant2_team, initiative_tracker)
                 elif attacker.currenthitpoints <= 0 and not isinstance(attacker, Monster):
                     if attacker.dead == False:
                         print(f"Time for {attacker.name} to make a death save!")
-                        deathsave = dice(20)
+                        deathsave = dnd_combat_fn.dice(20)
                         if deathsave == 20:
                             announcer.announce("death_save_crit_success", attacker.name)
                             attacker.deathsave_success = 0
@@ -159,7 +159,7 @@ def combat(player):
                                 if c.get("Name") == "Unconscious":
                                     attacker.conditions.remove(c)  
                             attacker.currenthitpoints = 1
-                            take_turn(attacker, announcer, turn_number, player, contestant1_team, contestant2_team, initiative_tracker)                                                    
+                            dnd_combat_fn.take_turn(attacker, announcer, turn_number, player, contestant1_team, contestant2_team, initiative_tracker)                                                    
                         elif 10 <= deathsave < 20:
                             announcer.announce("death_save_success", attacker.name)
                             attacker.deathsave_success += 1
@@ -187,14 +187,14 @@ def combat(player):
                             attacker.dead = True
             #Code in death saves!
             turn_status = "End"
-            remove_expired_conditions(attacker, all_contestants, announcer, turn_number, turn_status) 
+            dnd_combat_fn.remove_expired_conditions(attacker, all_contestants, announcer, turn_number, turn_status) 
             #End of turn, rotate tracker
             initiative_tracker.append(initiative_tracker.pop(0))
 
-            if check_combat_end(player, announcer, contestant2_team):
+            if dnd_combat_fn.check_combat_end(player, announcer, contestant2_team):
                 print(f"Contestant 1 with {', '.join(con.original_name for con in contestant1_team)} wins!")
                 break  
-            if check_combat_end(player, announcer, contestant1_team):
+            if dnd_combat_fn.check_combat_end(player, announcer, contestant1_team):
                 print(f"Contestant 2 with {', '.join(con.original_name for con in contestant2_team)} wins!")
                 break          
         # End of round check

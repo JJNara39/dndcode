@@ -1,6 +1,6 @@
 import random
 from dnd_code import dnd_tools
-from dnd_code.dnd_languagesskills import *
+from dnd_code import dnd_languagesskills
 
 
 def dndCharGenBkg(param, player):    
@@ -14,8 +14,8 @@ def dndCharGenBkg(param, player):
     ArtisanToolsMuleCartNames = ArtisanToolsNames + ["Mule and Cart"]
     MusicalInstrDisgKit = MusicalInstr + list(dnd_tools.kits["DisgKit"])
     MusicalInstrDisgKitNames = MusicalInstrNames + [dnd_tools.kits["DisgKit"]['Name']]
-    GamingSets = list(dnd_tools.gaming_sets.keys())
-    GamingSetsNames = [gs["Name"] for gs in dnd_tools.gaming_sets.values()]    
+    dnd_languagesskills.dnd_languagesskills.GamingSets = list(dnd_tools.gaming_sets.keys())
+    dnd_languagesskills.dnd_languagesskills.GamingSetsNames = [gs["Name"] for gs in dnd_tools.gaming_sets.values()]    
     Actual_Background = [
             "Acolyte", "Anthropologist", "Archaeologist", "Ashari", "Astral Drifter", "Athlete", "Azorius Functionary", "Bandit Defector", "Boros Legionnaire", "Celebrity Adventurer's Scion", "Charlatan", "City Watch", "Clan Crafter", "Clasp Member",
             "Cloistered Scholar", "Courtier", "Criminal", "Dimir Operative", "Entertainer", "Faceless", "Faction Agent", "Failed Merchant", "Far Traveler", "Feylost", "Fisher", "Folk Hero", "Gambler", "Gate Warden", "Giant Foundling", "Gladiator",
@@ -173,8 +173,8 @@ def dndCharGenBkg(param, player):
         player.Flaw = random.choice(FLA)
         player.gold = 15
         if player.background == "Acolyte": 
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.skills_dict["InsiNum"] += 1
             player.skills_dict["ReliNum"] += 1
             eqp_items = ["A Holy Symbol (a gift to you when you entered the priesthood)", "A Prayer Book or Prayer Wheel", "5 sticks of Incense", "Vestments", "A set of Common Clothes"]
@@ -228,8 +228,8 @@ def dndCharGenBkg(param, player):
                 category = random.choice(skills_list)
                 skillboost = random.choice(FAskills[category])
                 player.skills_dict[skillboost] += 1     
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["Badge or emblem of your faction", "A copy of a seminal faction text (or a code-book for a covert faction)", "A set of Common Clothes"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -270,8 +270,8 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A leather-bound diary", "A Bottle of Ink", "An Ink pen", "A set of Traveler's Clothes", "One trinket of special significance"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["InsiNum"] += 1
         player.skills_dict["ReliNum"] += 1            
     if player.background == "Archaeologist":   
@@ -313,7 +313,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A wooden case containing a map to a ruin or dungeon", "A Bullseye Lantern", "A Miner's Pick", "A set of Traveler's Clothes", "A Shovel", "A Two-Person Tent"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         ArchProf = [dnd_tools.artisan_tools["CartTools"]["Name"], dnd_tools.kits["NavTools"]["Name"]]      
         if param == "Y":
             while True:
@@ -410,8 +410,8 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A set of traveler's clothes", "A diary", "An ink pen", "A bottle of ink"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["InsiNum"] += 1
         player.skills_dict["ReliNum"] += 1    
         player.Trait = ""
@@ -457,7 +457,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A bronze discus or leather ball", "A lucky charm or past trophy", "A set of Traveler's Clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)        
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)        
         player.skills_dict["AcroNum"] += 1
         player.skills_dict["AthlNum"] += 1
         player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
@@ -500,8 +500,8 @@ def dndCharGenBkg(param, player):
         eqp_items = ["An Azorius insignia", "A scroll containing the text of a law important to you", "A Bottle of Blue Ink", "A Pen", "A set of Fine Clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)       
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)       
         player.skills_dict["InsiNum"] += 1
         player.skills_dict["IntiNum"] += 1          
     if player.background == "Bandit Defector": 
@@ -543,7 +543,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A knife, a cooking pot", "A winter blanket", "An object you received as your cut from a successful robbery", "A set of common clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.proficiencies = gamingsetsmusicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["SurvNum"] += 1
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])      
@@ -587,7 +587,7 @@ def dndCharGenBkg(param, player):
         for item in eqp_items:
             player.equipment.append(item)
         langlist = ["Cele", "Drac", "Gobl", "Mino"]
-        player.languages, player.slang = choicefourlang(param, player.languages, player.slang, langlist)
+        player.languages, player.slang = dnd_languagesskills.choicefourlang(param, player.languages, player.slang, langlist)
         player.skills_dict["AthlNum"] += 1
         player.skills_dict["IntiNum"] += 1
         BlProf = [dnd_tools.artisan_tools["CartTools"]["Name"], dnd_tools.kits["NavTools"]["Name"]]
@@ -650,8 +650,8 @@ def dndCharGenBkg(param, player):
         player.equipment.append(dnd_tools.kits["DisgKit"].copy())
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["PercNum"] += 1
         player.skills_dict["PerfNum"] += 1
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])
@@ -783,7 +783,7 @@ def dndCharGenBkg(param, player):
             player.skills_dict[random_skill_key] += 1
             player.proficiencies.append(random.choice(ClMeTl))
         if dnd_tools.TCant in player.languages:
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         else:
             player.languages.append(dnd_tools.TCant)
         player.gold = 10
@@ -812,7 +812,7 @@ def dndCharGenBkg(param, player):
         toolnames = []
         for tool in tools:
             toolnames.append(tool['Name'])
-        player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)     
+        player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)     
         if param == "Y":
             while True:
                 try:
@@ -877,14 +877,14 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(item)
             player.skills_dict["DeceNum"] += 1
             player.skills_dict["SteaNum"] += 1
-            player.proficiencies = gamingsets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)
         if player.background == "Urban Bounty Hunter":
             player.gold = 20
             eqp_items = ["A set of clothes appropriate to your duties"]
             for item in eqp_items:
                 player.equipment.append(item)
-            player.skills_dict["DeceNum"], player.skills_dict["InsiNum"], player.skills_dict["PersNum"], player.skills_dict["SteaNum"] = choicefourskill2(param, player.skills_dict, "DeceNum", "InsiNum", "PersNum", "SteaNum", dnd_tools.skills["Deception"], dnd_tools.skills["Insight"], dnd_tools.skills["Persuasion"], dnd_tools.skills["Stealth"])
-            player.proficiencies = gamingsetmusicalinstrthieves(param, player.proficiencies)
+            player.skills_dict["DeceNum"], player.skills_dict["InsiNum"], player.skills_dict["PersNum"], player.skills_dict["SteaNum"] = dnd_languagesskills.choicefourskill2(param, player.skills_dict, "DeceNum", "InsiNum", "PersNum", "SteaNum", dnd_tools.skills["Deception"], dnd_tools.skills["Insight"], dnd_tools.skills["Persuasion"], dnd_tools.skills["Stealth"])
+            player.proficiencies = dnd_languagesskills.gamingsetmusicalinstrthieves(param, player.proficiencies)
     if player.background == "Dimir Operative":
         DOPT1 = "I'm good at hiding my true thoughts and feelings."
         DOPT2 = "When I'm in doubt about revealing something, I assume it's a secret, and I don't share it."
@@ -924,7 +924,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A Dimir insignia", "Three small knives", "A set of dark-colored common clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)   
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)   
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["SteaNum"] += 1
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])
@@ -964,7 +964,7 @@ def dndCharGenBkg(param, player):
         FLA = [F1, F2, F3, F4, F5, F6]
         player.Flaw = random.choice(FLA)
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])
-        player.proficiencies = musicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
         player.skills_dict["AcroNum"] += 1
         player.skills_dict["PerfNum"] += 1 
         player.gold = 15
@@ -1033,7 +1033,7 @@ def dndCharGenBkg(param, player):
         player.equipment.append(dnd_tools.kits["DisgKit"].copy())
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["IntiNum"] += 1
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])                 
@@ -1072,7 +1072,7 @@ def dndCharGenBkg(param, player):
         FaMeF6 = "Nothing gets between me and danger except my fellow adventurers. So I'll be sure to put them there."
         FaMeF = [FaMeF1, FaMeF2, FaMeF3, FaMeF4, FaMeF5, FaMeF6]
         player.Flaw = random.choice(FaMeF)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 10
         eqp_items = ["Merchant's Scale", "A set of Fine Clothes"]
         for item in eqp_items:
@@ -1099,7 +1099,7 @@ def dndCharGenBkg(param, player):
         if param == "N": 
             chosen_tool = random.choice(ArtisanTools)
             player.equipment.append(dnd_tools.artisan_tools[chosen_tool].copy())            
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["InveNum"] += 1
         player.skills_dict["PersNum"] += 1  
     if player.background == "Far Traveler":
@@ -1135,7 +1135,7 @@ def dndCharGenBkg(param, player):
         FTFlaw6 = "I have a weakness for the exotic beauty of the people of these lands."
         FTFlaw = [FTFlaw1, FTFlaw2, FTFlaw3, FTFlaw4, FTFlaw5, FTFlaw6]
         player.Flaw = random.choice(FTFlaw)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["InsiNum"] += 1
         player.skills_dict["PercNum"] += 1     
         player.gold = 15
@@ -1171,7 +1171,7 @@ def dndCharGenBkg(param, player):
         toolnames = []
         for tool in tools:
             toolnames.append(tool['Name'])
-        player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)
+        player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)
         if param == "Y":
             while True:
                 try:
@@ -1235,7 +1235,7 @@ def dndCharGenBkg(param, player):
         FeyWF8 = "I'm always changing my mind—well, almost always."
         FeyWF = [FeyWF1,  FeyWF2, FeyWF3, FeyWF4, FeyWF5, FeyWF6, FeyWF7, FeyWF8]
         player.Flaw = random.choice(FeyWF)
-        player.proficiencies = musicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
         player.gold = 8
         eqp_items = ["A set of traveler's clothes", "Three trinkets (each determined by rolling on the Feywild Trinkets table)"]
         for item in eqp_items:
@@ -1263,7 +1263,7 @@ def dndCharGenBkg(param, player):
             chosen_instr = random.choice(MusicalInstr)
             player.equipment.append(dnd_tools.musical_instr[chosen_instr].copy())    
         langlist = ["Elvi", "Gnom", "Gobl", "Sylv"]
-        player.languages, player.slang = choicefourlang(param, player.languages, player.slang, langlist)
+        player.languages, player.slang = dnd_languagesskills.choicefourlang(param, player.languages, player.slang, langlist)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["SurvNum"] += 1           
     if player.background == "Fisher":  
@@ -1305,7 +1305,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["Fishing Tackle", "A fishing net", "A favorite fishing lure or oiled leather wading boots", "A set of Traveler's Clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)      
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)      
         player.skills_dict["HistNum"] += 1
         player.skills_dict["SurvNum"] += 1    
     if (player.background == "Folk Hero") or (player.background == "Inheritor"):       
@@ -1347,7 +1347,7 @@ def dndCharGenBkg(param, player):
             player.skills_dict["AnHaNum"] += 1
             player.skills_dict["SurvNum"] += 1
             player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
-            player.proficiencies = artisantools(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
             player.gold = 10
             eqp_items = ["A Shovel", "An Iron Pot", "A set of Common Clothes"]
             for item in eqp_items:
@@ -1376,8 +1376,8 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(dnd_tools.artisan_tools[chosen_tool].copy())
         if player.background == "Inheritor":
             player.skills_dict["SurvNum"] += 1
-            player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["ReliNum"] = choicethreeskill(param, player.skills_dict, "ArcaNum", "HistNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Religion"])
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["ReliNum"] = dnd_languagesskills.choicethreeskill(param, player.skills_dict, "ArcaNum", "HistNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Religion"])
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 15                  
             eqp_items = ["A set of Traveler's Clothes"]
             for item in eqp_items:
@@ -1411,7 +1411,7 @@ def dndCharGenBkg(param, player):
             toolnames = []
             for tool in tools:
                 toolnames.append(tool['Name'])
-            player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)
+            player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)
             if param == "Y":
                 while True:
                     try:
@@ -1469,7 +1469,7 @@ def dndCharGenBkg(param, player):
         GamblerF6 = "I'm a great gambler. I'm just bad at math and logic."
         GamblerF = [GamblerF1, GamblerF2, GamblerF3, GamblerF4, GamblerF5, GamblerF6]
         player.Flaw = random.choice(GamblerF)
-        player.proficiencies = gamingsets(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)
         player.gold = 15
         eqp_items = ["A lucky charm", "A set of Fine Clothes"]
         for item in eqp_items:
@@ -1478,15 +1478,15 @@ def dndCharGenBkg(param, player):
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(GamingSetsNames, 1):
+                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(GamingSets)
+                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(GamingSets):
-                        chosen_gs = GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
+                        chosen_gs = dnd_languagesskills.dnd_languagesskills.GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())    
                         break    
                     else:
@@ -1494,9 +1494,9 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")
         if param == "N": 
-            chosen_gs = random.choice(GamingSets)
+            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())            
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["InsiNum"] += 1          
     if player.background == "Gate Warden":
@@ -1506,8 +1506,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["PersNum"] += 1
         player.skills_dict["SurvNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -1524,7 +1524,7 @@ def dndCharGenBkg(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -1573,7 +1573,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["SurvNum"] += 1
         player.proficiencies.append(dnd_tools.kits["PoisKit"]["Name"])
         langlist = ["Elvi", "Gian", "Krau"]
-        player.languages, player.slang = choicethreelang(param, player.languages, player.slang, langlist)    
+        player.languages, player.slang = dnd_languagesskills.choicethreelang(param, player.languages, player.slang, langlist)    
     if (player.background == "Grey Hunter") or (player.background == "Whitestone Rifle Corps"):       
         Trait1 = "I want to make a good impression at all times. That means keeping my clothes and gear clean and in top condition."
         Trait2 = "I don't like being the center of attention. I'd rather let someone else do the talking while I watch their back."
@@ -1641,8 +1641,8 @@ def dndCharGenBkg(param, player):
         if param == "N": 
             chosen_weapon = random.choice(mskpi)
             player.equipment.append(chosen_weapon.copy())          
-        player.skills_dict["AthlNum"], player.skills_dict["PercNum"], player.skills_dict["SurvNum"] = choicethreeskill2(param, player.skills_dict, "AthlNum", "PercNum", "SurvNum", dnd_tools.skills["Athletics"], dnd_tools.skills["Perception"], dnd_tools.skills["Survival"])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)            
+        player.skills_dict["AthlNum"], player.skills_dict["PercNum"], player.skills_dict["SurvNum"] = dnd_languagesskills.choicethreeskill2(param, player.skills_dict, "AthlNum", "PercNum", "SurvNum", dnd_tools.skills["Athletics"], dnd_tools.skills["Perception"], dnd_tools.skills["Survival"])
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)            
     if player.background == "Grinner":
         GrPT1 = "I love the spotlight. Everyone, look at me!"
         GrPT2 = "Give me a drink and I 'm your friend."
@@ -1679,7 +1679,7 @@ def dndCharGenBkg(param, player):
         GrinF = [GrinF1, GrinF2, GrinF3, GrinF4, GrinF5, GrinF6]
         player.Flaw = random.choice(GrinF)
         
-        player.proficiencies = musicalinstrthiev(param, player.proficiencies)   
+        player.proficiencies = dnd_languagesskills.musicalinstrthiev(param, player.proficiencies)   
         print(f"Proficiencies should be {player.proficiencies}")                                                      
         player.gold = 15
         eqp_items = ["A set of Fine Clothes", "A gold-plated ring depicting a smiling face"]
@@ -1745,7 +1745,7 @@ def dndCharGenBkg(param, player):
         GrF6 = "I find hard to trust other birdfolk."
         GrF = [GrF1, GrF2, GrF3, GrF4, GrF5, GrF6]
         player.Flaw = random.choice(GrF)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 5
         eqp_items = ["A walking stick", "A trinket from another culture", "Traveling clothes"]
         for item in eqp_items:
@@ -1774,7 +1774,7 @@ def dndCharGenBkg(param, player):
             player.equipment.append(dnd_tools.artisan_tools[chosen_tool].copy())
         player.skills_dict["AthlNum"] += 1
         player.skills_dict["InsiNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)         
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)         
     if player.background == "Gruul Anarch":
         GrAPT1 = "Unlike people, the beasts of the wild are friends who won't stab me in the back."
         GrAPT2 = "Go ahead and insult me - I dare you."
@@ -1819,7 +1819,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["AthlNum"] += 1
         player.proficiencies.append(dnd_tools.kits["HerbKit"]["Name"])
         langlist = ["Drac", "Gian", "Gobl", "Sylv"]
-        player.languages, player.slang = choicefourlang(param, player.languages, player.slang, langlist)       
+        player.languages, player.slang = dnd_languagesskills.choicefourlang(param, player.languages, player.slang, langlist)       
     if (player.background == "Clan Crafter") or (player.background == "Courtier") or (player.background == "Guild Artisan") or (player.background == "Guild Merchant"):           
         P1 = "I believe that anything worth doing is worth doing right. I ca not help it – I am a perfectionist."
         P2 = "I'm a snob who looks down on those who can't appreciate fine art."
@@ -1864,7 +1864,7 @@ def dndCharGenBkg(param, player):
                     player.languages.append(dnd_tools.languages[lang])
                     player.slang.remove(lang)
                 else:
-                    player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                    player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 15
             eqp_items = ["A maker's mark chisel used to mark your handiwork with the symbol of the clan of crafters you learned your skill from", "A set of Traveler's Clothes"]
             for item in eqp_items:
@@ -1891,7 +1891,7 @@ def dndCharGenBkg(param, player):
             toolnames = []
             for tool in tools:
                 toolnames.append(tool['Name'])
-            player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)
+            player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)
             if param == "Y":
                 while True:
                     try:
@@ -1917,8 +1917,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Courtier":
             player.skills_dict["InsiNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 5
             eqp_items = ["A set of Fine Clothes"]
             for item in eqp_items:
@@ -1926,8 +1926,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Guild Artisan":
             player.skills_dict["InsiNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = artisantools(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 15
             eqp_items = ["A letter of introduction from your guild", "A set of Traveler's Clothes"]
             for item in eqp_items:
@@ -1957,8 +1957,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Guild Merchant":
             player.skills_dict["InsiNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies, player.languages, player.slang = ArtTlNavTlLang(param, player.proficiencies, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.proficiencies, player.languages, player.slang = dnd_languagesskills.ArtTlNavTlLang(param, player.proficiencies, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 15   
             eqp_items = ["A letter of introduction from your guild, a set of Traveler's Clothes"]
             for item in eqp_items:
@@ -2034,8 +2034,8 @@ def dndCharGenBkg(param, player):
         player.equipment.append(dnd_tools.packs["MonsterHuntersPack"].copy())
         for item in eqp_items:
             player.equipment.append(item)
-        player.skills_dict["ArcaNum"], player.skills_dict["InveNum"], player.skills_dict["ReliNum"], player.skills_dict["SurvNum"] = choicefourskill2(param, player.skills_dict, "ArcaNum", "InveNum", "ReliNum", "SurvNum", dnd_tools.skills["Arcana"], dnd_tools.skills["Investigation"], dnd_tools.skills["Religion"], dnd_tools.skills["Survival"])
-        player.languages, player.slang = ExoticLang(param, player.languages, player.slang)
+        player.skills_dict["ArcaNum"], player.skills_dict["InveNum"], player.skills_dict["ReliNum"], player.skills_dict["SurvNum"] = dnd_languagesskills.choicefourskill2(param, player.skills_dict, "ArcaNum", "InveNum", "ReliNum", "SurvNum", dnd_tools.skills["Arcana"], dnd_tools.skills["Investigation"], dnd_tools.skills["Religion"], dnd_tools.skills["Survival"])
+        player.languages, player.slang = dnd_languagesskills.ExoticLang(param, player.languages, player.slang)
     if player.background == "Hermit":
         P1 = "I have been isolated for so long that I speak rarely, preferring gestures and also the occasional grunt."
         P2 = "I am utterly serene, even in the face of disaster."
@@ -2079,7 +2079,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["MediNum"] += 1
         player.skills_dict["ReliNum"] += 1
         player.proficiencies.append(dnd_tools.kits["HerbKit"]["Name"])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)   
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)   
     if player.background == "House Agent":
         HoAgPT1 = "I'm always looking to improve efficiency."
         HoAgPT2 = "I love to share trivia about my house's business."
@@ -2182,8 +2182,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["InveNum"] += 1
         player.skills_dict["InsiNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)     
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)     
     if player.background == "Izzet Engineer":
         IEPT1 = "I have a hard time staying focused on… oh, and my brain tends to jump from one… did I mention focus?"
         IEPT2 = "I get really excited about my ideas and I can't wait to talk about them and start putting them into practice and tinkering with them and I want to tell you about how exciting it all is!"
@@ -2219,7 +2219,7 @@ def dndCharGenBkg(param, player):
         IzEnF6 = "I'm incapable of admitting a flaw in my logic."
         IzEnF = [IzEnF1, IzEnF2, IzEnF3, IzEnF4, IzEnF5, IzEnF6]
         player.Flaw = random.choice(IzEnF)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 5  
         eqp_items = ["An Izzet insignia", "The charred and twisted remains of a failed experiment", "A Hammer", "A Block and Tackle", "A set of Common Clothes"]
         for item in eqp_items:
@@ -2249,7 +2249,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["ArcaNum"] += 1
         player.skills_dict["InveNum"] += 1
         langlist = ["Drac", "Gobl", "Veda"]
-        player.languages, player.slang = choicethreelang(param, player.languages, player.slang, langlist)     
+        player.languages, player.slang = dnd_languagesskills.choicethreelang(param, player.languages, player.slang, langlist)     
     if player.background == "Knight of Solamnia":
         player.gold = 10
         eqp_items = ["An insignia of rank", "A set of common clothes"]
@@ -2258,8 +2258,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["AthlNum"] += 1
         player.skills_dict["SurvNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2271,8 +2271,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["HistNum"] += 1
         player.skills_dict["ReliNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2316,9 +2316,9 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A set of fine clothes", "A student uniform", "A writing kit (small pouch with a quill, ink, folded parchment and a penknife)"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["PersNum"] = choicethreeskill2(param, player.skills_dict, "ArcaNum", "HistNum", "PersNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Persuasion"])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)        
+        player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["PersNum"] = dnd_languagesskills.choicethreeskill2(param, player.skills_dict, "ArcaNum", "HistNum", "PersNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Persuasion"])
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)        
     if player.background == "Mage of High Sorcery":
         player.gold = 10
         eqp_items = ["A bottle of colored ink"," An ink pen", "A set of common clothes"]
@@ -2326,8 +2326,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["ArcaNum"] += 1
         player.skills_dict["HistNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2413,8 +2413,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Knight":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = gamingsets(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 25
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
             for item in eqp_items:
@@ -2422,8 +2422,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Noble":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = gamingsets(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 25
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
             for item in eqp_items:
@@ -2431,8 +2431,8 @@ def dndCharGenBkg(param, player):
         if player.background == "Waterdhavian Noble":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = gamingsetsmusicalinstr(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)   
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)   
             player.gold = 20
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree", "A skin of fine zzar or wine"] 
             for item in eqp_items:
@@ -2478,8 +2478,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["IntiNum"] += 1
         player.skills_dict["ReliNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)       
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)       
     if (player.background == "Outlander") or (player.background == "Uthgardt Tribe Member"):
         P1 = "I am driven by a wanderlust that led me away from home."
         P2 = "I watch over my friends as if they were a litter of newborn pups."
@@ -2519,16 +2519,16 @@ def dndCharGenBkg(param, player):
         if player.background == "Outlander":
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["SurvNum"] += 1
-            player.proficiencies = musicalinstr(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["A staff", "A Hunting Trap", "A trophy from an animal you killed", "A set of Traveler's Clothes"]
             for item in eqp_items:
                 player.equipment.append(item)
         if player.background == "Uthgardt Tribe Member":
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["SurvNum"] += 1
-            player.proficiencies = artisantoolsmusicalinstr(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)     
+            player.proficiencies = dnd_languagesskills.artisantoolsmusicalinstr(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)     
             eqp_items = ["A Hunting Trap", "A totemic token or set of tattoos marking your loyalty to Uthgar and your tribal totem", "A set of Traveler's Clothes"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -2567,7 +2567,7 @@ def dndCharGenBkg(param, player):
         PlaintiffF6 = "If people find me unpleasant, that's their problem."
         PlaintiffF = [PlaintiffF1, PlaintiffF2, PlaintiffF3, PlaintiffF4, PlaintiffF5, PlaintiffF6]
         player.Flaw = random.choice(PlaintiffF)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 20
         eqp_items = ["Fine Clothes"]
         for item in eqp_items:
@@ -2596,21 +2596,21 @@ def dndCharGenBkg(param, player):
             player.equipment.append(dnd_tools.artisan_tools[chosen_tool].copy())           
         player.skills_dict["MediNum"] += 1
         player.skills_dict["PersNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)       
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)       
     if player.background == "Planar Philosopher": 
         player.gold = 10
         eqp_items = ["A portal key (such as a bag of golden tea leaves or the tooth of a planar beast)", "A manifesto of your guiding philosophy", "A set of common clothes in your faction's style"]
         for item in eqp_items:
             player.equipment.append(item)
         player.skills_dict["ArcaNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
         player.Flaw = ""               
     if player.background == "Prismari Student": 
-        player.proficiencies = artisantoolsmusicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantoolsmusicalinstr(param, player.proficiencies)
         player.gold = 10
         eqp_items = ["A bottle of Black Ink", "An Ink Pen", "A school uniform"]
         for item in eqp_items:
@@ -2648,7 +2648,7 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(dnd_tools.musical_instr[chosen_atmi].copy())              
         player.skills_dict["AcroNum"] += 1
         player.skills_dict["PerfNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2660,8 +2660,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["ArcaNum"] += 1
         player.skills_dict["NatuNum"] += 1
-        player.proficiencies = artisantools(param, player.proficiencies)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2704,7 +2704,7 @@ def dndCharGenBkg(param, player):
         player.gold = 10
         player.skills_dict["AcroNum"] += 1
         player.skills_dict["PerfNum"] += 1
-        player.proficiencies = musicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
         langs = ["Abys", "Gian"]
         langsavail = []
         for lang in langs:
@@ -2799,7 +2799,7 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["ReliNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)             
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)             
     if player.background == "Rewarded":      
         player.gold = 18
         eqp_items = ["A bottle of black ink", "An ink pen", "Five sheets of paper", "A signet ring", "A set of fine clothes"]    
@@ -2807,7 +2807,7 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["InsiNum"] += 1
         player.skills_dict["PersNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -2821,20 +2821,20 @@ def dndCharGenBkg(param, player):
         toolnames = []
         for tool in tools:
             toolnames.append(tool['Name'])
-        player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)
+        player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)
         if param == "Y":
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(GamingSetsNames, 1):
+                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(GamingSets)
+                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(GamingSets):
-                        chosen_gs = GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
+                        chosen_gs = dnd_languagesskills.dnd_languagesskills.GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy()) 
                         break
                     else:
@@ -2842,7 +2842,7 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")       
         if param == "N": 
-            chosen_gs = random.choice(GamingSets)
+            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
     if player.background == "Rival Intern":
         RivInPT1 = "My previous employer didn't respect me, and now I'll do whatever I can to gain respect."
@@ -2879,7 +2879,7 @@ def dndCharGenBkg(param, player):
         RivInF6 = "Our superiors might not like what you're doing. I'm going to have to put that in my report."
         RivInF = [RivInF1, RivInF2, RivInF3, RivInF4, RivInF5, RivInF6]
         player.Flaw = random.choice(RivInF)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 10
         eqp_items = ["A ledger from your previous employer containing a small piece of useful information", "A set of Fine Clothes"]
         for item in eqp_items:
@@ -2908,7 +2908,7 @@ def dndCharGenBkg(param, player):
             player.equipment.append(dnd_tools.artisan_tools[chosen_tool].copy())     
         player.skills_dict["HistNum"] += 1
         player.skills_dict["InveNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)             
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)             
     if player.background == "Ruined":     
         player.gold = 13
         eqp_items = ["A cracked hourglass", "A set of rusty manacles", "A half-empty bottle", "A hunting trap", "A set of traveler's clothes"]
@@ -2916,7 +2916,7 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["SteaNum"] += 1
         player.skills_dict["SurvNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         tools = [
             dnd_tools.gaming_sets["DiceSet"], 
             dnd_tools.gaming_sets["DrgnChSet"], 
@@ -2926,20 +2926,20 @@ def dndCharGenBkg(param, player):
         toolnames = []
         for tool in tools:
             toolnames.append(tool['Name'])
-        player.proficiencies = oneskillfromlist(param, player.proficiencies, toolnames)
+        player.proficiencies = dnd_languagesskills.oneskillfromlist(param, player.proficiencies, toolnames)
         if param == "Y":
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(GamingSetsNames, 1):
+                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(GamingSets)
+                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(GamingSets):
-                        chosen_gs = GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
+                        chosen_gs = dnd_languagesskills.dnd_languagesskills.GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())  
                         break
                     else:
@@ -2947,14 +2947,14 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")      
         if param == "N": 
-            chosen_gs = random.choice(GamingSets)
+            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
         player.Flaw = ""        
     if player.background == "Rune Carver":
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
         player.gold = 10
         eqp_items = ["A small knife", "A whetstone", "A set of common clothes"]
         for item in eqp_items:
@@ -3030,9 +3030,9 @@ def dndCharGenBkg(param, player):
         player.gold = 10
         if player.background == "Cloistered Solder":
             player.skills_dict["HistNum"] += 1
-            player.skills_dict["ArcaNum"], player.skills_dict["NatuNum"], player.skills_dict["ReliNum"] = choicethreeskill(param, player.skills_dict, "ArcaNum", "NatuNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["Nature"], dnd_tools.skills["Religion"])
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.skills_dict["ArcaNum"], player.skills_dict["NatuNum"], player.skills_dict["ReliNum"] = dnd_languagesskills.choicethreeskill(param, player.skills_dict, "ArcaNum", "NatuNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["Nature"], dnd_tools.skills["Religion"])
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["The scholar's robes of your cloister", "A writing kit (small pouch with a Quill, Ink, folded Parchment, and a small penknife)", "A borrowed book on the subject of your current study"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -3042,8 +3042,8 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(item)
             player.skills_dict["ArcaNum"] += 1
             player.skills_dict["HistNum"] += 1
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)      
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)      
     if (player.background == "Sailor") or (player.background == "Pirate"):        
         P1 = "My friends know they can rely on me, no matter what."
         P2 = "I work hard so that I can play hard when the work is done."
@@ -3129,9 +3129,9 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["NatuNum"] += 1
         player.skills_dict["PersNum"] += 1
-        player.proficiencies = artisantoolsmusicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.artisantoolsmusicalinstr(param, player.proficiencies)
         langlist = ["Elvi", "Loxo", "Sylv"]
-        player.languages, player.slang = choicethreelang(param, player.languages, player.slang, langlist)   
+        player.languages, player.slang = dnd_languagesskills.choicethreelang(param, player.languages, player.slang, langlist)   
     if player.background == "Shipwright": 
         ShipwPT1 = "I love talking and being heard more than I like to listen."
         ShipwPT2 = "I'm extremely fond of puzzles."
@@ -3177,8 +3177,8 @@ def dndCharGenBkg(param, player):
         player.skills_dict["PercNum"] += 1
         player.proficiencies.append(dnd_tools.artisan_tools["CarpTools"]["Name"])
         player.proficiencies.append(dnd_tools.vehicles["VehSea"]['Name'])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)     
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)     
     if player.background == "Silverquill Student": 
         player.gold = 15
         eqp_items = ["A bottle of Black Ink", "An Ink Pen", "A book of poetry", "A school uniform"]
@@ -3186,8 +3186,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["IntiNum"] += 1
         player.skills_dict["PersNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""
@@ -3233,8 +3233,8 @@ def dndCharGenBkg(param, player):
             player.equipment.append(item)
         player.skills_dict["ArcaNum"] += 1
         player.skills_dict["MediNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)            
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)            
     if player.background == "Smuggler":
         SmuPT1 = "I love being on the water but hate fishing."
         SmuPT2 = "I think of everything in terms of monetary value."
@@ -3316,16 +3316,16 @@ def dndCharGenBkg(param, player):
         if player.background == "City Watch":
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["InsiNum"] += 1
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["A uniform in the style of your unit and indicative of your rank", "A horn with which to summon help", "A set of Manacles"]
             for item in eqp_items:
                 player.equipment.append(item)
         if player.background == "Knight of the Order":
             player.skills_dict["PersNum"] += 1
-            player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["NatuNum"], player.skills_dict["ReliNum"] = choicefourskill(param, player.skills_dict, "ArcaNum", "HistNum", "NatuNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Nature"], dnd_tools.skills["Religion"])
-            player.proficiencies = gamingsetsmusicalinstr(param, player.proficiencies)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["NatuNum"], player.skills_dict["ReliNum"] = dnd_languagesskills.choicefourskill(param, player.skills_dict, "ArcaNum", "HistNum", "NatuNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Nature"], dnd_tools.skills["Religion"])
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["One set of Traveler's Clothes", "A Signet", "Banner or seal representing your place or rank in the order"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -3333,7 +3333,7 @@ def dndCharGenBkg(param, player):
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["PersNum"] += 1
             player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
-            player.proficiencies = gamingsets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)
             eqp_items = ["A uniform of your company (Traveler's Clothes in quality)", "An insignia of your rank"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -3341,15 +3341,15 @@ def dndCharGenBkg(param, player):
                 while True:
                     try:
                         print("0 - Random")
-                        for idx, gs in enumerate(GamingSetsNames, 1):
+                        for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
                             print(f"{idx} - {gs}")
                         gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                         if gsinv == 0:
-                            chosen_gs = random.choice(GamingSets)
+                            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
                             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                             break
-                        elif 1 <= gsinv <= len(GamingSets):
-                            chosen_gs = GamingSets[gsinv - 1]
+                        elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
+                            chosen_gs = dnd_languagesskills.dnd_languagesskills.GamingSets[gsinv - 1]
                             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())  
                             break
                         else:
@@ -3357,13 +3357,13 @@ def dndCharGenBkg(param, player):
                     except ValueError: #Handles non-numeric choices  
                         print("Invalid input. Please enter a number.")      
             if param == "N": 
-                chosen_gs = random.choice(GamingSets)
+                chosen_gs = random.choice(dnd_languagesskills.GamingSets)
                 player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())                   
         if player.background == "Soldier":
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["IntiNum"] += 1
             player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
-            player.proficiencies = gamingsets(param, player.proficiencies)       
+            player.proficiencies = dnd_languagesskills.dnd_languagesskills.GamingSets(param, player.proficiencies)       
             eqp_items = ["An insignia of rank", "A trophy taken from a fallen enemy (a Dagger, broken blade, or piece of a banner)", "A set of Bone Dice or Deck of Cards", "A set of Common Clothes"]                 
             for item in eqp_items:
                 player.equipment.append(item)
@@ -3447,7 +3447,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["SteaNum"] += 1
         player.proficiencies.append(dnd_tools.kits["PoisKit"]["Name"])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)      
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)      
     if player.background == "Wildspacer":
         player.gold = 10
         eqp_items = ["A belaying pin (club)", "A set of traveler's clothes", "A grappling hook", "50 feet of hempen rope"]
@@ -3609,7 +3609,7 @@ def dndCharGenBkg(param, player):
         for item in eqp_items:
             player.equipment.append(item)
         player.equipment.append(dnd_tools.gaming_sets['PlyCrdSet'].copy())
-        player.proficiencies = musicalinstrdisg(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.musicalinstrdisg(param, player.proficiencies)
         if param == "Y":
             while True:
                 try:
@@ -3643,7 +3643,7 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(dnd_tools.musical_instr[chosen_item].copy())            
         player.skills_dict["PerfNum"] += 1
         player.skills_dict["SloHNum"] += 1
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)  
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)  
     if player.background == "Witherbloom Student":    
         player.gold = 15
         eqp_items = ["A bottle of Black Ink", "An Ink Pen", "A book about plant identification", "An Iron Pot", "A school uniform"]
@@ -3653,7 +3653,7 @@ def dndCharGenBkg(param, player):
         player.skills_dict["NatuNum"] += 1
         player.skills_dict["SurvNum"] += 1
         player.proficiencies.append(dnd_tools.kits["HerbKit"]["Name"])
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.Trait = ""
         player.Ideal = ""
         player.Bond = ""

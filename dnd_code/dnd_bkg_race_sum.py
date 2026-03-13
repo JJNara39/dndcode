@@ -1,6 +1,6 @@
 import random
 import math
-from dnd_code.dnd_languagesskills import *
+from dnd_code import dnd_languagesskills
 
 def summation(param, player):
     if player.race == "Aasimar":
