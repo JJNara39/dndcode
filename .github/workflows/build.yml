@@ -48,7 +48,7 @@ jobs:
       run: pip install pyinstaller
 
     - name: Build Mac App
-      run: pyinstaller --windowed dnd_code/dnd.py
+      run: pyinstaller --windowed dnd.py
 
     - name: Upload Mac artifact
       uses: actions/upload-artifact@v4
