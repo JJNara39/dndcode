@@ -30,7 +30,7 @@ jobs:
         dir dnd_code      
 
     - name: Build Windows EXE
-      run: pyinstaller --clean --onefile --collect-all dnd_code --collect-submodules dnd.py
+      run: pyinstaller --clean --onefile --collect-all dnd_code --collect-submodules dnd_code dnd.py
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v4
