@@ -2,11 +2,13 @@ import random
 import os
 import shutil
 from fractions import Fraction
-from dnd_python_classes import Player
+from dnd_code.dnd_python_classes import Player
 import json
-import dndcombat
-from dnd_languagesskills import choose_spells, switch_spells
-import dnd_tools
+from dnd_code import dndcombat
+from dnd_code.dnd_languagesskills import choose_spells, switch_spells
+from dnd_code import dnd_tools
+import PyPDF2
+import pygame
 
 def save_character(player):
     with open(f"{player.name}_{player.playername}_level{player.level}.json", "w") as file:

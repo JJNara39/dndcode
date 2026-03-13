@@ -1,7 +1,7 @@
 import random
-import dnd_tools
-import dnd_spells
-from dnd_languagesskills import *
+from dnd_code import dnd_tools
+from dnd_code import dnd_spells
+from dnd_code.dnd_languagesskills import *
 
 def dice(dicenum):
     # Rolls a dice with dicenum sides

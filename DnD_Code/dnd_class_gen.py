@@ -1,7 +1,7 @@
 import random
 import math
-from dnd_languagesskills import *
-import dnd_tools
+from dnd_code.dnd_languagesskills import *
+from dnd_code import dnd_tools
 
 
 #Define a function called hpcalc that determines your hp, given your level, and what dice you give it

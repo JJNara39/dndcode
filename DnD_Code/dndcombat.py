@@ -1,10 +1,10 @@
 import random
 import copy
-from dnd_python_classes import Player, Monster, Team, Announcer
-from dnd_monsters import monsters
-from dnd_npc import npcs
-from dnd_languagesskills import *
-from dnd_combat_fn import *
+from dnd_code.dnd_python_classes import Player, Monster, Team, Announcer
+from dnd_code.dnd_monsters import monsters
+from dnd_code.dnd_npc import npcs
+from dnd_code.dnd_languagesskills import *
+from dnd_code.dnd_combat_fn import *
 
 def combat(player):
     announcer = Announcer()

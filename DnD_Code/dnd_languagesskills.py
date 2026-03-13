@@ -1,7 +1,7 @@
 import random
 import math
-import dnd_tools
-import dnd_spells
+from dnd_code import dnd_tools
+from dnd_code import dnd_spells
 
 def languagegen(param, PlLang, SLANG):
     if param == "Y":

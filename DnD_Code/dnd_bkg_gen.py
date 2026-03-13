@@ -1,6 +1,6 @@
 import random
-import dnd_tools
-from dnd_languagesskills import *
+from dnd_code import dnd_tools
+from dnd_code.dnd_languagesskills import *
 
 
 def dndCharGenBkg(param, player):    
