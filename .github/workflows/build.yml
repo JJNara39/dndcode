@@ -20,14 +20,7 @@ jobs:
         python-version: "3.13"
 
     - name: Install Dependencies
-      run: pip install pygame pyinstaller PyPDF2
-    
-    - name: Show repository files
-      run: |
-        echo "Repo structure:"
-        dir
-        echo "dnd_code contents:"
-        dir dnd_code      
+      run: pip install pygame pyinstaller PyPDF2   
 
     - name: Build Windows EXE
       run: pyinstaller --clean --onefile --collect-all dnd_code --collect-submodules dnd_code dnd.py
@@ -55,7 +48,7 @@ jobs:
       run: pip install pygame PyPDF2 pyinstaller
 
     - name: Build Mac App
-      run: pyinstaller --clean --windowed --onefile --collect-all dnd_code --hidden-import=dnd_code.dnd_combat_fn dnd.py
+      run: pyinstaller --clean --windowed --onefile --collect-all dnd_code --collect-submodules dnd_code dnd.py
 
     - name: Upload Mac artifact
       uses: actions/upload-artifact@v4

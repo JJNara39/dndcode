@@ -53,7 +53,7 @@ def dndchargen_characterbuilder(param, player):
                         if dnd_tools.artisan_tools["AlchSupp"]["Name"] in player.proficiencies:
                             if param == "Y":
                                 print(f"You already know {dnd_tools.artisan_tools['AlchSupp']['Name']}, please select a different tool to be proficient in.")
-                            player.proficiencies = artisantools(param, player.proficiencies)
+                            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                         else:
                             player.proficiencies.append(dnd_tools.artisan_tools['AlchSupp']['Name'])
                         player.artalcprof = True
@@ -79,7 +79,7 @@ def dndchargen_characterbuilder(param, player):
                         if "Smith's Tools" in player.proficiencies:
                             if param == "Y":
                                 print("You already know Smith's Tools, please select a different tool to be proficient in.")
-                            player.proficiencies = artisantools(param, player.proficiencies)
+                            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                         else:
                             player.proficiencies.append(dnd_tools.artisan_tools["SmthTools"]["Name"])
                         player.artarmprof = True
@@ -97,7 +97,7 @@ def dndchargen_characterbuilder(param, player):
                         if "Woodcarver's Tools" in player.proficiencies:
                             if param == "Y":
                                 print("You already know Woodcarver's Tools, please select a different tool to be proficient in.")
-                            player.proficiencies = artisantools(param, player.proficiencies)
+                            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                         else:
                             player.proficiencies.append("Woodcarver's Tools")
                         player.artartprof = True
@@ -114,7 +114,7 @@ def dndchargen_characterbuilder(param, player):
                         if "Smith's Tools" in player.proficiencies:
                             if param == "Y":
                                 print("You already know Smith's Tools, please select a different tool to be proficient in.")
-                            player.proficiencies = artisantools(param, player.proficiencies)
+                            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                         else:
                             player.proficiencies.append(dnd_tools.artisan_tools["SmthTools"]["Name"])
                         player.artbattlesmithprof = True
@@ -297,7 +297,7 @@ def dndchargen_characterbuilder(param, player):
                     if player.barblvl >= 14:
                         player.notes["Controlled Surge"] = "Whenever you roll on the Wild Magic table, you can roll the die twice and choose which of the two effects to unleash. If you roll the same number on both dice, you can ignore the number and choose any effect on the table."
                 if player.barbextraskill1 == False:
-                    player.skills = oneskillfromlist(param, player.skills, BarbSkillsList)
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, BarbSkillsList)
                     player.barbextraskill1 = True
             if player.barblvl >= 5:
                 player.notes["Extra Attack"] = "You can attack twice, instead of once, whenever you take the Attack action on your turn."
@@ -314,7 +314,7 @@ def dndchargen_characterbuilder(param, player):
                 player.notes["Brutal Critical"] = f"You can roll {player.barbbrutwep} additional weapon damage die when determining the extra damage for a critical hit with a melee attack."
             if player.barblvl >= 10:
                 if player.barbextraskill2 == False:
-                    player.skills = oneskillfromlist(param, player.skills, BarbSkillsList)
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, BarbSkillsList)
                     player.barbextraskill2 = True
             if player.barblvl >= 11:
                 player.notes["Relentless Rage"] = "Your rage can keep you fighting despite grievous wounds. If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead.\nEach time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10."
@@ -727,8 +727,8 @@ def dndchargen_characterbuilder(param, player):
                 clericknowledgedomain_str = ", ".join(spell for spell in clericknowledgedomain_spells)
                 player.notes["Domain Spells"] = f"Each domain has a list of spells — its domain spells — that you gain certain Cleric levels. Currently your Domain Spells are: {clericknowledgedomain_str}. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.\nIf you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you."
                 if player.clericknowledgelanguages == False:
-                    player.languages, player.slang = languagegen(param, player.languages, player.slang)
-                    player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                    player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+                    player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                     player.clericknowledgelanguages = True
                 player.notes["Blessings of Knowledge"] = "Your Proficiency Bonus is doubled for any ability check you make that uses either of those skills."
                 if player.clerlvl >= 2:
@@ -868,7 +868,7 @@ def dndchargen_characterbuilder(param, player):
                         dnd_tools.skills["Nature"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                     player.clericnatureskl = True
                 profs = ["Heavy Armor"]
                 for prof in profs:
@@ -952,7 +952,7 @@ def dndchargen_characterbuilder(param, player):
                         dnd_tools.skills["Intimidation"], 
                         dnd_tools.skills["Persuasion"]
                         ]
-                    player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                     player.clericorderskl = True                    
                 player.notes["Voice of Authority"] = "You can invoke the power of law to drive an ally to attack. If you cast a spell with a spell slot of 1st level or higher and target an ally with the spell, that ally can use their reaction immediately after the spell to make one weapon attack against a creature of your choice that you can see.\nIf the spell targets more than one ally, you choose the ally who can make the attack."
                 if player.clerlvl >= 2:
@@ -994,7 +994,7 @@ def dndchargen_characterbuilder(param, player):
                         dnd_tools.skills["Performance"], 
                         dnd_tools.skills["Persuasion"]
                         ]
-                    player.skills = oneskillfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)  
                     player.clericpeaceskl = True                  
                 player.notes["Emboldening Bond"] = f"You can forge an empowering bond among people who are at peace with one another. As an action, you choose a number of willing creatures within 30 feet of you (this can include yourself) equal to your Proficiency Bonus, or {player.profbonus} creatures. You create a magical bond among them for 10 minutes or until you use this feature again. While any bonded creature is within 30 feet of another, the creature can roll a d4 and add the number rolled to an attack roll, an ability check, or a saving throw it makes. Each creature can add the d4 no more than once per turn.\nYou can use this feature a number of times equal to your Proficiency Bonus, or {player.profbonus} times, and you regain all expended uses when you finish a long rest."
                 if player.clerlvl >= 2:
@@ -1461,7 +1461,7 @@ def dndchargen_characterbuilder(param, player):
                     player.notes["Combat Superiority"] = f"You learn maneuvers that are fueled by special dice called superiority dice.\nManeuvers - You learn three maneuvers (from Maneuvers table) of your choice. Many maneuvers enhance an attack in some way. You can use only one maneuver per attack. You learn two additional maneuvers of your choice at 7th, 10th, and 15th level. Each time you learn new maneuvers, you can also replace one maneuver you know with a different one.\nSuperiority Dice - You have {player.figsuperioritydie} superiority dice, which are d8s. A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.\nSaving Throws - Some of your maneuvers require your target to make a saving throw to resist the maneuver's effects. The saving throw DC is calculated as follows:\nManeuver save DC = 8 + your Proficiency Bonus, or {8 + player.profbonus}, + your Strength or Dexterity modifier (your choice)"
                     print("Going into artisantools")
                     if player.figbattlemasterprof == False:
-                        player.proficiencies = artisantools(param, player.proficiencies)  
+                        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)  
                         player.figbattlemasterprof = True  
                     if player.figlvl >= 7:
                         player.notes["Know Your Enemy"] = "If you spend at least 1 minute observing or interacting with another creature outside combat, you can learn certain information about its capabilities compared to your own. The DM tells you if the creature is your equal, superior, or inferior in regard to two of the following characteristics of your choice:\n- Strength score\n- Dexterity score\n- Constitution score\n- Armor Class\n- Current hit points\n- Total class levels, if any\n- Fighter class levels, if any"
@@ -1492,9 +1492,9 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["Performance"], 
                                                 dnd_tools.skills["Persuasion"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if CavFigChoice == "Language":
-                                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                                         break
                                     elif 1 <= cavfiginput <= len(CavFig):
                                         CavFigChoice = CavFig[cavfiginput-1]
@@ -1506,9 +1506,9 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["Performance"], 
                                                 dnd_tools.skills["Persuasion"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if CavFigChoice == "Language":
-                                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                                         break
                                     else:
                                         print("Invalid choice, please choose a valid option.")
@@ -1524,9 +1524,9 @@ def dndchargen_characterbuilder(param, player):
                                     dnd_tools.skills["Performance"], 
                                     dnd_tools.skills["Persuasion"]
                                     ]
-                                player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                             if CavFigChoice == "Language":
-                                player.languages, player.slang = languagegen(param, player.languages, player.slang)     
+                                player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)     
                         player.figcavskllang = True                   
                     player.notes["Born to the Saddle"] = "Your mastery as a rider becomes apparent. You have advantage on saving throws made to avoid falling off your mount. If you fall off your mount and descend no more than 10 feet, you can land on your feet if you're not incapacitated.\nFinally, mounting or dismounting a creature costs you only 5 feet of movement, rather than half your speed."
                     player.notes["Unwavering Mark"] = f"You can menace your foes, foiling their attacks and punishing them for harming others. When you hit a creature with a melee weapon attack, you can mark the creature until the end of your next turn. This effect ends early if you are incapacitated or you die, or if someone else marks the creature.\nWhile it is within 5 feet of you, a creature marked by you has disadvantage on any attack roll that doesn't target you.\nIn addition, if a creature marked by you deals damage to anyone other than you, you can make a special melee weapon attack against the marked creature as a bonus action on your next turn. You have advantage on the attack roll, and if it hits, the attack's weapon deals extra damage to the target equal to half your Fighter level, or {math.ceil(player.figlvl/2)} extra damage.\nRegardless of the number of creatures you mark, you can make this special attack a number of times equal to your Strength modifier, or {player.StrMod} times, a minimum of once, and you regain all expended uses of it when you finish a long rest."
@@ -1599,7 +1599,7 @@ def dndchargen_characterbuilder(param, player):
                                     dnd_tools.skills["Intimidation"], 
                                     dnd_tools.skills["Performance"]
                                     ]
-                                player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                             player.figpurpdragkngtskl = True
                         player.notes["Royal Envoy"] = "Knights of high standing are expected to conduct themselves with grace;\nYour Proficiency Bonus is doubled for any ability check you make that uses Persuasion. You receive this benefit regardless of the skill proficiency you gain from this feature."
                     if player.figlvl >= 10:
@@ -1649,9 +1649,9 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["Performance"], 
                                                 dnd_tools.skills["Persuasion"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if SamFigChoice == "Language":
-                                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                                         break
                                     elif 1 <= samfiginput <= len(SamFig):
                                         SamFigChoice = SamFig[samfiginput-1]
@@ -1662,9 +1662,9 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["Performance"], 
                                                 dnd_tools.skills["Persuasion"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if SamFigChoice == "Language":
-                                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                                         break
                                     else:
                                         print("Invalid choice, please choose a valid option.")
@@ -1679,9 +1679,9 @@ def dndchargen_characterbuilder(param, player):
                                     dnd_tools.skills["Performance"], 
                                     dnd_tools.skills["Persuasion"]
                                     ]
-                                player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                             if SamFigChoice == "Language":
-                                player.languages, player.slang = languagegen(param, player.languages, player.slang)   
+                                player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)   
                         player.figsamskllang = True                                         
                     player.figspirittemphp = 5
                     if player.figlvl >= 7:
@@ -1715,7 +1715,7 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["SleightofHand"], 
                                                 dnd_tools.skills["Stealth"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if CavFigChoice == "Language":
                                             if dnd_tools.TCant not in player.languages:
                                                 player.languages.append(dnd_tools.TCant)
@@ -1730,7 +1730,7 @@ def dndchargen_characterbuilder(param, player):
                                                 dnd_tools.skills["SleightofHand"], 
                                                 dnd_tools.skills["Stealth"]
                                                 ]
-                                            player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                                         if CavFigChoice == "Language":
                                             if dnd_tools.TCant not in player.languages:
                                                 player.languages.append(dnd_tools.TCant)
@@ -1749,7 +1749,7 @@ def dndchargen_characterbuilder(param, player):
                                     dnd_tools.skills["SleightofHand"], 
                                     dnd_tools.skills["Stealth"]
                                     ]
-                                player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                                player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                             if ScoffFigChoice == "Language":
                                 if dnd_tools.TCant not in player.languages:
                                     player.languages.append(dnd_tools.TCant)
@@ -1818,7 +1818,7 @@ def dndchargen_characterbuilder(param, player):
                         if dnd_tools.languages["Drac"] not in player.languages:
                             player.languages.append(dnd_tools.languages["Drac"])
                         else:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                     player.notes["Draconic Disciple"] = "You can channel draconic power to magnify your presence and imbue your unarmed strikes with the essence of a dragon's breath. You gain the following benefits:\nDraconic Presence. If you fail a Charisma (Intimidation) or Charisma (Persuasion) check, you can use your reaction to reroll the check, as you tap into the mighty presence of dragons. Once this feature turns a failure into a success, you can't use it again until you finish a long rest.\nDraconic Strike - When you damage a target with an unarmed strike, you can change the damage type to acid, cold, fire, lightning, or poison.\nTongue of Dragons. You learn to speak, read, and write Draconic or one other language of your choice (already done)."
                     player.notes["Breath of the Dragon"] = f"You can channel destructive waves of energy, like those created by the dragons you emulate. When you take the Attack action on your turn, you can replace one of the attacks with an exhalation of draconic energy in either a 20-foot cone or a 30-foot line that is 5 feet wide (your choice). Choose a damage type: acid, cold, fire, lightning, or poison. Each creature in that area must make a Dexterity saving throw against your ki save DC, or against {player.spellsavedc['Monk Spell Save DC']}, taking damage of the chosen type equal to two rolls of your Martial Arts die on a failed save, or half as much damage on a successful one."
                     if player.monklvl >= 6:
@@ -1849,20 +1849,20 @@ def dndchargen_characterbuilder(param, player):
                     if player.monklvl >= 6:
                         player.notes["Extort Truth"] = "You can precisely strike a hidden cluster of nerves on a creature, temporarily preventing it from masking its true thoughts and intent. When you hit a creature with an unarmed strike, you can spend 1 ki point to force it to make a Charisma saving throw. On a failed save, the creature is unable to speak a deliberate lie, and all Charisma checks directed at the creature are made with advantage for up to 10 minutes. You know if it succeeded or failed on its saving throw.\nAn affected creature is aware of the effect and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive in its answers as long as the effect lasts.\nIf you wish to impose this effect on a creature without injuring it, you can attack the creature to simply touch it, dealing no damage on a hit."
                         if player.monkcobaltmonkskllang1 == False:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-                            player.skills = oneskillfromlist(param, player.skills, WCSMSkillsList)
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, WCSMSkillsList)
                             player.monkcobaltmonkskllang1 = True
                         player.notes["Mystical Erudition"] = "You have extensively studied the history and lore within the archives of the Cobalt Soul. You learn one language of your choice, and you gain proficiency with one of the following skills of your choice: Arcana, History, Investigation, Nature, or Religion. If you already have proficiency in one of the listed skills, you can instead choose to double your Proficiency Bonus for any ability check you make that uses the chosen proficiency (both have been addressed and added to your sheet already).\nMore languages and proficiencies are available at higher levels."
                     if player.monklvl >= 11:
                         if player.monkcobaltmonkskllang2 == False:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-                            player.skills = oneskillfromlist(param, player.skills, WCSMSkillsList)
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, WCSMSkillsList)
                             player.monkcobaltmonkskllang2 = True
                         player.notes["Mind of Mercury"] = "You've honed your awareness and reflexes through mental aptitude and pattern recognition. Once per turn, if you've already taken your reaction, you may spend 1 ki point to take an additional reaction. You can use only one reaction per triggering effect."
                     if player.monklvl >= 17:
                         if player.monkcobaltmonkskllang3 == False:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-                            player.skills = oneskillfromlist(param, player.skills, WCSMSkillsList)     
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+                            player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, WCSMSkillsList)     
                             player.monkcobaltmonkskllang3 = True
                         player.notes["Debilitating Barrage"] = "You've gained the knowledge to manipulate a creature's ki to undermine their fortitude. When you hit a creature with an unarmed strike, you can spend 3 ki points to cause the creature to gain vulnerability to one damage type of your choice for 1 minute, or until the end of a turn in which it has taken damage of that type.\nIf a creature has resistance to the damage type you choose, this resistance is suppressed for 1 minute, rather than gaining vulnerability. A creature that is immune to the damage type you choose is unaffected. A creature who is affected by this feature cannot be affected by it again for 24 hours."
                 if player.subclass[i] == "Way of the Drunken Master Monk":
@@ -1900,7 +1900,7 @@ def dndchargen_characterbuilder(param, player):
                 if player.subclass[i] == "Way of the Kensei Monk":
                     if player.monkkenseitl == False:
                         toollist = [dnd_tools.artisan_tools["CallSupp"]["Name"], dnd_tools.artisan_tools["PaintSupp"]["Name"]]
-                        player.proficiencies = toolprof(param, player.proficiencies, toollist)
+                        player.proficiencies = dnd_languagesskills.toolprof(param, player.proficiencies, toollist)
                         player.monkkenseitl = True
                     player.notes["Path of the Kensei(1)"] = "Your special martial arts training leads you to master the use of certain weapons. This path also includes instruction in the deft strokes of calligraphy or painting. You gain the following benefits:\n- Kensei Weapons. Choose two types of weapons to be your kensei weapons: one melee weapon and one ranged weapon. Each of these weapons can be any simple or martial weapon that lacks the heavy and special properties. The longbow is also a valid choice. You gain proficiency with these weapons if you don't already have it. Weapons of the chosen types are monk weapons for you. Many of this tradition's features work only with your kensei weapons. More kensei weapons are available at higher levels.\n- Agile Parry. If you make an unarmed strike as part of the Attack action on your turn and are holding a kensei weapon, you can use it to defend yourself if it is a melee weapon. You gain a +2 bonus to AC until the start of your next turn, while the weapon is in your hand and you aren't incapacitated.\n- Kensei's Shot. You can use a bonus action on your turn to make your ranged attacks with a kensei weapon more deadly. When you do so, any target you hit with a ranged attack using a kensei weapon takes an extra 1d4 damage of the weapon's type. You retain this benefit until the end of the current turn.\n- Way of the Brush (addressed and added to proficiencies). You gain proficiency with your choice of calligrapher's supplies or painter's supplies."
                     if player.monklvl >= 6:
@@ -2412,7 +2412,7 @@ def dndchargen_characterbuilder(param, player):
                         if dnd_tools.languages["Drac"] not in player.languages:
                             player.languages.append(dnd_tools.languages["Drac"])
                         else:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                     player.notes["Draconic Gift"] = "The bond you share with your drake creates a connection to dragonkind, granting you understanding and empowering your presence. You gain the following benefits:\nThaumaturgy - You learn the Thaumaturgy cantrip, which is a ranger spell for you.\nTongue of Dragons - You learn to speak, read, and write Draconic or one other language of your choice (this last one has been addressed)."
                     player.notes["Drake Companion"] = "As an action, you can magically summon the drake that is bound to you. It appears in an unoccupied space of your choice within 30 feet of you.\nThe drake is friendly to you and your companions, and it obeys your commands. See its game statistics in the Drake Companion stat block in 'Fizban's Treasury of Dragons', which uses your Proficiency Bonus (PB) in several places. Whenever you summon the drake, choose a damage type listed in its Draconic Essence trait. You can determine the cosmetic characteristics of the drake, such as its color, its scale texture, or any visible effect of its Draconic Essence; your choice has no effect on its game statistics.\nIn combat, the drake shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the drake can take any action of its choice, not just Dodge.\nThe drake remains until it is reduced to 0 hit points, until you use this feature to summon the drake again, or until you die. Anything the drake was wearing or carrying is left behind when the drake vanishes.\nOnce you summon the drake, you can't do so again until you finish a long rest, unless you expend a spell slot of 1st level or higher to summon it."
                     if player.ranlvl >= 7:
@@ -2484,7 +2484,7 @@ def dndchargen_characterbuilder(param, player):
                             dnd_tools.skills["Performance"], 
                             dnd_tools.skills["Persuasion"]
                             ]
-                        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                         player.ranfeywandererskl = True
                     if player.ranlvl >= 7:
                         player.notes["Beguiling Twist"] = f"The magic of the Feywild guards your mind. You have advantage on saving throws against being charmed or frightened.\nIn addition, whenever you or a creature you can see within 120 feet of you succeeds on a saving throw against being charmed or frightened, you can use your reaction to force a different creature you can see within 120 feet of you to make a Wisdom saving throw against your spell save DC, or against {player.spellsavedc['Ranger Spell Save DC']}. If the save fails, the target is charmed or frightened by you (your choice) for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a successful save."
@@ -2522,7 +2522,7 @@ def dndchargen_characterbuilder(param, player):
                                 player.skills.append(dnd_tools.saving_throws["WisST"])
                             else:
                                 SavingThrowList = [dnd_tools.saving_throws["IntST"], dnd_tools.saving_throws["ChaST"]]
-                                player.skills = oneskillfromlist(param, player.skills, SavingThrowList)
+                                player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SavingThrowList)
                             player.rangloomstalkerskl = True
                         player.notes["Iron Mind"] = "You have honed your ability to resist the mind-altering powers of your prey. You gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice), these all have been addressed."
                     if player.ranlvl >= 11:
@@ -2756,9 +2756,9 @@ def dndchargen_characterbuilder(param, player):
                     if player.rogmastermindskl == False:
                         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])
                         player.proficiencies.append(dnd_tools.kits["ForgKit"]["Name"]) 
-                        player.proficiencies = gamingsets(param, player.proficiencies)  
-                        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-                        player.languages, player.slang = languagegen(param, player.languages, player.slang)        
+                        player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)  
+                        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+                        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)        
                         player.rogmastermindskl = True         
                     player.notes["Master of Intrigue"] = "You can unerringly mimic the speech patterns and accent of a creature that you hear speak for at least 1 minute, enabling you to pass yourself off as a native speaker of a particular land, provided that you know the language."
                     player.notes["Master of Tactics"] = "You can use the Help action as a bonus action. Additionally, when you use the Help action to aid an ally in attacking a creature, the target of that attack can be within 30 feet of you, rather than 5 feet of you, if the target can see or hear you."
@@ -3648,7 +3648,7 @@ def dndchargen_characterbuilder(param, player):
                     if dnd_tools.skills["Performance"] not in player.skills:
                         player.skills.append(dnd_tools.skills["Performance"])
                     if player.wizbladesingwep == False:
-                        player.proficiencies = onehandedweaponprof(param, player.proficiencies)
+                        player.proficiencies = dnd_languagesskills.onehandedweaponprof(param, player.proficiencies)
                         player.wizbladesingwep = True
                     player.notes["Bladesong"] = f"You can invoke an elven magic called the Bladesong, provided that you aren't wearing medium or heavy armor or using a shield. It graces you with supernatural speed, agility, and focus.\nYou can use a bonus action to start the Bladesong, which lasts for 1 minute. It ends early if you are incapacitated, if you don medium or heavy armor or a shield, or if you use two hands to make an attack with a weapon. You can also dismiss the Bladesong at any time (no action required).\nWhile your Bladesong is active, you gain the following benefits:\n- You gain a bonus to your AC equal to your Intelligence modifier, or bonus of {player.IntMod}, minimum of +1.\n- Your walking speed increases by 10 feet.\n- You have advantage on Dexterity (Acrobatics) checks.\n- You gain a bonus to any Constitution saving throw you make to maintain your concentration on a spell. The bonus equals your Intelligence modifier, or bonus of {player.IntMod}, minimum of +1.\nYou can use this feature a number of times equal to your Proficiency Bonus, or {player.profbonus} times, and you regain all expended uses of it when you finish a long rest."
                     if player.wizlvl >= 6:

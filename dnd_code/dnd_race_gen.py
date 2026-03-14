@@ -356,15 +356,15 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)          
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.notes["Built for Success"] = f"You can add a d4 to one attack roll, ability check, or saving throw you make, and you can do so after seeing the d20 roll but before the effects of the roll are resolved. You can use this trait {player.profbonus} times, and you regain all expended uses when you finish a long rest."
         #Combat notes
         player.notes["Mechanical Nature"] = "You have resistance to poison damage and immunity to disease, and you have advantage on saving throws against being paralyzed or poisoned. You don't need to eat, drink, or breathe."
         player.notes["Sentry's Rest"] = "When you take a long rest, you spend at least 6 hours in an inactive, motionless state, instead of sleeping. In this state, you appear inert, but you remain conscious."
         #Resting notes
-        player.proficiencies = arttool2(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.arttool2(param, player.proficiencies)
         player.type = "Construct"
     if player.race == "Bugbear":
         Hmo1 = dice(12)
@@ -415,7 +415,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)    
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Fey"
         player.notes["Charge"] = "If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves."
         #Combat Notes
@@ -428,7 +428,7 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Nature"],
             dnd_tools.skills["Survival"],
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
     if player.race == "Cervan":
         player.ability_scores["CON"] += 2
         player.type = "Humanoid"
@@ -497,10 +497,10 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["CHA"] += 2
-        player.ability_scores = singleabilityscore(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.type = "Humanoid"
         player.notes["Shapechanger"] = "As an action, you can change your appearance and your voice. You determine the specifics of the changes, including your coloration, hair length, and sex. You can also adjust your height and weight, but not so much that your size changes. You can make yourself appear as a member of another race, though none of your game statistics change. You can't duplicate the appearance of a creature you've never seen, and you must adopt a form that has the same basic arrangement of limbs that you have. Your clothing and equipment aren't changed by this trait.\nYou stay in the new form until you use an action to revert to your true form or until you die."
@@ -511,7 +511,7 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Intimidation"], 
             dnd_tools.skills["Persuasion"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
     if player.race == "Corginian":
         Hmo1 = dice(4)
         Hmo2 = dice(4)
@@ -527,7 +527,7 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Small"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["CHA"] += 2
         player.ability_scores["WIS"] += 1
         player.speed['Walk'] = 25
@@ -574,7 +574,7 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Nature"], 
             dnd_tools.skills["Religion"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
         player.notes["Appraising Eye"] = "You have an almost supernatural ability to appraise objects. By spending an action examining any object, you can determine any magical properties the item has, how they might be used or activated, as well as a fair estimation of market price. Using this skill strains the eyes, and you must complete a long or short rest before you can use it again."
         #General notes
         if player.subrace == "Dusk Corvum":
@@ -596,16 +596,16 @@ def dndCharGenRace(param, player):
                         print("2 - One Tool of your choice")
                         kcprof = int(input("Choose whether to gain proficiency in a language or a tool. "))
                         if kcprof == 1:
-                            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                             break
                         elif kcprof == 2:
-                            player.proficiencies = artisantools(param, player.proficiencies)
+                            player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                             break
                         elif kcprof == 0:
                             if KindledCorvumProfRand == "Languages":
-                                player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                                player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                             if KindledCorvumProfRand == "Tools":
-                                player.proficiencies = artisantools(param, player.proficiencies)
+                                player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                             break
                         else:
                             print("Invalid choice, please choose a valid option.")
@@ -613,9 +613,9 @@ def dndCharGenRace(param, player):
                         print("Invalid input. Please enter a number.")
             if param == "N":
                 if KindledCorvumProfRand == "Languages":
-                    player.languages, player.slang = languagegen(param, player.languages, player.slang)
+                    player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
                 if KindledCorvumProfRand == "Tools":
-                    player.proficiencies = artisantools(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
             player.notes["Sharp Mind"] = "You are able to accurately recall with perfect clarity anything you have seen or heard within the past month."
     if player.race == "Dhampir":
         Hmo1 = dice(10)
@@ -632,8 +632,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #can choose to be small instead
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.speed['Walk'] =  35
         player.notes["Darkvision"] = dnd_tools.Darkvision
@@ -659,8 +659,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default Medium; what was it before the incident that made you disembodied?
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["INT"] += 1
         player.ability_scores["DEX"] += 1
         player.speed['Walk'] =  30
@@ -696,7 +696,7 @@ def dndCharGenRace(param, player):
                 player.slang.remove(lang)          
         player.type = "Dragonoid"
         player.speed['Walk'] = 30
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes        
         if player.subrace == "Chromatic Dragonborn":
@@ -754,7 +754,7 @@ def dndCharGenRace(param, player):
             dnd_tools.artisan_tools["BrewSupp"]["Name"],
             dnd_tools.artisan_tools["MasnTools"]["Name"]
         ]
-        player.proficiencies = toolprof(param, player.proficiencies, ToolList)
+        player.proficiencies = dnd_languagesskills.toolprof(param, player.proficiencies, ToolList)
         player.notes["Stonecunning"] = f"Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, or {2*player.profbonus}, instead of your normal proficiency bonus."
         #General notes
         player.size = "Medium"
@@ -868,8 +868,8 @@ def dndCharGenRace(param, player):
                 if lang in player.slang:
                     player.languages.append(dnd_tools.languages[lang])
                     player.slang.remove(lang)      
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.ability_scores = abilityscores(param, player.ability_scores)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
             player.notes["Astral Fire"] = "You know one of the following cantrips of your choice: dancing lights, light, or sacred flame. Intelligence, Wisdom, or Charisma is your spellcasting ability for it (choose when you select this race)."
             #Spell notes           
             player.notes["Starlight Step"] = f"As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. You can use this trait {player.profbonus} times, and you regain all expended uses when you finish a long rest."
@@ -930,7 +930,7 @@ def dndCharGenRace(param, player):
                 if lang in player.slang:
                     player.languages.append(dnd_tools.languages[lang])
                     player.slang.remove(lang)        
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.ability_scores["CHA"] += 1
             player.notes["Trance"] = "Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep."
         if player.subrace == "High Elf": 
@@ -952,7 +952,7 @@ def dndCharGenRace(param, player):
                 if lang in player.slang:
                     player.languages.append(dnd_tools.languages[lang])
                     player.slang.remove(lang)        
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)     
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)     
             player.ability_scores["INT"] += 1
             profs = ["Longsword", "Shortsword", "Shortbow", "Longbow"]
             for prof in profs:
@@ -1061,8 +1061,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Small"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Fey"
         player.speed['Walk'] =  30
         player.notes["Flight"] = "Because of your wings, you have a flying speed equal to your walking speed. You can't use this flying speed if you're wearing medium or heavy armor."
@@ -1136,7 +1136,7 @@ def dndCharGenRace(param, player):
             dnd_tools.artisan_tools["CarpTools"]["Name"],
             dnd_tools.artisan_tools["SmthTools"]["Name"]
         ]
-        player.proficiencies = toolprof(param, player.proficiencies, ToolList)
+        player.proficiencies = dnd_languagesskills.toolprof(param, player.proficiencies, ToolList)
         if player.subrace == "Bright Gallus":
             player.ability_scores["CHA"] += 1
             player.notes["Inspiring"] = "By spending an action and giving words of advice or encouragement, you can inspire an ally who is able to see and hear you. The ally can roll a d4 and add the number rolled to their next ability check, attack roll, or saving throw."
@@ -1216,8 +1216,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.speed['Walk'] =  30
         player.speed["Swim"] = player.speed['Walk']
@@ -1254,8 +1254,8 @@ def dndCharGenRace(param, player):
                     player.languages.append(dnd_tools.languages[lang])
                     player.slang.remove(lang)  
             player.ability_scores["STR"] += 2
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
-            player.proficiencies, player.skills = toolskillprof(param, player.proficiencies, player.skills)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+            player.proficiencies, player.skills = dnd_languagesskills.toolskillprof(param, player.proficiencies, player.skills)
             player.notes["Githyanki Psionics(1)"] = "You know the Mage Hand cantrip, and the hand is invisible when you cast the cantrip with this trait.\nIntelligence is your spellcasting ability for this spell. When you cast it with this trait, it doesn't require components."
             #Spell Notes for (1), general notes for (2) and (3)
             if player.level >= 3:
@@ -1457,8 +1457,8 @@ def dndCharGenRace(param, player):
         hy = Wbase + Wemod
         player.height = str(tl)
         player.weight = str(hy)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.speed['Walk'] =  30
         player.size = "Medium" #default medium, can choose to be small
@@ -1488,17 +1488,17 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["CHA"] += 2
-        player.ability_scores = singleabilityscore(param, player.ability_scores)
-        player.ability_scores = singleabilityscore(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.type = "Humanoid"
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes
         player.notes["Fey Ancestry"] = "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
         #Combat Notes
-        player.skills = skillprof2(param, player.skills) 
+        player.skills = dnd_languagesskills.skillprof2(param, player.skills) 
         if player.subrace == "Half-Elf: Aquatic Elf Descent":
             player.speed["Swim"] = 30
         if player.subrace == "Half-Elf: Drow Descent":
@@ -1690,8 +1690,8 @@ def dndCharGenRace(param, player):
         hy = Wbase + Wemod
         player.height = str(tl)
         player.weight = str(hy)
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.size = "Medium" #default medium, can choose small instead
         player.speed['Walk'] =  30
@@ -1746,8 +1746,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default medium, can choose to be small
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Fey"
         player.speed['Walk'] =  30
         player.notes["Darkvision"] = dnd_tools.Darkvision
@@ -1782,8 +1782,8 @@ def dndCharGenRace(param, player):
         player.type = "Goblinoid"
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes
-        player.proficiencies = martwepprof(param, player.proficiencies)
-        player.proficiencies = martwepprof(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.martwepprof(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.martwepprof(param, player.proficiencies)
         if "Light Armor" not in player.proficiencies:
             player.proficiencies.append("Light Armor")
         player.notes["Saving Face"] = "Hobgoblins are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can't use it again until you finish a short or long rest."
@@ -1803,7 +1803,7 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.speed['Walk'] =  30
         player.type = "Humanoid"
         if player.subrace == "Human":
@@ -1814,9 +1814,9 @@ def dndCharGenRace(param, player):
             player.ability_scores["STR"] += 1
             player.ability_scores["WIS"] += 1        
         if player.subrace == "Variant Human":
-            player.ability_scores = singleabilityscore(param, player.ability_scores)
-            player.ability_scores = singleabilityscore(param, player.ability_scores)
-            player.skills = skillprof(param, player.skills)
+            player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
+            player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
+            player.skills = dnd_languagesskills.skillprof(param, player.skills)
             player.notes["Feat"] = "You gain one feat of your choice." 
             #Add in ability to choose feat
     if player.race == "Jerbeen":
@@ -1871,7 +1871,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Humanoid"
         player.ability_scores["WIS"] += 2
         player.ability_scores["CHA"] += 1
@@ -1898,8 +1898,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Small"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.speed['Walk'] =  30
         SkillsList = [
@@ -1909,7 +1909,7 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Stealth"], 
             dnd_tools.skills["Survival"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
         player.notes["Fearless"] = "You have advantage on saving throws you make to avoid or end the frightened condition on yourself. When you fail a saving throw to avoid or end the frightened condition on yourself, you can choose to succeed instead. Once you succeed on a saving throw in this way, you can't do so again until you finish a long rest."
         #Combat Notes
         player.notes["Taunt"] = "You have an extraordinary ability to fluster creatures. As a bonus action, you can unleash a string of provoking words at a creature within 60 feet of yourself that can hear and understand you. The target must succeed on a Wisdom saving throw, or it has disadvantage on attack rolls against targets other than you until the start of your next turn. The DC equals 8 + your proficiency bonus + your Intelligence, Wisdom, or Charisma modifier (choose when you select this race).\nYou can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest."
@@ -1945,8 +1945,8 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Stealth"],
             dnd_tools.skills["SleightofHand"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
         player.notes["Mimicry"] = "You can mimic sounds you have heard, including voices. A creature that hears the sounds can tell they are imitations with a successful Insight check opposed by your Deception check."
         #General Notes
         player.languages.append("In addition to the languages you know, you can only speak using your Mimicry trait.")
@@ -2016,7 +2016,7 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Perception"], 
             dnd_tools.skills["Survival"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
         player.notes["Daunting Roar"] = "As a bonus action, you can let out an especially menacing roar. Creatures of your choice within 10 feet of you that can hear you must succeed on a Wisdom saving throw or become frightened of you until the end of your next turn. The DC of the save equals 8 + your proficiency bonus + your Constitution modifier. Once you use this trait, you can't use it again until you finish a short or long rest."
         #Combat Notes
     if player.race == "Lizardfolk":
@@ -2054,8 +2054,8 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Stealth"], 
             dnd_tools.skills["Survival"]
         ]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
         player.notes["Hungry Jaws"] = "In battle, you can throw yourself into a vicious feeding frenzy. As a bonus action, you can make a special attack with your bite. If the attack hits, it deals its normal damage, and you gain temporary hit points equal to your Constitution modifier (minimum of 1), and you can't use this trait again until you finish a short or long rest."
         #Combat Notes
     if player.race == "Locathah":
@@ -2217,7 +2217,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Humanoid"
         player.ability_scores["STR"] += 2
         player.ability_scores["CON"] += 1
@@ -2228,7 +2228,7 @@ def dndCharGenRace(param, player):
         player.notes["Hammering Horns"] = "Immediately after you hit a creature with a melee attack as part of the Attack action on your turn, you can use a bonus action to attempt to shove that target with your horns. The target must be no more than one size larger than you and within 5 feet of you. Unless it succeeds on a Strength saving throw against a DC equal to 8 + your proficiency bonus+ your Strength modifier, you push it up to 10 feet away from you."
         #Combat Notes
         SkillsList = [dnd_tools.skills["Intimidation"], dnd_tools.skills["Persuasion"]]
-        player.skills = oneskillfromlist(param, player.skills, SkillsList)
+        player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
     if player.race == "Orc":
         Hmo1 = dice(8)
         Hmo2 = dice(8)
@@ -2276,9 +2276,9 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default medium, can choose small
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Humanoid"
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes
@@ -2299,8 +2299,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default medium, can choose small
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Ooze"
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes
@@ -2369,8 +2369,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default medium, can choose small
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Humanoid"
         player.speed['Walk'] =  30
         player.notes["Deathless Nature"] = "You have escaped death, a fact represented by the following benefits:\nYou have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage.\nYou have advantage on death saving throws.\nYou don't need to eat, drink, or breathe.\nYou don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in an inactive, motionless state, during which you retain consciousness."
@@ -2397,7 +2397,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["CHA"] += 2
         player.ability_scores["DEX"] += 1
         player.type = "Fey"
@@ -2410,7 +2410,7 @@ def dndCharGenRace(param, player):
         #General Notes
         player.skills.append(dnd_tools.skills["Performance"])
         player.skills.append(dnd_tools.skills["Persuasion"])
-        player.proficiencies = musicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
     if player.race == "Sharkin":
         Hmo1 = dice(4)
         Hmo2 = dice(4)
@@ -2794,7 +2794,7 @@ def dndCharGenRace(param, player):
             hy = Wbase + Wemod
             player.height = str(tl)
             player.weight = str(hy)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.ability_scores["CON"] += 2
             player.ability_scores["STR"] += 1
             player.skills.append(dnd_tools.skills["Athletics"])
@@ -2812,7 +2812,7 @@ def dndCharGenRace(param, player):
             hy = Wbase + Wemod
             player.height = str(tl)
             player.weight = str(hy)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.ability_scores["STR"] += 2
             player.ability_scores["DEX"] += 1
             player.skills.append(dnd_tools.skills["Intimidation"])
@@ -2831,7 +2831,7 @@ def dndCharGenRace(param, player):
             hy = Wbase + Wemod
             player.height = str(tl)
             player.weight = str(hy)        
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.ability_scores["DEX"] += 2
             player.ability_scores["CHA"] += 1
             player.skills.append(dnd_tools.skills["Acrobatics"])
@@ -2851,7 +2851,7 @@ def dndCharGenRace(param, player):
             hy = Wbase + Wemod
             player.height = str(tl)
             player.weight = str(hy)
-            player.languages, player.slang = languagegen(param, player.languages, player.slang)
+            player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.ability_scores["WIS"] += 2
             player.ability_scores["DEX"] += 1
             player.skills.append(dnd_tools.skills["Survival"])
@@ -2913,7 +2913,7 @@ def dndCharGenRace(param, player):
                     player.slang.remove(lang)  
         player.type = "Humanoid"
         player.ability_scores["CON"] += 2
-        player.ability_scores = singleabilityscore(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.notes["Darkvision"] = dnd_tools.Darkvision
         #Darkvision notes
@@ -2976,7 +2976,7 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["DEX"] += 2
         player.ability_scores["CHA"] += 1
         player.speed['Walk'] =  30
@@ -3102,8 +3102,8 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)
         player.size = "Medium" #default medium, can choose small
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
-        player.ability_scores = abilityscores(param, player.ability_scores)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
+        player.ability_scores = dnd_languagesskills.abilityscores(param, player.ability_scores)
         player.type = "Monstrosity"
         player.speed['Walk'] =  35
         player.notes["Darkvision"] = dnd_tools.Darkvision
@@ -3135,7 +3135,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["STR"] += 2
         player.ability_scores["WIS"] += 1
         player.speed['Walk'] =  30
@@ -3201,7 +3201,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Humanoid"
         player.ability_scores["INT"] += 2
         player.ability_scores["WIS"] += 1
@@ -3216,8 +3216,8 @@ def dndCharGenRace(param, player):
             dnd_tools.skills["Performance"],
             dnd_tools.skills["SleightofHand"]
         ]
-        player.notes, player.skills = vedsixskillprof(param, player.notes, player.skills, SkillsList)
-        player.proficiencies = vedartisantools(param, player.proficiencies)
+        player.notes, player.skills = dnd_languagesskills.vedsixskillprof(param, player.notes, player.skills, SkillsList)
+        player.proficiencies = dnd_languagesskills.vedartisantools(param, player.proficiencies)
         player.notes["Partially Amphibious"] = "By absorbing oxygen through your skin, you can breathe underwater for up to 1 hour. Once you've reached that limit, you can't use this trait again until you finish a long rest."
         #General Notes
     if player.race == "Verdan":
@@ -3243,7 +3243,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.ability_scores["CON"] += 1
         player.ability_scores["CHA"] += 2
         player.speed['Walk'] =  30
@@ -3306,17 +3306,17 @@ def dndCharGenRace(param, player):
         player.height = str(tl)
         player.weight = str(hy)        
         player.size = "Medium"
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Construct"
         player.ability_scores["CON"] += 2
-        player.ability_scores = singleabilityscore(param, player.ability_scores)
+        player.ability_scores = dnd_languagesskills.singleabilityscore(param, player.ability_scores)
         player.speed['Walk'] =  30
         player.notes["Constructed Resilience"] = "You were created to have remarkable fortitude, represented by the following benefits:\nYou have advantage on saving throws against being poisoned, and you have resistance to poison damage.\nYou don't need to eat, drink, or breathe.\nYou are immune to disease.\nYou don't need to sleep, and magic can't put you to sleep."
         #General Nots
         player.notes["Sentry's Rest"] = "When you take a long rest, you must spend at least six hours in an inactive, motionless state, rather than sleeping. In this state, you appear inert, but it doesn't render you unconscious, and you can see and hear as normal."
         #General Notes
-        player.skills = skillprof(param, player.skills)
-        player.proficiencies = artisantools(param, player.proficiencies)
+        player.skills = dnd_languagesskills.skillprof(param, player.skills)
+        player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
     if player.race == "Wechselkind":
         Hmo1 = dice(10)
         Hmo2 = dice(10)
@@ -3337,7 +3337,7 @@ def dndCharGenRace(param, player):
             if lang in player.slang:
                 player.languages.append(dnd_tools.languages[lang])
                 player.slang.remove(lang)  
-        player.languages, player.slang = languagegen(param, player.languages, player.slang)
+        player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.type = "Fey"
         player.ability_scores["CON"] += 2
         player.ability_scores["CHA"] += 1

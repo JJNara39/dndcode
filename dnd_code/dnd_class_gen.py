@@ -342,7 +342,7 @@ def dndchargen_class(param, player):
                             player.proficiencies.append(prof)
                     player.proficiencies.append(dnd_tools.kits["ThievKit"]["Name"])
                     player.proficiencies.append(dnd_tools.artisan_tools["TinkTools"]["Name"])                                                
-                    player.proficiencies = artisantools(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.artisantools(param, player.proficiencies)
                     player.skills.append(dnd_tools.saving_throws["ConST"])
                     player.skills.append(dnd_tools.saving_throws["IntST"])
                     ArtSkillsList = [
@@ -354,7 +354,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Perception"], 
                         dnd_tools.skills["SleightofHand"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, ArtSkillsList)
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, ArtSkillsList)
                     ArtChoices = ["Starting Equipment", "Gold"]
                     ArtChoices2 = ["Studded Leather Armor", "Scale Mail"]
                     if param == "Y":
@@ -494,7 +494,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Perception"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, BarbSkillsList)
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, BarbSkillsList)
                     StartEquip1 = ["Greataxe", "Martial Melee Weapon"]
                     StartEquip2 = ["Two Handaxes", "Any Simple Weapon"]
                     if param == "Y":
@@ -648,12 +648,12 @@ def dndchargen_class(param, player):
                     for prof in profs:
                         if prof not in player.proficiencies:
                             player.proficiencies.append(prof)
-                    player.proficiencies = musicalinstr(param, player.proficiencies)
-                    player.proficiencies = musicalinstr(param, player.proficiencies)
-                    player.proficiencies = musicalinstr(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)
                     player.skills.append(dnd_tools.saving_throws["DexST"])
                     player.skills.append(dnd_tools.saving_throws["ChaST"])
-                    player.skills = skillprof3(param, player.skills)  
+                    player.skills = dnd_languagesskills.skillprof3(param, player.skills)  
                     StartEquip1 = ["Rapier", "Longsword", "Any Simple Weapon"]
                     StartEquip2 = ["Diplomat's Pack", "Entertainer's Pack"]     
                     StartEquip3 = ["Lute", "Any Other Musical Instrument"]                                   
@@ -798,8 +798,8 @@ def dndchargen_class(param, player):
                     for prof in profs:
                         if prof not in player.proficiencies:
                             player.proficiencies.append(prof)
-                    player.skills = skillprof(param, player.skills)   
-                    player.proficiencies = musicalinstr(param, player.proficiencies)                                                                                                      
+                    player.skills = dnd_languagesskills.skillprof(param, player.skills)   
+                    player.proficiencies = dnd_languagesskills.musicalinstr(param, player.proficiencies)                                                                                                      
             player.spellcastingclass.append("Bard")
             player.spellcastingability.append("Cha")
             player.notes["Bard Cantrips Known"] = 2
@@ -858,7 +858,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Persuasion"], 
                         dnd_tools.skills["Religion"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)   
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)   
                     StartEquip1 = ["Mace", "Warhammer (if proficient)"]
                     StartEquip2 = ["Scale Mail", "Leather Armor", "Chain Mail (if proficient)"]     
                     StartEquip3 = ["Light Crossbow w/ 20 Bolts", "Any Simple Weapon"]
@@ -1146,7 +1146,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Religion"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)  
                     StartEquip1 = ["Wooden Shield", "Any Simple Weapon"]
                     StartEquip2 = ["Scimitar", "Any Simple Melee Weapon"]
                     if param == "Y":
@@ -1315,7 +1315,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Perception"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)  
                     StartEquip1 = ["Chain Mail", "Leather Armor, Longbow and 20 Arrows"]
                     StartEquip2 = ["Martial Weapon and Shield", "Two Martial Weapons"]
                     StartEquip3 = ["Light Crossbow and 20 Bolts", "Two Handaxes"]
@@ -1550,7 +1550,7 @@ def dndchargen_class(param, player):
                     for prof in profs:
                         if prof not in player.proficiencies:
                             player.proficiencies.append(prof)       
-                    player.proficiencies = artisantoolsmusicalinstr(param, player.proficiencies)
+                    player.proficiencies = dnd_languagesskills.artisantoolsmusicalinstr(param, player.proficiencies)
                     player.skills.append(dnd_tools.saving_throws["StrST"])
                     player.skills.append(dnd_tools.saving_throws["DexST"])
                     SkillsList = [
@@ -1561,7 +1561,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Religion"], 
                         dnd_tools.skills["Stealth"]
                         ]    
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)  
                     StartEquip1 = ["Shortsword", "Any Simple Weapon"]
                     StartEquip2 = ["Dungeoneer's Pack", "Explorer's Pack"]
                     if param == "Y":
@@ -1692,7 +1692,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Persuasion"], 
                         dnd_tools.skills["Religion"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)      
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)      
                     StartEquip1 = ["A Martial Weapon and a Shield", "Two Martial Weapons"]
                     StartEquip2 = ["Five Javelins", "Any Simple Melee Weapon"]
                     StartEquip3 = ["Priest's Pack", "Explorer's Pack"]
@@ -1921,7 +1921,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Stealth"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = threeskillsfromlist(param, player.skills, SkillsList)         
+                    player.skills = dnd_languagesskills.threeskillsfromlist(param, player.skills, SkillsList)         
                     StartEquip1 = ["Scale Mail", "Leather Armor"]
                     StartEquip2 = ["Two Shortswords", "Two Simple Melee Weapons"]
                     StartEquip3 = ["Dungeoneer's Pack", "Explorer's Pack"]
@@ -2074,7 +2074,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Stealth"], 
                         dnd_tools.skills["Survival"]
                         ]
-                    player.skills = oneskillfromlist(param, player.skills, SkillsList)       
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)       
             player.notes["Favored Enemy(1)"] = "You have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.\nChoose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.\nYou have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.\nWhen you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all (not adapted into your languages).\nMore options are available at higher levels. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures."
             player.notes["Natural Explorer"] = "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, swamp, or the Underdark. When you make an Intelligence or Wisdom check related to your favored terrain, your Proficiency Bonus is doubled if you are using a skill that you're proficient in.\nWhile traveling for an hour or more in your favored terrain, you gain the following benefits:\n- Difficult terrain doesn't slow your group's travel.\n- Your group can't become lost except by magical means.\n- Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.\n- If you are traveling alone, you can move stealthily at a normal pace.\n- When you forage, you find twice as much food as you normally would.\n- While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.\nYou choose additional favored terrain types at 6th and 10th level."
 
@@ -2132,7 +2132,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["SleightofHand"], 
                         dnd_tools.skills["Stealth"]
                         ]
-                    player.skills = fourskillsfromlist(param, player.skills, SkillsList)   
+                    player.skills = dnd_languagesskills.fourskillsfromlist(param, player.skills, SkillsList)   
                     StartEquip1 = ["Rapier", "Shortsword"]
                     StartEquip2 = ["Shortbow and Quiver of 20 Arrows", "Shortsword"]
                     StartEquip3 = ["Burglar's Pack", "Dungeoneer's Pack", "Explorer's Pack"]
@@ -2259,7 +2259,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["SleightofHand"], 
                         dnd_tools.skills["Stealth"]
                         ]                            
-                    player.skills = oneskillfromlist(param, player.skills, SkillsList)
+                    player.skills = dnd_languagesskills.oneskillfromlist(param, player.skills, SkillsList)
                     player.proficiencies.append(dnd_tools.kits["ThievKit"]["Name"]) 
             player.notes["Thieves' Cant"] = "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\nIn addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run."
 
@@ -2312,7 +2312,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Persuasion"], 
                         dnd_tools.skills["Religion"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Dungeoneer's Pack", "Explorer's Pack"]
@@ -2486,7 +2486,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Nature"], 
                         dnd_tools.skills["Religion"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList)  
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList)  
                     StartEquip1 = ["A Light Crossbow and 20 Bolts", "Any Simple Weapon"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Scholar's Pack", "Dungeoneer's Pack"]
@@ -2685,7 +2685,7 @@ def dndchargen_class(param, player):
                         dnd_tools.skills["Medicine"], 
                         dnd_tools.skills["Religion"]
                         ]
-                    player.skills = twoskillsfromlist(param, player.skills, SkillsList) 
+                    player.skills = dnd_languagesskills.twoskillsfromlist(param, player.skills, SkillsList) 
                     StartEquip1 = ["Quarterstaff", "Dagger"]
                     StartEquip2 = ["A Component Pouch", "An Arcane Focus"]
                     StartEquip3 = ["Scholar's Pack", "Explorer's Pack"]
