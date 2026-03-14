@@ -14,8 +14,8 @@ def dndCharGenBkg(param, player):
     ArtisanToolsMuleCartNames = ArtisanToolsNames + ["Mule and Cart"]
     MusicalInstrDisgKit = MusicalInstr + list(dnd_tools.kits["DisgKit"])
     MusicalInstrDisgKitNames = MusicalInstrNames + [dnd_tools.kits["DisgKit"]['Name']]
-    dnd_languagesskills.GamingSets = list(dnd_tools.gaming_sets.keys())
-    dnd_languagesskills.GamingSetsNames = [gs["Name"] for gs in dnd_tools.gaming_sets.values()]    
+    GamingSets = list(dnd_tools.gaming_sets.keys())
+    GamingSetsNames = [gs["Name"] for gs in dnd_tools.gaming_sets.values()]    
     Actual_Background = [
             "Acolyte", "Anthropologist", "Archaeologist", "Ashari", "Astral Drifter", "Athlete", "Azorius Functionary", "Bandit Defector", "Boros Legionnaire", "Celebrity Adventurer's Scion", "Charlatan", "City Watch", "Clan Crafter", "Clasp Member",
             "Cloistered Scholar", "Courtier", "Criminal", "Dimir Operative", "Entertainer", "Faceless", "Faction Agent", "Failed Merchant", "Far Traveler", "Feylost", "Fisher", "Folk Hero", "Gambler", "Gate Warden", "Giant Foundling", "Gladiator",
@@ -543,7 +543,7 @@ def dndCharGenBkg(param, player):
         eqp_items = ["A knife, a cooking pot", "A winter blanket", "An object you received as your cut from a successful robbery", "A set of common clothes"]
         for item in eqp_items:
             player.equipment.append(item)
-        player.proficiencies = dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.gamingsetsmusicalinstr(param, player.proficiencies)
         player.skills_dict["DeceNum"] += 1
         player.skills_dict["SurvNum"] += 1
         player.proficiencies.append(dnd_tools.kits["DisgKit"]["Name"])      
@@ -877,7 +877,7 @@ def dndCharGenBkg(param, player):
                 player.equipment.append(item)
             player.skills_dict["DeceNum"] += 1
             player.skills_dict["SteaNum"] += 1
-            player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
         if player.background == "Urban Bounty Hunter":
             player.gold = 20
             eqp_items = ["A set of clothes appropriate to your duties"]
@@ -1469,7 +1469,7 @@ def dndCharGenBkg(param, player):
         GamblerF6 = "I'm a great gambler. I'm just bad at math and logic."
         GamblerF = [GamblerF1, GamblerF2, GamblerF3, GamblerF4, GamblerF5, GamblerF6]
         player.Flaw = random.choice(GamblerF)
-        player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)
+        player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
         player.gold = 15
         eqp_items = ["A lucky charm", "A set of Fine Clothes"]
         for item in eqp_items:
@@ -1478,15 +1478,15 @@ def dndCharGenBkg(param, player):
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
+                    for idx, gs in enumerate(dnd_languagesskills, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+                        chosen_gs = random.choice(GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
-                        chosen_gs = dnd_languagesskills.GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(GamingSets):
+                        chosen_gs = GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())    
                         break    
                     else:
@@ -1494,7 +1494,7 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")
         if param == "N": 
-            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+            chosen_gs = random.choice(GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())            
         player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
         player.skills_dict["DeceNum"] += 1
@@ -2413,7 +2413,7 @@ def dndCharGenBkg(param, player):
         if player.background == "Knight":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
             player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 25
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
@@ -2422,7 +2422,7 @@ def dndCharGenBkg(param, player):
         if player.background == "Noble":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
             player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             player.gold = 25
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree"]
@@ -2431,7 +2431,7 @@ def dndCharGenBkg(param, player):
         if player.background == "Waterdhavian Noble":
             player.skills_dict["HistNum"] += 1
             player.skills_dict["PersNum"] += 1
-            player.proficiencies = dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsetsmusicalinstr(param, player.proficiencies)
             player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)   
             player.gold = 20
             eqp_items = ["A set of Fine Clothes", "A Signet Ring", "A scroll of pedigree", "A skin of fine zzar or wine"] 
@@ -2826,15 +2826,15 @@ def dndCharGenBkg(param, player):
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
+                    for idx, gs in enumerate(dnd_languagesskills, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+                        chosen_gs = random.choice(GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
-                        chosen_gs = dnd_languagesskills.GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(GamingSets):
+                        chosen_gs = GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy()) 
                         break
                     else:
@@ -2842,7 +2842,7 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")       
         if param == "N": 
-            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+            chosen_gs = random.choice(GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
     if player.background == "Rival Intern":
         RivInPT1 = "My previous employer didn't respect me, and now I'll do whatever I can to gain respect."
@@ -2931,15 +2931,15 @@ def dndCharGenBkg(param, player):
             while True:
                 try:
                     print("0 - Random")
-                    for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
+                    for idx, gs in enumerate(GamingSetsNames, 1):
                         print(f"{idx} - {gs}")
                     gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                     if gsinv == 0:
-                        chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+                        chosen_gs = random.choice(GamingSets)
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                         break
-                    elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
-                        chosen_gs = dnd_languagesskills.GamingSets[gsinv - 1]
+                    elif 1 <= gsinv <= len(GamingSets):
+                        chosen_gs = GamingSets[gsinv - 1]
                         player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())  
                         break
                     else:
@@ -2947,7 +2947,7 @@ def dndCharGenBkg(param, player):
                 except ValueError: #Handles non-numeric choices  
                     print("Invalid input. Please enter a number.")      
         if param == "N": 
-            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+            chosen_gs = random.choice(GamingSets)
             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
         player.Trait = ""
         player.Ideal = ""
@@ -3324,7 +3324,7 @@ def dndCharGenBkg(param, player):
         if player.background == "Knight of the Order":
             player.skills_dict["PersNum"] += 1
             player.skills_dict["ArcaNum"], player.skills_dict["HistNum"], player.skills_dict["NatuNum"], player.skills_dict["ReliNum"] = dnd_languagesskills.choicefourskill(param, player.skills_dict, "ArcaNum", "HistNum", "NatuNum", "ReliNum", dnd_tools.skills["Arcana"], dnd_tools.skills["History"], dnd_tools.skills["Nature"], dnd_tools.skills["Religion"])
-            player.proficiencies = dnd_languagesskills.GamingSetsmusicalinstr(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsetsmusicalinstr(param, player.proficiencies)
             player.languages, player.slang = dnd_languagesskills.languagegen(param, player.languages, player.slang)
             eqp_items = ["One set of Traveler's Clothes", "A Signet", "Banner or seal representing your place or rank in the order"]
             for item in eqp_items:
@@ -3333,7 +3333,7 @@ def dndCharGenBkg(param, player):
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["PersNum"] += 1
             player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
-            player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)
+            player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)
             eqp_items = ["A uniform of your company (Traveler's Clothes in quality)", "An insignia of your rank"]
             for item in eqp_items:
                 player.equipment.append(item)
@@ -3341,15 +3341,15 @@ def dndCharGenBkg(param, player):
                 while True:
                     try:
                         print("0 - Random")
-                        for idx, gs in enumerate(dnd_languagesskills.GamingSetsNames, 1):
+                        for idx, gs in enumerate(GamingSetsNames, 1):
                             print(f"{idx} - {gs}")
                         gsinv = int(input("Choose a Gaming Set to add to your inventory. "))
                         if gsinv == 0:
-                            chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+                            chosen_gs = random.choice(GamingSets)
                             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())
                             break
-                        elif 1 <= gsinv <= len(dnd_languagesskills.GamingSets):
-                            chosen_gs = dnd_languagesskills.GamingSets[gsinv - 1]
+                        elif 1 <= gsinv <= len(GamingSets):
+                            chosen_gs = GamingSets[gsinv - 1]
                             player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())  
                             break
                         else:
@@ -3357,13 +3357,13 @@ def dndCharGenBkg(param, player):
                     except ValueError: #Handles non-numeric choices  
                         print("Invalid input. Please enter a number.")      
             if param == "N": 
-                chosen_gs = random.choice(dnd_languagesskills.GamingSets)
+                chosen_gs = random.choice(GamingSets)
                 player.equipment.append(dnd_tools.gaming_sets[chosen_gs].copy())                   
         if player.background == "Soldier":
             player.skills_dict["AthlNum"] += 1
             player.skills_dict["IntiNum"] += 1
             player.proficiencies.append(dnd_tools.vehicles["VehLand"]['Name'])
-            player.proficiencies = dnd_languagesskills.GamingSets(param, player.proficiencies)       
+            player.proficiencies = dnd_languagesskills.gamingsets(param, player.proficiencies)       
             eqp_items = ["An insignia of rank", "A trophy taken from a fallen enemy (a Dagger, broken blade, or piece of a banner)", "A set of Bone Dice or Deck of Cards", "A set of Common Clothes"]                 
             for item in eqp_items:
                 player.equipment.append(item)
