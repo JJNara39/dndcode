@@ -516,11 +516,11 @@ class Player:
                 #print(f"Attack Bonus for {key} before: {attack_data.get('Attack Bonus', None)}") #debug
                 dmg_bonus = attack_data.get("Damage Bonus", 0) #get the damage bonus, store it in a variable, this is how we will use the :+ later
                 attack_data["Attack Bonus"] = attack_data.get("Damage Bonus", 0) + (self.profbonus if attack_data.get("Proficient") == True else 0)
-                #print(f"Attack Bonus for {key} after: {attack_data.get('Attack Bonus', None)}") #debug
-                spell_data = dnd_spells.spells[attack_data.get("Original Name"), ""]
-                effect = spell_data.get("Effect", {})
-                scaling = effect.get("Scaling", {})                
+                #print(f"Attack Bonus for {key} after: {attack_data.get('Attack Bonus', None)}") #debug             
                 if attack_data.get("Original Name") in dnd_spells.spells:
+                    spell_data = dnd_spells.spells[attack_data.get("Original Name")]
+                    effect = spell_data.get("Effect", {})
+                    scaling = effect.get("Scaling", {})                       
                     int_level_scaling = {int(k): v for k, v in scaling.items()}
                     max_level = max([k for k in int_level_scaling if k <= self.level], default=None)
                     #print(f"Spell Data is {spell_data}") #debug
@@ -535,6 +535,9 @@ class Player:
                         damage_type_str = spell_data.get("Effect", {}).get("Damage Type", '')
                         damage_str = f"{damage} + {dmg_bonus:+} {damage_type_str}"
                 elif atk == "Breath Weapon":
+                    spell_data = dnd_spells.spells[attack_data.get("Original Name")]
+                    effect = spell_data.get("Effect", {})
+                    scaling = effect.get("Scaling", {})                          
                     damage_str = f"{scaling[str(max_level)]} + {spell_data['Effect']['Damage Type']}"
                 else:
                     #print(f"Attack Data is {attack_data}")
