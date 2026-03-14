@@ -11,15 +11,19 @@ import PyPDF2
 import pygame
 
 def save_character(player):
-    with open(f"{player.name}_{player.playername}_level{player.level}.json", "w") as file:
+    output_json_path = os.path.join(
+        data_folder,
+        f"{player.name}_{player.playername}_level{player.level}.json"
+    )    
+    with open(output_json_path, "w") as file:
         json.dump(player.__dict__, file, indent=4)
 
 def load_character(choice):
     # Look through all files in current directory
-    for filename in os.listdir():    
+    for filename in os.listdir(data_folder):    
         # Find the one that starts with choice and ends in .json
         if filename.startswith(choice) and filename.endswith(".json"):
-            with open(filename, "r") as file:
+            with open(os.path.join(data_folder, filename), "r") as file:
                 data = json.load(file)
         
             # Create the Player object using values from the JSON file
@@ -29,7 +33,7 @@ def load_character(choice):
             return player
 
 def archive_character_files(player):
-    archive_path = "Archive"
+    archive_path = os.path.join(data_folder, "Archive")
     os.makedirs(archive_path, exist_ok=True)
     file_variants = [
         f"{player.name}_{player.playername}_level{player.level}.json",
@@ -37,9 +41,10 @@ def archive_character_files(player):
         f"{player.name}_{player.playername}_level{player.level}_notes.txt"
     ]
     for fname in file_variants:
-        if os.path.exists(fname):
+        source = os.path.join(data_folder, fname)
+        if os.path.exists(source):
             dest = os.path.join(archive_path, fname)
-            shutil.move(fname, dest)
+            shutil.move(source, dest)
             print(f"Archived {fname}")
         else:
             print(f"{fname} not found for archiving.")    
@@ -223,8 +228,8 @@ def dndCharGen(param, player):
     player.class_explained(param)  #This WAS after update  
     choose_spells(player, param)  
     player.post_spell_update()
-    player.create_sheet()
-    player.write_notes()
+    player.create_sheet(data_folder)
+    player.write_notes(data_folder)
 
                          
 
@@ -378,6 +383,11 @@ player_list = [] #later i will load a player list
     dndCharGen(param, player)'''
 
 
+data_folder = os.path.join(os.path.abspath("."), "data")
+os.makedirs(data_folder, exist_ok=True)
+
+group_file = os.path.join(data_folder, "group_characters.json")
+player_file = os.path.join(data_folder, "player_list.json")
 
 while True: #This is temporarily commented out to do the 10000 loop
     print("1 - Create a Character")
@@ -441,11 +451,11 @@ while True: #This is temporarily commented out to do the 10000 loop
                 entry = f"{player.name}_{player.playername}"
                 if entry not in player_list:
                     player_list.append(entry) #Makes the all_character list
-                with open("player_list.json", "w") as file: #Should it not just dump the entire player list into the file?
+                with open(player_file, "w") as file: #Should it not just dump the entire player list into the file?
                     json.dump(player_list, file, indent=4)
                 save_character(player) #Makes a character's own list
-                if os.path.exists("group_characters.json"):
-                    with open("group_characters.json", "r") as file:
+                if os.path.exists(group_file):
+                    with open(group_file, "r") as file:
                         group_characters = json.load(file)
                 else:
                     group_characters = {}
@@ -475,14 +485,14 @@ while True: #This is temporarily commented out to do the 10000 loop
                 group_characters[selected_group].append(char_identifier)
 
                 # Save updated group dictionary
-                with open("group_characters.json", "w") as file:
+                with open(group_file, "w") as file:
                     json.dump(group_characters, file, indent=4)              
             continue
         elif start_choice == 2:
             player = None
             player_group = []
-            if os.path.exists("player_list.json"):
-                with open("player_list.json", "r") as file:
+            if os.path.exists(player_file):
+                with open(player_file, "r") as file:
                     player_list = json.load(file)
             
             if not player_list:
@@ -510,8 +520,8 @@ while True: #This is temporarily commented out to do the 10000 loop
                                     print("Invalid input. Please enter a valid number.")  
                             break     
                         elif grouporall == 1: #Pick a group
-                            if os.path.exists("group_characters.json"):
-                                with open("group_characters.json", "r") as file:
+                            if os.path.exists(group_file):
+                                with open(group_file, "r") as file:
                                     group_characters = json.load(file)
                             else:
                                 print("No group file exists yet. Showing all characters instead.")
@@ -702,8 +712,8 @@ while True: #This is temporarily commented out to do the 10000 loop
                                     if cl in ["Bard", "Sorcerer", "Warlock"]:
                                         print(f"On level up you can switch a spell, because you are a {cl}")
                                         switch_spells(player, cantrip = False, count = 1)
-                            player.create_sheet()
-                            player.write_notes()
+                            player.create_sheet(data_folder)
+                            player.write_notes(data_folder)
                             while True:
                                 savepara = input(f"Save parameters for {player.name}? Y/N ").strip().lower()
                                 if savepara in {"y", "ye", "yes"}:
@@ -718,11 +728,11 @@ while True: #This is temporarily commented out to do the 10000 loop
                                 char_identifier = f"{player.name}_{player.playername}"
                                 player_list = [p for p in player_list if p != char_identifier]
                                 player_list.append(char_identifier)
-                                with open("player_list.json", "w") as file:
+                                with open(player_file, "w") as file:
                                     json.dump(player_list, file, indent=4)                                      
                                 group_characters[selected_group] = [p for p in group_characters[selected_group] if p != char_identifier]                                        
                                 group_characters[selected_group].append(char_identifier)
-                                with open("group_characters.json", "w") as file:
+                                with open(group_file, "w") as file:
                                     json.dump(group_characters, file, indent=4)   
                                 save_character(player)        
                                 continue

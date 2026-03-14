@@ -23,12 +23,12 @@ jobs:
       run: pip install pygame pyinstaller PyPDF2   
 
     - name: Build Windows EXE
-      run: pyinstaller --clean --onefile --collect-all dnd_code --collect-submodules dnd_code dnd.py
+      run: pyinstaller --clean --onefile --collect-all dnd_code --collect-submodules dnd_code --add-data "DnD_5E_CharacterSheet_FormFillable.pdf;." dnd.py
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v4
       with:
-        name: windows-build
+        name: DnD_Code_Windows
         path: dist/dnd.exe
 
 
@@ -48,10 +48,10 @@ jobs:
       run: pip install pygame PyPDF2 pyinstaller
 
     - name: Build Mac App
-      run: pyinstaller --clean --windowed --onefile --collect-all dnd_code --collect-submodules dnd_code dnd.py
+      run: pyinstaller --clean --windowed --onefile --collect-all dnd_code --collect-submodules dnd_code --add-data "DnD_5E_CharacterSheet_FormFillable.pdf:." dnd.py
 
     - name: Upload Mac artifact
       uses: actions/upload-artifact@v4
       with:
-        name: mac-build
+        name: DnD_Code_Mac
         path: dist/dnd

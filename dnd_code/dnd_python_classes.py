@@ -1,5 +1,7 @@
 import random
 import math
+import sys
+import os
 import dnd_code.dnd_bkg_gen as dnd_bkg_gen
 import dnd_code.dnd_bkg_race_sum as dnd_bkg_race_sum
 import dnd_code.dnd_class_expl as dnd_class_expl
@@ -15,6 +17,16 @@ def dice(dicenum):
     # Rolls a dice with dicenum sides
     result = random.randint(1, dicenum)
     return result
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and PyInstaller exe."""
+    if getattr(sys, 'frozen', False):
+        # Running in a PyInstaller bundle
+        base_path = sys._MEIPASS
+    else:
+        # Running as normal script
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 class Player:
     def __init__(self, name, plName, PlayerLevel): #The player would start out "blank"; this is your init class, what you start as
@@ -632,9 +644,12 @@ class Player:
         self.WisMod = math.floor((self.ability_scores["WIS"]-10)/2)  
         dnd_bkg_race_sum.summation(param, self)
 
-    def create_sheet(self):
-        input_pdf_path = 'DnD_5E_CharacterSheet_FormFillable.pdf'
-        output_pdf_path = f'{self.name}_{self.playername}_level{self.level}_charsheet.pdf'        
+    def create_sheet(self, data_folder):
+        input_pdf_path = resource_path('DnD_5E_CharacterSheet_FormFillable.pdf')
+        output_pdf_path = os.path.join(
+            data_folder,
+            f"{self.name}_{self.playername}_level{self.level}_charsheet.pdf"
+        )    
         # Read input file
         with open(input_pdf_path, 'rb') as pdf_file:
             reader = PdfReader(pdf_file)
@@ -659,9 +674,12 @@ class Player:
             with open(output_pdf_path, 'wb') as output_pdf:
                 writer.write(output_pdf)
 
-    def write_notes(self):
-        filename = f"{self.name}_{self.playername}_level{self.level}_notes.txt"
-        with open(filename, "w") as file:
+    def write_notes(self, data_folder):
+        output_notes_path = os.path.join(
+            data_folder,
+            f"{self.name}_{self.playername}_level{self.level}_notes.txt"
+        )
+        with open(output_notes_path, "w") as file:
             file.write(f"{self.name}'s Notes\n")
             file.write("=" * (len(self.name)+8) + "\n\n") #Decorative Header
             for note_title, note in self.notes.items():
