@@ -367,7 +367,7 @@ def dndchargen_class(param, player):
                                 if sego == 0:
                                     RandArtChoice = random.choice(ArtChoices)
                                     if RandArtChoice == "Starting Equipment":    
-                                        player.equipment = twosimpleweapons(param, player.equipment)
+                                        player.equipment = dnd_languagesskills.twosimpleweapons(param, player.equipment)
                                         player.equipment.append(dnd_tools.simple_weapons["LightCrossbow"].copy())
                                         player.equipment.append("20 Bolts")
                                         RandArtChoice2 = random.choice(ArtChoices2)
@@ -381,7 +381,7 @@ def dndchargen_class(param, player):
                                         player.gold = player.gold + dice(4) + dice(4) + dice(4) + dice(4) + dice(4)  
                                     break                              
                                 elif sego == 1:
-                                    player.equipment = twosimpleweapons(param, player.equipment)
+                                    player.equipment = dnd_languagesskills.twosimpleweapons(param, player.equipment)
                                     player.equipment.append(dnd_tools.simple_weapons["LightCrossbow"].copy())
                                     player.equipment.append("20 Bolts")
 
@@ -421,7 +421,7 @@ def dndchargen_class(param, player):
                     if param == "N":
                         RandArtChoice = random.choice(ArtChoices)
                         if RandArtChoice == "Starting Equipment":    
-                            player.equipment = twosimpleweapons(param, player.equipment)
+                            player.equipment = dnd_languagesskills.twosimpleweapons(param, player.equipment)
                             player.equipment.append(dnd_tools.simple_weapons["LightCrossbow"].copy())
                             player.equipment.append("20 Bolts")
                             RandArtChoice2 = random.choice(ArtChoices2)
