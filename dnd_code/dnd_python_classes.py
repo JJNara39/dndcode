@@ -517,7 +517,7 @@ class Player:
                 dmg_bonus = attack_data.get("Damage Bonus", 0) #get the damage bonus, store it in a variable, this is how we will use the :+ later
                 attack_data["Attack Bonus"] = attack_data.get("Damage Bonus", 0) + (self.profbonus if attack_data.get("Proficient") == True else 0)
                 #print(f"Attack Bonus for {key} after: {attack_data.get('Attack Bonus', None)}") #debug
-                spell_data = dnd_spells.spells[attack_data.get("Original Name")]
+                spell_data = dnd_spells.spells[attack_data.get("Original Name"), ""]
                 effect = spell_data.get("Effect", {})
                 scaling = effect.get("Scaling", {})                
                 if attack_data.get("Original Name") in dnd_spells.spells:
