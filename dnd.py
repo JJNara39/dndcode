@@ -400,7 +400,7 @@ player_file = os.path.join(data_folder, "player_list.json")
 while True: #This is temporarily commented out to do the 10000 loop
     print("1 - Create a Character")
     print("2 - Load a Character")
-    print("3 - Combat Tester (XP-less, if players are available they can test combat)")
+    print("3 - Combat Tester (Monster/NPC v Monster/NPC)")
     print("4 - Exit")
     try:
         start_choice = int(input("What would you like to do first? "))
