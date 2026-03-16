@@ -1,5 +1,6 @@
 import random
 import os
+import sys
 import shutil
 from fractions import Fraction
 from dnd_code.dnd_python_classes import Player
@@ -48,6 +49,12 @@ def archive_character_files(player):
             print(f"Archived {fname}")
         else:
             print(f"{fname} not found for archiving.")    
+
+def executable_path():
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(sys.executable)
+    else:
+        return os.path.dirname(os.path.abspath(__file__))            
 
 def don_armor(player):
     armor_have_list = []
@@ -383,7 +390,8 @@ player_list = [] #later i will load a player list
     dndCharGen(param, player)'''
 
 
-data_folder = os.path.join(os.path.abspath("."), "data")
+base_path = executable_path()
+data_folder = os.path.join(base_path, "data")
 os.makedirs(data_folder, exist_ok=True)
 
 group_file = os.path.join(data_folder, "group_characters.json")
@@ -392,7 +400,7 @@ player_file = os.path.join(data_folder, "player_list.json")
 while True: #This is temporarily commented out to do the 10000 loop
     print("1 - Create a Character")
     print("2 - Load a Character")
-    print("3 - Combat Tester")
+    print("3 - Combat Tester (XP-less, if players are available they can test combat)")
     print("4 - Exit")
     try:
         start_choice = int(input("What would you like to do first? "))
@@ -438,7 +446,7 @@ while True: #This is temporarily commented out to do the 10000 loop
                     print("Invalid choice, please choose a valid option.")
             dndCharGen(param, player)
             while True:
-                savepara = input(f"Save parameters for {player.name}? Y/N ").strip().lower()
+                savepara = input(f"Save {player.name} (Save) ? Y/N ").strip().lower()
                 if savepara in {"y", "ye", "yes"}:
                     saveparam = "Y"
                     break
@@ -715,7 +723,7 @@ while True: #This is temporarily commented out to do the 10000 loop
                             player.create_sheet(data_folder)
                             player.write_notes(data_folder)
                             while True:
-                                savepara = input(f"Save parameters for {player.name}? Y/N ").strip().lower()
+                                savepara = input(f"Save {player.name} (Save)? Y/N ").strip().lower()
                                 if savepara in {"y", "ye", "yes"}:
                                     saveparam = "Y"
                                     break
