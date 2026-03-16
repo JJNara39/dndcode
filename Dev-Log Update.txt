@@ -16,3 +16,4 @@ On March 8th '26:
 --Had to edit combat to run in the event of just monsters
 
 On March 12th '26, added a build workflow so I can generate a .exe and .app from GitHub, removed the .bat and changed the 2 .txt files
+-March 14th, made a working version of it
